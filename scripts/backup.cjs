@@ -2,6 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
+const os = require('os');
+
 const rootDir = path.resolve(__dirname, '..');
 const backupsDir = path.join(rootDir, 'backups');
 
@@ -22,8 +24,8 @@ console.log('====================================================');
 console.log(`Timestamp: ${now.toISOString()}`);
 console.log(`Destination: ${backupZipPath}`);
 
-// Create a temporary staging directory to gather all critical files
-const stagingDir = path.join(backupsDir, `staging-${timestamp}`);
+// Create temporary staging directory in os.tmpdir() to prevent Vite watcher collisions
+const stagingDir = path.join(os.tmpdir(), `ea-staging-${Date.now()}`);
 fs.mkdirSync(stagingDir, { recursive: true });
 
 try {

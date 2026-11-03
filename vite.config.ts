@@ -567,6 +567,7 @@ export default defineConfig({
         '**/public/uploads/**',
         '**/.git/**',
         '**/.chrome*/**',
+        '**/backups/**',
         '**/*.cjs',
       ],
     },
