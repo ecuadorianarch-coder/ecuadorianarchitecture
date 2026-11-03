@@ -24,6 +24,7 @@ import { useCommunityNotes } from '../../services/communityService';
 import { WorksiteVisit, CriticalArgument } from '../../types/community';
 import { FIGMA_PATHS } from './communityFigmaPaths';
 import { uploadImageFile } from '../../utils/mediaUpload';
+import { EditorialEmptyState } from '../../components/common/EditorialEmptyState';
 
 interface CommunityFolderContentProps {
   project: any;
@@ -367,6 +368,11 @@ export const CommunityFolderContent: React.FC<CommunityFolderContentProps> = ({ 
       {/* =================================================================== */}
       {viewMode === 'index' && (
         <div className="flex flex-col items-center justify-center min-h-[350px] sm:min-h-[380px] py-2 sm:py-3 select-none">
+          {criticalArguments.length === 0 && visits.length === 0 && (
+            <div className="w-full max-w-xl mb-6">
+              <EditorialEmptyState section="comunidad" variant="card" />
+            </div>
+          )}
           {/* Post-it(s) Centrados: En Proyectos muestra Conversaciones y Visitas; en Territorios y Academia solo Conversaciones */}
           <div className={`flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-6 md:gap-7 w-full ${isVisitasEnabled ? 'max-w-xl' : 'max-w-md'} pb-6 sm:pb-7`}>
             <FigmaNoteConversaciones
@@ -473,6 +479,11 @@ export const CommunityFolderContent: React.FC<CommunityFolderContentProps> = ({ 
 
           {/* Tablero de Post-its de Conversación Crítica (2 columnas para lectura espaciosa y cómoda) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 w-full items-stretch">
+            {criticalArguments.length === 0 && (
+              <div className="col-span-full mb-2">
+                <EditorialEmptyState section="comunidad" variant="card" />
+              </div>
+            )}
             {criticalArguments.map((arg, idx) => (
               <div
                 key={arg.id}

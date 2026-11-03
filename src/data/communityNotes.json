@@ -1,32 +1,6 @@
 {
   "visits": [
     {
-      "id": "visita-pending-01",
-      "projectId": "atrium",
-      "authorName": "Arq. Belén Morales // Estudio Sur",
-      "authorEmail": "belen@estudiosur.ec",
-      "experience": "Visita técnica durante la tarde soleada. Quisiera consultar sobre la absorción acústica de los paneles perimetrales en planta baja. Se siente un leve eco cuando hay grupos de visitantes.",
-      "photos": [],
-      "visitDate": "2026-11-02",
-      "createdAt": "2026-11-02T16:45:00.000Z",
-      "status": "pendiente",
-      "likes": 0
-    },
-    {
-      "id": "visita-museo-precolombino-1793736516299-3rl6",
-      "projectId": "museo-precolombino",
-      "authorName": "Arq. Mateo Carrión",
-      "experience": "asa",
-      "photos": [
-        "/images/uploads/visit-visita-museo-precolombino-1793736516299-3rl6-0.png"
-      ],
-      "visitDate": "2026-11-03",
-      "createdAt": "2026-11-03T20:08:36.299Z",
-      "status": "aprobado",
-      "likes": 1,
-      "hasLiked": true
-    },
-    {
       "id": "visita-ephd-01",
       "projectId": "espacio-para-hablar-con-dios-ssqj",
       "authorName": "Arq. Mateo Carrión // Taller Andino",
@@ -53,83 +27,6 @@
       "createdAt": "2026-10-24T10:00:00.000Z",
       "status": "aprobado",
       "likes": 16
-    },
-    {
-      "id": "visita-atrium-01",
-      "projectId": "atrium",
-      "authorName": "Arq. Mateo Carrión",
-      "experience": "Recorrido matutino por el atrio central. La chimenea térmica opera con una eficiencia notable: las corrientes de aire ascienden de forma natural manteniendo una temperatura estable de 19°C sin climatización activa. La luz equinoccial baña los planos verticales de hormigón visto sin generar deslumbramientos en los accesos residenciales.",
-      "photos": [
-        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
-        "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80",
-        "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"
-      ],
-      "visitDate": "2026-10-02",
-      "createdAt": "2026-10-02T11:00:00.000Z",
-      "status": "aprobado",
-      "likes": 24
-    },
-    {
-      "id": "visita-atrium-02",
-      "projectId": "atrium",
-      "authorName": "Dra. Elena Santillán",
-      "experience": "Visita técnica con estudiantes de proyectos arquitectónicos de la PUCE. Verificamos el comportamiento acústico del patio central colectivo: la rugosidad del encofrado de madera en los muros de hormigón mitiga la reverberación de manera sorprendente. Excelente resolución de los encuentros con la carpintería metálica.",
-      "photos": [
-        "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"
-      ],
-      "visitDate": "2026-09-12",
-      "createdAt": "2026-09-12T15:30:00.000Z",
-      "status": "aprobado",
-      "likes": 19
-    },
-    {
-      "id": "visita-casa-arboles-01",
-      "projectId": "casa-arboles",
-      "authorName": "Ing. Carla Montenegro",
-      "experience": "Inspección in situ de los muros de tapial y madera reciclada tras el invierno andino. El asentamiento diferencial es nulo y la protección de los aleros contra el agua de lluvia conserva la tierra sin exfoliación en los bordes críticos.",
-      "photos": [
-        "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80"
-      ],
-      "visitDate": "2026-08-20",
-      "createdAt": "2026-08-20T10:15:00.000Z",
-      "status": "aprobado",
-      "likes": 15
-    },
-    {
-      "id": "visita-plaza-01",
-      "projectId": "plaza-san-marcos",
-      "authorName": "Arq. David Gómez",
-      "experience": "Paseo vespertino durante la reapertura de la plaza. El adoquín de piedra andesita recuperado drena con fluidez hacia las cunetas vegetales perimetrales. Gran acogida por los vecinos del barrio tradicional.",
-      "photos": [],
-      "visitDate": "2026-07-14",
-      "createdAt": "2026-07-14T17:00:00.000Z",
-      "status": "aprobado",
-      "likes": 12
-    },
-    {
-      "id": "visita-sensei-01",
-      "projectId": "edificio-sensei",
-      "authorName": "Arq. Fernando Dávila // FAU UCE",
-      "experience": "Inspección de la doble piel de hormigón y parasoles en fachada oriente. El zócalo comercial permeable integra la vereda peatonal de forma armónica, y la ventilación cruzada en los departamentos esquineros reduce la ganancia térmica solar en un 40%.",
-      "photos": [
-        "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80"
-      ],
-      "visitDate": "2026-09-08",
-      "createdAt": "2026-09-08T16:20:00.000Z",
-      "status": "aprobado",
-      "likes": 21
-    },
-    {
-      "id": "visita-atrium-1792298757571-r5hw",
-      "projectId": "atrium",
-      "authorName": "Arq. Mateo Carrión",
-      "experience": "Inspección de prueba in situ: El patio central mantiene 19°C y excelente confort térmico natural sin climatización activa.",
-      "photos": [],
-      "visitDate": "2026-10-18",
-      "createdAt": "2026-10-18T04:45:57.571Z",
-      "status": "aprobado",
-      "likes": 0,
-      "hasLiked": false
     }
   ],
   "arguments": [
@@ -153,46 +50,6 @@
       "createdAt": "2026-10-20T11:15:00.000Z",
       "status": "aprobado",
       "likes": 42
-    },
-    {
-      "id": "arg-atrium-01",
-      "projectId": "atrium",
-      "authorName": "Al Borde & Rama Estudio",
-      "argumentTitle": "¿Vacío bioclimático o monumento formal? Tensión tipológica en la vivienda colectiva",
-      "argument": "La tipología de claustro central reinterpretada en altura desafía la especulación del metro cuadrado vendible. El vacío no es un desperdicio espacial sino un pulmón colectivo indispensable en la densidad urbana contemporánea de Quito.",
-      "createdAt": "2026-09-25T18:00:00.000Z",
-      "status": "aprobado",
-      "likes": 38
-    },
-    {
-      "id": "arg-atrium-02",
-      "projectId": "atrium",
-      "authorName": "Camila Villacís",
-      "argumentTitle": "La honestidad del hormigón crudo frente a la habitabilidad doméstica",
-      "argument": "La renuncia a revestimientos sintéticos devuelve a la vivienda una dignidad táctil elemental, aunque exige al usuario un compromiso con el mantenimiento y la apreciación de la pátina del tiempo.",
-      "createdAt": "2026-10-05T09:40:00.000Z",
-      "status": "aprobado",
-      "likes": 27
-    },
-    {
-      "id": "arg-casa-arboles-01",
-      "projectId": "casa-arboles",
-      "argumentTitle": "La arquitectura vernácula como tecnología de futuro en la periferia de Quito",
-      "argument": "La tierra compactada y las vigas recuperadas demuestran que la huella de carbono cero no requiere patentes extranjeras complejas, sino inteligencia constructiva situada y mano de obra comunitaria calificada.",
-      "createdAt": "2026-08-28T14:20:00.000Z",
-      "status": "aprobado",
-      "likes": 31
-    },
-    {
-      "id": "arg-casa-arboles-1792298765889-0mjo",
-      "projectId": "casa-arboles",
-      "authorName": "Arq. Mateo Carrión",
-      "argumentTitle": "Diálogo crítico sobre tapial y huella ecológica",
-      "argument": "El uso de tierra compactada en Casa entre Árboles demuestra que la arquitectura andina contemporánea resuelve el confort pasivo con inteligencia situada.",
-      "createdAt": "2026-10-18T04:46:05.889Z",
-      "status": "aprobado",
-      "likes": 1,
-      "hasLiked": true
     }
   ]
 }

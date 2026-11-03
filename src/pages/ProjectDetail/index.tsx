@@ -138,7 +138,21 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
 
   const sectionTagIcon = projectSection === 'academia' ? tagAcademicoUrl : projectSection === 'territorios' ? tagCiudadUrl : tagProyectosUrl;
 
-  const [activeTab, setActiveTab] = useState<string>(() => availableModules[0]?.id || 'resena');
+  const [activeTab, setActiveTab] = useState<string>(() => {
+    if (controlledActiveTab) return controlledActiveTab;
+    if (typeof window !== 'undefined') {
+      const p = new URLSearchParams(window.location.search);
+      const t = p.get('tab');
+      if (t && ['resena', 'critica', 'podcast', 'obra-viva'].includes(t)) return t;
+    }
+    return availableModules[0]?.id || 'resena';
+  });
+
+  useEffect(() => {
+    if (controlledActiveTab && controlledActiveTab !== activeTab) {
+      setActiveTab(controlledActiveTab);
+    }
+  }, [controlledActiveTab]);
   const [activePlanType, setActivePlanType] = useState<'planta' | 'corte' | 'axonometria'>('planta');
   const [copiedLink, setCopiedLink] = useState(false);
   const [isBottomNavVisible, setIsBottomNavVisible] = useState(false);

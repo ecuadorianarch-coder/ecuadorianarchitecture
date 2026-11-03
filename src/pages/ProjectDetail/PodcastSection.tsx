@@ -1,11 +1,26 @@
 import React, { useState } from 'react';
-import { Mic, Play, Pause, Volume2, RotateCcw, RotateCw, Download, FileText, Share2, Headphones, Radio, Sparkles } from 'lucide-react';
+import { Play, Pause, Volume2, RotateCcw, RotateCw, Download, FileText, Share2, Headphones, Radio } from 'lucide-react';
+import { EditorialEmptyState } from '../../components/common/EditorialEmptyState';
 
 interface PodcastSectionProps {
   project: any;
 }
 
 export const PodcastSection: React.FC<PodcastSectionProps> = ({ project }) => {
+  const hasValidAudio = Boolean(
+    project.podcast &&
+    project.podcast.published !== false &&
+    project.podcast.audioUrl &&
+    project.podcast.audioUrl.trim().length > 0
+  );
+
+  if (!hasValidAudio) {
+    return (
+      <div className="max-w-4xl mx-auto py-4">
+        <EditorialEmptyState section="podcast" />
+      </div>
+    );
+  }
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackSpeed, setPlaybackSpeed] = useState<number>(1);
   const [currentTime, setCurrentTime] = useState<number>(14 * 60 + 28); // 14:28 in seconds

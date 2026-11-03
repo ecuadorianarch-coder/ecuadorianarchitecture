@@ -25,7 +25,9 @@ export const AppContent: React.FC = () => {
   const [reportToken, setReportToken] = useState<string | null>(initialRoute.reportToken || null);
   const [currentView, setCurrentView] = useState<'home' | 'catalog' | 'project-detail' | 'acerca'>(initialRoute.view);
   const [catalogSection, setCatalogSection] = useState<CatalogSectionType>(initialRoute.catalogSection || 'proyectos');
-  const [selectedProjectId, setSelectedProjectId] = useState<string>(initialRoute.projectId || 'atrium');
+  const [selectedProjectId, setSelectedProjectId] = useState<string>(
+    initialRoute.projectId || 'espacio-para-hablar-con-dios-ssqj'
+  );
   const [targetTab, setTargetTab] = useState<'proyectos' | 'academia' | 'territorios' | 'acerca'>(
     initialRoute.targetTab || initialRoute.catalogSection || 'proyectos'
   );

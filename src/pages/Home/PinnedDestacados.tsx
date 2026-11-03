@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -10,6 +10,7 @@ import tagProyectosUrl from '../../assets/logos/tag_proyectos.svg';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { useContent } from '../../context/ContentContext';
 import { ImageCarouselLightbox, extractAllProjectImages } from '../../components/editorial/ImageCarouselLightbox';
+import { EditorialEmptyState } from '../../components/common/EditorialEmptyState';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 if (typeof window !== 'undefined') {
@@ -394,7 +395,10 @@ export const PinnedDestacados: React.FC<PinnedDestacadosProps> = ({
   const [canScrollRight, setCanScrollRight] = useState(true);
 
   // Fullscreen Architectural Image Carousel Lightbox State
-  const { projects } = useContent();
+  const { projects, academia, territorios } = useContent();
+  const proyectosList = useMemo(() => (Array.isArray(projects) && projects.length > 0 ? projects : []), [projects]);
+  const territoriosList = useMemo(() => (Array.isArray(territorios) && territorios.length > 0 ? territorios : []), [territorios]);
+  const academiaList = useMemo(() => (Array.isArray(academia) && academia.length > 0 ? academia : []), [academia]);
   const [lightboxImages, setLightboxImages] = useState<any[]>([]);
   const [lightboxProjectTitle, setLightboxProjectTitle] = useState('');
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
@@ -1015,14 +1019,21 @@ export const PinnedDestacados: React.FC<PinnedDestacadosProps> = ({
         className="ea-stage-grid relative w-full max-w-[1240px] min-h-[500px] h-[520px] flex items-center justify-center select-none overflow-visible"
         style={{ perspective: '1200px' }}
       >
-        {/* ================= LAYER 1: PROYECTOS (6 Projects + Dedicated Standalone CTA Card) ================= */}
+        {/* ================= LAYER 1: PROYECTOS ================= */}
         <div
           ref={proyCarouselRef}
           onScroll={handleActiveScroll}
-          className={`layer-proy absolute inset-0 w-full ${currentScene === 'proyectos' ? 'flex' : 'hidden md:flex'} items-center gap-6 md:gap-8 lg:gap-10 overflow-x-auto no-scrollbar py-8 px-6 sm:px-12`}
+          className={`layer-proy absolute inset-0 w-full ${currentScene === 'proyectos' ? 'flex' : 'hidden md:flex'} items-center ${
+            proyectosList.length === 0 ? 'justify-center' : 'gap-6 md:gap-8 lg:gap-10 overflow-x-auto no-scrollbar'
+          } py-8 px-6 sm:px-12`}
         >
-          {/* THE 6 ARCHITECTURAL PROJECTS (1:1 with Figma Redesign Mockup) */}
-          {PROYECTOS_DATA.map((proj) => {
+          {proyectosList.length === 0 ? (
+            <div className="w-full max-w-xl my-auto">
+              <EditorialEmptyState section="proyectos" variant="card" />
+            </div>
+          ) : (
+            <>
+              {proyectosList.map((proj) => {
             const isColored = hoveredCardId === proj.id || clickedCardId === proj.id;
             return (
               <article
@@ -1085,7 +1096,7 @@ export const PinnedDestacados: React.FC<PinnedDestacadosProps> = ({
                   title="Clic para ver carrusel de fotos a pantalla completa"
                 >
                   <img
-                    src={proj.imageUrl}
+                    src={proj.heroImage || proj.imageUrl || '/images/edificio_sensei.png'}
                     alt={proj.title}
                     className="w-full h-full object-cover object-center group-hover/img:scale-105 group-hover:scale-[1.03] transition-transform duration-500 ease-out"
                     loading="lazy"
@@ -1131,15 +1142,25 @@ export const PinnedDestacados: React.FC<PinnedDestacadosProps> = ({
               </div>
             </div>
           </div>
+            </>
+          )}
         </div>
 
-        {/* ================= LAYER 2: TERRITORIOS (6 Regions + Dedicated Standalone CTA Card) ================= */}
+        {/* ================= LAYER 2: TERRITORIOS ================= */}
         <div
           ref={terrCarouselRef}
           onScroll={handleActiveScroll}
-          className={`layer-terr absolute inset-0 w-full ${currentScene === 'territorios' ? 'flex' : 'hidden md:flex'} items-center gap-6 md:gap-8 lg:gap-10 overflow-x-auto no-scrollbar py-8 px-6 sm:px-12`}
+          className={`layer-terr absolute inset-0 w-full ${currentScene === 'territorios' ? 'flex' : 'hidden md:flex'} items-center ${
+            territoriosList.length === 0 ? 'justify-center' : 'gap-6 md:gap-8 lg:gap-10 overflow-x-auto no-scrollbar'
+          } py-8 px-6 sm:px-12`}
         >
-          {TERRITORIOS_DATA.map((terr) => {
+          {territoriosList.length === 0 ? (
+            <div className="w-full max-w-xl my-auto">
+              <EditorialEmptyState section="territorios" variant="card" />
+            </div>
+          ) : (
+            <>
+              {territoriosList.map((terr) => {
             const isColored = hoveredCardId === terr.id || clickedCardId === terr.id;
             return (
               <article
@@ -1202,7 +1223,7 @@ export const PinnedDestacados: React.FC<PinnedDestacadosProps> = ({
                   title="Clic para ver carrusel de fotos a pantalla completa"
                 >
                   <img
-                    src={terr.imageUrl}
+                    src={terr.heroImage || terr.imageUrl || ''}
                     alt={terr.title}
                     className="w-full h-full object-cover object-center group-hover/img:scale-105 group-hover:scale-[1.03] transition-transform duration-500 ease-out"
                     loading="lazy"
@@ -1248,15 +1269,25 @@ export const PinnedDestacados: React.FC<PinnedDestacadosProps> = ({
               </div>
             </div>
           </div>
+            </>
+          )}
         </div>
 
-        {/* ================= LAYER 3: ACADEMIA (6 Investigations + Dedicated Standalone CTA Card) ================= */}
+        {/* ================= LAYER 3: ACADEMIA ================= */}
         <div
           ref={acadCarouselRef}
           onScroll={handleActiveScroll}
-          className={`layer-acad absolute inset-0 w-full ${currentScene === 'academia' ? 'flex' : 'hidden md:flex'} items-center gap-6 md:gap-8 lg:gap-10 overflow-x-auto no-scrollbar py-8 px-6 sm:px-12`}
+          className={`layer-acad absolute inset-0 w-full ${currentScene === 'academia' ? 'flex' : 'hidden md:flex'} items-center ${
+            academiaList.length === 0 ? 'justify-center' : 'gap-6 md:gap-8 lg:gap-10 overflow-x-auto no-scrollbar'
+          } py-8 px-6 sm:px-12`}
         >
-          {ACADEMIA_DATA.map((acad) => {
+          {academiaList.length === 0 ? (
+            <div className="w-full max-w-xl my-auto">
+              <EditorialEmptyState section="academia" variant="card" />
+            </div>
+          ) : (
+            <>
+              {academiaList.map((acad) => {
             const isColored = hoveredCardId === acad.id || clickedCardId === acad.id;
             return (
               <article
@@ -1327,7 +1358,7 @@ export const PinnedDestacados: React.FC<PinnedDestacadosProps> = ({
                   title="Clic para ver carrusel de fotos a pantalla completa"
                 >
                   <img
-                    src={acad.imageUrl}
+                    src={acad.heroImage || acad.imageUrl || ''}
                     alt={acad.title}
                     className="w-full h-full object-cover object-center group-hover/img:scale-105 group-hover:scale-[1.03] transition-transform duration-500 ease-out"
                     loading="lazy"
@@ -1373,6 +1404,8 @@ export const PinnedDestacados: React.FC<PinnedDestacadosProps> = ({
               </div>
             </div>
           </div>
+            </>
+          )}
         </div>
 
         {/* NAVIGATION ARROWS (Synchronized with active scene: Proyectos, Territorios & Academia) */}

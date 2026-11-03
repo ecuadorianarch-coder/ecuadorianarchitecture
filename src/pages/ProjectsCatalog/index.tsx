@@ -23,6 +23,7 @@ import { PanoramicFolderCard } from '../../components/projects/PanoramicFolderCa
 import { StickySponsorWings } from '../../components/advertising/StickySponsorWings';
 import { InFeedProjectAdCard } from '../../components/advertising/InFeedProjectAdCard';
 import { useAdvertising } from '../../context/AdvertisingContext';
+import { EditorialEmptyState } from '../../components/common/EditorialEmptyState';
 
 import academiaJson from '../../data/academia.json';
 import territoriosJson from '../../data/territorios.json';
@@ -1376,7 +1377,9 @@ export const ProjectsCatalog: React.FC<ProjectsCatalogProps> = ({
       <main className="py-6">
         {/* ======================= CASE A: PROYECTOS ======================= */}
         {currentSection === 'proyectos' && (
-          filteredProjects.length === 0 ? (
+          projects.length === 0 ? (
+            <EditorialEmptyState section="proyectos" />
+          ) : filteredProjects.length === 0 ? (
             <div className="py-24 text-center border border-dashed border-ea-black/20 bg-[#FAF8F5] p-8">
               <p className="font-okcok text-2xl uppercase text-ea-black/45">{sectionConfig.emptyMessage}</p>
               <button
@@ -1433,7 +1436,9 @@ export const ProjectsCatalog: React.FC<ProjectsCatalogProps> = ({
 
         {/* ======================= CASE B: ACADEMIA ======================= */}
         {currentSection === 'academia' && (
-          filteredAcademia.length === 0 ? (
+          academiaList.length === 0 ? (
+            <EditorialEmptyState section="academia" />
+          ) : filteredAcademia.length === 0 ? (
             <div className="py-24 text-center border border-dashed border-ea-black/20 bg-[#FAF8F5] p-8">
               <p className="font-okcok text-2xl uppercase text-ea-black/45">{sectionConfig.emptyMessage}</p>
               <button
@@ -1540,7 +1545,9 @@ export const ProjectsCatalog: React.FC<ProjectsCatalogProps> = ({
 
         {/* ======================= CASE C: TERRITORIOS ======================= */}
         {currentSection === 'territorios' && (
-          filteredTerritorios.length === 0 ? (
+          territoriosList.length === 0 ? (
+            <EditorialEmptyState section="territorios" />
+          ) : filteredTerritorios.length === 0 ? (
             <div className="py-24 text-center border border-dashed border-ea-black/20 bg-[#FAF8F5] p-8">
               <p className="font-okcok text-2xl uppercase text-ea-black/45">{sectionConfig.emptyMessage}</p>
               <button

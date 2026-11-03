@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import initialCommunityData from '../data/communityNotes.json';
-import { WorksiteVisit, CriticalArgument, CommunityStore, SessionUser } from '../types/community';
+import { WorksiteVisit, CriticalArgument, CommunityStore, SessionUser, ModerationStatus } from '../types/community';
 
 const STORAGE_KEY = 'ea_community_store_v1';
 const SESSION_USER_KEY = 'ea_session_user_v1';

@@ -3,7 +3,8 @@ import { PodcastSection } from './PodcastSection';
 import { CommunityFolderContent } from './CommunityFolderContent';
 import { DynamicModulesRenderer, extractStudiosList } from '../../components/editorial/DynamicModulesRenderer';
 import { ImageCarouselLightbox, extractAllProjectImages } from '../../components/editorial/ImageCarouselLightbox';
-import { Maximize2, Camera } from 'lucide-react';
+import { Camera } from 'lucide-react';
+import { EditorialEmptyState } from '../../components/common/EditorialEmptyState';
 
 export interface ProjectModuleContext {
   project: any;
@@ -398,6 +399,15 @@ const CriticaModuleContent: React.FC<ProjectModuleContext> = ({
     );
   }
 
+  // If there is no real critical review authored yet, display the authentic editorial empty state
+  if (!project.critica || (typeof project.critica === 'string' && project.critica.trim().length === 0)) {
+    return (
+      <article className="max-w-4xl mx-auto py-4">
+        <EditorialEmptyState section="critica" />
+      </article>
+    );
+  }
+
   return (
     <article className="space-y-5 md:space-y-6 max-w-4xl mx-auto">
       <div className="space-y-2.5">
@@ -591,10 +601,7 @@ export const PROJECT_MODULES_REGISTRY: ProjectModuleDefinition[] = [
     isMandatory: false,
     isAvailable: (project) => {
       if (!project) return false;
-      if (project.hasCritica === false) return false;
-      if (project.hasCritica === true) return true;
-      const c = project.critica;
-      return typeof c === 'string' && c.trim().length > 0;
+      return project.hasCritica !== false;
     },
     inactiveFillClass: 'af-fill-critica',
     renderContent: (ctx) => <CriticaModuleContent {...ctx} />,
@@ -607,13 +614,7 @@ export const PROJECT_MODULES_REGISTRY: ProjectModuleDefinition[] = [
     isMandatory: false,
     isAvailable: (project) => {
       if (!project) return false;
-      if (project.hasPodcast === false) return false;
-      if (project.hasPodcast === true) return true;
-      if (!project.podcast) return false;
-      if (typeof project.podcast === 'object') {
-        return project.podcast.published !== false && Boolean(project.podcast.title);
-      }
-      return Boolean(project.podcast);
+      return project.hasPodcast !== false;
     },
     inactiveFillClass: 'af-fill-podcast',
     renderContent: (ctx) => <PodcastSection project={ctx.project} />,

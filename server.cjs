@@ -99,6 +99,7 @@ const server = http.createServer((req, res) => {
     else if (pathname === '/api/ad-events') filename = 'adEvents.json';
     else if (pathname === '/api/feedback') filename = 'feedback.json';
     else if (pathname === '/api/project-submissions') filename = 'projectSubmissions.json';
+    else if (pathname === '/api/subscribers' || pathname === '/api/subscribe') filename = 'subscribers.json';
 
     if (filename) {
       const filePath = path.join(dataDir, filename);
@@ -117,6 +118,46 @@ const server = http.createServer((req, res) => {
         req.on('data', chunk => body += chunk);
         req.on('end', () => {
           try {
+            if ((pathname === '/api/subscribe' || pathname === '/api/subscribers') && body) {
+              const parsed = JSON.parse(body);
+              if (parsed && typeof parsed === 'object' && !Array.isArray(parsed) && parsed.email) {
+                if (parsed.hp || parsed.honeypot) {
+                  res.setHeader('Content-Type', 'application/json');
+                  res.end(JSON.stringify({ success: true, spam: true }));
+                  return;
+                }
+                const email = String(parsed.email).trim().toLowerCase();
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                  res.statusCode = 400;
+                  res.setHeader('Content-Type', 'application/json');
+                  res.end(JSON.stringify({ error: 'Dirección de correo electrónico inválida.' }));
+                  return;
+                }
+                const currentSubs = fs.existsSync(filePath)
+                  ? JSON.parse(fs.readFileSync(filePath, 'utf-8') || '[]')
+                  : [];
+                const exists = currentSubs.find(s => s.email?.toLowerCase() === email);
+                if (!exists) {
+                  currentSubs.push({
+                    id: `sub-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
+                    email,
+                    section: parsed.section || 'general',
+                    source: parsed.source || 'empty-state',
+                    createdAt: new Date().toISOString(),
+                  });
+                  fs.writeFileSync(filePath, JSON.stringify(currentSubs, null, 2), 'utf-8');
+                }
+                res.setHeader('Content-Type', 'application/json');
+                res.end(JSON.stringify({
+                  success: true,
+                  alreadySubscribed: Boolean(exists),
+                  message: '¡Gracias por querer ser parte de esta conversación! Te avisaremos cuando haya nuevas publicaciones en EcuadorianArchitecture.',
+                }));
+                return;
+              }
+            }
+
             fs.writeFileSync(filePath, body, 'utf-8');
             res.setHeader('Content-Type', 'application/json');
             res.end(JSON.stringify({ success: true, updated: filename }));
