@@ -326,6 +326,106 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
 
   const [shutterSection, setShutterSection] = useState<TransitionSectionType>(currentTab);
 
+  // Card slot configuration
+  // Slot 0 = Front (centered, straight)
+  // Slot 1 = 1st behind (offset Y, rotated +3.5°, top banner fully visible)
+  // Slot 2 = 2nd behind (offset Y, rotated -3.8°, top banner fully visible)
+  // Slot 3 & 4 = bottom of deck (hidden underneath stack)
+  const getSlotConfig = (slot: number) => {
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+
+    switch (slot) {
+      case 0:
+        return {
+          y: 0,
+          rotation: 0,
+          scale: 1,
+          zIndex: 6,
+          boxShadow: '0 26px 50px -12px rgba(0, 0, 0, 0.22), 0 0 0 1px rgba(0, 0, 0, 0.12)',
+        };
+      case 1:
+        return {
+          y: isMobile ? -36 : -46,
+          rotation: 3.5, // Between 2° and 5°
+          scale: isMobile ? 0.98 : 0.985,
+          zIndex: 5,
+          boxShadow: '0 18px 34px -10px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(0, 0, 0, 0.1)',
+        };
+      case 2:
+        return {
+          y: isMobile ? -72 : -92,
+          rotation: -3.8, // Between 2° and 5°, distinct angle
+          scale: isMobile ? 0.96 : 0.97,
+          zIndex: 4,
+          boxShadow: '0 12px 24px -8px rgba(0, 0, 0, 0.14), 0 0 0 1px rgba(0, 0, 0, 0.08)',
+        };
+      case 3:
+        return {
+          y: isMobile ? -76 : -96,
+          rotation: -1.2,
+          scale: isMobile ? 0.94 : 0.95,
+          zIndex: 3,
+          boxShadow: '0 6px 14px -6px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.06)',
+        };
+      case 4:
+        return {
+          y: isMobile ? -78 : -98,
+          rotation: 1.0,
+          scale: isMobile ? 0.93 : 0.94,
+          zIndex: 2,
+          boxShadow: '0 4px 10px -6px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.05)',
+        };
+      case 5:
+      default:
+        return {
+          y: isMobile ? -80 : -100,
+          rotation: -0.6,
+          scale: isMobile ? 0.92 : 0.93,
+          zIndex: 1,
+          boxShadow: '0 4px 10px -6px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(0, 0, 0, 0.04)',
+        };
+    }
+  };
+
+  const getSlotForCard = (cardIndex: number, currentActive: number, cardCount = projects.length) => {
+    if (cardCount <= 0) return 0;
+    return (cardIndex - currentActive + cardCount) % cardCount;
+  };
+
+  // Instant layout setter (mount & reduced motion)
+  const applySlotsInstant = useCallback(
+    (currentActive: number) => {
+      const cardCount = projects.length;
+      if (cardCount <= 0) return;
+
+      // Truncate any obsolete elements beyond current count
+      cardRefs.current.length = cardCount;
+
+      cardRefs.current.forEach((cardEl, idx) => {
+        if (!cardEl) return;
+        gsap.killTweensOf(cardEl);
+
+        const slot = (idx - currentActive + cardCount) % cardCount;
+        const cfg = getSlotConfig(slot);
+
+        gsap.set(cardEl, {
+          x: 0,
+          y: cfg.y,
+          rotation: cfg.rotation,
+          scale: cfg.scale,
+          zIndex: cfg.zIndex,
+          boxShadow: cfg.boxShadow,
+          opacity: 1, // MANDATORY: 100% Opaque at all times
+          transformOrigin: 'bottom center',
+        });
+      });
+    },
+    [projects]
+  );
+
+  const applySlotsInstantRef = useRef(applySlotsInstant);
+  applySlotsInstantRef.current = applySlotsInstant;
+
   const handleTabSwitch = useCallback(
     (targetTab: 'proyectos' | 'territorios' | 'academia') => {
       if (isTransitioningRef.current || targetTab === currentTab) return;
@@ -353,7 +453,8 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
           gsap.set(shutter, { autoAlpha: 0 });
           gsap.set(aperture, { yPercent: 0, scaleY: 0, transformOrigin: 'top center' });
           isTransitioningRef.current = false;
-          applySlotsInstant(0);
+          applySlotsInstantRef.current(0);
+          ScrollTrigger.refresh();
         },
       });
 
@@ -416,20 +517,12 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
         ease: 'power2.in',
       });
 
-      // 7. Aperture wipes away upwards like a theatrical curtain
+      // 7. Aperture wipes away upwards like a theatrical curtain revealing the cards
       tl.to(aperture, {
         yPercent: -100,
         duration: 0.42,
         ease: 'power3.inOut',
       });
-
-      // 8. Physical cards fan in smoothly into position
-      tl.fromTo(
-        cardRefs.current.filter(Boolean),
-        { y: 35, opacity: 0.6 },
-        { y: 0, opacity: 1, duration: 0.38, ease: 'power2.out', stagger: 0.04 },
-        '-=0.2'
-      );
     },
     [currentTab, onTabChange]
   );
@@ -438,97 +531,11 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
   const prevTabRef = useRef(currentTab);
   useEffect(() => {
     if (prevTabRef.current !== currentTab) {
-      handleTabSwitch(currentTab);
-      prevTabRef.current = currentTab;
+      const nextTab = currentTab;
+      prevTabRef.current = nextTab;
+      handleTabSwitch(nextTab);
     }
   }, [currentTab, handleTabSwitch]);
-
-  // Card slot configuration
-  // Slot 0 = Front (centered, straight)
-  // Slot 1 = 1st behind (offset Y, rotated +3.5°, top banner fully visible)
-  // Slot 2 = 2nd behind (offset Y, rotated -3.8°, top banner fully visible)
-  // Slot 3 & 4 = bottom of deck (hidden underneath stack)
-  const getSlotConfig = (slot: number) => {
-    const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
-
-    switch (slot) {
-      case 0:
-        return {
-          y: 0,
-          rotation: 0,
-          scale: 1,
-          zIndex: 6,
-          boxShadow: '0 26px 50px -12px rgba(0, 0, 0, 0.22), 0 0 0 1px rgba(0, 0, 0, 0.12)',
-        };
-      case 1:
-        return {
-          y: isMobile ? -36 : -46,
-          rotation: 3.5, // Between 2° and 5°
-          scale: isMobile ? 0.98 : 0.985,
-          zIndex: 5,
-          boxShadow: '0 18px 34px -10px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(0, 0, 0, 0.1)',
-        };
-      case 2:
-        return {
-          y: isMobile ? -72 : -92,
-          rotation: -3.8, // Between 2° and 5°, distinct angle
-          scale: isMobile ? 0.96 : 0.97,
-          zIndex: 4,
-          boxShadow: '0 12px 24px -8px rgba(0, 0, 0, 0.14), 0 0 0 1px rgba(0, 0, 0, 0.08)',
-        };
-      case 3:
-        return {
-          y: isMobile ? -76 : -96,
-          rotation: -1.2,
-          scale: isMobile ? 0.94 : 0.95,
-          zIndex: 3,
-          boxShadow: '0 6px 14px -6px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.06)',
-        };
-      case 4:
-        return {
-          y: isMobile ? -78 : -98,
-          rotation: 1.0,
-          scale: isMobile ? 0.93 : 0.94,
-          zIndex: 2,
-          boxShadow: '0 4px 10px -6px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.05)',
-        };
-      case 5:
-      default:
-        return {
-          y: isMobile ? -80 : -100,
-          rotation: -0.6,
-          scale: isMobile ? 0.92 : 0.93,
-          zIndex: 1,
-          boxShadow: '0 4px 10px -6px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(0, 0, 0, 0.04)',
-        };
-    }
-  };
-
-  const getSlotForCard = (cardIndex: number, currentActive: number) => {
-    return (cardIndex - currentActive + totalCards) % totalCards;
-  };
-
-  // Instant layout setter (mount & reduced motion)
-  const applySlotsInstant = useCallback(
-    (currentActive: number) => {
-      cardRefs.current.forEach((cardEl, idx) => {
-        if (!cardEl) return;
-        const slot = getSlotForCard(idx, currentActive);
-        const cfg = getSlotConfig(slot);
-
-        gsap.set(cardEl, {
-          x: 0,
-          y: cfg.y,
-          rotation: cfg.rotation,
-          scale: cfg.scale,
-          zIndex: cfg.zIndex,
-          boxShadow: cfg.boxShadow,
-          opacity: 1, // MANDATORY: 100% Opaque at all times
-        });
-      });
-    },
-    [totalCards]
-  );
 
   useEffect(() => {
     applySlotsInstant(activeIndex);
@@ -542,6 +549,7 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
 
   // Reset deck state when switching categories (Proyectos / Territorios / Academia)
   useEffect(() => {
+    cardRefs.current = cardRefs.current.slice(0, projects.length);
     setActiveIndex(0);
     activeIndexRef.current = 0;
     setHoveredCardId(null);
@@ -550,7 +558,7 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
       applySlotsInstant(0);
     });
     return () => cancelAnimationFrame(raf);
-  }, [currentTab, applySlotsInstant]);
+  }, [projects, applySlotsInstant]);
 
   // =========================================================================
   // PINNED SCROLL DECK (GSAP ScrollTrigger & Scrubbed Master Timeline)
@@ -559,6 +567,12 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
   // =========================================================================
   const goToCard = useCallback(
     (targetIndex: number) => {
+      if (totalCards <= 1) {
+        setActiveIndex(0);
+        activeIndexRef.current = 0;
+        applySlotsInstant(0);
+        return;
+      }
       const clamped = Math.max(0, Math.min(totalCards - 1, targetIndex));
       if (scrollTriggerRef.current) {
         const st = scrollTriggerRef.current;
@@ -573,18 +587,32 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
   );
 
   const nextCard = useCallback(() => {
+    if (totalCards <= 1) return;
     const nextIdx = (activeIndexRef.current + 1) % totalCards;
     goToCard(nextIdx);
   }, [totalCards, goToCard]);
 
   const prevCard = useCallback(() => {
+    if (totalCards <= 1) return;
     const prevIdx = (activeIndexRef.current - 1 + totalCards) % totalCards;
     goToCard(prevIdx);
   }, [totalCards, goToCard]);
 
   useGSAP(
     () => {
-      if (!sectionRef.current || totalCards <= 1) return;
+      if (!sectionRef.current) return;
+
+      // If only 1 card or empty editorial state, cleanly dismantle any pinned ScrollTrigger
+      if (totalCards <= 1 || Boolean(projects[0]?.isEditorialEmptyCard)) {
+        if (scrollTriggerRef.current) {
+          scrollTriggerRef.current.kill(true);
+          scrollTriggerRef.current = null;
+        }
+        applySlotsInstant(0);
+        setActiveIndex(0);
+        activeIndexRef.current = 0;
+        return;
+      }
 
       // Ensure cards start at slot 0 initial state
       applySlotsInstant(0);
@@ -636,7 +664,7 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
           const otherCard = cardRefs.current[idx];
           if (!otherCard) continue;
 
-          const nextSlot = getSlotForCard(idx, s + 1);
+          const nextSlot = (idx - (s + 1) + totalCards) % totalCards;
           const nextCfg = getSlotConfig(nextSlot);
 
           // Update zIndex at midpoint
@@ -683,11 +711,12 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
       scrollTriggerRef.current = st;
 
       return () => {
-        st.kill();
-        tl.kill();
+        if (st) st.kill(true);
+        if (tl) tl.kill();
+        scrollTriggerRef.current = null;
       };
     },
-    { dependencies: [currentTab, totalCards], scope: sectionRef }
+    { dependencies: [currentTab, totalCards, projects], scope: sectionRef, revertOnUpdate: true }
   );
 
   // =========================================================================
@@ -1117,11 +1146,25 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
               Boolean(project.secondaryImageUrl) &&
               (hoveredCardId === project.id || manualSecondImageId === project.id);
 
+            const slot = (idx - activeIndex + projects.length) % projects.length;
+            const cfg = getSlotConfig(slot);
+
             return (
               <article
-                key={project.id}
+                key={`${project.id}-${currentTab}`}
                 ref={(el) => {
                   cardRefs.current[idx] = el;
+                  if (el) {
+                    gsap.set(el, {
+                      x: 0,
+                      y: cfg.y,
+                      rotation: cfg.rotation,
+                      scale: cfg.scale,
+                      zIndex: cfg.zIndex,
+                      boxShadow: cfg.boxShadow,
+                      opacity: 1,
+                    });
+                  }
                 }}
                 onClick={() => isFrontCard && handleCardClick(project)}
                 role="group"
@@ -1169,6 +1212,9 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
                     : 'select-none pointer-events-none'
                 }`}
                 style={{
+                  transform: `translate3d(0px, ${cfg.y}px, 0px) rotate(${cfg.rotation}deg) scale(${cfg.scale})`,
+                  zIndex: cfg.zIndex,
+                  boxShadow: cfg.boxShadow,
                   opacity: 1, // MANDATORY: 100% OPAQUE - NEVER FADES
                   transformOrigin: 'bottom center',
                   transformStyle: 'preserve-3d',
