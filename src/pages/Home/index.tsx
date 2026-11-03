@@ -43,6 +43,16 @@ export const HomePage: React.FC<HomePageProps> = ({
     }
   }, [initialTab, onTabChange]);
 
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.location.hash === '#destacados') {
+      const timer = setTimeout(() => {
+        const el = document.getElementById('destacados');
+        if (el) el.scrollIntoView({ behavior: 'instant' as ScrollBehavior });
+      }, 80);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
   const handleNavigateToSection = (section: string) => {
     if (section === 'acerca' || section === 'acerca-de-ea') {
       if (onNavigateToSection) {

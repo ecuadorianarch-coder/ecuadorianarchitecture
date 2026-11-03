@@ -66,9 +66,11 @@ export function parseCurrentRoute(): ParsedRoute {
 
   // 3. Clean Path-based Routing (ArchDaily / Dezeen standard)
   const segments = path.split('/').filter(Boolean);
+  const deckParam = searchParams.get('deck') || searchParams.get('tab');
+  const validDeck = (deckParam === 'academia' || deckParam === 'territorios' || deckParam === 'proyectos') ? deckParam : undefined;
 
   if (segments.length === 0 || path === '/' || path === '/home') {
-    return { view: 'home' };
+    return { view: 'home', targetTab: validDeck };
   }
 
   const first = segments[0].toLowerCase();

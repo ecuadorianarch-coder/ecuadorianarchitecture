@@ -1,7 +1,7 @@
 {
   "impressions": {
-    "camp-flos-running-magnet": 1488,
-    "camp-hunter-douglas-celosias": 1036,
+    "camp-flos-running-magnet": 1491,
+    "camp-hunter-douglas-celosias": 1039,
     "camp-cosentino-dekton-public": 861,
     "camp-vitra-estudios": 640
   },
@@ -25,9 +25,9 @@
   },
   "impressionsByPlacement": {
     "entre-proyectos": 2228,
-    "skyscrapers-laterales": 1314,
+    "skyscrapers-laterales": 1318,
     "dossier-editorial": 470,
-    "inter-galeria": 13
+    "inter-galeria": 15
   },
   "clicksByPlacement": {
     "entre-proyectos": 111,
@@ -259,12 +259,12 @@
     },
     "2026-11-03": {
       "camp-hunter-douglas-celosias": {
-        "validImpressions": 8,
+        "validImpressions": 11,
         "grossClicks": 1,
         "validClicks": 1
       },
       "camp-flos-running-magnet": {
-        "validImpressions": 7,
+        "validImpressions": 10,
         "grossClicks": 2,
         "validClicks": 2
       },
@@ -276,9 +276,9 @@
     }
   },
   "deviceBreakdown": {
-    "desktop": 2475,
+    "desktop": 2481,
     "tablet": 520,
     "mobile": 1030
   },
-  "lastUpdated": "2026-11-03T21:43:01.199Z"
+  "lastUpdated": "2026-11-03T22:57:24.915Z"
 }

@@ -68,6 +68,20 @@ interface ContentContextType {
 const ContentContext = createContext<ContentContextType | undefined>(undefined);
 
 export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  // Invalidation of stale demo content from previous versions in client-side localStorage
+  if (typeof window !== 'undefined') {
+    const CURRENT_EDITORIAL_VERSION = '2026-11-03-editorial-clean-v3';
+    try {
+      if (localStorage.getItem('ea_content_version') !== CURRENT_EDITORIAL_VERSION) {
+        localStorage.removeItem('ea_content_projects');
+        localStorage.removeItem('ea_content_articles');
+        localStorage.removeItem('ea_content_academia');
+        localStorage.removeItem('ea_content_territorios');
+        localStorage.setItem('ea_content_version', CURRENT_EDITORIAL_VERSION);
+      }
+    } catch {}
+  }
+
   const [siteConfig, setSiteConfig] = useState(defaultSiteConfig);
   const [projects, setProjects] = useState<any[]>(() => {
     try {

@@ -1593,5 +1593,71 @@
     "reason": "valid",
     "device": "desktop",
     "sessionId": ""
+  },
+  {
+    "id": "evt-imp-1793746318098-bz8qu",
+    "campaignId": "camp-hunter-douglas-celosias",
+    "placementId": "skyscrapers-laterales",
+    "type": "impression",
+    "timestamp": "2026-11-03T22:51:58.098Z",
+    "isValid": true,
+    "reason": "valid",
+    "device": "desktop",
+    "sessionId": ""
+  },
+  {
+    "id": "evt-imp-1793746318196-53cq0",
+    "campaignId": "camp-flos-running-magnet",
+    "placementId": "skyscrapers-laterales",
+    "type": "impression",
+    "timestamp": "2026-11-03T22:51:58.196Z",
+    "isValid": true,
+    "reason": "valid",
+    "device": "desktop",
+    "sessionId": ""
+  },
+  {
+    "id": "evt-imp-1793746557743-9p8dx",
+    "campaignId": "camp-hunter-douglas-celosias",
+    "placementId": "inter-galeria",
+    "type": "impression",
+    "timestamp": "2026-11-03T22:55:57.743Z",
+    "isValid": true,
+    "reason": "valid",
+    "device": "desktop",
+    "sessionId": ""
+  },
+  {
+    "id": "evt-imp-1793746561240-2wdbg",
+    "campaignId": "camp-flos-running-magnet",
+    "placementId": "inter-galeria",
+    "type": "impression",
+    "timestamp": "2026-11-03T22:56:01.240Z",
+    "isValid": true,
+    "reason": "valid",
+    "device": "desktop",
+    "sessionId": ""
+  },
+  {
+    "id": "evt-imp-1793746644810-m5l3t",
+    "campaignId": "camp-flos-running-magnet",
+    "placementId": "skyscrapers-laterales",
+    "type": "impression",
+    "timestamp": "2026-11-03T22:57:24.810Z",
+    "isValid": true,
+    "reason": "valid",
+    "device": "desktop",
+    "sessionId": ""
+  },
+  {
+    "id": "evt-imp-1793746644886-tp2jy",
+    "campaignId": "camp-hunter-douglas-celosias",
+    "placementId": "skyscrapers-laterales",
+    "type": "impression",
+    "timestamp": "2026-11-03T22:57:24.886Z",
+    "isValid": true,
+    "reason": "valid",
+    "device": "desktop",
+    "sessionId": ""
   }
 ]

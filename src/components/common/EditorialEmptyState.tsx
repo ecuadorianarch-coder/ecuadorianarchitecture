@@ -17,7 +17,7 @@ interface EditorialEmptyStateProps {
   onSuccess?: (email: string) => void;
 }
 
-interface SectionEditorialCopy {
+export interface SectionEditorialCopy {
   badge: string;
   title: string;
   body1: string;
@@ -27,7 +27,7 @@ interface SectionEditorialCopy {
   buttonText: string;
 }
 
-const SECTION_COPIES: Record<string, SectionEditorialCopy> = {
+export const SECTION_COPIES: Record<string, SectionEditorialCopy> = {
   territorio: {
     badge: 'EXPEDIENTES TERRITORIALES // EN CONSTRUCCIÓN EDITORIAL',
     title: 'El territorio también está por escribirse.',
@@ -93,7 +93,7 @@ const SECTION_COPIES: Record<string, SectionEditorialCopy> = {
   },
 };
 
-const TapeStrip: React.FC<{ className?: string }> = ({ className = '' }) => (
+export const TapeStrip: React.FC<{ className?: string }> = ({ className = '' }) => (
   <span
     aria-hidden="true"
     className={`absolute w-12 sm:w-16 h-4 sm:h-5 bg-[#E8E6E1]/90 border border-ea-black/30 shadow-[0_1px_2px_rgba(0,0,0,0.15)] pointer-events-none z-10 ${className}`}

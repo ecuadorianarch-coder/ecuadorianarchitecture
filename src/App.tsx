@@ -89,6 +89,9 @@ export const AppContent: React.FC = () => {
     } else {
       const isDifferent = prevView !== 'home';
       setCurrentView('home');
+      if (route.targetTab) {
+        setTargetTab(route.targetTab);
+      }
       if (isDifferent && window.location.hash !== '#destacados') {
         window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
       }

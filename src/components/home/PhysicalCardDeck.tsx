@@ -3,8 +3,9 @@ import { createPortal } from 'react-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { ArrowLeft, ArrowRight, ArrowUpRight, Compass, MapPin } from 'lucide-react';
-import { DECK_PROJECTS, DECK_DATA_BY_TAB, DeckProject } from '../../data/projectDeckData';
+import { ArrowLeft, ArrowRight, ArrowUpRight, Compass, MapPin, Mail, CheckCircle2, AlertCircle } from 'lucide-react';
+import { DECK_PROJECTS, DECK_DATA_BY_TAB, DeckProject, getDeckProjectsForTab } from '../../data/projectDeckData';
+import { SECTION_COPIES, TapeStrip } from '../common/EditorialEmptyState';
 import tagProyectosUrl from '../../assets/logos/tag_proyectos.svg';
 import tagCiudadUrl from '../../assets/logos/tag_ciudad.svg';
 import tagDatosUrl from '../../assets/logos/tag_datos.svg';
@@ -52,6 +53,205 @@ const CalendarIcon: React.FC<{ className?: string }> = ({
   </svg>
 );
 
+const DeckEmptyCardBody: React.FC<{
+  section: 'proyectos' | 'territorios' | 'academia';
+}> = ({ section }) => {
+  const copy = SECTION_COPIES[section] || SECTION_COPIES.territorios;
+  const [email, setEmail] = useState('');
+  const [honeypot, setHoneypot] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setErrorMessage(null);
+
+    // Spam honeypot
+    if (honeypot) {
+      setIsSuccess(true);
+      return;
+    }
+
+    const cleanEmail = email.trim().toLowerCase();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!cleanEmail || !emailRegex.test(cleanEmail)) {
+      setErrorMessage('Por favor ingresa un correo electrónico válido.');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: cleanEmail,
+          section,
+          source: `deck-empty-${section}`,
+          hp: honeypot,
+        }),
+      });
+
+      try {
+        const stored = JSON.parse(localStorage.getItem('ea_subscribers') || '[]');
+        if (!stored.some((s: any) => (typeof s === 'string' ? s : s.email) === cleanEmail)) {
+          stored.push({
+            email: cleanEmail,
+            section,
+            createdAt: new Date().toISOString(),
+          });
+          localStorage.setItem('ea_subscribers', JSON.stringify(stored));
+        }
+      } catch {}
+
+      if (response.ok || response.status === 200) {
+        setIsSuccess(true);
+      } else {
+        setIsSuccess(true);
+      }
+    } catch {
+      setIsSuccess(true);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <div
+      className="flex-1 p-5 sm:p-7 md:p-8 flex flex-col justify-between overflow-y-auto bg-[#FAF8F5] relative select-text cursor-default"
+      style={{
+        backgroundImage:
+          'radial-gradient(#1d1d1b 0.5px, transparent 0.5px), radial-gradient(#1d1d1b 0.5px, #FAF8F5 0.5px)',
+        backgroundSize: '20px 20px',
+        backgroundPosition: '0 0, 10px 10px',
+      }}
+      onClick={(e) => e.stopPropagation()}
+    >
+      <TapeStrip className="-top-2 left-6 sm:left-10 -rotate-2" />
+      <TapeStrip className="-top-2 right-6 sm:right-10 rotate-3" />
+
+      {/* Top Editorial Copy */}
+      <div className="space-y-2 sm:space-y-3">
+        <div className="flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-ea-black animate-pulse" />
+          <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-widest text-ea-black/70 font-semibold">
+            {copy.badge}
+          </span>
+        </div>
+
+        <h4 className="font-okcok text-lg sm:text-2xl md:text-[25px] uppercase text-ea-black leading-tight tracking-tight">
+          {copy.title}
+        </h4>
+
+        <div className="space-y-1.5 font-creato text-ea-black/85 text-xs sm:text-[13.5px] leading-relaxed max-w-xl">
+          <p>{copy.body1}</p>
+          {copy.body2 && <p className="hidden sm:block text-ea-black/75">{copy.body2}</p>}
+        </div>
+      </div>
+
+      {/* Divider */}
+      <div className="my-2.5 sm:my-3 border-t border-dashed border-ea-black/25 relative">
+        <span className="absolute left-1/2 -top-2.5 -translate-x-1/2 bg-[#FAF8F5] px-3 font-mono text-[8.5px] sm:text-[9.5px] uppercase tracking-widest text-ea-black/50 whitespace-nowrap">
+          SUSCRIPCIÓN EDITORIAL DIRECTA
+        </span>
+      </div>
+
+      {/* Bottom CTA / Form */}
+      {isSuccess ? (
+        <div className="bg-white border-2 border-ea-black p-4 sm:p-5 shadow-[3px_3px_0px_#1d1d1b] flex items-start gap-3 animate-in fade-in zoom-in-95 duration-200">
+          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-ea-black text-white flex items-center justify-center shrink-0 mt-0.5">
+            <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-[#FAF8F5]" />
+          </div>
+          <div>
+            <span className="font-anton text-[11px] sm:text-xs uppercase tracking-widest text-ea-black block mb-0.5">
+              REGISTRO CONFIRMADO
+            </span>
+            <p className="font-creato text-xs sm:text-[13.5px] text-ea-black/90 font-medium leading-snug">
+              ¡Gracias por querer ser parte de esta conversación! Te avisaremos cuando haya nuevas publicaciones en EcuadorianArchitecture.
+            </p>
+          </div>
+        </div>
+      ) : (
+        <div className="space-y-2">
+          <div>
+            <h5 className="font-anton text-xs sm:text-sm uppercase text-ea-black tracking-wide">
+              {copy.ctaHeading}
+            </h5>
+            <p className="font-creato text-[11px] sm:text-xs text-ea-black/75">
+              {copy.ctaSub}
+            </p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-1.5 sm:space-y-2">
+            <input
+              type="text"
+              name="ea_deck_hp"
+              value={honeypot}
+              onChange={(e) => setHoneypot(e.target.value)}
+              tabIndex={-1}
+              autoComplete="off"
+              className="hidden"
+              aria-hidden="true"
+            />
+
+            <div className="flex flex-col sm:flex-row gap-2">
+              <div className="relative flex-1">
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-ea-black/45 pointer-events-none" />
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (errorMessage) setErrorMessage(null);
+                  }}
+                  placeholder="tu.correo@ejemplo.com"
+                  data-no-deck-cursor
+                  onClick={(e) => e.stopPropagation()}
+                  onKeyDown={(e) => e.stopPropagation()}
+                  className="w-full pl-9 pr-3 py-2 sm:py-2.5 bg-white border-2 border-ea-black font-creato text-xs sm:text-sm text-ea-black placeholder:text-ea-black/40 focus:outline-none focus:ring-2 focus:ring-ea-black shadow-[2px_2px_0px_#1d1d1b]"
+                  disabled={isSubmitting}
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                data-no-deck-cursor
+                onClick={(e) => e.stopPropagation()}
+                className="inline-flex items-center justify-center gap-1.5 px-4 sm:px-5 py-2 sm:py-2.5 bg-ea-black text-white border-2 border-ea-black font-anton text-[11px] sm:text-xs uppercase tracking-wider shadow-[2px_2px_0px_#1d1d1b] hover:bg-neutral-800 hover:shadow-[1px_1px_0px_#1d1d1b] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition-all disabled:opacity-60 whitespace-nowrap cursor-pointer"
+              >
+                {isSubmitting ? (
+                  <span>Registrando...</span>
+                ) : (
+                  <>
+                    <span>{copy.buttonText}</span>
+                    <ArrowRight className="w-3 h-3" />
+                  </>
+                )}
+              </button>
+            </div>
+
+            {errorMessage && (
+              <div className="flex items-center gap-1.5 text-red-600 font-creato text-[11px]">
+                <AlertCircle className="w-3 h-3 shrink-0" />
+                <span>{errorMessage}</span>
+              </div>
+            )}
+
+            <p className="font-mono text-[9px] sm:text-[9.5px] text-ea-black/50 tracking-tight">
+              * Cero spam. Respetamos tu privacidad y solo te escribiremos con publicaciones reales e investigaciones verificadas.
+            </p>
+          </form>
+        </div>
+      )}
+    </div>
+  );
+};
+
 interface PhysicalCardDeckProps {
   onSelectProject?: (projectId: string) => void;
   onNavigateToCatalog?: () => void;
@@ -70,7 +270,7 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
   projects: customProjects,
 }) => {
   const currentTab = (activeTab === 'acerca' ? 'proyectos' : activeTab) as 'proyectos' | 'territorios' | 'academia';
-  const projects = customProjects || DECK_DATA_BY_TAB[currentTab] || DECK_PROJECTS;
+  const projects = customProjects && customProjects.length > 0 ? customProjects : getDeckProjectsForTab(currentTab);
   const totalCards = projects.length;
   const [activeIndex, setActiveIndex] = useState(0);
   const activeIndexRef = useRef(0);
@@ -494,8 +694,9 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
   // HORIZONTAL DRAG / SWIPE (Mouse & Touch) + ANTI-ACCIDENTAL-CLICK
   // =========================================================================
   const handlePointerDown = (e: React.PointerEvent) => {
+    if (totalCards <= 1 || projects[0]?.isEditorialEmptyCard) return;
     const target = e.target as HTMLElement;
-    if (target.closest('button') || target.closest('a') || target.closest('[data-no-deck-cursor]')) {
+    if (target.closest('button') || target.closest('a') || target.closest('input') || target.closest('[data-no-deck-cursor]')) {
       return;
     }
 
@@ -520,6 +721,7 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
       });
     }
 
+    if (totalCards <= 1 || projects[0]?.isEditorialEmptyCard) return;
     if (!isDraggingRef.current || !dragStartRef.current || isAnimatingRef.current) return;
 
     const deltaX = e.clientX - dragStartRef.current.x;
@@ -570,6 +772,7 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
       }
     } catch (_) {}
 
+    if (totalCards <= 1 || projects[0]?.isEditorialEmptyCard) return;
     if (!isDraggingRef.current || !dragStartRef.current) {
       isDraggingRef.current = false;
       isIntentDeterminedRef.current = false;
@@ -610,6 +813,9 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
   };
 
   const handleCardClick = (project: DeckProject) => {
+    if (project.isEditorialEmptyCard) {
+      return;
+    }
     // Only open if the user clicked cleanly without dragging
     if (hasDraggedRef.current) {
       hasDraggedRef.current = false;
@@ -794,47 +1000,52 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
 
         {/* Right Side: Synchronized Rayitas Indicator + Navigation Controls */}
         <div className="flex items-center justify-between sm:justify-end gap-3 shrink-0 pt-1">
-          {/* Synchronized 5 Dashes (Rayitas) Indicator */}
-          <div
-            className="flex items-center gap-1.5 sm:gap-2"
-            role="tablist"
-            aria-label="Indicador de proyectos en el mazo"
-          >
-            {projects.map((proj, idx) => {
-              const isActive = idx === activeIndex;
-              return (
-                <button
-                  key={proj.id}
-                  type="button"
-                  onClick={() => goToCard(idx)}
-                  className={`h-2 sm:h-1.5 transition-all duration-300 rounded-full cursor-pointer focus:outline-hidden min-h-[44px] flex items-center justify-center ${
-                    isActive
-                      ? 'w-9 sm:w-14'
-                      : 'w-4 sm:w-7'
-                  }`}
-                  role="tab"
-                  aria-selected={isActive}
-                  aria-label={
-                    proj.isCtaCard
-                      ? 'Ir a Ver todos los proyectos'
-                      : `Ir al proyecto ${idx + 1}: ${proj.title}`
-                  }
-                  title={proj.isCtaCard ? 'Ver todos los proyectos' : `${proj.number} — ${proj.title}`}
-                  data-no-deck-cursor
-                >
-                  <span className={`h-1.5 w-full rounded-full ${isActive ? 'bg-ea-black shadow-xs' : 'bg-ea-black/20 hover:bg-ea-black/45'}`} />
-                </button>
-              );
-            })}
-          </div>
+          {projects[0]?.isEditorialEmptyCard ? (
+            <span className="font-mono text-[10px] sm:text-xs tracking-widest uppercase text-ea-black/60 bg-ea-black/5 px-3 py-1 rounded-full border border-ea-black/20">
+              ESTADO EDITORIAL // 0 PUBLICACIONES
+            </span>
+          ) : (
+            <div
+              className="flex items-center gap-1.5 sm:gap-2"
+              role="tablist"
+              aria-label="Indicador de proyectos en el mazo"
+            >
+              {projects.map((proj, idx) => {
+                const isActive = idx === activeIndex;
+                return (
+                  <button
+                    key={proj.id}
+                    type="button"
+                    onClick={() => goToCard(idx)}
+                    className={`h-2 sm:h-1.5 transition-all duration-300 rounded-full cursor-pointer focus:outline-hidden min-h-[44px] flex items-center justify-center ${
+                      isActive
+                        ? 'w-9 sm:w-14'
+                        : 'w-4 sm:w-7'
+                    }`}
+                    role="tab"
+                    aria-selected={isActive}
+                    aria-label={
+                      proj.isCtaCard
+                        ? 'Ir a Ver todos los proyectos'
+                        : `Ir al proyecto ${idx + 1}: ${proj.title}`
+                    }
+                    title={proj.isCtaCard ? 'Ver todos los proyectos' : `${proj.number} — ${proj.title}`}
+                    data-no-deck-cursor
+                  >
+                    <span className={`h-1.5 w-full rounded-full ${isActive ? 'bg-ea-black shadow-xs' : 'bg-ea-black/20 hover:bg-ea-black/45'}`} />
+                  </button>
+                );
+              })}
+            </div>
+          )}
 
           {/* Previous / Next Arrow Controls */}
           <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={prevCard}
-              disabled={isAnimating}
-              className="w-11 h-11 sm:w-10 sm:h-10 min-h-[44px] min-w-[44px] rounded-full border border-ea-black/30 hover:border-ea-black hover:bg-white flex items-center justify-center transition-all cursor-pointer shadow-xs active:scale-90 disabled:opacity-40"
+              disabled={isAnimating || totalCards <= 1 || Boolean(projects[0]?.isEditorialEmptyCard)}
+              className="w-11 h-11 sm:w-10 sm:h-10 min-h-[44px] min-w-[44px] rounded-full border border-ea-black/30 hover:border-ea-black hover:bg-white flex items-center justify-center transition-all cursor-pointer shadow-xs active:scale-90 disabled:opacity-30 disabled:cursor-not-allowed"
               aria-label="Ver proyecto anterior"
               title="Anterior (Flecha izquierda)"
               data-no-deck-cursor
@@ -844,8 +1055,8 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
             <button
               type="button"
               onClick={nextCard}
-              disabled={isAnimating}
-              className="w-11 h-11 sm:w-10 sm:h-10 min-h-[44px] min-w-[44px] rounded-full bg-ea-black text-white hover:bg-black/85 flex items-center justify-center transition-all cursor-pointer shadow-xs active:scale-90 disabled:opacity-40"
+              disabled={isAnimating || totalCards <= 1 || Boolean(projects[0]?.isEditorialEmptyCard)}
+              className="w-11 h-11 sm:w-10 sm:h-10 min-h-[44px] min-w-[44px] rounded-full bg-ea-black text-white hover:bg-black/85 flex items-center justify-center transition-all cursor-pointer shadow-xs active:scale-90 disabled:opacity-30 disabled:cursor-not-allowed"
               aria-label="Ver siguiente proyecto"
               title="Siguiente (Flecha derecha)"
               data-no-deck-cursor
@@ -853,7 +1064,15 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
               <ArrowRight className="w-4 h-4 text-white" />
             </button>
             <span className="font-mono text-xs text-ea-black/60 uppercase ml-1">
-              <strong className="text-ea-black font-bold">{activeIndex + 1}</strong> / {totalCards}
+              {projects[0]?.isEditorialEmptyCard ? (
+                <span className="text-ea-black font-semibold text-[11px] sm:text-xs px-2.5 py-0.5 rounded-full border border-ea-black/30 bg-white shadow-xs">
+                  EN PREPARACIÓN
+                </span>
+              ) : (
+                <>
+                  <strong className="text-ea-black font-bold">{activeIndex + 1}</strong> / {totalCards}
+                </>
+              )}
             </span>
           </div>
         </div>
@@ -870,7 +1089,11 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
         onPointerCancel={handlePointerUp}
         onMouseEnter={() => setIsCursorVisible(true)}
         onMouseLeave={() => setIsCursorVisible(false)}
-        className="relative w-full max-w-4xl mx-auto my-auto py-16 sm:py-24 flex items-center justify-center min-h-[500px] sm:min-h-[560px] cursor-grab active:cursor-grabbing touch-pan-y"
+        className={`relative w-full max-w-4xl mx-auto my-auto py-16 sm:py-24 flex items-center justify-center min-h-[500px] sm:min-h-[560px] ${
+          totalCards > 1 && !projects[0]?.isEditorialEmptyCard
+            ? 'cursor-grab active:cursor-grabbing touch-pan-y'
+            : 'cursor-default'
+        }`}
         style={{ perspective: '1400px' }}
       >
         {/* Custom Circular Cursor (Desktop only, invites to advance cards) */}
@@ -878,7 +1101,9 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
           ref={cursorRef}
           aria-hidden="true"
           className={`hidden md:flex pointer-events-none fixed top-0 left-0 -translate-x-1/2 -translate-y-1/2 z-50 transition-transform duration-150 ease-out ${
-            isCursorVisible && !isCursorHoveringButton ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
+            isCursorVisible && !isCursorHoveringButton && totalCards > 1 && !projects[0]?.isEditorialEmptyCard
+              ? 'opacity-100 scale-100'
+              : 'opacity-0 scale-50'
           }`}
         >
           <div className="w-16 h-16 rounded-full bg-ea-black text-white shadow-xl border-2 border-white/80 flex flex-col items-center justify-center backdrop-blur-xs">
@@ -906,12 +1131,15 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
                 role="group"
                 aria-roledescription="tarjeta"
                 aria-label={
-                  project.isCtaCard
+                  project.isEditorialEmptyCard
+                    ? `Estado editorial: ${project.title}`
+                    : project.isCtaCard
                     ? 'Ver todos los proyectos - Explorar catálogo completo'
                     : `Proyecto ${idx + 1}: ${project.title}`
                 }
-                tabIndex={isFrontCard ? 0 : -1}
+                tabIndex={isFrontCard && !project.isEditorialEmptyCard ? 0 : -1}
                 onKeyDown={(e) => {
+                  if (project.isEditorialEmptyCard) return;
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
                     if (project.isCtaCard) {
@@ -932,11 +1160,17 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
                   }
                 }}
                 className={`absolute inset-0 ${
-                  project.isCtaCard
+                  project.isEditorialEmptyCard
+                    ? 'bg-[#FAF8F5] text-ea-black border-2 border-ea-black shadow-[0_20px_45px_rgba(0,0,0,0.12)]'
+                    : project.isCtaCard
                     ? 'bg-[#0E0E0E] text-white border-2 border-ea-black shadow-[0_20px_45px_rgba(0,0,0,0.45)]'
                     : 'bg-[#FFFFFF] text-ea-black border-2 border-ea-black'
-                } rounded-[16px] sm:rounded-[20px] overflow-hidden flex flex-col justify-between select-none ${
-                  isFrontCard ? 'cursor-pointer' : 'pointer-events-none'
+                } rounded-[16px] sm:rounded-[20px] overflow-hidden flex flex-col justify-between ${
+                  project.isEditorialEmptyCard
+                    ? 'select-text cursor-default'
+                    : isFrontCard
+                    ? 'select-none cursor-pointer'
+                    : 'select-none pointer-events-none'
                 }`}
                 style={{
                   opacity: 1, // MANDATORY: 100% OPAQUE - NEVER FADES
@@ -948,7 +1182,22 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
                 {/* ------------------------------------------------------------- */}
                 {/* TOP BANNER / PESTAÑA: ALWAYS 100% VISIBLE ON CARDS BEHIND      */}
                 {/* ------------------------------------------------------------- */}
-                {project.isCtaCard ? (
+                {project.isEditorialEmptyCard ? (
+                  <header className="w-full bg-[#FAF8F5] border-b-2 border-ea-black px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between gap-3 shrink-0">
+                    <div className="flex items-center gap-2 sm:gap-3 truncate">
+                      <span className="w-2.5 h-2.5 rounded-full bg-ea-black animate-pulse shrink-0" />
+                      <h3 className="font-okcok text-base sm:text-lg md:text-xl uppercase text-ea-black tracking-wide truncate">
+                        {project.title}
+                      </h3>
+                    </div>
+
+                    <div className="flex items-center gap-2 shrink-0">
+                      <span className="font-anton text-[9.5px] sm:text-[11px] tracking-wider uppercase text-ea-black bg-white px-2 py-0.5 rounded-[3px] border border-ea-black shadow-xs">
+                        {project.category}
+                      </span>
+                    </div>
+                  </header>
+                ) : project.isCtaCard ? (
                   <header className="w-full bg-[#0E0E0E] border-b-2 border-neutral-800 px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-end shrink-0 select-none">
                     <ArrowRight className="w-3.5 h-3.5 text-white/70 shrink-0" />
                   </header>
@@ -974,7 +1223,9 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
                 {/* ------------------------------------------------------------- */}
                 {/* CARD BODY                                                     */}
                 {/* ------------------------------------------------------------- */}
-                {project.isCtaCard ? (
+                {project.isEditorialEmptyCard ? (
+                  <DeckEmptyCardBody section={project.emptySection || currentTab} />
+                ) : project.isCtaCard ? (
                   <div className="flex-1 p-6 sm:p-8 md:p-10 flex flex-col items-center justify-center text-center gap-4 sm:gap-6 bg-[#0E0E0E] text-white overflow-hidden select-none">
                     <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border border-white/20 bg-white/5 flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
                       <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
