@@ -1000,11 +1000,7 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
 
         {/* Right Side: Synchronized Rayitas Indicator + Navigation Controls */}
         <div className="flex items-center justify-between sm:justify-end gap-3 shrink-0 pt-1">
-          {projects[0]?.isEditorialEmptyCard ? (
-            <span className="font-mono text-[10px] sm:text-xs tracking-widest uppercase text-ea-black/60 bg-ea-black/5 px-3 py-1 rounded-full border border-ea-black/20">
-              ESTADO EDITORIAL // 0 PUBLICACIONES
-            </span>
-          ) : (
+          {!projects[0]?.isEditorialEmptyCard && (
             <div
               className="flex items-center gap-1.5 sm:gap-2"
               role="tablist"
