@@ -1,0 +1,268 @@
+# Ecuadorian Architecture (EA) — Dossier Completo para Modelos de Lenguaje & RAG
+
+Este documento contiene la información detallada, resúmenes críticos, materialidades y fichas técnicas de la arquitectura contemporánea de Ecuador documentada por Ecuadorian Architecture (https://ecuadorianarchitecture.com).
+
+================================================================================
+SECCIÓN 1: PROYECTOS Y OBRAS ARQUITECTÓNICAS
+================================================================================
+
+## ESPACIO PARA HABLAR CON DIOS
+- **URL Canónica:** https://ecuadorianarchitecture.com/proyectos/espacio-para-hablar-con-dios
+- **Estudio / Autores:** NOMADE TALLER
+- **Ubicación:** QUITO
+- **Año de Finalización:** 2024
+- **Tipología / Categoría:** Equipamiento Cultural
+- **Superficie Construida:** 180 m²
+- **Sistema Estructural y Materiales:** Adobe y Madera
+- **Crítica Editorial:** REDACCIÓN CRÍTICA EA
+
+### Memoria Descriptiva & Concepto:
+Texto analítico principal de la reseña...
+
+### Crítica Arquitectónica EA:
+> "Desafiar la convención inmobiliaria desde la inercia térmica"
+Dictamen crítico externo sobre la obra y su pertinencia ética y constructiva...
+*Conclusión crítica:* El proyecto cuestiona el modelo hegemónico de edificación en QUITO.
+
+---
+
+## EDIFICIO ATRIUM
+- **URL Canónica:** https://ecuadorianarchitecture.com/proyectos/edificio-atrium
+- **Estudio / Autores:** RAMA ESTUDIO
+- **Ubicación:** QUITO
+- **Año de Finalización:** 2024
+- **Tipología / Categoría:** Edificación Colectiva
+- **Superficie Construida:** 3.850 m²
+- **Fotografía:** Bicubik Photography
+- **Sistema Estructural y Materiales:** Hormigón armado visto y perfiles de acero laminado
+- **Crítica Editorial:** AL BORDE
+
+### Memoria Descriptiva & Concepto:
+El vacío central no es una ausencia, sino el protagonista activo que reconfigura las relaciones entre lo privado y lo colectivo. Concebido como una gran chimenea térmica, el atrio distribuye la luz equinoccial hacia cada uno de los departamentos, reduciendo la necesidad de climatización artificial y creando un paisaje interior de vegetación endémica.
+
+### Crítica Arquitectónica EA:
+Por Al Borde: La propuesta de Rama Estudio desafía la convención inmobiliaria contemporánea. Frente a la proliferación de torres herméticas y vidriadas en el valle de Quito, Atrium reintroduce la inercia térmica, la porosidad visual y una materialidad de hormigón crudo y mampostería que dialoga honestamente con la tradición constructiva andina.
+
+---
+
+## CASA ENTRE ÁRBOLES
+- **URL Canónica:** https://ecuadorianarchitecture.com/proyectos/casa-entre-arboles
+- **Estudio / Autores:** AL BORDE ARQUITECTOS
+- **Ubicación:** PUEMBO
+- **Año de Finalización:** 2023
+- **Tipología / Categoría:** Vivienda Unifamiliar
+- **Superficie Construida:** 280 m²
+- **Fotografía:** JAG STUDIO
+- **Sistema Estructural y Materiales:** Tapial de tierra cruda y entramado de eucalipto reciclado
+- **Crítica Editorial:** RAMA ESTUDIO
+
+### Memoria Descriptiva & Concepto:
+La vivienda se descompone en tres pabellones conectados por pasarelas elevadas. Cada pabellón responde a un momento del día y a una cota topográfica específica, permitiendo que la pendiente fluya libremente por debajo de la estructura sin alterar las escorrentías naturales.
+
+### Crítica Arquitectónica EA:
+Por Rama Estudio: Al Borde demuestra una vez más que la radicalidad no radica en el alarde tecnológico, sino en la economía de medios y la pertinencia ética. La reutilización de maderas de desecho y el uso de tierra cruda posicionan a este proyecto como un manifiesto de resistencia ecológica.
+
+---
+
+## PLAZA Y TEATRO
+- **URL Canónica:** https://ecuadorianarchitecture.com/proyectos/plaza-y-teatro
+- **Estudio / Autores:** DIEGO GUAYASAMÍN
+- **Ubicación:** CUENCA
+- **Año de Finalización:** 2024
+- **Tipología / Categoría:** Espacio Público
+- **Fotografía:** Sebastián Crespo
+- **Sistema Estructural y Materiales:** Muros de contención en andesita y graderíos en hormigón pigmentado
+- **Crítica Editorial:** MARÍA MORENO
+
+### Memoria Descriptiva & Concepto:
+El proyecto rehúye la monumentalidad ensimismada para convertirse en una extensión del suelo urbano. Sus graderíos escalonados funcionan simultáneamente como contención topográfica, teatro comunitario y mirador hacia el centro histórico de Cuenca.
+
+---
+
+## CASA LOMA
+- **URL Canónica:** https://ecuadorianarchitecture.com/proyectos/casa-loma
+- **Estudio / Autores:** RAMA ESTUDIO
+- **Ubicación:** TUMBACO
+- **Año de Finalización:** 2024
+- **Tipología / Categoría:** Vivienda Unifamiliar
+- **Fotografía:** Bicubik Photography
+- **Sistema Estructural y Materiales:** Madera laminada de pino y zapatas aisladas
+- **Crítica Editorial:** DANIEL MORENO FLORES
+
+### Memoria Descriptiva & Concepto:
+Luego del terremoto del 16 de abril de 2016 en Ecuador, los arquitectos de Al Borde decidieron unirse a un equipo de arquitectos, diseñadores industriales e ingenieros, para crear cuatro prototipos de vivienda con tecnología experimental, pero sin descuidar las particularidades culturales del sector rural ecuatoriano. El proyecto se desarrolló con el volumen longitudinal abriéndose hacia las visuales del Ilaló, aprovechando la ventilación pasiva y la inercia térmica.
+
+---
+
+## MUSEO PRECOLOMBINO
+- **URL Canónica:** https://ecuadorianarchitecture.com/proyectos/museo-precolombino
+- **Estudio / Autores:** LUIS LÓPEZ LÓPEZ
+- **Ubicación:** GUAYAQUIL
+- **Año de Finalización:** 2022
+- **Tipología / Categoría:** Equipamiento Cultural
+- **Fotografía:** Jag Studio
+- **Sistema Estructural y Materiales:** Hormigón armado visto con áridos locales y muros portantes
+- **Crítica Editorial:** AL BORDE
+
+### Memoria Descriptiva & Concepto:
+El museo protege piezas arqueológicas cerámicas Valdivia mediante muros dobles de inercia térmica.
+
+### Crítica Arquitectónica EA:
+Por Al Borde: Arquitectura de sobriedad tectónica que resiste el clima extremo guayaquileño sin estridencias.
+
+---
+
+## PABELLÓN DEL BOSQUE
+- **URL Canónica:** https://ecuadorianarchitecture.com/proyectos/pabellon-bosque
+- **Estudio / Autores:** ESTUDIO FELIPE ESCUDERO
+- **Ubicación:** COTOPAXI
+- **Año de Finalización:** 2024
+- **Tipología / Categoría:** Arquitectura Efímera
+- **Fotografía:** Bicubik Photography
+- **Sistema Estructural y Materiales:** Perfiles tubulares de acero galvanizado lacado en negro
+- **Crítica Editorial:** MARÍA MORENO
+
+### Memoria Descriptiva & Concepto:
+El pabellón refleja el cielo cambiante de la cordillera y capta calor diurno para liberarlo durante las noches heladas.
+
+### Crítica Arquitectónica EA:
+Por María Moreno: Precisión geométrica que contrasta poéticamente con la organicidad agreste del páramo del Cotopaxi.
+
+---
+
+## CENTRO COMUNITARIO
+- **URL Canónica:** https://ecuadorianarchitecture.com/proyectos/centro-comunitario-cana
+- **Estudio / Autores:** ENLACE ARQUITECTURA + AL BORDE + ENSAMBLE ARQUITECTURA
+- **Ubicación:** MANABÍ
+- **Año de Finalización:** 2023
+- **Tipología / Categoría:** Equipamiento Social
+- **Fotografía:** Sebastián Crespo
+- **Sistema Estructural y Materiales:** Caña guadúa rolliza y uniones apernadas con mortero
+- **Crítica Editorial:** AL BORDE
+
+### Memoria Descriptiva & Concepto:
+Estructura sismo-resistente en caña guadúa inmunizada con humo, con aleros generosos que protegen de la lluvia monzónica.
+
+### Crítica Arquitectónica EA:
+Por Al Borde: Dignificación del bambú como material de presente y futuro, fortaleciendo el tejido social costero.
+
+---
+
+## CASA MAGNOLIA
+- **URL Canónica:** https://ecuadorianarchitecture.com/proyectos/casa-magnolia
+- **Estudio / Autores:** ESTUDIO FELIPE ESCUDERO
+- **Ubicación:** PUEMBO
+- **Año de Finalización:** 2023
+- **Tipología / Categoría:** Vivienda Unifamiliar
+- **Fotografía:** Bicubik Photography
+- **Sistema Estructural y Materiales:** Hormigón armado visto pigmentado en blanco
+- **Crítica Editorial:** ANA MARÍA DURÁN
+
+### Memoria Descriptiva & Concepto:
+El proyecto explora la luz cenital y las superficies continuas de hormigón desactivado, estableciendo un diálogo de contrastes entre la pureza volumétrica y la frondosidad vegetal.
+
+### Crítica Arquitectónica EA:
+Por Ana María Durán: Madurez formal que consolida la búsqueda escultórica de Felipe Escudero en el paisaje doméstico ecuatoriano.
+
+---
+
+## EDIFICIO SENSEI
+- **URL Canónica:** https://ecuadorianarchitecture.com/proyectos/edificio-sensei
+- **Estudio / Autores:** DANIEL MORENO FLORES
+- **Ubicación:** QUITO
+- **Año de Finalización:** 2023
+- **Tipología / Categoría:** Edificio de Uso Mixto
+- **Superficie Construida:** 5.600 m²
+- **Fotografía:** JAG STUDIO
+- **Sistema Estructural y Materiales:** Hormigón armado y envolvente metálica curva
+- **Crítica Editorial:** JULIÁN ZID
+
+### Memoria Descriptiva & Concepto:
+La torre propone una piel fluida que dinamiza el perfil urbano de las avenidas Naciones Unidas y Amazonas.
+
+### Crítica Arquitectónica EA:
+Por Julián Zid: Una audaz declaración de dinamismo formal en el corazón corporativo de Quito.
+
+---
+
+================================================================================
+SECCIÓN 2: EXPEDIENTES TERRITORIALES
+================================================================================
+
+## CIUDAD Y RÍO
+- **URL Canónica:** https://ecuadorianarchitecture.com/territorios/ciudad-rio
+- **Ubicación / Región:** GUAYAQUIL
+- **Año:** 2024
+- **Investigación:** Redacción EA
+
+### Análisis Territorial:
+EL IMPACTO DE LAS MAREAS Y LA INFRAESTRUCTURA HIDRÁULICA EN LA FORMA URBANA.
+
+---
+
+## CARTOGRAFÍA VIVA
+- **URL Canónica:** https://ecuadorianarchitecture.com/territorios/cartografia-viva
+- **Ubicación / Región:** CHIMBORAZO
+- **Año:** 2023
+- **Investigación:** Redacción EA
+
+### Análisis Territorial:
+PAISAJES AGRÍCOLAS Y HUELLAS PREHISPÁNICAS EN EL CALLEJÓN INTERANDINO.
+
+---
+
+## AMAZONÍA Y ENCLAVE
+- **URL Canónica:** https://ecuadorianarchitecture.com/territorios/amazonia-enclave
+- **Ubicación / Región:** NAPO / PASTAZA
+- **Año:** 2024
+- **Investigación:** Redacción EA
+
+### Análisis Territorial:
+TRANSFORMACIONES TERRITORIALES ANTE LAS VÍAS DE EXTRACCIÓN Y COMUNIDADES NATIVAS.
+
+---
+
+## CUENCAS HIDROGRÁFICAS DEL SUR
+- **URL Canónica:** https://ecuadorianarchitecture.com/territorios/cuencas-sur
+- **Ubicación / Región:** CUENCA / PAUTE
+- **Año:** 2023
+- **Investigación:** Redacción EA
+
+### Análisis Territorial:
+REPRESIÓN HIDROELÉCTRICA Y TRANSFORMACIÓN DEL PAISAJE FLUVIAL INTERANDINO.
+
+---
+
+## FRONTERAS ECOLÓGICAS URBANAS
+- **URL Canónica:** https://ecuadorianarchitecture.com/territorios/fronteras-ilalo
+- **Ubicación / Región:** PICHINCHA / ILALÓ
+- **Año:** 2022
+- **Investigación:** Redacción EA
+
+### Análisis Territorial:
+PRESIÓN INMOBILIARIA SOBRE EL PAISAJE VOLCÁNICO Y VALLES INTERANDINOS.
+
+---
+
+## CORREDOR BIOLÓGICO DEL CHOCÓ
+- **URL Canónica:** https://ecuadorianarchitecture.com/territorios/corredor-choco
+- **Ubicación / Región:** ESMERALDAS
+- **Año:** 2024
+- **Investigación:** Redacción EA
+
+### Análisis Territorial:
+DEFORESTACIÓN, VÍAS SECUNDARIAS Y RESISTENCIA COMUNITARIA EN EL BOSQUE HÚMEDO.
+
+---
+
+## METABOLISMO INSULAR Y TURISMO
+- **URL Canónica:** https://ecuadorianarchitecture.com/territorios/metabolismo-insular
+- **Ubicación / Región:** SANTA CRUZ
+- **Año:** 2023
+- **Investigación:** Redacción EA
+
+### Análisis Territorial:
+IMPORTACIÓN DE MATERIALES Y HUELLA ECOLÓGICA EN ECOSISTEMAS FRÁGILES.
+
+---
+

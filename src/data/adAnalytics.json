@@ -1,0 +1,284 @@
+{
+  "impressions": {
+    "camp-flos-running-magnet": 1488,
+    "camp-hunter-douglas-celosias": 1036,
+    "camp-cosentino-dekton-public": 861,
+    "camp-vitra-estudios": 640
+  },
+  "grossClicks": {
+    "camp-flos-running-magnet": 81,
+    "camp-hunter-douglas-celosias": 50,
+    "camp-cosentino-dekton-public": 39,
+    "camp-vitra-estudios": 31
+  },
+  "validClicks": {
+    "camp-flos-running-magnet": 75,
+    "camp-hunter-douglas-celosias": 45,
+    "camp-cosentino-dekton-public": 35,
+    "camp-vitra-estudios": 28
+  },
+  "clicks": {
+    "camp-flos-running-magnet": 75,
+    "camp-hunter-douglas-celosias": 45,
+    "camp-cosentino-dekton-public": 35,
+    "camp-vitra-estudios": 28
+  },
+  "impressionsByPlacement": {
+    "entre-proyectos": 2228,
+    "skyscrapers-laterales": 1314,
+    "dossier-editorial": 470,
+    "inter-galeria": 13
+  },
+  "clicksByPlacement": {
+    "entre-proyectos": 111,
+    "skyscrapers-laterales": 56,
+    "dossier-editorial": 16
+  },
+  "dailyStats": {
+    "2026-10-15": {
+      "camp-flos-running-magnet": {
+        "validImpressions": 180,
+        "grossClicks": 10,
+        "validClicks": 9
+      },
+      "camp-hunter-douglas-celosias": {
+        "validImpressions": 120,
+        "grossClicks": 6,
+        "validClicks": 5
+      }
+    },
+    "2026-10-16": {
+      "camp-flos-running-magnet": {
+        "validImpressions": 210,
+        "grossClicks": 12,
+        "validClicks": 11
+      },
+      "camp-hunter-douglas-celosias": {
+        "validImpressions": 145,
+        "grossClicks": 8,
+        "validClicks": 7
+      }
+    },
+    "2026-10-17": {
+      "camp-flos-running-magnet": {
+        "validImpressions": 240,
+        "grossClicks": 14,
+        "validClicks": 13
+      },
+      "camp-hunter-douglas-celosias": {
+        "validImpressions": 160,
+        "grossClicks": 7,
+        "validClicks": 6
+      }
+    },
+    "2026-10-18": {
+      "camp-flos-running-magnet": {
+        "validImpressions": 195,
+        "grossClicks": 9,
+        "validClicks": 8
+      },
+      "camp-hunter-douglas-celosias": {
+        "validImpressions": 130,
+        "grossClicks": 6,
+        "validClicks": 5
+      }
+    },
+    "2026-10-19": {
+      "camp-flos-running-magnet": {
+        "validImpressions": 290,
+        "grossClicks": 15,
+        "validClicks": 14
+      },
+      "camp-hunter-douglas-celosias": {
+        "validImpressions": 210,
+        "grossClicks": 10,
+        "validClicks": 9
+      }
+    },
+    "2026-10-20": {
+      "camp-flos-running-magnet": {
+        "validImpressions": 305,
+        "grossClicks": 14,
+        "validClicks": 13
+      },
+      "camp-hunter-douglas-celosias": {
+        "validImpressions": 215,
+        "grossClicks": 10,
+        "validClicks": 10
+      }
+    },
+    "2026-10-21": {
+      "camp-flos-running-magnet": {
+        "validImpressions": 8,
+        "grossClicks": 2,
+        "validClicks": 2
+      },
+      "camp-hunter-douglas-celosias": {
+        "validImpressions": 4,
+        "grossClicks": 0,
+        "validClicks": 0
+      }
+    },
+    "2026-10-22": {
+      "camp-hunter-douglas-celosias": {
+        "validImpressions": 8,
+        "grossClicks": 0,
+        "validClicks": 0
+      },
+      "camp-flos-running-magnet": {
+        "validImpressions": 8,
+        "grossClicks": 1,
+        "validClicks": 1
+      },
+      "camp-cosentino-dekton-public": {
+        "validImpressions": 2,
+        "grossClicks": 0,
+        "validClicks": 0
+      }
+    },
+    "2026-10-23": {
+      "camp-flos-running-magnet": {
+        "validImpressions": 5,
+        "grossClicks": 0,
+        "validClicks": 0
+      },
+      "camp-hunter-douglas-celosias": {
+        "validImpressions": 5,
+        "grossClicks": 1,
+        "validClicks": 1
+      },
+      "camp-cosentino-dekton-public": {
+        "validImpressions": 2,
+        "grossClicks": 0,
+        "validClicks": 0
+      }
+    },
+    "2026-10-24": {
+      "camp-flos-running-magnet": {
+        "validImpressions": 2,
+        "grossClicks": 0,
+        "validClicks": 0
+      },
+      "camp-hunter-douglas-celosias": {
+        "validImpressions": 1,
+        "grossClicks": 0,
+        "validClicks": 0
+      }
+    },
+    "2026-10-26": {
+      "camp-flos-running-magnet": {
+        "validImpressions": 9,
+        "grossClicks": 0,
+        "validClicks": 0
+      },
+      "camp-hunter-douglas-celosias": {
+        "validImpressions": 6,
+        "grossClicks": 1,
+        "validClicks": 1
+      },
+      "camp-cosentino-dekton-public": {
+        "validImpressions": 1,
+        "grossClicks": 0,
+        "validClicks": 0
+      }
+    },
+    "2026-10-27": {
+      "camp-hunter-douglas-celosias": {
+        "validImpressions": 3,
+        "grossClicks": 0,
+        "validClicks": 0
+      },
+      "camp-flos-running-magnet": {
+        "validImpressions": 4,
+        "grossClicks": 2,
+        "validClicks": 2
+      },
+      "camp-cosentino-dekton-public": {
+        "validImpressions": 1,
+        "grossClicks": 0,
+        "validClicks": 0
+      }
+    },
+    "2026-10-28": {
+      "camp-hunter-douglas-celosias": {
+        "validImpressions": 2,
+        "grossClicks": 0,
+        "validClicks": 0
+      },
+      "camp-flos-running-magnet": {
+        "validImpressions": 4,
+        "grossClicks": 0,
+        "validClicks": 0
+      }
+    },
+    "2026-10-29": {
+      "camp-flos-running-magnet": {
+        "validImpressions": 8,
+        "grossClicks": 0,
+        "validClicks": 0
+      },
+      "camp-hunter-douglas-celosias": {
+        "validImpressions": 6,
+        "grossClicks": 0,
+        "validClicks": 0
+      },
+      "camp-cosentino-dekton-public": {
+        "validImpressions": 1,
+        "grossClicks": 0,
+        "validClicks": 0
+      }
+    },
+    "2026-10-30": {
+      "camp-flos-running-magnet": {
+        "validImpressions": 5,
+        "grossClicks": 0,
+        "validClicks": 0
+      },
+      "camp-hunter-douglas-celosias": {
+        "validImpressions": 5,
+        "grossClicks": 0,
+        "validClicks": 0
+      },
+      "camp-cosentino-dekton-public": {
+        "validImpressions": 2,
+        "grossClicks": 0,
+        "validClicks": 0
+      }
+    },
+    "2026-10-31": {
+      "camp-flos-running-magnet": {
+        "validImpressions": 8,
+        "grossClicks": 0,
+        "validClicks": 0
+      },
+      "camp-hunter-douglas-celosias": {
+        "validImpressions": 8,
+        "grossClicks": 0,
+        "validClicks": 0
+      }
+    },
+    "2026-11-03": {
+      "camp-hunter-douglas-celosias": {
+        "validImpressions": 8,
+        "grossClicks": 1,
+        "validClicks": 1
+      },
+      "camp-flos-running-magnet": {
+        "validImpressions": 7,
+        "grossClicks": 2,
+        "validClicks": 2
+      },
+      "camp-cosentino-dekton-public": {
+        "validImpressions": 2,
+        "grossClicks": 0,
+        "validClicks": 0
+      }
+    }
+  },
+  "deviceBreakdown": {
+    "desktop": 2475,
+    "tablet": 520,
+    "mobile": 1030
+  },
+  "lastUpdated": "2026-11-03T21:43:01.199Z"
+}

@@ -1,0 +1,17 @@
+# robots.txt for Ecuadorian Architecture
+User-agent: *
+Allow: /
+
+# Disallow private editorial and administration routes
+Disallow: /admin.html
+Disallow: /admin
+Disallow: /api/
+
+# Disallow private advertiser tokens and reports
+Disallow: /*?portal=*
+Disallow: /*?token=*
+Disallow: /*?ad-report=*
+Disallow: /*?ad-advertiser=*
+
+# Canonical Sitemap
+Sitemap: https://ecuadorianarchitecture.com/sitemap.xml

@@ -1,0 +1,145 @@
+[
+  {
+    "id": "ciudad-rio",
+    "number": "#01",
+    "title": "CIUDAD Y RÍO",
+    "studio": "ESTUDIO URBANO LITORAL",
+    "region": "GUAYAS Y LITORAL",
+    "location": "GUAYAQUIL",
+    "problematica": "Hidráulica / Mareas",
+    "year": "2024",
+    "status": "published",
+    "showOnLanding": true,
+    "landingOrder": 1,
+    "landingTab": "territorios",
+    "actionButtonText": "VER TERRITORIO",
+    "photographer": "ARCHIVO PAISAJE",
+    "secondaryImageUrl": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
+    "secondaryCaption": "MAREAS // DINÁMICA FLUVIAL",
+    "secondaryExcerpt": "El estuario del Guayas articula un sistema dinámico de bajamares y pleamares que condicionan el borde portuario.",
+    "excerpt": "EL IMPACTO DE LAS MAREAS Y LA INFRAESTRUCTURA HIDRÁULICA EN LA FORMA URBANA.",
+    "heroImage": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
+    "motion": {
+      "variant": "horizontal-blinds",
+      "kicker": "ESTUARIO FLUVIAL, MAREAS Y FORMA URBANA"
+    }
+  },
+  {
+    "id": "cartografia-viva",
+    "number": "#02",
+    "title": "CARTOGRAFÍA VIVA",
+    "studio": "COLECTIVO ANDINO",
+    "region": "SIERRA CENTRAL",
+    "location": "CHIMBORAZO",
+    "problematica": "Agrícola / Prehispánico",
+    "year": "2023",
+    "status": "published",
+    "excerpt": "PAISAJES AGRÍCOLAS Y HUELLAS PREHISPÁNICAS EN EL CALLEJÓN INTERANDINO.",
+    "heroImage": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80",
+    "motion": {
+      "variant": "horizontal-blinds",
+      "kicker": "ESTRATIGRAFÍA AGRÍCOLA Y HUELLA PREHISPÁNICA"
+    }
+  },
+  {
+    "id": "amazonia-enclave",
+    "number": "#03",
+    "title": "AMAZONÍA Y ENCLAVE",
+    "studio": "RED TERRITORIAL AMAZÓNICA",
+    "region": "CORDILLERA ORIENTAL",
+    "location": "NAPO / PASTAZA",
+    "problematica": "Extracción / Comunidades",
+    "year": "2024",
+    "status": "published",
+    "showOnLanding": true,
+    "landingOrder": 1,
+    "landingTab": "territorios",
+    "actionButtonText": "VER TERRITORIO",
+    "photographer": "ARCHIVO PAISAJE",
+    "secondaryImageUrl": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
+    "secondaryCaption": "MAREAS // DINÁMICA FLUVIAL",
+    "secondaryExcerpt": "El estuario del Guayas articula un sistema dinámico de bajamares y pleamares que condicionan el borde portuario.",
+    "excerpt": "TRANSFORMACIONES TERRITORIALES ANTE LAS VÍAS DE EXTRACCIÓN Y COMUNIDADES NATIVAS.",
+    "heroImage": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80",
+    "motion": {
+      "variant": "vertical-slices",
+      "kicker": "CANOPIO AMAZÓNICO Y VECTORES DE EXTRACCIÓN"
+    }
+  },
+  {
+    "id": "cuencas-sur",
+    "number": "#04",
+    "title": "CUENCAS HIDROGRÁFICAS DEL SUR",
+    "studio": "LABORATORIO FLUVIAL CUENCA",
+    "region": "AUSTRO / AZUAY",
+    "location": "CUENCA / PAUTE",
+    "problematica": "Hidráulica / Mareas",
+    "year": "2023",
+    "status": "published",
+    "excerpt": "REPRESIÓN HIDROELÉCTRICA Y TRANSFORMACIÓN DEL PAISAJE FLUVIAL INTERANDINO.",
+    "heroImage": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
+    "motion": {
+      "variant": "quadrant-aperture",
+      "kicker": "CARTOGRAFÍA FLUVIAL Y PAISAJE HIDROELÉCTRICO"
+    }
+  },
+  {
+    "id": "fronteras-ilalo",
+    "number": "#05",
+    "title": "FRONTERAS ECOLÓGICAS URBANAS",
+    "studio": "TALLER PAISAJE PICHINCHA",
+    "region": "SIERRA NORTE",
+    "location": "PICHINCHA / ILALÓ",
+    "problematica": "Asentamientos Informales",
+    "year": "2022",
+    "status": "published",
+    "excerpt": "PRESIÓN INMOBILIARIA SOBRE EL PAISAJE VOLCÁNICO Y VALLES INTERANDINOS.",
+    "heroImage": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80",
+    "motion": {
+      "variant": "horizontal-blinds",
+      "kicker": "FRONTERA URBANA Y RELIEVE VOLCÁNICO DEL ILALÓ"
+    }
+  },
+  {
+    "id": "corredor-choco",
+    "number": "#06",
+    "title": "CORREDOR BIOLÓGICO DEL CHOCÓ",
+    "studio": "COLECTIVO TROPICAL ESMERALDAS",
+    "region": "COSTA NORTE",
+    "location": "ESMERALDAS",
+    "problematica": "Extracción / Comunidades",
+    "year": "2024",
+    "status": "published",
+    "showOnLanding": true,
+    "landingOrder": 1,
+    "landingTab": "territorios",
+    "actionButtonText": "VER TERRITORIO",
+    "photographer": "ARCHIVO PAISAJE",
+    "secondaryImageUrl": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
+    "secondaryCaption": "MAREAS // DINÁMICA FLUVIAL",
+    "secondaryExcerpt": "El estuario del Guayas articula un sistema dinámico de bajamares y pleamares que condicionan el borde portuario.",
+    "excerpt": "DEFORESTACIÓN, VÍAS SECUNDARIAS Y RESISTENCIA COMUNITARIA EN EL BOSQUE HÚMEDO.",
+    "heroImage": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1200&q=80",
+    "motion": {
+      "variant": "vertical-slices",
+      "kicker": "DOSIL TROPICAL Y RESISTENCIA BIOLÓGICA DEL CHOCÓ"
+    }
+  },
+  {
+    "id": "metabolismo-insular",
+    "number": "#07",
+    "title": "METABOLISMO INSULAR Y TURISMO",
+    "studio": "OBSERVATORIO GALÁPAGOS",
+    "region": "INSULAR / GALÁPAGOS",
+    "location": "SANTA CRUZ",
+    "problematica": "Asentamientos Informales",
+    "year": "2023",
+    "status": "published",
+    "excerpt": "IMPORTACIÓN DE MATERIALES Y HUELLA ECOLÓGICA EN ECOSISTEMAS FRÁGILES.",
+    "heroImage": "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80",
+    "motion": {
+      "variant": "quadrant-aperture",
+      "kicker": "APERTURA INSULAR Y HUELLA ECOLÓGICA EN GALÁPAGOS"
+    }
+  }
+]

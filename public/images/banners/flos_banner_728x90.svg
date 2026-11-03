@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 728 90" width="100%" height="100%">
+  <defs>
+    <linearGradient id="flosGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0c0e" />
+      <stop offset="100%" stop-color="#14181d" />
+    </linearGradient>
+    <linearGradient id="accentLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.8" />
+      <stop offset="50%" stop-color="#ffdd77" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.2" />
+    </linearGradient>
+  </defs>
+
+  <!-- Banner Background -->
+  <rect width="728" height="90" fill="url(#flosGrad)" />
+  <rect x="0.5" y="0.5" width="727" height="89" fill="none" stroke="#ffffff" stroke-opacity="0.15" />
+
+  <!-- Subtle Architectural Grid Accent -->
+  <line x1="160" y1="12" x2="160" y2="78" stroke="#ffffff" stroke-opacity="0.1" />
+  <line x1="560" y1="12" x2="560" y2="78" stroke="#ffffff" stroke-opacity="0.1" />
+
+  <!-- Brand Mark: FLOS -->
+  <g transform="translate(28, 22)">
+    <text x="0" y="32" font-family="'Helvetica Neue', Arial, sans-serif" font-size="34" font-weight="900" letter-spacing="4" fill="#ffffff">FLOS</text>
+    <text x="2" y="48" font-family="'Courier New', monospace" font-size="7.5" font-weight="600" letter-spacing="2.5" fill="#ffffff" fill-opacity="0.55">ARCHITECTURAL</text>
+  </g>
+
+  <!-- Product System Highlight -->
+  <g transform="translate(185, 24)">
+    <text x="0" y="16" font-family="'Courier New', monospace" font-size="9" font-weight="700" letter-spacing="2" fill="#ffdd77">THE RUNNING MAGNET SYSTEM</text>
+    <text x="0" y="35" font-family="'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" letter-spacing="0.5" fill="#ffffff">SISTEMAS MAGNÉTICOS DE PRECISIÓN EMPOTRADOS</text>
+    <text x="0" y="49" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="400" fill="#ffffff" fill-opacity="0.6">Control DALI-2 • Módulos orientables invisibles • Catálogo 2026</text>
+  </g>
+
+  <!-- Luminaire Graphic Accent -->
+  <line x1="185" y1="56" x2="530" y2="56" stroke="url(#accentLine)" stroke-width="1.5" />
+  <circle cx="215" cy="56" r="3" fill="#ffdd77" />
+  <circle cx="340" cy="56" r="3" fill="#ffdd77" />
+  <circle cx="465" cy="56" r="3" fill="#ffdd77" />
+
+  <!-- Graphic Call To Action Button (Baked into image artwork) -->
+  <g transform="translate(580, 26)">
+    <rect width="122" height="38" rx="2" fill="#ffffff" fill-opacity="0.08" stroke="#ffffff" stroke-opacity="0.4" />
+    <text x="14" y="23" font-family="'Helvetica Neue', Arial, sans-serif" font-size="9.5" font-weight="800" letter-spacing="1.2" fill="#ffffff">VER CATÁLOGO</text>
+    <path d="M 98 16 L 105 16 M 105 16 L 105 23 M 105 16 L 96 25" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+
+  <!-- Discreet AD Label -->
+  <text x="716" y="12" text-anchor="end" font-family="'Courier New', monospace" font-size="7" font-weight="700" letter-spacing="1" fill="#ffffff" fill-opacity="0.3">PUBLICIDAD</text>
+</svg>

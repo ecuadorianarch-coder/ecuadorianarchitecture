@@ -1,0 +1,13 @@
+<svg width="280" height="340" viewBox="0 0 280 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Hand-drawn card perimeter with ripped sawtooth bottom edge -->
+  <path d="M 16 18 
+           C 70 16, 210 17, 264 19 
+           C 266 80, 264 220, 265 295 
+           L 252 284 L 239 303 L 226 283 L 213 301 L 200 282 L 187 300 
+           L 174 284 L 161 302 L 148 283 L 135 301 L 122 284 L 109 300 
+           L 96 283 L 83 302 L 70 285 L 57 301 L 44 284 L 31 300 L 19 285 L 15 295 
+           C 14 220, 15 80, 16 18 Z" 
+        fill="white" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- The black tape at top center -->
+  <rect x="120" y="4" width="40" height="22" fill="black" transform="rotate(-1.5 140 15)" />
+</svg>

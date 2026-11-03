@@ -1,0 +1,646 @@
+[
+  {
+    "id": "espacio-para-hablar-con-dios-ssqj",
+    "slug": "espacio-para-hablar-con-dios",
+    "type": "proyectos",
+    "title": "ESPACIO PARA HABLAR CON DIOS",
+    "subtitle": "SIN CONSTRUIR",
+    "studio": "NOMADE TALLER",
+    "studios": [
+      "NOMADE TALLER"
+    ],
+    "critic": "REDACCIÓN CRÍTICA EA",
+    "location": "QUITO",
+    "year": "2024",
+    "excerpt": "El proyecto nace como una respuesta íntima de la comunidad de Rumipamba a su propia necesidad espiritual, un intento de reconectar con lo divino en un espacio que les ha sido negado. A través de un proceso de diseño participativo, en el que toda la comunidad fue protagonista, se concibió un espacio que no solo uniera a las personas con lo sagrado, sino que también revitalizara técnicas ancestrales, honrando la maestría local en un acto de revalorización cultural.\n",
+    "status": "published",
+    "featured": false,
+    "showOnLanding": true,
+    "landingTab": "proyectos",
+    "actionButtonText": "VER PROYECTO",
+    "photographer": "",
+    "escritoPor": "Alejandro Andrade",
+    "editadoPor": "Dirección Editorial EA",
+    "superficie": "180 m²",
+    "category": "Equipamiento Cultural",
+    "tags": [
+      "Lugar",
+      "Materia",
+      "Ecuador"
+    ],
+    "heroImage": "/images/uploads/1793233204996-RENDER_1__3_.webp",
+    "heroImageFocalPoint": "center",
+    "resena": "Texto analítico principal de la reseña...",
+    "hasCritica": false,
+    "critica": "Dictamen crítico externo sobre la obra y su pertinencia ética y constructiva...",
+    "criticaHeadline": "Desafiar la convención inmobiliaria desde la inercia térmica",
+    "criticaQuote": "Frente a la torre hermética vidriada, la pertinencia ética radica en la economía de medios y la inercia de la materia cruda.",
+    "criticaConclusion": "El proyecto cuestiona el modelo hegemónico de edificación en QUITO.",
+    "hasPodcast": false,
+    "hasNotasComunidad": true,
+    "modules": [
+      {
+        "id": "mod-intro-1793233182760",
+        "type": "hero-header",
+        "title": "ESPACIO PARA HABLAR CON DIOS",
+        "subtitle": "LECTURA ARQUITECTÓNICA",
+        "content": "Un proyecto que re piensa como debe imaginarse un espacio sagrado"
+      },
+      {
+        "id": "mod-single-image-1793233605520",
+        "type": "single-image",
+        "imageUrl": "/images/uploads/1793233204996-RENDER_1__3_.webp",
+        "caption": "Registro fotográfico de obra"
+      },
+      {
+        "id": "mod-text-1793233182761",
+        "type": "rich-text",
+        "content": "\n\tUn día, recién egresado de la escuela de arquitectura y sin un rumbo claro, sentí la necesidad de encontrar un proyecto que reflejara la verdadera esencia de la arquitectura como agente de cambio. Mi búsqueda me llevó a Rumipamba, una parroquia rural en Rumiñahui, cerca de Quito. Allí, descubrí una comunidad que, a lo largo de su historia, nunca había tenido una iglesia, y cuyo desvanecimiento de la fe se hacía palpable con el tiempo.\n\nAl llegar con las ganas de emprender un proyecto, fuimos recibidos con los brazos abiertos. Esta obra, sin fines de lucro, tenía un solo propósito: reafirmar el poder de la arquitectura para crear espacios que transformen realidades. El proceso fue marcado por una serie de cinco reuniones con la comunidad, cada una un paso crucial en la materialización del proyecto.\n\n"
+      },
+      {
+        "id": "mod-quote-1793233182762",
+        "type": "blockquote",
+        "quoteText": "El proyecto fue devolver la virtud social al actuar profesional, lo que imaginaba como arquitectura.",
+        "quoteAuthor": "nomade taller",
+        "content": "El proyecto fue devolver la virtud social al actuar profesional, lo que imaginaba como arquitectura."
+      },
+      {
+        "id": "mod-single-image-1793233709708",
+        "type": "single-image",
+        "imageUrl": "/images/uploads/1793233720751-TALLER_PARTICIPATIVO__1_.webp"
+      },
+      {
+        "id": "mod-rich-text-1793233689946",
+        "type": "rich-text",
+        "content": "En la primera reunión, nos acercamos a las autoridades locales para presentarles la visión. En la segunda, 15 miembros de la comunidad se reunieron para escuchar y compartir sus perspectivas. La tercera fue un taller de diseño participativo con toda la comunidad, donde se diseñaron dispositivos que nos ayudaron a entender la cosmovisión de Dios y el significado de una iglesia para cada persona, además de identificar sus necesidades. La cuarta reunión nos permitió regresar con un proyecto más definido, para recibir retroalimentación y realizar ajustes. Finalmente, en la quinta reunión, la comunidad aprobó el proyecto con satisfacción.\n\nEl diseño arquitectónico resultante no es más que una manifestación física de la cosmovisión de los futuros usuarios. Este proyecto se fundamenta en un diseño profundamente responsable con su contexto social y cultural. Optamos por utilizar muros de tierra, no solo como un homenaje al conocimiento vernáculo de la región, sino también como una manera de aprovechar los recursos locales y reducir costos. La premisa principal del espacio es sencilla pero poderosa: crear un lugar donde se pueda hablar con Dios.\n\n"
+      },
+      {
+        "id": "mod-single-image-1793233740022",
+        "type": "single-image",
+        "imageUrl": "/images/uploads/1793233752542-RENDER_3__1_.webp"
+      },
+      {
+        "id": "mod-rich-text-1793233772706",
+        "type": "rich-text",
+        "content": "Uno de los desafíos más grandes del proyecto ha sido la falta de presupuesto, la misma razón por la que la comunidad no había podido construir una iglesia hasta ahora. Esta realidad nos llevó a desarrollar un diseño coherente con la situación económica de los habitantes. El espacio interior del templo es mínimo, optimizado para el uso de los vecinos, pero incluye un altar de doble función, orientado hacia dentro y hacia fuera. Esta estrategia permite que la iglesia pueda albergar eventos masivos cuando sea necesario, aprovechando el entorno que la rodea.\n"
+      },
+      {
+        "id": "mod-single-image-1793233784294",
+        "type": "single-image",
+        "imageUrl": "/images/uploads/1793233791457-RENDER_5__1_.webp"
+      },
+      {
+        "id": "mod-rich-text-1793233809517",
+        "type": "rich-text",
+        "content": "El interior del templo está concebido como un recorrido sensorial. Se ingresa a través de un espacio de transición, estrecho y oscuro, que desemboca en la sala principal, donde el altar, bañado en luz natural, evoca la presencia de Dios descendiendo al plano terrenal. El altar cuenta con tres gradas, un simbolismo del Padre, el Hijo y el Espíritu Santo, mientras que una celosía de madera local permite que la luz entre suavemente.\n"
+      },
+      {
+        "id": "mod-single-image-1793233822537",
+        "type": "single-image",
+        "imageUrl": "/images/uploads/1793233832520-RENDER_4__1_.webp"
+      },
+      {
+        "id": "mod-rich-text-1793233839726",
+        "type": "rich-text",
+        "content": "En el altar exterior, dos maderas, una vertical y otra horizontal, se cruzan en un ángulo preciso, formando una cruz visible solo desde el punto exacto donde se encuentra el altar, transformando el exterior en un espacio igualmente divino. Este proyecto, más que una simple construcción, es un testimonio de cómo la arquitectura puede conectar a las personas con lo sagrado, utilizando lo que tienen a su alcance y honrando su identidad cultural.\n"
+      },
+      {
+        "id": "mod-image-gallery-1793233878184",
+        "type": "image-gallery",
+        "title": "PLANIMETRÍAS Y DIAGRAMAS",
+        "category": "planimetria",
+        "settings": {
+          "columns": 2
+        },
+        "imageUrls": [
+          "/images/uploads/1793233902795-Corte_A_EPHD__2_.webp",
+          "/images/uploads/1793233903862-AXO_B_EPHD__1_.webp",
+          "/images/uploads/1793233904596-PLANTA_EPHD__1_.webp",
+          "/images/uploads/1793233905075-DIAGRAMA_1__1_.webp"
+        ]
+      }
+    ],
+    "imageCategories": {
+      "/images/uploads/1793233204996-RENDER_1__3_.webp": "fotografia",
+      "/images/uploads/1793233720751-TALLER_PARTICIPATIVO__1_.webp": "fotografia",
+      "/images/uploads/1793233752542-RENDER_3__1_.webp": "fotografia",
+      "/images/uploads/1793233791457-RENDER_5__1_.webp": "fotografia",
+      "/images/uploads/1793233832520-RENDER_4__1_.webp": "fotografia",
+      "/images/uploads/1793233902795-Corte_A_EPHD__2_.webp": "planimetria",
+      "/images/uploads/1793233903862-AXO_B_EPHD__1_.webp": "planimetria",
+      "/images/uploads/1793233904596-PLANTA_EPHD__1_.webp": "planimetria",
+      "/images/uploads/1793233905075-DIAGRAMA_1__1_.webp": "planimetria"
+    },
+    "datos": {
+      "superficie": "180 m²",
+      "estructura": "Adobe y Madera ",
+      "fotografia": "",
+      "colaboradores": "nomade taller",
+      "certificacion": "Eficiencia Bioclimática",
+      "maestroMayor": "Segundo Guanoluisa"
+    },
+    "ciudad": {
+      "barrio": "QUITO",
+      "altura": "2.850 msnm",
+      "orientacion": "Norte-Sur",
+      "clima": "Ecuatorial Andino"
+    },
+    "createdAt": "2026-10-29T00:19:42.760Z",
+    "updatedAt": "2026-10-29T00:34:49.441Z",
+    "motion": {
+      "variant": "quadrant-aperture"
+    },
+    "seo": {
+      "metaDescription": "Una iglesia que se entiende desde lo fundamental se convierte en un espacio para hablar con Dios"
+    },
+    "secondaryExcerpt": "El proyecto nace como una respuesta íntima de la comunidad de Rumipamba a su propia necesidad espiritual, un intento de reconectar con lo divino en un espacio que les ha sido negado. A través de un proceso de diseño participativo, en el que toda la comunidad fue protagonista, se concibió un espacio que no solo uniera a las personas con lo sagrado, sino que también revitalizara técnicas ancestrales, honrando la maestría local en un acto de revalorización cultural.\n",
+    "maestroMayor": "Segundo Guanoluisa"
+  },
+  {
+    "id": "atrium",
+    "slug": "edificio-atrium",
+    "number": "#01",
+    "title": "EDIFICIO ATRIUM",
+    "studio": "RAMA ESTUDIO",
+    "critic": "AL BORDE",
+    "escritoPor": "Carolina Rodas (RAMA Estudio)",
+    "editadoPor": "Dirección Editorial EA",
+    "photographer": "Bicubik Photography",
+    "superficie": "3.850 m²",
+    "showOnLanding": true,
+    "landingOrder": 1,
+    "landingTab": "proyectos",
+    "secondaryImageUrl": "https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?auto=format&fit=crop&w=1200&q=80",
+    "secondaryCaption": "ATRIO CENTRAL // LUZ CENITAL",
+    "secondaryExcerpt": "La tectónica de madera y acero dialoga con la topografía de la quebrada, permitiendo que la arquitectura se disuelva en el paisaje andino.",
+    "actionButtonText": "VER PROYECTO",
+    "location": "QUITO",
+    "year": "2024",
+    "excerpt": "ES UN ESPACIO O UN ECOSISTEMA, EL PROYECTO NARRA PERO TAMBIÉN SE APROVECHA DE LA LUZ Y LA MATERIA LOCAL.",
+    "status": "published",
+    "featured": true,
+    "category": "Edificación Colectiva",
+    "tags": [
+      "Lugar",
+      "Materiales",
+      "Hormigón",
+      "Luz"
+    ],
+    "heroImage": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80",
+    "memory": "El Edificio Atrium explora las posibilidades del vacío como articulador social. En lugar de densificar hacia el perímetro, el proyecto vacía su centro para generar un microclima andino que aprovecha la radiación solar directa y la ventilación cruzada natural.",
+    "resena": "El vacío central no es una ausencia, sino el protagonista activo que reconfigura las relaciones entre lo privado y lo colectivo. Concebido como una gran chimenea térmica, el atrio distribuye la luz equinoccial hacia cada uno de los departamentos, reduciendo la necesidad de climatización artificial y creando un paisaje interior de vegetación endémica.",
+    "critica": "Por Al Borde: La propuesta de Rama Estudio desafía la convención inmobiliaria contemporánea. Frente a la proliferación de torres herméticas y vidriadas en el valle de Quito, Atrium reintroduce la inercia térmica, la porosidad visual y una materialidad de hormigón crudo y mampostería que dialoga honestamente con la tradición constructiva andina.",
+    "podcast": {
+      "episode": "EA-POD-01",
+      "title": "Tectónica, Inercia y Vacío en Edificio Atrium",
+      "duration": "44 min 15 seg",
+      "published": true
+    },
+    "evento": "Conversatorio Abierto: 'Materia y Colectividad en la Cordillera' — Viernes 18 de Octubre, 19:00 hrs. Auditorio FADA PUCE, Quito. Conferencia magistral de Rama Estudio con comentarios críticos de Al Borde.",
+    "datos": {
+      "superficie": "3.850 m²",
+      "estructura": "Hormigón armado visto y perfiles de acero laminado",
+      "fotografia": "Bicubik Photography",
+      "colaboradores": "Carolina Rodas, Felipe Donoso, David Barragán",
+      "ingenieria": "Cálculo Estructural Cevallos & Hidroing",
+      "cliente": "Fideicomiso Inmobiliario Atrium",
+      "maestroMayor": "Luis Toapanta"
+    },
+    "ciudad": {
+      "barrio": "La Floresta, Quito",
+      "altura": "2.850 msnm",
+      "orientacion": "Norte-Sur con fachada este vidriada",
+      "clima": "Ecuatorial de alta montaña"
+    },
+    "plans": {
+      "planta": "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=80",
+      "corte": "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=1600&q=80",
+      "axonometria": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1600&q=80"
+    },
+    "motion": {
+      "variant": "vertical-slices",
+      "kicker": "DISLOCACIÓN VERTICAL TECTÓNICA",
+      "conceptTag": "CHIMENEA TÉRMICA & VACÍO ARTICULADOR",
+      "preset": "clipReveal",
+      "hoverZoom": 1.05
+    },
+    "maestroMayor": "Luis Toapanta"
+  },
+  {
+    "id": "casa-arboles",
+    "slug": "casa-entre-arboles",
+    "number": "#02",
+    "title": "CASA ENTRE ÁRBOLES",
+    "studio": "AL BORDE ARQUITECTOS",
+    "critic": "RAMA ESTUDIO",
+    "escritoPor": "Equipo Editorial EA",
+    "editadoPor": "Dirección Editorial EA",
+    "photographer": "JAG STUDIO",
+    "superficie": "280 m²",
+    "showOnLanding": true,
+    "landingOrder": 3,
+    "landingTab": "proyectos",
+    "secondaryImageUrl": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80",
+    "secondaryCaption": "ATMÓSFERA // TAPIAL & MADERA",
+    "secondaryExcerpt": "La inercia térmica del tapial estabiliza las temperaturas interiores, prescindiendo por completo de sistemas mecánicos de climatización.",
+    "actionButtonText": "VER PROYECTO",
+    "location": "PUEMBO",
+    "year": "2023",
+    "excerpt": "ARQUITECTURA DE TIERRA, ESTRUCTURA RECUPERADA Y DIÁLOGO ACTIVO CON LA TOPOGRAFÍA ANDINA.",
+    "status": "published",
+    "featured": true,
+    "category": "Vivienda Unifamiliar",
+    "tags": [
+      "Tierra",
+      "Madera",
+      "Topografía",
+      "Paisaje"
+    ],
+    "heroImage": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80",
+    "memory": "Una casa que no tala ningún árbol preexistente. Se teje entre los troncos de algarrobos nativos mediante una estructura ligera de madera y muros portantes de tapial compactado con tierra del propio terreno.",
+    "resena": "La vivienda se descompone en tres pabellones conectados por pasarelas elevadas. Cada pabellón responde a un momento del día y a una cota topográfica específica, permitiendo que la pendiente fluya libremente por debajo de la estructura sin alterar las escorrentías naturales.",
+    "critica": "Por Rama Estudio: Al Borde demuestra una vez más que la radicalidad no radica en el alarde tecnológico, sino en la economía de medios y la pertinencia ética. La reutilización de maderas de desecho y el uso de tierra cruda posicionan a este proyecto como un manifiesto de resistencia ecológica.",
+    "evento": "Visita Guiada de Obra: 'Construir sin destruir el dosel arbóreo' — Sábado 25 de Noviembre. Salida desde Cumbayá. Cupos limitados para estudiantes y profesionales.",
+    "datos": {
+      "superficie": "280 m²",
+      "estructura": "Tapial de tierra cruda y entramado de eucalipto reciclado",
+      "fotografia": "Jag Studio",
+      "colaboradores": "Pascual Gangotena, David Barragán, Marialuisa Borja",
+      "ingenieria": "Cálculo en Madera & Tierra Al Borde",
+      "cliente": "Familia Gangotena-Borja",
+      "maestroMayor": "Juan Carlos Tipán"
+    },
+    "ciudad": {
+      "barrio": "Valle de Puembo, Pichincha",
+      "altura": "2.390 msnm",
+      "orientacion": "Nororiente hacia la cordillera oriental",
+      "clima": "Subtropical de valle interandino"
+    },
+    "plans": {
+      "planta": "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=80",
+      "corte": "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=1600&q=80",
+      "axonometria": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1600&q=80"
+    },
+    "motion": {
+      "variant": "horizontal-blinds",
+      "kicker": "ESTRATIGRAFÍA TOPOGRÁFICA EN PENDIENTE",
+      "conceptTag": "TAPIAL COMPACTADO & DOSEL ARBÓREO",
+      "preset": "clipReveal",
+      "hoverZoom": 1.05
+    },
+    "maestroMayor": "Juan Carlos Tipán"
+  },
+  {
+    "id": "plaza-teatro",
+    "slug": "plaza-y-teatro",
+    "number": "#03",
+    "title": "PLAZA Y TEATRO",
+    "studio": "DIEGO GUAYASAMÍN",
+    "critic": "MARÍA MORENO",
+    "location": "CUENCA",
+    "year": "2024",
+    "excerpt": "REHABILITACIÓN DEL CENTRO HISTÓRICO, DINAMIZANDO EL ESPACIO PÚBLICO Y LA MEMORIA VECINAL.",
+    "status": "published",
+    "featured": true,
+    "category": "Espacio Público",
+    "tags": [
+      "Patrimonio",
+      "Espacio Público",
+      "Piedra",
+      "Ciudad"
+    ],
+    "heroImage": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1600&q=80",
+    "memory": "La intervención recupera una manzana residual en las márgenes del río Tomebamba, articulando un teatro al aire libre con terrazas públicas de travertino y piedra andesita local.",
+    "resena": "El proyecto rehúye la monumentalidad ensimismada para convertirse en una extensión del suelo urbano. Sus graderíos escalonados funcionan simultáneamente como contención topográfica, teatro comunitario y mirador hacia el centro histórico de Cuenca.",
+    "critica": "",
+    "podcast": {
+      "episode": "EA-POD-03",
+      "title": "Suelo Urbano y Memoria en Plaza y Teatro",
+      "duration": "38 min 20 seg",
+      "published": true
+    },
+    "evento": "Inauguración y Concierto Acústico al Aire Libre — Jueves 12 de Diciembre, 18:30 hrs. Plaza del Barranco, Cuenca.",
+    "datos": {
+      "superficie": "4.200 m² de espacio público y 650 m² cubiertos",
+      "estructura": "Muros de contención en andesita y graderíos en hormigón pigmentado",
+      "fotografia": "Sebastián Crespo",
+      "colaboradores": "Diego Guayasamín, Pablo Viteri, Marco Salcedo",
+      "ingenieria": "Dirección de Obras Públicas Municipales",
+      "cliente": "Alcaldía de Cuenca & Fundación El Barranco",
+      "maestroMayor": "Bolívar Quizhpe"
+    },
+    "ciudad": {
+      "barrio": "El Barranco, Cuenca",
+      "altura": "2.550 msnm",
+      "orientacion": "Ribera del Río Tomebamba",
+      "clima": "Templado andino húmedo"
+    },
+    "plans": {
+      "planta": "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=80",
+      "corte": "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=1600&q=80",
+      "axonometria": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1600&q=80"
+    },
+    "motion": {
+      "variant": "quadrant-aperture",
+      "kicker": "APERTURA ÓPTICA MONUMENTAL 3D",
+      "conceptTag": "SUELO URBANO EXPANDIDO & ANDESITA",
+      "preset": "clipReveal",
+      "hoverZoom": 1.05
+    },
+    "maestroMayor": "Bolívar Quizhpe"
+  },
+  {
+    "id": "casa-loma",
+    "slug": "casa-loma",
+    "number": "#04",
+    "title": "CASA LOMA",
+    "studio": "RAMA ESTUDIO",
+    "critic": "DANIEL MORENO FLORES",
+    "location": "TUMBACO",
+    "year": "2024",
+    "excerpt": "ESTRUCTURA DE MADERA LAMINADA ENSAMBLADA EN SECO SOBRE PENDIENTE PRONUNCIADA.",
+    "status": "published",
+    "featured": false,
+    "category": "Vivienda Unifamiliar",
+    "tags": [
+      "Madera",
+      "Topografía",
+      "Sostenibilidad",
+      "Valle"
+    ],
+    "heroImage": "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1600&q=80",
+    "memory": "Una casa que flota sobre la topografía mediante pilotis de acero y cerchas de madera local tratada, minimizando la huella en el terreno.",
+    "resena": "Luego del terremoto del 16 de abril de 2016 en Ecuador, los arquitectos de Al Borde decidieron unirse a un equipo de arquitectos, diseñadores industriales e ingenieros, para crear cuatro prototipos de vivienda con tecnología experimental, pero sin descuidar las particularidades culturales del sector rural ecuatoriano. El proyecto se desarrolló con el volumen longitudinal abriéndose hacia las visuales del Ilaló, aprovechando la ventilación pasiva y la inercia térmica.",
+    "critica": "",
+    "evento": "Clínica de Estructuras en Madera: 'Ensamblaje en Seco en Pendientes Andinas' — Jueves 9 de Noviembre, 17:00 hrs. Tumbaco.",
+    "visitas": 2,
+    "comentarios": 7,
+    "datos": {
+      "superficie": "240 m²",
+      "estructura": "Madera laminada de pino y zapatas aisladas",
+      "fotografia": "Bicubik Photography",
+      "colaboradores": "Carolina Rodas, Felipe Donoso, Mateo Neira",
+      "ingenieria": "Cálculo Tectónico en Madera RAMA",
+      "cliente": "Privado",
+      "maestroMayor": "Carlos Morocho"
+    },
+    "ciudad": {
+      "barrio": "Ilaló, Tumbaco",
+      "altura": "2.420 msnm"
+    },
+    "motion": {
+      "variant": "horizontal-blinds",
+      "kicker": "ESTRATOS SUSPENDIDOS SOBRE EL ILALÓ",
+      "conceptTag": "ESTRUCTURA DE MADERA LAMINADA EN SECO",
+      "preset": "clipReveal",
+      "hoverZoom": 1.05
+    },
+    "maestroMayor": "Carlos Morocho"
+  },
+  {
+    "id": "museo-precolombino",
+    "slug": "museo-precolombino",
+    "number": "#05",
+    "title": "MUSEO PRECOLOMBINO",
+    "studio": "LUIS LÓPEZ LÓPEZ",
+    "critic": "AL BORDE",
+    "location": "GUAYAQUIL",
+    "year": "2022",
+    "excerpt": "HORMIGÓN VISTO Y CONTROL CLIMÁTICO PASIVO EN EL TRÓPICO COSTERO.",
+    "status": "published",
+    "featured": false,
+    "category": "Equipamiento Cultural",
+    "tags": [
+      "Cultura",
+      "Hormigón",
+      "Sombra",
+      "Litoral"
+    ],
+    "heroImage": "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1600&q=80",
+    "memory": "Pabellón expositivo cerrado a la radiación solar directa que genera una secuencia de penumbras y patios ventilados.",
+    "resena": "El museo protege piezas arqueológicas cerámicas Valdivia mediante muros dobles de inercia térmica.",
+    "critica": "Por Al Borde: Arquitectura de sobriedad tectónica que resiste el clima extremo guayaquileño sin estridencias.",
+    "evento": "Mesa Redonda: 'Sombra, Inercia y Patrimonio Arqueológico en el Litoral' — Miércoles 13 de Noviembre, 18:00 hrs. Auditorio Museo, Guayaquil.",
+    "datos": {
+      "superficie": "1.800 m²",
+      "estructura": "Hormigón armado visto con áridos locales y muros portantes",
+      "fotografia": "Jag Studio",
+      "colaboradores": "Andrés Gómez, Daniela Viteri, Carlos Mendoza",
+      "ingenieria": "Ing. Patricio Cevallos & Asociados",
+      "cliente": "Fundación Cultural Guayaquil",
+      "maestroMayor": "Edison Mero"
+    },
+    "ciudad": {
+      "barrio": "Puerto Santa Ana, Guayaquil",
+      "altura": "4 msnm"
+    },
+    "motion": {
+      "variant": "quadrant-aperture",
+      "kicker": "DIAFRAGMA DE HORMIGÓN & PENUMBRAS COSTERAS",
+      "conceptTag": "INERCIA TÉRMICA & PATIOS VENTILADOS",
+      "preset": "clipReveal",
+      "hoverZoom": 1.05
+    },
+    "maestroMayor": "Edison Mero"
+  },
+  {
+    "id": "pabellon-bosque",
+    "slug": "pabellon-bosque",
+    "number": "#06",
+    "title": "PABELLÓN DEL BOSQUE",
+    "studio": "ESTUDIO FELIPE ESCUDERO",
+    "critic": "MARÍA MORENO",
+    "location": "COTOPAXI",
+    "year": "2024",
+    "excerpt": "REFUGIO DE ALTA MONTAÑA INTEGRADO AL PÁRAMO MEDIANTE ACERO NEGRO Y VIDRIO AISLANTE.",
+    "status": "published",
+    "featured": false,
+    "category": "Arquitectura Efímera",
+    "tags": [
+      "Páramo",
+      "Acero",
+      "Alta Montaña",
+      "Paisaje"
+    ],
+    "heroImage": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1600&q=80",
+    "memory": "Un prisma negro elemental suspendido sobre el páramo andino, concebido como observatorio astronómico y meteorológico.",
+    "resena": "El pabellón refleja el cielo cambiante de la cordillera y capta calor diurno para liberarlo durante las noches heladas.",
+    "critica": "Por María Moreno: Precisión geométrica que contrasta poéticamente con la organicidad agreste del páramo del Cotopaxi.",
+    "evento": "Noche de Observación y Charla: 'Arquitectura y Cosmos en el Páramo' — Sábado 2 de Diciembre, 19:30 hrs. Refugio Cotopaxi.",
+    "datos": {
+      "superficie": "95 m²",
+      "estructura": "Perfiles tubulares de acero galvanizado lacado en negro",
+      "fotografia": "Bicubik Photography",
+      "colaboradores": "Felipe Escudero, Esteban Naranjo",
+      "ingenieria": "Ingeniería Metálica Estructural",
+      "cliente": "Privado",
+      "maestroMayor": "Marco Chasi"
+    },
+    "ciudad": {
+      "barrio": "Parque Nacional Cotopaxi",
+      "altura": "3.800 msnm"
+    },
+    "motion": {
+      "variant": "vertical-slices",
+      "kicker": "FRACTURA DE ALTA MONTAÑA A 3.800 MSNM",
+      "conceptTag": "OBSERVATORIO ASTRONÓMICO & ACERO NEGRO",
+      "preset": "clipReveal",
+      "hoverZoom": 1.05
+    },
+    "maestroMayor": "Marco Chasi"
+  },
+  {
+    "id": "centro-comunitario",
+    "slug": "centro-comunitario-cana",
+    "number": "#07",
+    "title": "CENTRO COMUNITARIO",
+    "studio": "ENLACE ARQUITECTURA + AL BORDE + ENSAMBLE",
+    "studios": [
+      "ENLACE ARQUITECTURA",
+      "AL BORDE",
+      "ENSAMBLE ARQUITECTURA"
+    ],
+    "critic": "AL BORDE",
+    "escritoPor": "Elisa Silva & Al Borde",
+    "editadoPor": "Dirección Editorial EA",
+    "location": "MANABÍ",
+    "year": "2023",
+    "excerpt": "CONSTRUCCIÓN PARTICIPATIVA EN CAÑA GUADUA Y TECHO DE TEJIDO VEGETAL.",
+    "status": "published",
+    "featured": false,
+    "category": "Equipamiento Social",
+    "tags": [
+      "Bambú",
+      "Comunidad",
+      "Sostenibilidad",
+      "Costa"
+    ],
+    "heroImage": "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=80",
+    "memory": "Espacio de asamblea y talleres artesanales co-diseñado y autoconstruido junto a la comunidad de pescadores.",
+    "resena": "Estructura sismo-resistente en caña guadúa inmunizada con humo, con aleros generosos que protegen de la lluvia monzónica.",
+    "critica": "Por Al Borde: Dignificación del bambú como material de presente y futuro, fortaleciendo el tejido social costero.",
+    "evento": "Taller Comunitario de Tejeduría en Bambú y Caña Guadúa — Domingo 17 de Diciembre, 10:00 hrs. Canoa, Manabí.",
+    "datos": {
+      "superficie": "320 m²",
+      "estructura": "Caña guadúa rolliza y uniones apernadas con mortero",
+      "fotografia": "Sebastián Crespo",
+      "colaboradores": "Comunidad de Pescadores de Canoa, Taller Con lo que Hay",
+      "ingenieria": "Consultoría Estructural en Bambú INBAR",
+      "cliente": "Comunidad de Pescadores de Canoa",
+      "maestroMayor": "Don Eloy Cedeño"
+    },
+    "ciudad": {
+      "barrio": "Canoa, Manabí",
+      "altura": "12 msnm"
+    },
+    "motion": {
+      "variant": "vertical-slices",
+      "kicker": "RITMO VERTICAL DE CAÑA GUADUA Y BAMBÚ",
+      "conceptTag": "CONSTRUCCIÓN PARTICIPATIVA & TEJIDO VEGETAL",
+      "preset": "clipReveal",
+      "hoverZoom": 1.05
+    },
+    "maestroMayor": "Don Eloy Cedeño"
+  },
+  {
+    "id": "casa-magnolia",
+    "slug": "casa-magnolia",
+    "number": "#08",
+    "title": "CASA MAGNOLIA",
+    "studio": "ESTUDIO FELIPE ESCUDERO",
+    "critic": "ANA MARÍA DURÁN",
+    "location": "PUEMBO",
+    "year": "2023",
+    "excerpt": "VOLÚMENES ESCULTÓRICOS DE HORMIGÓN BLANCO Y UN PATIO CIRCULAR ARTICULADO EN TORNO A UN ÁRBOL DE MAGNOLIA.",
+    "status": "published",
+    "featured": false,
+    "category": "Vivienda Unifamiliar",
+    "tags": [
+      "Hormigón Blanco",
+      "Valle de Tumbaco",
+      "Patio Circular",
+      "Escultura"
+    ],
+    "heroImage": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80",
+    "memory": "Una composición de prismas de hormigón blanco que abrazan un patio central ajardinado, generando recorridos continuos entre el interior y la naturaleza andina.",
+    "resena": "El proyecto explora la luz cenital y las superficies continuas de hormigón desactivado, estableciendo un diálogo de contrastes entre la pureza volumétrica y la frondosidad vegetal.",
+    "critica": "Por Ana María Durán: Madurez formal que consolida la búsqueda escultórica de Felipe Escudero en el paisaje doméstico ecuatoriano.",
+    "datos": {
+      "superficie": "480 m²",
+      "estructura": "Hormigón armado visto pigmentado en blanco",
+      "fotografia": "Bicubik Photography",
+      "colaboradores": "Felipe Escudero, Mateo Neira, Esteban Naranjo",
+      "ingenieria": "Cevallos & Asociados Cálculo Estructural",
+      "cliente": "Privado",
+      "maestroMayor": "Manuel Quishpe"
+    },
+    "ciudad": {
+      "barrio": "Puembo",
+      "altura": "2.350 msnm"
+    },
+    "motion": {
+      "variant": "horizontal-blinds",
+      "kicker": "ESCULTURA DOMÉSTICA EN HORMIGÓN BLANCO",
+      "conceptTag": "PATIO CIRCULAR & MAGNOLIO",
+      "preset": "clipReveal",
+      "hoverZoom": 1.05
+    },
+    "maestroMayor": "Manuel Quishpe"
+  },
+  {
+    "id": "edificio-sensei",
+    "slug": "edificio-sensei",
+    "number": "#09",
+    "title": "EDIFICIO SENSEI",
+    "studio": "DANIEL MORENO FLORES",
+    "critic": "JULIÁN ZID",
+    "escritoPor": "Daniel Moreno Flores",
+    "editadoPor": "Dirección Editorial EA",
+    "photographer": "JAG STUDIO",
+    "superficie": "5.600 m²",
+    "showOnLanding": true,
+    "landingOrder": 2,
+    "landingTab": "proyectos",
+    "secondaryImageUrl": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
+    "secondaryCaption": "MATERIALIDAD // HORMIGÓN VISTO",
+    "secondaryExcerpt": "El zócalo permeable vincula el espacio privado con la vereda peatonal, enriqueciendo la vida colectiva del barrio.",
+    "actionButtonText": "VER PROYECTO",
+    "location": "QUITO",
+    "year": "2023",
+    "excerpt": "INCURSIÓN CONTEMPORÁNEA CON ESTILO Y ESPÍRITU PROPIO QUE TRASCIENDE MÁS ALLÁ DE LO IMAGINABLE.",
+    "status": "published",
+    "featured": true,
+    "category": "Edificio de Uso Mixto",
+    "tags": [
+      "Quito",
+      "Uso Mixto",
+      "Tectónica Andina",
+      "Vanguardia"
+    ],
+    "heroImage": "/images/edificio_sensei.png",
+    "memory": "Proyecto de uso mixto que explora la verticalidad urbana con una arquitectura contemporánea en movimiento.",
+    "resena": "La torre propone una piel fluida que dinamiza el perfil urbano de las avenidas Naciones Unidas y Amazonas.",
+    "critica": "Por Julián Zid: Una audaz declaración de dinamismo formal en el corazón corporativo de Quito.",
+    "datos": {
+      "superficie": "5.600 m²",
+      "estructura": "Hormigón armado y envolvente metálica curva",
+      "fotografia": "Bicubik Photography",
+      "colaboradores": "Daniel Moreno Flores, Margaux Eyssette",
+      "ingenieria": "Cálculo Estructural Cevallos",
+      "cliente": "Inmobiliaria Sensei Quito",
+      "maestroMayor": "Ángel Criollo"
+    },
+    "ciudad": {
+      "barrio": "Iñaquito",
+      "altura": "2.810 msnm"
+    },
+    "motion": {
+      "variant": "vertical-slices",
+      "kicker": "FLUIDEZ VERTICAL EN EL CENTRO FINANCIERO",
+      "conceptTag": "USO MIXTO & ENVOLVENTE DINÁMICA",
+      "preset": "clipReveal",
+      "hoverZoom": 1.05
+    },
+    "maestroMayor": "Ángel Criollo"
+  }
+]

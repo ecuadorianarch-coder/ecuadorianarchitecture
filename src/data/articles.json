@@ -1,0 +1,40 @@
+[
+  {
+    "id": "ciudad-prohibio-hombres",
+    "slug": "el-dia-que-una-ciudad-prohibio-salir-a-los-hombres",
+    "type": "territorio",
+    "title": "EL DÍA QUE UNA CIUDAD PROHIBIÓ SALIR A LOS HOMBRES",
+    "subtitle": "ENSAYO TERRITORIAL Y CIUDAD",
+    "author": "Redacción Crítica EA",
+    "date": "2026-03-15",
+    "location": "Costa / Sierra",
+    "excerpt": "Una lectura espacial sobre la ocupación del espacio público, género y dinámicas urbanas en ciudades intermedias del Ecuador. ¿Cómo la arquitectura condiciona quién habita la calle?",
+    "status": "published",
+    "featured": true,
+    "tags": [
+      "Género",
+      "Espacio Público",
+      "Territorio",
+      "Crítica Social"
+    ]
+  },
+  {
+    "id": "produccion-universitaria",
+    "slug": "produccion-critica-universitaria",
+    "type": "academia",
+    "title": "PRODUCCIÓN CRÍTICA UNIVERSITARIA",
+    "subtitle": "INVESTIGACIÓN Y TESIS",
+    "author": "Comité Académico EA",
+    "date": "2026-02-28",
+    "location": "Quito / Guayaquil",
+    "excerpt": "Mapeo de investigaciones, tesis de pregrado y posgrado de facultades de arquitectura del Ecuador. Un archivo abierto para consultar problemáticas de vivienda, patrimonio y tecnología constructiva.",
+    "status": "published",
+    "featured": true,
+    "tags": [
+      "Tesis",
+      "Investigación",
+      "Vivienda",
+      "Bambú"
+    ]
+  }
+]

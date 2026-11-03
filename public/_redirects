@@ -1,0 +1,10 @@
+# Cloudflare Pages / Netlify SPA Routing Fallback
+/admin    /admin.html   200
+/*        /index.html   200
+
+# Security Headers
+/*
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()

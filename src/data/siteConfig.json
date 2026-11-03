@@ -1,0 +1,72 @@
+{
+  "hero": {
+    "watermark": "EA",
+    "pillText": "PLATAFORMA CRÍTICA DE ARQUITECTURA",
+    "headlineLine1": "UN ESPACIO DE CRITICA",
+    "headlineLine2": "DE ARQUITECTURA",
+    "subtitle": "DONDE TODAS LAS VOCES SON RELEVANTES",
+    "ctaText": "COMENZAR DESCUBRIMIENTO ↓",
+    "tags": [
+      {
+        "id": "proyectos",
+        "label": "PROYECTOS",
+        "meta": "/ Obras"
+      },
+      {
+        "id": "territorios",
+        "label": "TERRITORIOS",
+        "meta": "/ Ciudad"
+      },
+      {
+        "id": "academia",
+        "label": "ACADEMIA",
+        "meta": "/ Datos"
+      }
+    ],
+    "motion": {
+      "preset": "fadeUp",
+      "speed": 1,
+      "stagger": 0.15,
+      "delay": 0.2,
+      "easing": "power3.out"
+    }
+  },
+  "search": {
+    "headerLabel": "EXPLORADOR DE ARQUITECTURA ECUATORIANA",
+    "sublabel": "Busca por obra, arquitecto, ciudad, tipología o autor",
+    "placeholder": "Proyecto, arquitecto, crítico...",
+    "buttonLabel": "BUSCAR"
+  },
+  "pinnedDestacados": {
+    "instruction": "DESPLAZA O HAZ CLIC PARA RECORRER LAS ESCENAS",
+    "tabs": [
+      {
+        "id": "proyectos",
+        "title": "PROYECTOS",
+        "subtitle": "DESTACADOS"
+      },
+      {
+        "id": "academia",
+        "title": "ACADEMIA",
+        "subtitle": "DESTACADOS"
+      },
+      {
+        "id": "territorios",
+        "title": "TERRITORIOS",
+        "subtitle": "DESTACADOS"
+      }
+    ],
+    "motion": {
+      "scrub": 0.5,
+      "anticipatePin": 1,
+      "cardTransitionDuration": 0.4
+    }
+  },
+  "footer": {
+    "brandTagline": "CRÍTICA + DIFUSIÓN + CONVERSACIÓN",
+    "manifesto": "La web no presenta arquitectura. La web hace que el usuario descubra arquitectura.",
+    "editorialNote": "Plataforma independiente dedicada a la difusión y problematización de la arquitectura contemporánea e histórica en el Ecuador.",
+    "copyright": "© 2026 Ecuadorian Architecture. Todos los derechos reservados.",
+    "cities": "Quito — Guayaquil — Cuenca — Ecuador"
+  }
+}

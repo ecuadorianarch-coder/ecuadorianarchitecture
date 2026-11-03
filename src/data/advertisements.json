@@ -1,0 +1,85 @@
+[
+  {
+    "id": "ad-flos-lighting",
+    "brandName": "FLOS Architectural",
+    "campaignTitle": "Luz Escultural & Sistemas Lineales 2026",
+    "targetSections": ["proyectos", "criticas", "home"],
+    "positionTarget": "ambos-lados",
+    "sponsorCategory": "ILUMINACIÓN TÉCNICA",
+    "tagLabel": "PATROCINIO OFICIAL",
+    "destinationUrl": "https://flos.com/es/es/architectural/?utm_source=ecuadorianarch&utm_medium=skyscrapers&utm_campaign=proyectos_2026",
+    "carouselInterval": 5500,
+    "activeStatus": true,
+    "startDate": "2026-01-01",
+    "endDate": "2026-12-31",
+    "bannerAssets": [
+      {
+        "url": "https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=800&q=85",
+        "alt": "Sistemas de iluminación arquitectónica suspendida FLOS",
+        "caption": "COLECCIÓN RUNNING MAGNET • CONTROL DALI"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=85",
+        "alt": "Iluminación indirecta en arquitectura de hormigón",
+        "caption": "PERFILES EMPOTRADOS FLOS ZERO TRACK"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=85",
+        "alt": "Integración lumínica en residencias contemporáneas",
+        "caption": "SISTEMAS EXTERIORES • IP67 GRADE"
+      }
+    ]
+  },
+  {
+    "id": "ad-hunter-douglas",
+    "brandName": "Hunter Douglas",
+    "campaignTitle": "Fachadas Ventiladas & Celosías Paramétricas",
+    "targetSections": ["territorios"],
+    "positionTarget": "ambos-lados",
+    "sponsorCategory": "ENVOLVENTES & FACHADAS",
+    "tagLabel": "ALIADO TÉCNICO",
+    "destinationUrl": "https://www.hunterdouglas.com.ec/ap/arquitectura?utm_source=ecuadorianarch&utm_medium=skyscrapers",
+    "carouselInterval": 6000,
+    "activeStatus": true,
+    "startDate": "2026-01-01",
+    "endDate": "2026-12-31",
+    "bannerAssets": [
+      {
+        "url": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=85",
+        "alt": "Fachada bioclimática en clima interandino",
+        "caption": "CELOSÍAS AEROBRISE • CONTROL SOLAR"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=85",
+        "alt": "Paneles de aluminio perforado para envolventes",
+        "caption": "REVESTIMIENTOS QUADROLIND • RESISTENCIA SÍSMICA"
+      }
+    ]
+  },
+  {
+    "id": "ad-cosentino",
+    "brandName": "Cosentino Dekton",
+    "campaignTitle": "Piedra Ultracompacta para Arquitectura Pública",
+    "targetSections": ["academia"],
+    "positionTarget": "ambos-lados",
+    "sponsorCategory": "SUPERFICIES ESTRUCTURALES",
+    "tagLabel": "INVESTIGACIÓN MATERIAL",
+    "destinationUrl": "https://www.cosentino.com/es/dekton/?utm_source=ecuadorianarch&utm_medium=skyscrapers",
+    "carouselInterval": 5000,
+    "activeStatus": true,
+    "startDate": "2026-01-01",
+    "endDate": "2026-12-31",
+    "bannerAssets": [
+      {
+        "url": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=85",
+        "alt": "Superficies de gran formato Dekton en pavimentos",
+        "caption": "DEKTON KRAFTIZEN • RESISTENCIA AL ALTO TRÁFICO"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=800&q=85",
+        "alt": "Mobiliario e islas arquitectónicas en piedra técnica",
+        "caption": "NEUTRALIDAD DE CARBONO • CICLO DE VIDA COMPLETO"
+      }
+    ]
+  }
+]

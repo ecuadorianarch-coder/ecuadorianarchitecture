@@ -1,0 +1,158 @@
+[
+  {
+    "id": "segundo-guanoluisa",
+    "name": "Segundo Guanoluisa",
+    "slug": "segundo-guanoluisa",
+    "rol": "Maestro Mayor de Obra & Dirección Artesanal",
+    "oficio": "Cantería andina, cimentaciones ciclópeas y replanteo de niveles",
+    "location": "Rumipamba, Quito, Ecuador",
+    "experienceYears": "35+ años",
+    "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
+    "coverImage": "https://images.unsplash.com/photo-1541888946425-d0fbb186f5f7?auto=format&fit=crop&w=1200&q=80",
+    "trayectoria": "Más de 35 años de experiencia liderando cuadrillas de construcción tradicional en los valles interandinos de Pichincha y Cotopaxi.",
+    "reconocimiento": "Coordinó la minga comunitaria y el levantamiento de los muros portantes de tierra y piedra.",
+    "specialties": [
+      "Cantería andina",
+      "Mampostería de adobe",
+      "Cimentaciones ciclópeas",
+      "Morteros de cal"
+    ],
+    "defaultMembers": [
+      {
+        "nombre": "Carlos Toapanta",
+        "rol": "Maestro Albañil",
+        "oficio": "Mampostería tradicional y aparejos de piedra vista",
+        "especialidad": "Asentado de muros ciclópeos y morteros de cal apagada"
+      },
+      {
+        "nombre": "Manuel Chasi",
+        "rol": "Maestro Carpintero",
+        "oficio": "Encofrados tradicionales y ensambles en madera bruta",
+        "especialidad": "Vigas maestras de eucalipto y cubiertas a dos aguas"
+      },
+      {
+        "nombre": "Fausto Pillajo",
+        "rol": "Maestro Fierrero",
+        "oficio": "Cimentaciones reforzadas y anclajes sismorresistentes",
+        "especialidad": "Amarrado de hierro corrugado y zapatas corridas"
+      },
+      {
+        "nombre": "Cuadrilla Comunitaria Rumipamba",
+        "rol": "Mano de Obra Colectiva / Minga",
+        "oficio": "Acarreo de piedra de río, pisado de barro y revoques naturales",
+        "especialidad": "Comuna de Rumipamba"
+      }
+    ]
+  },
+  {
+    "id": "luis-toapanta",
+    "name": "Luis Toapanta",
+    "slug": "luis-toapanta",
+    "rol": "Maestro Mayor de Obra General",
+    "oficio": "Estructuras de hormigón armado visto y coordinación de subcontratos",
+    "location": "Quito, Ecuador",
+    "experienceYears": "28 años",
+    "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
+    "coverImage": "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80",
+    "trayectoria": "28 años de trayectoria en obras de gran escala y complejidad técnica en el Distrito Metropolitano de Quito.",
+    "reconocimiento": "Lideró la modulación de encofrados fenolíticos y el vaciado continuo del atrio central.",
+    "specialties": [
+      "Hormigón visto",
+      "Encofrados fenólicos",
+      "Coordinación de subcontratos",
+      "Vaciado continuo en altura"
+    ],
+    "defaultMembers": [
+      {
+        "nombre": "Jorge Criollo",
+        "rol": "Maestro Encofrador",
+        "oficio": "Modulación de tableros fenólicos y desencofrado limpio",
+        "especialidad": "Acabados arquitectónicos sin resanes"
+      },
+      {
+        "nombre": "Carlos Morocho",
+        "rol": "Maestro Fierrero",
+        "oficio": "Doblado y armado de enfierrado sismorresistente",
+        "especialidad": "Muros de corte y nudos de pórticos de alta densidad"
+      },
+      {
+        "nombre": "Bolívar Tipán",
+        "rol": "Maestro Metalmecánico",
+        "oficio": "Herrería arquitectónica y barandales",
+        "especialidad": "Soldadura TIG y carpintería de acero"
+      }
+    ]
+  },
+  {
+    "id": "nelson-quishpe",
+    "name": "Nelson Quishpe",
+    "slug": "nelson-quishpe",
+    "rol": "Maestro Mayor & Artesano Maderero",
+    "oficio": "Estructuras ligeras de madera, pilotes y ensambles tradicionales",
+    "location": "La Armenia, Valle de los Chillos, Ecuador",
+    "experienceYears": "24 años",
+    "avatarUrl": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80",
+    "coverImage": "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80",
+    "trayectoria": "24 años de dedicación a la carpintería arquitectónica y montaje de cubiertas vivas en los valles orientales de Quito.",
+    "reconocimiento": "Diseñó y ejecutó los ensambles machihembrados que preservaron la totalidad del arbolado existente.",
+    "specialties": [
+      "Carpintería estructural",
+      "Ensambles en madera",
+      "Cubiertas ligeras",
+      "Pilotes sobre terreno vivo"
+    ],
+    "defaultMembers": [
+      {
+        "nombre": "Ángel Tipantuña",
+        "rol": "Maestro Carpintero de Banco",
+        "oficio": "Cepillado manual y uniones de espiga",
+        "especialidad": "Madera local de reforestación tratada"
+      },
+      {
+        "nombre": "José Caisaguano",
+        "rol": "Maestro Albañil",
+        "oficio": "Zapatas aisladas y anclajes en tierra permeable",
+        "especialidad": "Mínimo impacto ambiental de fundación"
+      }
+    ]
+  },
+  {
+    "id": "patricio-morales",
+    "name": "Patricio Morales",
+    "slug": "patricio-morales",
+    "rol": "Maestro Mayor de Estructuras & Montaje",
+    "oficio": "Estructuras mixtas de hormigón y pieles metálicas suspendidas",
+    "location": "Quito, Ecuador",
+    "experienceYears": "26 años",
+    "avatarUrl": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80",
+    "coverImage": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80",
+    "trayectoria": "26 años de liderazgo en edificaciones de uso mixto e ingeniería de fachadas en la capital.",
+    "reconocimiento": "Coordinó la calibración de tensores y la fachada paramétrica curva.",
+    "specialties": [
+      "Estructuras mixtas",
+      "Pieles metálicas suspendidas",
+      "Hormigón sismorresistente",
+      "Fachadas complejas"
+    ],
+    "defaultMembers": [
+      {
+        "nombre": "Washington Toapanta",
+        "rol": "Maestro Fierrero",
+        "oficio": "Armadura densa en pantallas de hormigón sismorresistente",
+        "especialidad": "Nudos de confinamiento estructural de alta exigencia"
+      },
+      {
+        "nombre": "Segundo Morocho",
+        "rol": "Maestro Encofrador",
+        "oficio": "Encofrados trepantes para muros perimetrales",
+        "especialidad": "Vaciado vertical continuo a plomo perfecto"
+      },
+      {
+        "nombre": "Jorge Quishpe",
+        "rol": "Maestro Albañil",
+        "oficio": "Mampostería ligera y aislamiento acústico interior",
+        "especialidad": "Divisiones interiores y nivelación de losas"
+      }
+    ]
+  }
+]
