@@ -67,23 +67,40 @@ export const FooterModal: React.FC<FooterModalProps> = ({
 
   if (!isOpen) return null;
 
-  const handleFeedbackSubmit = (e: React.FormEvent) => {
+  const handleFeedbackSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!feedbackMessage.trim()) return;
 
+    const newFeedback = {
+      id: Date.now().toString(),
+      name: feedbackName || 'Anónimo',
+      email: feedbackEmail || 'No provisto',
+      type: feedbackType,
+      message: feedbackMessage,
+      createdAt: new Date().toISOString(),
+    };
+
+    // 1. Save to client storage
     try {
       const existing = JSON.parse(localStorage.getItem('ea_user_feedback') || '[]');
-      existing.push({
-        id: Date.now().toString(),
-        name: feedbackName || 'Anónimo',
-        email: feedbackEmail || 'No provisto',
-        type: feedbackType,
-        message: feedbackMessage,
-        createdAt: new Date().toISOString(),
-      });
+      existing.push(newFeedback);
       localStorage.setItem('ea_user_feedback', JSON.stringify(existing));
     } catch (err) {
       console.warn('Could not store feedback locally', err);
+    }
+
+    // 2. Transmit to backend API
+    try {
+      const currentRes = await fetch('/api/feedback');
+      const list = currentRes.ok ? await currentRes.json() : [];
+      const updatedList = Array.isArray(list) ? [...list, newFeedback] : [newFeedback];
+      await fetch('/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updatedList, null, 2),
+      });
+    } catch (err) {
+      console.warn('Could not transmit feedback to server', err);
     }
 
     setFeedbackSuccess(true);
@@ -93,25 +110,42 @@ export const FooterModal: React.FC<FooterModalProps> = ({
     }, 4000);
   };
 
-  const handleProjectSubmit = (e: React.FormEvent) => {
+  const handleProjectSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!projTitle.trim() || !projLink.trim() || !projEmail.trim()) return;
 
+    const newSubmission = {
+      id: Date.now().toString(),
+      title: projTitle,
+      authors: projAuthors,
+      location: projLocation,
+      type: projType,
+      link: projLink,
+      email: projEmail,
+      createdAt: new Date().toISOString(),
+    };
+
+    // 1. Save to client storage
     try {
       const existing = JSON.parse(localStorage.getItem('ea_project_submissions') || '[]');
-      existing.push({
-        id: Date.now().toString(),
-        title: projTitle,
-        authors: projAuthors,
-        location: projLocation,
-        type: projType,
-        link: projLink,
-        email: projEmail,
-        createdAt: new Date().toISOString(),
-      });
+      existing.push(newSubmission);
       localStorage.setItem('ea_project_submissions', JSON.stringify(existing));
     } catch (err) {
-      console.warn('Could not store project submission', err);
+      console.warn('Could not store project submission locally', err);
+    }
+
+    // 2. Transmit to backend API
+    try {
+      const currentRes = await fetch('/api/project-submissions');
+      const list = currentRes.ok ? await currentRes.json() : [];
+      const updatedList = Array.isArray(list) ? [...list, newSubmission] : [newSubmission];
+      await fetch('/api/project-submissions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updatedList, null, 2),
+      });
+    } catch (err) {
+      console.warn('Could not transmit project submission to server', err);
     }
 
     setProjSuccess(true);

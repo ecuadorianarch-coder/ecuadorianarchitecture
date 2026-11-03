@@ -505,6 +505,8 @@ const apiPlugin = () => ({
         else if (endpoint === '/api/ad-placements') filename = 'adPlacements.json';
         else if (endpoint === '/api/ad-analytics') filename = 'adAnalytics.json';
         else if (endpoint === '/api/ad-events') filename = 'adEvents.json';
+        else if (endpoint === '/api/feedback') filename = 'feedback.json';
+        else if (endpoint === '/api/project-submissions') filename = 'projectSubmissions.json';
 
         if (filename) {
           const filePath = path.join(dataPath, filename);

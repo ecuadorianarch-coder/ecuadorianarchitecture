@@ -187,45 +187,45 @@ export const Footer: React.FC = () => {
             {/* Iconos de Redes Sociales con 44x44px touch targets */}
             <div className="flex items-center gap-1 sm:gap-2 text-ea-black/45">
               <a
-                href="https://instagram.com"
+                href="https://instagram.com/ecuadorianarch"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Instagram de Ecuadorian Architecture"
+                aria-label="Instagram oficial de Ecuadorian Architecture (@ecuadorianarch)"
                 className="w-11 h-11 flex items-center justify-center hover:text-blue-600 transition-all cursor-pointer active:scale-90"
-                title="Instagram"
+                title="Instagram: @ecuadorianarch"
                 data-cursor
               >
                 <Instagram className="w-4.5 h-4.5" />
               </a>
               <a
-                href="https://facebook.com"
+                href="https://facebook.com/ecuadorianarch"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Facebook de Ecuadorian Architecture"
+                aria-label="Facebook oficial de Ecuadorian Architecture"
                 className="w-11 h-11 flex items-center justify-center hover:text-blue-600 transition-all cursor-pointer active:scale-90"
-                title="Facebook"
+                title="Facebook: Ecuadorian Architecture"
                 data-cursor
               >
                 <Facebook className="w-4.5 h-4.5" />
               </a>
               <a
-                href="https://youtube.com"
+                href="https://youtube.com/@ecuadorianarch"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="YouTube de Ecuadorian Architecture"
+                aria-label="YouTube oficial de Ecuadorian Architecture"
                 className="w-11 h-11 flex items-center justify-center hover:text-blue-600 transition-all cursor-pointer active:scale-90"
-                title="YouTube"
+                title="YouTube: @ecuadorianarch"
                 data-cursor
               >
                 <Youtube className="w-4.5 h-4.5" />
               </a>
               <a
-                href="https://x.com"
+                href="https://x.com/ecuadorianarch"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="X (Twitter) de Ecuadorian Architecture"
+                aria-label="X (Twitter) oficial de Ecuadorian Architecture (@ecuadorianarch)"
                 className="w-11 h-11 flex items-center justify-center hover:text-blue-600 transition-all cursor-pointer active:scale-90"
-                title="X"
+                title="X: @ecuadorianarch"
                 data-cursor
               >
                 <Twitter className="w-4.5 h-4.5" />

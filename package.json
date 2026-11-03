@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "start": "node server.cjs",
     "backup": "node scripts/backup.cjs",
     "build": "vite build && node scripts/generate-static-seo.mjs && node scripts/generate-avo-geo.cjs && node scripts/generate-sitemap.cjs",
     "build:seo": "node scripts/generate-static-seo.mjs",

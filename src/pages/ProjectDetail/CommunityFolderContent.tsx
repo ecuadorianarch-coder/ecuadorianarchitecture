@@ -23,6 +23,7 @@ import {
 import { useCommunityNotes } from '../../services/communityService';
 import { WorksiteVisit, CriticalArgument } from '../../types/community';
 import { FIGMA_PATHS } from './communityFigmaPaths';
+import { uploadImageFile } from '../../utils/mediaUpload';
 
 interface CommunityFolderContentProps {
   project: any;
@@ -209,8 +210,8 @@ export const CommunityFolderContent: React.FC<CommunityFolderContentProps> = ({ 
   // Visita activa mostrada en la hoja monográfica
   const activeVisit = visits[selectedVisitIndex] || visits[0] || null;
 
-  // Subir imagen simulada a base64
-  const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Subir imagen optimizada para arquitectura (URL de servidor o WebP compacto)
+  const handlePhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
 
@@ -222,20 +223,19 @@ export const CommunityFolderContent: React.FC<CommunityFolderContentProps> = ({ 
     setIsUploadingPhoto(true);
     setFormError(null);
 
-    Array.from(files).forEach((file) => {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        if (typeof reader.result === 'string') {
-          setVisitPhotos((prev) => [...prev, reader.result as string].slice(0, 3));
+    try {
+      const fileList = Array.from(files).slice(0, 3 - visitPhotos.length);
+      for (const file of fileList) {
+        const url = await uploadImageFile(file, { maxDimension: 1920, quality: 0.85, format: 'image/webp' });
+        if (url) {
+          setVisitPhotos((prev) => [...prev, url].slice(0, 3));
         }
-        setIsUploadingPhoto(false);
-      };
-      reader.onerror = () => {
-        setFormError('Error al leer la fotografía.');
-        setIsUploadingPhoto(false);
-      };
-      reader.readAsDataURL(file);
-    });
+      }
+    } catch {
+      setFormError('Error al procesar la fotografía.');
+    } finally {
+      setIsUploadingPhoto(false);
+    }
   };
 
   const handleRemovePhoto = (index: number) => {

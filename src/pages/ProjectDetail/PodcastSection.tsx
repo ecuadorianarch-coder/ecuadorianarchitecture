@@ -72,6 +72,9 @@ export const PodcastSection: React.FC<PodcastSectionProps> = ({ project }) => {
             <Radio className="w-3.5 h-3.5 text-red-500 animate-pulse" />
             <span>DISCURSO SONORO EN OBRA</span>
           </span>
+          <span className="font-anton text-[10px] sm:text-[11px] tracking-wider uppercase bg-amber-400 text-ea-black border border-ea-black px-2.5 py-1 font-bold">
+            ESTRENO PRÓXIMO // TEMPORADA 2026
+          </span>
           <span className="font-mono text-[10px] sm:text-[11px] text-ea-black/50 uppercase">
             PODCAST OFICIAL // ECUADORIAN ARCHITECTURE
           </span>
@@ -303,13 +306,12 @@ export const PodcastSection: React.FC<PodcastSectionProps> = ({ project }) => {
       )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <a
-          href="#descargar-audio"
-          onClick={(e) => {
-            e.preventDefault();
-            triggerNotice('Descarga iniciada: Audio Master en alta resolución (MP3 320kbps).');
+        <button
+          type="button"
+          onClick={() => {
+            triggerNotice('El Audio Master (MP3 320kbps) estará disponible para descarga directa el día del estreno oficial de la temporada.');
           }}
-          className="border-2 border-ea-black p-4 bg-ea-offwhite hover:bg-white transition-colors flex items-center justify-between group shadow-xs cursor-pointer focus-visible:ring-2 focus-visible:ring-ea-black/70 focus-visible:outline-hidden"
+          className="border-2 border-ea-black p-4 bg-ea-offwhite hover:bg-white transition-colors flex items-center justify-between group shadow-xs cursor-pointer focus-visible:ring-2 focus-visible:ring-ea-black/70 focus-visible:outline-hidden text-left"
           data-cursor
         >
           <div className="flex items-center gap-3">
@@ -318,19 +320,18 @@ export const PodcastSection: React.FC<PodcastSectionProps> = ({ project }) => {
               <span className="font-anton text-xs uppercase tracking-wider block text-ea-black">
                 DESCARGAR AUDIO MASTER
               </span>
-              <span className="font-mono text-[10px] text-ea-black/50">MP3 320 KBPS • 62.4 MB</span>
+              <span className="font-mono text-[10px] text-ea-black/50">MP3 320 KBPS • DISPONIBLE EN ESTRENO</span>
             </div>
           </div>
           <span className="font-mono text-xs">↗</span>
-        </a>
+        </button>
 
-        <a
-          href="#transcripcion"
-          onClick={(e) => {
-            e.preventDefault();
-            triggerNotice('Abriendo expediente editorial: Transcripción crítica completa (PDF 14 págs).');
+        <button
+          type="button"
+          onClick={() => {
+            triggerNotice('La transcripción crítica y el expediente editorial en PDF se habilitarán junto con la publicación del episodio.');
           }}
-          className="border-2 border-ea-black p-4 bg-ea-offwhite hover:bg-white transition-colors flex items-center justify-between group shadow-xs cursor-pointer focus-visible:ring-2 focus-visible:ring-ea-black/70 focus-visible:outline-hidden"
+          className="border-2 border-ea-black p-4 bg-ea-offwhite hover:bg-white transition-colors flex items-center justify-between group shadow-xs cursor-pointer focus-visible:ring-2 focus-visible:ring-ea-black/70 focus-visible:outline-hidden text-left"
           data-cursor
         >
           <div className="flex items-center gap-3">
@@ -339,11 +340,11 @@ export const PodcastSection: React.FC<PodcastSectionProps> = ({ project }) => {
               <span className="font-anton text-xs uppercase tracking-wider block text-ea-black">
                 TRANSCRIPCIÓN CRÍTICA
               </span>
-              <span className="font-mono text-[10px] text-ea-black/50">EXPEDIENTE EDITORIAL • 14 PÁGINAS</span>
+              <span className="font-mono text-[10px] text-ea-black/50">EXPEDIENTE EDITORIAL • DISPONIBLE EN ESTRENO</span>
             </div>
           </div>
           <span className="font-mono text-xs">↗</span>
-        </a>
+        </button>
       </div>
     </article>
   );
