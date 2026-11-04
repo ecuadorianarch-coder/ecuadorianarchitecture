@@ -276,7 +276,7 @@ export const VisualEditorialEditor: React.FC<VisualEditorialEditorProps> = ({
             ...parsed,
             studios: studiosList,
             studio: studiosList.join(' + ') || parsed.studio || 'ESTUDIO',
-            hasCritica: parsed.hasCritica ?? Boolean(parsed.critica && parsed.critica.trim().length > 0),
+            hasCritica: parsed.hasCritica ?? Boolean(parsed.critica && parsed.critica.trim().length > 0 && !parsed.critica.includes('Dictamen crítico')),
             hasPodcast: parsed.hasPodcast ?? Boolean(parsed.podcast?.title),
             hasNotasComunidad: parsed.hasNotasComunidad ?? true,
           };
@@ -290,7 +290,7 @@ export const VisualEditorialEditor: React.FC<VisualEditorialEditorProps> = ({
       ...initialArticle,
       studios: initialStudiosList,
       studio: initialStudiosList.join(' + ') || initialArticle.studio || 'ESTUDIO',
-      hasCritica: initialArticle.hasCritica ?? Boolean(initialArticle.critica && initialArticle.critica.trim().length > 0),
+      hasCritica: initialArticle.hasCritica ?? Boolean(initialArticle.critica && initialArticle.critica.trim().length > 0 && !initialArticle.critica.includes('Dictamen crítico')),
       hasPodcast: initialArticle.hasPodcast ?? Boolean(initialArticle.podcast?.title),
       hasNotasComunidad: initialArticle.hasNotasComunidad ?? true,
       modules: initialArticle.modules || [
@@ -768,7 +768,7 @@ export const VisualEditorialEditor: React.FC<VisualEditorialEditorProps> = ({
   // Check whether Critica is active
   const isCriticaActive =
     article.hasCritica !== false &&
-    (article.hasCritica === true || (typeof article.critica === 'string' && article.critica.trim().length > 0));
+    (article.hasCritica === true || (typeof article.critica === 'string' && article.critica.trim().length > 0 && !article.critica.includes('Dictamen crítico')));
 
   const handleToggleCritica = (enable: boolean) => {
     if (enable) {

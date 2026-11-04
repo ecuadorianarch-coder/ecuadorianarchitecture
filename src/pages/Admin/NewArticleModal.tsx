@@ -198,7 +198,7 @@ export const NewArticleModal: React.FC<NewArticleModalProps> = ({
         : 'OBRA CONSTRUIDA',
       studio: primaryStudio,
       studios: [primaryStudio],
-      critic: isTerritorio || isAcademia ? '' : 'REDACCIÓN CRÍTICA EA',
+      critic: '',
       location: location.trim().toUpperCase() || (isTerritorio ? 'GUAYAS Y LITORAL' : 'QUITO'),
       year,
       excerpt: isTerritorio
@@ -237,10 +237,10 @@ export const NewArticleModal: React.FC<NewArticleModalProps> = ({
         : 'Texto analítico principal de la reseña...',
       hasCritica: false,
       hasVisitas: selectedType === 'proyectos',
-      critica: isTerritorio || isAcademia ? '' : 'Dictamen crítico externo sobre la obra y su pertinencia constructiva...',
-      criticaHeadline: 'Desafiar la convención inmobiliaria desde la inercia térmica',
-      criticaQuote: 'Frente a la torre hermética vidriada, la pertinencia ética radica en la economía de medios y la inercia de la materia cruda.',
-      criticaConclusion: `El proyecto cuestiona el modelo hegemónico de producción en ${location.trim().toUpperCase() || 'el territorio'}.`,
+      critica: '',
+      criticaHeadline: '',
+      criticaQuote: '',
+      criticaConclusion: '',
       hasPodcast: false,
       hasNotasComunidad: true,
       modules: [

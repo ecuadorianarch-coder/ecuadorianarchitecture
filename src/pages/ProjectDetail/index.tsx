@@ -120,6 +120,15 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
   const availableModules = useMemo(() => getAvailableModules(project), [project]);
   const studiosList = useMemo(() => extractStudiosList(project), [project]);
 
+  const hasCriticaActive = useMemo(() => {
+    if (!project) return false;
+    if (project.hasCritica === false) return false;
+    return (
+      project.hasCritica === true ||
+      availableModules.some((m) => m.id === 'critica')
+    );
+  }, [project, availableModules]);
+
   const projectSection: 'proyectos' | 'academia' | 'territorios' = useMemo(() => {
     if (
       project?.type === 'academia' ||
@@ -1208,12 +1217,16 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
                       </>
                     )}
 
-                    {/* 5. CRÍTICA */}
-                    <span className="text-ea-black/30 font-bold text-sm sm:text-base shrink-0 select-none">•</span>
-                    <div className="flex items-center gap-2 font-okcok text-xs sm:text-[15px] md:text-base uppercase tracking-wide text-ea-black shrink-0 leading-[1.25] py-0.5">
-                      <img src={compCriticaUrl} alt="" className="h-4 sm:h-5 md:h-6 object-contain inline-block pointer-events-none" />
-                      <span>{project.critic || 'AL BORDE'}</span>
-                    </div>
+                    {/* 5. CRÍTICA (OPCIONAL: solo si el módulo de crítica está activo en este proyecto) */}
+                    {hasCriticaActive && Boolean(project.critic?.trim()) && (
+                      <>
+                        <span className="text-ea-black/30 font-bold text-sm sm:text-base shrink-0 select-none">•</span>
+                        <div className="flex items-center gap-2 font-okcok text-xs sm:text-[15px] md:text-base uppercase tracking-wide text-ea-black shrink-0 leading-[1.25] py-0.5">
+                          <img src={compCriticaUrl} alt="Crítica" className="h-4 sm:h-5 md:h-6 object-contain inline-block pointer-events-none" />
+                          <span>{project.critic.trim()}</span>
+                        </div>
+                      </>
+                    )}
                   </>
                 )}
               </div>
@@ -1252,9 +1265,9 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
                   <span className="block text-ea-black/55">región: {project.region || project.location}</span>
                 ) : projectSection === 'academia' ? (
                   <span className="block text-ea-black/55">investigación: {project.universidad || project.studio}</span>
-                ) : (
-                  <span className="block text-ea-black/55">escrito por: {project.critic || 'Alejandro Andrade'}</span>
-                )}
+                ) : hasCriticaActive && Boolean(project.critic?.trim()) ? (
+                  <span className="block text-ea-black/55">escrito por: {project.critic.trim()}</span>
+                ) : null}
               </div>
             </div>
             <div className="text-right hidden sm:block pointer-events-auto leading-tight text-ea-black/60">
@@ -1272,11 +1285,11 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
                 <p className="font-creato text-[11px] sm:text-[12px] text-ea-black/60 mt-0.5">
                   institución: <span className="text-ea-black/75">{project.universidad || project.studio || 'Academia'}</span>
                 </p>
-              ) : (
+              ) : hasCriticaActive && Boolean(project.critic?.trim()) ? (
                 <p className="font-creato text-[11px] sm:text-[12px] text-ea-black/60 mt-0.5">
-                  escrito por: <span className="text-ea-black/75">{project.critic || 'Alejandro Andrade'}</span>
+                  escrito por: <span className="text-ea-black/75">{project.critic.trim()}</span>
                 </p>
-              )}
+              ) : null}
             </div>
           </div>
 
@@ -1397,7 +1410,9 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
 
                 <div className="w-full overflow-hidden my-2">
                   <div ref={vKineticLine2Ref} className="inline-block whitespace-nowrap bg-white text-ea-black px-8 py-3 font-anton text-2xl sm:text-4xl md:text-5xl uppercase tracking-wider shadow-2xl border-y-2 border-ea-black">
-                    CRÍTICA: “{project.critic || 'AL BORDE'}” — {project.excerpt.toUpperCase()}
+                    {hasCriticaActive && Boolean(project.critic?.trim())
+                      ? `CRÍTICA: “${project.critic.trim()}” — ${(project.excerpt || '').toUpperCase()}`
+                      : `${project.studio || 'ARQUITECTURA'} — ${(project.title || '').toUpperCase()} — ${(project.location || '').toUpperCase()}`}
                   </div>
                 </div>
 
@@ -1485,7 +1500,9 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
                   ref={hKineticCol2Ref}
                   className="font-okcok text-4xl sm:text-6xl md:text-7xl text-white/75 uppercase tracking-tight select-none [writing-mode:vertical-rl] drop-shadow-2xl"
                 >
-                  CRÍTICA: {project.critic || 'AL BORDE'}
+                  {hasCriticaActive && Boolean(project.critic?.trim())
+                    ? `CRÍTICA: ${project.critic.trim()}`
+                    : `${project.studio || 'ARQUITECTURA'} • ${project.year || ''}`}
                 </div>
               </div>
             </>
@@ -1567,7 +1584,9 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
                 {/* Diagonal Ribbon Bottom */}
                 <div ref={qDiagonalRibbon2Ref} className="w-full flex justify-center rotate-3 my-2">
                   <span className="bg-ea-black text-white font-okcok text-xl sm:text-3xl uppercase px-12 py-2 shadow-2xl border border-white/20 whitespace-nowrap">
-                    CRÍTICA: “{project.critic || 'AL BORDE'}” • {project.tags?.[0] || 'ESPACIO'} & {project.tags?.[1] || 'MATERIA ANDINA'}
+                    {hasCriticaActive && Boolean(project.critic?.trim())
+                      ? `CRÍTICA: “${project.critic.trim()}” • ${project.tags?.[0] || 'ESPACIO'} & ${project.tags?.[1] || 'MATERIA ANDINA'}`
+                      : `${(project.title || '').toUpperCase()} • ${(project.location || '').toUpperCase()} • ${project.year || ''}`}
                   </span>
                 </div>
               </div>

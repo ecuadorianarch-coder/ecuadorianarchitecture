@@ -601,7 +601,14 @@ export const PROJECT_MODULES_REGISTRY: ProjectModuleDefinition[] = [
     isMandatory: false,
     isAvailable: (project) => {
       if (!project) return false;
-      return project.hasCritica !== false;
+      if (project.hasCritica === false) return false;
+      return (
+        project.hasCritica === true ||
+        (typeof project.critica === 'string' &&
+          project.critica.trim().length > 0 &&
+          !project.critica.includes('Dictamen crítico')) ||
+        (Array.isArray(project.criticaModules) && project.criticaModules.length > 0)
+      );
     },
     inactiveFillClass: 'af-fill-critica',
     renderContent: (ctx) => <CriticaModuleContent {...ctx} />,
