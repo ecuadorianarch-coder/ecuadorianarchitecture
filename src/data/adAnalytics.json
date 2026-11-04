@@ -1,9 +1,10 @@
 {
   "impressions": {
-    "camp-flos-running-magnet": 1491,
-    "camp-hunter-douglas-celosias": 1039,
+    "camp-flos-running-magnet": 1495,
+    "camp-hunter-douglas-celosias": 1041,
     "camp-cosentino-dekton-public": 861,
-    "camp-vitra-estudios": 640
+    "camp-vitra-estudios": 640,
+    "camp-ea-newsletter": 18
   },
   "grossClicks": {
     "camp-flos-running-magnet": 81,
@@ -24,10 +25,10 @@
     "camp-vitra-estudios": 28
   },
   "impressionsByPlacement": {
-    "entre-proyectos": 2228,
-    "skyscrapers-laterales": 1318,
+    "entre-proyectos": 2236,
+    "skyscrapers-laterales": 1331,
     "dossier-editorial": 470,
-    "inter-galeria": 15
+    "inter-galeria": 18
   },
   "clicksByPlacement": {
     "entre-proyectos": 111,
@@ -273,12 +274,29 @@
         "grossClicks": 0,
         "validClicks": 0
       }
+    },
+    "2026-11-04": {
+      "camp-hunter-douglas-celosias": {
+        "validImpressions": 2,
+        "grossClicks": 0,
+        "validClicks": 0
+      },
+      "camp-flos-running-magnet": {
+        "validImpressions": 4,
+        "grossClicks": 0,
+        "validClicks": 0
+      },
+      "camp-ea-newsletter": {
+        "validImpressions": 18,
+        "grossClicks": 0,
+        "validClicks": 0
+      }
     }
   },
   "deviceBreakdown": {
-    "desktop": 2481,
+    "desktop": 2505,
     "tablet": 520,
     "mobile": 1030
   },
-  "lastUpdated": "2026-11-03T22:57:24.915Z"
+  "lastUpdated": "2026-11-04T02:10:12.255Z"
 }

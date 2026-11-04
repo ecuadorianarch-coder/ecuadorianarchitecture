@@ -142,11 +142,19 @@ const server = http.createServer((req, res) => {
                   currentSubs.push({
                     id: `sub-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
                     email,
+                    nombre: parsed.nombre || parsed.name || '',
+                    telefono: parsed.telefono || parsed.phone || '',
                     section: parsed.section || 'general',
-                    source: parsed.source || 'empty-state',
+                    source: parsed.source || 'banner-newsletter',
                     createdAt: new Date().toISOString(),
                   });
                   fs.writeFileSync(filePath, JSON.stringify(currentSubs, null, 2), 'utf-8');
+                } else {
+                  if (parsed.nombre || parsed.telefono || parsed.name || parsed.phone) {
+                    exists.nombre = parsed.nombre || parsed.name || exists.nombre || '';
+                    exists.telefono = parsed.telefono || parsed.phone || exists.telefono || '';
+                    fs.writeFileSync(filePath, JSON.stringify(currentSubs, null, 2), 'utf-8');
+                  }
                 }
                 res.setHeader('Content-Type', 'application/json');
                 res.end(JSON.stringify({

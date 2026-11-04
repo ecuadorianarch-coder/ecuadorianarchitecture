@@ -1,5 +1,20 @@
 [
   {
+    "id": "brand-ea",
+    "name": "Ecuadorian Architecture",
+    "logoUrl": "/logo.svg",
+    "description": "Plataforma editorial independiente dedicada a documentar, investigar y debatir la arquitectura contemporánea ecuatoriana.",
+    "destinationUrl": "#newsletter",
+    "contactEmail": "contacto@ecuadorianarchitecture.com",
+    "category": "Plataforma Editorial",
+    "status": "activa",
+    "priority": 100,
+    "portalToken": "ea_editorial_newsletter_2026",
+    "portalEnabled": true,
+    "accountManager": "Redacción Editorial EA",
+    "createdAt": "2026-01-01"
+  },
+  {
     "id": "brand-flos",
     "name": "FLOS Architectural",
     "logoUrl": "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=120&h=120&q=80",
@@ -7,10 +22,10 @@
     "destinationUrl": "https://flos.com/es/es/architectural/?utm_source=ecuadorianarch&utm_medium=catalog",
     "contactEmail": "contacto@flos-latam.com",
     "category": "Iluminación Técnica",
-    "status": "activa",
+    "status": "pausada",
     "priority": 10,
     "portalToken": "ea_adv_flos_2026_8c1b",
-    "portalEnabled": true,
+    "portalEnabled": false,
     "accountManager": "Mónica Serrano · Directora Comercial EA",
     "createdAt": "2026-01-10"
   },
@@ -22,10 +37,10 @@
     "destinationUrl": "https://www.hunterdouglas.com.ec/ap/arquitectura?utm_source=ecuadorianarch",
     "contactEmail": "especificaciones@hunterdouglas.com.ec",
     "category": "Envolventes & Fachadas",
-    "status": "activa",
+    "status": "pausada",
     "priority": 9,
     "portalToken": "ea_adv_hunterdouglas_4e92",
-    "portalEnabled": true,
+    "portalEnabled": false,
     "accountManager": "Mónica Serrano · Directora Comercial EA",
     "createdAt": "2026-01-12"
   },
@@ -37,10 +52,10 @@
     "destinationUrl": "https://www.cosentino.com/es/dekton/?utm_source=ecuadorianarch",
     "contactEmail": "proyectos@cosentino.com",
     "category": "Superficies Estructurales",
-    "status": "activa",
+    "status": "pausada",
     "priority": 8,
     "portalToken": "ea_adv_cosentino_7a3d",
-    "portalEnabled": true,
+    "portalEnabled": false,
     "accountManager": "Carlos Mendoza · Alianzas Editoriales EA",
     "createdAt": "2026-01-15"
   },
@@ -52,10 +67,10 @@
     "destinationUrl": "https://www.vitra.com/?utm_source=ecuadorianarch",
     "contactEmail": "latam@vitra.com",
     "category": "Mobiliario & Espacio",
-    "status": "activa",
+    "status": "pausada",
     "priority": 7,
     "portalToken": "ea_adv_vitra_5f81",
-    "portalEnabled": true,
+    "portalEnabled": false,
     "accountManager": "Carlos Mendoza · Alianzas Editoriales EA",
     "createdAt": "2026-02-01"
   }

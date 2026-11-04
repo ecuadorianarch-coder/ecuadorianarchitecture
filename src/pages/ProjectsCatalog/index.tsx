@@ -581,6 +581,28 @@ export const ProjectsCatalog: React.FC<ProjectsCatalogProps> = ({
       }
     });
 
+    // Si aún no se insertó un banner in-feed y hay campañas elegibles, insertarlo después del último proyecto
+    if (adCounter === 0 && eligibleInFeedCampaigns.length > 0 && projectsList.length > 0) {
+      const campaign = eligibleInFeedCampaigns[0];
+      const brand = getBrandById(campaign.brandId);
+      elements.push(
+        <div
+          key={`ad-${campaign.id}-final`}
+          className={
+            isPanoramic
+              ? 'panoramic-archive-card will-change-transform w-full h-full flex'
+              : 'gravity-card-wrapper will-change-transform flex justify-center'
+          }
+        >
+          <InFeedProjectAdCard
+            campaign={campaign}
+            brand={brand}
+            layoutVariant={isPanoramic ? 'panoramic-card' : 'vertical-card'}
+          />
+        </div>
+      );
+    }
+
     return elements;
   };
 
@@ -1401,6 +1423,15 @@ export const ProjectsCatalog: React.FC<ProjectsCatalogProps> = ({
                     />
                   </div>
                 ))}
+                {filteredProjects.length < 3 && eligibleInFeedCampaigns.length > 0 && (
+                  <div className="gravity-card-wrapper will-change-transform flex justify-center">
+                    <InFeedProjectAdCard
+                      campaign={eligibleInFeedCampaigns[0]}
+                      brand={getBrandById(eligibleInFeedCampaigns[0].brandId)}
+                      layoutVariant="vertical-card"
+                    />
+                  </div>
+                )}
               </div>
 
               {filteredProjects.length > 3 && (

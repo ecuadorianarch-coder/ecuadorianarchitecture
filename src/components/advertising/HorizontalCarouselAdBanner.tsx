@@ -18,7 +18,7 @@ export const HorizontalCarouselAdBanner: React.FC<HorizontalCarouselAdBannerProp
   className = '',
   isPreview = false,
 }) => {
-  const { trackImpression, getClickUrl } = useAdvertising();
+  const { trackImpression, getClickUrl, openNewsletterModal } = useAdvertising();
   const bannerRef = useRef<HTMLDivElement>(null);
 
   // Track valid impression: >= 50% visible for >= 1s continuously
@@ -53,10 +53,22 @@ export const HorizontalCarouselAdBanner: React.FC<HorizontalCarouselAdBannerProp
     };
   }, [campaign.id, isPreview, trackImpression]);
 
-  const brandName = brand?.name || 'Auspiciante';
+  const brandName = brand?.name || 'Ecuadorian Architecture';
   const destinationHref = isPreview
     ? campaign.destinationUrl || '#'
     : getClickUrl(campaign, 'inter-galeria');
+
+  const handleClick = (e: React.MouseEvent) => {
+    if (
+      destinationHref === '#newsletter' ||
+      campaign.destinationUrl === '#newsletter' ||
+      !destinationHref.startsWith('http') ||
+      destinationHref.includes('#')
+    ) {
+      e.preventDefault();
+      openNewsletterModal();
+    }
+  };
 
   // Arte gráfico limpio tipo banner leaderboard enviado directamente por la empresa
   const bannerImageUrl =
@@ -75,10 +87,11 @@ export const HorizontalCarouselAdBanner: React.FC<HorizontalCarouselAdBannerProp
         {/* Banner gráfico 100% puro entregado por la empresa - Sin textos HTML ni botones CTA sobrepuestos */}
         <a
           href={destinationHref}
-          target="_blank"
-          rel="noopener noreferrer"
+          onClick={handleClick}
+          target={destinationHref.startsWith('http') ? '_blank' : undefined}
+          rel={destinationHref.startsWith('http') ? 'noopener noreferrer' : undefined}
           className="group relative block w-full max-w-[728px] overflow-hidden rounded-[2px] border border-white/15 hover:border-white/40 transition-all shadow-md cursor-pointer"
-          title={`Publicidad patrocinada: ${brandName} — Abrir sitio oficial`}
+          title={`Publicidad patrocinada: ${brandName} — Suscríbete a nuestro newsletter`}
         >
           <img
             src={bannerImageUrl}

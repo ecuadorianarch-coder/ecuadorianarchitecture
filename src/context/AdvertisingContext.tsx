@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, useRef, useCallback } from 'react';
+import { NewsletterSubscriptionModal } from '../components/common/NewsletterSubscriptionModal';
 import {
   SponsorBrand,
   AdCampaign,
@@ -67,6 +68,9 @@ interface AdvertisingContextType {
   ) => Promise<boolean>;
   refreshAnalytics: () => Promise<void>;
   resetToDefaults: () => void;
+  isNewsletterModalOpen: boolean;
+  openNewsletterModal: () => void;
+  closeNewsletterModal: () => void;
 }
 
 const AdvertisingContext = createContext<AdvertisingContextType | undefined>(undefined);
@@ -78,6 +82,10 @@ export const AdvertisingProvider: React.FC<{ children: React.ReactNode }> = ({ c
   const [analytics, setAnalytics] = useState<AdAnalytics>(defaultAnalytics as AdAnalytics);
   const [isSaving, setIsSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState<string | null>(null);
+  const [isNewsletterModalOpen, setIsNewsletterModalOpen] = useState(false);
+
+  const openNewsletterModal = useCallback(() => setIsNewsletterModalOpen(true), []);
+  const closeNewsletterModal = useCallback(() => setIsNewsletterModalOpen(false), []);
 
   // Deduplication cache for impressions within the current session
   const trackedImpressionsRef = useRef<Set<string>>(new Set());
@@ -504,9 +512,17 @@ export const AdvertisingProvider: React.FC<{ children: React.ReactNode }> = ({ c
         saveToDisk,
         refreshAnalytics,
         resetToDefaults,
+        isNewsletterModalOpen,
+        openNewsletterModal,
+        closeNewsletterModal,
       }}
     >
       {children}
+      <NewsletterSubscriptionModal
+        isOpen={isNewsletterModalOpen}
+        onClose={closeNewsletterModal}
+        source="banner-publicitario"
+      />
     </AdvertisingContext.Provider>
   );
 };

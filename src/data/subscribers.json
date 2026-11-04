@@ -5,5 +5,14 @@
     "section": "academia",
     "source": "deck-empty-academia",
     "createdAt": "2026-11-03T23:25:25.643Z"
+  },
+  {
+    "id": "sub-1793758116619-bns84",
+    "email": "mariajose.perez@fada.puce.edu.ec",
+    "nombre": "Arq. María José Pérez",
+    "telefono": "+593 98 765 4321",
+    "section": "newsletter-banner",
+    "source": "banner-publicitario",
+    "createdAt": "2026-11-04T02:08:36.619Z"
   }
 ]

@@ -22,7 +22,7 @@ export const VerticalAdCarousel: React.FC<VerticalAdCarouselProps> = ({
   theme = 'light',
   className = '',
 }) => {
-  const { trackImpression, getClickUrl } = useAdvertising();
+  const { trackImpression, getClickUrl, openNewsletterModal } = useAdvertising();
   const cardRef = useRef<HTMLAnchorElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -30,12 +30,12 @@ export const VerticalAdCarousel: React.FC<VerticalAdCarouselProps> = ({
 
   // If modern campaign is provided
   const isModern = Boolean(modernCampaign);
-  const brandName = brand?.name || modernCampaign?.name || campaign?.brandName || 'Auspiciante';
-  const brandCategory = brand?.category || campaign?.sponsorCategory || 'Alianza Arquitectónica';
-  const kicker = modernCampaign?.kicker || campaign?.tagLabel || 'PATROCINIO';
-  const title = modernCampaign?.title || campaign?.campaignTitle || '';
-  const subtitle = modernCampaign?.subtitle || '';
-  const ctaText = modernCampaign?.ctaText || 'EXPLORAR CATÁLOGO';
+  const brandName = brand?.name || modernCampaign?.name || campaign?.brandName || 'Ecuadorian Architecture';
+  const brandCategory = brand?.category || campaign?.sponsorCategory || 'Comunidad Editorial';
+  const kicker = modernCampaign?.kicker || campaign?.tagLabel || 'NEWSLETTER EA';
+  const title = modernCampaign?.title || campaign?.campaignTitle || 'SUSCRÍBETE A NUESTRO NEWSLETTER';
+  const subtitle = modernCampaign?.subtitle || 'Investigaciones, proyectos y críticas sobre arquitectura ecuatoriana.';
+  const ctaText = modernCampaign?.ctaText || 'SUSCRÍBETE A NUESTRO NEWSLETTER';
 
   // Assets list
   const assets: { url: string; alt?: string; caption?: string }[] = isModern && modernCampaign
@@ -105,12 +105,20 @@ export const VerticalAdCarousel: React.FC<VerticalAdCarouselProps> = ({
 
   const isDark = theme === 'dark';
 
+  const handleClick = (e: React.MouseEvent) => {
+    if (destinationUrl === '#newsletter' || !destinationUrl.startsWith('http') || destinationUrl.includes('#')) {
+      e.preventDefault();
+      openNewsletterModal();
+    }
+  };
+
   return (
     <a
       ref={cardRef}
       href={destinationUrl}
-      target="_blank"
-      rel="noopener noreferrer"
+      onClick={handleClick}
+      target={destinationUrl.startsWith('http') ? '_blank' : undefined}
+      rel={destinationUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       className={`group relative flex flex-col w-full h-[500px] xl:h-[550px] 2xl:h-[600px] rounded-[2px] transition-all duration-300 p-2 2xl:p-2.5 cursor-pointer overflow-hidden select-none ${

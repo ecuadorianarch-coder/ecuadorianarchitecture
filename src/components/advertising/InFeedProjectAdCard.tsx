@@ -16,7 +16,7 @@ export const InFeedProjectAdCard: React.FC<InFeedProjectAdCardProps> = ({
   layoutVariant = 'vertical-card',
   isPreview = false,
 }) => {
-  const { trackImpression, getClickUrl } = useAdvertising();
+  const { trackImpression, getClickUrl, openNewsletterModal } = useAdvertising();
   const cardRef = useRef<HTMLDivElement>(null);
 
   // Track valid impression: >= 50% visible for >= 1s continuously (skip if preview)
@@ -51,20 +51,34 @@ export const InFeedProjectAdCard: React.FC<InFeedProjectAdCardProps> = ({
     };
   }, [campaign.id, isPreview, trackImpression]);
 
-  const brandName = brand?.name || 'Marca Auspiciante';
+  const brandName = brand?.name || 'Ecuadorian Architecture';
 
   // Format destination URL display
-  let cleanDomain = 'flos.com';
+  let cleanDomain = 'ecuadorianarchitecture.com';
   try {
-    cleanDomain = new URL(campaign.destinationUrl).hostname.replace('www.', '');
+    if (campaign.destinationUrl && campaign.destinationUrl.startsWith('http')) {
+      cleanDomain = new URL(campaign.destinationUrl).hostname.replace('www.', '');
+    }
   } catch {
-    cleanDomain = campaign.destinationUrl;
+    cleanDomain = 'ecuadorianarchitecture.com';
   }
 
   // Real measurable click URL
   const clickHref = isPreview
     ? campaign.destinationUrl || '#'
     : getClickUrl(campaign, 'entre-proyectos');
+
+  const handleClick = (e: React.MouseEvent) => {
+    if (
+      clickHref === '#newsletter' ||
+      campaign.destinationUrl === '#newsletter' ||
+      !clickHref.startsWith('http') ||
+      clickHref.includes('#')
+    ) {
+      e.preventDefault();
+      openNewsletterModal();
+    }
+  };
 
   // =========================================================================
   // 1. PANORAMIC CARD VARIANT (Catalog Grid - 1:1 with client brief & mock)
@@ -79,11 +93,12 @@ export const InFeedProjectAdCard: React.FC<InFeedProjectAdCardProps> = ({
         {/* Main Artwork Asset Frame */}
         <a
           href={clickHref}
-          target="_blank"
-          rel="noopener noreferrer"
+          onClick={handleClick}
+          target={clickHref.startsWith('http') ? '_blank' : undefined}
+          rel={clickHref.startsWith('http') ? 'noopener noreferrer' : undefined}
           className="relative w-full flex-1 min-h-0 rounded-[22px] sm:rounded-[26px] overflow-hidden bg-neutral-100 block cursor-pointer"
           data-cursor
-          title={`Visitar ${brandName}`}
+          title={`Suscribirme al newsletter de ${brandName}`}
         >
           <picture className="w-full h-full block">
             <source media="(max-width: 639px)" srcSet={campaign.mobileAsset || campaign.desktopAsset} />
@@ -101,20 +116,22 @@ export const InFeedProjectAdCard: React.FC<InFeedProjectAdCardProps> = ({
           {/* CTA Button */}
           <a
             href={clickHref}
-            target="_blank"
-            rel="noopener noreferrer"
+            onClick={handleClick}
+            target={clickHref.startsWith('http') ? '_blank' : undefined}
+            rel={clickHref.startsWith('http') ? 'noopener noreferrer' : undefined}
             className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2 bg-ea-black text-white font-anton text-xs sm:text-[12.5px] tracking-wider uppercase hover:bg-neutral-800 transition-colors shadow-xs active:translate-x-0.5 active:translate-y-0.5 shrink-0"
             data-cursor
           >
-            <span>{campaign.ctaText || 'DESCARGAR ESPECIFICACIONES TÉCNICAS'}</span>
+            <span>{campaign.ctaText || 'SUSCRÍBETE A NUESTRO NEWSLETTER'}</span>
             <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
           </a>
 
           {/* Website Link with Architectural Target Dot */}
           <a
             href={clickHref}
-            target="_blank"
-            rel="noopener noreferrer"
+            onClick={handleClick}
+            target={clickHref.startsWith('http') ? '_blank' : undefined}
+            rel={clickHref.startsWith('http') ? 'noopener noreferrer' : undefined}
             className="font-mono text-xs sm:text-[12px] text-ea-black/75 hover:text-ea-black transition-colors flex items-center gap-2 truncate min-w-0"
             title={cleanDomain}
             data-cursor
@@ -141,11 +158,12 @@ export const InFeedProjectAdCard: React.FC<InFeedProjectAdCardProps> = ({
       {/* Artwork Banner */}
       <a
         href={clickHref}
-        target="_blank"
-        rel="noopener noreferrer"
+        onClick={handleClick}
+        target={clickHref.startsWith('http') ? '_blank' : undefined}
+        rel={clickHref.startsWith('http') ? 'noopener noreferrer' : undefined}
         className="relative w-full h-[335px] border border-ea-black/35 overflow-hidden bg-ea-offwhite block cursor-pointer"
         data-cursor
-        title={`Visitar ${brandName}`}
+        title={`Suscribirme al newsletter de ${brandName}`}
       >
         <picture className="w-full h-full block">
           <source media="(max-width: 639px)" srcSet={campaign.mobileAsset || campaign.desktopAsset} />
@@ -162,19 +180,21 @@ export const InFeedProjectAdCard: React.FC<InFeedProjectAdCardProps> = ({
       <div className="flex items-center justify-between gap-2 pt-2.5 mt-0.5 border-t border-ea-black/10">
         <a
           href={clickHref}
-          target="_blank"
-          rel="noopener noreferrer"
+          onClick={handleClick}
+          target={clickHref.startsWith('http') ? '_blank' : undefined}
+          rel={clickHref.startsWith('http') ? 'noopener noreferrer' : undefined}
           className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-ea-black text-white font-anton text-[11px] sm:text-xs tracking-wider uppercase hover:bg-neutral-800 transition-colors shadow-xs active:translate-x-0.5 active:translate-y-0.5 shrink-0"
           data-cursor
         >
-          <span>{campaign.ctaText || 'VER CATÁLOGO'}</span>
+          <span>{campaign.ctaText || 'SUSCRÍBETE A NUESTRO NEWSLETTER'}</span>
           <ArrowUpRight className="w-3 h-3 stroke-[2.5]" />
         </a>
 
         <a
           href={clickHref}
-          target="_blank"
-          rel="noopener noreferrer"
+          onClick={handleClick}
+          target={clickHref.startsWith('http') ? '_blank' : undefined}
+          rel={clickHref.startsWith('http') ? 'noopener noreferrer' : undefined}
           className="font-mono text-[10.5px] text-ea-black/75 hover:text-ea-black transition-colors flex items-center gap-1.5 truncate min-w-0"
           title={cleanDomain}
           data-cursor
