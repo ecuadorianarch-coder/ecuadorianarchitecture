@@ -832,7 +832,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
                     if (onNavigate) onNavigate('home');
                     else window.location.hash = '';
                   }}
-                  className="group transition-transform hover:scale-105 flex items-center gap-2 cursor-pointer focus:outline-none"
+                  className="group transition-transform hover:scale-105 flex items-center cursor-pointer focus:outline-none shrink-0"
                   title="Volver al inicio"
                   data-cursor
                 >
@@ -841,12 +841,9 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
                     alt="Ecuadorian Architecture"
                     className="w-7 h-7 sm:w-9 sm:h-9 object-contain shrink-0"
                   />
-                  <span className="font-anton text-xs sm:text-sm tracking-[0.14em] uppercase text-ea-black hidden md:inline">
-                    ECUADORIAN ARCHITECTURE
-                  </span>
                 </button>
 
-                <span className="text-ea-black/25 font-mono text-xs hidden md:inline">/</span>
+                <span className="text-ea-black/25 font-mono text-xs">/</span>
 
                 <button
                   type="button"
