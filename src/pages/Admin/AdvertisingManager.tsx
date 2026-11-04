@@ -104,7 +104,7 @@ export const AdvertisingManager: React.FC = () => {
   const [isCampaignModalOpen, setIsCampaignModalOpen] = useState(false);
   const [editingCampaign, setEditingCampaign] = useState<AdCampaign | null>(null);
   const [uploadingField, setUploadingField] = useState<string | null>(null);
-  const [mediaModalField, setMediaModalField] = useState<'desktopAsset' | 'mobileAsset' | 'horizontalBannerAsset' | null>(null);
+  const [mediaModalField, setMediaModalField] = useState<'desktopAsset' | 'mobileAsset' | 'horizontalBannerAsset' | 'verticalBannerAsset' | null>(null);
 
   const [isBrandModalOpen, setIsBrandModalOpen] = useState(false);
   const [editingBrand, setEditingBrand] = useState<SponsorBrand | null>(null);
@@ -134,6 +134,7 @@ export const AdvertisingManager: React.FC = () => {
     desktopAsset: '',
     mobileAsset: '',
     horizontalBannerAsset: '',
+    verticalBannerAsset: '',
     destinationUrl: '',
     ctaText: 'VER CATÁLOGO',
     startDate: new Date().toISOString().split('T')[0],
@@ -203,7 +204,7 @@ Nuestros banners renderizan exclusivamente la imagen gráfica final enviada por 
 
   const handleFileUpload = async (
     e: React.ChangeEvent<HTMLInputElement>,
-    field: 'desktopAsset' | 'mobileAsset' | 'horizontalBannerAsset'
+    field: 'desktopAsset' | 'mobileAsset' | 'horizontalBannerAsset' | 'verticalBannerAsset'
   ) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -317,6 +318,7 @@ Nuestros banners renderizan exclusivamente la imagen gráfica final enviada por 
         mobileAsset:
           'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
         horizontalBannerAsset: '',
+        verticalBannerAsset: '',
         destinationUrl: 'https://ecuadorianarch.com',
         ctaText: 'VER CATÁLOGO',
         startDate: today,
@@ -348,6 +350,7 @@ Nuestros banners renderizan exclusivamente la imagen gráfica final enviada por 
         ...editingCampaign,
         ...campForm,
         horizontalBannerAsset: campForm.horizontalBannerAsset || '',
+        verticalBannerAsset: campForm.verticalBannerAsset || '',
         status: targetStatus,
       } as AdCampaign;
       updatedList = campaigns.map((c) => (c.id === editingCampaign.id ? updatedCamp : c));
@@ -365,6 +368,7 @@ Nuestros banners renderizan exclusivamente la imagen gráfica final enviada por 
         desktopAsset: campForm.desktopAsset || '',
         mobileAsset: campForm.mobileAsset || campForm.desktopAsset || '',
         horizontalBannerAsset: campForm.horizontalBannerAsset || '',
+        verticalBannerAsset: campForm.verticalBannerAsset || '',
         destinationUrl: campForm.destinationUrl || 'https://ecuadorianarch.com',
         ctaText: campForm.ctaText || 'VER CATÁLOGO',
         startDate: campForm.startDate || today,
@@ -2075,15 +2079,15 @@ Nuestros banners renderizan exclusivamente la imagen gráfica final enviada por 
                 </p>
               </div>
 
-              {/* 1. ARTE PRINCIPAL / ESCRITORIO (IN-FEED, SKYSCRAPERS & DOSSIER) */}
+              {/* 1. ARTE PRINCIPAL / ESCRITORIO (IN-FEED & DOSSIER) */}
               <div className="bg-black/40 border border-white/15 p-3.5 space-y-2.5">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
                   <label className="font-mono text-[10.5px] uppercase font-bold text-white flex items-center gap-1.5">
                     <ImageIcon className="w-3.5 h-3.5 text-white/70" />
-                    <span>Arte Principal / Escritorio *</span>
+                    <span>Arte Principal / Escritorio (In-Feed Catálogo) *</span>
                   </label>
                   <span className="text-[9.5px] font-mono text-amber-400 bg-amber-400/10 px-2 py-0.5 border border-amber-400/30 rounded-xs self-start sm:self-auto">
-                    Medida: 800 × 500 px (In-Feed) o 300 × 600 px (Skyscraper)
+                    Medida: 800 × 500 px (In-Feed) o 1200 × 400 px (Dossier)
                   </span>
                 </div>
 
@@ -2171,7 +2175,102 @@ Nuestros banners renderizan exclusivamente la imagen gráfica final enviada por 
                 )}
               </div>
 
-              {/* 2. BANNER HORIZONTAL / INTER-GALERÍA (LIGHTBOX & LEADERBOARDS) */}
+              {/* 2. BANNER VERTICAL / SKYSCRAPERS LATERALES (WINGS & LIGHTBOX) */}
+              <div className="bg-black/40 border border-white/15 p-3.5 space-y-2.5">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                  <label className="font-mono text-[10.5px] uppercase font-bold text-white flex items-center gap-1.5">
+                    <ImageIcon className="w-3.5 h-3.5 text-white/70" />
+                    <span>Banner Vertical (Skyscrapers Laterales / Alas & Lightbox)</span>
+                  </label>
+                  <span className="text-[9.5px] font-mono text-purple-400 bg-purple-400/10 px-2 py-0.5 border border-purple-400/30 rounded-xs self-start sm:self-auto">
+                    Medida: 160 × 600 px o 300 × 600 px (Vertical Skyscraper)
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                  <div>
+                    <label className="font-mono text-[9px] uppercase text-white/50 block mb-1">
+                      Opción A: Subir banner vertical
+                    </label>
+                    <label className={`flex items-center justify-center gap-1.5 px-2.5 py-2 border text-white text-xs font-mono cursor-pointer transition-colors rounded-xs ${
+                      uploadingField === 'verticalBannerAsset'
+                        ? 'bg-amber-500/20 border-amber-400/50 cursor-wait'
+                        : 'bg-white/10 hover:bg-white/20 border-white/30'
+                    }`}>
+                      {uploadingField === 'verticalBannerAsset' ? (
+                        <>
+                          <Loader2 className="w-3.5 h-3.5 animate-spin text-amber-400" />
+                          <span className="text-amber-300 text-[11px]">Subiendo...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Upload className="w-3.5 h-3.5" />
+                          <span className="text-[11px]">Examinar...</span>
+                        </>
+                      )}
+                      <input
+                        type="file"
+                        accept="image/png,image/jpeg,image/webp,image/gif"
+                        onChange={(e) => handleFileUpload(e, 'verticalBannerAsset')}
+                        disabled={uploadingField === 'verticalBannerAsset'}
+                        className="hidden"
+                      />
+                    </label>
+                  </div>
+
+                  <div>
+                    <label className="font-mono text-[9px] uppercase text-white/50 block mb-1">
+                      Opción B: Galería / Biblioteca
+                    </label>
+                    <button
+                      type="button"
+                      onClick={() => setMediaModalField('verticalBannerAsset')}
+                      className="w-full flex items-center justify-center gap-1.5 px-2.5 py-2 bg-white/5 hover:bg-white/15 border border-white/20 text-white/90 hover:text-white text-xs font-mono cursor-pointer transition-colors rounded-xs"
+                      title="Seleccionar de fotografías de proyectos o biblioteca"
+                    >
+                      <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                      <span className="text-[11px]">Biblioteca...</span>
+                    </button>
+                  </div>
+
+                  <div>
+                    <label className="font-mono text-[9px] uppercase text-white/50 block mb-1">
+                      Opción C: O URL directa
+                    </label>
+                    <input
+                      type="url"
+                      value={campForm.verticalBannerAsset || ''}
+                      onChange={(e) => setCampForm({ ...campForm, verticalBannerAsset: e.target.value })}
+                      placeholder="https://..."
+                      className="w-full bg-black border border-white/20 px-2.5 py-2 text-white text-xs focus:outline-none"
+                    />
+                  </div>
+                </div>
+
+                {campForm.verticalBannerAsset && (
+                  <div className="flex items-center gap-3 pt-2 border-t border-white/10">
+                    <img
+                      src={campForm.verticalBannerAsset}
+                      alt="Vista previa banner vertical"
+                      className="h-20 w-8 object-cover border border-white/30 bg-neutral-900 rounded-xs"
+                    />
+                    <div className="flex-1 min-w-0">
+                      <span className="font-mono text-[10px] text-white/70 block truncate">
+                        Banner vertical cargado
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => setCampForm({ ...campForm, verticalBannerAsset: '' })}
+                        className="text-[10px] font-mono text-red-400 hover:text-red-300 underline cursor-pointer mt-0.5"
+                      >
+                        Quitar imagen
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* 3. BANNER HORIZONTAL / INTER-GALERÍA (LIGHTBOX & LEADERBOARDS) */}
               <div className="bg-black/40 border border-white/15 p-3.5 space-y-2.5">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
                   <label className="font-mono text-[10.5px] uppercase font-bold text-white flex items-center gap-1.5">
@@ -2266,7 +2365,7 @@ Nuestros banners renderizan exclusivamente la imagen gráfica final enviada por 
                 )}
               </div>
 
-              {/* 3. ARTE PARA MÓVIL (RESPONSIVE SMARTPHONES) */}
+              {/* 4. ARTE PARA MÓVIL (RESPONSIVE SMARTPHONES) */}
               <div className="bg-black/40 border border-white/15 p-3.5 space-y-2.5">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
                   <label className="font-mono text-[10.5px] uppercase font-bold text-white flex items-center gap-1.5">

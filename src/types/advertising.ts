@@ -35,7 +35,8 @@ export interface AdCampaign {
   kicker?: string; // Antetítulo editorial (e.g. 'PATROCINIO OFICIAL', 'ALIANZA EDITORIAL')
   title: string; // Título principal del anuncio
   subtitle?: string; // Mensaje secundario o especificación técnica
-  desktopAsset: string; // URL imagen optimizada para escritorio
+  desktopAsset: string; // URL imagen optimizada para escritorio / in-feed
+  verticalBannerAsset?: string; // Arte gráfico limpio tipo skyscraper vertical (160x600 o 300x600 px) para alas laterales y lightboxes
   mobileAsset: string; // URL imagen optimizada para móvil (relación adaptada)
   horizontalBannerAsset?: string; // Arte gráfico limpio tipo banner leaderboard (728x90 o similar) enviado directamente por la empresa
   destinationUrl: string; // URL de destino final

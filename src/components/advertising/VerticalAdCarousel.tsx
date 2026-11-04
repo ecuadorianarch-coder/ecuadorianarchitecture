@@ -36,11 +36,16 @@ export const VerticalAdCarousel: React.FC<VerticalAdCarouselProps> = ({
   const subtitle = modernCampaign?.subtitle || 'Investigaciones, proyectos y críticas sobre arquitectura ecuatoriana.';
   const ctaText = modernCampaign?.ctaText || 'SUSCRÍBETE A NUESTRO NEWSLETTER';
 
-  // Assets list
+  // Assets list (prioriza el arte vertical explícito de skyscraper)
+  const verticalAssetUrl =
+    modernCampaign?.verticalBannerAsset ||
+    modernCampaign?.desktopAsset ||
+    '';
+
   const assets: { url: string; alt?: string; caption?: string }[] = isModern && modernCampaign
     ? [
         {
-          url: modernCampaign.desktopAsset,
+          url: verticalAssetUrl,
           alt: modernCampaign.title,
           caption: modernCampaign.title,
         },
