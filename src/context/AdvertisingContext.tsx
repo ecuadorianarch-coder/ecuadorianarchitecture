@@ -75,10 +75,50 @@ interface AdvertisingContextType {
 
 const AdvertisingContext = createContext<AdvertisingContextType | undefined>(undefined);
 
+const STORAGE_BRANDS = 'ea_advertising_brands';
+const STORAGE_CAMPAIGNS = 'ea_advertising_campaigns';
+const STORAGE_PLACEMENTS = 'ea_advertising_placements';
+
 export const AdvertisingProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [brands, setBrands] = useState<SponsorBrand[]>(defaultBrands as SponsorBrand[]);
-  const [campaigns, setCampaigns] = useState<AdCampaign[]>(defaultCampaigns as AdCampaign[]);
-  const [placements, setPlacements] = useState<AdPlacementConfig[]>(defaultPlacements as AdPlacementConfig[]);
+  const [brands, setBrands] = useState<SponsorBrand[]>(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const cached = localStorage.getItem(STORAGE_BRANDS);
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        }
+      } catch (e) {}
+    }
+    return defaultBrands as SponsorBrand[];
+  });
+
+  const [campaigns, setCampaigns] = useState<AdCampaign[]>(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const cached = localStorage.getItem(STORAGE_CAMPAIGNS);
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        }
+      } catch (e) {}
+    }
+    return defaultCampaigns as AdCampaign[];
+  });
+
+  const [placements, setPlacements] = useState<AdPlacementConfig[]>(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const cached = localStorage.getItem(STORAGE_PLACEMENTS);
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        }
+      } catch (e) {}
+    }
+    return defaultPlacements as AdPlacementConfig[];
+  });
+
   const [analytics, setAnalytics] = useState<AdAnalytics>(defaultAnalytics as AdAnalytics);
   const [isSaving, setIsSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState<string | null>(null);
@@ -102,21 +142,36 @@ export const AdvertisingProvider: React.FC<{ children: React.ReactNode }> = ({ c
     }
   }, []);
 
-  // Load from API on mount
+  // Load from API on mount and update local cache
   useEffect(() => {
     fetch('/api/ad-brands')
       .then((res) => (res.ok ? res.json() : null))
-      .then((data) => { if (data && Array.isArray(data)) setBrands(data); })
+      .then((data) => {
+        if (data && Array.isArray(data) && data.length > 0) {
+          setBrands(data);
+          try { localStorage.setItem(STORAGE_BRANDS, JSON.stringify(data)); } catch (e) {}
+        }
+      })
       .catch(() => {});
 
     fetch('/api/ad-campaigns')
       .then((res) => (res.ok ? res.json() : null))
-      .then((data) => { if (data && Array.isArray(data)) setCampaigns(data); })
+      .then((data) => {
+        if (data && Array.isArray(data) && data.length > 0) {
+          setCampaigns(data);
+          try { localStorage.setItem(STORAGE_CAMPAIGNS, JSON.stringify(data)); } catch (e) {}
+        }
+      })
       .catch(() => {});
 
     fetch('/api/ad-placements')
       .then((res) => (res.ok ? res.json() : null))
-      .then((data) => { if (data && Array.isArray(data)) setPlacements(data); })
+      .then((data) => {
+        if (data && Array.isArray(data) && data.length > 0) {
+          setPlacements(data);
+          try { localStorage.setItem(STORAGE_PLACEMENTS, JSON.stringify(data)); } catch (e) {}
+        }
+      })
       .catch(() => {});
 
     refreshAnalytics();
@@ -132,9 +187,18 @@ export const AdvertisingProvider: React.FC<{ children: React.ReactNode }> = ({ c
         adsBroadcastRef.current = bc;
         bc.onmessage = (event) => {
           const { brands: newBrands, campaigns: newCamps, placements: newPlacements } = event.data || {};
-          if (Array.isArray(newBrands)) setBrands(newBrands);
-          if (Array.isArray(newCamps)) setCampaigns(newCamps);
-          if (Array.isArray(newPlacements)) setPlacements(newPlacements);
+          if (Array.isArray(newBrands)) {
+            setBrands(newBrands);
+            try { localStorage.setItem(STORAGE_BRANDS, JSON.stringify(newBrands)); } catch (e) {}
+          }
+          if (Array.isArray(newCamps)) {
+            setCampaigns(newCamps);
+            try { localStorage.setItem(STORAGE_CAMPAIGNS, JSON.stringify(newCamps)); } catch (e) {}
+          }
+          if (Array.isArray(newPlacements)) {
+            setPlacements(newPlacements);
+            try { localStorage.setItem(STORAGE_PLACEMENTS, JSON.stringify(newPlacements)); } catch (e) {}
+          }
         };
       } catch (e) {
         console.warn('Ads BroadcastChannel error:', e);
@@ -177,36 +241,82 @@ export const AdvertisingProvider: React.FC<{ children: React.ReactNode }> = ({ c
       .sort((a, b) => (b.priority || 0) - (a.priority || 0));
   }, [campaigns, getPlacementConfig, getBrandById]);
 
+  // Debounced auto-save to disk for reliable real-time persistence
+  const debounceTimerRef = useRef<any>(null);
+  const triggerDebouncedSaveToDisk = (
+    c?: AdCampaign[],
+    b?: SponsorBrand[],
+    p?: AdPlacementConfig[],
+    a?: AdAnalytics,
+    delayMs = 600
+  ) => {
+    if (debounceTimerRef.current) clearTimeout(debounceTimerRef.current);
+    debounceTimerRef.current = setTimeout(() => {
+      saveToDisk(c, b, p, a);
+    }, delayMs);
+  };
+
   // Brand CRUD
   const addBrand = (brand: SponsorBrand) => {
-    setBrands((prev) => [brand, ...prev]);
+    setBrands((prev) => {
+      const next = [brand, ...prev];
+      triggerDebouncedSaveToDisk(undefined, next);
+      return next;
+    });
   };
 
   const updateBrand = (id: string, updated: Partial<SponsorBrand>) => {
-    setBrands((prev) => prev.map((b) => (b.id === id ? { ...b, ...updated } : b)));
+    setBrands((prev) => {
+      const next = prev.map((b) => (b.id === id ? { ...b, ...updated } : b));
+      triggerDebouncedSaveToDisk(undefined, next);
+      return next;
+    });
   };
 
   const deleteBrand = (id: string) => {
-    setBrands((prev) => prev.filter((b) => b.id !== id));
-    setCampaigns((prev) => prev.filter((c) => c.brandId !== id));
+    setBrands((prevBrands) => {
+      const nextBrands = prevBrands.filter((b) => b.id !== id);
+      setCampaigns((prevCamps) => {
+        const nextCamps = prevCamps.filter((c) => c.brandId !== id);
+        triggerDebouncedSaveToDisk(nextCamps, nextBrands);
+        return nextCamps;
+      });
+      return nextBrands;
+    });
   };
 
   // Campaign CRUD
   const addCampaign = (campaign: AdCampaign) => {
-    setCampaigns((prev) => [campaign, ...prev]);
+    setCampaigns((prev) => {
+      const next = [campaign, ...prev];
+      triggerDebouncedSaveToDisk(next);
+      return next;
+    });
   };
 
   const updateCampaign = (id: string, updated: Partial<AdCampaign>) => {
-    setCampaigns((prev) => prev.map((c) => (c.id === id ? { ...c, ...updated } : c)));
+    setCampaigns((prev) => {
+      const next = prev.map((c) => (c.id === id ? { ...c, ...updated } : c));
+      triggerDebouncedSaveToDisk(next);
+      return next;
+    });
   };
 
   const deleteCampaign = (id: string) => {
-    setCampaigns((prev) => prev.filter((c) => c.id !== id));
+    setCampaigns((prev) => {
+      const next = prev.filter((c) => c.id !== id);
+      triggerDebouncedSaveToDisk(next);
+      return next;
+    });
   };
 
   // Placement Config
   const updatePlacementConfig = (id: AdPlacementId, updated: Partial<AdPlacementConfig>) => {
-    setPlacements((prev) => prev.map((p) => (p.id === id ? { ...p, ...updated } : p)));
+    setPlacements((prev) => {
+      const next = prev.map((p) => (p.id === id ? { ...p, ...updated } : p));
+      triggerDebouncedSaveToDisk(undefined, undefined, next);
+      return next;
+    });
   };
 
   // Build Click Redirection URL
@@ -461,6 +571,17 @@ export const AdvertisingProvider: React.FC<{ children: React.ReactNode }> = ({ c
     const pToSave = overridePlacements || placements;
     const aToSave = overrideAnalytics || analytics;
 
+    // Persist immediately to localStorage
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.setItem(STORAGE_CAMPAIGNS, JSON.stringify(cToSave));
+        localStorage.setItem(STORAGE_BRANDS, JSON.stringify(bToSave));
+        localStorage.setItem(STORAGE_PLACEMENTS, JSON.stringify(pToSave));
+      } catch (e) {
+        console.warn('LocalStorage error in AdvertisingContext:', e);
+      }
+    }
+
     try {
       await Promise.all([
         fetch('/api/ad-brands', {
@@ -510,6 +631,13 @@ export const AdvertisingProvider: React.FC<{ children: React.ReactNode }> = ({ c
     setPlacements(defaultPlacements as AdPlacementConfig[]);
     setAnalytics(defaultAnalytics as AdAnalytics);
     trackedImpressionsRef.current.clear();
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.removeItem(STORAGE_BRANDS);
+        localStorage.removeItem(STORAGE_CAMPAIGNS);
+        localStorage.removeItem(STORAGE_PLACEMENTS);
+      } catch (e) {}
+    }
   };
 
   return (

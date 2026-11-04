@@ -69,6 +69,20 @@ const server = http.createServer((req, res) => {
         const filePath = path.join(uploadsDir, safeName);
 
         fs.writeFileSync(filePath, Buffer.from(base64Data, 'base64'));
+
+        // También escribir en dist/images/uploads si dist existe para disponibilidad inmediata sin rebuild
+        const distUploads = path.join(distDir, 'images', 'uploads');
+        if (fs.existsSync(distDir)) {
+          if (!fs.existsSync(distUploads)) {
+            fs.mkdirSync(distUploads, { recursive: true });
+          }
+          try {
+            fs.writeFileSync(path.join(distUploads, safeName), Buffer.from(base64Data, 'base64'));
+          } catch (e) {
+            // ignore
+          }
+        }
+
         res.setHeader('Content-Type', 'application/json');
         res.end(JSON.stringify({ success: true, url: `/images/uploads/${safeName}`, filename: safeName }));
       } catch (err) {
@@ -179,8 +193,16 @@ const server = http.createServer((req, res) => {
     }
   }
 
-  // 3. Serve Static Files from dist/
+  // 3. Serve Static Files from dist/ or public/
   let filePath = path.join(distDir, pathname === '/' ? 'index.html' : pathname);
+
+  // Fallback to public/ for dynamically uploaded assets or images
+  if (!fs.existsSync(filePath) && (pathname.startsWith('/images/') || pathname.startsWith('/assets/'))) {
+    const publicPath = path.join(rootDir, 'public', pathname);
+    if (fs.existsSync(publicPath) && fs.statSync(publicPath).isFile()) {
+      filePath = publicPath;
+    }
+  }
 
   // If path doesn't have an extension, try folder/index.html or .html
   if (!path.extname(filePath)) {

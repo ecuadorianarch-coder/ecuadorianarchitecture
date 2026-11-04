@@ -39,8 +39,11 @@ import {
   Upload,
   Image as ImageIcon,
   FileText,
+  Loader2,
 } from 'lucide-react';
 import { useAdvertising } from '../../context/AdvertisingContext';
+import { uploadImageFile } from '../../utils/mediaUpload';
+import { MediaLibraryModal } from './MediaLibraryModal';
 import {
   AdCampaign,
   SponsorBrand,
@@ -100,6 +103,8 @@ export const AdvertisingManager: React.FC = () => {
   // Modals state
   const [isCampaignModalOpen, setIsCampaignModalOpen] = useState(false);
   const [editingCampaign, setEditingCampaign] = useState<AdCampaign | null>(null);
+  const [uploadingField, setUploadingField] = useState<string | null>(null);
+  const [mediaModalField, setMediaModalField] = useState<'desktopAsset' | 'mobileAsset' | 'horizontalBannerAsset' | null>(null);
 
   const [isBrandModalOpen, setIsBrandModalOpen] = useState(false);
   const [editingBrand, setEditingBrand] = useState<SponsorBrand | null>(null);
@@ -196,7 +201,7 @@ Nuestros banners renderizan exclusivamente la imagen gráfica final enviada por 
     });
   };
 
-  const handleFileUpload = (
+  const handleFileUpload = async (
     e: React.ChangeEvent<HTMLInputElement>,
     field: 'desktopAsset' | 'mobileAsset' | 'horizontalBannerAsset'
   ) => {
@@ -208,19 +213,35 @@ Nuestros banners renderizan exclusivamente la imagen gráfica final enviada por 
       return;
     }
 
-    if (file.size > 8 * 1024 * 1024) {
-      alert('La imagen seleccionada supera los 8 MB. Por favor optimízala antes de subirla.');
+    if (file.size > 12 * 1024 * 1024) {
+      alert('La imagen seleccionada supera los 12 MB. Por favor optimízala antes de subirla.');
       return;
     }
 
-    const reader = new FileReader();
-    reader.onload = (uploadEvent) => {
-      const dataUrl = uploadEvent.target?.result as string;
-      if (dataUrl) {
-        setCampForm((prev) => ({ ...prev, [field]: dataUrl }));
+    setUploadingField(field);
+    try {
+      const uploadedUrl = await uploadImageFile(file, {
+        maxDimension: field === 'horizontalBannerAsset' ? 1920 : 2560,
+        quality: 0.90,
+      });
+      if (uploadedUrl) {
+        setCampForm((prev) => ({ ...prev, [field]: uploadedUrl }));
       }
-    };
-    reader.readAsDataURL(file);
+    } catch (err) {
+      console.error('Error al subir imagen de publicidad:', err);
+      // Fallback local con FileReader si falla el endpoint
+      const reader = new FileReader();
+      reader.onload = (uploadEvent) => {
+        const dataUrl = uploadEvent.target?.result as string;
+        if (dataUrl) {
+          setCampForm((prev) => ({ ...prev, [field]: dataUrl }));
+        }
+      };
+      reader.readAsDataURL(file);
+    } finally {
+      setUploadingField(null);
+      e.target.value = '';
+    }
   };
 
   const today = new Date().toISOString().split('T')[0];
@@ -311,7 +332,7 @@ Nuestros banners renderizan exclusivamente la imagen gráfica final enviada por 
     setIsCampaignModalOpen(true);
   };
 
-  const handleSaveCampaign = (publishImmediately = false) => {
+  const handleSaveCampaign = async (publishImmediately = false) => {
     if (!campForm.name || !campForm.brandId || !campForm.title || !campForm.desktopAsset) {
       alert('Por favor completa los campos requeridos (Nombre, Marca, Título, Arte Desktop).');
       return;
@@ -321,12 +342,16 @@ Nuestros banners renderizan exclusivamente la imagen gráfica final enviada por 
       ? 'activa'
       : (campForm.status as AdStatus) || 'borrador';
 
+    let updatedList: AdCampaign[];
     if (editingCampaign) {
-      updateCampaign(editingCampaign.id, {
+      const updatedCamp: AdCampaign = {
+        ...editingCampaign,
         ...campForm,
         horizontalBannerAsset: campForm.horizontalBannerAsset || '',
         status: targetStatus,
-      });
+      } as AdCampaign;
+      updatedList = campaigns.map((c) => (c.id === editingCampaign.id ? updatedCamp : c));
+      updateCampaign(editingCampaign.id, updatedCamp);
     } else {
       const rawToken =
         Math.random().toString(36).substring(2, 9) + Date.now().toString(36).substring(3);
@@ -346,7 +371,7 @@ Nuestros banners renderizan exclusivamente la imagen gráfica final enviada por 
         endDate: campForm.endDate || '2026-12-31',
         status: targetStatus,
         placements: campForm.placements || ['entre-proyectos'],
-        priority: campForm.priority || 5,
+        priority: campForm.priority || 10,
         budget: campForm.budget,
         targetImpressions: campForm.targetImpressions,
         shareToken: `ea_sec_${rawToken}`,
@@ -354,13 +379,15 @@ Nuestros banners renderizan exclusivamente la imagen gráfica final enviada por 
         notes: campForm.notes || '',
         createdAt: today,
       };
+      updatedList = [newCamp, ...campaigns];
       addCampaign(newCamp);
     }
     setIsCampaignModalOpen(false);
+    await saveToDisk(updatedList);
   };
 
   // Duplicate campaign
-  const handleDuplicateCampaign = (camp: AdCampaign) => {
+  const handleDuplicateCampaign = async (camp: AdCampaign) => {
     const rawToken =
       Math.random().toString(36).substring(2, 9) + Date.now().toString(36).substring(3);
     const duplicated: AdCampaign = {
@@ -371,12 +398,16 @@ Nuestros banners renderizan exclusivamente la imagen gráfica final enviada por 
       shareToken: `ea_sec_${rawToken}`,
       createdAt: today,
     };
+    const updated = [duplicated, ...campaigns];
     addCampaign(duplicated);
+    await saveToDisk(updated);
   };
 
-  const handleTogglePause = (camp: AdCampaign) => {
+  const handleTogglePause = async (camp: AdCampaign) => {
     const nextStatus: AdStatus = camp.status === 'activa' ? 'pausada' : 'activa';
+    const updated = campaigns.map((c) => (c.id === camp.id ? { ...c, status: nextStatus } : c));
     updateCampaign(camp.id, { status: nextStatus });
+    await saveToDisk(updated);
   };
 
   // Advertiser Profile Share
@@ -454,14 +485,16 @@ Nuestros banners renderizan exclusivamente la imagen gráfica final enviada por 
     setIsBrandModalOpen(true);
   };
 
-  const handleSaveBrand = (e: React.FormEvent) => {
+  const handleSaveBrand = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!brandForm.name || !brandForm.destinationUrl) {
       alert('Por favor completa el nombre de la marca y su sitio web.');
       return;
     }
 
+    let updatedBrands: SponsorBrand[];
     if (editingBrand) {
+      updatedBrands = brands.map((b) => (b.id === editingBrand.id ? { ...b, ...brandForm } : b));
       updateBrand(editingBrand.id, brandForm);
     } else {
       const rawSlug = brandForm.name.toLowerCase().replace(/[^a-z0-9]/g, '');
@@ -480,9 +513,11 @@ Nuestros banners renderizan exclusivamente la imagen gráfica final enviada por 
         accountManager: brandForm.accountManager || 'Mónica Serrano · Directora Comercial EA',
         createdAt: today,
       };
+      updatedBrands = [newBrand, ...brands];
       addBrand(newBrand);
     }
     setIsBrandModalOpen(false);
+    await saveToDisk(undefined, updatedBrands);
   };
 
   // Live preview active campaign
@@ -2052,18 +2087,32 @@ Nuestros banners renderizan exclusivamente la imagen gráfica final enviada por 
                   </span>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                   <div>
                     <label className="font-mono text-[9px] uppercase text-white/50 block mb-1">
-                      Opción A: Subir archivo desde tu computadora
+                      Opción A: Subir imagen
                     </label>
-                    <label className="flex items-center justify-center gap-2 px-3 py-2 bg-white/10 hover:bg-white/20 border border-white/30 text-white text-xs font-mono cursor-pointer transition-colors rounded-xs">
-                      <Upload className="w-3.5 h-3.5" />
-                      <span>Examinar imagen...</span>
+                    <label className={`flex items-center justify-center gap-1.5 px-2.5 py-2 border text-white text-xs font-mono cursor-pointer transition-colors rounded-xs ${
+                      uploadingField === 'desktopAsset'
+                        ? 'bg-amber-500/20 border-amber-400/50 cursor-wait'
+                        : 'bg-white/10 hover:bg-white/20 border-white/30'
+                    }`}>
+                      {uploadingField === 'desktopAsset' ? (
+                        <>
+                          <Loader2 className="w-3.5 h-3.5 animate-spin text-amber-400" />
+                          <span className="text-amber-300 text-[11px]">Subiendo...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Upload className="w-3.5 h-3.5" />
+                          <span className="text-[11px]">Examinar...</span>
+                        </>
+                      )}
                       <input
                         type="file"
                         accept="image/png,image/jpeg,image/webp,image/gif"
                         onChange={(e) => handleFileUpload(e, 'desktopAsset')}
+                        disabled={uploadingField === 'desktopAsset'}
                         className="hidden"
                       />
                     </label>
@@ -2071,14 +2120,29 @@ Nuestros banners renderizan exclusivamente la imagen gráfica final enviada por 
 
                   <div>
                     <label className="font-mono text-[9px] uppercase text-white/50 block mb-1">
-                      Opción B: O pegar URL directa de la imagen
+                      Opción B: Galería / Biblioteca
+                    </label>
+                    <button
+                      type="button"
+                      onClick={() => setMediaModalField('desktopAsset')}
+                      className="w-full flex items-center justify-center gap-1.5 px-2.5 py-2 bg-white/5 hover:bg-white/15 border border-white/20 text-white/90 hover:text-white text-xs font-mono cursor-pointer transition-colors rounded-xs"
+                      title="Seleccionar de fotografías de proyectos o biblioteca"
+                    >
+                      <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                      <span className="text-[11px]">Biblioteca...</span>
+                    </button>
+                  </div>
+
+                  <div>
+                    <label className="font-mono text-[9px] uppercase text-white/50 block mb-1">
+                      Opción C: O URL directa
                     </label>
                     <input
                       type="url"
                       value={campForm.desktopAsset}
                       onChange={(e) => setCampForm({ ...campForm, desktopAsset: e.target.value })}
                       placeholder="https://..."
-                      className="w-full bg-black border border-white/20 px-3 py-2 text-white text-xs focus:outline-none"
+                      className="w-full bg-black border border-white/20 px-2.5 py-2 text-white text-xs focus:outline-none"
                       required
                     />
                   </div>
@@ -2119,18 +2183,32 @@ Nuestros banners renderizan exclusivamente la imagen gráfica final enviada por 
                   </span>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                   <div>
                     <label className="font-mono text-[9px] uppercase text-white/50 block mb-1">
-                      Opción A: Subir banner horizontal
+                      Opción A: Subir banner
                     </label>
-                    <label className="flex items-center justify-center gap-2 px-3 py-2 bg-white/10 hover:bg-white/20 border border-white/30 text-white text-xs font-mono cursor-pointer transition-colors rounded-xs">
-                      <Upload className="w-3.5 h-3.5" />
-                      <span>Examinar banner horizontal...</span>
+                    <label className={`flex items-center justify-center gap-1.5 px-2.5 py-2 border text-white text-xs font-mono cursor-pointer transition-colors rounded-xs ${
+                      uploadingField === 'horizontalBannerAsset'
+                        ? 'bg-amber-500/20 border-amber-400/50 cursor-wait'
+                        : 'bg-white/10 hover:bg-white/20 border-white/30'
+                    }`}>
+                      {uploadingField === 'horizontalBannerAsset' ? (
+                        <>
+                          <Loader2 className="w-3.5 h-3.5 animate-spin text-amber-400" />
+                          <span className="text-amber-300 text-[11px]">Subiendo...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Upload className="w-3.5 h-3.5" />
+                          <span className="text-[11px]">Examinar...</span>
+                        </>
+                      )}
                       <input
                         type="file"
                         accept="image/png,image/jpeg,image/webp,image/gif"
                         onChange={(e) => handleFileUpload(e, 'horizontalBannerAsset')}
+                        disabled={uploadingField === 'horizontalBannerAsset'}
                         className="hidden"
                       />
                     </label>
@@ -2138,14 +2216,29 @@ Nuestros banners renderizan exclusivamente la imagen gráfica final enviada por 
 
                   <div>
                     <label className="font-mono text-[9px] uppercase text-white/50 block mb-1">
-                      Opción B: O pegar URL directa
+                      Opción B: Galería / Biblioteca
+                    </label>
+                    <button
+                      type="button"
+                      onClick={() => setMediaModalField('horizontalBannerAsset')}
+                      className="w-full flex items-center justify-center gap-1.5 px-2.5 py-2 bg-white/5 hover:bg-white/15 border border-white/20 text-white/90 hover:text-white text-xs font-mono cursor-pointer transition-colors rounded-xs"
+                      title="Seleccionar de fotografías de proyectos o biblioteca"
+                    >
+                      <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                      <span className="text-[11px]">Biblioteca...</span>
+                    </button>
+                  </div>
+
+                  <div>
+                    <label className="font-mono text-[9px] uppercase text-white/50 block mb-1">
+                      Opción C: O URL directa
                     </label>
                     <input
                       type="url"
                       value={campForm.horizontalBannerAsset || ''}
                       onChange={(e) => setCampForm({ ...campForm, horizontalBannerAsset: e.target.value })}
                       placeholder="https://..."
-                      className="w-full bg-black border border-white/20 px-3 py-2 text-white text-xs focus:outline-none"
+                      className="w-full bg-black border border-white/20 px-2.5 py-2 text-white text-xs focus:outline-none"
                     />
                   </div>
                 </div>
@@ -2185,18 +2278,32 @@ Nuestros banners renderizan exclusivamente la imagen gráfica final enviada por 
                   </span>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                   <div>
                     <label className="font-mono text-[9px] uppercase text-white/50 block mb-1">
-                      Opción A: Subir archivo para móvil
+                      Opción A: Subir arte móvil
                     </label>
-                    <label className="flex items-center justify-center gap-2 px-3 py-2 bg-white/10 hover:bg-white/20 border border-white/30 text-white text-xs font-mono cursor-pointer transition-colors rounded-xs">
-                      <Upload className="w-3.5 h-3.5" />
-                      <span>Examinar imagen móvil...</span>
+                    <label className={`flex items-center justify-center gap-1.5 px-2.5 py-2 border text-white text-xs font-mono cursor-pointer transition-colors rounded-xs ${
+                      uploadingField === 'mobileAsset'
+                        ? 'bg-amber-500/20 border-amber-400/50 cursor-wait'
+                        : 'bg-white/10 hover:bg-white/20 border-white/30'
+                    }`}>
+                      {uploadingField === 'mobileAsset' ? (
+                        <>
+                          <Loader2 className="w-3.5 h-3.5 animate-spin text-amber-400" />
+                          <span className="text-amber-300 text-[11px]">Subiendo...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Upload className="w-3.5 h-3.5" />
+                          <span className="text-[11px]">Examinar...</span>
+                        </>
+                      )}
                       <input
                         type="file"
                         accept="image/png,image/jpeg,image/webp,image/gif"
                         onChange={(e) => handleFileUpload(e, 'mobileAsset')}
+                        disabled={uploadingField === 'mobileAsset'}
                         className="hidden"
                       />
                     </label>
@@ -2204,14 +2311,29 @@ Nuestros banners renderizan exclusivamente la imagen gráfica final enviada por 
 
                   <div>
                     <label className="font-mono text-[9px] uppercase text-white/50 block mb-1">
-                      Opción B: O pegar URL directa
+                      Opción B: Galería / Biblioteca
+                    </label>
+                    <button
+                      type="button"
+                      onClick={() => setMediaModalField('mobileAsset')}
+                      className="w-full flex items-center justify-center gap-1.5 px-2.5 py-2 bg-white/5 hover:bg-white/15 border border-white/20 text-white/90 hover:text-white text-xs font-mono cursor-pointer transition-colors rounded-xs"
+                      title="Seleccionar de fotografías de proyectos o biblioteca"
+                    >
+                      <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                      <span className="text-[11px]">Biblioteca...</span>
+                    </button>
+                  </div>
+
+                  <div>
+                    <label className="font-mono text-[9px] uppercase text-white/50 block mb-1">
+                      Opción C: O URL directa
                     </label>
                     <input
                       type="url"
                       value={campForm.mobileAsset || ''}
                       onChange={(e) => setCampForm({ ...campForm, mobileAsset: e.target.value })}
                       placeholder="https://..."
-                      className="w-full bg-black border border-white/20 px-3 py-2 text-white text-xs focus:outline-none"
+                      className="w-full bg-black border border-white/20 px-2.5 py-2 text-white text-xs focus:outline-none"
                     />
                   </div>
                 </div>
@@ -2539,6 +2661,21 @@ Nuestros banners renderizan exclusivamente la imagen gráfica final enviada por 
             </form>
           </div>
         </div>
+      )}
+
+      {/* Modal de Biblioteca de Medios Arquitectónicos */}
+      {mediaModalField && (
+        <MediaLibraryModal
+          isOpen={Boolean(mediaModalField)}
+          onClose={() => setMediaModalField(null)}
+          currentImageUrl={campForm[mediaModalField] || ''}
+          onSelectImage={(media) => {
+            if (media?.url && mediaModalField) {
+              setCampForm((prev) => ({ ...prev, [mediaModalField]: media.url }));
+            }
+            setMediaModalField(null);
+          }}
+        />
       )}
     </div>
   );

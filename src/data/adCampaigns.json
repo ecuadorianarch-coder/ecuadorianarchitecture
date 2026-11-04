@@ -15,7 +15,7 @@
     "endDate": "2030-12-31",
     "status": "activa",
     "placements": ["entre-proyectos", "skyscrapers-laterales", "dossier-editorial", "inter-galeria"],
-    "priority": 100,
+    "priority": 1,
     "budget": 0,
     "targetImpressions": 100000,
     "shareToken": "ea_newsletter_official_2026",
