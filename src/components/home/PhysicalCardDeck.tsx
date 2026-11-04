@@ -770,6 +770,71 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
     shuffleDeck('prev');
   }, [shuffleDeck]);
 
+  // =========================================================================
+  // WHEEL SCROLL LISTENER: BARAJA DE CARTAS AL SCROLLEAR CON MOUSE O TRACKPAD
+  // Cada impulso de scroll hacia abajo baraja inmediatamente la carta hacia atrás.
+  // Cada impulso hacia arriba baraja en reversa.
+  // Al llegar a la última carta permite continuar al footer; en la primera permite volver al hero.
+  // =========================================================================
+  useEffect(() => {
+    const sectionEl = sectionRef.current;
+    if (!sectionEl) return;
+
+    let lastWheelTime = 0;
+    let accumulatedDelta = 0;
+
+    const onWheel = (e: WheelEvent) => {
+      if (totalCards <= 1 || projects[0]?.isEditorialEmptyCard) return;
+
+      const target = e.target as HTMLElement;
+      if (target?.closest('input') || target?.closest('textarea') || target?.closest('[data-no-deck-cursor]')) {
+        return;
+      }
+
+      const rect = sectionEl.getBoundingClientRect();
+      const isInView = rect.top < window.innerHeight * 0.7 && rect.bottom > window.innerHeight * 0.3;
+      if (!isInView) return;
+
+      accumulatedDelta += e.deltaY;
+      const now = Date.now();
+      const currentIdx = activeIndexRef.current;
+      const threshold = 35;
+
+      // Scroll DOWN -> BARAJAR AL SIGUIENTE
+      if (accumulatedDelta > threshold) {
+        accumulatedDelta = 0;
+        if (currentIdx < totalCards - 1) {
+          e.preventDefault();
+          if (isAnimatingRef.current || now - lastWheelTime < 420) return;
+          lastWheelTime = now;
+          shuffleDeck('next');
+        }
+      }
+      // Scroll UP -> BARAJAR AL ANTERIOR
+      else if (accumulatedDelta < -threshold) {
+        accumulatedDelta = 0;
+        if (currentIdx > 0) {
+          e.preventDefault();
+          if (isAnimatingRef.current || now - lastWheelTime < 420) return;
+          lastWheelTime = now;
+          shuffleDeck('prev');
+        }
+      } else {
+        if (
+          (e.deltaY > 0 && currentIdx < totalCards - 1) ||
+          (e.deltaY < 0 && currentIdx > 0)
+        ) {
+          e.preventDefault();
+        }
+      }
+    };
+
+    sectionEl.addEventListener('wheel', onWheel, { passive: false });
+    return () => {
+      sectionEl.removeEventListener('wheel', onWheel);
+    };
+  }, [totalCards, projects, shuffleDeck]);
+
   useGSAP(
     () => {
       if (!sectionRef.current) return;
@@ -792,75 +857,7 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
       activeIndexRef.current = 0;
 
       const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
-      const exitDist = -(typeof window !== 'undefined' && window.innerWidth < 768 ? window.innerWidth * 1.15 : 750);
-      const lastSlotCfg = getSlotConfig(totalCards - 1);
-
-      // Build Master Deck Scrubbed Timeline
-      // Total duration = totalCards - 1 (1.0 duration per card transition)
-      const tl = gsap.timeline({ paused: true });
-
-      for (let s = 0; s < totalCards - 1; s++) {
-        const frontCard = cardRefs.current[s];
-
-        if (frontCard) {
-          // Explicit keyframes for zIndex and motion
-          tl.set(frontCard, { zIndex: 6 }, s);
-          // 1. Front card pulls out to the left
-          tl.to(
-            frontCard,
-            { x: exitDist, rotation: -8, y: 12, duration: 0.45, ease: 'power1.in' },
-            s
-          );
-          // 2. Drop behind stack
-          tl.set(frontCard, { zIndex: 1 }, s + 0.46);
-          // 3. Slides smoothly into the last slot from behind
-          tl.to(
-            frontCard,
-            {
-              x: 0,
-              y: lastSlotCfg.y,
-              rotation: lastSlotCfg.rotation,
-              scale: lastSlotCfg.scale,
-              zIndex: 1,
-              boxShadow: lastSlotCfg.boxShadow,
-              duration: 0.54,
-              ease: 'power2.out',
-            },
-            s + 0.46
-          );
-        }
-
-        // Advance all other cards forward one slot
-        for (let idx = 0; idx < totalCards; idx++) {
-          if (idx === s) continue;
-          const otherCard = cardRefs.current[idx];
-          if (!otherCard) continue;
-
-          const nextSlot = (idx - (s + 1) + totalCards) % totalCards;
-          const nextCfg = getSlotConfig(nextSlot);
-
-          // Update zIndex at midpoint
-          tl.set(otherCard, { zIndex: nextCfg.zIndex }, s + 0.2);
-
-          tl.to(
-            otherCard,
-            {
-              x: 0,
-              y: nextCfg.y,
-              rotation: nextCfg.rotation,
-              scale: nextCfg.scale,
-              zIndex: nextCfg.zIndex,
-              boxShadow: nextCfg.boxShadow,
-              duration: 0.75,
-              ease: nextSlot === 0 ? 'back.out(1.15)' : 'power2.out',
-            },
-            s + 0.15
-          );
-        }
-      }
-
-      // Scroll distance per card transition (gives comfortable reading time)
-      const scrollDistancePerCard = isMobile ? 480 : 620;
+      const scrollDistancePerCard = isMobile ? 380 : 450;
       const totalScrollDist = (totalCards - 1) * scrollDistancePerCard;
 
       const st = ScrollTrigger.create({
@@ -869,14 +866,18 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
         pinSpacing: true,
         start: 'top top',
         end: () => `+=${totalScrollDist}`,
-        scrub: 0.35,
-        animation: tl,
         onUpdate: (self) => {
           if (isAnimatingRef.current) return;
-          const step = Math.min(totalCards - 1, Math.round(self.progress * (totalCards - 1)));
-          if (step !== activeIndexRef.current) {
-            activeIndexRef.current = step;
-            setActiveIndex(step);
+          const targetStep = Math.min(
+            totalCards - 1,
+            Math.floor(self.progress * (totalCards - 1) + 0.5)
+          );
+          if (targetStep !== activeIndexRef.current) {
+            if (targetStep > activeIndexRef.current) {
+              shuffleDeck('next');
+            } else if (targetStep < activeIndexRef.current) {
+              shuffleDeck('prev');
+            }
           }
         },
       });
@@ -885,11 +886,10 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
 
       return () => {
         if (st) st.kill(true);
-        if (tl) tl.kill();
         scrollTriggerRef.current = null;
       };
     },
-    { dependencies: [currentTab, totalCards], scope: sectionRef }
+    { dependencies: [currentTab, totalCards, shuffleDeck], scope: sectionRef }
   );
 
   // =========================================================================
