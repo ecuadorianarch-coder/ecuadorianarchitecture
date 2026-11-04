@@ -48,10 +48,7 @@ export function parseCurrentRoute(): ParsedRoute {
   }
 
   // 2. Backward compatibility: Handle Legacy Hashes if present
-  if (hash === '#admin') {
-    window.open('/admin.html', '_blank');
-    window.location.hash = '';
-  } else if (hash.startsWith('#proyecto-')) {
+  if (hash.startsWith('#proyecto-')) {
     const id = hash.replace('#proyecto-', '');
     return { view: 'project-detail', projectId: id };
   } else if (hash === '#proyectos' || hash === '#catalogo') {

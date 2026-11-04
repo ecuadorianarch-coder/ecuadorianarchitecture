@@ -14,4 +14,4 @@ Disallow: /*?ad-report=*
 Disallow: /*?ad-advertiser=*
 
 # Canonical Sitemap
-Sitemap: https://ecuadorianarchitecture.com/sitemap.xml
+Sitemap: https://ecuadorianarch.com/sitemap.xml

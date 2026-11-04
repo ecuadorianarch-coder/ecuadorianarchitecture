@@ -260,9 +260,9 @@ export const AdminPage: React.FC<{ onClose?: () => void }> = ({ onClose }) => {
           onCreateNew={() => setIsNewModalOpen(true)}
           onDuplicate={(art) => duplicateEditorialArticle(art.id, art.type)}
           onDelete={(art) => deleteEditorialArticle(art.id, art.type)}
-          onStatusChange={(art, newStatus) => saveEditorialArticle({ ...art, status: newStatus })}
+          onStatusChange={(art, newStatus) => saveEditorialArticle({ ...art, status: newStatus }, true)}
           onOpenPreview={(art) => setEditingArticle(art)}
-          onSaveArticle={(art) => saveEditorialArticle(art)}
+          onSaveArticle={(art) => saveEditorialArticle(art, true)}
         />
       )}
 
@@ -470,7 +470,7 @@ export const AdminPage: React.FC<{ onClose?: () => void }> = ({ onClose }) => {
         isOpen={isNewModalOpen}
         onClose={() => setIsNewModalOpen(false)}
         onCreate={(newArt) => {
-          saveEditorialArticle(newArt);
+          saveEditorialArticle(newArt, true);
           sessionStorage.setItem('ea_editing_article_id', newArt.id);
           setEditingArticle(newArt);
         }}

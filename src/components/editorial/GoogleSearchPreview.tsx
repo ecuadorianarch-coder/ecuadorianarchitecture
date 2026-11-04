@@ -91,7 +91,7 @@ export const GoogleSearchPreview: React.FC<GoogleSearchPreviewProps> = ({
                     Ecuadorian Architecture
                   </span>
                   <span className="text-[12px] text-[#4d5156] truncate flex items-center gap-1 leading-tight font-mono">
-                    https://ecuadorianarchitecture.com › {article.type || 'proyectos'} › {article.slug || 'obra'}
+                    https://ecuadorianarch.com › {article.type || 'proyectos'} › {article.slug || 'obra'}
                   </span>
                 </div>
               </div>

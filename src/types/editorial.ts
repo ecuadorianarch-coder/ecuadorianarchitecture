@@ -83,6 +83,15 @@ export interface EditorialArticle {
   heroImageCredit?: string;
   gallery?: string[];
   imageCategories?: Record<string, 'fotografia' | 'planimetria'>;
+  plans?: {
+    planta?: string;
+    corte?: string;
+    axonometria?: string;
+    [key: string]: string | undefined;
+  };
+  planImage?: string;
+  beforeImageUrl?: string;
+  afterImageUrl?: string;
   // Landing Deck Configuration & Preview Fields
   showOnLanding?: boolean;
   landingOrder?: number;
@@ -94,6 +103,15 @@ export interface EditorialArticle {
   authorHandle?: string;
   photographer?: string;
   photographerHandle?: string;
+  maestroMayor?: string;
+  equipoTrabajo?: {
+    nombre: string;
+    rol: string;
+    oficio: string;
+    especialidad?: string;
+  }[];
+  materialidadPrincipal?: string;
+  manifiestoManoObra?: string;
   renders?: string; // Autor de Renders / Visualización 3D (Academia / Proyectos)
   hasVisitas?: boolean; // Control explícito de visitas de obra (falso para Territorios y Academia)
   studios?: string[];
@@ -123,9 +141,13 @@ export interface EditorialArticle {
     superficie?: string;
     estructura?: string;
     fotografia?: string;
+    maestroMayor?: string;
     colaboradores?: string;
     certificacion?: string;
-    [key: string]: string | undefined;
+    escala?: string;
+    universidad?: string;
+    renders?: string;
+    [key: string]: any;
   };
   ciudad?: {
     barrio?: string;
@@ -148,6 +170,7 @@ export interface EditorialArticle {
   situacion?: string;
   // Territorios specific
   region?: string;
+  escala?: string;
   // Dynamic modular layout
   modules?: EditorialModuleItem[];
   // SEO & Social

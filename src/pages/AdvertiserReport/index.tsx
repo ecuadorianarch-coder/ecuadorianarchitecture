@@ -548,8 +548,8 @@ export const AdvertiserReport: React.FC<AdvertiserReportProps> = ({ token }) => 
           </p>
           <p className="mt-1">
             Para dudas sobre este reporte, ajustes de creatividad o contratación de nuevos espacios, contáctanos a{' '}
-            <a href="mailto:comercial@ecuadorianarchitecture.com" className="underline font-bold text-ea-black">
-              comercial@ecuadorianarchitecture.com
+            <a href="mailto:comercial@ecuadorianarch.com" className="underline font-bold text-ea-black">
+              comercial@ecuadorianarch.com
             </a>
           </p>
         </footer>

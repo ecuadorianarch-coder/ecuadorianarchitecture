@@ -24,6 +24,10 @@ export interface ArchitectureSeoData {
   };
 }
 
+export const CANONICAL_SITE_URL = (typeof window !== 'undefined' && window.location.origin && !window.location.origin.includes('localhost'))
+  ? window.location.origin
+  : ((import.meta as any).env?.VITE_SITE_URL || 'https://ecuadorianarch.com');
+
 /**
  * Normalizes text to capital case / clean punctuation
  */
@@ -195,7 +199,7 @@ export function generateArchitectureSchemaJsonLd(project: any): Record<string, a
   const authors = studios.map((studioName) => ({
     '@type': 'Organization',
     name: studioName,
-    url: `https://ecuadorianarchitecture.com/estudios/${encodeURIComponent(studioName.toLowerCase().replace(/\s+/g, '-'))}`,
+    url: `${CANONICAL_SITE_URL}/estudios/${encodeURIComponent(studioName.toLowerCase().replace(/\s+/g, '-'))}`,
   }));
 
   const imageList = [
@@ -212,9 +216,9 @@ export function generateArchitectureSchemaJsonLd(project: any): Record<string, a
         '@id': `${canonicalUrl}#article`,
         isPartOf: {
           '@type': 'WebSite',
-          '@id': 'https://ecuadorianarchitecture.com/#website',
+          '@id': `${CANONICAL_SITE_URL}/#website`,
           name: 'Ecuadorian Architecture',
-          url: 'https://ecuadorianarchitecture.com',
+          url: CANONICAL_SITE_URL,
         },
         mainEntityOfPage: canonicalUrl,
         headline: generateArchitectureTitle(project),
@@ -231,10 +235,10 @@ export function generateArchitectureSchemaJsonLd(project: any): Record<string, a
         publisher: {
           '@type': 'Organization',
           name: 'Ecuadorian Architecture',
-          url: 'https://ecuadorianarchitecture.com',
+          url: CANONICAL_SITE_URL,
           logo: {
             '@type': 'ImageObject',
-            url: 'https://ecuadorianarchitecture.com/logo.svg',
+            url: `${CANONICAL_SITE_URL}/logo.svg`,
             width: 512,
             height: 512,
           },
@@ -344,8 +348,8 @@ export function compileArchitectureSeo(project: any): ArchitectureSeoData {
   const keywords = project?.tags?.length ? project.tags : generateArchitectureKeywords(project);
   const slug = cleanText(project?.slug) || cleanText(project?.id) || 'proyecto';
   const section = project?.type || 'proyectos';
-  const canonicalUrl = `https://ecuadorianarchitecture.com/${section}/${slug}`;
-  const ogImage = cleanText(project?.heroImage) || 'https://ecuadorianarchitecture.com/logo.svg';
+  const canonicalUrl = `${CANONICAL_SITE_URL}/${section}/${slug}`;
+  const ogImage = cleanText(project?.heroImage) || `${CANONICAL_SITE_URL}/og-image.jpg`;
   const schemaJsonLd = generateArchitectureSchemaJsonLd(project);
 
   const titleLength = metaTitle.length;

@@ -12,6 +12,23 @@ import { PhotographerProfileData } from '../data/photographers';
 import { MasterBuilderProfile } from '../data/masterBuilders';
 import { EditorialArticle, EditorialType } from '../types/editorial';
 
+export const REALTIME_CHANNEL_NAME = 'ea_content_realtime_bus';
+
+export interface RealtimeBroadcastMessage {
+  type: 'SYNC_COLLECTION' | 'SYNC_ALL';
+  collection:
+    | 'projects'
+    | 'academia'
+    | 'territorios'
+    | 'articles'
+    | 'authors'
+    | 'photographers'
+    | 'masterBuilders'
+    | 'siteConfig';
+  data: any;
+  timestamp: number;
+}
+
 interface ContentContextType {
   siteConfig: typeof defaultSiteConfig;
   projects: typeof defaultProjects;
@@ -31,11 +48,11 @@ interface ContentContextType {
   updateArticle: (id: string, updatedFields: Partial<(typeof defaultArticles)[0]>) => void;
   addArticle: (article: (typeof defaultArticles)[0]) => void;
   deleteArticle: (id: string) => void;
-  updateAcademia: (id: string, updatedFields: Partial<(typeof defaultAcademia)[0]>) => void;
-  addAcademia: (item: (typeof defaultAcademia)[0]) => void;
+  updateAcademia: (id: string, updatedFields: any) => void;
+  addAcademia: (item: any) => void;
   deleteAcademia: (id: string) => void;
-  updateTerritorio: (id: string, updatedFields: Partial<(typeof defaultTerritorios)[0]>) => void;
-  addTerritorio: (item: (typeof defaultTerritorios)[0]) => void;
+  updateTerritorio: (id: string, updatedFields: any) => void;
+  addTerritorio: (item: any) => void;
   deleteTerritorio: (id: string) => void;
   updateAuthorProfile: (id: string, updatedFields: Partial<AuthorProfileData>) => void;
   createAuthorProfile: (profile: AuthorProfileData) => void;
@@ -70,19 +87,31 @@ const ContentContext = createContext<ContentContextType | undefined>(undefined);
 export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   // Invalidation of stale demo content from previous versions in client-side localStorage
   if (typeof window !== 'undefined') {
-    const CURRENT_EDITORIAL_VERSION = '2026-11-03-editorial-clean-v3';
+    const CURRENT_EDITORIAL_VERSION = '2026-11-04-editorial-realtime-v4';
     try {
       if (localStorage.getItem('ea_content_version') !== CURRENT_EDITORIAL_VERSION) {
         localStorage.removeItem('ea_content_projects');
         localStorage.removeItem('ea_content_articles');
         localStorage.removeItem('ea_content_academia');
         localStorage.removeItem('ea_content_territorios');
+        localStorage.removeItem('ea_content_authors');
+        localStorage.removeItem('ea_content_photographers');
+        localStorage.removeItem('ea_content_master_builders');
+        localStorage.removeItem('ea_content_site_config');
         localStorage.setItem('ea_content_version', CURRENT_EDITORIAL_VERSION);
       }
     } catch {}
   }
 
-  const [siteConfig, setSiteConfig] = useState(defaultSiteConfig);
+  const [siteConfig, setSiteConfig] = useState(() => {
+    try {
+      const cached = localStorage.getItem('ea_content_site_config');
+      return cached ? JSON.parse(cached) : defaultSiteConfig;
+    } catch {
+      return defaultSiteConfig;
+    }
+  });
+
   const [projects, setProjects] = useState<any[]>(() => {
     try {
       const cached = localStorage.getItem('ea_content_projects');
@@ -91,6 +120,7 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
       return defaultProjects;
     }
   });
+
   const [articles, setArticles] = useState<any[]>(() => {
     try {
       const cached = localStorage.getItem('ea_content_articles');
@@ -99,6 +129,7 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
       return defaultArticles;
     }
   });
+
   const [academia, setAcademia] = useState<any[]>(() => {
     try {
       const cached = localStorage.getItem('ea_content_academia');
@@ -107,6 +138,7 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
       return defaultAcademia;
     }
   });
+
   const [territorios, setTerritorios] = useState<any[]>(() => {
     try {
       const cached = localStorage.getItem('ea_content_territorios');
@@ -115,6 +147,7 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
       return defaultTerritorios;
     }
   });
+
   const [authors, setAuthors] = useState<AuthorProfileData[]>(() => {
     try {
       const cached = localStorage.getItem('ea_content_authors');
@@ -123,6 +156,7 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
       return defaultAuthors as AuthorProfileData[];
     }
   });
+
   const [photographers, setPhotographers] = useState<PhotographerProfileData[]>(() => {
     try {
       const cached = localStorage.getItem('ea_content_photographers');
@@ -131,6 +165,7 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
       return defaultPhotographers as PhotographerProfileData[];
     }
   });
+
   const [masterBuilders, setMasterBuilders] = useState<MasterBuilderProfile[]>(() => {
     try {
       const cached = localStorage.getItem('ea_content_master_builders');
@@ -162,7 +197,35 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
   useEffect(() => { photographersRef.current = photographers; }, [photographers]);
   useEffect(() => { masterBuildersRef.current = masterBuilders; }, [masterBuilders]);
 
-  // Sync to local cache on changes for fail-safe persistence
+  // BroadcastChannel instance for zero-latency multi-tab sync
+  const broadcastChannelRef = useRef<BroadcastChannel | null>(null);
+
+  const broadcastChange = (
+    collection: RealtimeBroadcastMessage['collection'],
+    data: any
+  ) => {
+    try {
+      broadcastChannelRef.current?.postMessage({
+        type: 'SYNC_COLLECTION',
+        collection,
+        data,
+        timestamp: Date.now(),
+      } as RealtimeBroadcastMessage);
+    } catch (e) {
+      // Fallback silent
+    }
+  };
+
+  // Debounced disk persistence timer
+  const debounceTimerRef = useRef<any>(null);
+  const triggerDebouncedSaveToDisk = (overrides?: Parameters<typeof saveToDisk>[0], delayMs = 600) => {
+    if (debounceTimerRef.current) clearTimeout(debounceTimerRef.current);
+    debounceTimerRef.current = setTimeout(() => {
+      saveToDisk(overrides);
+    }, delayMs);
+  };
+
+  // Sync to local cache on changes for fail-safe client-side persistence
   useEffect(() => {
     try {
       localStorage.setItem('ea_content_projects', JSON.stringify(projects));
@@ -171,10 +234,71 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
       localStorage.setItem('ea_content_articles', JSON.stringify(articles));
       localStorage.setItem('ea_content_authors', JSON.stringify(authors));
       localStorage.setItem('ea_content_photographers', JSON.stringify(photographers));
+      localStorage.setItem('ea_content_master_builders', JSON.stringify(masterBuilders));
+      localStorage.setItem('ea_content_site_config', JSON.stringify(siteConfig));
     } catch (e) {
       console.warn('Storage quota warning', e);
     }
-  }, [projects, academia, territorios, articles, authors, photographers]);
+  }, [projects, academia, territorios, articles, authors, photographers, masterBuilders, siteConfig]);
+
+  // Centralized handler for incoming live updates
+  const applyIncomingSync = (collection: RealtimeBroadcastMessage['collection'], data: any) => {
+    if (!data) return;
+    try {
+      switch (collection) {
+        case 'projects':
+          if (Array.isArray(data)) {
+            projectsRef.current = data;
+            setProjects(data);
+          }
+          break;
+        case 'academia':
+          if (Array.isArray(data)) {
+            academiaRef.current = data;
+            setAcademia(data);
+          }
+          break;
+        case 'territorios':
+          if (Array.isArray(data)) {
+            territoriosRef.current = data;
+            setTerritorios(data);
+          }
+          break;
+        case 'articles':
+          if (Array.isArray(data)) {
+            articlesRef.current = data;
+            setArticles(data);
+          }
+          break;
+        case 'authors':
+          if (Array.isArray(data)) {
+            authorsRef.current = data;
+            setAuthors(data);
+          }
+          break;
+        case 'photographers':
+          if (Array.isArray(data)) {
+            photographersRef.current = data;
+            setPhotographers(data);
+          }
+          break;
+        case 'masterBuilders':
+          if (Array.isArray(data)) {
+            masterBuildersRef.current = data;
+            setMasterBuilders(data);
+          }
+          break;
+        case 'siteConfig':
+          if (data && typeof data === 'object') {
+            siteConfigRef.current = data;
+            setSiteConfig(data);
+          }
+          break;
+      }
+    } catch (err) {
+      console.warn('Error applying incoming live sync:', err);
+    }
+  };
 
   // Load latest on mount from API or fallback
   useEffect(() => {
@@ -247,45 +371,65 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
         }
       })
       .catch(() => {});
+
+    fetch('/api/master-builders')
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data && Array.isArray(data)) {
+          masterBuildersRef.current = data;
+          setMasterBuilders(data);
+        }
+      })
+      .catch(() => {});
   }, []);
 
-  // Real-time synchronization across browser tabs (e.g. /admin vs main portal)
+  // Real-time synchronization bus across browser tabs (e.g. /admin vs main portal)
   useEffect(() => {
+    // 1. BroadcastChannel listener (Instant <2ms latency)
+    if (typeof window !== 'undefined' && 'BroadcastChannel' in window) {
+      try {
+        const bc = new BroadcastChannel(REALTIME_CHANNEL_NAME);
+        broadcastChannelRef.current = bc;
+        bc.onmessage = (event) => {
+          const payload = event.data as RealtimeBroadcastMessage;
+          if (payload && payload.collection && payload.data) {
+            applyIncomingSync(payload.collection, payload.data);
+          }
+        };
+      } catch (err) {
+        console.warn('BroadcastChannel init error:', err);
+      }
+    }
+
+    // 2. StorageEvent listener (Fallback cross-tab sync)
     const handleStorageChange = (e: StorageEvent) => {
       if (!e.newValue) return;
       try {
+        const parsed = JSON.parse(e.newValue);
         if (e.key === 'ea_content_projects') {
-          const parsed = JSON.parse(e.newValue);
-          projectsRef.current = parsed;
-          setProjects(parsed);
+          applyIncomingSync('projects', parsed);
         } else if (e.key === 'ea_content_academia') {
-          const parsed = JSON.parse(e.newValue);
-          academiaRef.current = parsed;
-          setAcademia(parsed);
+          applyIncomingSync('academia', parsed);
         } else if (e.key === 'ea_content_territorios') {
-          const parsed = JSON.parse(e.newValue);
-          territoriosRef.current = parsed;
-          setTerritorios(parsed);
+          applyIncomingSync('territorios', parsed);
         } else if (e.key === 'ea_content_articles') {
-          const parsed = JSON.parse(e.newValue);
-          articlesRef.current = parsed;
-          setArticles(parsed);
+          applyIncomingSync('articles', parsed);
         } else if (e.key === 'ea_content_authors') {
-          const parsed = JSON.parse(e.newValue);
-          authorsRef.current = parsed;
-          setAuthors(parsed);
+          applyIncomingSync('authors', parsed);
         } else if (e.key === 'ea_content_photographers') {
-          const parsed = JSON.parse(e.newValue);
-          photographersRef.current = parsed;
-          setPhotographers(parsed);
+          applyIncomingSync('photographers', parsed);
+        } else if (e.key === 'ea_content_master_builders') {
+          applyIncomingSync('masterBuilders', parsed);
+        } else if (e.key === 'ea_content_site_config') {
+          applyIncomingSync('siteConfig', parsed);
         }
       } catch (err) {
-        console.warn('Cross-tab sync error:', err);
+        console.warn('Cross-tab storage sync error:', err);
       }
     };
 
+    // 3. Window focus refresh
     const handleWindowFocus = () => {
-      // Re-fetch projects if modified externally
       fetch('/api/projects')
         .then((res) => (res.ok ? res.json() : null))
         .then((data) => {
@@ -295,102 +439,189 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
           }
         })
         .catch(() => {});
+
+      fetch('/api/site-config')
+        .then((res) => (res.ok ? res.json() : null))
+        .then((data) => {
+          if (data) {
+            siteConfigRef.current = data;
+            setSiteConfig(data);
+          }
+        })
+        .catch(() => {});
     };
 
     window.addEventListener('storage', handleStorageChange);
     window.addEventListener('focus', handleWindowFocus);
     return () => {
+      broadcastChannelRef.current?.close();
       window.removeEventListener('storage', handleStorageChange);
       window.removeEventListener('focus', handleWindowFocus);
     };
   }, []);
 
   const updateHero = (data: Partial<typeof defaultSiteConfig.hero>) => {
-    setSiteConfig((prev) => ({
-      ...prev,
-      hero: { ...prev.hero, ...data },
-    }));
+    setSiteConfig((prev) => {
+      const next = { ...prev, hero: { ...prev.hero, ...data } };
+      siteConfigRef.current = next;
+      broadcastChange('siteConfig', next);
+      triggerDebouncedSaveToDisk({ siteConfig: next });
+      return next;
+    });
   };
 
   const updateSearch = (data: Partial<typeof defaultSiteConfig.search>) => {
-    setSiteConfig((prev) => ({
-      ...prev,
-      search: { ...prev.search, ...data },
-    }));
+    setSiteConfig((prev) => {
+      const next = { ...prev, search: { ...prev.search, ...data } };
+      siteConfigRef.current = next;
+      broadcastChange('siteConfig', next);
+      triggerDebouncedSaveToDisk({ siteConfig: next });
+      return next;
+    });
   };
 
   const updatePinnedDestacados = (data: Partial<typeof defaultSiteConfig.pinnedDestacados>) => {
-    setSiteConfig((prev) => ({
-      ...prev,
-      pinnedDestacados: { ...prev.pinnedDestacados, ...data },
-    }));
+    setSiteConfig((prev) => {
+      const next = { ...prev, pinnedDestacados: { ...prev.pinnedDestacados, ...data } };
+      siteConfigRef.current = next;
+      broadcastChange('siteConfig', next);
+      triggerDebouncedSaveToDisk({ siteConfig: next });
+      return next;
+    });
   };
 
   const updateFooter = (data: Partial<typeof defaultSiteConfig.footer>) => {
-    setSiteConfig((prev) => ({
-      ...prev,
-      footer: { ...prev.footer, ...data },
-    }));
+    setSiteConfig((prev) => {
+      const next = { ...prev, footer: { ...prev.footer, ...data } };
+      siteConfigRef.current = next;
+      broadcastChange('siteConfig', next);
+      triggerDebouncedSaveToDisk({ siteConfig: next });
+      return next;
+    });
   };
 
   // Projects
   const updateProject = (id: string, updatedFields: Partial<(typeof defaultProjects)[0]>) => {
-    setProjects((prev) =>
-      prev.map((p) => (p.id === id ? { ...p, ...updatedFields } : p))
-    );
+    setProjects((prev) => {
+      const next = prev.map((p) => (p.id === id ? { ...p, ...updatedFields } : p));
+      projectsRef.current = next;
+      broadcastChange('projects', next);
+      triggerDebouncedSaveToDisk({ projects: next });
+      return next;
+    });
   };
 
   const addProject = (project: (typeof defaultProjects)[0]) => {
-    setProjects((prev) => [project, ...prev.filter((p) => p.id !== project.id)]);
+    setProjects((prev) => {
+      const next = [project, ...prev.filter((p) => p.id !== project.id)];
+      projectsRef.current = next;
+      broadcastChange('projects', next);
+      saveToDisk({ projects: next });
+      return next;
+    });
   };
 
   const deleteProject = (id: string) => {
-    setProjects((prev) => prev.filter((p) => p.id !== id));
+    setProjects((prev) => {
+      const next = prev.filter((p) => p.id !== id);
+      projectsRef.current = next;
+      broadcastChange('projects', next);
+      saveToDisk({ projects: next });
+      return next;
+    });
   };
 
   // Articles
   const updateArticle = (id: string, updatedFields: Partial<(typeof defaultArticles)[0]>) => {
-    setArticles((prev) =>
-      prev.map((a) => (a.id === id ? { ...a, ...updatedFields } : a))
-    );
+    setArticles((prev) => {
+      const next = prev.map((a) => (a.id === id ? { ...a, ...updatedFields } : a));
+      articlesRef.current = next;
+      broadcastChange('articles', next);
+      triggerDebouncedSaveToDisk({ articles: next });
+      return next;
+    });
   };
 
   const addArticle = (article: (typeof defaultArticles)[0]) => {
-    setArticles((prev) => [article, ...prev.filter((a) => a.id !== article.id)]);
+    setArticles((prev) => {
+      const next = [article, ...prev.filter((a) => a.id !== article.id)];
+      articlesRef.current = next;
+      broadcastChange('articles', next);
+      saveToDisk({ articles: next });
+      return next;
+    });
   };
 
   const deleteArticle = (id: string) => {
-    setArticles((prev) => prev.filter((a) => a.id !== id));
+    setArticles((prev) => {
+      const next = prev.filter((a) => a.id !== id);
+      articlesRef.current = next;
+      broadcastChange('articles', next);
+      saveToDisk({ articles: next });
+      return next;
+    });
   };
 
   // Academia
   const updateAcademia = (id: string, updatedFields: any) => {
-    setAcademia((prev) =>
-      prev.map((item) => (item.id === id ? { ...item, ...updatedFields } : item))
-    );
+    setAcademia((prev) => {
+      const next = prev.map((item) => (item.id === id ? { ...item, ...updatedFields } : item));
+      academiaRef.current = next;
+      broadcastChange('academia', next);
+      triggerDebouncedSaveToDisk({ academia: next });
+      return next;
+    });
   };
 
   const addAcademia = (item: any) => {
-    setAcademia((prev) => [item, ...prev.filter((a) => a.id !== item.id)]);
+    setAcademia((prev) => {
+      const next = [item, ...prev.filter((a) => a.id !== item.id)];
+      academiaRef.current = next;
+      broadcastChange('academia', next);
+      saveToDisk({ academia: next });
+      return next;
+    });
   };
 
   const deleteAcademia = (id: string) => {
-    setAcademia((prev) => prev.filter((a) => a.id !== id));
+    setAcademia((prev) => {
+      const next = prev.filter((a) => a.id !== id);
+      academiaRef.current = next;
+      broadcastChange('academia', next);
+      saveToDisk({ academia: next });
+      return next;
+    });
   };
 
   // Territorios
   const updateTerritorio = (id: string, updatedFields: any) => {
-    setTerritorios((prev) =>
-      prev.map((item) => (item.id === id ? { ...item, ...updatedFields } : item))
-    );
+    setTerritorios((prev) => {
+      const next = prev.map((item) => (item.id === id ? { ...item, ...updatedFields } : item));
+      territoriosRef.current = next;
+      broadcastChange('territorios', next);
+      triggerDebouncedSaveToDisk({ territorios: next });
+      return next;
+    });
   };
 
   const addTerritorio = (item: any) => {
-    setTerritorios((prev) => [item, ...prev.filter((t) => t.id !== item.id)]);
+    setTerritorios((prev) => {
+      const next = [item, ...prev.filter((t) => t.id !== item.id)];
+      territoriosRef.current = next;
+      broadcastChange('territorios', next);
+      saveToDisk({ territorios: next });
+      return next;
+    });
   };
 
   const deleteTerritorio = (id: string) => {
-    setTerritorios((prev) => prev.filter((t) => t.id !== id));
+    setTerritorios((prev) => {
+      const next = prev.filter((t) => t.id !== id);
+      territoriosRef.current = next;
+      broadcastChange('territorios', next);
+      saveToDisk({ territorios: next });
+      return next;
+    });
   };
 
   // Authors / Architects
@@ -398,9 +629,8 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
     setAuthors((prev) => {
       const next = prev.map((a) => (a.id === id || a.slug === id ? { ...a, ...updatedFields } : a));
       authorsRef.current = next;
-      try {
-        localStorage.setItem('ea_content_authors', JSON.stringify(next));
-      } catch (_) {}
+      broadcastChange('authors', next);
+      saveToDisk({ authors: next });
       return next;
     });
   };
@@ -410,9 +640,8 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
       const filtered = prev.filter((a) => a.id !== profile.id && a.slug !== profile.slug);
       const next = [profile, ...filtered];
       authorsRef.current = next;
-      try {
-        localStorage.setItem('ea_content_authors', JSON.stringify(next));
-      } catch (_) {}
+      broadcastChange('authors', next);
+      saveToDisk({ authors: next });
       return next;
     });
   };
@@ -421,9 +650,8 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
     setAuthors((prev) => {
       const next = prev.filter((a) => a.id !== id && a.slug !== id);
       authorsRef.current = next;
-      try {
-        localStorage.setItem('ea_content_authors', JSON.stringify(next));
-      } catch (_) {}
+      broadcastChange('authors', next);
+      saveToDisk({ authors: next });
       return next;
     });
   };
@@ -433,9 +661,8 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
     setPhotographers((prev) => {
       const next = prev.map((p) => (p.id === id || p.slug === id ? { ...p, ...updatedFields } : p));
       photographersRef.current = next;
-      try {
-        localStorage.setItem('ea_content_photographers', JSON.stringify(next));
-      } catch (_) {}
+      broadcastChange('photographers', next);
+      saveToDisk({ photographers: next });
       return next;
     });
   };
@@ -445,9 +672,8 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
       const filtered = prev.filter((p) => p.id !== profile.id && p.slug !== profile.slug);
       const next = [profile, ...filtered];
       photographersRef.current = next;
-      try {
-        localStorage.setItem('ea_content_photographers', JSON.stringify(next));
-      } catch (_) {}
+      broadcastChange('photographers', next);
+      saveToDisk({ photographers: next });
       return next;
     });
   };
@@ -456,9 +682,8 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
     setPhotographers((prev) => {
       const next = prev.filter((p) => p.id !== id && p.slug !== id);
       photographersRef.current = next;
-      try {
-        localStorage.setItem('ea_content_photographers', JSON.stringify(next));
-      } catch (_) {}
+      broadcastChange('photographers', next);
+      saveToDisk({ photographers: next });
       return next;
     });
   };
@@ -468,9 +693,8 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
     setMasterBuilders((prev) => {
       const next = prev.map((m) => (m.id === id || m.slug === id ? { ...m, ...updatedFields } : m));
       masterBuildersRef.current = next;
-      try {
-        localStorage.setItem('ea_content_master_builders', JSON.stringify(next));
-      } catch (_) {}
+      broadcastChange('masterBuilders', next);
+      saveToDisk({ masterBuilders: next });
       return next;
     });
   };
@@ -480,9 +704,8 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
       const filtered = prev.filter((m) => m.id !== profile.id && m.slug !== profile.slug);
       const next = [profile, ...filtered];
       masterBuildersRef.current = next;
-      try {
-        localStorage.setItem('ea_content_master_builders', JSON.stringify(next));
-      } catch (_) {}
+      broadcastChange('masterBuilders', next);
+      saveToDisk({ masterBuilders: next });
       return next;
     });
   };
@@ -491,15 +714,14 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
     setMasterBuilders((prev) => {
       const next = prev.filter((m) => m.id !== id && m.slug !== id);
       masterBuildersRef.current = next;
-      try {
-        localStorage.setItem('ea_content_master_builders', JSON.stringify(next));
-      } catch (_) {}
+      broadcastChange('masterBuilders', next);
+      saveToDisk({ masterBuilders: next });
       return next;
     });
   };
 
-  // Unified polymorphic save
-  const saveEditorialArticle = (article: EditorialArticle, persistNow = false) => {
+  // Unified polymorphic save (Automatically broadcasts & persists to disk)
+  const saveEditorialArticle = (article: EditorialArticle, persistNow = true) => {
     const cleanItem = {
       ...article,
       updatedAt: new Date().toISOString(),
@@ -512,11 +734,11 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
         : [cleanItem, ...projectsRef.current];
       projectsRef.current = nextProjects;
       setProjects(nextProjects);
-      try {
-        localStorage.setItem('ea_content_projects', JSON.stringify(nextProjects));
-      } catch (e) {}
+      broadcastChange('projects', nextProjects);
       if (persistNow) {
         saveToDisk({ projects: nextProjects });
+      } else {
+        triggerDebouncedSaveToDisk({ projects: nextProjects });
       }
     } else if (article.type === 'territorios') {
       const exists = territoriosRef.current.some((t) => t.id === cleanItem.id);
@@ -525,11 +747,11 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
         : [cleanItem, ...territoriosRef.current];
       territoriosRef.current = nextTerritorios;
       setTerritorios(nextTerritorios);
-      try {
-        localStorage.setItem('ea_content_territorios', JSON.stringify(nextTerritorios));
-      } catch (e) {}
+      broadcastChange('territorios', nextTerritorios);
       if (persistNow) {
         saveToDisk({ territorios: nextTerritorios });
+      } else {
+        triggerDebouncedSaveToDisk({ territorios: nextTerritorios });
       }
     } else if (article.type === 'academia') {
       const exists = academiaRef.current.some((a) => a.id === cleanItem.id);
@@ -538,11 +760,11 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
         : [cleanItem, ...academiaRef.current];
       academiaRef.current = nextAcademia;
       setAcademia(nextAcademia);
-      try {
-        localStorage.setItem('ea_content_academia', JSON.stringify(nextAcademia));
-      } catch (e) {}
+      broadcastChange('academia', nextAcademia);
       if (persistNow) {
         saveToDisk({ academia: nextAcademia });
+      } else {
+        triggerDebouncedSaveToDisk({ academia: nextAcademia });
       }
     }
   };
@@ -577,7 +799,7 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
       updatedAt: new Date().toISOString(),
     };
 
-    saveEditorialArticle(duplicated);
+    saveEditorialArticle(duplicated, true);
     return duplicated;
   };
 
@@ -682,7 +904,7 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
       ]);
 
       setIsSaving(false);
-      setSaveMessage('✓ Cambios editoriales guardados correctamente en disco.');
+      setSaveMessage('✓ Cambios sincronizados en tiempo real y guardados en disco.');
       setTimeout(() => setSaveMessage(null), 4000);
       return true;
     } catch (err: any) {
@@ -708,6 +930,27 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
     localStorage.removeItem('ea_content_authors');
     localStorage.removeItem('ea_content_photographers');
     localStorage.removeItem('ea_content_master_builders');
+    localStorage.removeItem('ea_content_site_config');
+
+    broadcastChange('projects', defaultProjects);
+    broadcastChange('academia', defaultAcademia);
+    broadcastChange('territorios', defaultTerritorios);
+    broadcastChange('articles', defaultArticles);
+    broadcastChange('authors', defaultAuthors);
+    broadcastChange('photographers', defaultPhotographers);
+    broadcastChange('masterBuilders', defaultMasterBuilders);
+    broadcastChange('siteConfig', defaultSiteConfig);
+
+    saveToDisk({
+      projects: defaultProjects,
+      siteConfig: defaultSiteConfig,
+      articles: defaultArticles,
+      academia: defaultAcademia,
+      territorios: defaultTerritorios,
+      authors: defaultAuthors as AuthorProfileData[],
+      photographers: defaultPhotographers as PhotographerProfileData[],
+      masterBuilders: defaultMasterBuilders as MasterBuilderProfile[],
+    });
   };
 
   return (

@@ -7,7 +7,7 @@ SECCIÓN 1: PROYECTOS Y OBRAS ARQUITECTÓNICAS
 ================================================================================
 
 ## ESPACIO PARA HABLAR CON DIOS
-- **URL Canónica:** https://ecuadorianarchitecture.com/proyectos/espacio-para-hablar-con-dios
+- **URL Canónica:** https://ecuadorianarch.com/proyectos/espacio-para-hablar-con-dios
 - **Estudio / Autores:** NOMADE TALLER
 - **Ubicación:** QUITO
 - **Año de Finalización:** 2024
@@ -27,7 +27,7 @@ Dictamen crítico externo sobre la obra y su pertinencia ética y constructiva..
 ---
 
 ## EDIFICIO SENSEI
-- **URL Canónica:** https://ecuadorianarchitecture.com/proyectos/edificio-sensei
+- **URL Canónica:** https://ecuadorianarch.com/proyectos/edificio-sensei
 - **Estudio / Autores:** DANIEL MORENO FLORES
 - **Ubicación:** QUITO
 - **Año de Finalización:** 2023

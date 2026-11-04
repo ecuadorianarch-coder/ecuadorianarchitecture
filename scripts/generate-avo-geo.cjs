@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const SITE_URL = 'https://ecuadorianarchitecture.com';
+const SITE_URL = process.env.VITE_SITE_URL || 'https://ecuadorianarch.com';
 const rootDir = path.resolve(__dirname, '..');
 const dataDir = path.join(rootDir, 'src', 'data');
 const publicDir = path.join(rootDir, 'public');

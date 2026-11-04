@@ -1195,7 +1195,7 @@ export const AdvertiserPortal: React.FC<AdvertiserPortalProps> = ({ token }) => 
               </div>
 
               <a
-                href="mailto:comercial@ecuadorianarchitecture.com"
+                href="mailto:comercial@ecuadorianarch.com"
                 className="px-4 py-2 bg-stone-900 text-white font-mono text-xs uppercase hover:bg-black transition-colors shrink-0"
               >
                 Contactar a {brand.accountManager?.split('—')[0] || 'Comercial EA'}

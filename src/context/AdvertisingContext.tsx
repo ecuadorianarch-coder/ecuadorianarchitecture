@@ -122,6 +122,29 @@ export const AdvertisingProvider: React.FC<{ children: React.ReactNode }> = ({ c
     refreshAnalytics();
   }, [refreshAnalytics]);
 
+  // Real-time synchronization for advertising across tabs
+  const adsBroadcastRef = useRef<BroadcastChannel | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && 'BroadcastChannel' in window) {
+      try {
+        const bc = new BroadcastChannel('ea_ads_realtime_bus');
+        adsBroadcastRef.current = bc;
+        bc.onmessage = (event) => {
+          const { brands: newBrands, campaigns: newCamps, placements: newPlacements } = event.data || {};
+          if (Array.isArray(newBrands)) setBrands(newBrands);
+          if (Array.isArray(newCamps)) setCampaigns(newCamps);
+          if (Array.isArray(newPlacements)) setPlacements(newPlacements);
+        };
+      } catch (e) {
+        console.warn('Ads BroadcastChannel error:', e);
+      }
+    }
+    return () => {
+      adsBroadcastRef.current?.close();
+    };
+  }, []);
+
   const getBrandById = useCallback((brandId: string) => {
     return brands.find((b) => b.id === brandId);
   }, [brands]);
@@ -462,8 +485,16 @@ export const AdvertisingProvider: React.FC<{ children: React.ReactNode }> = ({ c
         }),
       ]);
 
+      try {
+        adsBroadcastRef.current?.postMessage({
+          brands: bToSave,
+          campaigns: cToSave,
+          placements: pToSave,
+        });
+      } catch (e) {}
+
       setIsSaving(false);
-      setSaveMessage('✓ Campañas y analíticas guardadas en disco.');
+      setSaveMessage('✓ Campañas y analíticas sincronizadas en tiempo real y guardadas en disco.');
       setTimeout(() => setSaveMessage(null), 3500);
       return true;
     } catch (err: any) {

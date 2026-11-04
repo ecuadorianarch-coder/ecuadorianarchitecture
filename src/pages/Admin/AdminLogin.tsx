@@ -31,13 +31,6 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess }) => {
     }, 350);
   };
 
-  const fillDefaultCredentials = () => {
-    const hint = authService.getDefaultCredentialsHint();
-    setUsername(hint.user);
-    setPassword(hint.defaultPass);
-    setError(null);
-  };
-
   return (
     <div className="min-h-screen w-full bg-[#0d0d0d] text-white flex flex-col justify-between font-inter relative overflow-hidden select-none">
       {/* Background architectural grid pattern */}
@@ -156,36 +149,18 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess }) => {
               </div>
             </div>
 
-            {/* Credentials Hint Card (Protected: only exposed in local dev environment) */}
+            {/* Credentials Info Card */}
             {showHint && (
               <div className="p-3 bg-white/5 border border-white/10 text-xs text-white/70 space-y-2">
-                {import.meta.env.DEV ? (
-                  <>
-                    <div className="flex items-center justify-between">
-                      <span className="font-mono text-[10px] uppercase text-white/50 tracking-wider">
-                        Modo Desarrollo &bull; Credenciales locales:
-                      </span>
-                      <button
-                        type="button"
-                        onClick={fillDefaultCredentials}
-                        className="text-[11px] font-mono text-emerald-400 hover:text-emerald-300 underline font-medium cursor-pointer"
-                      >
-                        Autocompletar
-                      </button>
-                    </div>
-                    <div className="font-mono text-[11px] bg-black/60 p-2 rounded border border-white/10 space-y-1">
-                      <div><span className="text-white/40">Usuario:</span> <span className="text-white">admin</span></div>
-                      <div><span className="text-white/40">Contraseña:</span> <span className="text-white">ecuadorianarch2026</span></div>
-                    </div>
-                  </>
-                ) : (
-                  <div className="font-mono text-[11px] text-white/60 p-2 bg-black/40 border border-white/10 rounded space-y-1">
-                    <p className="font-sans text-xs text-white/80">Acceso restringido y monitoreado.</p>
-                    <p className="text-[10px] text-white/50">
-                      Para solicitar o restablecer credenciales de editor, contacte a la dirección técnica en <span className="text-white underline">direccion@ecuadorianarchitecture.com</span>.
-                    </p>
-                  </div>
-                )}
+                <div className="font-mono text-[11px] text-white/70 p-2 bg-black/40 border border-white/10 rounded space-y-1.5">
+                  <p className="font-sans text-xs text-white/90 font-medium flex items-center gap-1.5">
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                    <span>Acceso restringido y autenticado.</span>
+                  </p>
+                  <p className="text-[10.5px] text-white/60 leading-relaxed">
+                    Utiliza tus credenciales editoriales asignadas (<code className="text-white/80 bg-white/10 px-1 py-0.5 rounded">admin</code>, <code className="text-white/80 bg-white/10 px-1 py-0.5 rounded">ecuadorianarch</code> o <code className="text-white/80 bg-white/10 px-1 py-0.5 rounded">editor</code>). Para restablecer accesos, contacta a la dirección técnica en <span className="text-white underline">direccion@ecuadorianarch.com</span>.
+                  </p>
+                </div>
               </div>
             )}
 

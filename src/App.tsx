@@ -149,9 +149,6 @@ export const AppContent: React.FC = () => {
       setCurrentView('acerca');
       setTargetTab('acerca');
       window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
-    } else if (section === 'admin') {
-      window.location.href = '/admin.html';
-      return;
     } else {
       if (currentView !== 'home') {
         pushAppRoute('/');

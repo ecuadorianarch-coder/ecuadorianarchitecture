@@ -212,6 +212,6 @@ const server = http.createServer((req, res) => {
   }
 });
 
-server.listen(PORT, () => {
-  console.log(`[EA Production Server] Listening on http://localhost:${PORT}`);
+server.listen(PORT, '0.0.0.0', () => {
+  console.log(`[EA Production Server] Listening on port ${PORT}`);
 });

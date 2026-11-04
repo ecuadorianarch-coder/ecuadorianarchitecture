@@ -1,9 +1,9 @@
 {
   "meta": {
     "publisher": "Ecuadorian Architecture",
-    "website": "https://ecuadorianarchitecture.com",
+    "website": "https://ecuadorianarch.com",
     "description": "Catálogo abierto estructurado para agentes de inteligencia artificial y buscadores generativos.",
-    "generatedAt": "2026-11-04T02:12:17.243Z",
+    "generatedAt": "2026-11-04T15:12:04.150Z",
     "totalProjects": 2,
     "totalTerritorios": 0,
     "totalAcademia": 0,
@@ -14,7 +14,7 @@
     {
       "id": "espacio-para-hablar-con-dios-ssqj",
       "slug": "espacio-para-hablar-con-dios",
-      "url": "https://ecuadorianarchitecture.com/proyectos/espacio-para-hablar-con-dios",
+      "url": "https://ecuadorianarch.com/proyectos/espacio-para-hablar-con-dios",
       "title": "ESPACIO PARA HABLAR CON DIOS",
       "subtitle": "SIN CONSTRUIR",
       "studios": [
@@ -34,7 +34,7 @@
     {
       "id": "edificio-sensei",
       "slug": "edificio-sensei",
-      "url": "https://ecuadorianarchitecture.com/proyectos/edificio-sensei",
+      "url": "https://ecuadorianarch.com/proyectos/edificio-sensei",
       "title": "EDIFICIO SENSEI",
       "studios": [
         "DANIEL MORENO FLORES"

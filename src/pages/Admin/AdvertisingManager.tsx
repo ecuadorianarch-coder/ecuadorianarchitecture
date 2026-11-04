@@ -222,7 +222,7 @@ export const AdvertisingManager: React.FC = () => {
           'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
         mobileAsset:
           'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
-        destinationUrl: 'https://ecuadorianarchitecture.com',
+        destinationUrl: 'https://ecuadorianarch.com',
         ctaText: 'VER CATÁLOGO',
         startDate: today,
         endDate: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
@@ -264,7 +264,7 @@ export const AdvertisingManager: React.FC = () => {
         subtitle: campForm.subtitle || '',
         desktopAsset: campForm.desktopAsset || '',
         mobileAsset: campForm.mobileAsset || campForm.desktopAsset || '',
-        destinationUrl: campForm.destinationUrl || 'https://ecuadorianarchitecture.com',
+        destinationUrl: campForm.destinationUrl || 'https://ecuadorianarch.com',
         ctaText: campForm.ctaText || 'VER CATÁLOGO',
         startDate: campForm.startDate || today,
         endDate: campForm.endDate || '2026-12-31',

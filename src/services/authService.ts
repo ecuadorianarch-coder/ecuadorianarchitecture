@@ -27,7 +27,7 @@ const REGISTERED_USERS_KEY = 'ea_registered_users';
 
 // Default initial credentials (supports runtime environment variable VITE_ADMIN_PASSWORD)
 const VALID_USERS = ['admin', 'ecuadorianarch', 'editor'];
-const DEFAULT_PASSWORD = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_ADMIN_PASSWORD) || 'ecuadorianarch2026';
+const DEFAULT_PASSWORD = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_ADMIN_PASSWORD) || 'Ecuadorianarch10.';
 
 export const authService = {
   /**

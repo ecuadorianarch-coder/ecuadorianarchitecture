@@ -8,10 +8,10 @@ const rootDir = path.resolve(__dirname, '..');
 const distDir = path.resolve(rootDir, 'dist');
 const dataDir = path.resolve(rootDir, 'src/data');
 
-const SITE_URL = 'https://ecuadorianarchitecture.com';
+const SITE_URL = process.env.VITE_SITE_URL || 'https://ecuadorianarch.com';
 const DEFAULT_TITLE = 'Ecuadorian Architecture — Crítica + Difusión + Conversación';
 const DEFAULT_DESC = 'Una plataforma para descubrir, contextualizar y cuestionar arquitectura ecuatoriana mediante experiencias narrativas interactivas.';
-const DEFAULT_IMAGE = `${SITE_URL}/logo.svg`;
+const DEFAULT_IMAGE = `${SITE_URL}/og-image.jpg`;
 
 function cleanText(str) {
   if (!str) return '';
@@ -455,7 +455,7 @@ Sitemap: ${SITE_URL}/sitemap.xml
   console.log('[EA SEO Prerender] Generated dist/robots.txt');
 
   // 5. Generate _redirects for Netlify / Cloudflare Pages / Static hosts
-  const redirects = `/*    /index.html   200\n`;
+  const redirects = `/admin    /admin.html   200\n/*        /index.html   200\n`;
   fs.writeFileSync(path.join(distDir, '_redirects'), redirects, 'utf-8');
 
   console.log('[EA SEO Prerender] Static architectural SEO generated successfully! 🎉');
