@@ -835,6 +835,9 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
     };
   }, [totalCards, projects, shuffleDeck]);
 
+  const shuffleDeckRef = useRef(shuffleDeck);
+  shuffleDeckRef.current = shuffleDeck;
+
   useGSAP(
     () => {
       if (!sectionRef.current) return;
@@ -874,9 +877,9 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
           );
           if (targetStep !== activeIndexRef.current) {
             if (targetStep > activeIndexRef.current) {
-              shuffleDeck('next');
+              shuffleDeckRef.current('next');
             } else if (targetStep < activeIndexRef.current) {
-              shuffleDeck('prev');
+              shuffleDeckRef.current('prev');
             }
           }
         },
@@ -889,7 +892,7 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
         scrollTriggerRef.current = null;
       };
     },
-    { dependencies: [currentTab, totalCards, shuffleDeck], scope: sectionRef }
+    { dependencies: [currentTab, totalCards], scope: sectionRef }
   );
 
   // =========================================================================
@@ -1066,7 +1069,7 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
     <section
       ref={sectionRef}
       id="destacados"
-      className="relative w-full h-screen min-h-[640px] bg-white flex flex-col justify-between py-5 sm:py-8 md:py-10 px-4 sm:px-8 md:px-12 select-none overflow-hidden"
+      className="relative w-full min-h-screen bg-white flex flex-col justify-between pt-6 sm:pt-8 md:pt-10 pb-10 sm:pb-14 md:pb-16 px-4 sm:px-8 md:px-12 select-none overflow-hidden"
       role="region"
       aria-label="Previsualización de proyectos destacados en mazo de cartas"
     >
@@ -1287,7 +1290,7 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
         onPointerCancel={handlePointerUp}
         onMouseEnter={() => setIsCursorVisible(true)}
         onMouseLeave={() => setIsCursorVisible(false)}
-        className={`relative w-full max-w-4xl mx-auto my-auto py-16 sm:py-24 flex items-center justify-center min-h-[500px] sm:min-h-[560px] ${
+        className={`relative w-full max-w-4xl mx-auto my-auto py-8 sm:py-12 md:py-14 flex items-center justify-center min-h-[460px] sm:min-h-[520px] ${
           totalCards > 1 && !projects[0]?.isEditorialEmptyCard
             ? 'cursor-grab active:cursor-grabbing touch-pan-y'
             : 'cursor-default'
@@ -1311,7 +1314,7 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
         </div>
 
         {/* THE 5 PHYSICAL CARDS STACK */}
-        <div className="relative w-[92vw] sm:w-[600px] md:w-[680px] lg:w-[740px] h-[460px] sm:h-[475px] md:h-[495px] translate-y-7 sm:translate-y-8 md:translate-y-9">
+        <div className="relative w-[92vw] sm:w-[600px] md:w-[680px] lg:w-[740px] h-[460px] sm:h-[475px] md:h-[495px] translate-y-1 sm:translate-y-2">
           {projects.map((project, idx) => {
             const isFrontCard = idx === activeIndex;
             const isShowingSecondary =
@@ -1603,7 +1606,7 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
       {/* --------------------------------------------------------------------- */}
       {/* 3. BOTTOM FOOTER HINT & EXPLORE CATALOG BUTTON                        */}
       {/* --------------------------------------------------------------------- */}
-      <div className="w-full max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 text-xs font-mono text-ea-black/60 uppercase">
+      <div className="w-full max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 pt-6 pb-2 text-xs font-mono text-ea-black/60 uppercase">
         <div className="flex items-center gap-2 text-center sm:text-left">
           <Compass className="w-3.5 h-3.5 text-ea-black/50 shrink-0" />
           <span className="hidden sm:inline">DESPLÁZATE CON EL SCROLL O USA LAS FLECHAS PARA BARAJAR</span>
