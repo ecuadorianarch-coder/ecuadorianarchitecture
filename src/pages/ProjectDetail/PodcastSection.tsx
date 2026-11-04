@@ -152,9 +152,21 @@ export const PodcastSection: React.FC<PodcastSectionProps> = ({ project }) => {
             </button>
             <button
               onClick={() => {
-                const url = window.location.href;
-                navigator.clipboard?.writeText(url);
-                alert('Enlace del podcast copiado al portapapeles');
+                if (navigator.share) {
+                  navigator
+                    .share({
+                      title: `Podcast: ${project.title} — Ecuadorian Architecture`,
+                      text: `Escucha el diálogo crítico y análisis en obra de ${project.title} (${project.studio}) en Ecuadorian Architecture.`,
+                      url: window.location.href,
+                    })
+                    .catch(() => {
+                      navigator.clipboard?.writeText(window.location.href);
+                      triggerNotice('Enlace del podcast copiado al portapapeles');
+                    });
+                } else {
+                  navigator.clipboard?.writeText(window.location.href);
+                  triggerNotice('Enlace del podcast copiado al portapapeles');
+                }
               }}
               className="p-1.5 border border-ea-black text-ea-black hover:bg-ea-black hover:text-white transition-colors"
               title="Compartir episodio"

@@ -35,6 +35,7 @@ import { ConstructionTeamModal } from '../../components/construction/Constructio
 import { getConstructionTeamForProject } from '../../data/constructionTeams';
 import { hasAuthorProfile } from '../../data/authors';
 import { applyArchitectureSeoToDocument } from '../../services/architectureSeo';
+import { ShareProjectModal } from '../../components/common/ShareProjectModal';
 
 // Tape strip component for the taped tabs from Figma media_1791919174953_b2b8f1f9.png
 const TapeStrip: React.FC<{ className?: string }> = ({ className = '' }) => (
@@ -156,6 +157,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
   }, [controlledActiveTab]);
   const [activePlanType, setActivePlanType] = useState<'planta' | 'corte' | 'axonometria'>('planta');
   const [copiedLink, setCopiedLink] = useState(false);
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [isBottomNavVisible, setIsBottomNavVisible] = useState(false);
   const [isAuthorModalOpen, setIsAuthorModalOpen] = useState(false);
   const [selectedAuthorName, setSelectedAuthorName] = useState<string>(() => project.studio || '');
@@ -454,9 +456,25 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
   const qCenterCardRef = useRef<HTMLDivElement>(null);
 
   const handleShare = () => {
-    navigator.clipboard?.writeText(window.location.href);
-    setCopiedLink(true);
-    setTimeout(() => setCopiedLink(false), 2500);
+    const shareData = {
+      title: `${project.title} — ${project.studio || 'Ecuadorian Architecture'}`,
+      text: `Explora el expediente monográfico de "${project.title}" (${project.studio || 'Arquitectura Ecuatoriana'}) en Ecuadorian Architecture.`,
+      url: window.location.href,
+    };
+
+    if (
+      typeof navigator !== 'undefined' &&
+      navigator.share &&
+      /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
+    ) {
+      navigator.share(shareData).catch((err) => {
+        if (err && err.name !== 'AbortError') {
+          setIsShareModalOpen(true);
+        }
+      });
+    } else {
+      setIsShareModalOpen(true);
+    }
   };
 
   // Computed Focal Point / Object Position for Hero Photograph
@@ -1632,12 +1650,14 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
               {project.location} — {project.studio}
             </span>
             <button
+              type="button"
               onClick={handleShare}
-              className="p-2 border border-ea-border hover:border-ea-black text-ea-black/60 hover:text-ea-black transition-colors rounded-sm"
-              title="Compartir enlace al proyecto"
+              className="inline-flex items-center gap-2 px-3 py-1.5 border border-ea-black bg-white hover:bg-ea-black text-ea-black hover:text-white transition-all rounded-[2px] shadow-2xs font-anton text-xs tracking-wider uppercase active:scale-95"
+              title="Compartir expediente"
               data-cursor
             >
-              {copiedLink ? <CheckCircle2 className="w-4 h-4 text-green-600" /> : <Share2 className="w-4 h-4" />}
+              <Share2 className="w-3.5 h-3.5" />
+              <span>COMPARTIR</span>
             </button>
           </div>
         </div>
@@ -1796,6 +1816,39 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
         )}
 
         {/* ======================================================================= */}
+        {/* COMPARTIR / DIFUSIÓN ARQUITECTÓNICA BANNER                               */}
+        {/* ======================================================================= */}
+        <div className="my-10 p-6 sm:p-8 bg-[#F6F5F2] border-2 border-ea-black rounded-[2px] shadow-[4px_4px_0px_#000000]">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="space-y-1.5">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-ea-black" />
+                <span className="font-mono text-[10px] tracking-widest uppercase text-ea-black/60">
+                  DIFUSIÓN ARQUITECTÓNICA // ARCHIVO ECUATORIANO
+                </span>
+              </div>
+              <h3 className="font-anton text-lg sm:text-2xl uppercase tracking-wide text-ea-black">
+                ¿Te inspiró esta obra? Compártela con tu red
+              </h3>
+              <p className="font-creato text-xs sm:text-sm text-ea-black/70 max-w-xl">
+                Impulsa la arquitectura ecuatoriana enviando este expediente monográfico a colegas, estudiantes o a tu despacho vía WhatsApp, LinkedIn, X o código QR.
+              </p>
+            </div>
+            <div className="flex items-center gap-3 shrink-0">
+              <button
+                type="button"
+                onClick={handleShare}
+                className="inline-flex items-center gap-2.5 px-5 py-3 bg-ea-black text-white hover:bg-[#222] font-anton text-xs sm:text-sm tracking-wider uppercase rounded-[2px] shadow-[3px_3px_0px_rgba(0,0,0,0.25)] hover:shadow-[4px_4px_0px_rgba(0,0,0,0.35)] transition-all active:scale-98 cursor-pointer"
+                data-cursor
+              >
+                <Share2 className="w-4 h-4 text-white" />
+                <span>COMPARTIR EXPEDIENTE</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* ======================================================================= */}
         {/* 4. CONTINUAR EXPLORANDO OTROS PROYECTOS (CARRUSEL INTERACTIVO)         */}
         {/* ======================================================================= */}
         <section className="pt-14 border-t border-ea-border relative">
@@ -1940,6 +1993,20 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
                 </button>
               );
             })}
+
+            <div className="border-l border-ea-border pl-1.5 ml-1 flex items-center">
+              <button
+                type="button"
+                onClick={handleShare}
+                className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 font-anton text-[10.5px] sm:text-[11.5px] tracking-wider uppercase text-ea-black/70 hover:text-white hover:bg-ea-black rounded-[2px] transition-colors"
+                title="Compartir este expediente"
+                aria-label="Compartir este expediente"
+                data-cursor
+              >
+                <Share2 className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">COMPARTIR</span>
+              </button>
+            </div>
           </div>
         </aside>
       </main>
@@ -1989,6 +2056,13 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
         initialIndex={lightboxInitialIndex}
         projectTitle={project.title}
         onClose={() => setIsLightboxOpen(false)}
+      />
+
+      {/* Universal Multi-Channel Share Project Modal */}
+      <ShareProjectModal
+        isOpen={isShareModalOpen}
+        onClose={() => setIsShareModalOpen(false)}
+        project={project}
       />
     </div>
   );
