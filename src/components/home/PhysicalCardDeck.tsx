@@ -430,7 +430,7 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
     (targetTab: 'proyectos' | 'territorios' | 'academia') => {
       if (isTransitioningRef.current || targetTab === currentTab) return;
 
-      if (prefersReducedMotion.current || !shutterRef.current || !apertureRef.current) {
+      if (!shutterRef.current || !apertureRef.current) {
         onTabChange && onTabChange(targetTab);
         return;
       }
@@ -582,13 +582,6 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
       const exitDist = -(typeof window !== 'undefined' && window.innerWidth < 768 ? window.innerWidth * 1.15 : 750);
       const lastSlotCfg = getSlotConfig(totalCards - 1);
 
-      if (prefersReducedMotion.current) {
-        setActiveIndex(targetIdx);
-        activeIndexRef.current = targetIdx;
-        applySlotsInstant(targetIdx);
-        return;
-      }
-
       isAnimatingRef.current = true;
       setIsAnimating(true);
 
@@ -598,15 +591,6 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
           setActiveIndex(targetIdx);
           isAnimatingRef.current = false;
           setIsAnimating(false);
-
-          // Sync with ScrollTrigger if active
-          if (scrollTriggerRef.current) {
-            const st = scrollTriggerRef.current;
-            if (st.start && st.end) {
-              const targetScroll = st.start + (targetIdx / (totalCards - 1)) * (st.end - st.start);
-              window.scrollTo({ top: targetScroll, behavior: 'instant' });
-            }
-          }
         },
       });
 
