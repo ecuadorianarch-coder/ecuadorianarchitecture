@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { Instagram, Facebook, Youtube, Twitter } from 'lucide-react';
+import { Instagram, Facebook, Youtube, Linkedin } from 'lucide-react';
 import logoExtendidoUrl from '../../assets/logos/logo_extendido.svg';
 import mediaPartnersUrl from '../../assets/logos/media_partners.svg';
 import { FooterModal, FooterModalTab } from '../footer/FooterModal';
@@ -187,18 +187,18 @@ export const Footer: React.FC = () => {
             {/* Iconos de Redes Sociales con 44x44px touch targets */}
             <div className="flex items-center gap-1 sm:gap-2 text-ea-black/45">
               <a
-                href="https://instagram.com/ecuadorianarch"
+                href="https://www.instagram.com/ecuadorianarchitecture/"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Instagram oficial de Ecuadorian Architecture (@ecuadorianarch)"
+                aria-label="Instagram oficial de Ecuadorian Architecture (@ecuadorianarchitecture)"
                 className="w-11 h-11 flex items-center justify-center hover:text-blue-600 transition-all cursor-pointer active:scale-90"
-                title="Instagram: @ecuadorianarch"
+                title="Instagram: @ecuadorianarchitecture"
                 data-cursor
               >
                 <Instagram className="w-4.5 h-4.5" />
               </a>
               <a
-                href="https://facebook.com/ecuadorianarch"
+                href="https://www.facebook.com/profile.php?id=100071072018091"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook oficial de Ecuadorian Architecture"
@@ -209,26 +209,26 @@ export const Footer: React.FC = () => {
                 <Facebook className="w-4.5 h-4.5" />
               </a>
               <a
-                href="https://youtube.com/@ecuadorianarch"
+                href="https://www.youtube.com/@ecuadorianarch437"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="YouTube oficial de Ecuadorian Architecture"
+                aria-label="YouTube oficial de Ecuadorian Architecture (@ecuadorianarch437)"
                 className="w-11 h-11 flex items-center justify-center hover:text-blue-600 transition-all cursor-pointer active:scale-90"
-                title="YouTube: @ecuadorianarch"
+                title="YouTube: @ecuadorianarch437"
                 data-cursor
               >
                 <Youtube className="w-4.5 h-4.5" />
               </a>
               <a
-                href="https://x.com/ecuadorianarch"
+                href="https://www.linkedin.com/company/ecuadorian-architecture"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="X (Twitter) oficial de Ecuadorian Architecture (@ecuadorianarch)"
+                aria-label="LinkedIn oficial de Ecuadorian Architecture"
                 className="w-11 h-11 flex items-center justify-center hover:text-blue-600 transition-all cursor-pointer active:scale-90"
-                title="X: @ecuadorianarch"
+                title="LinkedIn: Ecuadorian Architecture"
                 data-cursor
               >
-                <Twitter className="w-4.5 h-4.5" />
+                <Linkedin className="w-4.5 h-4.5" />
               </a>
             </div>
           </div>
