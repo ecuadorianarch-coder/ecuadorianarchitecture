@@ -473,13 +473,12 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
 
     if (
       typeof navigator !== 'undefined' &&
-      navigator.share &&
+      typeof navigator.share === 'function' &&
       /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
     ) {
-      navigator.share(shareData).catch((err) => {
-        if (err && err.name !== 'AbortError') {
-          setIsShareModalOpen(true);
-        }
+      navigator.share(shareData).catch(() => {
+        // Fallback to rich mobile drawer modal
+        setIsShareModalOpen(true);
       });
     } else {
       setIsShareModalOpen(true);
@@ -947,6 +946,18 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
                   data-cursor
                 >
                   <span>ACERCA</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleShare}
+                  className="inline-flex items-center gap-1.5 px-2 sm:px-2.5 py-1 border border-ea-black/30 hover:border-ea-black text-ea-black hover:bg-ea-black hover:text-white transition-all rounded-[2px] font-anton text-[11px] sm:text-xs uppercase tracking-wider shrink-0 cursor-pointer active:scale-95 touch-manipulation ml-0.5"
+                  title="Compartir este expediente"
+                  aria-label="Compartir este expediente"
+                  data-cursor
+                >
+                  <Share2 className="w-3.5 h-3.5" />
+                  <span className="hidden md:inline">COMPARTIR</span>
                 </button>
               </nav>
             </header>
@@ -1664,14 +1675,14 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
             <span>VOLVER AL CATÁLOGO</span>
           </button>
 
-          <div className="flex items-center gap-3">
-            <span className="font-mono text-xs text-ea-black/50 uppercase">
+          <div className="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto">
+            <span className="font-mono text-xs text-ea-black/50 uppercase truncate min-w-0">
               {project.location} — {project.studio}
             </span>
             <button
               type="button"
               onClick={handleShare}
-              className="inline-flex items-center gap-2 px-3 py-1.5 border border-ea-black bg-white hover:bg-ea-black text-ea-black hover:text-white transition-all rounded-[2px] shadow-2xs font-anton text-xs tracking-wider uppercase active:scale-95"
+              className="inline-flex items-center gap-2 px-3 py-1.5 border border-ea-black bg-white hover:bg-ea-black text-ea-black hover:text-white transition-all rounded-[2px] shadow-2xs font-anton text-xs tracking-wider uppercase active:scale-95 shrink-0 touch-manipulation"
               title="Compartir expediente"
               data-cursor
             >
@@ -1853,11 +1864,11 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
                 Impulsa la arquitectura ecuatoriana enviando este expediente monográfico a colegas, estudiantes o a tu despacho vía WhatsApp, LinkedIn, X o código QR.
               </p>
             </div>
-            <div className="flex items-center gap-3 shrink-0">
+            <div className="flex items-center gap-3 shrink-0 w-full md:w-auto">
               <button
                 type="button"
                 onClick={handleShare}
-                className="inline-flex items-center gap-2.5 px-5 py-3 bg-ea-black text-white hover:bg-[#222] font-anton text-xs sm:text-sm tracking-wider uppercase rounded-[2px] shadow-[3px_3px_0px_rgba(0,0,0,0.25)] hover:shadow-[4px_4px_0px_rgba(0,0,0,0.35)] transition-all active:scale-98 cursor-pointer"
+                className="w-full md:w-auto justify-center inline-flex items-center gap-2.5 px-5 py-3.5 bg-ea-black text-white hover:bg-[#222] font-anton text-xs sm:text-sm tracking-wider uppercase rounded-[2px] shadow-[3px_3px_0px_rgba(0,0,0,0.25)] hover:shadow-[4px_4px_0px_rgba(0,0,0,0.35)] transition-all active:scale-98 cursor-pointer touch-manipulation"
                 data-cursor
               >
                 <Share2 className="w-4 h-4 text-white" />
@@ -2017,7 +2028,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
               <button
                 type="button"
                 onClick={handleShare}
-                className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 font-anton text-[10.5px] sm:text-[11.5px] tracking-wider uppercase text-ea-black/70 hover:text-white hover:bg-ea-black rounded-[2px] transition-colors"
+                className="inline-flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-1 min-h-[30px] font-anton text-[10.5px] sm:text-[11.5px] tracking-wider uppercase text-ea-black/70 hover:text-white hover:bg-ea-black rounded-[2px] transition-colors touch-manipulation active:scale-95"
                 title="Compartir este expediente"
                 aria-label="Compartir este expediente"
                 data-cursor
