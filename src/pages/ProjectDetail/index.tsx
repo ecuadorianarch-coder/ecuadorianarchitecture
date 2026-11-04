@@ -733,9 +733,96 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
           {/* --------------------------------------------------------------------- */}
           <div
             ref={headerBarRef}
-            className="absolute top-0 left-0 right-0 z-40 px-3.5 sm:px-8 md:px-12 pt-[calc(0.6rem+env(safe-area-inset-top,0px))] sm:pt-7 pb-2 max-w-[1400px] mx-auto pointer-events-auto"
+            className="hero-header-bar absolute top-0 left-0 right-0 z-40 px-3.5 sm:px-8 md:px-12 pt-[calc(0.4rem+env(safe-area-inset-top,0px))] sm:pt-3.5 md:pt-4 pb-1 max-w-[1400px] mx-auto pointer-events-auto"
           >
-            <header className="flex items-center justify-between gap-2 sm:gap-6 pb-2.5 sm:pb-4">
+            <style>{`
+              /* Responsive height rules to guarantee zero text-on-photo overlap across all zoom levels and window heights */
+              .hero-photo-card {
+                top: 63.5%;
+                height: 42vh;
+                max-height: 440px;
+              }
+              @media (max-height: 750px) {
+                .hero-header-bar {
+                  padding-top: 8px !important;
+                  padding-bottom: 3px !important;
+                }
+                .hero-header-bar header {
+                  padding-bottom: 4px !important;
+                }
+                .hero-header-bar header img {
+                  width: 44px !important;
+                  height: 44px !important;
+                }
+                .hero-header-bar header span {
+                  font-size: 26px !important;
+                }
+                .hero-pill-capsule {
+                  padding-top: 8px !important;
+                  padding-bottom: 8px !important;
+                  padding-left: 20px !important;
+                  padding-right: 20px !important;
+                }
+                .hero-editorial-placard {
+                  top: 142px !important;
+                }
+                .hero-editorial-placard h2 {
+                  font-size: 26px !important;
+                }
+                .hero-photo-card {
+                  top: 64.5% !important;
+                  height: 38vh !important;
+                  max-height: 360px !important;
+                }
+              }
+              @media (max-height: 600px) {
+                .hero-header-bar {
+                  padding-top: 5px !important;
+                  padding-bottom: 2px !important;
+                }
+                .hero-header-bar header {
+                  padding-bottom: 3px !important;
+                }
+                .hero-header-bar header img {
+                  width: 32px !important;
+                  height: 32px !important;
+                }
+                .hero-header-bar header span {
+                  font-size: 20px !important;
+                }
+                .hero-pill-capsule {
+                  padding-top: 5px !important;
+                  padding-bottom: 5px !important;
+                  padding-left: 14px !important;
+                  padding-right: 14px !important;
+                }
+                .hero-editorial-placard {
+                  top: 116px !important;
+                }
+                .hero-editorial-placard h2 {
+                  font-size: 21px !important;
+                }
+                .hero-photo-card {
+                  top: 66% !important;
+                  height: 34vh !important;
+                  max-height: 270px !important;
+                }
+              }
+              @media (max-height: 480px) {
+                .hero-header-bar header {
+                  display: none !important;
+                }
+                .hero-editorial-placard {
+                  top: 64px !important;
+                }
+                .hero-photo-card {
+                  top: 68% !important;
+                  height: 30vh !important;
+                  max-height: 200px !important;
+                }
+              }
+            `}</style>
+            <header className="flex items-center justify-between gap-2 sm:gap-6 pb-2 sm:pb-3">
               {/* Left: Logo + [SECCIÓN: PROYECTOS / ACADEMIA / TERRITORIOS] */}
               <div className="flex items-center gap-1.5 sm:gap-3.5 shrink min-w-0">
                 <button
@@ -857,7 +944,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
               <div
                 ref={pillScrollRef}
                 onScroll={checkPillScroll}
-                className="w-full bg-[#F0EEEA] rounded-full py-2.5 sm:py-3.5 md:py-4 px-6 sm:px-10 md:px-12 border border-ea-black/15 shadow-[0_2px_8px_rgba(0,0,0,0.04)] flex items-center justify-start lg:justify-center gap-3.5 sm:gap-6 md:gap-8 overflow-x-auto no-scrollbar whitespace-nowrap cursor-grab active:cursor-grabbing select-none"
+                className="hero-pill-capsule w-full bg-[#F0EEEA] rounded-full py-2.5 sm:py-3.5 md:py-4 px-6 sm:px-10 md:px-12 border border-ea-black/15 shadow-[0_2px_8px_rgba(0,0,0,0.04)] flex items-center justify-start lg:justify-center gap-3.5 sm:gap-6 md:gap-8 overflow-x-auto no-scrollbar whitespace-nowrap cursor-grab active:cursor-grabbing select-none"
               >
                 {/* ========================================================= */}
                 {/* CASO 1: TERRITORIOS (Sin crítica ni fotografía)          */}
@@ -1090,7 +1177,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
           {/* --------------------------------------------------------------------- */}
           <div
             ref={initialEditorialRef}
-            className="absolute top-[180px] sm:top-[195px] md:top-[210px] left-1/2 -translate-x-1/2 w-[88vw] sm:w-[85vw] max-w-[740px] px-1 sm:px-2 flex items-end justify-between z-20 pointer-events-none"
+            className="hero-editorial-placard absolute top-[162px] sm:top-[174px] md:top-[182px] left-1/2 -translate-x-1/2 w-[88vw] sm:w-[85vw] max-w-[740px] px-1 sm:px-2 flex items-end justify-between z-20 pointer-events-none"
           >
             <div>
               <h2 className="font-okcok text-2xl sm:text-3xl md:text-4xl uppercase text-ea-black tracking-normal leading-[1.2] py-0.5">
@@ -1133,7 +1220,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
           <div
             ref={heroWrapperRef}
             onClick={() => openLightboxAt(0)}
-            className="absolute top-[63%] sm:top-[58%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[88vw] sm:w-[85vw] max-w-[740px] h-[44vh] sm:h-[50vh] md:h-[52vh] max-h-[540px] rounded-[24px] sm:rounded-[28px] md:rounded-[32px] shadow-2xl overflow-hidden bg-ea-offwhite z-10 transition-shadow duration-300 cursor-zoom-in"
+            className="hero-photo-card absolute left-1/2 -translate-x-1/2 -translate-y-1/2 w-[88vw] sm:w-[85vw] max-w-[740px] rounded-[20px] sm:rounded-[26px] md:rounded-[28px] shadow-2xl overflow-hidden bg-ea-offwhite z-10 transition-shadow duration-300 cursor-zoom-in"
             title="Clic para ver en carrusel de fotos a pantalla completa"
           >
             <img
