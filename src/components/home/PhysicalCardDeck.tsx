@@ -420,7 +420,7 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
         });
       });
     },
-    [projects]
+    [projects.length]
   );
 
   const applySlotsInstantRef = useRef(applySlotsInstant);
@@ -538,9 +538,11 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
   }, [currentTab, handleTabSwitch]);
 
   useEffect(() => {
+    if (isAnimatingRef.current) return;
     applySlotsInstant(activeIndex);
 
     const handleResize = () => {
+      if (isAnimatingRef.current) return;
       applySlotsInstant(activeIndexRef.current);
     };
     window.addEventListener('resize', handleResize);
@@ -558,13 +560,174 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
       applySlotsInstant(0);
     });
     return () => cancelAnimationFrame(raf);
-  }, [projects, applySlotsInstant]);
+  }, [currentTab, projects.length, applySlotsInstant]);
 
   // =========================================================================
-  // PINNED SCROLL DECK (GSAP ScrollTrigger & Scrubbed Master Timeline)
-  // Shuffles through all cards sequentially as the user scrolls naturally down
-  // the page, before releasing the pin and reaching the footer.
+  // PHYSICAL CARD SHUFFLE ANIMATION (BARAJAR CARTAS)
+  // Direct GSAP Tween for next / prev buttons, swipe gestures & arrow keys.
+  // Front card sweeps out with physical rotation, drops behind stack, and
+  // all cards advance with a tactile back.out bounce.
   // =========================================================================
+  const shuffleDeck = useCallback(
+    (direction: 'next' | 'prev') => {
+      if (totalCards <= 1 || isAnimatingRef.current || projects[0]?.isEditorialEmptyCard) return;
+
+      const currentIdx = activeIndexRef.current;
+      const targetIdx =
+        direction === 'next'
+          ? (currentIdx + 1) % totalCards
+          : (currentIdx - 1 + totalCards) % totalCards;
+
+      const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+      const exitDist = -(typeof window !== 'undefined' && window.innerWidth < 768 ? window.innerWidth * 1.15 : 750);
+      const lastSlotCfg = getSlotConfig(totalCards - 1);
+
+      if (prefersReducedMotion.current) {
+        setActiveIndex(targetIdx);
+        activeIndexRef.current = targetIdx;
+        applySlotsInstant(targetIdx);
+        return;
+      }
+
+      isAnimatingRef.current = true;
+      setIsAnimating(true);
+
+      const tl = gsap.timeline({
+        onComplete: () => {
+          activeIndexRef.current = targetIdx;
+          setActiveIndex(targetIdx);
+          isAnimatingRef.current = false;
+          setIsAnimating(false);
+
+          // Sync with ScrollTrigger if active
+          if (scrollTriggerRef.current) {
+            const st = scrollTriggerRef.current;
+            if (st.start && st.end) {
+              const targetScroll = st.start + (targetIdx / (totalCards - 1)) * (st.end - st.start);
+              window.scrollTo({ top: targetScroll, behavior: 'instant' });
+            }
+          }
+        },
+      });
+
+      if (direction === 'next') {
+        // FRONT CARD pulls out to the left and slides into the back slot
+        const frontCard = cardRefs.current[currentIdx];
+        if (frontCard) {
+          gsap.killTweensOf(frontCard);
+          tl.set(frontCard, { zIndex: 6 }, 0);
+          // 1. Pull out to the left
+          tl.to(
+            frontCard,
+            { x: exitDist, rotation: -8, y: 12, duration: 0.38, ease: 'power1.in' },
+            0
+          );
+          // 2. Drop behind stack
+          tl.set(frontCard, { zIndex: 1 }, 0.38);
+          // 3. Slide smoothly into the last slot from behind
+          tl.to(
+            frontCard,
+            {
+              x: 0,
+              y: lastSlotCfg.y,
+              rotation: lastSlotCfg.rotation,
+              scale: lastSlotCfg.scale,
+              zIndex: 1,
+              boxShadow: lastSlotCfg.boxShadow,
+              duration: 0.44,
+              ease: 'power2.out',
+            },
+            0.38
+          );
+        }
+
+        // All OTHER CARDS advance forward one slot
+        for (let idx = 0; idx < totalCards; idx++) {
+          if (idx === currentIdx) continue;
+          const otherCard = cardRefs.current[idx];
+          if (!otherCard) continue;
+
+          gsap.killTweensOf(otherCard);
+          const nextSlot = (idx - targetIdx + totalCards) % totalCards;
+          const nextCfg = getSlotConfig(nextSlot);
+
+          tl.set(otherCard, { zIndex: nextCfg.zIndex }, 0.2);
+          tl.to(
+            otherCard,
+            {
+              x: 0,
+              y: nextCfg.y,
+              rotation: nextCfg.rotation,
+              scale: nextCfg.scale,
+              zIndex: nextCfg.zIndex,
+              boxShadow: nextCfg.boxShadow,
+              duration: 0.58,
+              ease: nextSlot === 0 ? 'back.out(1.15)' : 'power2.out',
+            },
+            0.12
+          );
+        }
+      } else {
+        // PREVIOUS CARD: the card from the very back slot pulls out to the left and lands on the front
+        const incomingCard = cardRefs.current[targetIdx];
+        if (incomingCard) {
+          gsap.killTweensOf(incomingCard);
+          // 1. Pull out to the left from underneath
+          tl.to(
+            incomingCard,
+            { x: exitDist, rotation: -8, y: 12, duration: 0.38, ease: 'power1.in' },
+            0
+          );
+          // 2. Bring above all other cards
+          tl.set(incomingCard, { zIndex: 7 }, 0.38);
+          // 3. Drop into front slot (Slot 0)
+          tl.to(
+            incomingCard,
+            {
+              x: 0,
+              y: 0,
+              rotation: 0,
+              scale: 1,
+              zIndex: 6,
+              boxShadow: getSlotConfig(0).boxShadow,
+              duration: 0.44,
+              ease: 'back.out(1.15)',
+            },
+            0.38
+          );
+        }
+
+        // All OTHER CARDS shift back one slot
+        for (let idx = 0; idx < totalCards; idx++) {
+          if (idx === targetIdx) continue;
+          const otherCard = cardRefs.current[idx];
+          if (!otherCard) continue;
+
+          gsap.killTweensOf(otherCard);
+          const nextSlot = (idx - targetIdx + totalCards) % totalCards;
+          const nextCfg = getSlotConfig(nextSlot);
+
+          tl.set(otherCard, { zIndex: nextCfg.zIndex }, 0.18);
+          tl.to(
+            otherCard,
+            {
+              x: 0,
+              y: nextCfg.y,
+              rotation: nextCfg.rotation,
+              scale: nextCfg.scale,
+              zIndex: nextCfg.zIndex,
+              boxShadow: nextCfg.boxShadow,
+              duration: 0.52,
+              ease: 'power2.out',
+            },
+            0.1
+          );
+        }
+      }
+    },
+    [totalCards, projects, applySlotsInstant]
+  );
+
   const goToCard = useCallback(
     (targetIndex: number) => {
       if (totalCards <= 1) {
@@ -573,30 +736,55 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
         applySlotsInstant(0);
         return;
       }
-      const clamped = Math.max(0, Math.min(totalCards - 1, targetIndex));
-      if (scrollTriggerRef.current) {
-        const st = scrollTriggerRef.current;
-        const targetScroll = st.start + (clamped / (totalCards - 1)) * (st.end - st.start);
-        window.scrollTo({ top: targetScroll, behavior: 'smooth' });
-      } else {
-        setActiveIndex(clamped);
-        applySlotsInstant(clamped);
+      if (isAnimatingRef.current) return;
+      const currentIdx = activeIndexRef.current;
+      if (targetIndex === currentIdx) return;
+
+      if (targetIndex === (currentIdx + 1) % totalCards) {
+        shuffleDeck('next');
+        return;
       }
+      if (targetIndex === (currentIdx - 1 + totalCards) % totalCards) {
+        shuffleDeck('prev');
+        return;
+      }
+
+      // Multi-step jump (e.g. clicking rayita from 0 to 4): animate all cards to target slots
+      isAnimatingRef.current = true;
+      setIsAnimating(true);
+      cardRefs.current.forEach((cardEl, idx) => {
+        if (!cardEl) return;
+        gsap.killTweensOf(cardEl);
+        const nextSlot = (idx - targetIndex + totalCards) % totalCards;
+        const nextCfg = getSlotConfig(nextSlot);
+        gsap.to(cardEl, {
+          x: 0,
+          y: nextCfg.y,
+          rotation: nextCfg.rotation,
+          scale: nextCfg.scale,
+          zIndex: nextCfg.zIndex,
+          boxShadow: nextCfg.boxShadow,
+          duration: 0.45,
+          ease: nextSlot === 0 ? 'back.out(1.15)' : 'power2.out',
+        });
+      });
+      setTimeout(() => {
+        activeIndexRef.current = targetIndex;
+        setActiveIndex(targetIndex);
+        isAnimatingRef.current = false;
+        setIsAnimating(false);
+      }, 450);
     },
-    [totalCards, applySlotsInstant]
+    [totalCards, shuffleDeck, applySlotsInstant]
   );
 
   const nextCard = useCallback(() => {
-    if (totalCards <= 1) return;
-    const nextIdx = (activeIndexRef.current + 1) % totalCards;
-    goToCard(nextIdx);
-  }, [totalCards, goToCard]);
+    shuffleDeck('next');
+  }, [shuffleDeck]);
 
   const prevCard = useCallback(() => {
-    if (totalCards <= 1) return;
-    const prevIdx = (activeIndexRef.current - 1 + totalCards) % totalCards;
-    goToCard(prevIdx);
-  }, [totalCards, goToCard]);
+    shuffleDeck('prev');
+  }, [shuffleDeck]);
 
   useGSAP(
     () => {
@@ -700,6 +888,7 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
         scrub: 0.35,
         animation: tl,
         onUpdate: (self) => {
+          if (isAnimatingRef.current) return;
           const step = Math.min(totalCards - 1, Math.round(self.progress * (totalCards - 1)));
           if (step !== activeIndexRef.current) {
             activeIndexRef.current = step;
@@ -716,7 +905,7 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
         scrollTriggerRef.current = null;
       };
     },
-    { dependencies: [currentTab, totalCards, projects], scope: sectionRef, revertOnUpdate: true }
+    { dependencies: [currentTab, totalCards], scope: sectionRef }
   );
 
   // =========================================================================
@@ -1154,17 +1343,6 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
                 key={`${project.id}-${currentTab}`}
                 ref={(el) => {
                   cardRefs.current[idx] = el;
-                  if (el) {
-                    gsap.set(el, {
-                      x: 0,
-                      y: cfg.y,
-                      rotation: cfg.rotation,
-                      scale: cfg.scale,
-                      zIndex: cfg.zIndex,
-                      boxShadow: cfg.boxShadow,
-                      opacity: 1,
-                    });
-                  }
                 }}
                 onClick={() => isFrontCard && handleCardClick(project)}
                 role="group"
@@ -1212,9 +1390,6 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
                     : 'select-none pointer-events-none'
                 }`}
                 style={{
-                  transform: `translate3d(0px, ${cfg.y}px, 0px) rotate(${cfg.rotation}deg) scale(${cfg.scale})`,
-                  zIndex: cfg.zIndex,
-                  boxShadow: cfg.boxShadow,
                   opacity: 1, // MANDATORY: 100% OPAQUE - NEVER FADES
                   transformOrigin: 'bottom center',
                   transformStyle: 'preserve-3d',
