@@ -618,7 +618,7 @@ export const ProjectsCatalog: React.FC<ProjectsCatalogProps> = ({
         <StickySponsorWings
           section={currentSection}
           position="izquierdo"
-          className="mt-28 mb-8"
+          className="mt-6 mb-8"
         />
 
         {/* Central Projects Catalog Column */}
@@ -1689,7 +1689,7 @@ export const ProjectsCatalog: React.FC<ProjectsCatalogProps> = ({
         <StickySponsorWings
           section={currentSection}
           position="derecho"
-          className="mt-28 mb-8"
+          className="mt-6 mb-8"
         />
       </div>
 

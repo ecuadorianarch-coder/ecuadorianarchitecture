@@ -87,7 +87,7 @@ export const InFeedProjectAdCard: React.FC<InFeedProjectAdCardProps> = ({
     return (
       <div
         ref={cardRef}
-        className="infeed-sponsor-card relative w-full h-auto md:h-[380px] lg:h-[390px] bg-white border-2 border-ea-black rounded-[26px] sm:rounded-[30px] md:rounded-[34px] p-2 sm:p-2.5 flex flex-col justify-between select-none transition-all duration-300 ease-out hover:shadow-xl hover:-translate-y-1 overflow-hidden group"
+        className="infeed-sponsor-card relative w-full h-auto md:h-[380px] lg:h-[390px] rounded-[24px] sm:rounded-[28px] md:rounded-[32px] overflow-hidden select-none transition-all duration-300 ease-out hover:-translate-y-0.5 border border-ea-black/30 hover:border-ea-black group"
       >
         {/* Main Artwork Asset Frame - 100% pure image */}
         <a
@@ -95,7 +95,7 @@ export const InFeedProjectAdCard: React.FC<InFeedProjectAdCardProps> = ({
           onClick={handleClick}
           target={clickHref.startsWith('http') ? '_blank' : undefined}
           rel={clickHref.startsWith('http') ? 'noopener noreferrer' : undefined}
-          className="relative w-full h-full min-h-[220px] md:min-h-0 flex-1 rounded-[20px] sm:rounded-[24px] overflow-hidden bg-neutral-100 block cursor-pointer"
+          className="relative w-full h-full min-h-[220px] md:min-h-0 overflow-hidden bg-neutral-100 block cursor-pointer"
           data-cursor
           title={campaign.title || brandName}
         >
@@ -104,7 +104,7 @@ export const InFeedProjectAdCard: React.FC<InFeedProjectAdCardProps> = ({
             <img
               src={campaign.desktopAsset}
               alt={campaign.title || brandName}
-              className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500 ease-out"
+              className="w-full h-full object-cover group-hover:scale-[1.015] transition-transform duration-500 ease-out"
               loading="lazy"
             />
           </picture>
@@ -123,8 +123,7 @@ export const InFeedProjectAdCard: React.FC<InFeedProjectAdCardProps> = ({
   return (
     <div
       ref={cardRef}
-      className="infeed-sponsor-card relative w-[345px] h-[414px] bg-[#FAF8F5] border-2 border-ea-black p-2 flex flex-col justify-between select-none transition-all duration-300 ease-out shadow-[3px_3px_0px_#000] hover:shadow-[5px_5px_0px_#000] hover:-translate-y-1 shrink-0 overflow-hidden group"
-      style={{ borderRadius: '2px' }}
+      className="infeed-sponsor-card relative w-[345px] h-[414px] rounded-[2px] overflow-hidden select-none transition-all duration-300 ease-out hover:-translate-y-0.5 shrink-0 border border-ea-black/30 hover:border-ea-black group"
     >
       {/* Artwork Banner - 100% pure image */}
       <a
@@ -132,7 +131,7 @@ export const InFeedProjectAdCard: React.FC<InFeedProjectAdCardProps> = ({
         onClick={handleClick}
         target={clickHref.startsWith('http') ? '_blank' : undefined}
         rel={clickHref.startsWith('http') ? 'noopener noreferrer' : undefined}
-        className="relative w-full h-full border border-ea-black/35 overflow-hidden bg-ea-offwhite block cursor-pointer"
+        className="relative w-full h-full overflow-hidden bg-neutral-100 block cursor-pointer"
         data-cursor
         title={campaign.title || brandName}
       >
@@ -141,7 +140,7 @@ export const InFeedProjectAdCard: React.FC<InFeedProjectAdCardProps> = ({
           <img
             src={campaign.desktopAsset}
             alt={campaign.title || brandName}
-            className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500 ease-out"
+            className="w-full h-full object-cover group-hover:scale-[1.015] transition-transform duration-500 ease-out"
             loading="lazy"
           />
         </picture>

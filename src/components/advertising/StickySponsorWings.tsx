@@ -104,7 +104,7 @@ export const StickySponsorWings: React.FC<StickySponsorWingsProps> = ({
   return (
     <aside
       aria-label={`Espacio publicitario ${position}: ${brandLabel}`}
-      className={`hidden xl:flex flex-col sticky top-24 z-20 w-[165px] 2xl:w-[190px] shrink-0 select-none transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+      className={`hidden xl:flex flex-col sticky top-20 z-20 w-[145px] xl:w-[165px] 2xl:w-[195px] h-[calc(100vh-100px)] max-h-[88vh] min-h-[500px] shrink-0 select-none transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
         isVisible
           ? 'opacity-100 translate-y-0 pointer-events-auto'
           : 'opacity-0 translate-y-3 pointer-events-none'

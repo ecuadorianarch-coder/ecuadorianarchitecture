@@ -691,7 +691,7 @@ export const ImageCarouselLightbox: React.FC<ImageCarouselLightboxProps> = ({
         {hasLeftAd && (
           <aside
             aria-label="Publicidad lateral izquierda"
-            className="hidden xl:flex flex-col items-center justify-center shrink-0 w-[140px] xl:w-[155px] 2xl:w-[175px] max-h-[56vh] z-10 select-none animate-in fade-in slide-in-from-left-4 duration-300 min-h-0"
+            className="hidden xl:flex flex-col items-center justify-center shrink-0 w-[140px] xl:w-[155px] 2xl:w-[175px] h-[72vh] max-h-[75vh] z-10 select-none animate-in fade-in slide-in-from-left-4 duration-300 min-h-0"
           >
             <div className="w-full flex items-center justify-between pb-1 px-0.5 text-[9px] font-mono tracking-widest text-white/40 uppercase">
               <span>PUBLICIDAD</span>
@@ -754,7 +754,7 @@ export const ImageCarouselLightbox: React.FC<ImageCarouselLightboxProps> = ({
         {hasRightAd && (
           <aside
             aria-label="Publicidad lateral derecha"
-            className="hidden xl:flex flex-col items-center justify-center shrink-0 w-[140px] xl:w-[155px] 2xl:w-[175px] max-h-[56vh] z-10 select-none animate-in fade-in slide-in-from-right-4 duration-300 min-h-0"
+            className="hidden xl:flex flex-col items-center justify-center shrink-0 w-[140px] xl:w-[155px] 2xl:w-[175px] h-[72vh] max-h-[75vh] z-10 select-none animate-in fade-in slide-in-from-right-4 duration-300 min-h-0"
           >
             <div className="w-full flex items-center justify-between pb-1 px-0.5 text-[9px] font-mono tracking-widest text-white/40 uppercase">
               <span>PUBLICIDAD</span>

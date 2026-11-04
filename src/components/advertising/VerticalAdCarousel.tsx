@@ -120,20 +120,16 @@ export const VerticalAdCarousel: React.FC<VerticalAdCarouselProps> = ({
       rel={destinationUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
-      className={`group relative flex flex-col w-full h-full min-h-[320px] max-h-[580px] rounded-[2px] transition-all duration-300 p-2 2xl:p-2.5 cursor-pointer overflow-hidden select-none ${
+      className={`group relative flex flex-col w-full h-full rounded-[2px] transition-all duration-300 cursor-pointer overflow-hidden select-none border ${
         isDark
-          ? 'bg-[#111317]/95 border border-white/20 hover:border-white/50 shadow-[0_12px_36px_rgba(0,0,0,0.8)] backdrop-blur-md hover:-translate-y-1'
-          : 'bg-[#FAF8F5] border-2 border-ea-black shadow-[5px_5px_0px_#000] hover:shadow-[7px_7px_0px_#000] hover:-translate-y-1'
+          ? 'bg-black/90 border-white/20 hover:border-white/50'
+          : 'bg-neutral-100 border-ea-black/30 hover:border-ea-black'
       } ${className}`}
       aria-label={`Pauta publicitaria de ${brandName}: ${title}`}
       data-cursor
     >
       {/* 1. Arte Visual Predefinido 100% Puro (Sin textos ni botones sobrepuestos) */}
-      <div
-        className={`relative flex-1 w-full h-full overflow-hidden rounded-[1px] ${
-          isDark ? 'bg-black/60 border border-white/15' : 'bg-[#EAE6DD] border border-ea-black/20'
-        }`}
-      >
+      <div className="relative w-full h-full overflow-hidden">
         {/* Micro-etiqueta "AD" discreta */}
         <div className="absolute top-2 left-2 z-10 opacity-70 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
           <span

@@ -1322,7 +1322,7 @@ Nuestros banners renderizan exclusivamente la imagen gráfica final enviada por 
                   return (
                     <div className="w-full max-w-[1040px] flex items-start justify-center gap-4">
                       {/* Left Wing Banner */}
-                      <div className="w-[180px] shrink-0">
+                      <div className="w-[180px] h-[640px] shrink-0">
                         <VerticalAdCarousel
                           modernCampaign={currentPreviewCampaign}
                           brand={currentPreviewBrand}
@@ -1332,7 +1332,7 @@ Nuestros banners renderizan exclusivamente la imagen gráfica final enviada por 
                       </div>
 
                       {/* Real Central Monograph Column */}
-                      <div className="flex-1 bg-white border-2 border-ea-black p-6 shadow-[3px_3px_0px_#000] min-h-[580px] flex flex-col justify-between">
+                      <div className="flex-1 bg-white border border-ea-black/30 p-6 min-h-[580px] flex flex-col justify-between">
                         <div>
                           <span className="font-mono text-[10px] text-ea-black/50 uppercase block">
                             EXPEDIENTE MONOGRÁFICO // {p1.location} · {p1.year}
@@ -1347,14 +1347,14 @@ Nuestros banners renderizan exclusivamente la imagen gráfica final enviada por 
                           </p>
                         </div>
 
-                        <div className="p-3 bg-[#FAF8F5] border border-ea-black/20 text-center font-mono text-[10px] text-ea-black/60 mt-4">
-                          Los skyscrapers laterales flanquean el contenido y permanecen fijos durante el scroll del lector.
+                        <div className="p-3 bg-neutral-50 border border-ea-black/20 text-center font-mono text-[10px] text-ea-black/60 mt-4">
+                          Los skyscrapers laterales flanquean el contenido y permanecen fijos durante el scroll del lector ocupando casi toda la altura de la pantalla.
                         </div>
                       </div>
 
                       {/* Right Wing Banner (Desktop only) */}
                       {previewDevice === 'desktop' && (
-                        <div className="w-[180px] shrink-0">
+                        <div className="w-[180px] h-[640px] shrink-0">
                           <VerticalAdCarousel
                             modernCampaign={currentPreviewCampaign}
                             brand={currentPreviewBrand}

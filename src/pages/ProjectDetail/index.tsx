@@ -1532,7 +1532,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
           section="criticas"
           position="izquierdo"
           triggerRef={dossierContainerRef}
-          className="mt-24"
+          className="mt-4"
         />
 
         <main
@@ -1872,7 +1872,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
           section="criticas"
           position="derecho"
           triggerRef={dossierContainerRef}
-          className="mt-24"
+          className="mt-4"
         />
       </div>
 
