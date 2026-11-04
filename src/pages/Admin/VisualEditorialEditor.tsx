@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import {
   ArrowLeft,
   Smartphone,
@@ -49,6 +49,10 @@ import {
   Camera,
   HardHat,
   Users,
+  Crop,
+  Crosshair,
+  ZoomIn,
+  RotateCcw,
 } from 'lucide-react';
 import { ProfileSearchSelect } from '../../components/common/ProfileSearchSelect';
 import { ConstructionTeamMember } from '../../data/constructionTeams';
@@ -348,6 +352,90 @@ export const VisualEditorialEditor: React.FC<VisualEditorialEditorProps> = ({
 
   const [isLandingModalOpen, setIsLandingModalOpen] = useState(false);
   const [showSecondaryInEditorPreview, setShowSecondaryInEditorPreview] = useState(false);
+
+  // Hero Image Framing & Photo Selector State
+  const heroFileInputRef = useRef<HTMLInputElement>(null);
+  const [isUploadingHero, setIsUploadingHero] = useState(false);
+  const [isProjectPhotosOpen, setIsProjectPhotosOpen] = useState(false);
+
+  // Extract all existing project images for 1-click selection as hero cover
+  const projectPhotos = useMemo(() => {
+    const list: { url: string; label: string; type: string }[] = [];
+    const seen = new Set<string>();
+
+    const add = (url?: string, label?: string, type = 'Imagen') => {
+      if (url && typeof url === 'string' && url.trim() && !seen.has(url)) {
+        seen.add(url);
+        list.push({ url, label: label || 'Imagen del proyecto', type });
+      }
+    };
+
+    if (article.heroImage) add(article.heroImage, 'Portada actual', 'Portada');
+    if (article.secondaryImageUrl) add(article.secondaryImageUrl, 'Fotografía secundaria', 'Interior');
+    (article.gallery || []).forEach((u, i) => add(u, `Galería #${i + 1}`, 'Galería'));
+    (article.modules || []).forEach((m) => {
+      if (m.imageUrl) add(m.imageUrl, m.title || m.caption || 'Foto de módulo', m.type);
+      (m.imageUrls || []).forEach((u, idx) => add(u, `Foto ${idx + 1} de galería`, 'Galería'));
+      if (m.beforeImageUrl) add(m.beforeImageUrl, 'Antes', 'Comparativa');
+      if (m.afterImageUrl) add(m.afterImageUrl, 'Después', 'Comparativa');
+    });
+    if (article.plans) {
+      if (article.plans.planta) add(article.plans.planta, 'Planta arquitectónica', 'Planimetría');
+      if (article.plans.corte) add(article.plans.corte, 'Corte arquitectónico', 'Planimetría');
+      if (article.plans.axonometria) add(article.plans.axonometria, 'Axonometría', 'Planimetría');
+    }
+
+    return list;
+  }, [article]);
+
+  // Computed focal coordinates (X: 0-100%, Y: 0-100%)
+  const [heroPosX, heroPosY] = useMemo(() => {
+    if (article.heroImagePosition && article.heroImagePosition.includes('%')) {
+      const parts = article.heroImagePosition.split(/\s+/);
+      if (parts.length >= 2) {
+        const x = parseFloat(parts[0]);
+        const y = parseFloat(parts[1]);
+        if (!isNaN(x) && !isNaN(y)) return [Math.round(x), Math.round(y)];
+      }
+    }
+    if (article.heroImageFocalPoint === 'top') return [50, 15];
+    if (article.heroImageFocalPoint === 'bottom') return [50, 75];
+    return [50, 50];
+  }, [article.heroImagePosition, article.heroImageFocalPoint]);
+
+  const heroZoom = Number(article.heroImageZoom) || 100;
+
+  const updateHeroFraming = (x: number, y: number, zoom = heroZoom) => {
+    const clampedX = Math.max(0, Math.min(100, Math.round(x)));
+    const clampedY = Math.max(0, Math.min(100, Math.round(y)));
+    const posStr = `${clampedX}% ${clampedY}%`;
+    const focalCategory = clampedY < 35 ? 'top' : clampedY > 65 ? 'bottom' : 'center';
+
+    setArticle((prev) => ({
+      ...prev,
+      heroImagePosition: posStr,
+      heroImageFocalPoint: focalCategory,
+      heroImageZoom: zoom,
+    }));
+  };
+
+  const handleHeroFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setIsUploadingHero(true);
+    try {
+      const uploadedUrl = await uploadImageFile(file);
+      setArticle((prev) => ({
+        ...prev,
+        heroImage: uploadedUrl,
+      }));
+    } catch (err) {
+      console.error('Error al subir imagen de portada:', err);
+    } finally {
+      setIsUploadingHero(false);
+      if (heroFileInputRef.current) heroFileInputRef.current.value = '';
+    }
+  };
 
   // Active section for the sticky breadcrumb & sidebar highlight
   const [activeSection, setActiveSection] = useState<EditorSectionKey>('basica');
@@ -2223,78 +2311,442 @@ export const VisualEditorialEditor: React.FC<VisualEditorialEditorProps> = ({
 
                 {!collapsedSections.fotos && (
                   <div className="p-4 space-y-4">
-                    {/* Foto Principal de Portada */}
-                    <div className="space-y-2.5">
-                      <label className="block text-[11px] font-mono uppercase tracking-wider text-white font-bold">
-                        Fotografía Principal (Exterior / Portada) *
-                      </label>
+                    {/* ======================================================= */}
+                    {/* FOTOGRAFÍA PRINCIPAL DE PORTADA (HERO) // ENCUADRE Y RECORTE */}
+                    {/* ======================================================= */}
+                    <div className="space-y-3.5 pb-4 border-b border-white/10">
+                      {/* Header with Title and Current Coordinate Badge */}
+                      <div className="flex items-center justify-between">
+                        <label className="text-[11px] font-mono uppercase tracking-wider text-white font-bold flex items-center gap-1.5">
+                          <Crop className="w-3.5 h-3.5 text-amber-400" />
+                          <span>Fotografía Principal de Portada *</span>
+                        </label>
+                        <span className="font-mono text-[9px] uppercase tracking-widest px-2 py-0.5 rounded bg-amber-400/10 text-amber-300 border border-amber-400/20">
+                          Encuadre: X:{heroPosX}% • Y:{heroPosY}%
+                        </span>
+                      </div>
 
-                      <div className="aspect-[16/9] bg-black border border-white/20 overflow-hidden relative group">
-                        <img
-                          src={article.heroImage}
-                          alt={article.title}
-                          className={`w-full h-full object-cover ${
-                            article.heroImageFocalPoint === 'top'
-                              ? 'object-top'
-                              : article.heroImageFocalPoint === 'bottom'
-                              ? 'object-bottom'
-                              : 'object-center'
-                          }`}
+                      {/* Photo Selector Controls: Upload, Library, and Project Photos Dropdown */}
+                      <div className="flex flex-wrap items-center gap-2">
+                        {/* Hidden Native File Input */}
+                        <input
+                          ref={heroFileInputRef}
+                          type="file"
+                          accept="image/*"
+                          onChange={handleHeroFileUpload}
+                          className="hidden"
                         />
+
+                        {/* Direct File Upload Button */}
+                        <button
+                          type="button"
+                          onClick={() => heroFileInputRef.current?.click()}
+                          disabled={isUploadingHero}
+                          className="flex items-center gap-1.5 px-3 py-1.5 bg-white text-black font-anton text-xs uppercase tracking-wider hover:bg-neutral-200 transition-colors cursor-pointer disabled:opacity-50"
+                          title="Subir foto desde tu computador o dispositivo"
+                        >
+                          {isUploadingHero ? (
+                            <>
+                              <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                              <span>Subiendo...</span>
+                            </>
+                          ) : (
+                            <>
+                              <Upload className="w-3.5 h-3.5" />
+                              <span>Subir Foto</span>
+                            </>
+                          )}
+                        </button>
+
+                        {/* Open Media Library Modal */}
                         <button
                           type="button"
                           onClick={() => {
                             setMediaTarget('hero');
                             setIsMediaModalOpen(true);
                           }}
-                          className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center text-xs font-anton uppercase tracking-widest transition-opacity cursor-pointer"
+                          className="flex items-center gap-1.5 px-3 py-1.5 bg-[#252525] hover:bg-[#303030] text-white border border-white/20 font-anton text-xs uppercase tracking-wider transition-colors cursor-pointer"
+                          title="Elegir foto de la biblioteca multimedia general"
                         >
-                          Elegir de la Biblioteca Multimedia
+                          <Folder className="w-3.5 h-3.5 text-white/70" />
+                          <span>Biblioteca</span>
                         </button>
+
+                        {/* Toggle Existing Project Photos */}
+                        {projectPhotos.length > 0 && (
+                          <button
+                            type="button"
+                            onClick={() => setIsProjectPhotosOpen((prev) => !prev)}
+                            className={`flex items-center gap-1.5 px-3 py-1.5 border font-anton text-xs uppercase tracking-wider transition-colors cursor-pointer ${
+                              isProjectPhotosOpen
+                                ? 'bg-amber-400 text-black border-amber-400 font-bold'
+                                : 'bg-[#1c1c1c] text-white/80 border-white/15 hover:text-white hover:border-white/40'
+                            }`}
+                            title="Seleccionar cualquiera de las fotos ya cargadas en este proyecto"
+                          >
+                            <ImageIcon className="w-3.5 h-3.5" />
+                            <span>Fotos de la Obra ({projectPhotos.length})</span>
+                            <ChevronDown className={`w-3 h-3 transition-transform ${isProjectPhotosOpen ? 'rotate-180' : ''}`} />
+                          </button>
+                        )}
                       </div>
 
-                      <div className="flex gap-2">
+                      {/* Dropdown Grid of Existing Project Photos for 1-Click Assignment */}
+                      {isProjectPhotosOpen && projectPhotos.length > 0 && (
+                        <div className="p-2.5 bg-[#141414] border border-white/15 rounded-lg space-y-2 animate-in fade-in duration-150">
+                          <div className="flex items-center justify-between text-[10px] font-mono text-white/50">
+                            <span>Haz clic en cualquier imagen para convertirla en portada:</span>
+                            <span className="text-amber-300">{projectPhotos.length} disponibles</span>
+                          </div>
+                          <div className="grid grid-cols-4 sm:grid-cols-5 gap-2 max-h-[170px] overflow-y-auto pr-1">
+                            {projectPhotos.map((p, idx) => {
+                              const isCurrent = article.heroImage === p.url;
+                              return (
+                                <button
+                                  key={`${p.url}-${idx}`}
+                                  type="button"
+                                  onClick={() => {
+                                    updateField('heroImage', p.url);
+                                    setIsProjectPhotosOpen(false);
+                                  }}
+                                  className={`group relative aspect-[4/3] rounded-[4px] overflow-hidden bg-black transition-all cursor-pointer ${
+                                    isCurrent
+                                      ? 'ring-2 ring-amber-400 ring-offset-1 ring-offset-black scale-[0.98]'
+                                      : 'border border-white/20 hover:border-white hover:scale-105'
+                                  }`}
+                                  title={`${p.label} (${p.type})`}
+                                >
+                                  <img src={p.url} alt="" className="w-full h-full object-cover" />
+                                  <span className="absolute bottom-0 inset-x-0 bg-black/80 text-[8px] font-mono text-white/80 px-1 py-0.5 truncate text-left">
+                                    {p.label}
+                                  </span>
+                                  {isCurrent && (
+                                    <div className="absolute top-1 right-1 bg-amber-400 text-black rounded-full p-0.5 shadow-sm">
+                                      <Check className="w-2.5 h-2.5 stroke-[3]" />
+                                    </div>
+                                  )}
+                                </button>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Direct URL input fallback */}
+                      <div className="flex items-center gap-2">
                         <input
                           type="text"
                           value={article.heroImage || ''}
                           onChange={(e) => updateField('heroImage', e.target.value)}
-                          placeholder="https://..."
-                          className="flex-1 bg-[#242424] border border-white/20 p-2 text-xs text-white font-mono focus:border-white focus:outline-none"
+                          placeholder="O pega una URL: https://..."
+                          className="flex-1 bg-[#1a1a1a] border border-white/15 p-2 text-[11px] text-white font-mono focus:border-white focus:outline-none rounded-[2px]"
                         />
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setMediaTarget('hero');
-                            setIsMediaModalOpen(true);
-                          }}
-                          className="px-3 py-2 bg-white text-black font-anton text-xs uppercase tracking-wider hover:bg-neutral-200"
-                        >
-                          Biblioteca
-                        </button>
+                        {article.heroImage && (
+                          <a
+                            href={article.heroImage}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-2 bg-[#252525] border border-white/15 text-white/60 hover:text-white rounded-[2px]"
+                            title="Ver imagen original en nueva pestaña"
+                          >
+                            <ExternalLink className="w-3.5 h-3.5" />
+                          </a>
+                        )}
                       </div>
 
-                      {/* Punto Focal / Encuadre */}
-                      <div>
-                        <label className="block text-[10px] font-mono uppercase tracking-wider text-white/50 mb-1">
-                          Enfoque de la imagen (Arriba, Centro o Abajo)
-                        </label>
-                        <div className="grid grid-cols-3 gap-1">
-                          {(['top', 'center', 'bottom'] as const).map((pt) => (
-                            <button
-                              key={pt}
-                              type="button"
-                              onClick={() => updateField('heroImageFocalPoint', pt)}
-                              className={`py-1.5 text-xs font-mono uppercase border transition-colors ${
-                                (article.heroImageFocalPoint || 'center') === pt
-                                  ? 'bg-white text-black border-white font-bold'
-                                  : 'bg-[#222222] text-white/60 border-white/15 hover:text-white'
-                              }`}
+                      {/* ======================================================= */}
+                      {/* INTERACTIVE CROP & FOCAL POINT FRAMER CANVAS            */}
+                      {/* ======================================================= */}
+                      {article.heroImage && (
+                        <div className="space-y-3 pt-2">
+                          <div className="flex items-center justify-between text-[11px] font-mono">
+                            <span className="text-white/80 font-bold flex items-center gap-1.5">
+                              <Crosshair className="w-3.5 h-3.5 text-amber-400" />
+                              <span>Encuadre Interactivo (Haz clic o arrastra para centrar)</span>
+                            </span>
+                            <span className="text-white/40 text-[10px]">
+                              X: {heroPosX}% • Y: {heroPosY}%
+                            </span>
+                          </div>
+
+                          {/* Clickable / Draggable Focal Area */}
+                          <div
+                            onPointerDown={(e) => {
+                              const rect = e.currentTarget.getBoundingClientRect();
+                              if (rect.width > 0 && rect.height > 0) {
+                                const clickX = ((e.clientX - rect.left) / rect.width) * 100;
+                                const clickY = ((e.clientY - rect.top) / rect.height) * 100;
+                                updateHeroFraming(clickX, clickY);
+                              }
+                            }}
+                            onPointerMove={(e) => {
+                              if (e.buttons === 1) {
+                                const rect = e.currentTarget.getBoundingClientRect();
+                                if (rect.width > 0 && rect.height > 0) {
+                                  const clickX = ((e.clientX - rect.left) / rect.width) * 100;
+                                  const clickY = ((e.clientY - rect.top) / rect.height) * 100;
+                                  updateHeroFraming(clickX, clickY);
+                                }
+                              }
+                            }}
+                            className="relative w-full h-[220px] bg-[#0c0c0c] border-2 border-white/20 hover:border-amber-400/60 rounded-[8px] overflow-hidden select-none cursor-crosshair group transition-colors shadow-inner flex items-center justify-center"
+                            title="Haz clic o arrastra sobre la foto para ubicar qué parte debe verse en el centro"
+                          >
+                            {/* Complete Uncropped Image in Full View */}
+                            <img
+                              src={article.heroImage}
+                              alt="Vista completa para encuadre"
+                              className="w-full h-full object-contain pointer-events-none"
+                            />
+
+                            {/* Rule of Thirds Grid Overlay */}
+                            <div className="absolute inset-0 grid grid-cols-3 grid-rows-3 pointer-events-none opacity-20">
+                              <div className="border-r border-b border-white" />
+                              <div className="border-r border-b border-white" />
+                              <div className="border-b border-white" />
+                              <div className="border-r border-b border-white" />
+                              <div className="border-r border-b border-white" />
+                              <div className="border-b border-white" />
+                              <div className="border-r border-b border-white" />
+                              <div className="border-r border-b border-white" />
+                              <div />
+                            </div>
+
+                            {/* Approximate Panoramical Card Frame centered on focal point */}
+                            <div
+                              className="absolute pointer-events-none border border-dashed border-amber-400/50 bg-amber-400/5 transition-all duration-75"
+                              style={{
+                                width: '100%',
+                                height: '56%',
+                                left: '0%',
+                                top: `${Math.max(0, Math.min(44, heroPosY - 28))}%`,
+                              }}
+                            />
+
+                            {/* Focal Point Crosshair Pin */}
+                            <div
+                              className="absolute pointer-events-none transition-all duration-75 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center"
+                              style={{
+                                left: `${heroPosX}%`,
+                                top: `${heroPosY}%`,
+                              }}
                             >
-                              {pt === 'top' ? 'Superior' : pt === 'center' ? 'Centro' : 'Inferior'}
-                            </button>
-                          ))}
+                              <div className="relative flex items-center justify-center">
+                                {/* Pulse ring */}
+                                <span className="absolute w-7 h-7 rounded-full bg-amber-400/30 animate-ping" />
+                                {/* Outer target ring */}
+                                <div className="w-6 h-6 rounded-full border-2 border-white bg-black/60 shadow-lg flex items-center justify-center">
+                                  {/* Inner crosshair dot */}
+                                  <div className="w-2 h-2 rounded-full bg-amber-400 shadow-xs" />
+                                </div>
+                                {/* Reticle crosshair axes */}
+                                <div className="absolute w-10 h-0.5 bg-white/70 -z-10" />
+                                <div className="absolute h-10 w-0.5 bg-white/70 -z-10" />
+                              </div>
+
+                              {/* Coordinate badge below pin */}
+                              <span className="mt-1 font-mono text-[8px] bg-black/90 text-amber-300 px-1.5 py-0.2 rounded border border-white/20 whitespace-nowrap shadow-md">
+                                X: {heroPosX}% • Y: {heroPosY}%
+                              </span>
+                            </div>
+
+                            {/* Instruction overlay pill */}
+                            <div className="absolute bottom-2 left-2 bg-black/80 backdrop-blur-xs text-[9px] font-mono text-white/70 px-2 py-0.5 rounded border border-white/10 pointer-events-none">
+                              🎯 Haz clic o arrastra para encuadrar
+                            </div>
+                          </div>
+
+                          {/* Precision Sliders */}
+                          <div className="space-y-3 bg-[#171717] p-3 rounded-lg border border-white/10">
+                            {/* Vertical Slider */}
+                            <div className="space-y-1">
+                              <div className="flex items-center justify-between text-[10.5px] font-mono">
+                                <span className="text-white/80 font-medium">
+                                  Posición Vertical (Cielo ↔ Suelo / Obra):
+                                </span>
+                                <span className="text-amber-300 font-bold">{heroPosY}%</span>
+                              </div>
+                              <input
+                                type="range"
+                                min="0"
+                                max="100"
+                                value={heroPosY}
+                                onChange={(e) => updateHeroFraming(heroPosX, Number(e.target.value))}
+                                className="w-full h-1.5 bg-[#2a2a2a] rounded-lg appearance-none cursor-pointer accent-amber-400"
+                              />
+                              <div className="flex justify-between text-[9px] font-mono text-white/40">
+                                <span>0% Cielo / Cubierta</span>
+                                <span className="text-white/60">50% Centro</span>
+                                <span className="text-amber-300 font-bold">75% Enfoque Obra</span>
+                                <span>100% Suelo / Base</span>
+                              </div>
+                            </div>
+
+                            {/* Horizontal Slider */}
+                            <div className="space-y-1">
+                              <div className="flex items-center justify-between text-[10.5px] font-mono">
+                                <span className="text-white/80 font-medium">
+                                  Posición Horizontal (Izquierda ↔ Derecha):
+                                </span>
+                                <span className="text-amber-300 font-bold">{heroPosX}%</span>
+                              </div>
+                              <input
+                                type="range"
+                                min="0"
+                                max="100"
+                                value={heroPosX}
+                                onChange={(e) => updateHeroFraming(Number(e.target.value), heroPosY)}
+                                className="w-full h-1.5 bg-[#2a2a2a] rounded-lg appearance-none cursor-pointer accent-amber-400"
+                              />
+                              <div className="flex justify-between text-[9px] font-mono text-white/40">
+                                <span>0% Izquierda</span>
+                                <span className="text-white/60">50% Centro</span>
+                                <span>100% Derecha</span>
+                              </div>
+                            </div>
+
+                            {/* Scale / Zoom Slider */}
+                            <div className="space-y-1 pt-1 border-t border-white/10">
+                              <div className="flex items-center justify-between text-[10.5px] font-mono">
+                                <span className="text-white/80 font-medium flex items-center gap-1">
+                                  <ZoomIn className="w-3 h-3 text-white/60" />
+                                  <span>Acercamiento / Zoom:</span>
+                                </span>
+                                <span className="text-amber-300 font-bold">{heroZoom}%</span>
+                              </div>
+                              <input
+                                type="range"
+                                min="100"
+                                max="140"
+                                value={heroZoom}
+                                onChange={(e) => updateHeroFraming(heroPosX, heroPosY, Number(e.target.value))}
+                                className="w-full h-1.5 bg-[#2a2a2a] rounded-lg appearance-none cursor-pointer accent-amber-400"
+                              />
+                              <div className="flex justify-between text-[9px] font-mono text-white/40">
+                                <span>100% Cobertura Real</span>
+                                <span>120% Acercamiento Medio</span>
+                                <span>140% Zoom Máximo</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Quick Architectural Presets */}
+                          <div className="space-y-1.5">
+                            <label className="block text-[10px] font-mono uppercase tracking-wider text-white/50">
+                              Ajustes rápidos de 1 clic:
+                            </label>
+                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
+                              {/* Golden preset for architectural elevation/ground */}
+                              <button
+                                type="button"
+                                onClick={() => updateHeroFraming(50, 75)}
+                                className={`py-1.5 px-2 text-[10px] font-mono uppercase border rounded-[3px] transition-colors flex items-center justify-center gap-1 ${
+                                  heroPosY >= 70 && heroPosY <= 80 && heroPosX >= 45 && heroPosX <= 55
+                                    ? 'bg-amber-400 text-black border-amber-300 font-bold shadow-xs'
+                                    : 'bg-[#202020] text-amber-300 border-amber-400/30 hover:border-amber-400'
+                                }`}
+                                title="Centra la toma en el edificio y su base (ideal para fotos con mucho cielo)"
+                              >
+                                <span>🏛️</span>
+                                <span>Enfocar en la Obra (75%)</span>
+                              </button>
+
+                              <button
+                                type="button"
+                                onClick={() => updateHeroFraming(50, 50)}
+                                className={`py-1.5 px-2 text-[10px] font-mono uppercase border rounded-[3px] transition-colors ${
+                                  heroPosY === 50 && heroPosX === 50
+                                    ? 'bg-white text-black border-white font-bold'
+                                    : 'bg-[#202020] text-white/70 border-white/15 hover:text-white'
+                                }`}
+                              >
+                                ⚖️ Centro (50%)
+                              </button>
+
+                              <button
+                                type="button"
+                                onClick={() => updateHeroFraming(50, 15)}
+                                className={`py-1.5 px-2 text-[10px] font-mono uppercase border rounded-[3px] transition-colors ${
+                                  heroPosY <= 25 && heroPosX >= 45 && heroPosX <= 55
+                                    ? 'bg-white text-black border-white font-bold'
+                                    : 'bg-[#202020] text-white/70 border-white/15 hover:text-white'
+                                }`}
+                              >
+                                ☁️ Cielo / Cubierta
+                              </button>
+
+                              <button
+                                type="button"
+                                onClick={() => updateHeroFraming(50, 90)}
+                                className={`py-1.5 px-2 text-[10px] font-mono uppercase border rounded-[3px] transition-colors ${
+                                  heroPosY >= 85
+                                    ? 'bg-white text-black border-white font-bold'
+                                    : 'bg-[#202020] text-white/70 border-white/15 hover:text-white'
+                                }`}
+                              >
+                                🌾 Suelo / Zócalo
+                              </button>
+
+                              <button
+                                type="button"
+                                onClick={() => updateHeroFraming(25, heroPosY)}
+                                className="py-1.5 px-2 text-[10px] font-mono uppercase border rounded-[3px] bg-[#202020] text-white/70 border-white/15 hover:text-white"
+                              >
+                                ⬅️ Lateral Izq.
+                              </button>
+
+                              <button
+                                type="button"
+                                onClick={() => updateHeroFraming(75, heroPosY)}
+                                className="py-1.5 px-2 text-[10px] font-mono uppercase border rounded-[3px] bg-[#202020] text-white/70 border-white/15 hover:text-white"
+                              >
+                                ➡️ Lateral Der.
+                              </button>
+                            </div>
+                          </div>
+
+                          {/* =================================================== */}
+                          {/* LIVE HERO CARD PREVIEW SIMULATOR                    */}
+                          {/* =================================================== */}
+                          <div className="pt-2 space-y-1.5">
+                            <div className="flex items-center justify-between text-[10px] font-mono text-white/60">
+                              <span className="uppercase tracking-wider font-bold text-white flex items-center gap-1.5">
+                                <Eye className="w-3 h-3 text-emerald-400" />
+                                <span>Simulador Real de Portada</span>
+                              </span>
+                              <span className="text-emerald-400 text-[9px]">
+                                Proporción exacta de la ficha
+                              </span>
+                            </div>
+
+                            {/* Simulated hero photo card matching ProjectDetail proportions */}
+                            <div className="relative w-full aspect-[16/8] sm:aspect-[2.1/1] rounded-[14px] sm:rounded-[18px] overflow-hidden bg-black border-2 border-white/30 shadow-2xl">
+                              <img
+                                src={article.heroImage}
+                                alt="Simulación exacta del recorte"
+                                className="w-full h-full object-cover transition-[object-position] duration-150"
+                                style={{
+                                  objectPosition: `${heroPosX}% ${heroPosY}%`,
+                                  transform: heroZoom > 100 ? `scale(${heroZoom / 100})` : undefined,
+                                }}
+                              />
+
+                              {/* Corner watermark ribbon simulation */}
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none flex flex-col justify-between p-3 sm:p-4 text-white">
+                                <div className="flex justify-between items-center text-[8px] sm:text-[9px] font-mono uppercase tracking-widest text-white/80">
+                                  <span>{article.location || 'ECUADOR'}</span>
+                                  <span>{article.year || '2024'}</span>
+                                </div>
+                                <div>
+                                  <h4 className="font-okcok text-xs sm:text-sm uppercase tracking-wide truncate drop-shadow">
+                                    {article.title || 'TÍTULO DE LA OBRA'}
+                                  </h4>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                      </div>
+                      )}
                     </div>
 
                     {/* Foto Secundaria (Efecto Cortina en Portada) */}
@@ -4107,6 +4559,8 @@ export const VisualEditorialEditor: React.FC<VisualEditorialEditorProps> = ({
                         year: article.year,
                         excerpt: article.excerpt,
                         heroImage: article.heroImage,
+                        heroImagePosition: article.heroImagePosition,
+                        heroImageFocalPoint: article.heroImageFocalPoint,
                       }}
                       onSelect={() => {}}
                     />
@@ -4187,6 +4641,8 @@ export const VisualEditorialEditor: React.FC<VisualEditorialEditorProps> = ({
                         year: article.year,
                         excerpt: article.excerpt,
                         heroImage: article.heroImage,
+                        heroImagePosition: article.heroImagePosition,
+                        heroImageFocalPoint: article.heroImageFocalPoint,
                       }}
                       onSelect={() => {}}
                     />
@@ -4354,6 +4810,8 @@ export const VisualEditorialEditor: React.FC<VisualEditorialEditorProps> = ({
                           year: article.year,
                           excerpt: article.excerpt,
                           heroImage: article.heroImage,
+                          heroImagePosition: article.heroImagePosition,
+                          heroImageFocalPoint: article.heroImageFocalPoint,
                         }}
                         onSelect={() => {}}
                       />

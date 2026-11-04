@@ -9,6 +9,8 @@ export interface ProjectCardData {
   year: string;
   excerpt: string;
   imageUrl: string;
+  heroImagePosition?: string;
+  heroImageFocalPoint?: string;
   category?: string;
   critiqueCount?: number;
   visitsCount?: number;
@@ -59,6 +61,15 @@ export const CatalogProjectCard: React.FC<CatalogProjectCardProps> = ({
           className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 ${
             isLoaded ? 'opacity-100' : 'opacity-0'
           }`}
+          style={{
+            objectPosition:
+              project.heroImagePosition ||
+              (project.heroImageFocalPoint === 'top'
+                ? 'center 20%'
+                : project.heroImageFocalPoint === 'bottom'
+                ? 'center 80%'
+                : 'center 50%'),
+          }}
         />
 
         {/* Píldora de Categoría / Número Superior */}

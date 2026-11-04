@@ -157,7 +157,16 @@ export const PanoramicFolderCard: React.FC<PanoramicFolderCardProps> = ({
         <img
           src={photoUrl}
           alt={project.title}
-          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+          style={{
+            objectPosition:
+              (project as any).heroImagePosition ||
+              ((project as any).heroImageFocalPoint === 'top'
+                ? 'center 20%'
+                : (project as any).heroImageFocalPoint === 'bottom'
+                ? 'center 80%'
+                : 'center 50%'),
+          }}
           loading="lazy"
         />
       </div>

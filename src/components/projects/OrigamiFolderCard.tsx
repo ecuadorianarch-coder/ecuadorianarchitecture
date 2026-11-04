@@ -12,6 +12,8 @@ export interface ProjectFolderData {
   year: string;
   excerpt: string;
   heroImage?: string;
+  heroImagePosition?: string;
+  heroImageFocalPoint?: string;
   imageUrl?: string;
   category?: string;
   resena?: string;
@@ -137,6 +139,15 @@ export const OrigamiFolderCard: React.FC<OrigamiFolderCardProps> = ({
                   ? 'grayscale-0 scale-105 contrast-105'
                   : 'grayscale contrast-120 scale-100'
               }`}
+              style={{
+                objectPosition:
+                  project.heroImagePosition ||
+                  (project.heroImageFocalPoint === 'top'
+                    ? 'center 20%'
+                    : project.heroImageFocalPoint === 'bottom'
+                    ? 'center 80%'
+                    : 'center 50%'),
+              }}
               loading="lazy"
             />
             <div className="absolute bottom-1 right-1 px-1.5 py-0.5 bg-black/85 text-white font-mono text-[8.5px] uppercase tracking-wider backdrop-blur-xs flex items-center gap-1 shadow-xs">

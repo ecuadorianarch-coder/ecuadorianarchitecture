@@ -449,6 +449,29 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
     setTimeout(() => setCopiedLink(false), 2500);
   };
 
+  // Computed Focal Point / Object Position for Hero Photograph
+  const heroObjectPosition = useMemo(() => {
+    if (project.heroImagePosition && typeof project.heroImagePosition === 'string' && project.heroImagePosition.trim()) {
+      return project.heroImagePosition.trim();
+    }
+    if (project.heroImageFocalPoint && typeof project.heroImageFocalPoint === 'string') {
+      const fp = project.heroImageFocalPoint.trim().toLowerCase();
+      if (fp === 'top') return 'center 15%';
+      if (fp === 'bottom') return 'center 80%';
+      if (fp === 'center') return 'center 50%';
+      return fp;
+    }
+    return 'center 50%';
+  }, [project.heroImagePosition, project.heroImageFocalPoint]);
+
+  const heroImageZoomScale = useMemo(() => {
+    const zoom = Number(project.heroImageZoom);
+    if (!isNaN(zoom) && zoom > 100) {
+      return `scale(${zoom / 100})`;
+    }
+    return undefined;
+  }, [project.heroImageZoom]);
+
   // =========================================================================
   // GSAP SCROLL CHOREOGRAPHY (Switches between 3 distinct physical proposals)
   // =========================================================================
@@ -1199,7 +1222,11 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
               ref={singleHeroImgRef}
               src={project.heroImage}
               alt={project.title}
-              className="w-full h-full object-cover object-[center_28%]"
+              className="w-full h-full object-cover transition-[object-position] duration-200"
+              style={{
+                objectPosition: heroObjectPosition,
+                transform: heroImageZoomScale,
+              }}
             />
 
             <div

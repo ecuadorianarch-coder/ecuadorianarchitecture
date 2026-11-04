@@ -78,7 +78,9 @@ export interface EditorialArticle {
   category?: string;
   tags?: string[];
   heroImage: string;
-  heroImageFocalPoint?: 'top' | 'center' | 'bottom';
+  heroImageFocalPoint?: 'top' | 'center' | 'bottom' | string;
+  heroImagePosition?: string; // Coordenadas CSS exactas (e.g. '50% 75%')
+  heroImageZoom?: number; // Factor de zoom (100 - 150)
   heroImageCaption?: string;
   heroImageCredit?: string;
   gallery?: string[];

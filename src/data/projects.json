@@ -29,7 +29,9 @@
       "Ecuador"
     ],
     "heroImage": "/images/uploads/1793233204996-RENDER_1__3_.webp",
-    "heroImageFocalPoint": "center",
+    "heroImageFocalPoint": "bottom",
+    "heroImagePosition": "50% 75%",
+    "heroImageZoom": 100,
     "resena": "Texto analítico principal de la reseña...",
     "hasCritica": false,
     "critica": "Dictamen crítico externo sobre la obra y su pertinencia ética y constructiva...",
