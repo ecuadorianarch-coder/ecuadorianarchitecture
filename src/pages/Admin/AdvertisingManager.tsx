@@ -169,9 +169,10 @@ Estimado anunciante / agencia comercial:
 A continuación detallamos las medidas requeridas para publicar pautas en www.ecuadorianarch.com:
 
 1. SKYSCRAPERS LATERALES (Sticky Wings & Lightbox)
-   • Medida: 300 × 600 px (o 160 × 600 px)
-   • Proporción: 1:2 vertical
-   • Formatos: JPG, PNG o WebP (máx. 600 KB)
+   • Medida Real de Pantalla: 400 × 1800 px (o 300 × 1350 px · Alta Resolución 2x)
+   • Proporción: 1:4.5 ultra-vertical (ocupa el alto completo de pantalla)
+   • Zona Segura: Dejar 30 px de margen a los lados para textos y logos
+   • Formatos: JPG, PNG o WebP (máx. 1.5 MB)
 
 2. ENTRE PROYECTOS / IN-FEED (Catálogo General)
    • Medida: 800 × 500 px (o 600 × 400 px)
@@ -2059,8 +2060,8 @@ Nuestros banners renderizan exclusivamente la imagen gráfica final enviada por 
                   </div>
                   <div className="bg-black/60 p-2 border border-white/10">
                     <span className="text-white/40 block text-[9px] uppercase">2. Skyscrapers Wings</span>
-                    <span className="text-white font-bold text-[11px]">300 × 600 px</span>
-                    <span className="text-white/50 block text-[8.5px]">Proporción 1:2</span>
+                    <span className="text-white font-bold text-[11px]">400 × 1800 px</span>
+                    <span className="text-white/50 block text-[8.5px]">Proporción 1:4.5 Ultra-Vertical</span>
                   </div>
                   <div className="bg-black/60 p-2 border border-white/10">
                     <span className="text-white/40 block text-[9px] uppercase">3. Banner Horizontal</span>
@@ -2183,7 +2184,7 @@ Nuestros banners renderizan exclusivamente la imagen gráfica final enviada por 
                     <span>Banner Vertical (Skyscrapers Laterales / Alas & Lightbox)</span>
                   </label>
                   <span className="text-[9.5px] font-mono text-purple-400 bg-purple-400/10 px-2 py-0.5 border border-purple-400/30 rounded-xs self-start sm:self-auto">
-                    Medida: 160 × 600 px o 300 × 600 px (Vertical Skyscraper)
+                    Medida Real: 400 × 1800 px o 300 × 1350 px (Proporción 1:4.5 Ultra-Vertical)
                   </span>
                 </div>
 

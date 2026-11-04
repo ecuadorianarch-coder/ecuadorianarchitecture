@@ -151,14 +151,21 @@ export const VerticalAdCarousel: React.FC<VerticalAdCarouselProps> = ({
         {assets.map((asset, idx) => (
           <div
             key={asset.url + idx}
-            className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+            className={`absolute inset-0 transition-opacity duration-700 ease-in-out flex items-center justify-center overflow-hidden ${
               idx === currentIndex ? 'opacity-100 z-1' : 'opacity-0 z-0 pointer-events-none'
             }`}
           >
+            {/* Fondo difuminado ambiental para que cualquier proporción de pantalla se integre sin bordes vacíos */}
+            <div
+              className="absolute inset-0 bg-cover bg-center filter blur-md opacity-25 scale-110 pointer-events-none"
+              style={{ backgroundImage: `url(${asset.url})` }}
+              aria-hidden="true"
+            />
+            {/* Arte publicitario nítido: 100% visible, NUNCA recortado */}
             <img
               src={asset.url}
               alt={asset.alt || title || brandName}
-              className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500 ease-out"
+              className="relative w-full h-full object-contain object-center z-1 group-hover:scale-[1.015] transition-transform duration-500 ease-out"
               loading="lazy"
             />
           </div>
