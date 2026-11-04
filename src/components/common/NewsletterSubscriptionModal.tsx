@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { X, CheckCircle2, ArrowRight, Mail, User, Phone, Sparkles } from 'lucide-react';
 import logoUrl from '/logo.svg';
 
@@ -37,10 +38,11 @@ export const NewsletterSubscriptionModal: React.FC<NewsletterSubscriptionModalPr
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
+        e.stopImmediatePropagation();
         onClose();
       }
     };
-    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keydown', handleKeyDown, true);
 
     const timer = setTimeout(() => {
       firstInputRef.current?.focus();
@@ -48,7 +50,7 @@ export const NewsletterSubscriptionModal: React.FC<NewsletterSubscriptionModalPr
 
     return () => {
       document.body.style.overflow = originalOverflow;
-      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keydown', handleKeyDown, true);
       clearTimeout(timer);
     };
   }, [isOpen, onClose]);
@@ -124,9 +126,10 @@ export const NewsletterSubscriptionModal: React.FC<NewsletterSubscriptionModalPr
     onClose();
   };
 
-  return (
+  const modalContent = (
     <div
-      className="fixed inset-0 z-500 flex items-center justify-center p-3 sm:p-4 bg-ea-black/60 backdrop-blur-sm animate-in fade-in duration-200"
+      className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-4 bg-ea-black/75 backdrop-blur-md animate-in fade-in duration-200"
+      style={{ zIndex: 99999 }}
       onClick={(e) => {
         if (e.target === e.currentTarget) {
           handleResetAndClose();
@@ -337,4 +340,10 @@ export const NewsletterSubscriptionModal: React.FC<NewsletterSubscriptionModalPr
       </div>
     </div>
   );
+
+  if (typeof document !== 'undefined') {
+    return createPortal(modalContent, document.body);
+  }
+
+  return modalContent;
 };

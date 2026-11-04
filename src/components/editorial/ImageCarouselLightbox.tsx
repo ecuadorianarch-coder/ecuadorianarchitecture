@@ -364,7 +364,7 @@ export const ImageCarouselLightbox: React.FC<ImageCarouselLightboxProps> = ({
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const { getEligibleCampaigns, getBrandById } = useAdvertising();
+  const { getEligibleCampaigns, getBrandById, isNewsletterModalOpen } = useAdvertising();
 
   // Category counts
   const counts = useMemo(() => {
@@ -492,6 +492,11 @@ export const ImageCarouselLightbox: React.FC<ImageCarouselLightboxProps> = ({
     if (!isOpen) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
+      // Do not capture shortcuts when newsletter modal is open or when typing in form controls
+      if (isNewsletterModalOpen) return;
+      const targetTag = (e.target as HTMLElement)?.tagName;
+      if (targetTag === 'INPUT' || targetTag === 'TEXTAREA' || targetTag === 'SELECT') return;
+
       if (e.key === 'Escape') {
         onClose();
       } else if (e.key === 'ArrowLeft') {
@@ -509,7 +514,7 @@ export const ImageCarouselLightbox: React.FC<ImageCarouselLightboxProps> = ({
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, handlePrev, handleNext, onClose, activeFilter, filteredImages, currentIndex]);
+  }, [isOpen, isNewsletterModalOpen, handlePrev, handleNext, onClose, activeFilter, filteredImages, currentIndex]);
 
   // Touch gesture handlers for mobile
   const handleTouchStart = (e: React.TouchEvent) => {
