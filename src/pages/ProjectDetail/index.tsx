@@ -736,76 +736,55 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
             className="hero-header-bar absolute top-0 left-0 right-0 z-40 px-3.5 sm:px-8 md:px-12 pt-[calc(0.4rem+env(safe-area-inset-top,0px))] sm:pt-3.5 md:pt-4 pb-1 max-w-[1400px] mx-auto pointer-events-auto"
           >
             <style>{`
-              /* Responsive height rules to guarantee zero text-on-photo overlap across all zoom levels and window heights */
+              /* Architectural Hero & Header Geometry: Balanced proportions, zero cropping */
               .hero-photo-card {
-                top: 63.5%;
-                height: 42vh;
-                max-height: 440px;
+                top: 57.5%;
+                height: 56vh;
+                max-height: 580px;
+                min-height: 380px;
               }
-              @media (max-height: 750px) {
+              @media (max-height: 800px) {
                 .hero-header-bar {
                   padding-top: 8px !important;
-                  padding-bottom: 3px !important;
-                }
-                .hero-header-bar header {
-                  padding-bottom: 4px !important;
-                }
-                .hero-header-bar header img {
-                  width: 44px !important;
-                  height: 44px !important;
-                }
-                .hero-header-bar header span {
-                  font-size: 26px !important;
-                }
-                .hero-pill-capsule {
-                  padding-top: 8px !important;
-                  padding-bottom: 8px !important;
-                  padding-left: 20px !important;
-                  padding-right: 20px !important;
-                }
-                .hero-editorial-placard {
-                  top: 142px !important;
-                }
-                .hero-editorial-placard h2 {
-                  font-size: 26px !important;
-                }
-                .hero-photo-card {
-                  top: 64.5% !important;
-                  height: 38vh !important;
-                  max-height: 360px !important;
-                }
-              }
-              @media (max-height: 600px) {
-                .hero-header-bar {
-                  padding-top: 5px !important;
                   padding-bottom: 2px !important;
                 }
-                .hero-header-bar header {
-                  padding-bottom: 3px !important;
-                }
-                .hero-header-bar header img {
-                  width: 32px !important;
-                  height: 32px !important;
-                }
-                .hero-header-bar header span {
-                  font-size: 20px !important;
-                }
                 .hero-pill-capsule {
-                  padding-top: 5px !important;
-                  padding-bottom: 5px !important;
-                  padding-left: 14px !important;
-                  padding-right: 14px !important;
+                  padding-top: 6px !important;
+                  padding-bottom: 6px !important;
+                  padding-left: 16px !important;
+                  padding-right: 16px !important;
                 }
                 .hero-editorial-placard {
-                  top: 116px !important;
+                  top: 126px !important;
                 }
                 .hero-editorial-placard h2 {
-                  font-size: 21px !important;
+                  font-size: 26px !important;
                 }
                 .hero-photo-card {
-                  top: 66% !important;
-                  height: 34vh !important;
-                  max-height: 270px !important;
+                  top: 58.5% !important;
+                  height: 50vh !important;
+                  max-height: 480px !important;
+                }
+              }
+              @media (max-height: 620px) {
+                .hero-header-bar {
+                  padding-top: 4px !important;
+                  padding-bottom: 2px !important;
+                }
+                .hero-pill-capsule {
+                  padding-top: 4px !important;
+                  padding-bottom: 4px !important;
+                }
+                .hero-editorial-placard {
+                  top: 104px !important;
+                }
+                .hero-editorial-placard h2 {
+                  font-size: 20px !important;
+                }
+                .hero-photo-card {
+                  top: 61% !important;
+                  height: 44vh !important;
+                  max-height: 350px !important;
                 }
               }
               @media (max-height: 480px) {
@@ -813,111 +792,104 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
                   display: none !important;
                 }
                 .hero-editorial-placard {
-                  top: 64px !important;
+                  top: 56px !important;
                 }
                 .hero-photo-card {
-                  top: 68% !important;
-                  height: 30vh !important;
-                  max-height: 200px !important;
+                  top: 64% !important;
+                  height: 38vh !important;
+                  max-height: 240px !important;
                 }
               }
             `}</style>
-            <header className="flex items-center justify-between gap-2 sm:gap-6 pb-2 sm:pb-3">
-              {/* Left: Logo + [SECCIÓN: PROYECTOS / ACADEMIA / TERRITORIOS] */}
-              <div className="flex items-center gap-1.5 sm:gap-3.5 shrink min-w-0">
+            <header className="flex items-center justify-between gap-3 sm:gap-6 pb-2 sm:pb-3 border-b border-ea-black/10 mb-2">
+              {/* Left: Brand Logo + Section Breadcrumb Back Button */}
+              <div className="flex items-center gap-2.5 sm:gap-4 shrink min-w-0">
                 <button
                   onClick={() => {
                     if (onNavigate) onNavigate('home');
                     else window.location.hash = '';
                   }}
-                  className="group transition-transform hover:scale-105 min-h-[36px] min-w-[36px] sm:min-h-[44px] sm:min-w-[44px] flex items-center justify-center cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-ea-black/70 focus-visible:outline-hidden shrink-0"
+                  className="group transition-transform hover:scale-105 flex items-center gap-2 cursor-pointer focus:outline-none"
                   title="Volver al inicio"
                   data-cursor
                 >
                   <img
                     src={logoUrl}
                     alt="Ecuadorian Architecture"
-                    className="w-8 h-8 sm:w-14 sm:h-14 md:w-[68px] md:h-[68px] object-contain shrink-0"
+                    className="w-7 h-7 sm:w-9 sm:h-9 object-contain shrink-0"
                   />
+                  <span className="font-anton text-xs sm:text-sm tracking-[0.14em] uppercase text-ea-black hidden md:inline">
+                    ECUADORIAN ARCHITECTURE
+                  </span>
                 </button>
+
+                <span className="text-ea-black/25 font-mono text-xs hidden md:inline">/</span>
 
                 <button
                   type="button"
                   onClick={onBack}
-                  className="flex items-center gap-1 sm:gap-2 group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-ea-black/70 focus-visible:outline-hidden shrink-0"
+                  className="inline-flex items-center gap-1.5 sm:gap-2 group cursor-pointer focus:outline-none py-1 px-2 rounded-sm hover:bg-ea-black/5 transition-colors shrink-0"
                   title={`Volver a ${projectSection}`}
                   data-cursor
                 >
-                  <span className="font-okcok text-xl sm:text-3xl md:text-[44px] uppercase text-ea-black tracking-normal leading-[1.25] py-1 inline-block overflow-visible whitespace-nowrap group-hover:opacity-75 transition-opacity">
+                  <ArrowLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-ea-black group-hover:-translate-x-1 transition-transform" />
+                  <span className="font-anton text-xs sm:text-sm uppercase tracking-wider text-ea-black">
                     {projectSection.toUpperCase()}
                   </span>
-                  <img
-                    src={sectionTagIcon}
-                    alt=""
-                    className="w-5 h-5 sm:w-8 sm:h-8 md:w-10 md:h-10 object-contain shrink-0 inline-block ml-0.5 group-hover:scale-105 transition-transform"
-                  />
+                  <span className="text-[10px] font-mono text-ea-black/40 tracking-widest uppercase hidden lg:inline">
+                    / ARCHIVO
+                  </span>
                 </button>
               </div>
 
-              {/* Right: Section Badges (Territorios, Academia, Proyectos, Acerca) */}
-              {/* En móvil: Solo se muestran los íconos limpios con padding táctil, evitando colisión con el título */}
-              <nav aria-label="Secciones de la plataforma" className="flex items-center gap-1 sm:gap-5 md:gap-8 shrink-0">
-                {/* Botón Territorios */}
+              {/* Right: Section Links - Clean horizontal architectural links */}
+              <nav aria-label="Secciones de la plataforma" className="flex items-center gap-3.5 sm:gap-6 md:gap-7 shrink-0">
                 <button
                   onClick={() => onNavigate && onNavigate('territorios')}
-                  className={`flex flex-col items-center group transition-transform hover:scale-105 min-h-[36px] min-w-[34px] sm:min-h-[44px] sm:min-w-[44px] justify-center p-1 active:scale-95 ${
-                    projectSection === 'territorios' ? 'opacity-35 pointer-events-none' : ''
+                  className={`font-anton text-xs sm:text-[13px] tracking-[0.15em] uppercase transition-colors relative py-1 ${
+                    projectSection === 'territorios' ? 'text-ea-black font-bold' : 'text-ea-black/60 hover:text-ea-black'
                   }`}
                   title="Ir a Territorios"
                   data-cursor
                 >
-                  <img src={tagCiudadUrl} alt="Territorios" className="w-5 h-5 sm:w-7 sm:h-7 md:w-9 md:h-9 object-contain opacity-80 group-hover:opacity-100 transition-opacity" />
-                  <span className="hidden sm:block font-anton text-[8px] sm:text-[10px] md:text-xs tracking-wider uppercase text-ea-black/60 group-hover:text-ea-black mt-0.5 whitespace-nowrap">
-                    TERRITORIOS
-                  </span>
+                  <span>TERRITORIOS</span>
+                  {projectSection === 'territorios' && (
+                    <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-ea-black" />
+                  )}
                 </button>
 
-                {/* Botón Academia */}
                 <button
                   onClick={() => onNavigate && onNavigate('academia')}
-                  className={`flex flex-col items-center group transition-transform hover:scale-105 min-h-[36px] min-w-[34px] sm:min-h-[44px] sm:min-w-[44px] justify-center p-1 active:scale-95 ${
-                    projectSection === 'academia' ? 'opacity-35 pointer-events-none' : ''
+                  className={`font-anton text-xs sm:text-[13px] tracking-[0.15em] uppercase transition-colors relative py-1 ${
+                    projectSection === 'academia' ? 'text-ea-black font-bold' : 'text-ea-black/60 hover:text-ea-black'
                   }`}
                   title="Ir a Academia"
                   data-cursor
                 >
-                  <img src={tagAcademicoUrl} alt="Academia" className="w-5 h-5 sm:w-7 sm:h-7 md:w-9 md:h-9 object-contain opacity-80 group-hover:opacity-100 transition-opacity" />
-                  <span className="hidden sm:block font-anton text-[8px] sm:text-[10px] md:text-xs tracking-wider uppercase text-ea-black/60 group-hover:text-ea-black mt-0.5 whitespace-nowrap">
-                    ACADEMIA
-                  </span>
+                  <span>ACADEMIA</span>
+                  {projectSection === 'academia' && (
+                    <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-ea-black" />
+                  )}
                 </button>
 
-                {/* Botón Proyectos (visible si estamos en otra sección) */}
                 {projectSection !== 'proyectos' && (
                   <button
                     onClick={() => onNavigate && onNavigate('proyectos')}
-                    className="flex flex-col items-center group transition-transform hover:scale-105 min-h-[36px] min-w-[34px] sm:min-h-[44px] sm:min-w-[44px] justify-center p-1 active:scale-95"
+                    className="font-anton text-xs sm:text-[13px] tracking-[0.15em] uppercase text-ea-black/60 hover:text-ea-black transition-colors relative py-1"
                     title="Ir a Proyectos"
                     data-cursor
                   >
-                    <img src={tagProyectosUrl} alt="Proyectos" className="w-5 h-5 sm:w-7 sm:h-7 md:w-9 md:h-9 object-contain opacity-80 group-hover:opacity-100 transition-opacity" />
-                    <span className="hidden sm:block font-anton text-[8px] sm:text-[10px] md:text-xs tracking-wider uppercase text-ea-black/60 group-hover:text-ea-black mt-0.5 whitespace-nowrap">
-                      PROYECTOS
-                    </span>
+                    <span>PROYECTOS</span>
                   </button>
                 )}
 
-                {/* Botón Acerca de EA */}
                 <button
                   onClick={() => onNavigate && onNavigate('acerca')}
-                  className="flex flex-col items-center group transition-transform hover:scale-105 min-h-[36px] min-w-[34px] sm:min-h-[44px] sm:min-w-[44px] justify-center p-1 active:scale-95"
+                  className="font-anton text-xs sm:text-[13px] tracking-[0.15em] uppercase text-ea-black/60 hover:text-ea-black transition-colors relative py-1"
                   title="Ir a Acerca de EA"
                   data-cursor
                 >
-                  <img src={tagAcercaBoxUrl} alt="Acerca" className="w-5 h-5 sm:w-7 sm:h-7 md:w-9 md:h-9 object-contain opacity-80 group-hover:opacity-100 transition-opacity" />
-                  <span className="hidden sm:block font-anton text-[8px] sm:text-[10px] md:text-xs tracking-wider uppercase text-ea-black/60 group-hover:text-ea-black mt-0.5 whitespace-nowrap">
-                    ACERCA
-                  </span>
+                  <span>ACERCA</span>
                 </button>
               </nav>
             </header>
@@ -944,7 +916,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
               <div
                 ref={pillScrollRef}
                 onScroll={checkPillScroll}
-                className="hero-pill-capsule w-full bg-[#F0EEEA] rounded-full py-2.5 sm:py-3.5 md:py-4 px-6 sm:px-10 md:px-12 border border-ea-black/15 shadow-[0_2px_8px_rgba(0,0,0,0.04)] flex items-center justify-start lg:justify-center gap-3.5 sm:gap-6 md:gap-8 overflow-x-auto no-scrollbar whitespace-nowrap cursor-grab active:cursor-grabbing select-none"
+                className="hero-pill-capsule w-full bg-[#FAF8F5]/95 rounded-full py-1.5 sm:py-2.5 px-5 sm:px-8 border border-ea-black/20 shadow-xs flex items-center justify-start lg:justify-center gap-3 sm:gap-6 md:gap-7 overflow-x-auto no-scrollbar whitespace-nowrap cursor-grab active:cursor-grabbing select-none"
               >
                 {/* ========================================================= */}
                 {/* CASO 1: TERRITORIOS (Sin crítica ni fotografía)          */}
@@ -1177,10 +1149,10 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
           {/* --------------------------------------------------------------------- */}
           <div
             ref={initialEditorialRef}
-            className="hero-editorial-placard absolute top-[162px] sm:top-[174px] md:top-[182px] left-1/2 -translate-x-1/2 w-[88vw] sm:w-[85vw] max-w-[740px] px-1 sm:px-2 flex items-end justify-between z-20 pointer-events-none"
+            className="hero-editorial-placard absolute top-[134px] sm:top-[144px] md:top-[150px] left-1/2 -translate-x-1/2 w-[92vw] sm:w-[90vw] max-w-[1040px] px-1 sm:px-2 flex items-end justify-between z-20 pointer-events-none"
           >
             <div>
-              <h2 className="font-okcok text-2xl sm:text-3xl md:text-4xl uppercase text-ea-black tracking-normal leading-[1.2] py-0.5">
+              <h2 className="font-okcok text-2xl sm:text-3xl md:text-[38px] uppercase text-ea-black tracking-normal leading-[1.2] py-0.5">
                 {project.title}
               </h2>
               <div className="sm:hidden font-creato text-[11px] text-ea-black/60 leading-snug mt-1">
@@ -1220,14 +1192,14 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
           <div
             ref={heroWrapperRef}
             onClick={() => openLightboxAt(0)}
-            className="hero-photo-card absolute left-1/2 -translate-x-1/2 -translate-y-1/2 w-[88vw] sm:w-[85vw] max-w-[740px] rounded-[20px] sm:rounded-[26px] md:rounded-[28px] shadow-2xl overflow-hidden bg-ea-offwhite z-10 transition-shadow duration-300 cursor-zoom-in"
+            className="hero-photo-card absolute left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92vw] sm:w-[90vw] max-w-[1040px] rounded-[18px] sm:rounded-[24px] shadow-2xl overflow-hidden bg-ea-offwhite z-10 transition-shadow duration-300 cursor-zoom-in"
             title="Clic para ver en carrusel de fotos a pantalla completa"
           >
             <img
               ref={singleHeroImgRef}
               src={project.heroImage}
               alt={project.title}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover object-[center_28%]"
             />
 
             <div
