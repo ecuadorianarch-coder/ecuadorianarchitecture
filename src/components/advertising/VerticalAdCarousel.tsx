@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ArrowUpRight } from 'lucide-react';
 import { AdvertisementCampaign, AdCampaign, SponsorBrand } from '../../types/advertising';
 import { useAdvertising } from '../../context/AdvertisingContext';
 
@@ -121,7 +120,7 @@ export const VerticalAdCarousel: React.FC<VerticalAdCarouselProps> = ({
       rel={destinationUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
-      className={`group relative flex flex-col w-full h-[500px] xl:h-[550px] 2xl:h-[600px] rounded-[2px] transition-all duration-300 p-2 2xl:p-2.5 cursor-pointer overflow-hidden select-none ${
+      className={`group relative flex flex-col w-full h-full min-h-[320px] max-h-[580px] rounded-[2px] transition-all duration-300 p-2 2xl:p-2.5 cursor-pointer overflow-hidden select-none ${
         isDark
           ? 'bg-[#111317]/95 border border-white/20 hover:border-white/50 shadow-[0_12px_36px_rgba(0,0,0,0.8)] backdrop-blur-md hover:-translate-y-1'
           : 'bg-[#FAF8F5] border-2 border-ea-black shadow-[5px_5px_0px_#000] hover:shadow-[7px_7px_0px_#000] hover:-translate-y-1'
@@ -129,14 +128,14 @@ export const VerticalAdCarousel: React.FC<VerticalAdCarouselProps> = ({
       aria-label={`Pauta publicitaria de ${brandName}: ${title}`}
       data-cursor
     >
-      {/* 1. Arte Visual Predefinido (Sin textos invasivos superpuestos) */}
+      {/* 1. Arte Visual Predefinido 100% Puro (Sin textos ni botones sobrepuestos) */}
       <div
-        className={`relative flex-1 w-full overflow-hidden rounded-[1px] ${
+        className={`relative flex-1 w-full h-full overflow-hidden rounded-[1px] ${
           isDark ? 'bg-black/60 border border-white/15' : 'bg-[#EAE6DD] border border-ea-black/20'
         }`}
       >
-        {/* Micro-etiqueta "AD" visible encima de la foto solo en hover */}
-        <div className="absolute top-2 left-2 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+        {/* Micro-etiqueta "AD" discreta */}
+        <div className="absolute top-2 left-2 z-10 opacity-70 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
           <span
             className={`font-mono text-[8px] font-bold tracking-widest uppercase backdrop-blur-xs px-1.5 py-0.5 rounded-[1px] shadow-xs ${
               isDark
@@ -158,7 +157,7 @@ export const VerticalAdCarousel: React.FC<VerticalAdCarouselProps> = ({
             <img
               src={asset.url}
               alt={asset.alt || title || brandName}
-              className="w-full h-full object-cover grayscale contrast-105 group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-700 ease-out"
+              className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500 ease-out"
               loading="lazy"
             />
           </div>
@@ -176,49 +175,6 @@ export const VerticalAdCarousel: React.FC<VerticalAdCarouselProps> = ({
               />
             ))}
           </div>
-        )}
-      </div>
-
-      {/* 2. Barra de CTA */}
-      <div
-        className={`mt-2 2xl:mt-2.5 px-2.5 py-2.5 2xl:py-3 flex items-center justify-between gap-1.5 transition-colors duration-200 shrink-0 ${
-          isDark
-            ? 'bg-white text-black group-hover:bg-neutral-200 shadow-md'
-            : 'bg-ea-black text-white group-hover:bg-[#181818] shadow-[2px_2px_0px_rgba(0,0,0,0.15)]'
-        }`}
-      >
-        <span
-          className={`font-anton text-[11px] 2xl:text-[12px] tracking-wider uppercase truncate ${
-            isDark ? 'text-black' : 'text-white'
-          }`}
-        >
-          {ctaText || 'EXPLORAR CATÁLOGO'}
-        </span>
-        <ArrowUpRight
-          className={`w-3.5 h-3.5 2xl:w-4 2xl:h-4 stroke-[2.5] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0 ${
-            isDark ? 'text-black' : 'text-white'
-          }`}
-        />
-      </div>
-
-      {/* 3. Texto corto editorial abajo */}
-      <div className="mt-2 px-1 pb-0.5 flex flex-col gap-0.5 shrink-0">
-        <h4
-          className={`font-anton text-[12px] 2xl:text-[13px] leading-tight tracking-wider uppercase truncate group-hover:underline ${
-            isDark ? 'text-white' : 'text-ea-black'
-          }`}
-        >
-          {brandName}
-        </h4>
-
-        {(subtitle || currentAsset?.caption || brandCategory || title) && (
-          <p
-            className={`font-creato text-[9px] 2xl:text-[9.5px] leading-snug uppercase line-clamp-2 ${
-              isDark ? 'text-neutral-400' : 'text-ea-black/75'
-            }`}
-          >
-            {subtitle || currentAsset?.caption || brandCategory || title}
-          </p>
         )}
       </div>
     </a>

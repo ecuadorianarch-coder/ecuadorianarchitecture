@@ -90,13 +90,17 @@ export const HorizontalCarouselAdBanner: React.FC<HorizontalCarouselAdBannerProp
           onClick={handleClick}
           target={destinationHref.startsWith('http') ? '_blank' : undefined}
           rel={destinationHref.startsWith('http') ? 'noopener noreferrer' : undefined}
-          className="group relative block w-full max-w-[728px] overflow-hidden rounded-[2px] border border-white/15 hover:border-white/40 transition-all shadow-md cursor-pointer"
-          title={`Publicidad patrocinada: ${brandName} — Suscríbete a nuestro newsletter`}
+          className="group relative block w-full max-w-[728px] overflow-hidden rounded-[2px] border border-white/20 hover:border-white/50 transition-all shadow-md cursor-pointer bg-black/60"
+          title={`Publicidad patrocinada: ${brandName}`}
         >
+          {/* Micro-etiqueta AD */}
+          <span className="absolute top-1 left-1.5 z-10 font-mono text-[7.5px] font-bold tracking-widest uppercase bg-black/80 text-white/80 px-1 py-0.2 rounded-[1px] pointer-events-none">
+            AD
+          </span>
           <img
             src={bannerImageUrl}
             alt={campaign.title || `Banner publicitario ${brandName}`}
-            className="w-full h-[50px] xs:h-[56px] sm:h-[68px] md:h-[76px] object-cover sm:object-contain object-center group-hover:opacity-90 transition-opacity"
+            className="w-full h-[42px] xs:h-[48px] sm:h-[58px] md:h-[66px] object-contain object-center group-hover:scale-[1.01] transition-transform duration-300"
             loading="lazy"
           />
         </a>

@@ -36,6 +36,9 @@ import {
   Info,
   Sparkles,
   UserCheck,
+  Upload,
+  Image as ImageIcon,
+  FileText,
 } from 'lucide-react';
 import { useAdvertising } from '../../context/AdvertisingContext';
 import {
@@ -125,6 +128,7 @@ export const AdvertisingManager: React.FC = () => {
     subtitle: '',
     desktopAsset: '',
     mobileAsset: '',
+    horizontalBannerAsset: '',
     destinationUrl: '',
     ctaText: 'VER CATÁLOGO',
     startDate: new Date().toISOString().split('T')[0],
@@ -149,6 +153,75 @@ export const AdvertisingManager: React.FC = () => {
     contactEmail: '',
     accountManager: 'Mónica Serrano · Directora Comercial EA',
   });
+
+  // Technical Specs Guide State & Helpers
+  const [copiedSpecs, setCopiedSpecs] = useState(false);
+
+  const bannerSpecsText = `📐 ESPECIFICACIONES TÉCNICAS OFICIALES DE PUBLICIDAD — ECUADORIAN ARCHITECTURE
+================================================================================
+Estimado anunciante / agencia comercial:
+A continuación detallamos las medidas requeridas para publicar pautas en www.ecuadorianarch.com:
+
+1. SKYSCRAPERS LATERALES (Sticky Wings & Lightbox)
+   • Medida: 300 × 600 px (o 160 × 600 px)
+   • Proporción: 1:2 vertical
+   • Formatos: JPG, PNG o WebP (máx. 600 KB)
+
+2. ENTRE PROYECTOS / IN-FEED (Catálogo General)
+   • Medida: 800 × 500 px (o 600 × 400 px)
+   • Proporción: 16:10 o 3:2 horizontal
+   • Formatos: JPG, PNG o WebP (máx. 800 KB)
+
+3. BANNER HORIZONTAL / INTER-GALERÍA (Carrusel Lightbox)
+   • Medida: 728 × 90 px (Leaderboard) o 1200 × 200 px (HD Panorámico)
+   • Proporción: 8:1 o 6:1 ultra-panorámico
+   • Formatos: JPG, PNG o WebP (máx. 400 KB)
+
+4. DOSSIER EDITORIAL (Dentro del Detalle de Obra)
+   • Medida: 1200 × 400 px (o 900 × 300 px)
+   • Proporción: 3:1 panorámico
+   • Formatos: JPG, PNG o WebP (máx. 800 KB)
+
+5. VERSIÓN MÓVIL RESPONSIVE (Smartphones)
+   • Medida: 600 × 600 px (1:1 Cuadrado) o 600 × 400 px (3:2)
+   • Formatos: JPG, PNG o WebP (máx. 500 KB)
+
+* NOTA DE DISEÑO IMPORTANTE:
+Nuestros banners renderizan exclusivamente la imagen gráfica final enviada por la empresa (sin tipografías ni botones HTML sobrepuestos). Por favor asegurarse de que el arte incluya el logotipo de la marca, su propio titular y su llamado a la acción comercial.`;
+
+  const handleCopySpecs = () => {
+    navigator.clipboard.writeText(bannerSpecsText).then(() => {
+      setCopiedSpecs(true);
+      setTimeout(() => setCopiedSpecs(false), 3000);
+    });
+  };
+
+  const handleFileUpload = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    field: 'desktopAsset' | 'mobileAsset' | 'horizontalBannerAsset'
+  ) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      alert('Por favor selecciona un archivo de imagen válido (JPG, PNG, WebP o GIF).');
+      return;
+    }
+
+    if (file.size > 8 * 1024 * 1024) {
+      alert('La imagen seleccionada supera los 8 MB. Por favor optimízala antes de subirla.');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (uploadEvent) => {
+      const dataUrl = uploadEvent.target?.result as string;
+      if (dataUrl) {
+        setCampForm((prev) => ({ ...prev, [field]: dataUrl }));
+      }
+    };
+    reader.readAsDataURL(file);
+  };
 
   const today = new Date().toISOString().split('T')[0];
 
@@ -222,6 +295,7 @@ export const AdvertisingManager: React.FC = () => {
           'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
         mobileAsset:
           'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
+        horizontalBannerAsset: '',
         destinationUrl: 'https://ecuadorianarch.com',
         ctaText: 'VER CATÁLOGO',
         startDate: today,
@@ -250,6 +324,7 @@ export const AdvertisingManager: React.FC = () => {
     if (editingCampaign) {
       updateCampaign(editingCampaign.id, {
         ...campForm,
+        horizontalBannerAsset: campForm.horizontalBannerAsset || '',
         status: targetStatus,
       });
     } else {
@@ -264,6 +339,7 @@ export const AdvertisingManager: React.FC = () => {
         subtitle: campForm.subtitle || '',
         desktopAsset: campForm.desktopAsset || '',
         mobileAsset: campForm.mobileAsset || campForm.desktopAsset || '',
+        horizontalBannerAsset: campForm.horizontalBannerAsset || '',
         destinationUrl: campForm.destinationUrl || 'https://ecuadorianarch.com',
         ctaText: campForm.ctaText || 'VER CATÁLOGO',
         startDate: campForm.startDate || today,
@@ -1580,13 +1656,25 @@ export const AdvertisingManager: React.FC = () => {
         {/* ========================================================================= */}
         {subTab === 'placements' && (
           <div className="max-w-5xl mx-auto flex flex-col gap-6">
-            <div>
-              <h2 className="font-anton text-2xl tracking-wider uppercase text-white">
-                TARIFARIO Y ESPECIFICACIONES COMERCIALES (MEDIA KIT)
-              </h2>
-              <p className="text-xs text-white/50 mt-0.5">
-                Dimensiones recomendadas, tarifas sugeridas CPM en USD y frecuencia en la retícula.
-              </p>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
+              <div>
+                <h2 className="font-anton text-2xl tracking-wider uppercase text-white">
+                  TARIFARIO Y ESPECIFICACIONES COMERCIALES (MEDIA KIT)
+                </h2>
+                <p className="text-xs text-white/50 mt-0.5">
+                  Dimensiones oficiales recomendadas para anunciantes, tarifas sugeridas CPM en USD y frecuencia.
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onClick={handleCopySpecs}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-amber-400 text-black font-anton text-xs uppercase tracking-wider hover:bg-amber-300 transition-colors rounded-xs shadow-md cursor-pointer shrink-0"
+                title="Copiar texto con todas las medidas para enviar a clientes y anunciantes"
+              >
+                {copiedSpecs ? <Check className="w-4 h-4 stroke-[2.5]" /> : <Copy className="w-4 h-4" />}
+                <span>{copiedSpecs ? '¡MEDIDAS COPIADAS!' : 'COPIAR MEDIDAS PARA CLIENTE'}</span>
+              </button>
             </div>
 
             <div className="flex flex-col gap-4">
@@ -1904,33 +1992,251 @@ export const AdvertisingManager: React.FC = () => {
                 />
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="font-mono text-[10px] uppercase font-bold text-white/70 block mb-1">
-                    Arte para Escritorio (URL) *
-                  </label>
-                  <input
-                    type="url"
-                    value={campForm.desktopAsset}
-                    onChange={(e) => setCampForm({ ...campForm, desktopAsset: e.target.value })}
-                    placeholder="https://..."
-                    className="w-full bg-black border border-white/20 px-3 py-2 text-white text-xs focus:outline-none"
-                    required
-                  />
+              {/* GUÍA DE MEDIDAS OFICIALES PARA ENVIAR AL CLIENTE */}
+              <div className="bg-neutral-900/90 border border-amber-400/40 p-3.5 rounded-xs flex flex-col gap-2.5">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/10 pb-2">
+                  <div className="flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-amber-400 shrink-0" />
+                    <span className="font-anton text-xs uppercase tracking-wider text-white">
+                      GUÍA DE MEDIDAS OFICIALES PARA CLIENTES Y ANUNCIANTES
+                    </span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleCopySpecs}
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-amber-400 text-black font-anton text-[10.5px] uppercase tracking-wider hover:bg-amber-300 transition-colors rounded-xs shadow-xs cursor-pointer self-start sm:self-auto shrink-0"
+                    title="Copiar texto con todas las medidas para enviar por WhatsApp o correo a la empresa"
+                  >
+                    {copiedSpecs ? <Check className="w-3.5 h-3.5 stroke-[2.5]" /> : <Copy className="w-3.5 h-3.5" />}
+                    <span>{copiedSpecs ? '¡MEDIDAS COPIADAS!' : 'COPIAR MEDIDAS PARA CLIENTE'}</span>
+                  </button>
                 </div>
 
-                <div>
-                  <label className="font-mono text-[10px] uppercase font-bold text-white/70 block mb-1">
-                    Arte para Móvil (URL)
-                  </label>
-                  <input
-                    type="url"
-                    value={campForm.mobileAsset}
-                    onChange={(e) => setCampForm({ ...campForm, mobileAsset: e.target.value })}
-                    placeholder="https://..."
-                    className="w-full bg-black border border-white/20 px-3 py-2 text-white text-xs focus:outline-none"
-                  />
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 font-mono text-[10px]">
+                  <div className="bg-black/60 p-2 border border-white/10">
+                    <span className="text-white/40 block text-[9px] uppercase">1. In-Feed (Catálogo)</span>
+                    <span className="text-white font-bold text-[11px]">800 × 500 px</span>
+                    <span className="text-white/50 block text-[8.5px]">Proporción 16:10</span>
+                  </div>
+                  <div className="bg-black/60 p-2 border border-white/10">
+                    <span className="text-white/40 block text-[9px] uppercase">2. Skyscrapers Wings</span>
+                    <span className="text-white font-bold text-[11px]">300 × 600 px</span>
+                    <span className="text-white/50 block text-[8.5px]">Proporción 1:2</span>
+                  </div>
+                  <div className="bg-black/60 p-2 border border-white/10">
+                    <span className="text-white/40 block text-[9px] uppercase">3. Banner Horizontal</span>
+                    <span className="text-white font-bold text-[11px]">728 × 90 / 1200 × 200</span>
+                    <span className="text-white/50 block text-[8.5px]">Inter-Galería Lightbox</span>
+                  </div>
+                  <div className="bg-black/60 p-2 border border-white/10">
+                    <span className="text-white/40 block text-[9px] uppercase">4. Móvil Responsive</span>
+                    <span className="text-white font-bold text-[11px]">600 × 600 px</span>
+                    <span className="text-white/50 block text-[8.5px]">Cuadrado 1:1 o 3:2</span>
+                  </div>
                 </div>
+
+                <p className="text-[10px] text-amber-300/90 font-mono">
+                  * IMPORTANTE: Los banners renderizan exclusivamente la imagen gráfica final enviada por la empresa (sin tipografías ni botones sobrepuestos). El arte debe contener el logo, titular y botón dentro del propio diseño gráfico.
+                </p>
+              </div>
+
+              {/* 1. ARTE PRINCIPAL / ESCRITORIO (IN-FEED, SKYSCRAPERS & DOSSIER) */}
+              <div className="bg-black/40 border border-white/15 p-3.5 space-y-2.5">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                  <label className="font-mono text-[10.5px] uppercase font-bold text-white flex items-center gap-1.5">
+                    <ImageIcon className="w-3.5 h-3.5 text-white/70" />
+                    <span>Arte Principal / Escritorio *</span>
+                  </label>
+                  <span className="text-[9.5px] font-mono text-amber-400 bg-amber-400/10 px-2 py-0.5 border border-amber-400/30 rounded-xs self-start sm:self-auto">
+                    Medida: 800 × 500 px (In-Feed) o 300 × 600 px (Skyscraper)
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="font-mono text-[9px] uppercase text-white/50 block mb-1">
+                      Opción A: Subir archivo desde tu computadora
+                    </label>
+                    <label className="flex items-center justify-center gap-2 px-3 py-2 bg-white/10 hover:bg-white/20 border border-white/30 text-white text-xs font-mono cursor-pointer transition-colors rounded-xs">
+                      <Upload className="w-3.5 h-3.5" />
+                      <span>Examinar imagen...</span>
+                      <input
+                        type="file"
+                        accept="image/png,image/jpeg,image/webp,image/gif"
+                        onChange={(e) => handleFileUpload(e, 'desktopAsset')}
+                        className="hidden"
+                      />
+                    </label>
+                  </div>
+
+                  <div>
+                    <label className="font-mono text-[9px] uppercase text-white/50 block mb-1">
+                      Opción B: O pegar URL directa de la imagen
+                    </label>
+                    <input
+                      type="url"
+                      value={campForm.desktopAsset}
+                      onChange={(e) => setCampForm({ ...campForm, desktopAsset: e.target.value })}
+                      placeholder="https://..."
+                      className="w-full bg-black border border-white/20 px-3 py-2 text-white text-xs focus:outline-none"
+                      required
+                    />
+                  </div>
+                </div>
+
+                {campForm.desktopAsset && (
+                  <div className="flex items-center gap-3 pt-2 border-t border-white/10">
+                    <img
+                      src={campForm.desktopAsset}
+                      alt="Vista previa arte escritorio"
+                      className="h-14 w-24 object-cover border border-white/30 bg-neutral-900 rounded-xs"
+                    />
+                    <div className="flex-1 min-w-0">
+                      <span className="font-mono text-[10px] text-white/70 block truncate">
+                        Imagen cargada correctamente
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => setCampForm({ ...campForm, desktopAsset: '' })}
+                        className="text-[10px] font-mono text-red-400 hover:text-red-300 underline cursor-pointer mt-0.5"
+                      >
+                        Quitar imagen
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* 2. BANNER HORIZONTAL / INTER-GALERÍA (LIGHTBOX & LEADERBOARDS) */}
+              <div className="bg-black/40 border border-white/15 p-3.5 space-y-2.5">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                  <label className="font-mono text-[10.5px] uppercase font-bold text-white flex items-center gap-1.5">
+                    <ImageIcon className="w-3.5 h-3.5 text-white/70" />
+                    <span>Banner Horizontal (Inter-Galería / Lightbox)</span>
+                  </label>
+                  <span className="text-[9.5px] font-mono text-emerald-400 bg-emerald-400/10 px-2 py-0.5 border border-emerald-400/30 rounded-xs self-start sm:self-auto">
+                    Medida: 728 × 90 px (Leaderboard) o 1200 × 200 px (HD)
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="font-mono text-[9px] uppercase text-white/50 block mb-1">
+                      Opción A: Subir banner horizontal
+                    </label>
+                    <label className="flex items-center justify-center gap-2 px-3 py-2 bg-white/10 hover:bg-white/20 border border-white/30 text-white text-xs font-mono cursor-pointer transition-colors rounded-xs">
+                      <Upload className="w-3.5 h-3.5" />
+                      <span>Examinar banner horizontal...</span>
+                      <input
+                        type="file"
+                        accept="image/png,image/jpeg,image/webp,image/gif"
+                        onChange={(e) => handleFileUpload(e, 'horizontalBannerAsset')}
+                        className="hidden"
+                      />
+                    </label>
+                  </div>
+
+                  <div>
+                    <label className="font-mono text-[9px] uppercase text-white/50 block mb-1">
+                      Opción B: O pegar URL directa
+                    </label>
+                    <input
+                      type="url"
+                      value={campForm.horizontalBannerAsset || ''}
+                      onChange={(e) => setCampForm({ ...campForm, horizontalBannerAsset: e.target.value })}
+                      placeholder="https://..."
+                      className="w-full bg-black border border-white/20 px-3 py-2 text-white text-xs focus:outline-none"
+                    />
+                  </div>
+                </div>
+
+                {campForm.horizontalBannerAsset && (
+                  <div className="flex items-center gap-3 pt-2 border-t border-white/10">
+                    <img
+                      src={campForm.horizontalBannerAsset}
+                      alt="Vista previa banner horizontal"
+                      className="h-10 w-32 object-contain border border-white/30 bg-neutral-900 rounded-xs"
+                    />
+                    <div className="flex-1 min-w-0">
+                      <span className="font-mono text-[10px] text-white/70 block truncate">
+                        Banner horizontal cargado
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => setCampForm({ ...campForm, horizontalBannerAsset: '' })}
+                        className="text-[10px] font-mono text-red-400 hover:text-red-300 underline cursor-pointer mt-0.5"
+                      >
+                        Quitar imagen
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* 3. ARTE PARA MÓVIL (RESPONSIVE SMARTPHONES) */}
+              <div className="bg-black/40 border border-white/15 p-3.5 space-y-2.5">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                  <label className="font-mono text-[10.5px] uppercase font-bold text-white flex items-center gap-1.5">
+                    <Smartphone className="w-3.5 h-3.5 text-white/70" />
+                    <span>Arte Adaptado para Móvil (Opcional)</span>
+                  </label>
+                  <span className="text-[9.5px] font-mono text-blue-400 bg-blue-400/10 px-2 py-0.5 border border-blue-400/30 rounded-xs self-start sm:self-auto">
+                    Medida: 600 × 600 px (1:1 Cuadrado) o 600 × 400 px
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="font-mono text-[9px] uppercase text-white/50 block mb-1">
+                      Opción A: Subir archivo para móvil
+                    </label>
+                    <label className="flex items-center justify-center gap-2 px-3 py-2 bg-white/10 hover:bg-white/20 border border-white/30 text-white text-xs font-mono cursor-pointer transition-colors rounded-xs">
+                      <Upload className="w-3.5 h-3.5" />
+                      <span>Examinar imagen móvil...</span>
+                      <input
+                        type="file"
+                        accept="image/png,image/jpeg,image/webp,image/gif"
+                        onChange={(e) => handleFileUpload(e, 'mobileAsset')}
+                        className="hidden"
+                      />
+                    </label>
+                  </div>
+
+                  <div>
+                    <label className="font-mono text-[9px] uppercase text-white/50 block mb-1">
+                      Opción B: O pegar URL directa
+                    </label>
+                    <input
+                      type="url"
+                      value={campForm.mobileAsset || ''}
+                      onChange={(e) => setCampForm({ ...campForm, mobileAsset: e.target.value })}
+                      placeholder="https://..."
+                      className="w-full bg-black border border-white/20 px-3 py-2 text-white text-xs focus:outline-none"
+                    />
+                  </div>
+                </div>
+
+                {campForm.mobileAsset && (
+                  <div className="flex items-center gap-3 pt-2 border-t border-white/10">
+                    <img
+                      src={campForm.mobileAsset}
+                      alt="Vista previa arte móvil"
+                      className="h-12 w-12 object-cover border border-white/30 bg-neutral-900 rounded-xs"
+                    />
+                    <div className="flex-1 min-w-0">
+                      <span className="font-mono text-[10px] text-white/70 block truncate">
+                        Arte móvil cargado
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => setCampForm({ ...campForm, mobileAsset: '' })}
+                        className="text-[10px] font-mono text-red-400 hover:text-red-300 underline cursor-pointer mt-0.5"
+                      >
+                        Quitar imagen
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -2034,9 +2340,10 @@ export const AdvertisingManager: React.FC = () => {
                 </label>
                 <div className="grid grid-cols-2 gap-2">
                   {[
-                    { id: 'dossier-editorial', label: 'Dossier Editorial (Ficha de Proyecto)' },
-                    { id: 'entre-proyectos', label: 'Entre Proyectos (In-Feed Grid)' },
-                    { id: 'skyscrapers-laterales', label: 'Skyscrapers Laterales (Sticky Wings)' },
+                    { id: 'entre-proyectos', label: 'Entre Proyectos (In-Feed Grid Catálogo)' },
+                    { id: 'skyscrapers-laterales', label: 'Skyscrapers Laterales (Sticky Wings & Lightbox)' },
+                    { id: 'inter-galeria', label: 'Inter-Galería (Banner Horizontal en Carrusel / Lightbox)' },
+                    { id: 'dossier-editorial', label: 'Dossier Editorial (Dentro de Ficha de Obra)' },
                     { id: 'destacado-home', label: 'Destacados Home' },
                   ].map((item) => {
                     const isChecked = campForm.placements?.includes(item.id as AdPlacementId);

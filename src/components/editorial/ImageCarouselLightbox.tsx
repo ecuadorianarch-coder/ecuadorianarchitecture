@@ -406,11 +406,11 @@ export const ImageCarouselLightbox: React.FC<ImageCarouselLightboxProps> = ({
     return defaultCampaigns as unknown as AdCampaign[];
   }, [getEligibleCampaigns]);
 
-  // Rotate horizontal sponsor dynamically with current image index
+  // Stable horizontal advertising campaign for the current lightbox viewing session
   const currentHorizontalCampaign = useMemo(() => {
     if (modernHorizontalCampaigns.length === 0) return null;
-    return modernHorizontalCampaigns[currentIndex % modernHorizontalCampaigns.length] || modernHorizontalCampaigns[0];
-  }, [modernHorizontalCampaigns, currentIndex]);
+    return modernHorizontalCampaigns[0];
+  }, [modernHorizontalCampaigns]);
 
   const horizontalBrand = currentHorizontalCampaign
     ? getBrandById(currentHorizontalCampaign.brandId)
@@ -434,6 +434,9 @@ export const ImageCarouselLightbox: React.FC<ImageCarouselLightboxProps> = ({
   const rightLegacyCampaign = !rightModernCampaign
     ? fallbackCampaigns.find((ad) => ad.positionTarget === 'ambos-lados' || ad.positionTarget === 'derecho') || fallbackCampaigns[1] || fallbackCampaigns[0]
     : null;
+
+  const hasLeftAd = Boolean(leftModernCampaign || leftLegacyCampaign);
+  const hasRightAd = Boolean(rightModernCampaign || rightLegacyCampaign);
 
   // Sync index when initialIndex changes or modal opens
   useEffect(() => {
@@ -679,28 +682,32 @@ export const ImageCarouselLightbox: React.FC<ImageCarouselLightboxProps> = ({
       {/* CENTER: LARGE ACTIVE IMAGE, NAVIGATION ARROWS & LATERAL AD BANNERS   */}
       {/* ==================================================================== */}
       <main
-        className="flex-1 relative flex items-center justify-between px-3 sm:px-6 2xl:px-10 py-2 overflow-hidden gap-4 2xl:gap-8"
+        className="flex-1 relative flex items-center justify-between px-3 sm:px-6 2xl:px-8 py-2 overflow-hidden gap-3 2xl:gap-6 min-h-0"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
         {/* Left Lateral Skyscraper Ad Banner */}
-        <aside
-          aria-label="Publicidad lateral izquierda"
-          className="hidden xl:flex flex-col items-center justify-center shrink-0 w-[165px] 2xl:w-[195px] z-10 select-none animate-in fade-in slide-in-from-left-4 duration-300"
-        >
-          <div className="w-full flex items-center justify-between pb-1.5 px-0.5 text-[9px] font-mono tracking-widest text-white/40 uppercase">
-            <span>PUBLICIDAD</span>
-            <span className="text-[8px] bg-white/10 px-1 py-0.2 rounded-[1px] text-white/60">AD</span>
-          </div>
-          <VerticalAdCarousel
-            position="izquierdo"
-            theme="dark"
-            modernCampaign={leftModernCampaign || undefined}
-            campaign={leftLegacyCampaign || undefined}
-            brand={leftBrand}
-          />
-        </aside>
+        {hasLeftAd && (
+          <aside
+            aria-label="Publicidad lateral izquierda"
+            className="hidden xl:flex flex-col items-center justify-center shrink-0 w-[140px] xl:w-[155px] 2xl:w-[175px] max-h-[56vh] z-10 select-none animate-in fade-in slide-in-from-left-4 duration-300 min-h-0"
+          >
+            <div className="w-full flex items-center justify-between pb-1 px-0.5 text-[9px] font-mono tracking-widest text-white/40 uppercase">
+              <span>PUBLICIDAD</span>
+              <span className="text-[8px] bg-white/10 px-1 py-0.2 rounded-[1px] text-white/60">AD</span>
+            </div>
+            <div className="w-full flex-1 min-h-0 flex items-center justify-center overflow-hidden">
+              <VerticalAdCarousel
+                position="izquierdo"
+                theme="dark"
+                modernCampaign={leftModernCampaign || undefined}
+                campaign={leftLegacyCampaign || undefined}
+                brand={leftBrand}
+              />
+            </div>
+          </aside>
+        )}
 
         {/* Center Stage: Image and Navigation Controls */}
         <div className="flex-1 relative flex items-center justify-center h-full max-h-full min-w-0">
@@ -708,7 +715,7 @@ export const ImageCarouselLightbox: React.FC<ImageCarouselLightboxProps> = ({
           {filteredImages.length > 1 && (
             <button
               onClick={handlePrev}
-              className="absolute left-2 sm:left-4 z-20 p-2.5 sm:p-3.5 bg-black/75 hover:bg-white hover:text-black border border-white/20 text-white rounded-full transition-all backdrop-blur-sm shadow-xl hover:scale-105 cursor-pointer"
+              className="absolute left-2 sm:left-4 z-30 p-2.5 sm:p-3.5 bg-black/80 hover:bg-white hover:text-black border border-white/25 text-white rounded-full transition-all backdrop-blur-sm shadow-2xl hover:scale-105 cursor-pointer"
               aria-label="Imagen anterior"
             >
               <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -722,7 +729,7 @@ export const ImageCarouselLightbox: React.FC<ImageCarouselLightboxProps> = ({
                 key={currentImage.url}
                 src={currentImage.url}
                 alt={currentImage.caption || `Imagen ${currentIndex + 1}`}
-                className="max-h-[48vh] xs:max-h-[54vh] sm:max-h-[62vh] xl:max-h-[68vh] max-w-full object-contain shadow-2xl border border-white/15 animate-in fade-in duration-200"
+                className="max-h-[50vh] xs:max-h-[56vh] sm:max-h-[62vh] xl:max-h-[68vh] max-w-full object-contain shadow-2xl border border-white/15 animate-in fade-in duration-200"
               />
             ) : (
               <div className="py-20 text-center font-mono text-sm text-white/50">
@@ -735,7 +742,7 @@ export const ImageCarouselLightbox: React.FC<ImageCarouselLightboxProps> = ({
           {filteredImages.length > 1 && (
             <button
               onClick={handleNext}
-              className="absolute right-2 sm:right-4 z-20 p-2.5 sm:p-3.5 bg-black/75 hover:bg-white hover:text-black border border-white/20 text-white rounded-full transition-all backdrop-blur-sm shadow-xl hover:scale-105 cursor-pointer"
+              className="absolute right-2 sm:right-4 z-30 p-2.5 sm:p-3.5 bg-black/80 hover:bg-white hover:text-black border border-white/25 text-white rounded-full transition-all backdrop-blur-sm shadow-2xl hover:scale-105 cursor-pointer"
               aria-label="Imagen siguiente"
             >
               <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -744,22 +751,26 @@ export const ImageCarouselLightbox: React.FC<ImageCarouselLightboxProps> = ({
         </div>
 
         {/* Right Lateral Skyscraper Ad Banner */}
-        <aside
-          aria-label="Publicidad lateral derecha"
-          className="hidden xl:flex flex-col items-center justify-center shrink-0 w-[165px] 2xl:w-[195px] z-10 select-none animate-in fade-in slide-in-from-right-4 duration-300"
-        >
-          <div className="w-full flex items-center justify-between pb-1.5 px-0.5 text-[9px] font-mono tracking-widest text-white/40 uppercase">
-            <span>PUBLICIDAD</span>
-            <span className="text-[8px] bg-white/10 px-1 py-0.2 rounded-[1px] text-white/60">AD</span>
-          </div>
-          <VerticalAdCarousel
-            position="derecho"
-            theme="dark"
-            modernCampaign={rightModernCampaign || undefined}
-            campaign={rightLegacyCampaign || undefined}
-            brand={rightBrand}
-          />
-        </aside>
+        {hasRightAd && (
+          <aside
+            aria-label="Publicidad lateral derecha"
+            className="hidden xl:flex flex-col items-center justify-center shrink-0 w-[140px] xl:w-[155px] 2xl:w-[175px] max-h-[56vh] z-10 select-none animate-in fade-in slide-in-from-right-4 duration-300 min-h-0"
+          >
+            <div className="w-full flex items-center justify-between pb-1 px-0.5 text-[9px] font-mono tracking-widest text-white/40 uppercase">
+              <span>PUBLICIDAD</span>
+              <span className="text-[8px] bg-white/10 px-1 py-0.2 rounded-[1px] text-white/60">AD</span>
+            </div>
+            <div className="w-full flex-1 min-h-0 flex items-center justify-center overflow-hidden">
+              <VerticalAdCarousel
+                position="derecho"
+                theme="dark"
+                modernCampaign={rightModernCampaign || undefined}
+                campaign={rightLegacyCampaign || undefined}
+                brand={rightBrand}
+              />
+            </div>
+          </aside>
+        )}
       </main>
 
       {/* ==================================================================== */}
