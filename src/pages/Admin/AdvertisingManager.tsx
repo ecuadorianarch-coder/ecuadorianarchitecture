@@ -1226,6 +1226,7 @@ Nuestros banners renderizan exclusivamente la imagen gráfica final enviada por 
                           brand={currentPreviewBrand}
                           layoutVariant="panoramic-card"
                           isPreview={true}
+                          device={previewDevice}
                         />
                       </div>
 
@@ -1295,6 +1296,7 @@ Nuestros banners renderizan exclusivamente la imagen gráfica final enviada por 
                             brand={currentPreviewBrand}
                             layoutVariant="vertical-card"
                             isPreview={true}
+                            device={previewDevice}
                           />
                         </div>
 
@@ -1335,6 +1337,7 @@ Nuestros banners renderizan exclusivamente la imagen gráfica final enviada por 
                           brand={currentPreviewBrand}
                           layoutVariant="panoramic-card"
                           isPreview={true}
+                          device={previewDevice}
                         />
                       </div>
 
@@ -1428,6 +1431,7 @@ Nuestros banners renderizan exclusivamente la imagen gráfica final enviada por 
                       brand={currentPreviewBrand}
                       layoutVariant="panoramic-card"
                       isPreview={true}
+                      device={previewDevice}
                     />
                   </div>
                 )}
@@ -1507,6 +1511,7 @@ Nuestros banners renderizan exclusivamente la imagen gráfica final enviada por 
                           brand={currentPreviewBrand}
                           layoutVariant="panoramic-card"
                           isPreview={true}
+                          device={previewDevice}
                         />
                       </div>
 

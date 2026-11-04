@@ -802,6 +802,7 @@ export const AdvertiserPortal: React.FC<AdvertiserPortalProps> = ({ token }) => 
                           brand={brand}
                           layoutVariant="panoramic-card"
                           isPreview={true}
+                          device={previewDevice}
                         />
                       </div>
 
@@ -869,6 +870,7 @@ export const AdvertiserPortal: React.FC<AdvertiserPortalProps> = ({ token }) => 
                             brand={brand}
                             layoutVariant="vertical-card"
                             isPreview={true}
+                            device={previewDevice}
                           />
                         </div>
 
@@ -907,6 +909,7 @@ export const AdvertiserPortal: React.FC<AdvertiserPortalProps> = ({ token }) => 
                           brand={brand}
                           layoutVariant="panoramic-card"
                           isPreview={true}
+                          device={previewDevice}
                         />
                       </div>
 
@@ -1072,6 +1075,7 @@ export const AdvertiserPortal: React.FC<AdvertiserPortalProps> = ({ token }) => 
                           brand={brand}
                           layoutVariant="panoramic-card"
                           isPreview={true}
+                          device={previewDevice}
                         />
                       </div>
 
@@ -1114,6 +1118,7 @@ export const AdvertiserPortal: React.FC<AdvertiserPortalProps> = ({ token }) => 
                           brand={brand}
                           layoutVariant="panoramic-card"
                           isPreview={true}
+                          device={previewDevice}
                         />
                       </div>
 
