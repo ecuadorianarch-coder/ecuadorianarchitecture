@@ -287,6 +287,14 @@ export const ProfileSearchSelect: React.FC<ProfileSearchSelectProps> = ({
           type="text"
           value={query}
           onChange={handleInputChange}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              if (query.trim()) {
+                handleSelect(query.trim().toUpperCase());
+              }
+            }
+          }}
           onFocus={() => setIsOpen(true)}
           placeholder={placeholder || `Buscar o escribir ${getTypeLabel()}...`}
           required={required}
@@ -325,6 +333,26 @@ export const ProfileSearchSelect: React.FC<ProfileSearchSelectProps> = ({
       {/* DROPDOWN MENU */}
       {isOpen && (
         <div className="absolute left-0 right-0 top-full mt-1 bg-[#1a1a1a] border border-white/20 shadow-2xl z-50 max-h-64 overflow-y-auto divide-y divide-white/10">
+          {/* Quick Option: Direct plain name without creating profile */}
+          {query.trim().length > 0 && (
+            <div className="p-2 bg-[#1f1f1f] border-b border-white/10">
+              <button
+                type="button"
+                onClick={() => handleSelect(query.trim().toUpperCase())}
+                className="w-full py-1.5 px-2.5 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 font-mono text-xs text-left flex items-center justify-between transition-colors cursor-pointer rounded-xs"
+              >
+                <div className="flex items-center gap-2 truncate">
+                  <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                  <span className="truncate">
+                    Usar solo texto: <strong className="text-white underline">{query.trim().toUpperCase()}</strong>
+                  </span>
+                </div>
+                <span className="text-[10px] text-emerald-400/80 shrink-0 font-mono ml-2">
+                  (Solo nombre, sin perfil)
+                </span>
+              </button>
+            </div>
+          )}
           {filteredItems.length > 0 ? (
             filteredItems.map((item: any) => {
               const itemName = item.name;
@@ -393,8 +421,8 @@ export const ProfileSearchSelect: React.FC<ProfileSearchSelectProps> = ({
               <Plus className="w-3.5 h-3.5" />
               <span>
                 {query.trim()
-                  ? `+ Crear perfil: "${query.trim().toUpperCase()}"`
-                  : `+ Crear nuevo perfil de ${getTypeLabel()}`}
+                  ? `+ Crear perfil detallado: "${query.trim().toUpperCase()}" (opcional)`
+                  : `+ Crear perfil detallado de ${getTypeLabel()} (opcional)`}
               </span>
             </button>
           </div>

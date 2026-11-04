@@ -349,6 +349,11 @@ export const VisualEditorialEditor: React.FC<VisualEditorialEditorProps> = ({
 
   const hasPhotographer = Boolean(article.photographer?.trim() || article.datos?.fotografia?.trim());
   const hasRenders = Boolean(article.renders?.trim() || article.datos?.renders?.trim());
+  const hasMaestroMayor = Boolean(
+    ((article as any).hasMaestroMayor !== false) &&
+    (((article as any).maestroMayor && (article as any).maestroMayor.trim()) ||
+     (article.datos?.maestroMayor && article.datos.maestroMayor.trim()))
+  );
 
   const [isLandingModalOpen, setIsLandingModalOpen] = useState(false);
   const [showSecondaryInEditorPreview, setShowSecondaryInEditorPreview] = useState(false);
@@ -2135,6 +2140,26 @@ export const VisualEditorialEditor: React.FC<VisualEditorialEditorProps> = ({
                             : '+ Agregar Otro Estudio Principal'}
                         </span>
                       </button>
+
+                      {/* Control de Popup de Perfil de Autor */}
+                      <div className="mt-3 p-3 bg-[#181818] border border-white/10 rounded-xs space-y-1">
+                        <label className="flex items-center gap-2 cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={Boolean(article.enableAuthorModal)}
+                            onChange={(e) => updateField('enableAuthorModal', e.target.checked)}
+                            className="rounded bg-[#242424] border-white/30 text-emerald-500 focus:ring-0 cursor-pointer w-4 h-4"
+                          />
+                          <span className="text-xs font-mono font-bold text-white uppercase tracking-wider">
+                            Abrir perfil de autor como ventana emergente (popup)
+                          </span>
+                        </label>
+                        <p className="text-[10.5px] font-mono text-white/50 pl-6">
+                          {article.enableAuthorModal
+                            ? '✓ Activado: Al hacer clic en el nombre en la ficha del proyecto se abrirá el dossier del estudio (requiere perfil registrado).'
+                            : '✕ Desactivado (Por defecto): En la web solo se mostrará el nombre como texto plano sin popup. No es obligatorio crear un perfil.'}
+                        </p>
+                      </div>
                     </div>
 
                     {/* Ubicación y Año */}
@@ -3503,10 +3528,31 @@ export const VisualEditorialEditor: React.FC<VisualEditorialEditorProps> = ({
                           <div className="flex items-center justify-between border-b border-white/10 pb-2">
                             <label className="block text-[11px] font-mono uppercase tracking-wider text-amber-400 font-bold flex items-center gap-1.5">
                               <HardHat className="w-4 h-4 text-amber-400" />
-                              <span>Maestro Mayor & Equipo de Trabajo (Mano de Obra)</span>
+                              <span>Maestro Mayor & Mano de Obra (Opcional)</span>
                             </label>
-                            <span className="text-[10px] font-mono text-white/50">Popup interactivo en ficha web</span>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                if (hasMaestroMayor) {
+                                  updateField('maestroMayor' as any, '');
+                                  updateField('datos', { ...(article.datos || {}), maestroMayor: '' });
+                                  updateField('hasMaestroMayor' as any, false);
+                                  updateField('constructionTeam' as any, null);
+                                  updateField('equipoTrabajo' as any, []);
+                                } else {
+                                  updateField('maestroMayor' as any, 'Segundo Guanoluisa');
+                                  updateField('datos', { ...(article.datos || {}), maestroMayor: 'Segundo Guanoluisa' });
+                                  updateField('hasMaestroMayor' as any, true);
+                                }
+                              }}
+                              className="text-[10px] font-mono text-amber-400 hover:text-amber-300 underline underline-offset-2 cursor-pointer"
+                            >
+                              {hasMaestroMayor ? '✕ Quitar Maestro Mayor' : '+ Asignar Maestro Mayor'}
+                            </button>
                           </div>
+
+                          {hasMaestroMayor ? (
+                            <>
 
                           <ProfileSearchSelect
                             type="masterBuilder"
@@ -3517,10 +3563,15 @@ export const VisualEditorialEditor: React.FC<VisualEditorialEditorProps> = ({
                                 ...(article.datos || {}),
                                 maestroMayor: val,
                               });
+                              if (!val.trim()) {
+                                updateField('hasMaestroMayor' as any, false);
+                              } else {
+                                updateField('hasMaestroMayor' as any, true);
+                              }
                             }}
                             label="Maestro Mayor Principal"
-                            placeholder="ej. SEGUNDO GUANOLUISA, LUIS TOAPANTA"
-                            helperText="Busca en el catálogo o crea un nuevo perfil de Maestro Mayor."
+                            placeholder="ej. SEGUNDO GUANOLUISA, LUIS TOAPANTA (o deja vacío)"
+                            helperText="Busca en el catálogo o escribe uno libre. Si lo dejas vacío o pulsas 'Quitar', no se mostrará en la web."
                           />
 
                           {/* Cuadrilla & Miembros de Mano de Obra */}
@@ -3636,7 +3687,24 @@ export const VisualEditorialEditor: React.FC<VisualEditorialEditorProps> = ({
                               </div>
                             )}
                           </div>
+                        </>
+                      ) : (
+                        <div className="p-2.5 bg-[#181818] border border-dashed border-white/20 text-[11px] font-mono text-white/50 flex items-center justify-between">
+                          <span>🚫 Sin Maestro Mayor (no aparecerá en la web ni en la ficha técnica)</span>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              updateField('maestroMayor' as any, 'Segundo Guanoluisa');
+                              updateField('datos', { ...(article.datos || {}), maestroMayor: 'Segundo Guanoluisa' });
+                              updateField('hasMaestroMayor' as any, true);
+                            }}
+                            className="text-[10.5px] text-amber-400 hover:text-amber-300 font-bold underline cursor-pointer"
+                          >
+                            Asignar
+                          </button>
                         </div>
+                      )}
+                    </div>
                       </>
                     )}
                   </div>

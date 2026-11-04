@@ -33,6 +33,7 @@ import { AuthorProfileModal } from '../../components/author/AuthorProfileModal';
 import { PhotographerProfileModal } from '../../components/photographer/PhotographerProfileModal';
 import { ConstructionTeamModal } from '../../components/construction/ConstructionTeamModal';
 import { getConstructionTeamForProject } from '../../data/constructionTeams';
+import { hasAuthorProfile } from '../../data/authors';
 import { applyArchitectureSeoToDocument } from '../../services/architectureSeo';
 
 // Tape strip component for the taped tabs from Figma media_1791919174953_b2b8f1f9.png
@@ -159,8 +160,17 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
   const [isAuthorModalOpen, setIsAuthorModalOpen] = useState(false);
   const [selectedAuthorName, setSelectedAuthorName] = useState<string>(() => project.studio || '');
 
+  const canOpenAuthorModal = (studioName?: string) => {
+    if (!studioName || !studioName.trim()) return false;
+    // Only open popup if explicitly enabled on this project in CMS AND a genuine registered profile exists
+    if (!project?.enableAuthorModal) return false;
+    return hasAuthorProfile(studioName);
+  };
+
   const handleOpenAuthor = (studio?: string) => {
-    setSelectedAuthorName(studio || project.studio || '');
+    const finalStudio = studio || project.studio || '';
+    if (!canOpenAuthorModal(finalStudio)) return;
+    setSelectedAuthorName(finalStudio);
     setIsAuthorModalOpen(true);
   };
 
@@ -955,23 +965,32 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
                     {studiosList.length > 1 ? (
                       <div className="flex items-center gap-1.5 font-okcok text-xs sm:text-[15px] md:text-base uppercase tracking-wide text-ea-black shrink-0 leading-[1.25] py-0.5">
                         <img src={compAutorUrl} alt="" className="h-4 sm:h-5 md:h-6 object-contain inline-block pointer-events-none" />
-                        {studiosList.map((st, i) => (
-                          <React.Fragment key={st}>
-                            {i > 0 && <span className="text-ea-black/50 font-bold select-none">+</span>}
-                            <button
-                              type="button"
-                              onClick={() => handleOpenAuthor(st)}
-                              className="hover:underline underline-offset-4 decoration-2 decoration-ea-black font-semibold cursor-pointer transition-colors"
-                              title={`Ver investigaciones de ${st}`}
-                              data-cursor
-                            >
-                              {st}
-                            </button>
-                          </React.Fragment>
-                        ))}
-                        <span className="text-xs font-mono text-ea-black/40">↗</span>
+                        {studiosList.map((st, i) => {
+                          const canOpen = canOpenAuthorModal(st);
+                          return (
+                            <React.Fragment key={st}>
+                              {i > 0 && <span className="text-ea-black/50 font-bold select-none">+</span>}
+                              {canOpen ? (
+                                <button
+                                  type="button"
+                                  onClick={() => handleOpenAuthor(st)}
+                                  className="hover:underline underline-offset-4 decoration-2 decoration-ea-black font-semibold cursor-pointer transition-colors"
+                                  title={`Ver investigaciones de ${st}`}
+                                  data-cursor
+                                >
+                                  {st}
+                                </button>
+                              ) : (
+                                <span className="font-semibold">{st}</span>
+                              )}
+                            </React.Fragment>
+                          );
+                        })}
+                        {studiosList.some((st) => canOpenAuthorModal(st)) && (
+                          <span className="text-xs font-mono text-ea-black/40">↗</span>
+                        )}
                       </div>
-                    ) : (
+                    ) : canOpenAuthorModal(project.studio) ? (
                       <button
                         type="button"
                         onClick={() => handleOpenAuthor(project.studio)}
@@ -985,6 +1004,13 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
                         </span>
                         <span className="text-xs font-mono text-ea-black/40 group-hover:text-ea-black transition-colors">↗</span>
                       </button>
+                    ) : (
+                      <div className="flex items-center gap-2 font-okcok text-xs sm:text-[15px] md:text-base uppercase tracking-wide text-ea-black shrink-0 leading-[1.25] py-0.5">
+                        <img src={compAutorUrl} alt="" className="h-4 sm:h-5 md:h-6 object-contain inline-block pointer-events-none" />
+                        <span className="font-semibold">
+                          {project.studio || 'COLECTIVO TERRITORIAL'}
+                        </span>
+                      </div>
                     )}
 
                     {/* 3. EJE / PROBLEMÁTICA (si está disponible) */}
@@ -1014,19 +1040,28 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
                     <span className="text-ea-black/30 font-bold text-sm sm:text-base shrink-0 select-none">•</span>
 
                     {/* 2. TESISTA / AUTOR */}
-                    <button
-                      type="button"
-                      onClick={() => handleOpenAuthor(project.studio || project.author || project.institution)}
-                      className="flex items-center gap-2 font-okcok text-xs sm:text-[15px] md:text-base uppercase tracking-wide text-ea-black shrink-0 group hover:text-black cursor-pointer transition-colors leading-[1.25] py-0.5"
-                      title="Ver investigaciones de este autor"
-                      data-cursor
-                    >
-                      <img src={compAutorUrl} alt="" className="h-4 sm:h-5 md:h-6 object-contain inline-block group-hover:scale-105 transition-transform pointer-events-none" />
-                      <span className="group-hover:underline underline-offset-4 decoration-2 decoration-ea-black font-semibold">
-                        {project.studio || project.author || 'TESISTA'}
-                      </span>
-                      <span className="text-xs font-mono text-ea-black/40 group-hover:text-ea-black transition-colors">↗</span>
-                    </button>
+                    {canOpenAuthorModal(project.studio || project.author || project.institution) ? (
+                      <button
+                        type="button"
+                        onClick={() => handleOpenAuthor(project.studio || project.author || project.institution)}
+                        className="flex items-center gap-2 font-okcok text-xs sm:text-[15px] md:text-base uppercase tracking-wide text-ea-black shrink-0 group hover:text-black cursor-pointer transition-colors leading-[1.25] py-0.5"
+                        title="Ver investigaciones de este autor"
+                        data-cursor
+                      >
+                        <img src={compAutorUrl} alt="" className="h-4 sm:h-5 md:h-6 object-contain inline-block group-hover:scale-105 transition-transform pointer-events-none" />
+                        <span className="group-hover:underline underline-offset-4 decoration-2 decoration-ea-black font-semibold">
+                          {project.studio || project.author || 'TESISTA'}
+                        </span>
+                        <span className="text-xs font-mono text-ea-black/40 group-hover:text-ea-black transition-colors">↗</span>
+                      </button>
+                    ) : (
+                      <div className="flex items-center gap-2 font-okcok text-xs sm:text-[15px] md:text-base uppercase tracking-wide text-ea-black shrink-0 leading-[1.25] py-0.5">
+                        <img src={compAutorUrl} alt="" className="h-4 sm:h-5 md:h-6 object-contain inline-block pointer-events-none" />
+                        <span className="font-semibold">
+                          {project.studio || project.author || 'TESISTA'}
+                        </span>
+                      </div>
+                    )}
 
                     {/* 3. UNIVERSIDAD / INSTITUCIÓN */}
                     <span className="text-ea-black/30 font-bold text-sm sm:text-base shrink-0 select-none">•</span>
@@ -1062,27 +1097,36 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
 
                     <span className="text-ea-black/30 font-bold text-sm sm:text-base shrink-0 select-none">•</span>
 
-                    {/* 2. AUTOR (Clickable -> abre perfil del autor con descripción del estudio y proyectos publicados) */}
+                    {/* 2. AUTOR (Clickable solo si tiene perfil registrado y activado en CMS) */}
                     {studiosList.length > 1 ? (
                       <div className="flex items-center gap-1.5 font-okcok text-xs sm:text-[15px] md:text-base uppercase tracking-wide text-ea-black shrink-0 leading-[1.25] py-0.5">
                         <img src={compAutorUrl} alt="" className="h-4 sm:h-5 md:h-6 object-contain inline-block pointer-events-none" />
-                        {studiosList.map((st, i) => (
-                          <React.Fragment key={st}>
-                            {i > 0 && <span className="text-ea-black/50 font-bold select-none">+</span>}
-                            <button
-                              type="button"
-                              onClick={() => handleOpenAuthor(st)}
-                              className="hover:underline underline-offset-4 decoration-2 decoration-ea-black font-semibold cursor-pointer transition-colors"
-                              title={`Ver perfil y proyectos de ${st}`}
-                              data-cursor
-                            >
-                              {st}
-                            </button>
-                          </React.Fragment>
-                        ))}
-                        <span className="text-xs font-mono text-ea-black/40">↗</span>
+                        {studiosList.map((st, i) => {
+                          const canOpen = canOpenAuthorModal(st);
+                          return (
+                            <React.Fragment key={st}>
+                              {i > 0 && <span className="text-ea-black/50 font-bold select-none">+</span>}
+                              {canOpen ? (
+                                <button
+                                  type="button"
+                                  onClick={() => handleOpenAuthor(st)}
+                                  className="hover:underline underline-offset-4 decoration-2 decoration-ea-black font-semibold cursor-pointer transition-colors"
+                                  title={`Ver perfil y proyectos de ${st}`}
+                                  data-cursor
+                                >
+                                  {st}
+                                </button>
+                              ) : (
+                                <span className="font-semibold">{st}</span>
+                              )}
+                            </React.Fragment>
+                          );
+                        })}
+                        {studiosList.some((st) => canOpenAuthorModal(st)) && (
+                          <span className="text-xs font-mono text-ea-black/40">↗</span>
+                        )}
                       </div>
-                    ) : (
+                    ) : canOpenAuthorModal(project.studio) ? (
                       <button
                         type="button"
                         onClick={() => handleOpenAuthor(project.studio)}
@@ -1096,31 +1140,40 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
                         </span>
                         <span className="text-xs font-mono text-ea-black/40 group-hover:text-ea-black transition-colors">↗</span>
                       </button>
+                    ) : (
+                      <div className="flex items-center gap-2 font-okcok text-xs sm:text-[15px] md:text-base uppercase tracking-wide text-ea-black shrink-0 leading-[1.25] py-0.5">
+                        <img src={compAutorUrl} alt="" className="h-4 sm:h-5 md:h-6 object-contain inline-block pointer-events-none" />
+                        <span className="font-semibold">
+                          {project.studio || 'ESTUDIO'}
+                        </span>
+                      </div>
                     )}
 
-                    <span className="text-ea-black/30 font-bold text-sm sm:text-base shrink-0 select-none">•</span>
+                    {/* 3. MAESTRO MAYOR & MANO DE OBRA (OPCIONAL: igual que fotógrafo, puede estar o no estar) */}
+                    {Boolean(constructionTeam && constructionTeam.maestroMayor?.nombre?.trim()) && (
+                      <>
+                        <span className="text-ea-black/30 font-bold text-sm sm:text-base shrink-0 select-none">•</span>
+                        <button
+                          type="button"
+                          onClick={() => setIsConstructionTeamModalOpen(true)}
+                          className="flex items-center gap-1.5 sm:gap-2 font-okcok text-xs sm:text-[15px] md:text-base uppercase tracking-wide text-ea-black shrink-0 group hover:text-black cursor-pointer transition-colors leading-[1.25] py-0.5"
+                          title={`Ver equipo de trabajo y cuadrilla de obra a cargo de ${constructionTeam.maestroMayor.nombre}`}
+                          data-cursor
+                        >
+                          <img src={compMaestroUrl} alt="" className="h-4 sm:h-5 md:h-6 w-auto object-contain inline-block group-hover:scale-105 transition-transform pointer-events-none" />
+                          <span className="text-ea-black/60 font-normal">MAESTRO MAYOR</span>
+                          <span className="group-hover:underline underline-offset-4 decoration-2 decoration-ea-black font-semibold">
+                            {constructionTeam.maestroMayor.nombre}
+                          </span>
+                          <span className="text-xs font-mono text-ea-black/40 group-hover:text-ea-black transition-colors">↗</span>
+                        </button>
+                      </>
+                    )}
 
-                    {/* 3. MAESTRO MAYOR & MANO DE OBRA (Clickable -> abre el modal de reconocimiento a los maestros constructores y cuadrilla) */}
-                    <button
-                      type="button"
-                      onClick={() => setIsConstructionTeamModalOpen(true)}
-                      className="flex items-center gap-1.5 sm:gap-2 font-okcok text-xs sm:text-[15px] md:text-base uppercase tracking-wide text-ea-black shrink-0 group hover:text-black cursor-pointer transition-colors leading-[1.25] py-0.5"
-                      title={`Ver equipo de trabajo y cuadrilla de obra a cargo de ${constructionTeam.maestroMayor.nombre}`}
-                      data-cursor
-                    >
-                      <img src={compMaestroUrl} alt="" className="h-4 sm:h-5 md:h-6 w-auto object-contain inline-block group-hover:scale-105 transition-transform pointer-events-none" />
-                      <span className="text-ea-black/60 font-normal">MAESTRO MAYOR</span>
-                      <span className="group-hover:underline underline-offset-4 decoration-2 decoration-ea-black font-semibold">
-                        {constructionTeam.maestroMayor.nombre}
-                      </span>
-                      <span className="text-xs font-mono text-ea-black/40 group-hover:text-ea-black transition-colors">↗</span>
-                    </button>
-
-                    <span className="text-ea-black/30 font-bold text-sm sm:text-base shrink-0 select-none">•</span>
-
-                    {/* 4. FOTOGRAFÍA (Clickable -> solo si el proyecto tiene fotógrafo asignado) */}
+                    {/* 4. FOTOGRAFÍA (OPCIONAL: solo si el proyecto tiene fotógrafo asignado) */}
                     {Boolean(project.datos?.fotografia?.trim() || project.photographer?.trim()) && (
                       <>
+                        <span className="text-ea-black/30 font-bold text-sm sm:text-base shrink-0 select-none">•</span>
                         <button
                           type="button"
                           onClick={() => handleOpenPhotographer(project.datos?.fotografia || project.photographer)}
@@ -1134,11 +1187,11 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
                           </span>
                           <span className="text-xs font-mono text-ea-black/40 group-hover:text-ea-black transition-colors">↗</span>
                         </button>
-                        <span className="text-ea-black/30 font-bold text-sm sm:text-base shrink-0 select-none">•</span>
                       </>
                     )}
 
-                    {/* 4. CRÍTICA */}
+                    {/* 5. CRÍTICA */}
+                    <span className="text-ea-black/30 font-bold text-sm sm:text-base shrink-0 select-none">•</span>
                     <div className="flex items-center gap-2 font-okcok text-xs sm:text-[15px] md:text-base uppercase tracking-wide text-ea-black shrink-0 leading-[1.25] py-0.5">
                       <img src={compCriticaUrl} alt="" className="h-4 sm:h-5 md:h-6 object-contain inline-block pointer-events-none" />
                       <span>{project.critic || 'AL BORDE'}</span>
@@ -1921,11 +1974,13 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
       />
 
       {/* Construction Team & Master Builders Recognition Modal */}
-      <ConstructionTeamModal
-        project={project}
-        isOpen={isConstructionTeamModalOpen}
-        onClose={() => setIsConstructionTeamModalOpen(false)}
-      />
+      {Boolean(constructionTeam) && (
+        <ConstructionTeamModal
+          project={project}
+          isOpen={isConstructionTeamModalOpen}
+          onClose={() => setIsConstructionTeamModalOpen(false)}
+        />
+      )}
 
       {/* Fullscreen Architectural Image Carousel Lightbox */}
       <ImageCarouselLightbox

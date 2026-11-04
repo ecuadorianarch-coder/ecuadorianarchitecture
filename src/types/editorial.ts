@@ -105,7 +105,9 @@ export interface EditorialArticle {
   authorHandle?: string;
   photographer?: string;
   photographerHandle?: string;
+  hasMaestroMayor?: boolean;
   maestroMayor?: string;
+  enableAuthorModal?: boolean;
   equipoTrabajo?: {
     nombre: string;
     rol: string;

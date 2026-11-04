@@ -412,28 +412,28 @@ export const CONSTRUCTION_TEAMS_DATABASE: Record<string, ConstructionTeamData> =
 /**
  * Fallback generator for any custom or dynamically created project
  */
-export function getConstructionTeamForProject(project: any): ConstructionTeamData {
-  if (!project) {
-    return {
-      projectId: 'unknown',
-      projectTitle: 'Proyecto Arquitectónico',
-      location: 'Ecuador',
-      year: '2026',
-      maestroMayor: {
-        nombre: 'Segundo Guanoluisa',
-        rol: 'Maestro Mayor de Obra',
-        oficio: 'Construcción tradicional andina y dirección de cuadrilla',
-      },
-      members: [],
-      materialidadPrincipal: 'Materiales locales',
-      manifiestoManoObra:
-        'Reconocimiento a la mano de obra ecuatoriana y al saber de los maestros constructores que hacen posible la arquitectura.',
-    };
+export function getConstructionTeamForProject(project: any): ConstructionTeamData | null {
+  if (!project) return null;
+
+  // Explicitly disabled or cleared in CMS (just like photographer)
+  if (
+    project.hasMaestroMayor === false ||
+    project.maestroMayor === '' ||
+    project.datos?.maestroMayor === '' ||
+    project.maestroMayor === 'none'
+  ) {
+    return null;
   }
 
   const slug = project.slug || project.id || '';
-  // If project has a full custom constructionTeam object:
-  if (project.constructionTeam && project.constructionTeam.maestroMayor) {
+
+  // 1. If project has a full custom constructionTeam object with an explicit maestro
+  if (
+    project.constructionTeam &&
+    project.constructionTeam.maestroMayor &&
+    project.constructionTeam.maestroMayor.nombre &&
+    project.constructionTeam.maestroMayor.nombre.trim()
+  ) {
     return {
       projectId: slug,
       projectTitle: project.title || 'Proyecto Arquitectónico',
@@ -443,47 +443,52 @@ export function getConstructionTeamForProject(project: any): ConstructionTeamDat
     };
   }
 
-  // If registered static project
+  // 2. If project has custom maestroMayor in its data:
+  const customMaestro = (project.maestroMayor || project.datos?.maestroMayor || '').trim();
+  if (customMaestro) {
+    const customTeam = project.equipoTrabajo || project.datos?.equipoTrabajo;
+    const builderProfile = getMasterBuilderByName(customMaestro);
+
+    return {
+      projectId: slug,
+      projectTitle: project.title || 'Proyecto Arquitectónico',
+      location: project.location || builderProfile?.location || 'Ecuador',
+      year: project.year || '2026',
+      maestroMayor: {
+        nombre: builderProfile?.name || customMaestro,
+        rol: builderProfile?.rol || 'Maestro Mayor de Obra',
+        oficio: builderProfile?.oficio || project.datos?.estructura || 'Coordinación general de obra y replanteo de niveles',
+        trayectoria: builderProfile?.trayectoria || 'Maestro constructor con amplia trayectoria en ejecución de obras tectónicas en el Ecuador.',
+        reconocimiento: builderProfile?.reconocimiento || 'Lideró la cuadrilla de artesanos y constructores locales a cargo de la ejecución.',
+      },
+      members: Array.isArray(customTeam) && customTeam.length > 0
+        ? customTeam
+        : builderProfile?.defaultMembers && builderProfile.defaultMembers.length > 0
+        ? builderProfile.defaultMembers
+        : [
+            {
+              nombre: `${(builderProfile?.name || customMaestro).split(' ')[0] || 'Maestro'} y Cuadrilla Local`,
+              rol: 'Maestros Albañiles & Fierreros',
+              oficio: project.datos?.estructura || 'Mampostería, estructuras y acabados arquitectónicos',
+            },
+            {
+              nombre: 'Mano de Obra Artesanal Ecuatoriana',
+              rol: 'Cuadrilla de Construcción',
+              oficio: 'Encofrados, carpintería tradicional y detalles en obra',
+            },
+          ],
+      materialidadPrincipal: project.materialidadPrincipal || project.datos?.estructura || 'Materiales y técnicas locales',
+      manifiestoManoObra:
+        project.manifiestoManoObra ||
+        'La arquitectura no existe sin las manos de quienes transforman la materia en espacio. Rendimos tributo al conocimiento técnico, la destreza manual y la dignidad de los maestros constructores del Ecuador.',
+    };
+  }
+
+  // 3. If registered static project in database:
   if (CONSTRUCTION_TEAMS_DATABASE[slug]) {
     return CONSTRUCTION_TEAMS_DATABASE[slug];
   }
 
-  // If project has custom maestroMayor in its data:
-  const customMaestro = project.maestroMayor || project.datos?.maestroMayor || 'Segundo Guanoluisa';
-  const customTeam = project.equipoTrabajo || project.datos?.equipoTrabajo;
-  const builderProfile = getMasterBuilderByName(customMaestro);
-
-  return {
-    projectId: slug,
-    projectTitle: project.title || 'Proyecto Arquitectónico',
-    location: project.location || builderProfile?.location || 'Ecuador',
-    year: project.year || '2026',
-    maestroMayor: {
-      nombre: builderProfile?.name || customMaestro,
-      rol: builderProfile?.rol || 'Maestro Mayor de Obra',
-      oficio: builderProfile?.oficio || project.datos?.estructura || 'Coordinación general de obra y replanteo de niveles',
-      trayectoria: builderProfile?.trayectoria || 'Maestro constructor con amplia trayectoria en ejecución de obras tectónicas en el Ecuador.',
-      reconocimiento: builderProfile?.reconocimiento || 'Lideró la cuadrilla de artesanos y constructores locales a cargo de la ejecución.',
-    },
-    members: Array.isArray(customTeam) && customTeam.length > 0
-      ? customTeam
-      : builderProfile?.defaultMembers && builderProfile.defaultMembers.length > 0
-      ? builderProfile.defaultMembers
-      : [
-          {
-            nombre: `${(builderProfile?.name || customMaestro).split(' ')[0] || 'Maestro'} y Cuadrilla Local`,
-            rol: 'Maestros Albañiles & Fierreros',
-            oficio: project.datos?.estructura || 'Mampostería, estructuras y acabados arquitectónicos',
-          },
-          {
-            nombre: 'Mano de Obra Artesanal Ecuatoriana',
-            rol: 'Cuadrilla de Construcción',
-            oficio: 'Encofrados, carpintería tradicional y detalles en obra',
-          },
-        ],
-    materialidadPrincipal: project.materialidadPrincipal || project.datos?.estructura || 'Materiales y técnicas locales',
-    manifiestoManoObra:
-      project.manifiestoManoObra ||
-      'La arquitectura no existe sin las manos de quienes transforman la materia en espacio. Rendimos tributo al conocimiento técnico, la destreza manual y la dignidad de los maestros constructores del Ecuador.',
-  };
+  // 4. Default: No maestro mayor assigned (optional, like photographer)
+  return null;
 }

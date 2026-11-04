@@ -282,6 +282,31 @@ export const getAllAuthorProfiles = (): AuthorProfileData[] => {
 };
 
 /**
+ * Checks whether an author or studio has a genuine registered profile
+ * in the database (either custom CMS authors or static registry).
+ */
+export const hasAuthorProfile = (studioName?: string): boolean => {
+  if (!studioName || !studioName.trim()) return false;
+  const cleanName = studioName.trim().toUpperCase();
+  const slug = normalizeStudioToSlug(studioName);
+  const allAuthors = getAllAuthorProfiles();
+
+  return (
+    allAuthors.some((a) => {
+      const aSlug = a.slug || normalizeStudioToSlug(a.name);
+      const aName = a.name.trim().toUpperCase();
+      return (
+        a.id === slug ||
+        aSlug === slug ||
+        aName === cleanName ||
+        (cleanName.length > 3 && aName.includes(cleanName)) ||
+        (cleanName.length > 3 && cleanName.includes(aName))
+      );
+    }) || Boolean(AUTHORS_REGISTRY[slug])
+  );
+};
+
+/**
  * Retrieves the author profile by studio name or id with fuzzy matching.
  * Checks live dynamic authors first so any updates in CMS are reflected immediately.
  */

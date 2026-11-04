@@ -42,7 +42,7 @@ export const NewArticleModal: React.FC<NewArticleModalProps> = ({
 
   // Project specific: Photographer, Maestro Mayor and Construction Team
   const [photographer, setPhotographer] = useState('');
-  const [maestroMayor, setMaestroMayor] = useState('Segundo Guanoluisa');
+  const [maestroMayor, setMaestroMayor] = useState('');
   const [materialidadPrincipal, setMaterialidadPrincipal] = useState('Hormigón crudo y materiales locales');
   const [showTeamSection, setShowTeamSection] = useState(false);
   const [teamMembers, setTeamMembers] = useState<ConstructionTeamMember[]>([
@@ -217,8 +217,10 @@ export const NewArticleModal: React.FC<NewArticleModalProps> = ({
           ? 'VER INVESTIGACIÓN'
           : 'VER PROYECTO',
       photographer: isTerritorio || isAcademia ? undefined : photographer.trim().toUpperCase() || undefined,
-      maestroMayor: selectedType === 'proyectos' ? maestroMayor.trim() : undefined,
-      equipoTrabajo: selectedType === 'proyectos' ? teamMembers : undefined,
+      maestroMayor: selectedType === 'proyectos' && maestroMayor.trim() ? maestroMayor.trim() : undefined,
+      equipoTrabajo: selectedType === 'proyectos' && maestroMayor.trim() ? teamMembers : undefined,
+      hasMaestroMayor: selectedType === 'proyectos' ? Boolean(maestroMayor.trim()) : false,
+      enableAuthorModal: false,
       materialidadPrincipal: selectedType === 'proyectos' ? materialidadPrincipal.trim() : undefined,
       renders: isAcademia ? (cleanRenders || undefined) : undefined,
       escritoPor: 'Redacción Editorial EA',
@@ -315,20 +317,20 @@ export const NewArticleModal: React.FC<NewArticleModalProps> = ({
         superficie: selectedType === 'proyectos' ? '450 m²' : undefined,
         estructura: selectedType === 'proyectos' ? materialidadPrincipal : undefined,
         fotografia: selectedType === 'proyectos' ? photographer.trim().toUpperCase() : undefined,
-        maestroMayor: selectedType === 'proyectos' ? maestroMayor.trim() : undefined,
-        equipoTrabajo: selectedType === 'proyectos' ? teamMembers : undefined,
+        maestroMayor: selectedType === 'proyectos' && maestroMayor.trim() ? maestroMayor.trim() : undefined,
+        equipoTrabajo: selectedType === 'proyectos' && maestroMayor.trim() ? teamMembers : undefined,
         renders: isAcademia && cleanRenders ? cleanRenders : undefined,
         universidad: isAcademia ? university.trim().toUpperCase() : undefined,
         colaboradores: studio.trim() || (isTerritorio ? 'Equipo de Investigación Territorial' : 'Equipo de Proyecto'),
         certificacion: selectedType === 'proyectos' ? 'Eficiencia Bioclimática' : undefined,
       },
-      constructionTeam: selectedType === 'proyectos' ? {
+      constructionTeam: selectedType === 'proyectos' && maestroMayor.trim() ? {
         projectId: slug,
         projectTitle: cleanTitle.toUpperCase(),
         location: location.trim().toUpperCase() || 'QUITO',
         year,
         maestroMayor: {
-          nombre: maestroMayor.trim() || 'Segundo Guanoluisa',
+          nombre: maestroMayor.trim(),
           rol: 'Maestro Mayor de Obra',
           oficio: materialidadPrincipal,
           trayectoria: 'Maestro constructor con amplia trayectoria en ejecución de obras tectónicas en el Ecuador.',
@@ -491,7 +493,7 @@ export const NewArticleModal: React.FC<NewArticleModalProps> = ({
                       ? 'ej. ESTUDIO URBANO LITORAL'
                       : 'ej. MATEO SÁNCHEZ'
                   }
-                  helperText="Despliega estudios registrados o pulsa + para crear un nuevo perfil de arquitecto."
+                  helperText="Escribe el nombre o selecciona uno. No es obligatorio crear un perfil (solo con el nombre basta)."
                 />
               </div>
 
@@ -534,8 +536,8 @@ export const NewArticleModal: React.FC<NewArticleModalProps> = ({
                     value={maestroMayor}
                     onChange={setMaestroMayor}
                     label="Maestro Mayor de Obra Principal"
-                    placeholder="ej. SEGUNDO GUANOLUISA, LUIS TOAPANTA"
-                    helperText="Reconoce al maestro mayor responsable de la faena constructiva."
+                    placeholder="ej. SEGUNDO GUANOLUISA (o deja vacío)"
+                    helperText="Opcional: Si lo dejas vacío, no aparecerá en la web ni en la ficha técnica."
                   />
                 </div>
 

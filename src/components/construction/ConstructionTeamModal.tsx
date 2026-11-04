@@ -14,7 +14,7 @@ export const ConstructionTeamModal: React.FC<ConstructionTeamModalProps> = ({
   onClose,
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
-  const teamData: ConstructionTeamData = getConstructionTeamForProject(project);
+  const teamData: ConstructionTeamData | null = getConstructionTeamForProject(project);
 
   // Close on Escape key
   useEffect(() => {
@@ -42,7 +42,7 @@ export const ConstructionTeamModal: React.FC<ConstructionTeamModalProps> = ({
     };
   }, [isOpen]);
 
-  if (!isOpen) return null;
+  if (!isOpen || !teamData || !teamData.maestroMayor) return null;
 
   const coverImage = project?.heroImage || project?.coverImage || 'https://images.unsplash.com/photo-1541888946425-d0fbb186f5f7?auto=format&fit=crop&w=1200&q=80';
 
