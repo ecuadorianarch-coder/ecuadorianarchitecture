@@ -284,7 +284,6 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
   const sectionRef = useRef<HTMLElement>(null);
   const deckContainerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
 
   // Drag & Anti-Accidental Click state
   const dragStartRef = useRef<{ x: number; y: number; time: number } | null>(null);
@@ -498,10 +497,10 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
         activeIndexRef.current = 0;
         setHoveredCardId(null);
         setManualSecondImageId(null);
-        if (scrollTriggerRef.current) {
-          const st = scrollTriggerRef.current;
-          if (window.scrollY > st.start) {
-            window.scrollTo({ top: st.start, behavior: 'instant' });
+        if (sectionRef.current) {
+          const sectionTop = sectionRef.current.offsetTop;
+          if (window.scrollY > sectionTop) {
+            window.scrollTo({ top: sectionTop, behavior: 'instant' });
           }
         }
       });
@@ -603,11 +602,11 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
           // 1. Pull out to the left
           tl.to(
             frontCard,
-            { x: exitDist, rotation: -8, y: 12, duration: 0.38, ease: 'power1.in' },
+            { x: exitDist, rotation: -8, y: 12, duration: 0.26, ease: 'power2.in' },
             0
           );
           // 2. Drop behind stack
-          tl.set(frontCard, { zIndex: 1 }, 0.38);
+          tl.set(frontCard, { zIndex: 1 }, 0.26);
           // 3. Slide smoothly into the last slot from behind
           tl.to(
             frontCard,
@@ -618,10 +617,10 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
               scale: lastSlotCfg.scale,
               zIndex: 1,
               boxShadow: lastSlotCfg.boxShadow,
-              duration: 0.44,
+              duration: 0.32,
               ease: 'power2.out',
             },
-            0.38
+            0.26
           );
         }
 
@@ -635,7 +634,7 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
           const nextSlot = (idx - targetIdx + totalCards) % totalCards;
           const nextCfg = getSlotConfig(nextSlot);
 
-          tl.set(otherCard, { zIndex: nextCfg.zIndex }, 0.2);
+          tl.set(otherCard, { zIndex: nextCfg.zIndex }, 0.16);
           tl.to(
             otherCard,
             {
@@ -645,10 +644,10 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
               scale: nextCfg.scale,
               zIndex: nextCfg.zIndex,
               boxShadow: nextCfg.boxShadow,
-              duration: 0.58,
-              ease: nextSlot === 0 ? 'back.out(1.15)' : 'power2.out',
+              duration: 0.46,
+              ease: nextSlot === 0 ? 'back.out(1.2)' : 'power2.out',
             },
-            0.12
+            0.10
           );
         }
       } else {
@@ -659,11 +658,11 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
           // 1. Pull out to the left from underneath
           tl.to(
             incomingCard,
-            { x: exitDist, rotation: -8, y: 12, duration: 0.38, ease: 'power1.in' },
+            { x: exitDist, rotation: -8, y: 12, duration: 0.26, ease: 'power2.in' },
             0
           );
           // 2. Bring above all other cards
-          tl.set(incomingCard, { zIndex: 7 }, 0.38);
+          tl.set(incomingCard, { zIndex: 7 }, 0.26);
           // 3. Drop into front slot (Slot 0)
           tl.to(
             incomingCard,
@@ -674,10 +673,10 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
               scale: 1,
               zIndex: 6,
               boxShadow: getSlotConfig(0).boxShadow,
-              duration: 0.44,
-              ease: 'back.out(1.15)',
+              duration: 0.32,
+              ease: 'back.out(1.2)',
             },
-            0.38
+            0.26
           );
         }
 
@@ -691,7 +690,7 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
           const nextSlot = (idx - targetIdx + totalCards) % totalCards;
           const nextCfg = getSlotConfig(nextSlot);
 
-          tl.set(otherCard, { zIndex: nextCfg.zIndex }, 0.18);
+          tl.set(otherCard, { zIndex: nextCfg.zIndex }, 0.14);
           tl.to(
             otherCard,
             {
@@ -701,10 +700,10 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
               scale: nextCfg.scale,
               zIndex: nextCfg.zIndex,
               boxShadow: nextCfg.boxShadow,
-              duration: 0.52,
+              duration: 0.42,
               ease: 'power2.out',
             },
-            0.1
+            0.08
           );
         }
       }
@@ -771,129 +770,176 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
   }, [shuffleDeck]);
 
   // =========================================================================
-  // WHEEL SCROLL LISTENER: BARAJA DE CARTAS AL SCROLLEAR CON MOUSE O TRACKPAD
-  // Cada impulso de scroll hacia abajo baraja inmediatamente la carta hacia atrás.
-  // Cada impulso hacia arriba baraja en reversa.
-  // Al llegar a la última carta permite continuar al footer; en la primera permite volver al hero.
+  // CONTROLLED DECK WHEEL & SCROLL COORDINATOR
   // =========================================================================
+  // 1. Cuando el usuario scrollea hacia abajo y llega a #destacados, la sección
+  //    se enmarca perfectamente en el viewport.
+  // 2. Cada scroll hacia abajo baraja inmediatamente la carta hacia atrás (0 -> 1 -> 2)
+  //    con animación física fluida.
+  // 3. El cooldown de inercia absorbe el impulso del trackpad para que 1 gesto
+  //    avance exactamente 1 carta deliberada sin saltarse cartas.
+  // 4. LÍMITE TOTAL INFERIOR: Solo cuando se ha llegado a la última carta
+  //    (activeIndex === totalCards - 1) y el usuario vuelve a scrollear hacia abajo,
+  //    se libera el scroll y continúa suavemente hacia el footer.
+  // 5. LÍMITE TOTAL SUPERIOR: Al volver desde el footer, el mazo captura el scroll
+  //    en la última carta, baraja en reversa (2 -> 1 -> 0), y solo tras llegar
+  //    a la primera carta y volver a scrollear hacia arriba, continúa al Hero.
+  // 6. En pestañas con estado vacío editorial (Territorios / Academia), el scroll
+  //    pasa directo sin bloquearse en ningún momento.
+  // =========================================================================
+  const shuffleDeckRef = useRef(shuffleDeck);
+  shuffleDeckRef.current = shuffleDeck;
+
   useEffect(() => {
+    if (totalCards <= 1 || Boolean(projects[0]?.isEditorialEmptyCard)) {
+      return;
+    }
+
     const sectionEl = sectionRef.current;
     if (!sectionEl) return;
 
-    let lastWheelTime = 0;
     let accumulatedDelta = 0;
+    let cooldownUntil = 0;
+    let lastWheelTime = 0;
 
     const onWheel = (e: WheelEvent) => {
-      if (totalCards <= 1 || projects[0]?.isEditorialEmptyCard) return;
-
+      // Ignorar inputs o textareas donde el usuario podría estar escribiendo o scrolleando texto interno
       const target = e.target as HTMLElement;
-      if (target?.closest('input') || target?.closest('textarea') || target?.closest('[data-no-deck-cursor]')) {
+      if (
+        target?.closest('input') ||
+        target?.closest('textarea') ||
+        target?.closest('select')
+      ) {
         return;
       }
 
       const rect = sectionEl.getBoundingClientRect();
-      const isInView = rect.top < window.innerHeight * 0.7 && rect.bottom > window.innerHeight * 0.3;
-      if (!isInView) return;
-
-      accumulatedDelta += e.deltaY;
-      const now = Date.now();
       const currentIdx = activeIndexRef.current;
-      const threshold = 35;
+      const now = Date.now();
+      const vh = window.innerHeight;
+      const isSectionInFrame = rect.top <= 100 && rect.bottom >= vh - 100;
+      const sectionTop = sectionEl.offsetTop;
+      const scrollY = window.scrollY;
+      const isParkedAtDeck = Math.abs(scrollY - sectionTop) <= 8;
 
-      // Scroll DOWN -> BARAJAR AL SIGUIENTE
-      if (accumulatedDelta > threshold) {
-        accumulatedDelta = 0;
-        if (currentIdx < totalCards - 1) {
-          e.preventDefault();
-          if (isAnimatingRef.current || now - lastWheelTime < 420) return;
-          lastWheelTime = now;
-          shuffleDeck('next');
-        }
-      }
-      // Scroll UP -> BARAJAR AL ANTERIOR
-      else if (accumulatedDelta < -threshold) {
-        accumulatedDelta = 0;
-        if (currentIdx > 0) {
-          e.preventDefault();
-          if (isAnimatingRef.current || now - lastWheelTime < 420) return;
-          lastWheelTime = now;
-          shuffleDeck('prev');
-        }
-      } else {
-        if (
-          (e.deltaY > 0 && currentIdx < totalCards - 1) ||
-          (e.deltaY < 0 && currentIdx > 0)
-        ) {
-          e.preventDefault();
-        }
-      }
-    };
-
-    sectionEl.addEventListener('wheel', onWheel, { passive: false });
-    return () => {
-      sectionEl.removeEventListener('wheel', onWheel);
-    };
-  }, [totalCards, projects, shuffleDeck]);
-
-  const shuffleDeckRef = useRef(shuffleDeck);
-  shuffleDeckRef.current = shuffleDeck;
-
-  useGSAP(
-    () => {
-      if (!sectionRef.current) return;
-
-      // If only 1 card or empty editorial state, cleanly dismantle any pinned ScrollTrigger
-      if (totalCards <= 1 || Boolean(projects[0]?.isEditorialEmptyCard)) {
-        if (scrollTriggerRef.current) {
-          scrollTriggerRef.current.kill(true);
-          scrollTriggerRef.current = null;
-        }
-        applySlotsInstant(0);
-        setActiveIndex(0);
-        activeIndexRef.current = 0;
+      // Caso 1: Entrada desde el Hero hacia abajo (la sección está llegando arriba)
+      if (e.deltaY > 0 && scrollY < sectionTop - 10 && scrollY >= sectionTop - 100 && currentIdx === 0) {
+        e.preventDefault();
+        window.scrollTo({ top: sectionTop, behavior: 'instant' });
         return;
       }
 
-      // Ensure cards start at slot 0 initial state
-      applySlotsInstant(0);
-      setActiveIndex(0);
-      activeIndexRef.current = 0;
+      // Caso 2: Entrada desde el Footer hacia arriba (la sección está llegando desde abajo)
+      if (
+        e.deltaY < 0 &&
+        scrollY > sectionTop + 10 &&
+        scrollY <= sectionTop + 100 &&
+        currentIdx === totalCards - 1
+      ) {
+        e.preventDefault();
+        window.scrollTo({ top: sectionTop, behavior: 'instant' });
+        return;
+      }
 
-      const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
-      const scrollDistancePerCard = isMobile ? 380 : 450;
-      const totalScrollDist = (totalCards - 1) * scrollDistancePerCard;
+      // Si no estamos aparcados en la sección ni en el encuadre activo, permitir scroll nativo libre
+      if (!isParkedAtDeck && !isSectionInFrame) {
+        return;
+      }
 
-      const st = ScrollTrigger.create({
-        trigger: sectionRef.current,
-        pin: true,
-        pinSpacing: true,
-        start: 'top top',
-        end: () => `+=${totalScrollDist}`,
-        onUpdate: (self) => {
-          if (isAnimatingRef.current) return;
-          const targetStep = Math.min(
-            totalCards - 1,
-            Math.floor(self.progress * (totalCards - 1) + 0.5)
-          );
-          if (targetStep !== activeIndexRef.current) {
-            if (targetStep > activeIndexRef.current) {
-              shuffleDeckRef.current('next');
-            } else if (targetStep < activeIndexRef.current) {
-              shuffleDeckRef.current('prev');
-            }
+      // ---------------------------------------------------------------------
+      // DENTRO DEL MAZO: USUARIO ENMARCADO EN #DESTACADOS
+      // ---------------------------------------------------------------------
+
+      // SCROLL HACIA ABAJO
+      if (e.deltaY > 0) {
+        // Aún quedan cartas por ver (no estamos en la última)
+        if (currentIdx < totalCards - 1) {
+          e.preventDefault();
+
+          // Asegurar encuadre en el tope de la sección si hay una leve desviación
+          if (Math.abs(rect.top) > 5) {
+            window.scrollTo({ top: sectionEl.offsetTop, behavior: 'instant' });
           }
-        },
-      });
 
-      scrollTriggerRef.current = st;
+          // Si está en plena animación o en cooldown de inercia, absorber el impulso
+          if (isAnimatingRef.current || now < cooldownUntil) {
+            return;
+          }
 
-      return () => {
-        if (st) st.kill(true);
-        scrollTriggerRef.current = null;
-      };
-    },
-    { dependencies: [currentTab, totalCards], scope: sectionRef }
-  );
+          if (now - lastWheelTime > 220) {
+            accumulatedDelta = 0;
+          }
+          lastWheelTime = now;
+          accumulatedDelta += e.deltaY;
+
+          if (accumulatedDelta >= 35) {
+            accumulatedDelta = 0;
+            cooldownUntil = now + 460;
+            shuffleDeckRef.current('next');
+          }
+          return;
+        }
+
+        // Estamos en la ÚLTIMA carta (currentIdx === totalCards - 1):
+        // Si recién acabamos de llegar a ella (animando o en cooldown), absorber para no saltar de golpe
+        if (isAnimatingRef.current || now < cooldownUntil) {
+          e.preventDefault();
+          return;
+        }
+
+        // LÍMITE TOTAL ALCANZADO: El usuario ya vio todas las cartas y da un nuevo scroll hacia abajo:
+        // NO llamamos a e.preventDefault() -> el scroll nativo continúa fluidamente al Footer!
+        return;
+      }
+
+      // SCROLL HACIA ARRIBA
+      if (e.deltaY < 0) {
+        // Aún no estamos en la primera carta (vamos de regreso: 2 -> 1 -> 0)
+        if (currentIdx > 0) {
+          e.preventDefault();
+
+          // Asegurar encuadre en el tope de la sección si hay una leve desviación
+          if (Math.abs(rect.top) > 5) {
+            window.scrollTo({ top: sectionEl.offsetTop, behavior: 'instant' });
+          }
+
+          // Si está en plena animación o en cooldown de inercia, absorber el impulso
+          if (isAnimatingRef.current || now < cooldownUntil) {
+            return;
+          }
+
+          if (now - lastWheelTime > 220) {
+            accumulatedDelta = 0;
+          }
+          lastWheelTime = now;
+          accumulatedDelta += e.deltaY;
+
+          if (accumulatedDelta <= -35) {
+            accumulatedDelta = 0;
+            cooldownUntil = now + 460;
+            shuffleDeckRef.current('prev');
+          }
+          return;
+        }
+
+        // Estamos en la PRIMERA carta (currentIdx === 0):
+        // Si recién acabamos de llegar a ella (animando o en cooldown), absorber para no saltar de golpe
+        if (isAnimatingRef.current || now < cooldownUntil) {
+          e.preventDefault();
+          return;
+        }
+
+        // LÍMITE TOTAL SUPERIOR ALCANZADO: El usuario ya regresó a la primera carta y scrollea hacia arriba:
+        // NO llamamos a e.preventDefault() -> el scroll nativo continúa fluidamente de vuelta al Hero!
+        return;
+      }
+    };
+
+    window.addEventListener('wheel', onWheel, { passive: false });
+    return () => {
+      window.removeEventListener('wheel', onWheel);
+    };
+  }, [totalCards, projects]);
 
   // =========================================================================
   // HORIZONTAL DRAG / SWIPE (Mouse & Touch) + ANTI-ACCIDENTAL-CLICK
@@ -1052,12 +1098,16 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
       const inView = rect.top < window.innerHeight && rect.bottom > 0;
       if (!inView) return;
 
-      if (e.key === 'ArrowRight') {
-        e.preventDefault();
-        nextCard();
-      } else if (e.key === 'ArrowLeft') {
-        e.preventDefault();
-        prevCard();
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        if (activeIndexRef.current < totalCards - 1) {
+          e.preventDefault();
+          nextCard();
+        }
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        if (activeIndexRef.current > 0) {
+          e.preventDefault();
+          prevCard();
+        }
       }
     };
 
