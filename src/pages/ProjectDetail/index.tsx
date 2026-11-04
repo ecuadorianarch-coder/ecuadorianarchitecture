@@ -129,6 +129,17 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
     );
   }, [project, availableModules]);
 
+  const displayLocation = useMemo(() => {
+    const loc = (project.datos?.ubicacion || project.location || '').trim();
+    const barrio = (project.ciudad?.barrio || '').trim();
+    if (!loc && !barrio) return '';
+    if (!barrio) return loc;
+    if (!loc) return barrio;
+    if (loc.toLowerCase().includes(barrio.toLowerCase())) return loc;
+    if (barrio.toLowerCase().includes(loc.toLowerCase())) return barrio;
+    return `${barrio}, ${loc}`;
+  }, [project.datos?.ubicacion, project.location, project.ciudad?.barrio]);
+
   const projectSection: 'proyectos' | 'academia' | 'territorios' = useMemo(() => {
     if (
       project?.type === 'academia' ||
@@ -1739,40 +1750,57 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
                 </div>
 
                 <div className="space-y-4 font-creato text-sm">
-                  <div className="flex justify-between py-2 border-b border-ea-border">
-                    <span className="text-ea-black/60 uppercase text-xs font-mono">Ubicación</span>
-                    <span className="font-semibold text-right">
-                      {project.ciudad?.barrio 
-                        ? `${project.ciudad.barrio}, ${project.location}` 
-                        : `${project.location}, Ecuador`}
-                    </span>
-                  </div>
-                  <div className="flex justify-between py-2 border-b border-ea-border">
-                    <span className="text-ea-black/60 uppercase text-xs font-mono">Tipología / Programa</span>
-                    <span className="font-semibold text-right">{project.category || 'Arquitectura Residencial'}</span>
-                  </div>
-                  <div className="flex justify-between py-2 border-b border-ea-border">
-                    <span className="text-ea-black/60 uppercase text-xs font-mono">Año de Finalización</span>
-                    <span className="font-semibold text-right">{project.year || '2024'}</span>
-                  </div>
-                  <div className="flex justify-between py-2 border-b border-ea-border">
-                    <span className="text-ea-black/60 uppercase text-xs font-mono">Estado de la Obra</span>
-                    <span className="font-semibold text-right">
-                      {project.status === 'published' ? 'Obra Construida' : 'En Construcción'}
-                    </span>
-                  </div>
-                  <div className="flex justify-between py-2">
-                    <span className="text-ea-black/60 uppercase text-xs font-mono">Cliente / Encargo</span>
-                    <span className="font-semibold text-right">
-                      {project.datos?.cliente || project.cliente || (project.category?.includes('Comunitario') || project.category?.includes('Social') ? 'Comunidad Local' : project.category?.includes('Público') ? 'Público / Institucional' : 'Privado')}
-                    </span>
-                  </div>
+                  {/* Ubicación (Sin duplicar ciudad y mostrando exactamente lo ingresado) */}
+                  {Boolean(displayLocation) && (
+                    <div className="flex justify-between py-2 border-b border-ea-border">
+                      <span className="text-ea-black/60 uppercase text-xs font-mono">Ubicación</span>
+                      <span className="font-semibold text-right">{displayLocation}</span>
+                    </div>
+                  )}
+
+                  {/* Tipología / Programa */}
+                  {Boolean(project.category?.trim() || project.tipologia?.trim() || project.datos?.tipologia?.trim()) && (
+                    <div className="flex justify-between py-2 border-b border-ea-border">
+                      <span className="text-ea-black/60 uppercase text-xs font-mono">Tipología / Programa</span>
+                      <span className="font-semibold text-right">
+                        {project.tipologia || project.datos?.tipologia || project.category}
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Año de Finalización */}
+                  {Boolean(project.year?.toString().trim()) && (
+                    <div className="flex justify-between py-2 border-b border-ea-border">
+                      <span className="text-ea-black/60 uppercase text-xs font-mono">Año de Finalización</span>
+                      <span className="font-semibold text-right">{project.year}</span>
+                    </div>
+                  )}
+
+                  {/* Estado de la Obra (Opcional) */}
+                  {Boolean(project.estadoObra?.trim() || project.datos?.estado?.trim()) && (
+                    <div className="flex justify-between py-2 border-b border-ea-border">
+                      <span className="text-ea-black/60 uppercase text-xs font-mono">Estado de la Obra</span>
+                      <span className="font-semibold text-right">
+                        {project.estadoObra || project.datos?.estado}
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Cliente / Encargo (OPCIONAL: solo si fue ingresado explícitamente) */}
+                  {Boolean(project.cliente?.trim() || project.datos?.cliente?.trim()) && (
+                    <div className="flex justify-between py-2 border-b border-ea-border last:border-b-0">
+                      <span className="text-ea-black/60 uppercase text-xs font-mono">Cliente / Encargo</span>
+                      <span className="font-semibold text-right">
+                        {(project.cliente || project.datos?.cliente)?.trim()}
+                      </span>
+                    </div>
+                  )}
                 </div>
               </div>
 
               <div className="pt-6 mt-6 border-t border-ea-border">
                 <p className="font-creato text-xs text-ea-black/60 leading-relaxed">
-                  {project.memory || project.excerpt || `Memoria arquitectónica: intervención proyectual desarrollada en ${project.location}, respondiendo al paisaje, al contexto urbano y a la materialidad contemporánea.`}
+                  {project.memory || project.excerpt || `Memoria arquitectónica: intervención proyectual desarrollada en ${displayLocation || 'el territorio'}, respondiendo al paisaje, al contexto urbano y a la materialidad contemporánea.`}
                 </p>
               </div>
             </div>
@@ -1791,32 +1819,55 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
                 </div>
 
                 <div className="space-y-4 font-creato text-sm">
-                  <div className="flex justify-between py-2 border-b border-ea-border">
-                    <span className="text-ea-black/60 uppercase text-xs font-mono">Superficie Construida</span>
-                    <span className="font-semibold text-right">{project.datos?.superficie || '3.850 m²'}</span>
-                  </div>
-                  <div className="flex justify-between py-2 border-b border-ea-border">
-                    <span className="text-ea-black/60 uppercase text-xs font-mono">Sistema Estructural</span>
-                    <span className="font-semibold text-right">{project.datos?.estructura || 'Hormigón armado visto y acero'}</span>
-                  </div>
-                  <div className="flex justify-between py-2 border-b border-ea-border">
-                    <span className="text-ea-black/60 uppercase text-xs font-mono">Equipo / Colaboradores</span>
-                    <span className="font-semibold text-right max-w-[60%]">
-                      {project.datos?.colaboradores || project.colaboradores || 'Equipo técnico de proyecto'}
-                    </span>
-                  </div>
+                  {/* Superficie Construida (OPCIONAL: solo si fue ingresada) */}
+                  {Boolean(project.superficie?.trim() || project.datos?.superficie?.trim()) && (
+                    <div className="flex justify-between py-2 border-b border-ea-border">
+                      <span className="text-ea-black/60 uppercase text-xs font-mono">Superficie Construida</span>
+                      <span className="font-semibold text-right">
+                        {(project.superficie || project.datos?.superficie)?.trim()}
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Sistema Estructural (OPCIONAL: solo si fue ingresado) */}
+                  {Boolean(project.datos?.estructura?.trim() || project.sistemaEstructural?.trim() || project.materialidadPrincipal?.trim()) && (
+                    <div className="flex justify-between py-2 border-b border-ea-border">
+                      <span className="text-ea-black/60 uppercase text-xs font-mono">Sistema Estructural</span>
+                      <span className="font-semibold text-right">
+                        {(project.datos?.estructura || project.sistemaEstructural || project.materialidadPrincipal)?.trim()}
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Equipo / Colaboradores (OPCIONAL: solo si fue ingresado) */}
+                  {Boolean(project.colaboradores?.trim() || project.datos?.colaboradores?.trim()) && (
+                    <div className="flex justify-between py-2 border-b border-ea-border">
+                      <span className="text-ea-black/60 uppercase text-xs font-mono">Equipo / Colaboradores</span>
+                      <span className="font-semibold text-right max-w-[60%]">
+                        {(project.colaboradores || project.datos?.colaboradores)?.trim()}
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Fotografía / Registro (OPCIONAL: solo si existe fotógrafo) */}
                   {Boolean(project.datos?.fotografia?.trim() || project.photographer?.trim()) && (
                     <div className="flex justify-between py-2 border-b border-ea-border">
                       <span className="text-ea-black/60 uppercase text-xs font-mono">Fotografía / Registro</span>
-                      <span className="font-semibold text-right">{project.datos?.fotografia || project.photographer}</span>
+                      <span className="font-semibold text-right">
+                        {(project.datos?.fotografia || project.photographer)?.trim()}
+                      </span>
                     </div>
                   )}
-                  <div className="flex justify-between py-2">
-                    <span className="text-ea-black/60 uppercase text-xs font-mono">Ingeniería / Cálculo</span>
-                    <span className="font-semibold text-right">
-                      {project.datos?.ingenieria || project.datos?.calculoEstructural || 'Ingeniería Estructural Especializada'}
-                    </span>
-                  </div>
+
+                  {/* Ingeniería / Cálculo (OPCIONAL: solo si fue ingresada) */}
+                  {Boolean(project.datos?.ingenieria?.trim() || project.datos?.calculoEstructural?.trim() || project.ingenieria?.trim()) && (
+                    <div className="flex justify-between py-2 border-b border-ea-border last:border-b-0">
+                      <span className="text-ea-black/60 uppercase text-xs font-mono">Ingeniería / Cálculo</span>
+                      <span className="font-semibold text-right">
+                        {(project.datos?.ingenieria || project.datos?.calculoEstructural || project.ingenieria)?.trim()}
+                      </span>
+                    </div>
+                  )}
                 </div>
               </div>
 

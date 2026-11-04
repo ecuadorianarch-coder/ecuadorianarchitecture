@@ -2166,7 +2166,7 @@ export const VisualEditorialEditor: React.FC<VisualEditorialEditorProps> = ({
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
                         <label className="block text-[11px] font-mono uppercase tracking-wider text-white/70 mb-1">
-                          {article.type === 'territorios' ? 'Territorio o Región *' : 'Ciudad o Ubicación *'}
+                          {article.type === 'territorios' ? 'Territorio o Región *' : 'Ciudad o Ubicación General *'}
                         </label>
                         <input
                           type="text"
@@ -2199,6 +2199,27 @@ export const VisualEditorialEditor: React.FC<VisualEditorialEditorProps> = ({
                           Año de registro oficial.
                         </p>
                       </div>
+                    </div>
+
+                    {/* Dirección, Barrio o Sector Específico */}
+                    <div>
+                      <label className="block text-[11px] font-mono uppercase tracking-wider text-white/70 mb-1">
+                        Dirección, Barrio o Sector Específico (Opcional)
+                      </label>
+                      <input
+                        type="text"
+                        value={article.ciudad?.barrio || article.datos?.ubicacion || ''}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          updateField('ciudad', { ...(article.ciudad || {}), barrio: val });
+                          updateField('datos', { ...(article.datos || {}), ubicacion: val });
+                        }}
+                        placeholder="ej. Boulevard 24 de Mayo, Centro Histórico (o deja vacío)"
+                        className="w-full bg-[#242424] border border-white/20 p-2 text-xs text-white focus:border-white focus:outline-none"
+                      />
+                      <p className="text-[10px] text-white/40 mt-1">
+                        Si lo dejas vacío, en la web solo se mostrará la ciudad sin duplicaciones.
+                      </p>
                     </div>
 
                     {/* Clasificación Editorial */}
@@ -3504,23 +3525,126 @@ export const VisualEditorialEditor: React.FC<VisualEditorialEditorProps> = ({
                           </div>
                         </div>
 
-                        {/* Estructura y Materiales */}
+                        {/* Estructura y Sistema Estructural */}
                         <div>
                           <label className="block text-[11px] font-mono uppercase tracking-wider text-white/70 mb-1">
-                            Estructura y Materiales Principales
+                            Sistema Estructural y Materiales (Opcional)
                           </label>
                           <input
                             type="text"
-                            value={article.datos?.estructura || 'Hormigón visto y materiales locales'}
-                            onChange={(e) =>
+                            value={article.datos?.estructura || (article as any).materialidadPrincipal || ''}
+                            onChange={(e) => {
+                              const val = e.target.value;
                               updateField('datos', {
                                 ...(article.datos || {}),
-                                estructura: e.target.value,
-                              })
-                            }
-                            placeholder="ej. Hormigón crudo, madera de eucalipto, acero"
+                                estructura: val,
+                              });
+                              updateField('materialidadPrincipal' as any, val);
+                            }}
+                            placeholder="ej. Hormigón armado visto y acero (o deja vacío si no aplica)"
                             className="w-full bg-[#242424] border border-white/20 p-2 text-xs text-white focus:border-white focus:outline-none"
                           />
+                          <p className="text-[10px] text-white/40 mt-1">
+                            Si lo dejas vacío, no se mostrará en la ficha técnica.
+                          </p>
+                        </div>
+
+                        {/* Ingeniería y Cálculo Estructural */}
+                        <div>
+                          <label className="block text-[11px] font-mono uppercase tracking-wider text-white/70 mb-1">
+                            Ingeniería / Cálculo Estructural (Opcional)
+                          </label>
+                          <input
+                            type="text"
+                            value={(article as any).ingenieria || article.datos?.ingenieria || article.datos?.calculoEstructural || ''}
+                            onChange={(e) => {
+                              const val = e.target.value;
+                              updateField('ingenieria' as any, val);
+                              updateField('datos', {
+                                ...(article.datos || {}),
+                                ingenieria: val,
+                                calculoEstructural: val,
+                              });
+                            }}
+                            placeholder="ej. Ing. Patricio Cevallos (o deja vacío si no aplica)"
+                            className="w-full bg-[#242424] border border-white/20 p-2 text-xs text-white focus:border-white focus:outline-none"
+                          />
+                          <p className="text-[10px] text-white/40 mt-1">
+                            Si lo dejas vacío, no se mostrará en la ficha técnica.
+                          </p>
+                        </div>
+
+                        {/* Cliente / Encargo */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          <div>
+                            <label className="block text-[11px] font-mono uppercase tracking-wider text-white/70 mb-1">
+                              Cliente / Encargo (Opcional)
+                            </label>
+                            <input
+                              type="text"
+                              value={(article as any).cliente || article.datos?.cliente || ''}
+                              onChange={(e) => {
+                                const val = e.target.value;
+                                updateField('cliente' as any, val);
+                                updateField('datos', {
+                                  ...(article.datos || {}),
+                                  cliente: val,
+                                });
+                              }}
+                              placeholder="ej. Privado, Municipio de Quito (o deja vacío)"
+                              className="w-full bg-[#242424] border border-white/20 p-2 text-xs text-white focus:border-white focus:outline-none"
+                            />
+                            <p className="text-[10px] text-white/40 mt-1">
+                              Si lo dejas vacío, no se mostrará en la web.
+                            </p>
+                          </div>
+
+                          <div>
+                            <label className="block text-[11px] font-mono uppercase tracking-wider text-white/70 mb-1">
+                              Estado de la Obra (Opcional)
+                            </label>
+                            <input
+                              type="text"
+                              value={(article as any).estadoObra || article.datos?.estado || ''}
+                              onChange={(e) => {
+                                const val = e.target.value;
+                                updateField('estadoObra' as any, val);
+                                updateField('datos', {
+                                  ...(article.datos || {}),
+                                  estado: val,
+                                });
+                              }}
+                              placeholder="ej. Obra Construida, Intervención Efímera (o deja vacío)"
+                              className="w-full bg-[#242424] border border-white/20 p-2 text-xs text-white focus:border-white focus:outline-none"
+                            />
+                            <p className="text-[10px] text-white/40 mt-1">
+                              Si lo dejas vacío, se deduce automáticamente.
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Equipo / Colaboradores */}
+                        <div>
+                          <label className="block text-[11px] font-mono uppercase tracking-wider text-white/70 mb-1">
+                            Equipo de Proyecto / Colaboradores (Opcional)
+                          </label>
+                          <input
+                            type="text"
+                            value={(article as any).colaboradores || article.datos?.colaboradores || ''}
+                            onChange={(e) => {
+                              const val = e.target.value;
+                              updateField('colaboradores' as any, val);
+                              updateField('datos', {
+                                ...(article.datos || {}),
+                                colaboradores: val,
+                              });
+                            }}
+                            placeholder="ej. Arq. Daniel Moreno, Arq. Margaux Eyssette (o deja vacío)"
+                            className="w-full bg-[#242424] border border-white/20 p-2 text-xs text-white focus:border-white focus:outline-none"
+                          />
+                          <p className="text-[10px] text-white/40 mt-1">
+                            Colaboradores del despacho o proyecto. Si lo dejas vacío, no se mostrará.
+                          </p>
                         </div>
 
                         {/* Maestro Mayor & Equipo de Mano de Obra */}

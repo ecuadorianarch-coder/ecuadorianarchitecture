@@ -141,6 +141,11 @@ export interface EditorialArticle {
     audioUrl?: string;
   };
   evento?: string;
+  cliente?: string;
+  ingenieria?: string;
+  colaboradores?: string;
+  estadoObra?: string;
+  sistemaEstructural?: string;
   datos?: {
     superficie?: string;
     estructura?: string;
@@ -151,6 +156,11 @@ export interface EditorialArticle {
     escala?: string;
     universidad?: string;
     renders?: string;
+    cliente?: string;
+    ingenieria?: string;
+    calculoEstructural?: string;
+    estado?: string;
+    ubicacion?: string;
     [key: string]: any;
   };
   ciudad?: {

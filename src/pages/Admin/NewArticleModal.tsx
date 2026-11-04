@@ -341,7 +341,7 @@ export const NewArticleModal: React.FC<NewArticleModalProps> = ({
         manifiestoManoObra: 'La arquitectura no existe sin las manos de quienes transforman la materia en espacio. Rendimos tributo al conocimiento técnico, la destreza manual y la dignidad de los maestros constructores del Ecuador.',
       } : undefined,
       ciudad: {
-        barrio: location.trim().toUpperCase(),
+        barrio: undefined,
         altura: '2.850 msnm',
         orientacion: 'Norte-Sur',
         clima: isTerritorio ? 'Variable Territorial' : 'Ecuatorial Andino',
