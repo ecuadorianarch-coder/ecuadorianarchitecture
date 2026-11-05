@@ -7,7 +7,7 @@
     "dev": "vite",
     "start": "node server.cjs",
     "backup": "node scripts/backup.cjs",
-    "build": "vite build && node scripts/generate-static-seo.mjs && node scripts/generate-avo-geo.cjs && node scripts/generate-sitemap.cjs",
+    "build": "node scripts/verify-content-integrity.cjs && vite build && node scripts/generate-static-seo.mjs && node scripts/generate-avo-geo.cjs && node scripts/generate-sitemap.cjs",
     "build:seo": "node scripts/generate-static-seo.mjs",
     "generate:avo": "node scripts/generate-avo-geo.cjs",
     "preview": "vite preview"

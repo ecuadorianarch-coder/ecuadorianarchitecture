@@ -60,8 +60,10 @@ export const Hero: React.FC<HeroProps> = ({
 
     const items: SearchPreviewItem[] = [];
 
-    // 1. Projects
-    (projects || []).forEach((proj: any) => {
+    // 1. Projects (Filtro estricto: solo obras publicadas)
+    (projects || [])
+      .filter((p: any) => p.status === 'published' || !p.status)
+      .forEach((proj: any) => {
       const titleMatch = normalizeText(proj.title).includes(q);
       const studioMatch = normalizeText(proj.studio).includes(q);
       const criticMatch = normalizeText(proj.critic).includes(q);
@@ -85,8 +87,10 @@ export const Hero: React.FC<HeroProps> = ({
       }
     });
 
-    // 2. Territorios
-    (territorios || []).forEach((terr: any) => {
+    // 2. Territorios (Solo publicados)
+    (territorios || [])
+      .filter((t: any) => t.status === 'published' || !t.status)
+      .forEach((terr: any) => {
       const titleMatch = normalizeText(terr.title).includes(q);
       const studioMatch = normalizeText(terr.studio).includes(q);
       const regionMatch = normalizeText(terr.region).includes(q);
@@ -108,8 +112,10 @@ export const Hero: React.FC<HeroProps> = ({
       }
     });
 
-    // 3. Academia
-    (academia || []).forEach((acad: any) => {
+    // 3. Academia (Solo publicados)
+    (academia || [])
+      .filter((a: any) => a.status === 'published' || !a.status)
+      .forEach((acad: any) => {
       const titleMatch = normalizeText(acad.title).includes(q);
       const instMatch = normalizeText(acad.institution || acad.universidad || acad.university).includes(q);
       const studentMatch = normalizeText(acad.student).includes(q);

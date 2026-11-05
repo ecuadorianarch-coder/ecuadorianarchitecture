@@ -319,10 +319,10 @@ async function run() {
   }
   const baseHtml = fs.readFileSync(indexPath, 'utf-8');
 
-  // Load collections
-  const projects = JSON.parse(fs.readFileSync(path.join(dataDir, 'projects.json'), 'utf-8') || '[]');
-  const academia = JSON.parse(fs.readFileSync(path.join(dataDir, 'academia.json'), 'utf-8') || '[]');
-  const territorios = JSON.parse(fs.readFileSync(path.join(dataDir, 'territorios.json'), 'utf-8') || '[]');
+  // Load collections (Strictly filter for published items)
+  const projects = JSON.parse(fs.readFileSync(path.join(dataDir, 'projects.json'), 'utf-8') || '[]').filter(p => p.status === 'published' || !p.status);
+  const academia = JSON.parse(fs.readFileSync(path.join(dataDir, 'academia.json'), 'utf-8') || '[]').filter(a => a.status === 'published' || !a.status);
+  const territorios = JSON.parse(fs.readFileSync(path.join(dataDir, 'territorios.json'), 'utf-8') || '[]').filter(t => t.status === 'published' || !t.status);
 
   const sitemapUrls = [
     { loc: SITE_URL, changefreq: 'daily', priority: '1.0' },

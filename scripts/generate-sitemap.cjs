@@ -5,9 +5,9 @@ const baseUrl = process.env.VITE_SITE_URL || 'https://ecuadorianarch.com';
 const dataDir = path.join(__dirname, '..', 'src', 'data');
 const publicDir = path.join(__dirname, '..', 'public');
 
-const projects = JSON.parse(fs.readFileSync(path.join(dataDir, 'projects.json'), 'utf8'));
-const territorios = JSON.parse(fs.readFileSync(path.join(dataDir, 'territorios.json'), 'utf8'));
-const academia = JSON.parse(fs.readFileSync(path.join(dataDir, 'academia.json'), 'utf8'));
+const projects = JSON.parse(fs.readFileSync(path.join(dataDir, 'projects.json'), 'utf8')).filter(p => p.status === 'published' || !p.status);
+const territorios = JSON.parse(fs.readFileSync(path.join(dataDir, 'territorios.json'), 'utf8')).filter(t => t.status === 'published' || !t.status);
+const academia = JSON.parse(fs.readFileSync(path.join(dataDir, 'academia.json'), 'utf8')).filter(a => a.status === 'published' || !a.status);
 
 const today = new Date().toISOString().split('T')[0];
 

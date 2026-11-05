@@ -194,7 +194,8 @@ export function getDeckProjectsForTab(
 ): DeckProject[] {
   const matching = (allArticles || []).filter((a) => {
     const belongsToTab = (a.landingTab || a.type) === tab;
-    return belongsToTab && a.showOnLanding === true;
+    const isPublished = a.status === 'published' || !a.status;
+    return belongsToTab && a.showOnLanding === true && isPublished;
   });
 
   if (matching.length === 0) {

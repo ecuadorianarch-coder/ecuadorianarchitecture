@@ -12,10 +12,15 @@ if (!fs.existsSync(publicApiDir)) {
   fs.mkdirSync(publicApiDir, { recursive: true });
 }
 
-// Load data files
-const projects = JSON.parse(fs.readFileSync(path.join(dataDir, 'projects.json'), 'utf8') || '[]');
-const territorios = JSON.parse(fs.readFileSync(path.join(dataDir, 'territorios.json'), 'utf8') || '[]');
-const academia = JSON.parse(fs.readFileSync(path.join(dataDir, 'academia.json'), 'utf8') || '[]');
+// Load data files (Strictly enforce published content for public AVO/GEO manifest)
+const rawProjects = JSON.parse(fs.readFileSync(path.join(dataDir, 'projects.json'), 'utf8') || '[]');
+const projects = rawProjects.filter(p => p.status === 'published' || !p.status);
+
+const rawTerritorios = JSON.parse(fs.readFileSync(path.join(dataDir, 'territorios.json'), 'utf8') || '[]');
+const territorios = rawTerritorios.filter(t => t.status === 'published' || !t.status);
+
+const rawAcademia = JSON.parse(fs.readFileSync(path.join(dataDir, 'academia.json'), 'utf8') || '[]');
+const academia = rawAcademia.filter(a => a.status === 'published' || !a.status);
 const authors = fs.existsSync(path.join(dataDir, 'authors.json'))
   ? JSON.parse(fs.readFileSync(path.join(dataDir, 'authors.json'), 'utf8') || '[]')
   : [];
