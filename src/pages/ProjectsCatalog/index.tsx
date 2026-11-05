@@ -194,7 +194,20 @@ export const ProjectsCatalog: React.FC<ProjectsCatalogProps> = ({
   const [selectedTerritorioLugar, setSelectedTerritorioLugar] = useState<string | null>(null);
   const [selectedTerritorioProblematica, setSelectedTerritorioProblematica] = useState<string | null>(null);
 
-  const [viewMode, setViewMode] = useState<'hybrid' | 'grid' | 'panoramic'>('hybrid');
+  // Default to 'panoramic' (card preview) on mobile screens (<768px or mobile user agents)
+  // for a better browsing experience, while desktop defaults to 'hybrid' (Figma dossiers/folders).
+  const [viewMode, setViewMode] = useState<'hybrid' | 'grid' | 'panoramic'>(() => {
+    if (typeof window !== 'undefined') {
+      const isMobileViewport = window.innerWidth < 768;
+      const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      );
+      if (isMobileViewport || isMobileDevice) {
+        return 'panoramic';
+      }
+    }
+    return 'hybrid';
+  });
 
   // Change section helper
   const handleSwitchSection = (section: CatalogSectionType) => {

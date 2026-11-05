@@ -6,6 +6,77 @@ Este documento contiene la información detallada, resúmenes críticos, materia
 SECCIÓN 1: PROYECTOS Y OBRAS ARQUITECTÓNICAS
 ================================================================================
 
+## Casa entre Arboles
+- **URL Canónica:** https://ecuadorianarch.com/proyectos/casa-entre-arboles-mw3qyfm5
+- **Estudio / Autores:** Javier Mera Arquitectos
+- **Ubicación:** Puembo, Pichincha, Ecuador
+- **Año de Finalización:** 2025
+- **Tipología / Categoría:** Arquitectura
+
+### Memoria Descriptiva & Concepto:
+Una estructura ligera de madera y acero que serpentea entre un bosque de algarrobos nativos sin talar un solo arbol, capturando la luz filtrada del valle....
+
+---
+
+## Casa en el Ilalo
+- **URL Canónica:** https://ecuadorianarch.com/proyectos/casa-en-el-ilalo-mw3qtrwm
+- **Estudio / Autores:** RAMA Estudio
+- **Ubicación:** Tumbaco, Pichincha, Ecuador
+- **Año de Finalización:** 2025
+- **Tipología / Categoría:** Arquitectura
+
+### Memoria Descriptiva & Concepto:
+Una estructura de tierra compactada y madera de eucalipto en la ladera del cerro Ilalo que desafia la pendiente y dialoga con la vegetacion nativa....
+
+---
+
+## VIGILIA
+- **URL Canónica:** https://ecuadorianarch.com/proyectos/pabellon-vigilia
+- **Estudio / Autores:** LAMS ARQUITECTOS
+- **Ubicación:** QUITO
+- **Año de Finalización:** 2026
+- **Tipología / Categoría:** Arquitectura Efímera
+- **Superficie Construida:** 40 m²
+- **Crítica Editorial:** Alejandro Andrade
+
+### Memoria Descriptiva & Concepto:
+Texto analítico principal de la reseña...
+
+---
+
+## POR FAVOR PISAR LAS JARDINERAS
+- **URL Canónica:** https://ecuadorianarch.com/proyectos/por-favor-pisar-las-jardineras
+- **Estudio / Autores:** ISAAC FLORES
+- **Ubicación:** QUITO
+- **Año de Finalización:** 2026
+- **Tipología / Categoría:** Arquitectura Efímera
+- **Superficie Construida:** 40 m²
+- **Crítica Editorial:** Alejandro Andrade
+
+### Memoria Descriptiva & Concepto:
+Texto analítico principal de la reseña...
+
+---
+
+## CLIMA EN CONSTRUCCIÓN
+- **URL Canónica:** https://ecuadorianarch.com/proyectos/clima-en-construccion
+- **Estudio / Autores:** NATURA FUTURA
+- **Ubicación:** BOULEVARD 24 DE MAYO
+- **Año de Finalización:** 2026
+- **Tipología / Categoría:** Arquitectura Efímera
+- **Superficie Construida:** 40 m²
+- **Crítica Editorial:** REDACCIÓN CRÍTICA EA
+
+### Memoria Descriptiva & Concepto:
+Texto analítico principal de la reseña...
+
+### Crítica Arquitectónica EA:
+> "Desafiar la convención inmobiliaria desde la inercia térmica"
+Dictamen crítico externo sobre la obra y su pertinencia constructiva...
+*Conclusión crítica:* El proyecto cuestiona el modelo hegemónico de producción en QUITO.
+
+---
+
 ## ESPACIO PARA HABLAR CON DIOS
 - **URL Canónica:** https://ecuadorianarch.com/proyectos/espacio-para-hablar-con-dios
 - **Estudio / Autores:** NOMADE TALLER
@@ -23,25 +94,6 @@ Texto analítico principal de la reseña...
 > "Desafiar la convención inmobiliaria desde la inercia térmica"
 Dictamen crítico externo sobre la obra y su pertinencia ética y constructiva...
 *Conclusión crítica:* El proyecto cuestiona el modelo hegemónico de edificación en QUITO.
-
----
-
-## EDIFICIO SENSEI
-- **URL Canónica:** https://ecuadorianarch.com/proyectos/edificio-sensei
-- **Estudio / Autores:** DANIEL MORENO FLORES
-- **Ubicación:** QUITO
-- **Año de Finalización:** 2023
-- **Tipología / Categoría:** Edificio de Uso Mixto
-- **Superficie Construida:** 5.600 m²
-- **Fotografía:** JAG STUDIO
-- **Sistema Estructural y Materiales:** Hormigón armado y envolvente metálica curva
-- **Crítica Editorial:** JULIÁN ZID
-
-### Memoria Descriptiva & Concepto:
-La torre propone una piel fluida que dinamiza el perfil urbano de las avenidas Naciones Unidas y Amazonas.
-
-### Crítica Arquitectónica EA:
-Por Julián Zid: Una audaz declaración de dinamismo formal en el corazón corporativo de Quito.
 
 ---
 

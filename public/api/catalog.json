@@ -3,14 +3,99 @@
     "publisher": "Ecuadorian Architecture",
     "website": "https://ecuadorianarch.com",
     "description": "Catálogo abierto estructurado para agentes de inteligencia artificial y buscadores generativos.",
-    "generatedAt": "2026-11-04T22:11:32.152Z",
-    "totalProjects": 2,
+    "generatedAt": "2026-11-05T17:26:19.123Z",
+    "totalProjects": 6,
     "totalTerritorios": 0,
     "totalAcademia": 0,
-    "totalAuthors": 8,
+    "totalAuthors": 11,
     "license": "Información pública para citación con atribución a Ecuadorian Architecture"
   },
   "projects": [
+    {
+      "id": "casa-entre-arboles-mw3qyfm5",
+      "slug": "casa-entre-arboles-mw3qyfm5",
+      "url": "https://ecuadorianarch.com/proyectos/casa-entre-arboles-mw3qyfm5",
+      "title": "Casa entre Arboles",
+      "subtitle": "Análisis crítico y memoria editorial",
+      "studios": [
+        "Javier Mera Arquitectos"
+      ],
+      "location": "Puembo, Pichincha, Ecuador",
+      "year": "2025",
+      "summary": "Una estructura ligera de madera y acero que serpentea entre un bosque de algarrobos nativos sin talar un solo arbol, capturando la luz filtrada del valle....",
+      "factualAnswer": "Casa entre Arboles es una obra de arquitectura diseñada por Javier Mera Arquitectos en Puembo, Pichincha, Ecuador, finalizada en 2025. Documentada críticamente por Ecuadorian Architecture."
+    },
+    {
+      "id": "casa-en-el-ilalo-mw3qtrwm",
+      "slug": "casa-en-el-ilalo-mw3qtrwm",
+      "url": "https://ecuadorianarch.com/proyectos/casa-en-el-ilalo-mw3qtrwm",
+      "title": "Casa en el Ilalo",
+      "subtitle": "Análisis crítico y memoria editorial",
+      "studios": [
+        "RAMA Estudio"
+      ],
+      "location": "Tumbaco, Pichincha, Ecuador",
+      "year": "2025",
+      "summary": "Una estructura de tierra compactada y madera de eucalipto en la ladera del cerro Ilalo que desafia la pendiente y dialoga con la vegetacion nativa....",
+      "factualAnswer": "Casa en el Ilalo es una obra de arquitectura diseñada por RAMA Estudio en Tumbaco, Pichincha, Ecuador, finalizada en 2025. Documentada críticamente por Ecuadorian Architecture."
+    },
+    {
+      "id": "vigilia-3ovi",
+      "slug": "pabellon-vigilia",
+      "url": "https://ecuadorianarch.com/proyectos/pabellon-vigilia",
+      "title": "VIGILIA",
+      "subtitle": "OBRA EN CONSTRUCCIÓN",
+      "studios": [
+        "LAMS ARQUITECTOS"
+      ],
+      "location": "QUITO",
+      "year": "2026",
+      "category": "Arquitectura Efímera",
+      "area": "40 m²",
+      "photographer": "",
+      "critic": "Alejandro Andrade",
+      "summary": "Luz y memoria en el espacio público: un umbral poroso en el Carmen Alto que nace desde la esperanza para dar voz colectiva frente a la violencia.",
+      "heroImage": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793891869770-R2_FINAL.webp",
+      "factualAnswer": "VIGILIA es una obra de Arquitectura Efímera diseñada por LAMS ARQUITECTOS en QUITO, finalizada en 2026. Documentada críticamente por Ecuadorian Architecture."
+    },
+    {
+      "id": "por-favor-pisar-las-jardineras-2or6",
+      "slug": "por-favor-pisar-las-jardineras",
+      "url": "https://ecuadorianarch.com/proyectos/por-favor-pisar-las-jardineras",
+      "title": "POR FAVOR PISAR LAS JARDINERAS",
+      "subtitle": "OBRA SIN CONSTRUIR",
+      "studios": [
+        "ISAAC FLORES"
+      ],
+      "location": "QUITO",
+      "year": "2026",
+      "category": "Arquitectura Efímera",
+      "area": "40 m²",
+      "photographer": "",
+      "critic": "Alejandro Andrade",
+      "summary": "Un acto crítico frente a los límites urbanos: una estructura ligera y sin programa fijo que invita a desaprender la plaza y habitarla libremente.",
+      "heroImage": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831209682-2.webp",
+      "factualAnswer": "POR FAVOR PISAR LAS JARDINERAS es una obra de Arquitectura Efímera diseñada por ISAAC FLORES en QUITO, finalizada en 2026. Documentada críticamente por Ecuadorian Architecture."
+    },
+    {
+      "id": "clima-en-construccion-2j6q",
+      "slug": "clima-en-construccion",
+      "url": "https://ecuadorianarch.com/proyectos/clima-en-construccion",
+      "title": "CLIMA EN CONSTRUCCIÓN",
+      "subtitle": "OBRA SIN CONSTRUIR",
+      "studios": [
+        "NATURA FUTURA"
+      ],
+      "location": "BOULEVARD 24 DE MAYO",
+      "year": "2026",
+      "category": "Arquitectura Efímera",
+      "area": "40 m²",
+      "photographer": "",
+      "critic": "REDACCIÓN CRÍTICA EA",
+      "summary": "El clima es cimiento del acto construido: una experiencia sensorial que regula temperatura y trasciende lo efímero para sembrar investigación futura.",
+      "heroImage": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793826295352-Capa_31.webp",
+      "factualAnswer": "CLIMA EN CONSTRUCCIÓN es una obra de Arquitectura Efímera diseñada por NATURA FUTURA en BOULEVARD 24 DE MAYO, finalizada en 2026. Documentada críticamente por Ecuadorian Architecture."
+    },
     {
       "id": "espacio-para-hablar-con-dios-ssqj",
       "slug": "espacio-para-hablar-con-dios",
@@ -30,30 +115,32 @@
       "summary": "El proyecto nace como una respuesta íntima de la comunidad de Rumipamba a su propia necesidad espiritual, un intento de reconectar con lo divino en un espacio que les ha sido negado. A través de un proceso de diseño participativo, en el que toda la comunidad fue protagonista, se concibió un espacio que no solo uniera a las personas con lo sagrado, sino que también revitalizara técnicas ancestrales, honrando la maestría local en un acto de revalorización cultural.\n",
       "heroImage": "/images/uploads/1793233204996-RENDER_1__3_.webp",
       "factualAnswer": "ESPACIO PARA HABLAR CON DIOS es una obra de Equipamiento Cultural diseñada por NOMADE TALLER en QUITO, finalizada en 2024. Documentada críticamente por Ecuadorian Architecture."
-    },
-    {
-      "id": "edificio-sensei",
-      "slug": "edificio-sensei",
-      "url": "https://ecuadorianarch.com/proyectos/edificio-sensei",
-      "title": "EDIFICIO SENSEI",
-      "studios": [
-        "DANIEL MORENO FLORES"
-      ],
-      "location": "QUITO",
-      "year": "2023",
-      "category": "Edificio de Uso Mixto",
-      "area": "5.600 m²",
-      "materials": "Hormigón armado y envolvente metálica curva",
-      "photographer": "JAG STUDIO",
-      "critic": "JULIÁN ZID",
-      "summary": "INCURSIÓN CONTEMPORÁNEA CON ESTILO Y ESPÍRITU PROPIO QUE TRASCIENDE MÁS ALLÁ DE LO IMAGINABLE.",
-      "heroImage": "/images/edificio_sensei.png",
-      "factualAnswer": "EDIFICIO SENSEI es una obra de Edificio de Uso Mixto diseñada por DANIEL MORENO FLORES en QUITO, finalizada en 2023. Documentada críticamente por Ecuadorian Architecture."
     }
   ],
   "territorios": [],
   "academia": [],
   "authors": [
+    {
+      "id": "estudio-mw3ou8ud",
+      "name": "Lams arquitectos",
+      "founder": "Luis Alberto Menéndez",
+      "location": "Quito, Ecuador",
+      "headline": "Práctica arquitectónica contemporánea, investigación y producción espacial."
+    },
+    {
+      "id": "estudio-mw2oqbw8",
+      "name": "isaac flores",
+      "founder": "Arquitecto Titular",
+      "location": "Quito, Ecuador",
+      "headline": "Práctica arquitectónica contemporánea, investigación y producción espacial."
+    },
+    {
+      "id": "estudio-mw2ilupu",
+      "name": "Natura futura",
+      "founder": "Jose Gomez",
+      "location": "Babahoyo",
+      "headline": "Práctica arquitectónica contemporánea, investigación y producción espacial."
+    },
     {
       "id": "estudio-felipe-escudero",
       "name": "ESTUDIO FELIPE ESCUDERO",

@@ -13,8 +13,12 @@
 
 ## Índice de Obras Arquitectónicas (Proyectos)
 
+- [Casa entre Arboles](https://ecuadorianarch.com/proyectos/casa-entre-arboles-mw3qyfm5): Obra de Arquitectura en Puembo, Pichincha, Ecuador (2025), diseñada por Javier Mera Arquitectos. Una estructura ligera de madera y acero que serpentea entre un bosque de algarrobos nativos sin talar un solo arbol, capturando la luz filtrada del valle....
+- [Casa en el Ilalo](https://ecuadorianarch.com/proyectos/casa-en-el-ilalo-mw3qtrwm): Obra de Arquitectura en Tumbaco, Pichincha, Ecuador (2025), diseñada por RAMA Estudio. Una estructura de tierra compactada y madera de eucalipto en la ladera del cerro Ilalo que desafia la pendiente y dialoga con la vegetacion nativa....
+- [VIGILIA](https://ecuadorianarch.com/proyectos/pabellon-vigilia): Obra de Arquitectura Efímera en QUITO (2026), diseñada por LAMS ARQUITECTOS. Luz y memoria en el espacio público: un umbral poroso en el Carmen Alto que nace desde la esperanza para dar voz colectiva frente a la violencia.
+- [POR FAVOR PISAR LAS JARDINERAS](https://ecuadorianarch.com/proyectos/por-favor-pisar-las-jardineras): Obra de Arquitectura Efímera en QUITO (2026), diseñada por ISAAC FLORES. Un acto crítico frente a los límites urbanos: una estructura ligera y sin programa fijo que invita a desaprender la plaza y habitarla libremente.
+- [CLIMA EN CONSTRUCCIÓN](https://ecuadorianarch.com/proyectos/clima-en-construccion): Obra de Arquitectura Efímera en BOULEVARD 24 DE MAYO (2026), diseñada por NATURA FUTURA. El clima es cimiento del acto construido: una experiencia sensorial que regula temperatura y trasciende lo efímero para sembrar investigación futura.
 - [ESPACIO PARA HABLAR CON DIOS](https://ecuadorianarch.com/proyectos/espacio-para-hablar-con-dios): Obra de Equipamiento Cultural en QUITO (2024), diseñada por NOMADE TALLER. El proyecto nace como una respuesta íntima de la comunidad de Rumipamba a su propia necesidad espiritual, un intento de reconectar con lo divino en un espacio que les ha sido negado. A través de un proceso de diseño participativo, en el que toda la comunidad fue protagonista, se concibió un espacio que no solo uniera a las personas con lo sagrado, sino que también revitalizara técnicas ancestrales, honrando la maestría local en un acto de revalorización cultural.
-- [EDIFICIO SENSEI](https://ecuadorianarch.com/proyectos/edificio-sensei): Obra de Edificio de Uso Mixto en QUITO (2023), diseñada por DANIEL MORENO FLORES. INCURSIÓN CONTEMPORÁNEA CON ESTILO Y ESPÍRITU PROPIO QUE TRASCIENDE MÁS ALLÁ DE LO IMAGINABLE.
 
 ## Índice de Expedientes Territoriales (Ciudad & Territorio)
 
@@ -24,6 +28,9 @@
 
 ## Directorio Oficial de Arquitectos y Estudios Colaboradores
 
+- **Lams arquitectos** (Quito, Ecuador): Fundado por Luis Alberto Menéndez. Práctica arquitectónica contemporánea, investigación y producción espacial.
+- **isaac flores** (Quito, Ecuador): Fundado por Arquitecto Titular. Práctica arquitectónica contemporánea, investigación y producción espacial.
+- **Natura futura** (Babahoyo): Fundado por Jose Gomez. Práctica arquitectónica contemporánea, investigación y producción espacial.
 - **ESTUDIO FELIPE ESCUDERO** (Quito, Ecuador): Fundado por Felipe Escudero. Arquitectura escultórica, vanguardia matérica y diálogo con la geografía andina.
 - **RAMA ESTUDIO** (Quito, Ecuador): Fundado por Carolina Rodas, Felipe Donoso, Carla Chávez. Taller de arquitectura, producción material y optimización de recursos en los Andes.
 - **AL BORDE ARQUITECTOS** (Quito / Puembo, Ecuador): Fundado por David Barragán, Pascual Gangotena, Marialuisa Borja, Esteban Benavides. Arquitectura radical de recursos escasos, tierra cruda y pedagogía comunitaria.
