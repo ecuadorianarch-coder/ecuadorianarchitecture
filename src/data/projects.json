@@ -1,45 +1,5 @@
 [
   {
-    "id": "casa-entre-arboles-mw3qyfm5",
-    "slug": "casa-entre-arboles-mw3qyfm5",
-    "title": "Casa entre Arboles",
-    "subtitle": "Análisis crítico y memoria editorial",
-    "author": "Javier Mera Arquitectos",
-    "studio": "Javier Mera Arquitectos",
-    "location": "Puembo, Pichincha, Ecuador",
-    "year": "2025",
-    "excerpt": "Una estructura ligera de madera y acero que serpentea entre un bosque de algarrobos nativos sin talar un solo arbol, capturando la luz filtrada del valle....",
-    "type": "proyectos",
-    "featured": false,
-    "status": "pending_approval",
-    "modules": [
-      {
-        "type": "text",
-        "content": "Una estructura ligera de madera y acero que serpentea entre un bosque de algarrobos nativos sin talar un solo arbol, capturando la luz filtrada del valle."
-      }
-    ]
-  },
-  {
-    "id": "casa-en-el-ilalo-mw3qtrwm",
-    "slug": "casa-en-el-ilalo-mw3qtrwm",
-    "title": "Casa en el Ilalo",
-    "subtitle": "Análisis crítico y memoria editorial",
-    "author": "RAMA Estudio",
-    "studio": "RAMA Estudio",
-    "location": "Tumbaco, Pichincha, Ecuador",
-    "year": "2025",
-    "excerpt": "Una estructura de tierra compactada y madera de eucalipto en la ladera del cerro Ilalo que desafia la pendiente y dialoga con la vegetacion nativa....",
-    "type": "proyectos",
-    "featured": false,
-    "status": "pending_approval",
-    "modules": [
-      {
-        "type": "text",
-        "content": "Una estructura de tierra compactada y madera de eucalipto en la ladera del cerro Ilalo que desafia la pendiente y dialoga con la vegetacion nativa."
-      }
-    ]
-  },
-  {
     "id": "vigilia-3ovi",
     "slug": "pabellon-vigilia",
     "type": "proyectos",

@@ -3,42 +3,14 @@
     "publisher": "Ecuadorian Architecture",
     "website": "https://ecuadorianarch.com",
     "description": "Catálogo abierto estructurado para agentes de inteligencia artificial y buscadores generativos.",
-    "generatedAt": "2026-11-05T17:54:46.442Z",
-    "totalProjects": 6,
+    "generatedAt": "2026-11-05T20:25:13.171Z",
+    "totalProjects": 4,
     "totalTerritorios": 0,
     "totalAcademia": 0,
     "totalAuthors": 11,
     "license": "Información pública para citación con atribución a Ecuadorian Architecture"
   },
   "projects": [
-    {
-      "id": "casa-entre-arboles-mw3qyfm5",
-      "slug": "casa-entre-arboles-mw3qyfm5",
-      "url": "https://ecuadorianarch.com/proyectos/casa-entre-arboles-mw3qyfm5",
-      "title": "Casa entre Arboles",
-      "subtitle": "Análisis crítico y memoria editorial",
-      "studios": [
-        "Javier Mera Arquitectos"
-      ],
-      "location": "Puembo, Pichincha, Ecuador",
-      "year": "2025",
-      "summary": "Una estructura ligera de madera y acero que serpentea entre un bosque de algarrobos nativos sin talar un solo arbol, capturando la luz filtrada del valle....",
-      "factualAnswer": "Casa entre Arboles es una obra de arquitectura diseñada por Javier Mera Arquitectos en Puembo, Pichincha, Ecuador, finalizada en 2025. Documentada críticamente por Ecuadorian Architecture."
-    },
-    {
-      "id": "casa-en-el-ilalo-mw3qtrwm",
-      "slug": "casa-en-el-ilalo-mw3qtrwm",
-      "url": "https://ecuadorianarch.com/proyectos/casa-en-el-ilalo-mw3qtrwm",
-      "title": "Casa en el Ilalo",
-      "subtitle": "Análisis crítico y memoria editorial",
-      "studios": [
-        "RAMA Estudio"
-      ],
-      "location": "Tumbaco, Pichincha, Ecuador",
-      "year": "2025",
-      "summary": "Una estructura de tierra compactada y madera de eucalipto en la ladera del cerro Ilalo que desafia la pendiente y dialoga con la vegetacion nativa....",
-      "factualAnswer": "Casa en el Ilalo es una obra de arquitectura diseñada por RAMA Estudio en Tumbaco, Pichincha, Ecuador, finalizada en 2025. Documentada críticamente por Ecuadorian Architecture."
-    },
     {
       "id": "vigilia-3ovi",
       "slug": "pabellon-vigilia",

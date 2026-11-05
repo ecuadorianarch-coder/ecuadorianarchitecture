@@ -237,7 +237,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
     // Independent collections: Territorios only shows Territorios, Academia only Academia, Proyectos only Proyectos
     for (const p of allProjects) {
       const pType = (p as any).type || (p.category === 'EXPEDIENTE TERRITORIAL' ? 'territorios' : p.category === 'INVESTIGACIÓN ACADÉMICA' ? 'academia' : 'proyectos');
-      if (!seen.has(p.id) && pType === projectSection && p.status !== 'draft') {
+      if (!seen.has(p.id) && pType === projectSection && (p.status === 'published' || !p.status)) {
         seen.add(p.id);
         list.push(p);
       }
