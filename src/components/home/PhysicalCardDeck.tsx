@@ -1557,10 +1557,16 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
                           </div>
                         </div>
 
-                        {/* Editorial Description Text (Faithful to the 2 paragraphs in the mockup) */}
+                        {/* Editorial Description Text (Faithful to the mockup without duplicate paragraphs) */}
                         <div className="mt-3 sm:mt-4 space-y-1.5 sm:space-y-2 font-creato text-xs sm:text-[12px] md:text-[12.5px] text-ea-black/85 leading-relaxed line-clamp-3 sm:line-clamp-4 md:line-clamp-5 max-w-md overflow-hidden">
                           <p>{project.excerpt}</p>
-                          {project.secondaryExcerpt && (
+                          {Boolean(
+                            project.secondaryExcerpt &&
+                              project.secondaryExcerpt.trim() !== '' &&
+                              project.secondaryExcerpt.trim() !== project.excerpt?.trim() &&
+                              !project.excerpt?.includes(project.secondaryExcerpt.trim()) &&
+                              !project.secondaryExcerpt.trim().includes(project.excerpt?.trim())
+                          ) && (
                             <p className="hidden sm:block text-ea-black/80">
                               {project.secondaryExcerpt}
                             </p>

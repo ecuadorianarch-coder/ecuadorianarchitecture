@@ -157,7 +157,7 @@
     "updatedAt": "2026-11-05T15:37:45.535Z",
     "heroImagePosition": "51% 69%",
     "heroImageZoom": 100,
-    "secondaryExcerpt": "Luz y memoria en el espacio público: un umbral poroso en el Carmen Alto que nace desde la esperanza para dar voz colectiva frente a la violencia.",
+    "secondaryExcerpt": "",
     "estadoObra": "En construcción",
     "colaboradores": "Luis Alberto Menéndez ",
     "imageCategories": {
@@ -305,7 +305,7 @@
     },
     "createdAt": "2026-11-04T22:25:55.953Z",
     "updatedAt": "2026-11-05T15:37:34.494Z",
-    "secondaryExcerpt": "Un acto crítico frente a los límites urbanos: una estructura ligera y sin programa fijo que invita a desaprender la plaza y habitarla libremente.",
+    "secondaryExcerpt": "",
     "estadoObra": "EN CONSTRUCCIÓN",
     "imageCategories": {
       "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831399460-Por_Favor_Pisar_las_Jardineras_Collage_Lugar.webp": "fotografia",
@@ -527,7 +527,7 @@
     },
     "createdAt": "2026-11-04T19:50:04.730Z",
     "updatedAt": "2026-11-05T15:37:19.563Z",
-    "secondaryExcerpt": "El clima es cimiento del acto construido: una experiencia sensorial que regula temperatura y trasciende lo efímero para sembrar investigación futura.",
+    "secondaryExcerpt": "",
     "imageCategories": {
       "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827417359-CORTE_FUGADO.webp": "planimetria",
       "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827530043-PLANTA_PABELLON_VEGETACION.webp": "planimetria",
@@ -695,7 +695,7 @@
     "seo": {
       "metaDescription": "Una iglesia que se entiende desde lo fundamental se convierte en un espacio para hablar con Dios"
     },
-    "secondaryExcerpt": "El proyecto nace como una respuesta íntima de la comunidad de Rumipamba a su propia necesidad espiritual, un intento de reconectar con lo divino en un espacio que les ha sido negado. A través de un proceso de diseño participativo, en el que toda la comunidad fue protagonista, se concibió un espacio que no solo uniera a las personas con lo sagrado, sino que también revitalizara técnicas ancestrales, honrando la maestría local en un acto de revalorización cultural.\n",
+    "secondaryExcerpt": "",
     "maestroMayor": "Segundo Guanoluisa"
   }
 ]

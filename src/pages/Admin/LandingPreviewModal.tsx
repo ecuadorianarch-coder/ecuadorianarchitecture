@@ -368,7 +368,13 @@ export const LandingPreviewModal: React.FC<LandingPreviewModalProps> = ({
                       {/* Excerpt */}
                       <div className="mt-4 space-y-2 font-creato text-[12.5px] text-ea-black/85 leading-relaxed line-clamp-4 max-w-md">
                         <p>{currentCard?.excerpt}</p>
-                        {currentCard?.secondaryExcerpt && (
+                        {Boolean(
+                          currentCard?.secondaryExcerpt &&
+                            currentCard.secondaryExcerpt.trim() !== '' &&
+                            currentCard.secondaryExcerpt.trim() !== currentCard.excerpt?.trim() &&
+                            !currentCard.excerpt?.includes(currentCard.secondaryExcerpt.trim()) &&
+                            !currentCard.secondaryExcerpt.trim().includes(currentCard.excerpt?.trim())
+                        ) && (
                           <p className="text-ea-black/80">{currentCard?.secondaryExcerpt}</p>
                         )}
                       </div>

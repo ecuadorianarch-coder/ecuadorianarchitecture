@@ -903,10 +903,16 @@ export const VisualEditorialEditor: React.FC<VisualEditorialEditorProps> = ({
     const cleanExcerpt = art.excerpt?.trim() || '';
     const rawResena = art.resena?.trim();
     const cleanResena = (!rawResena || rawResena.startsWith('Texto analítico')) ? cleanExcerpt : rawResena;
+    
+    // If secondaryExcerpt is empty or identical to excerpt, clear it so it never duplicates
+    const rawSecondary = art.secondaryExcerpt?.trim();
+    const cleanSecondary = (rawSecondary && rawSecondary !== cleanExcerpt) ? rawSecondary : '';
+
     return {
       ...art,
       excerpt: cleanExcerpt,
       resena: cleanResena,
+      secondaryExcerpt: cleanSecondary,
     };
   };
 
@@ -4717,7 +4723,13 @@ export const VisualEditorialEditor: React.FC<VisualEditorialEditorProps> = ({
 
                             <div className="mt-4 space-y-2 font-creato text-[12.5px] text-ea-black/85 leading-relaxed line-clamp-4 max-w-md">
                               <p>{article.excerpt}</p>
-                              {article.secondaryExcerpt && (
+                              {Boolean(
+                                article.secondaryExcerpt &&
+                                  article.secondaryExcerpt.trim() !== '' &&
+                                  article.secondaryExcerpt.trim() !== article.excerpt?.trim() &&
+                                  !article.excerpt?.includes(article.secondaryExcerpt.trim()) &&
+                                  !article.secondaryExcerpt.trim().includes(article.excerpt?.trim())
+                              ) && (
                                 <p className="text-ea-black/80">{article.secondaryExcerpt}</p>
                               )}
                             </div>
