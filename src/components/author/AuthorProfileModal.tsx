@@ -333,7 +333,7 @@ export const AuthorProfileModal: React.FC<AuthorProfileModalProps> = ({
 
                     {/* Excerpt */}
                     <p className="font-creato text-xs text-ea-black/80 line-clamp-2 leading-relaxed mb-4">
-                      {p.excerpt || p.memory || p.resena}
+                      {p.excerpt || p.memory || (p.resena && !p.resena.startsWith('Texto analítico') ? p.resena : '')}
                     </p>
 
                     {/* CTA Button */}

@@ -1424,9 +1424,13 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
                     <blockquote className="font-okcok text-xl sm:text-2xl md:text-3xl uppercase leading-tight text-ea-black mb-4">
                       "{project.excerpt}"
                     </blockquote>
-                    <p className="font-creato text-xs sm:text-sm text-ea-black/80 leading-relaxed">
-                      {project.memory || project.resena || project.excerpt}
-                    </p>
+                    {project.memory &&
+                      project.memory.trim() !== project.excerpt?.trim() &&
+                      !project.memory.trim().startsWith('Texto analítico') && (
+                        <p className="font-creato text-xs sm:text-sm text-ea-black/80 leading-relaxed">
+                          {project.memory}
+                        </p>
+                    )}
                   </div>
                 </div>
 
@@ -1507,9 +1511,13 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
                     <blockquote className="font-okcok text-xl sm:text-2xl uppercase leading-tight text-ea-black mb-3">
                       "{project.excerpt}"
                     </blockquote>
-                    <p className="font-creato text-xs text-ea-black/80 leading-relaxed">
-                      {project.memory}
-                    </p>
+                    {project.memory &&
+                      project.memory.trim() !== project.excerpt?.trim() &&
+                      !project.memory.trim().startsWith('Texto analítico') && (
+                        <p className="font-creato text-xs text-ea-black/80 leading-relaxed">
+                          {project.memory}
+                        </p>
+                    )}
                   </div>
 
                   <div ref={hKineticRibbonRef} className="bg-ea-black text-white px-8 py-3 font-anton text-xl sm:text-3xl uppercase tracking-widest border border-white/20 shadow-2xl whitespace-nowrap">

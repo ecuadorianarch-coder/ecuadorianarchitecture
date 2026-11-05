@@ -107,21 +107,28 @@ export const PanoramicFolderCard: React.FC<PanoramicFolderCardProps> = ({
   // Year
   const yearLabel = project.year || '2024';
 
-  // Construct a rich, complete editorial description so NO text gets cut off
+  // Construct a clean, authoritative editorial description without duplicates or dummy placeholders
   const fullDescription = (() => {
-    const resena = (project as any).resena?.trim();
-    const memory = (project as any).memory?.trim();
-    const secondaryExcerpt = (project as any).secondaryExcerpt?.trim();
-    const excerpt = project.excerpt?.trim();
+    const cleanText = (val?: string) => {
+      if (!val) return '';
+      const trimmed = val.trim();
+      return trimmed.startsWith('Texto analítico') ? '' : trimmed;
+    };
 
-    if (resena && memory && resena !== memory) {
-      return `${resena} ${memory}`;
-    }
-    if (resena) return resena;
-    if (memory && secondaryExcerpt) return `${memory} ${secondaryExcerpt}`;
-    if (memory) return memory;
-    if (excerpt && secondaryExcerpt) return `${excerpt} ${secondaryExcerpt}`;
-    return excerpt || '';
+    const excerpt = cleanText(project.excerpt);
+    const memory = cleanText((project as any).memory);
+    const resena = cleanText((project as any).resena);
+
+    // 1. Primary priority: excerpt (edited in CMS under "Resumen Principal para Tarjetas")
+    if (excerpt) return excerpt;
+
+    // 2. Fallback to memory if defined and not identical to excerpt
+    if (memory && memory !== excerpt) return memory;
+
+    // 3. Fallback to resena if it has real custom text
+    if (resena && resena !== excerpt && resena !== memory) return resena;
+
+    return '';
   })();
 
   // Title sizing: dynamically scaled so long titles stay readable without breaking the layout

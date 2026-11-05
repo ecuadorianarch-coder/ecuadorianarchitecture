@@ -230,11 +230,7 @@ export const NewArticleModal: React.FC<NewArticleModalProps> = ({
       tags: ['Lugar', 'Materia', 'Ecuador'],
       heroImage: defaultHero,
       heroImageFocalPoint: 'center',
-      resena: isTerritorio
-        ? 'Texto analítico principal del expediente territorial...'
-        : isAcademia
-        ? 'Texto analítico principal de la investigación académica...'
-        : 'Texto analítico principal de la reseña...',
+      resena: '',
       hasCritica: false,
       hasVisitas: selectedType === 'proyectos',
       critica: '',

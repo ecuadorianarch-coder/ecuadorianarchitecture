@@ -1,5 +1,545 @@
 [
   {
+    "id": "casa-entre-arboles-mw3qyfm5",
+    "slug": "casa-entre-arboles-mw3qyfm5",
+    "title": "Casa entre Arboles",
+    "subtitle": "Análisis crítico y memoria editorial",
+    "author": "Javier Mera Arquitectos",
+    "studio": "Javier Mera Arquitectos",
+    "location": "Puembo, Pichincha, Ecuador",
+    "year": "2025",
+    "excerpt": "Una estructura ligera de madera y acero que serpentea entre un bosque de algarrobos nativos sin talar un solo arbol, capturando la luz filtrada del valle....",
+    "type": "proyectos",
+    "featured": false,
+    "status": "pending_approval",
+    "modules": [
+      {
+        "type": "text",
+        "content": "Una estructura ligera de madera y acero que serpentea entre un bosque de algarrobos nativos sin talar un solo arbol, capturando la luz filtrada del valle."
+      }
+    ]
+  },
+  {
+    "id": "casa-en-el-ilalo-mw3qtrwm",
+    "slug": "casa-en-el-ilalo-mw3qtrwm",
+    "title": "Casa en el Ilalo",
+    "subtitle": "Análisis crítico y memoria editorial",
+    "author": "RAMA Estudio",
+    "studio": "RAMA Estudio",
+    "location": "Tumbaco, Pichincha, Ecuador",
+    "year": "2025",
+    "excerpt": "Una estructura de tierra compactada y madera de eucalipto en la ladera del cerro Ilalo que desafia la pendiente y dialoga con la vegetacion nativa....",
+    "type": "proyectos",
+    "featured": false,
+    "status": "pending_approval",
+    "modules": [
+      {
+        "type": "text",
+        "content": "Una estructura de tierra compactada y madera de eucalipto en la ladera del cerro Ilalo que desafia la pendiente y dialoga con la vegetacion nativa."
+      }
+    ]
+  },
+  {
+    "id": "vigilia-3ovi",
+    "slug": "pabellon-vigilia",
+    "type": "proyectos",
+    "title": "VIGILIA",
+    "subtitle": "OBRA EN CONSTRUCCIÓN",
+    "studio": "LAMS ARQUITECTOS",
+    "studios": [
+      "LAMS ARQUITECTOS"
+    ],
+    "critic": "",
+    "location": "QUITO",
+    "year": "2026",
+    "excerpt": "Luz y memoria en el espacio público: un umbral poroso en el Carmen Alto que nace desde la esperanza para dar voz colectiva frente a la violencia.",
+    "status": "published",
+    "featured": false,
+    "showOnLanding": true,
+    "landingTab": "proyectos",
+    "actionButtonText": "VER PROYECTO",
+    "hasMaestroMayor": false,
+    "enableAuthorModal": false,
+    "materialidadPrincipal": "",
+    "escritoPor": "Alejandro Andrade",
+    "editadoPor": "Dirección Editorial EA",
+    "superficie": "40 m²",
+    "category": "Arquitectura Efímera",
+    "tags": [
+      "Lugar",
+      "Materia",
+      "Ecuador"
+    ],
+    "heroImage": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793891869770-R2_FINAL.webp",
+    "heroImageFocalPoint": "bottom",
+    "resena": "",
+    "hasCritica": false,
+    "hasVisitas": true,
+    "critica": "",
+    "criticaHeadline": "",
+    "criticaQuote": "",
+    "criticaConclusion": "",
+    "hasPodcast": false,
+    "hasNotasComunidad": true,
+    "modules": [
+      {
+        "id": "mod-intro-1793891824251",
+        "type": "hero-header",
+        "title": "VIGILIA",
+        "subtitle": "LECTURA ARQUITECTÓNICA",
+        "content": "Asume a la luz como vehículo de memoria colectiva frente a un contexto de violencia."
+      },
+      {
+        "id": "mod-rich-text-1793892321389",
+        "type": "rich-text",
+        "content": "El espacio se comprende desde lo público y su contexto inmediato: nace de una cosmovisión ancestral y se asienta sobre una realidad contemporánea compleja. En la cultura latinoamericana, encender una vela no solo convoca la luz, sino también la memoria; una memoria colectiva que, frente a coyunturas críticas, resulta urgente resguardar."
+      },
+      {
+        "id": "mod-single-image-1793892042969",
+        "type": "single-image",
+        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892051586-R2_FINAL.webp",
+        "credits": "LAMS arquitectos",
+        "category": "fotografia"
+      },
+      {
+        "id": "mod-rich-text-1793892299332",
+        "type": "rich-text",
+        "content": "Bajo esta premisa, el emplazamiento en la Plaza del Carmen Alto responde a una lectura precisa del sitio. La propuesta reconoce la intimidad propia del lugar y su condición de umbral entre lo público y lo privado para definir su geometría. Así, la forma proyectada apuesta por la porosidad: una invitación abierta a interactuar con la atmósfera, el recorrido y la estancia, valiéndose de la variación de alturas en las estructuras portantes para integrar a todos los habitantes en la experiencia del espacio público."
+      },
+      {
+        "id": "mod-single-image-1793892358715",
+        "type": "single-image",
+        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892408453-r4-01.webp",
+        "credits": "LAMS arquitectos",
+        "category": "planimetria"
+      },
+      {
+        "id": "mod-rich-text-1793892463204",
+        "type": "rich-text",
+        "content": "Si el elemento rector es la luz, ¿cómo hacerla tangible durante el día? Aunque la intervención asume su potencia ritual y memorable en la noche, no renuncia a su vocación diurna. Por ello, su materialidad ha sido concebida para capturar y magnificar la radiación solar, manteniendo viva la atmósfera lumínica bajo la claridad del día."
+      },
+      {
+        "id": "mod-single-image-1793892491974",
+        "type": "single-image",
+        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892502029-R1__1_.webp",
+        "credits": "LAMS arquitectos",
+        "category": "fotografia"
+      },
+      {
+        "id": "mod-rich-text-1793892524073",
+        "type": "rich-text",
+        "content": "Concebido en medio de una realidad atravesada por la violencia, este pabellón germina desde la esperanza. La estructura se levanta como un pronunciamiento que utiliza la arquitectura para articular una voz; porque aun cuando la palabra parezca frágil frente a la crisis, la espacialidad persiste en su intento por conmover, reunir y comunicar."
+      },
+      {
+        "id": "mod-single-image-1793892537415",
+        "type": "single-image",
+        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892545849-1__Foto_Maqueta.webp",
+        "credits": "LAMS arquitectos",
+        "category": "fotografia"
+      }
+    ],
+    "datos": {
+      "superficie": "40 m²",
+      "estructura": "",
+      "fotografia": "",
+      "colaboradores": "Luis Alberto Menéndez ",
+      "certificacion": "Eficiencia Bioclimática",
+      "ubicacion": "PLaza del Monasterio del Carmen Alto",
+      "estado": "En construcción"
+    },
+    "ciudad": {
+      "barrio": "PLaza del Monasterio del Carmen Alto",
+      "altura": "2.850 msnm",
+      "orientacion": "Norte-Sur",
+      "clima": "Ecuatorial Andino"
+    },
+    "createdAt": "2026-11-05T15:17:04.251Z",
+    "updatedAt": "2026-11-05T15:37:45.535Z",
+    "heroImagePosition": "51% 69%",
+    "heroImageZoom": 100,
+    "secondaryExcerpt": "Luz y memoria en el espacio público: un umbral poroso en el Carmen Alto que nace desde la esperanza para dar voz colectiva frente a la violencia.",
+    "estadoObra": "En construcción",
+    "colaboradores": "Luis Alberto Menéndez ",
+    "imageCategories": {
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892051586-R2_FINAL.webp": "fotografia",
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892408453-r4-01.webp": "planimetria",
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892502029-R1__1_.webp": "fotografia",
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892545849-1__Foto_Maqueta.webp": "fotografia"
+    },
+    "motion": {
+      "variant": "horizontal-blinds"
+    },
+    "seo": {
+      "metaTitle": "PABELLÓN VIGILIA"
+    }
+  },
+  {
+    "id": "por-favor-pisar-las-jardineras-2or6",
+    "slug": "por-favor-pisar-las-jardineras",
+    "type": "proyectos",
+    "title": "POR FAVOR PISAR LAS JARDINERAS",
+    "subtitle": "OBRA SIN CONSTRUIR",
+    "studio": "ISAAC FLORES",
+    "studios": [
+      "ISAAC FLORES"
+    ],
+    "critic": "",
+    "location": "QUITO",
+    "year": "2026",
+    "excerpt": "Un acto crítico frente a los límites urbanos: una estructura ligera y sin programa fijo que invita a desaprender la plaza y habitarla libremente.",
+    "status": "published",
+    "featured": false,
+    "showOnLanding": true,
+    "landingTab": "proyectos",
+    "actionButtonText": "VER PROYECTO",
+    "hasMaestroMayor": false,
+    "enableAuthorModal": false,
+    "materialidadPrincipal": "",
+    "escritoPor": "Alejandro Andrade",
+    "editadoPor": "Dirección Editorial EA",
+    "superficie": "40 m²",
+    "category": "Arquitectura Efímera",
+    "tags": [
+      "Lugar",
+      "Materia",
+      "Ecuador"
+    ],
+    "heroImage": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831209682-2.webp",
+    "heroImageFocalPoint": "center",
+    "resena": "",
+    "hasCritica": false,
+    "hasVisitas": true,
+    "critica": "",
+    "criticaHeadline": "",
+    "criticaQuote": "",
+    "criticaConclusion": "",
+    "hasPodcast": false,
+    "hasNotasComunidad": true,
+    "modules": [
+      {
+        "id": "mod-intro-1793831155953",
+        "type": "hero-header",
+        "title": "POR FAVOR PISAR LAS JARDINERAS",
+        "subtitle": "LECTURA ARQUITECTÓNICA",
+        "content": "Cuestionar los límites de la ciudad fragmentada: despojar al espacio de programa fijo para desaprender la plaza y habitarla desde la apropiación."
+      },
+      {
+        "id": "mod-text-1793831155954",
+        "type": "rich-text",
+        "content": "Un letrero —«Por favor no pisar las jardineras»— constituye la génesis de la intervención. Este hallazgo cotidiano trasciende el sitio específico y es leído casi como un síntoma de la ciudad latinoamericana: un territorio fragmentado por medianeras, segregaciones y límites impuestos."
+      },
+      {
+        "id": "mod-single-image-1793831391486",
+        "type": "single-image",
+        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831399460-Por_Favor_Pisar_las_Jardineras_Collage_Lugar.webp",
+        "credits": "Isaac Flores",
+        "category": "fotografia"
+      },
+      {
+        "id": "mod-rich-text-1793831445696",
+        "type": "rich-text",
+        "content": "Frente a esta condición restrictiva, la propuesta se levanta desde el lugar como una toma de postura, un acto crítico del habitar. Así nace Favor pisar las jardineras, un dispositivo donde el recorrido mismo se convierte en espacio, despojándose de cualquier programa predeterminado para ceder el control y permitir la libre apropiación de los usuarios."
+      },
+      {
+        "id": "mod-single-image-1793831458949",
+        "type": "single-image",
+        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831492239-2.webp",
+        "credits": "Isaac Flores",
+        "category": "fotografia"
+      },
+      {
+        "id": "mod-rich-text-1793831590818",
+        "type": "rich-text",
+        "content": "Insertada en un tejido barrial consolidado, la operación se materializa mediante una estructura ligera y flexible de varilla de acero corrugado, concebida desde la modularidad para facilitar tanto su montaje como su transporte."
+      },
+      {
+        "id": "mod-single-image-1793831598130",
+        "type": "single-image",
+        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831607790-Por_Favor_Pisar_las_Jardineras_Implantacio__n.webp",
+        "credits": "Isaac Flores",
+        "category": "fotografia"
+      },
+      {
+        "id": "mod-rich-text-1793831636389",
+        "type": "rich-text",
+        "content": "A través de esta ligereza tectónica, la intervención ensaya una nueva forma de habitar la plaza: invita a desaprender sus usos normados para detonar dinámicas colectivas inéditas y, en última instancia, articular un manifiesto sobre la ciudad contemporánea, sus tensiones y sus posibles reinterpretaciones."
+      },
+      {
+        "id": "mod-image-gallery-1793831651680",
+        "type": "image-gallery",
+        "settings": {
+          "columns": 2
+        },
+        "imageUrls": [
+          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831662232-Por_Favor_Pisar_las_Jardineras_Ima__gen_01.webp",
+          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831670606-Por_Favor_Pisar_las_Jardineras_Maqueta_Conceptual.webp"
+        ]
+      },
+      {
+        "id": "mod-rich-text-1793832848294",
+        "type": "rich-text",
+        "content": "De este modo, la estructura trasciende su condición temporal para operar como un catalizador urbano que devuelve el suelo a la ciudadanía. Al diluir la frontera entre lo contemplativo y lo habitable, el proyecto demuestra que cuestionar una prohibición mínima basta para activar el espacio público como un territorio común, abierto al juego, al encuentro espontáneo y a la construcción colectiva de memoria barrial."
+      },
+      {
+        "id": "mod-single-image-1793832862514",
+        "type": "single-image",
+        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793832877836-Por_Favor_Pisar_las_Jardineras_Corte_Fachada_Norte.webp",
+        "credits": "Isaac Flores",
+        "category": "planimetria"
+      }
+    ],
+    "datos": {
+      "superficie": "40 m²",
+      "estructura": "",
+      "fotografia": "",
+      "colaboradores": "",
+      "certificacion": "Eficiencia Bioclimática",
+      "ubicacion": "Plaza San Marcos",
+      "estado": "EN CONSTRUCCIÓN"
+    },
+    "ciudad": {
+      "barrio": "Plaza San Marcos",
+      "altura": "2.850 msnm",
+      "orientacion": "Norte-Sur",
+      "clima": "Ecuatorial Andino"
+    },
+    "createdAt": "2026-11-04T22:25:55.953Z",
+    "updatedAt": "2026-11-05T15:37:34.494Z",
+    "secondaryExcerpt": "Un acto crítico frente a los límites urbanos: una estructura ligera y sin programa fijo que invita a desaprender la plaza y habitarla libremente.",
+    "estadoObra": "EN CONSTRUCCIÓN",
+    "imageCategories": {
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831399460-Por_Favor_Pisar_las_Jardineras_Collage_Lugar.webp": "fotografia",
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831492239-2.webp": "fotografia",
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831607790-Por_Favor_Pisar_las_Jardineras_Implantacio__n.webp": "fotografia",
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793832877836-Por_Favor_Pisar_las_Jardineras_Corte_Fachada_Norte.webp": "planimetria"
+    },
+    "colaboradores": ""
+  },
+  {
+    "id": "clima-en-construccion-2j6q",
+    "slug": "clima-en-construccion",
+    "type": "proyectos",
+    "title": "CLIMA EN CONSTRUCCIÓN",
+    "subtitle": "OBRA SIN CONSTRUIR",
+    "studio": "NATURA FUTURA",
+    "studios": [
+      "NATURA FUTURA"
+    ],
+    "critic": "REDACCIÓN CRÍTICA EA",
+    "location": "BOULEVARD 24 DE MAYO",
+    "year": "2026",
+    "excerpt": "El clima es cimiento del acto construido: una experiencia sensorial que regula temperatura y trasciende lo efímero para sembrar investigación futura.",
+    "status": "published",
+    "featured": false,
+    "showOnLanding": true,
+    "landingTab": "proyectos",
+    "actionButtonText": "VER PROYECTO",
+    "maestroMayor": "",
+    "equipoTrabajo": [
+      {
+        "nombre": "Carlos Toapanta",
+        "rol": "Maestro Albañil",
+        "oficio": "Mampostería tradicional y aparejos de piedra vista",
+        "especialidad": "Asentado de muros ciclópeos y morteros de cal apagada"
+      },
+      {
+        "nombre": "Manuel Chasi",
+        "rol": "Maestro Carpintero",
+        "oficio": "Encofrados tradicionales y ensambles en madera bruta",
+        "especialidad": "Vigas maestras de eucalipto y cubiertas a dos aguas"
+      },
+      {
+        "nombre": "Fausto Pillajo",
+        "rol": "Maestro Fierrero",
+        "oficio": "Cimentaciones reforzadas y anclajes sismorresistentes",
+        "especialidad": "Amarrado de hierro corrugado y zapatas corridas"
+      }
+    ],
+    "materialidadPrincipal": "",
+    "escritoPor": "Alejandro Andrade",
+    "editadoPor": "Dirección Editorial EA",
+    "superficie": "40 m²",
+    "category": "Arquitectura Efímera",
+    "tags": [
+      "Lugar",
+      "Materia",
+      "Ecuador"
+    ],
+    "heroImage": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793826295352-Capa_31.webp",
+    "heroImageFocalPoint": "center",
+    "resena": "",
+    "hasCritica": false,
+    "hasVisitas": true,
+    "critica": "Dictamen crítico externo sobre la obra y su pertinencia constructiva...",
+    "criticaHeadline": "Desafiar la convención inmobiliaria desde la inercia térmica",
+    "criticaQuote": "Frente a la torre hermética vidriada, la pertinencia ética radica en la economía de medios y la inercia de la materia cruda.",
+    "criticaConclusion": "El proyecto cuestiona el modelo hegemónico de producción en QUITO.",
+    "hasPodcast": false,
+    "hasNotasComunidad": true,
+    "modules": [
+      {
+        "id": "mod-intro-1793821804730",
+        "type": "hero-header",
+        "title": "CLIMA EN CONSTRUCCIÓN",
+        "subtitle": "LECTURA ARQUITECTÓNICA",
+        "content": "Visibilizar el clima desde la sensibilidad del habitar: rechazar lo efímero para transformar recursos en investigación y futuras políticas públicas."
+      },
+      {
+        "id": "mod-single-image-1793826919464",
+        "type": "single-image",
+        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793826295352-Capa_31.webp",
+        "caption": "",
+        "credits": "Natura Futura"
+      },
+      {
+        "id": "mod-text-1793821804731",
+        "type": "rich-text",
+        "content": "El pabellón convierte al clima en los cimientos del acto construido, buscando visibilizar aquello que históricamente se ha intentado ocultar: el clima y su cambio. Al insertarse en una plaza pública, los límites entre el adentro y el afuera quedan definidos únicamente por el hecho cubierto."
+      },
+      {
+        "id": "mod-rich-text-1793827330981",
+        "type": "rich-text",
+        "content": "El proyecto transforma el recorrido en una experiencia sensorial mediante estrategias espaciales que amplifican las condiciones atmosféricas, trascendiendo el simple desplazamiento físico para enfocarse en la sensibilidad del habitar. Las plantas aromáticas acompañan la deriva y despiertan el olfato; un sistema de nebulización humedece el ambiente a intervalos regulares, activando el oído y el tacto; mientras que la vista y el gusto atraviesan transversalmente toda la atmósfera."
+      },
+      {
+        "id": "mod-single-image-1793827473523",
+        "type": "single-image",
+        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827530043-PLANTA_PABELLON_VEGETACION.webp",
+        "credits": "Natura Futura",
+        "category": "planimetria"
+      },
+      {
+        "id": "mod-rich-text-1793827562667",
+        "type": "rich-text",
+        "content": "En el plano termodinámico, el diseño emplea tanques de agua como masa térmica para amortiguar la radiación solar y almacenar energía. Esta operación pasiva reduce la sensación térmica interior durante los días soleados y libera el calor acumulado cuando desciende la temperatura por la noche."
+      },
+      {
+        "id": "mod-single-image-1793827362060",
+        "type": "single-image",
+        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827417359-CORTE_FUGADO.webp",
+        "credits": "Natura Futura",
+        "category": "planimetria"
+      },
+      {
+        "id": "mod-rich-text-1793827602109",
+        "type": "rich-text",
+        "content": "La vida de esta estructura rechaza lo efímero. Natura Futura plantea una intervención que trasciende el objeto arquitectónico para consolidarse como un proceso vivo de experimentación, mutación e investigación."
+      },
+      {
+        "id": "mod-single-image-1793827661216",
+        "type": "single-image",
+        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827672968-PROCESO.webp",
+        "credits": "Natura Futura",
+        "category": "planimetria"
+      },
+      {
+        "id": "mod-rich-text-1793827694732",
+        "type": "rich-text",
+        "content": "En un contexto de recursos limitados, la arquitectura asume su realidad material y entiende cada componente desde la oportunidad de su reutilización. Así, lo construido adquiere una relevancia mayor: deja de ser un evento temporal para actuar como semilla de futuras políticas públicas e investigaciones a gran escala."
+      },
+      {
+        "id": "mod-single-image-1793827769192",
+        "type": "single-image",
+        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827779382-pabellon_jpg.webp",
+        "credits": "Natura Futura",
+        "category": "fotografia"
+      },
+      {
+        "id": "mod-image-gallery-1793827857165",
+        "type": "image-gallery",
+        "imageUrls": [
+          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827866941-pabellon_2_jpg.webp",
+          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827877399-WhatsApp_Image_2026-11-04_at_1_31_30_PM.webp"
+        ],
+        "settings": {
+          "columns": 2
+        }
+      }
+    ],
+    "datos": {
+      "superficie": "40 m²",
+      "estructura": "",
+      "fotografia": "",
+      "maestroMayor": "",
+      "equipoTrabajo": [
+        {
+          "nombre": "Carlos Toapanta",
+          "rol": "Maestro Albañil",
+          "oficio": "Mampostería tradicional y aparejos de piedra vista",
+          "especialidad": "Asentado de muros ciclópeos y morteros de cal apagada"
+        },
+        {
+          "nombre": "Manuel Chasi",
+          "rol": "Maestro Carpintero",
+          "oficio": "Encofrados tradicionales y ensambles en madera bruta",
+          "especialidad": "Vigas maestras de eucalipto y cubiertas a dos aguas"
+        },
+        {
+          "nombre": "Fausto Pillajo",
+          "rol": "Maestro Fierrero",
+          "oficio": "Cimentaciones reforzadas y anclajes sismorresistentes",
+          "especialidad": "Amarrado de hierro corrugado y zapatas corridas"
+        }
+      ],
+      "colaboradores": "Equipo de Proyecto",
+      "certificacion": "Eficiencia Bioclimática"
+    },
+    "constructionTeam": {
+      "projectId": "clima-en-construccion",
+      "projectTitle": "CLIMA EN CONSTRUCCIÓN",
+      "location": "QUITO",
+      "year": "2026",
+      "maestroMayor": {
+        "nombre": "Segundo Guanoluisa",
+        "rol": "Maestro Mayor de Obra",
+        "oficio": "Hormigón crudo y materiales locales",
+        "trayectoria": "Maestro constructor con amplia trayectoria en ejecución de obras tectónicas en el Ecuador.",
+        "reconocimiento": "Lideró la cuadrilla de artesanos y constructores locales a cargo de la ejecución."
+      },
+      "members": [
+        {
+          "nombre": "Carlos Toapanta",
+          "rol": "Maestro Albañil",
+          "oficio": "Mampostería tradicional y aparejos de piedra vista",
+          "especialidad": "Asentado de muros ciclópeos y morteros de cal apagada"
+        },
+        {
+          "nombre": "Manuel Chasi",
+          "rol": "Maestro Carpintero",
+          "oficio": "Encofrados tradicionales y ensambles en madera bruta",
+          "especialidad": "Vigas maestras de eucalipto y cubiertas a dos aguas"
+        },
+        {
+          "nombre": "Fausto Pillajo",
+          "rol": "Maestro Fierrero",
+          "oficio": "Cimentaciones reforzadas y anclajes sismorresistentes",
+          "especialidad": "Amarrado de hierro corrugado y zapatas corridas"
+        }
+      ],
+      "materialidadPrincipal": "Hormigón crudo y materiales locales",
+      "manifiestoManoObra": "La arquitectura no existe sin las manos de quienes transforman la materia en espacio. Rendimos tributo al conocimiento técnico, la destreza manual y la dignidad de los maestros constructores del Ecuador."
+    },
+    "ciudad": {
+      "barrio": "QUITO",
+      "altura": "2.850 msnm",
+      "orientacion": "Norte-Sur",
+      "clima": "Ecuatorial Andino"
+    },
+    "createdAt": "2026-11-04T19:50:04.730Z",
+    "updatedAt": "2026-11-05T15:37:19.563Z",
+    "secondaryExcerpt": "El clima es cimiento del acto construido: una experiencia sensorial que regula temperatura y trasciende lo efímero para sembrar investigación futura.",
+    "imageCategories": {
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827417359-CORTE_FUGADO.webp": "planimetria",
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827530043-PLANTA_PABELLON_VEGETACION.webp": "planimetria",
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827672968-PROCESO.webp": "planimetria",
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827779382-pabellon_jpg.webp": "fotografia",
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827822305-WhatsApp_Image_2026-11-04_at_1_31_30_PM.webp": "planimetria"
+    },
+    "motion": {
+      "variant": "quadrant-aperture"
+    }
+  },
+  {
     "id": "espacio-para-hablar-con-dios-ssqj",
     "slug": "espacio-para-hablar-con-dios",
     "type": "proyectos",
@@ -32,7 +572,7 @@
     "heroImageFocalPoint": "bottom",
     "heroImagePosition": "50% 75%",
     "heroImageZoom": 100,
-    "resena": "Texto analítico principal de la reseña...",
+    "resena": "",
     "hasCritica": false,
     "critica": "Dictamen crítico externo sobre la obra y su pertinencia ética y constructiva...",
     "criticaHeadline": "Desafiar la convención inmobiliaria desde la inercia térmica",
@@ -157,61 +697,5 @@
     },
     "secondaryExcerpt": "El proyecto nace como una respuesta íntima de la comunidad de Rumipamba a su propia necesidad espiritual, un intento de reconectar con lo divino en un espacio que les ha sido negado. A través de un proceso de diseño participativo, en el que toda la comunidad fue protagonista, se concibió un espacio que no solo uniera a las personas con lo sagrado, sino que también revitalizara técnicas ancestrales, honrando la maestría local en un acto de revalorización cultural.\n",
     "maestroMayor": "Segundo Guanoluisa"
-  },
-  {
-    "id": "edificio-sensei",
-    "slug": "edificio-sensei",
-    "number": "#09",
-    "title": "EDIFICIO SENSEI",
-    "studio": "DANIEL MORENO FLORES",
-    "critic": "JULIÁN ZID",
-    "escritoPor": "Daniel Moreno Flores",
-    "editadoPor": "Dirección Editorial EA",
-    "photographer": "JAG STUDIO",
-    "superficie": "5.600 m²",
-    "showOnLanding": true,
-    "landingOrder": 2,
-    "landingTab": "proyectos",
-    "secondaryImageUrl": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
-    "secondaryCaption": "MATERIALIDAD // HORMIGÓN VISTO",
-    "secondaryExcerpt": "El zócalo permeable vincula el espacio privado con la vereda peatonal, enriqueciendo la vida colectiva del barrio.",
-    "actionButtonText": "VER PROYECTO",
-    "location": "QUITO",
-    "year": "2023",
-    "excerpt": "INCURSIÓN CONTEMPORÁNEA CON ESTILO Y ESPÍRITU PROPIO QUE TRASCIENDE MÁS ALLÁ DE LO IMAGINABLE.",
-    "status": "published",
-    "featured": true,
-    "category": "Edificio de Uso Mixto",
-    "tags": [
-      "Quito",
-      "Uso Mixto",
-      "Tectónica Andina",
-      "Vanguardia"
-    ],
-    "heroImage": "/images/edificio_sensei.png",
-    "memory": "Proyecto de uso mixto que explora la verticalidad urbana con una arquitectura contemporánea en movimiento.",
-    "resena": "La torre propone una piel fluida que dinamiza el perfil urbano de las avenidas Naciones Unidas y Amazonas.",
-    "critica": "Por Julián Zid: Una audaz declaración de dinamismo formal en el corazón corporativo de Quito.",
-    "datos": {
-      "superficie": "5.600 m²",
-      "estructura": "Hormigón armado y envolvente metálica curva",
-      "fotografia": "Bicubik Photography",
-      "colaboradores": "Daniel Moreno Flores, Margaux Eyssette",
-      "ingenieria": "Cálculo Estructural Cevallos",
-      "cliente": "Inmobiliaria Sensei Quito",
-      "maestroMayor": "Ángel Criollo"
-    },
-    "ciudad": {
-      "barrio": "Iñaquito",
-      "altura": "2.810 msnm"
-    },
-    "motion": {
-      "variant": "vertical-slices",
-      "kicker": "FLUIDEZ VERTICAL EN EL CENTRO FINANCIERO",
-      "conceptTag": "USO MIXTO & ENVOLVENTE DINÁMICA",
-      "preset": "clipReveal",
-      "hoverZoom": 1.05
-    },
-    "maestroMayor": "Ángel Criollo"
   }
 ]

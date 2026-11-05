@@ -898,10 +898,24 @@ export const VisualEditorialEditor: React.FC<VisualEditorialEditorProps> = ({
     return true;
   };
 
+  // Clean dummy placeholders and synchronize excerpt before save or publish
+  const sanitizeArticleEditorialTexts = (art: EditorialArticle): EditorialArticle => {
+    const cleanExcerpt = art.excerpt?.trim() || '';
+    const rawResena = art.resena?.trim();
+    const cleanResena = (!rawResena || rawResena.startsWith('Texto analítico')) ? cleanExcerpt : rawResena;
+    return {
+      ...art,
+      excerpt: cleanExcerpt,
+      resena: cleanResena,
+    };
+  };
+
   // Save draft
   const handleSaveDraft = () => {
     if (!validateBeforeAction(false)) return;
-    onSave(article, false);
+    const sanitized = sanitizeArticleEditorialTexts(article);
+    setArticle(sanitized);
+    onSave(sanitized, false);
     setToast({
       type: 'success',
       message: '✓ Proyecto guardado correctamente como borrador.',
@@ -912,8 +926,9 @@ export const VisualEditorialEditor: React.FC<VisualEditorialEditorProps> = ({
   const handlePublish = () => {
     if (!validateBeforeAction(true)) return;
     setIsPublishing(true);
+    const sanitized = sanitizeArticleEditorialTexts(article);
     const publishedArticle: EditorialArticle = {
-      ...article,
+      ...sanitized,
       status: 'published',
       updatedAt: new Date().toISOString(),
     };
@@ -3187,7 +3202,19 @@ export const VisualEditorialEditor: React.FC<VisualEditorialEditorProps> = ({
                       <textarea
                         rows={3}
                         value={article.excerpt || ''}
-                        onChange={(e) => updateField('excerpt', e.target.value)}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          setArticle((prev) => ({
+                            ...prev,
+                            excerpt: val,
+                            resena:
+                              !prev.resena ||
+                              prev.resena.startsWith('Texto analítico') ||
+                              prev.resena === prev.excerpt
+                                ? val
+                                : prev.resena,
+                          }));
+                        }}
                         placeholder="Escribe el extracto principal de la obra que se leerá en la portada y tarjetas de celular..."
                         className="w-full bg-[#242424] border border-white/20 p-2.5 text-xs text-white leading-relaxed resize-none focus:border-white focus:outline-none"
                       />

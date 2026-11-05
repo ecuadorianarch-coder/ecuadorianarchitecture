@@ -281,9 +281,17 @@ const ResenaModuleContent: React.FC<ProjectModuleContext> = ({
         </div>
       </div>
 
-      <p className="font-creato text-[14px] sm:text-[15px] text-ea-black/90 leading-[1.8] font-normal my-4.5">
-        {project.resena || project.excerpt}
-      </p>
+      {(() => {
+        const text =
+          project.resena && !project.resena.trim().startsWith('Texto analítico')
+            ? project.resena.trim()
+            : project.excerpt?.trim();
+        return text ? (
+          <p className="font-creato text-[14px] sm:text-[15px] text-ea-black/90 leading-[1.8] font-normal my-4.5">
+            {text}
+          </p>
+        ) : null;
+      })()}
 
       {/* Architectural Floor Plan Image — Real uploaded drawing */}
       <figure className="my-8 group">
