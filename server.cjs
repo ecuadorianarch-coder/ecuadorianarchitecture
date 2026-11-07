@@ -78,6 +78,9 @@ async function uploadImageToSupabase(safeName, buffer, contentType) {
   return null;
 }
 
+// Cache for debouncing rapid duplicate ad clicks (< 3000ms)
+const recentAdClicksCache = new Map();
+
 // Pre-cargar datos desde Supabase al iniciar el servidor
 const contentFilesToWarm = [
   'projects.json',
@@ -86,6 +89,8 @@ const contentFilesToWarm = [
   'adCampaigns.json',
   'adBrands.json',
   'adPlacements.json',
+  'adAnalytics.json',
+  'adEvents.json',
   'siteConfig.json',
   'articles.json',
   'academia.json',
@@ -632,6 +637,379 @@ const server = http.createServer((req, res) => {
     }
   }
 
+  // 1.85. API: Advertising Analytics, Click Redirection & Impression Telemetry
+  if (pathname === '/api/ads/click') {
+    const campaignId = parsedUrl.query?.c || '';
+    const placementId = parsedUrl.query?.p || 'entre-proyectos';
+    const rawDest = parsedUrl.query?.dest || '';
+    const isAdmin = parsedUrl.query?.admin === 'true';
+    const destinationUrl = rawDest ? decodeURIComponent(rawDest) : 'https://ecuadorianarchitecture.com';
+
+    const userAgent = req.headers['user-agent'] || 'Unknown';
+    const now = Date.now();
+    const clientIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress || '127.0.0.1';
+    const dedupeKey = `${clientIp}_${campaignId}`;
+    const lastClickTime = recentAdClicksCache.get(dedupeKey) || 0;
+    const isRapidDuplicate = now - lastClickTime < 3000;
+    recentAdClicksCache.set(dedupeKey, now);
+
+    const isBot = /bot|crawl|spider|slurp|facebookexternalhit|bingbot/i.test(userAgent);
+    const isValid = !isAdmin && !isRapidDuplicate && !isBot;
+    const reason = isAdmin ? 'admin_preview' : isBot ? 'bot_detected' : isRapidDuplicate ? 'rapid_duplicate' : 'valid';
+
+    // 1. Log event to adEvents.json
+    const eventsPath = path.join(dataDir, 'adEvents.json');
+    try {
+      const events = fs.existsSync(eventsPath) ? JSON.parse(fs.readFileSync(eventsPath, 'utf-8') || '[]') : [];
+      events.push({
+        id: `evt-clk-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
+        campaignId,
+        placementId,
+        type: 'click',
+        timestamp: new Date().toISOString(),
+        isValid,
+        reason,
+        device: /mobile|iphone|android/i.test(userAgent) ? 'mobile' : /ipad|tablet/i.test(userAgent) ? 'tablet' : 'desktop',
+        userAgent: userAgent.substring(0, 150),
+      });
+      if (events.length > 5000) events.splice(0, events.length - 5000);
+      const eventsStr = JSON.stringify(events, null, 2);
+      fs.writeFileSync(eventsPath, eventsStr, 'utf-8');
+      writeToSupabase('adEvents.json', eventsStr).catch(() => {});
+    } catch (e) {
+      console.warn('Error recording ad click event:', e);
+    }
+
+    // 2. Increment counters in adAnalytics.json
+    const analyticsPath = path.join(dataDir, 'adAnalytics.json');
+    try {
+      if (fs.existsSync(analyticsPath)) {
+        const analytics = JSON.parse(fs.readFileSync(analyticsPath, 'utf-8') || '{}');
+        if (!analytics.grossClicks) analytics.grossClicks = {};
+        if (!analytics.validClicks) analytics.validClicks = {};
+        if (!analytics.clicks) analytics.clicks = {};
+        if (!analytics.clicksByPlacement) analytics.clicksByPlacement = {};
+        if (!analytics.dailyStats) analytics.dailyStats = {};
+
+        analytics.grossClicks[campaignId] = (analytics.grossClicks[campaignId] || 0) + 1;
+
+        if (isValid) {
+          analytics.validClicks[campaignId] = (analytics.validClicks[campaignId] || 0) + 1;
+          analytics.clicks[campaignId] = (analytics.clicks[campaignId] || 0) + 1;
+          analytics.clicksByPlacement[placementId] = (analytics.clicksByPlacement[placementId] || 0) + 1;
+
+          const today = new Date().toISOString().split('T')[0];
+          if (!analytics.dailyStats[today]) analytics.dailyStats[today] = {};
+          if (!analytics.dailyStats[today][campaignId]) {
+            analytics.dailyStats[today][campaignId] = { validImpressions: 0, grossClicks: 0, validClicks: 0 };
+          }
+          analytics.dailyStats[today][campaignId].grossClicks += 1;
+          analytics.dailyStats[today][campaignId].validClicks += 1;
+        }
+
+        analytics.lastUpdated = new Date().toISOString();
+        const analyticsStr = JSON.stringify(analytics, null, 2);
+        fs.writeFileSync(analyticsPath, analyticsStr, 'utf-8');
+        writeToSupabase('adAnalytics.json', analyticsStr).catch(() => {});
+      }
+    } catch (e) {
+      console.warn('Error updating analytics on ad click:', e);
+    }
+
+    // 3. HTTP 302 Redirection
+    res.statusCode = 302;
+    res.setHeader('Location', destinationUrl);
+    res.end();
+    return;
+  }
+
+  if (pathname === '/api/ads/track-impression' && req.method === 'POST') {
+    let body = '';
+    req.on('data', chunk => body += chunk);
+    req.on('end', () => {
+      try {
+        const { campaignId, placementId, device = 'desktop', isAdmin = false, sessionId = '' } = JSON.parse(body || '{}');
+        const userAgent = req.headers['user-agent'] || 'Unknown';
+        const isBot = /bot|crawl|spider|slurp|facebookexternalhit|bingbot/i.test(userAgent);
+        const isValid = !isAdmin && !isBot;
+        const reason = isAdmin ? 'admin_preview' : isBot ? 'bot_detected' : 'valid';
+
+        // Log event to adEvents.json
+        const eventsPath = path.join(dataDir, 'adEvents.json');
+        const events = fs.existsSync(eventsPath) ? JSON.parse(fs.readFileSync(eventsPath, 'utf-8') || '[]') : [];
+        events.push({
+          id: `evt-imp-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
+          campaignId,
+          placementId,
+          type: 'impression',
+          timestamp: new Date().toISOString(),
+          isValid,
+          reason,
+          device,
+          sessionId,
+        });
+        if (events.length > 5000) events.splice(0, events.length - 5000);
+        const eventsStr = JSON.stringify(events, null, 2);
+        fs.writeFileSync(eventsPath, eventsStr, 'utf-8');
+        writeToSupabase('adEvents.json', eventsStr).catch(() => {});
+
+        // Update adAnalytics.json if valid
+        if (isValid) {
+          const analyticsPath = path.join(dataDir, 'adAnalytics.json');
+          if (fs.existsSync(analyticsPath)) {
+            const analytics = JSON.parse(fs.readFileSync(analyticsPath, 'utf-8') || '{}');
+            if (!analytics.impressions) analytics.impressions = {};
+            if (!analytics.impressionsByPlacement) analytics.impressionsByPlacement = {};
+            if (!analytics.deviceBreakdown) analytics.deviceBreakdown = { desktop: 0, tablet: 0, mobile: 0 };
+            if (!analytics.dailyStats) analytics.dailyStats = {};
+
+            analytics.impressions[campaignId] = (analytics.impressions[campaignId] || 0) + 1;
+            analytics.impressionsByPlacement[placementId] = (analytics.impressionsByPlacement[placementId] || 0) + 1;
+            analytics.deviceBreakdown[device] = (analytics.deviceBreakdown[device] || 0) + 1;
+
+            const today = new Date().toISOString().split('T')[0];
+            if (!analytics.dailyStats[today]) analytics.dailyStats[today] = {};
+            if (!analytics.dailyStats[today][campaignId]) {
+              analytics.dailyStats[today][campaignId] = { validImpressions: 0, grossClicks: 0, validClicks: 0 };
+            }
+            analytics.dailyStats[today][campaignId].validImpressions += 1;
+            analytics.lastUpdated = new Date().toISOString();
+            const analyticsStr = JSON.stringify(analytics, null, 2);
+            fs.writeFileSync(analyticsPath, analyticsStr, 'utf-8');
+            writeToSupabase('adAnalytics.json', analyticsStr).catch(() => {});
+          }
+        }
+
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify({ success: true, recorded: isValid }));
+      } catch (err) {
+        res.statusCode = 500;
+        res.end(JSON.stringify({ error: err.message }));
+      }
+    });
+    return;
+  }
+
+  if (pathname === '/api/ads/report' && req.method === 'GET') {
+    const token = parsedUrl.query?.token || '';
+    try {
+      const campaignsPath = path.join(dataDir, 'adCampaigns.json');
+      const brandsPath = path.join(dataDir, 'adBrands.json');
+      const placementsPath = path.join(dataDir, 'adPlacements.json');
+      const analyticsPath = path.join(dataDir, 'adAnalytics.json');
+
+      const campaigns = fs.existsSync(campaignsPath) ? JSON.parse(fs.readFileSync(campaignsPath, 'utf-8')) : [];
+      const matchedCampaign = campaigns.find(c => c.shareToken === token && c.shareEnabled !== false);
+
+      if (!matchedCampaign) {
+        res.statusCode = 404;
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify({ error: 'Reporte no encontrado o enlace revocado.' }));
+        return;
+      }
+
+      const brands = fs.existsSync(brandsPath) ? JSON.parse(fs.readFileSync(brandsPath, 'utf-8')) : [];
+      const brand = brands.find(b => b.id === matchedCampaign.brandId) || { name: 'Anunciante Oficial' };
+      const placements = fs.existsSync(placementsPath) ? JSON.parse(fs.readFileSync(placementsPath, 'utf-8')) : [];
+      const analytics = fs.existsSync(analyticsPath) ? JSON.parse(fs.readFileSync(analyticsPath, 'utf-8')) : {};
+
+      const validImpressions = analytics.impressions?.[matchedCampaign.id] || 0;
+      const grossClicks = analytics.grossClicks?.[matchedCampaign.id] || 0;
+      const validClicks = analytics.validClicks?.[matchedCampaign.id] || analytics.clicks?.[matchedCampaign.id] || 0;
+      const ctr = validImpressions > 0 ? ((validClicks / validImpressions) * 100).toFixed(2) : '0.00';
+      const deliveryPercent = matchedCampaign.targetImpressions
+        ? ((validImpressions / matchedCampaign.targetImpressions) * 100).toFixed(1)
+        : undefined;
+
+      const dailyTrend = [];
+      if (analytics.dailyStats) {
+        Object.keys(analytics.dailyStats).sort().forEach((d) => {
+          const dayData = analytics.dailyStats[d]?.[matchedCampaign.id];
+          if (dayData) {
+            dailyTrend.push({
+              date: d,
+              validImpressions: dayData.validImpressions || 0,
+              grossClicks: dayData.grossClicks || 0,
+              validClicks: dayData.validClicks || 0,
+            });
+          }
+        });
+      }
+
+      const placementBreakdown = (matchedCampaign.placements || []).map((plcId) => {
+        const plcConfig = placements.find(p => p.id === plcId);
+        const imp = analytics.impressionsByPlacement?.[plcId] || 0;
+        const clk = analytics.clicksByPlacement?.[plcId] || 0;
+        const pCtr = imp > 0 ? ((clk / imp) * 100).toFixed(2) : '0.00';
+        return {
+          placementId: plcId,
+          name: plcConfig?.name || plcId,
+          impressions: imp,
+          clicks: clk,
+          ctr: pCtr,
+        };
+      });
+
+      const reportData = {
+        campaign: matchedCampaign,
+        brand,
+        stats: {
+          validImpressions,
+          grossClicks,
+          validClicks,
+          ctr,
+          deliveryPercent,
+          targetImpressions: matchedCampaign.targetImpressions,
+          budget: matchedCampaign.budget,
+          startDate: matchedCampaign.startDate,
+          endDate: matchedCampaign.endDate,
+        },
+        dailyTrend,
+        placementBreakdown,
+        methodology: {
+          impressionRule: 'IntersectionObserver >= 50% de área visible durante al menos 1.000 ms continuo. Deduplicado por sesión de navegación.',
+          clickRule: 'Redirección a través de endpoint /api/ads/click con filtrado de bots y bloqueo de clics rápidos duplicados (< 3s).',
+          lastUpdated: analytics.lastUpdated || new Date().toISOString(),
+        },
+      };
+
+      res.setHeader('Content-Type', 'application/json');
+      res.end(JSON.stringify(reportData));
+      return;
+    } catch (err) {
+      res.statusCode = 500;
+      res.end(JSON.stringify({ error: err.message }));
+      return;
+    }
+  }
+
+  if (pathname === '/api/ads/advertiser-portal' && req.method === 'GET') {
+    const token = parsedUrl.query?.token || '';
+    try {
+      const campaignsPath = path.join(dataDir, 'adCampaigns.json');
+      const brandsPath = path.join(dataDir, 'adBrands.json');
+      const placementsPath = path.join(dataDir, 'adPlacements.json');
+      const analyticsPath = path.join(dataDir, 'adAnalytics.json');
+
+      const brands = fs.existsSync(brandsPath) ? JSON.parse(fs.readFileSync(brandsPath, 'utf-8')) : [];
+      const brand = brands.find(b => (b.portalToken === token || b.id === token) && b.portalEnabled !== false);
+
+      if (!brand) {
+        res.statusCode = 404;
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify({ error: 'Portal de anunciante no encontrado o acceso revocado.' }));
+        return;
+      }
+
+      const campaigns = fs.existsSync(campaignsPath) ? JSON.parse(fs.readFileSync(campaignsPath, 'utf-8')) : [];
+      const brandCampaigns = campaigns.filter(c => c.brandId === brand.id);
+      const placements = fs.existsSync(placementsPath) ? JSON.parse(fs.readFileSync(placementsPath, 'utf-8')) : [];
+      const analytics = fs.existsSync(analyticsPath) ? JSON.parse(fs.readFileSync(analyticsPath, 'utf-8')) : {};
+
+      let totalBudget = 0;
+      let totalTargetImpressions = 0;
+      let totalValidImpressions = 0;
+      let totalGrossClicks = 0;
+      let totalValidClicks = 0;
+
+      const campaignsWithMetrics = brandCampaigns.map(camp => {
+        const vImp = analytics.impressions?.[camp.id] || 0;
+        const gClk = analytics.grossClicks?.[camp.id] || 0;
+        const vClk = analytics.validClicks?.[camp.id] || analytics.clicks?.[camp.id] || 0;
+        const ctr = vImp > 0 ? ((vClk / vImp) * 100).toFixed(2) : '0.00';
+        const del = camp.targetImpressions ? ((vImp / camp.targetImpressions) * 100).toFixed(1) : undefined;
+
+        totalBudget += (camp.budget || 0);
+        totalTargetImpressions += (camp.targetImpressions || 0);
+        totalValidImpressions += vImp;
+        totalGrossClicks += gClk;
+        totalValidClicks += vClk;
+
+        return {
+          ...camp,
+          metrics: {
+            validImpressions: vImp,
+            grossClicks: gClk,
+            validClicks: vClk,
+            ctr,
+            deliveryPercent: del,
+          },
+        };
+      });
+
+      const overallCtr = totalValidImpressions > 0 ? ((totalValidClicks / totalValidImpressions) * 100).toFixed(2) : '0.00';
+      const overallDeliveryPercent = totalTargetImpressions > 0 ? ((totalValidImpressions / totalTargetImpressions) * 100).toFixed(1) : undefined;
+
+      const dailyTrendMap = {};
+      if (analytics.dailyStats) {
+        Object.keys(analytics.dailyStats).sort().forEach(d => {
+          brandCampaigns.forEach(camp => {
+            const dayData = analytics.dailyStats[d]?.[camp.id];
+            if (dayData) {
+              if (!dailyTrendMap[d]) dailyTrendMap[d] = { validImpressions: 0, grossClicks: 0, validClicks: 0 };
+              dailyTrendMap[d].validImpressions += (dayData.validImpressions || 0);
+              dailyTrendMap[d].grossClicks += (dayData.grossClicks || 0);
+              dailyTrendMap[d].validClicks += (dayData.validClicks || 0);
+            }
+          });
+        });
+      }
+
+      const dailyTrend = Object.keys(dailyTrendMap).sort().map(d => ({ date: d, ...dailyTrendMap[d] }));
+      const usedPlacements = Array.from(new Set(brandCampaigns.flatMap(c => c.placements || [])));
+      const placementBreakdown = usedPlacements.map(plcId => {
+        const plcConfig = placements.find(p => p.id === plcId);
+        let plcImp = 0;
+        let plcClk = 0;
+        brandCampaigns.forEach(camp => {
+          if (camp.placements?.includes(plcId)) {
+            plcImp += (analytics.impressions?.[camp.id] || 0);
+            plcClk += (analytics.validClicks?.[camp.id] || analytics.clicks?.[camp.id] || 0);
+          }
+        });
+        const pCtr = plcImp > 0 ? ((plcClk / plcImp) * 100).toFixed(2) : '0.00';
+        return {
+          placementId: plcId,
+          name: plcConfig?.name || plcId,
+          impressions: plcImp,
+          clicks: plcClk,
+          ctr: pCtr,
+        };
+      });
+
+      const portalData = {
+        brand,
+        campaigns: campaignsWithMetrics,
+        totals: {
+          totalCampaigns: brandCampaigns.length,
+          activeCampaigns: brandCampaigns.filter(c => c.status === 'activa').length,
+          totalBudget,
+          totalTargetImpressions,
+          validImpressions: totalValidImpressions,
+          grossClicks: totalGrossClicks,
+          validClicks: totalValidClicks,
+          overallCtr,
+          overallDeliveryPercent,
+        },
+        dailyTrend,
+        placementBreakdown,
+        methodology: {
+          impressionRule: 'IntersectionObserver >= 50% de área visible durante al menos 1.000 ms continuo. Deduplicado por sesión de navegación.',
+          clickRule: 'Redirección a través de endpoint /api/ads/click con filtrado de bots y bloqueo de clics rápidos duplicados (< 3s).',
+          lastUpdated: analytics.lastUpdated || new Date().toISOString(),
+        },
+      };
+
+      res.setHeader('Content-Type', 'application/json');
+      res.end(JSON.stringify(portalData));
+      return;
+    } catch (err) {
+      res.statusCode = 500;
+      res.end(JSON.stringify({ error: err.message }));
+      return;
+    }
+  }
+
   // 1.9. API: Live Visitor Tracking & Audience Telemetry
   if (pathname === '/api/track-visit' && req.method === 'POST') {
     let body = '';
@@ -668,19 +1046,16 @@ const server = http.createServer((req, res) => {
         }
         
         const dev = payload.device || 'desktop';
-        if (metrics.deviceBreakdown && metrics.deviceBreakdown[dev] !== undefined) {
-          metrics.deviceBreakdown[dev] = (metrics.deviceBreakdown[dev] || 0) + 1;
-        }
+        if (!metrics.deviceBreakdown) metrics.deviceBreakdown = { mobile: 0, desktop: 0, tablet: 0 };
+        metrics.deviceBreakdown[dev] = (metrics.deviceBreakdown[dev] || 0) + 1;
         
         const sec = payload.section || 'home';
-        if (metrics.sectionsBreakdown) {
-          metrics.sectionsBreakdown[sec] = (metrics.sectionsBreakdown[sec] || 0) + 1;
-        }
+        if (!metrics.sectionsBreakdown) metrics.sectionsBreakdown = {};
+        metrics.sectionsBreakdown[sec] = (metrics.sectionsBreakdown[sec] || 0) + 1;
         
         const src = payload.source || 'direct_whatsapp';
-        if (metrics.sourcesBreakdown && metrics.sourcesBreakdown[src] !== undefined) {
-          metrics.sourcesBreakdown[src] = (metrics.sourcesBreakdown[src] || 0) + 1;
-        }
+        if (!metrics.sourcesBreakdown) metrics.sourcesBreakdown = {};
+        metrics.sourcesBreakdown[src] = (metrics.sourcesBreakdown[src] || 0) + 1;
         
         metrics.lastUpdated = new Date().toISOString();
         const updatedStr = JSON.stringify(metrics, null, 2);

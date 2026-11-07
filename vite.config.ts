@@ -519,17 +519,16 @@ const apiPlugin = () => ({
               metrics.dailyStats[today].uniqueVisitors = (metrics.dailyStats[today].uniqueVisitors || 0) + 1;
             }
             const dev = payload.device || 'desktop';
-            if (metrics.deviceBreakdown && metrics.deviceBreakdown[dev] !== undefined) {
-              metrics.deviceBreakdown[dev] = (metrics.deviceBreakdown[dev] || 0) + 1;
-            }
+            if (!metrics.deviceBreakdown) metrics.deviceBreakdown = { mobile: 0, desktop: 0, tablet: 0 };
+            metrics.deviceBreakdown[dev] = (metrics.deviceBreakdown[dev] || 0) + 1;
+
             const sec = payload.section || 'home';
-            if (metrics.sectionsBreakdown) {
-              metrics.sectionsBreakdown[sec] = (metrics.sectionsBreakdown[sec] || 0) + 1;
-            }
+            if (!metrics.sectionsBreakdown) metrics.sectionsBreakdown = {};
+            metrics.sectionsBreakdown[sec] = (metrics.sectionsBreakdown[sec] || 0) + 1;
+
             const src = payload.source || 'direct_whatsapp';
-            if (metrics.sourcesBreakdown && metrics.sourcesBreakdown[src] !== undefined) {
-              metrics.sourcesBreakdown[src] = (metrics.sourcesBreakdown[src] || 0) + 1;
-            }
+            if (!metrics.sourcesBreakdown) metrics.sourcesBreakdown = {};
+            metrics.sourcesBreakdown[src] = (metrics.sourcesBreakdown[src] || 0) + 1;
             metrics.lastUpdated = new Date().toISOString();
             fs.writeFileSync(metricsFile, JSON.stringify(metrics, null, 2), 'utf-8');
             res.setHeader('Content-Type', 'application/json');
@@ -566,6 +565,26 @@ const apiPlugin = () => ({
 
         if (filename) {
           const filePath = path.join(dataPath, filename);
+
+          if (req.method === 'DELETE' && (endpoint === '/api/subscribers' || endpoint === '/api/subscribe')) {
+            const urlObj = new URL(req.url, 'http://localhost:5173');
+            const queryId = urlObj.searchParams.get('id');
+            if (!queryId) {
+              res.statusCode = 400;
+              res.setHeader('Content-Type', 'application/json');
+              res.end(JSON.stringify({ error: 'Falta el id del suscriptor a eliminar.' }));
+              return;
+            }
+            const currentSubs = fs.existsSync(filePath)
+              ? JSON.parse(fs.readFileSync(filePath, 'utf-8') || '[]')
+              : [];
+            const nextSubs = currentSubs.filter((s: any) => s.id !== queryId);
+            fs.writeFileSync(filePath, JSON.stringify(nextSubs, null, 2), 'utf-8');
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({ success: true, remaining: nextSubs.length }));
+            return;
+          }
+
           if (req.method === 'GET') {
             if (fs.existsSync(filePath)) {
               const data = fs.readFileSync(filePath, 'utf-8');
@@ -614,6 +633,20 @@ const apiPlugin = () => ({
                         createdAt: new Date().toISOString(),
                       });
                       fs.writeFileSync(filePath, JSON.stringify(currentSubs, null, 2), 'utf-8');
+
+                      // Sincronizar incremento de nuevo lead en siteMetrics.json
+                      try {
+                        const metricsFile = path.join(dataPath, 'siteMetrics.json');
+                        if (fs.existsSync(metricsFile)) {
+                          const m = JSON.parse(fs.readFileSync(metricsFile, 'utf-8'));
+                          const t = new Date().toISOString().split('T')[0];
+                          if (!m.dailyStats) m.dailyStats = {};
+                          if (!m.dailyStats[t]) m.dailyStats[t] = { uniqueVisitors: 0, pageviews: 0, leads: 0 };
+                          m.dailyStats[t].leads = (m.dailyStats[t].leads || 0) + 1;
+                          m.lastUpdated = new Date().toISOString();
+                          fs.writeFileSync(metricsFile, JSON.stringify(m, null, 2), 'utf-8');
+                        }
+                      } catch (e) {}
                     } else {
                       if (parsed.nombre || parsed.telefono || parsed.name || parsed.phone) {
                         exists.nombre = parsed.nombre || parsed.name || exists.nombre || '';

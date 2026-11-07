@@ -12,9 +12,10 @@ export function useVisitorTracking(currentView?: string, section?: string) {
     }
 
     const today = new Date().toISOString().split('T')[0];
-    const trackKey = `${today}_${currentView || 'home'}_${section || ''}`;
+    const currentPath = window.location.pathname || '/';
+    const trackKey = `${today}_${currentPath}_${currentView || 'home'}_${section || ''}`;
 
-    // Prevent duplicate calls for the same view within seconds
+    // Prevent duplicate calls for the exact same view within the same session
     if (lastTrackedKeyRef.current === trackKey) return;
     lastTrackedKeyRef.current = trackKey;
 
@@ -59,20 +60,27 @@ export function useVisitorTracking(currentView?: string, section?: string) {
       timestamp: new Date().toISOString()
     };
 
+    let beaconSent = false;
     try {
-      if (typeof navigator !== 'undefined' && 'sendBeacon' in navigator) {
+      if (typeof navigator !== 'undefined' && typeof navigator.sendBeacon === 'function') {
         const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
-        navigator.sendBeacon('/api/track-visit', blob);
-      } else {
+        beaconSent = navigator.sendBeacon('/api/track-visit', blob);
+      }
+    } catch {
+      beaconSent = false;
+    }
+
+    if (!beaconSent) {
+      try {
         fetch('/api/track-visit', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
           keepalive: true,
         }).catch(() => {});
+      } catch {
+        // Non-blocking fail-safe
       }
-    } catch {
-      // Non-blocking fail-safe
     }
   }, [currentView, section]);
 }
