@@ -1,0 +1,45 @@
+[
+  {
+    "id": "sub-1793748325643-lbwtl",
+    "email": "investigador.fada@puce.edu.ec",
+    "section": "academia",
+    "source": "deck-empty-academia",
+    "createdAt": "2026-11-03T23:25:25.643Z"
+  },
+  {
+    "id": "sub-1793758116619-bns84",
+    "email": "mariajose.perez@fada.puce.edu.ec",
+    "nombre": "Arq. María José Pérez",
+    "telefono": "+593 98 765 4321",
+    "section": "newsletter-banner",
+    "source": "banner-publicitario",
+    "createdAt": "2026-11-04T02:08:36.619Z"
+  },
+  {
+    "id": "sub-1793825102775-1wl3d",
+    "email": "audit-test@ecuadorianarch.com",
+    "nombre": "Audit Bot",
+    "telefono": "",
+    "section": "general",
+    "source": "banner-newsletter",
+    "createdAt": "2026-11-04T20:45:02.775Z"
+  },
+  {
+    "id": "sub-1793829382216-xgnhb",
+    "email": "alejoandrade10@gmail.com",
+    "nombre": "",
+    "telefono": "",
+    "section": "territorios",
+    "source": "deck-empty-territorios",
+    "createdAt": "2026-11-04T21:56:22.216Z"
+  },
+  {
+    "id": "sub-1793878972067-qc9jl",
+    "email": "trigrama.gabriel@gmail.com",
+    "nombre": "Gabriel Sánchez",
+    "telefono": "0981829867",
+    "section": "newsletter-banner",
+    "source": "banner-publicitario",
+    "createdAt": "2026-11-05T11:42:52.067Z"
+  }
+]
