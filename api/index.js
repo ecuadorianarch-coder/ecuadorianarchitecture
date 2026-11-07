@@ -16,7 +16,10 @@ module.exports = (req, res) => {
   }
 
   let filename = '';
-  if (pathname.includes('/projects')) filename = 'projects.json';
+  if (pathname.includes('/site-metrics') || pathname.includes('/metrics')) filename = 'siteMetrics.json';
+  else if (pathname.includes('/opportunities')) filename = 'opportunities.json';
+  else if (pathname.includes('/editorial')) filename = 'editorialOffice.json';
+  else if (pathname.includes('/projects')) filename = 'projects.json';
   else if (pathname.includes('/articles')) filename = 'articles.json';
   else if (pathname.includes('/academia')) filename = 'academia.json';
   else if (pathname.includes('/territorios')) filename = 'territorios.json';

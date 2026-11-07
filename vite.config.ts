@@ -488,6 +488,60 @@ const apiPlugin = () => ({
         return;
       }
 
+      if (req.url?.startsWith('/api/track-visit') && req.method === 'POST') {
+        let body = '';
+        req.on('data', (chunk: any) => body += chunk);
+        req.on('end', () => {
+          try {
+            const payload = JSON.parse(body || '{}');
+            const metricsFile = path.join(dataPath, 'siteMetrics.json');
+            let metrics: any = {
+              totalUniqueVisitors: 0,
+              totalPageviews: 0,
+              dailyStats: {},
+              deviceBreakdown: { mobile: 0, desktop: 0, tablet: 0 },
+              sourcesBreakdown: { instagram: 0, direct_whatsapp: 0, google_search: 0, referral: 0 },
+              sectionsBreakdown: { proyectos: 0, home: 0, territorios: 0, academia: 0, acerca: 0 },
+              lastUpdated: new Date().toISOString()
+            };
+            if (fs.existsSync(metricsFile)) {
+              try { metrics = JSON.parse(fs.readFileSync(metricsFile, 'utf-8')); } catch {}
+            }
+            const today = new Date().toISOString().split('T')[0];
+            if (!metrics.dailyStats) metrics.dailyStats = {};
+            if (!metrics.dailyStats[today]) {
+              metrics.dailyStats[today] = { uniqueVisitors: 0, pageviews: 0, leads: 0 };
+            }
+            metrics.totalPageviews = (metrics.totalPageviews || 0) + 1;
+            metrics.dailyStats[today].pageviews = (metrics.dailyStats[today].pageviews || 0) + 1;
+            if (payload.isNewVisitor) {
+              metrics.totalUniqueVisitors = (metrics.totalUniqueVisitors || 0) + 1;
+              metrics.dailyStats[today].uniqueVisitors = (metrics.dailyStats[today].uniqueVisitors || 0) + 1;
+            }
+            const dev = payload.device || 'desktop';
+            if (metrics.deviceBreakdown && metrics.deviceBreakdown[dev] !== undefined) {
+              metrics.deviceBreakdown[dev] = (metrics.deviceBreakdown[dev] || 0) + 1;
+            }
+            const sec = payload.section || 'home';
+            if (metrics.sectionsBreakdown) {
+              metrics.sectionsBreakdown[sec] = (metrics.sectionsBreakdown[sec] || 0) + 1;
+            }
+            const src = payload.source || 'direct_whatsapp';
+            if (metrics.sourcesBreakdown && metrics.sourcesBreakdown[src] !== undefined) {
+              metrics.sourcesBreakdown[src] = (metrics.sourcesBreakdown[src] || 0) + 1;
+            }
+            metrics.lastUpdated = new Date().toISOString();
+            fs.writeFileSync(metricsFile, JSON.stringify(metrics, null, 2), 'utf-8');
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({ success: true, today: metrics.dailyStats[today] }));
+          } catch (e: any) {
+            res.statusCode = 500;
+            res.end(JSON.stringify({ error: e.message }));
+          }
+        });
+        return;
+      }
+
       if (req.url?.startsWith('/api/')) {
         const endpoint = req.url.split('?')[0];
         let filename = '';
@@ -508,6 +562,7 @@ const apiPlugin = () => ({
         else if (endpoint === '/api/feedback') filename = 'feedback.json';
         else if (endpoint === '/api/project-submissions') filename = 'projectSubmissions.json';
         else if (endpoint === '/api/subscribers' || endpoint === '/api/subscribe') filename = 'subscribers.json';
+        else if (endpoint === '/api/site-metrics' || endpoint === '/api/metrics') filename = 'siteMetrics.json';
 
         if (filename) {
           const filePath = path.join(dataPath, filename);

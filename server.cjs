@@ -93,7 +93,8 @@ const contentFilesToWarm = [
   'authors.json',
   'photographers.json',
   'masterBuilders.json',
-  'subscribers.json'
+  'subscribers.json',
+  'siteMetrics.json'
 ];
 
 contentFilesToWarm.forEach((file) => {
@@ -631,10 +632,76 @@ const server = http.createServer((req, res) => {
     }
   }
 
+  // 1.9. API: Live Visitor Tracking & Audience Telemetry
+  if (pathname === '/api/track-visit' && req.method === 'POST') {
+    let body = '';
+    req.on('data', chunk => body += chunk);
+    req.on('end', () => {
+      try {
+        const payload = JSON.parse(body || '{}');
+        const metricsFile = path.join(dataDir, 'siteMetrics.json');
+        let metrics = {
+          totalUniqueVisitors: 0,
+          totalPageviews: 0,
+          dailyStats: {},
+          deviceBreakdown: { mobile: 0, desktop: 0, tablet: 0 },
+          sourcesBreakdown: { instagram: 0, direct_whatsapp: 0, google_search: 0, referral: 0 },
+          sectionsBreakdown: { proyectos: 0, home: 0, territorios: 0, academia: 0, acerca: 0 },
+          lastUpdated: new Date().toISOString()
+        };
+        if (fs.existsSync(metricsFile)) {
+          try { metrics = JSON.parse(fs.readFileSync(metricsFile, 'utf-8')); } catch {}
+        }
+        
+        const today = new Date().toISOString().split('T')[0];
+        if (!metrics.dailyStats) metrics.dailyStats = {};
+        if (!metrics.dailyStats[today]) {
+          metrics.dailyStats[today] = { uniqueVisitors: 0, pageviews: 0, leads: 0 };
+        }
+        
+        metrics.totalPageviews = (metrics.totalPageviews || 0) + 1;
+        metrics.dailyStats[today].pageviews = (metrics.dailyStats[today].pageviews || 0) + 1;
+        
+        if (payload.isNewVisitor) {
+          metrics.totalUniqueVisitors = (metrics.totalUniqueVisitors || 0) + 1;
+          metrics.dailyStats[today].uniqueVisitors = (metrics.dailyStats[today].uniqueVisitors || 0) + 1;
+        }
+        
+        const dev = payload.device || 'desktop';
+        if (metrics.deviceBreakdown && metrics.deviceBreakdown[dev] !== undefined) {
+          metrics.deviceBreakdown[dev] = (metrics.deviceBreakdown[dev] || 0) + 1;
+        }
+        
+        const sec = payload.section || 'home';
+        if (metrics.sectionsBreakdown) {
+          metrics.sectionsBreakdown[sec] = (metrics.sectionsBreakdown[sec] || 0) + 1;
+        }
+        
+        const src = payload.source || 'direct_whatsapp';
+        if (metrics.sourcesBreakdown && metrics.sourcesBreakdown[src] !== undefined) {
+          metrics.sourcesBreakdown[src] = (metrics.sourcesBreakdown[src] || 0) + 1;
+        }
+        
+        metrics.lastUpdated = new Date().toISOString();
+        const updatedStr = JSON.stringify(metrics, null, 2);
+        fs.writeFileSync(metricsFile, updatedStr, 'utf-8');
+        writeToSupabase('siteMetrics.json', updatedStr).catch(() => {});
+        
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify({ success: true, today: metrics.dailyStats[today] }));
+      } catch (e) {
+        res.statusCode = 500;
+        res.end(JSON.stringify({ error: e.message }));
+      }
+    });
+    return;
+  }
+
   // 2. API: JSON Data endpoints (Con lectura y escritura sincronizada en Supabase Cloud)
   if (pathname.startsWith('/api/')) {
     let filename = '';
-    if (pathname === '/api/opportunities-data' || pathname === '/api/opportunities') filename = 'opportunities.json';
+    if (pathname === '/api/site-metrics') filename = 'siteMetrics.json';
+    else if (pathname === '/api/opportunities-data' || pathname === '/api/opportunities') filename = 'opportunities.json';
     else if (pathname === '/api/editorial-office' || pathname === '/api/editorial-state') filename = 'editorialOffice.json';
     else if (pathname === '/api/site-config') filename = 'siteConfig.json';
     else if (pathname === '/api/projects') filename = 'projects.json';
@@ -656,6 +723,25 @@ const server = http.createServer((req, res) => {
 
     if (filename) {
       const filePath = path.join(dataDir, filename);
+
+      if (req.method === 'DELETE' && (pathname === '/api/subscribers' || pathname === '/api/subscribe')) {
+        const queryId = parsedUrl.query?.id;
+        if (!queryId) {
+          res.statusCode = 400;
+          res.end(JSON.stringify({ error: 'Falta el id del suscriptor a eliminar.' }));
+          return;
+        }
+        const currentSubs = fs.existsSync(filePath)
+          ? JSON.parse(fs.readFileSync(filePath, 'utf-8') || '[]')
+          : [];
+        const nextSubs = currentSubs.filter(s => s.id !== queryId);
+        const updatedStr = JSON.stringify(nextSubs, null, 2);
+        fs.writeFileSync(filePath, updatedStr, 'utf-8');
+        writeToSupabase(filename, updatedStr).catch(() => {});
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify({ success: true, remaining: nextSubs.length }));
+        return;
+      }
 
       // GET: Priorizar Supabase Cloud Cache, fallback a archivo local
       if (req.method === 'GET') {
@@ -733,6 +819,22 @@ const server = http.createServer((req, res) => {
                   const updatedStr = JSON.stringify(currentSubs, null, 2);
                   fs.writeFileSync(filePath, updatedStr, 'utf-8');
                   writeToSupabase(filename, updatedStr).catch(() => {});
+
+                  // Sincronizar incremento de nuevo lead en siteMetrics.json
+                  try {
+                    const metricsFile = path.join(dataDir, 'siteMetrics.json');
+                    if (fs.existsSync(metricsFile)) {
+                      const m = JSON.parse(fs.readFileSync(metricsFile, 'utf-8'));
+                      const t = new Date().toISOString().split('T')[0];
+                      if (!m.dailyStats) m.dailyStats = {};
+                      if (!m.dailyStats[t]) m.dailyStats[t] = { uniqueVisitors: 0, pageviews: 0, leads: 0 };
+                      m.dailyStats[t].leads = (m.dailyStats[t].leads || 0) + 1;
+                      m.lastUpdated = new Date().toISOString();
+                      const updatedM = JSON.stringify(m, null, 2);
+                      fs.writeFileSync(metricsFile, updatedM, 'utf-8');
+                      writeToSupabase('siteMetrics.json', updatedM).catch(() => {});
+                    }
+                  } catch (e) {}
                 } else {
                   if (parsed.nombre || parsed.telefono || parsed.name || parsed.phone) {
                     exists.nombre = parsed.nombre || parsed.name || exists.nombre || '';

@@ -3,13 +3,21 @@
     "id": "entre-proyectos",
     "name": "Entre Proyectos (Catálogo In-Feed)",
     "description": "Inserción gráfica limpia en la retícula del catálogo general. Banner 100% gráfico sin textos sobrepuestos.",
-    "supportedDevices": ["desktop", "tablet", "mobile"],
+    "supportedDevices": [
+      "desktop",
+      "tablet",
+      "mobile"
+    ],
     "frequency": 3,
     "maxAdsPerPage": 3,
     "aspectRatioDesktop": "16:10",
     "aspectRatioMobile": "16:10",
     "recommendedDimensions": "800 x 500 px (o 1200 x 750 px)",
-    "acceptedFormats": ["JPG", "PNG", "WebP"],
+    "acceptedFormats": [
+      "JPG",
+      "PNG",
+      "WebP"
+    ],
     "pageLocation": "Catálogo General (/proyectos, /academia, /territorios)",
     "baseRateCpm": 18,
     "active": true
@@ -18,11 +26,17 @@
     "id": "skyscrapers-laterales",
     "name": "Skyscrapers Laterales (Sticky Wings & Lightbox)",
     "description": "Formato vertical puro: la empresa entrega su arte gráfico completo con logotipo y llamado a la acción. Se exhibe sin textos externos ni filtros.",
-    "supportedDevices": ["desktop"],
+    "supportedDevices": [
+      "desktop"
+    ],
     "aspectRatioDesktop": "1:2 (o 1:3)",
     "aspectRatioMobile": "hidden",
     "recommendedDimensions": "300 x 600 px (o 160 x 600 px)",
-    "acceptedFormats": ["JPG", "PNG", "WebP"],
+    "acceptedFormats": [
+      "JPG",
+      "PNG",
+      "WebP"
+    ],
     "pageLocation": "Laterales fijos de lectura editorial y carrusel lightbox",
     "baseRateCpm": 25,
     "active": true
@@ -31,11 +45,19 @@
     "id": "dossier-editorial",
     "name": "Dossier Editorial (Inter-módulo en Ficha de Proyecto)",
     "description": "Banner panorámico gráfico insertado entre módulos del expediente monográfico en el detalle del proyecto.",
-    "supportedDevices": ["desktop", "tablet", "mobile"],
+    "supportedDevices": [
+      "desktop",
+      "tablet",
+      "mobile"
+    ],
     "aspectRatioDesktop": "3:1",
     "aspectRatioMobile": "16:9",
     "recommendedDimensions": "1200 x 400 px (o 900 x 300 px)",
-    "acceptedFormats": ["JPG", "PNG", "WebP"],
+    "acceptedFormats": [
+      "JPG",
+      "PNG",
+      "WebP"
+    ],
     "pageLocation": "Interior de Expediente de Obra (Entre Reseña y Documentación)",
     "baseRateCpm": 22,
     "active": true
@@ -44,11 +66,19 @@
     "id": "destacado-home",
     "name": "Banner Destacado (Alianza Principal)",
     "description": "Espacio de patrocinio de sección o alianza editorial principal visible en la portada y áreas de alta visibilidad.",
-    "supportedDevices": ["desktop", "tablet", "mobile"],
+    "supportedDevices": [
+      "desktop",
+      "tablet",
+      "mobile"
+    ],
     "aspectRatioDesktop": "3:1",
     "aspectRatioMobile": "16:9",
     "recommendedDimensions": "1440 x 480 px (Banner ancho)",
-    "acceptedFormats": ["JPG", "PNG", "WebP"],
+    "acceptedFormats": [
+      "JPG",
+      "PNG",
+      "WebP"
+    ],
     "pageLocation": "Portada Principal (/home) bajo bloque de Manifiesto",
     "baseRateCpm": 30,
     "active": true
@@ -57,11 +87,19 @@
     "id": "pie-articulo",
     "name": "Cierre de Reseña / Post-Contenido Editorial",
     "description": "Espacio de alto impacto al concluir la lectura de una reseña o crítica arquitectónica, antes de créditos de autor y notas colaborativas.",
-    "supportedDevices": ["desktop", "tablet", "mobile"],
+    "supportedDevices": [
+      "desktop",
+      "tablet",
+      "mobile"
+    ],
     "aspectRatioDesktop": "21:9",
     "aspectRatioMobile": "16:9",
     "recommendedDimensions": "1400 x 450 px",
-    "acceptedFormats": ["JPG", "PNG", "WebP"],
+    "acceptedFormats": [
+      "JPG",
+      "PNG",
+      "WebP"
+    ],
     "pageLocation": "Pie del Artículo Monográfico (Fin de lectura)",
     "baseRateCpm": 20,
     "active": true
@@ -70,11 +108,20 @@
     "id": "barra-top-sponsor",
     "name": "Franja Institucional Superior (Top Bar)",
     "description": "Banda sobria de patrocinio institucional bajo la barra de navegación o cabecera de sección, ideal para acuerdos anuales de marca.",
-    "supportedDevices": ["desktop", "tablet", "mobile"],
+    "supportedDevices": [
+      "desktop",
+      "tablet",
+      "mobile"
+    ],
     "aspectRatioDesktop": "20:1",
     "aspectRatioMobile": "10:1",
     "recommendedDimensions": "1920 x 80 px (Escritorio) / 800 x 80 px (Móvil)",
-    "acceptedFormats": ["JPG", "PNG", "WebP", "SVG"],
+    "acceptedFormats": [
+      "JPG",
+      "PNG",
+      "WebP",
+      "SVG"
+    ],
     "pageLocation": "Sub-Cabecera Global (Bajo Navbar)",
     "baseRateCpm": 15,
     "active": true
@@ -83,11 +130,19 @@
     "id": "inter-galeria",
     "name": "Inter-Galería (Banner Horizontal en Carrusel / Lightbox)",
     "description": "Banner horizontal leaderboard gráfico exhibido limpiamente entre el escenario fotográfico y la barra de miniaturas del carrusel.",
-    "supportedDevices": ["desktop", "tablet", "mobile"],
+    "supportedDevices": [
+      "desktop",
+      "tablet",
+      "mobile"
+    ],
     "aspectRatioDesktop": "8:1 (o 6:1)",
     "aspectRatioMobile": "6:1",
     "recommendedDimensions": "728 x 90 px (Leaderboard) o 1200 x 200 px (HD)",
-    "acceptedFormats": ["JPG", "PNG", "WebP"],
+    "acceptedFormats": [
+      "JPG",
+      "PNG",
+      "WebP"
+    ],
     "pageLocation": "Carrusel Fotográfico Lightbox (Bajo la imagen principal)",
     "baseRateCpm": 20,
     "active": true
@@ -96,11 +151,19 @@
     "id": "comunidad-infeed",
     "name": "Notas Comunitarias & Archivo Abierto",
     "description": "Inserción en el feed colaborativo de experiencias de visita, notas ciudadanas y debate arquitectónico.",
-    "supportedDevices": ["desktop", "tablet", "mobile"],
+    "supportedDevices": [
+      "desktop",
+      "tablet",
+      "mobile"
+    ],
     "aspectRatioDesktop": "16:10",
     "aspectRatioMobile": "1:1",
     "recommendedDimensions": "345 x 414 px (Tarjeta modular) o 600 x 250 px",
-    "acceptedFormats": ["JPG", "PNG", "WebP"],
+    "acceptedFormats": [
+      "JPG",
+      "PNG",
+      "WebP"
+    ],
     "pageLocation": "Sección Comunidad y Bitácora de Visitas",
     "baseRateCpm": 16,
     "active": true

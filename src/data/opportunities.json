@@ -1,0 +1,459 @@
+{
+  "version": "2026-11-04-ea-opps-v1",
+  "lastUpdated": "2026-11-05T17:30:25.629Z",
+  "opportunities": {
+    "opp-baq-2026": {
+      "id": "opp-baq-2026",
+      "title": "BAQ 2026 — Concurso de Publicaciones de Arquitectura",
+      "officialName": "XXV Bienal Panamericana de Arquitectura de Quito — Concurso de Publicaciones",
+      "organizer": "Colegio de Arquitectos del Ecuador Provincial de Pichincha (CAE-P)",
+      "category": "premio",
+      "country": "Ecuador",
+      "officialUrl": "https://baq-cae.ec",
+      "openingDate": "2026-03-01",
+      "closingDate": "2026-07-31",
+      "requirements": [
+        "Publicación editada en el período 2024-2026",
+        "Enfoque en arquitectura latinoamericana o ecuatoriana",
+        "Memoria conceptual, expediente digital y ficha técnica de edición"
+      ],
+      "eaEligibility": "100% Elegible: EA como medio digital independiente y catálogo crítico de arquitectura.",
+      "cost": "$120 USD tasa de inscripción gremial",
+      "requiredDocs": [
+        "Certificado de autoría o dirección editorial",
+        "Dossier de artículos publicados en formato PDF",
+        "Memoria de impacto y alcance de la plataforma"
+      ],
+      "verificationStatus": "verificada",
+      "lastCheckedDate": "2026-11-04",
+      "strategicFitScore": 98,
+      "economicBenefit": "Reconocimiento continental, trofeo BAQ de oro y legitimación académica suprema.",
+      "visibilityScore": 100,
+      "estimatedEffortHours": 24,
+      "recommendedAction": "Preparar dossier de postulación con los artículos editados de 2024 a 2026.",
+      "status": "recomendada",
+      "assignedAgentId": "ea-opp-02-competitions",
+      "notes": "Oportunidad prioritaria número 1 para el posicionamiento institucional de EA.",
+      "daysRemaining": -97
+    },
+    "opp-ifci-editorial-2026": {
+      "id": "opp-ifci-editorial-2026",
+      "title": "Fondo de Fomento a Revistas y Medios Culturales IFCI 2026",
+      "officialName": "Línea de Fomento a la Edición de Revistas Culturales y Divulgación del Patrimonio",
+      "organizer": "Instituto de Fomento a la Creatividad y la Innovación (Ministerio de Cultura del Ecuador)",
+      "category": "fondo",
+      "country": "Ecuador",
+      "officialUrl": "https://servicios.creatividad.gob.ec",
+      "openingDate": "2026-04-15",
+      "closingDate": "2026-06-15",
+      "requirements": [
+        "Registro Único de Artistas y Gestores Culturales (RUAC)",
+        "Proyecto de investigación editorial de 6 meses de duración",
+        "Presupuesto desglosado con honorarios de editores e investigadores"
+      ],
+      "eaEligibility": "Alta elegibilidad a través de la Dirección Editorial registrada en RUAC.",
+      "cost": "Gratuito",
+      "requiredDocs": [
+        "Formulario de postulación en plataforma IFCI",
+        "Currículum vitae del equipo editorial",
+        "Cronograma de entregables y 3 cartas de apoyo institucional"
+      ],
+      "verificationStatus": "verificada",
+      "lastCheckedDate": "2026-11-04",
+      "strategicFitScore": 95,
+      "economicBenefit": "$15.000 USD de financiación no reembolsable para producción editorial.",
+      "visibilityScore": 85,
+      "estimatedEffortHours": 40,
+      "recommendedAction": "Confeccionar el proyecto de investigación 'Archivos Tectónicos del Ecuador rural'.",
+      "status": "en_preparacion",
+      "assignedAgentId": "ea-opp-03-grants",
+      "notes": "Permitirá remunerar investigaciones de campo en provincias y fotografía de arquitectura.",
+      "daysRemaining": -143
+    },
+    "opp-cceq-aecid-2026": {
+      "id": "opp-cceq-aecid-2026",
+      "title": "Ayudas a la Creación y Mediación Cultural CCEQ / AECID",
+      "officialName": "Programa de Ayudas a Proyectos Culturales con Enfoque de Sostenibilidad y Ciudad",
+      "organizer": "Centro Cultural de España en Quito / AECID",
+      "category": "cooperacion_internacional",
+      "country": "Ecuador / España",
+      "officialUrl": "https://ccequito.org",
+      "openingDate": "2026-02-01",
+      "closingDate": "2026-05-30",
+      "requirements": [
+        "Proyectos que vinculen memoria histórica, espacio público y sostenibilidad comunitaria",
+        "Coproducción con agentes locales ecuatorianos"
+      ],
+      "eaEligibility": "Elegible como programa de podcast y conversatorios sobre arquitectura andina.",
+      "cost": "Gratuito",
+      "requiredDocs": [
+        "Dossier de propuesta",
+        "Propuesta metodológica de 5 mesas redondas grabadas para podcast",
+        "Presupuesto de producción técnica y difusión"
+      ],
+      "verificationStatus": "verificada",
+      "lastCheckedDate": "2026-11-04",
+      "strategicFitScore": 91,
+      "economicBenefit": "$8.000 USD para producción de la temporada 1 del Podcast de EA.",
+      "visibilityScore": 90,
+      "estimatedEffortHours": 20,
+      "recommendedAction": "Redactar propuesta de coproducción para activar la sección Podcast con audio real.",
+      "status": "en_preparacion",
+      "assignedAgentId": "ea-opp-03-grants",
+      "notes": "Excelente encaje con la infraestructura existente de PodcastSection.tsx.",
+      "daysRemaining": -159
+    },
+    "opp-convenio-fau-uce": {
+      "id": "opp-convenio-fau-uce",
+      "title": "Convenio de Divulgación de Tesis de Grado FAU-UCE",
+      "officialName": "Convenio Marco de Colaboración Académica para la Divulgación de Investigaciones Urbanas",
+      "organizer": "Facultad de Arquitectura y Urbanismo — Universidad Central del Ecuador",
+      "category": "alianza_institucional",
+      "country": "Ecuador (Quito)",
+      "officialUrl": "https://fau.uce.edu.ec",
+      "openingDate": "2026-01-10",
+      "closingDate": "2026-12-31",
+      "requirements": [
+        "Revisión por pares ciegos de investigaciones de grado y posgrado",
+        "Acreditación de autores y docentes tutores en las fichas de EA"
+      ],
+      "eaEligibility": "100% Compatible: Llena directamente la sección 'Academia' de EA.",
+      "cost": "Sin costo financiero; intercambio de valor intelectual",
+      "requiredDocs": [
+        "Borrador de convenio de cooperación interinstitucional",
+        "Protocolo editorial de adaptación de tesis a artículos breves"
+      ],
+      "verificationStatus": "verificada",
+      "lastCheckedDate": "2026-11-04",
+      "strategicFitScore": 94,
+      "economicBenefit": "Alimentación continua de la sección Academia y prestigio en la universidad pública más grande del país.",
+      "visibilityScore": 88,
+      "estimatedEffortHours": 15,
+      "recommendedAction": "Presentar borrador de carta de intención al Decanato de la FAU UCE.",
+      "status": "en_negociacion",
+      "assignedAgentId": "ea-opp-05-institutional",
+      "notes": "Resolverá el estado vacío actual de academia.json con tesis de alto nivel.",
+      "daysRemaining": 56
+    }
+  },
+  "sponsors": {
+    "sp-novacero": {
+      "id": "sp-novacero",
+      "companyName": "Novacero S.A.",
+      "sector": "Acero estructural, varilla microaleada & sostenibilidad",
+      "country": "Ecuador",
+      "website": "https://www.novacero.com",
+      "contactEmail": "comunicacion@novacero.com",
+      "contactPerson": "Gerencia de Mercadeo & Sostenibilidad",
+      "role": "Director de Comunicaciones",
+      "affinityScore": 92,
+      "possibleInterests": [
+        "Posicionar el acero reciclado en la arquitectura contemporánea ecuatoriana",
+        "Auspiciar investigaciones técnicas sobre resistencia sísmica en la cordillera andina",
+        "Publicidad segmentada a arquitectos y especificadores de obra"
+      ],
+      "recommendedPackageId": "pkg-cuaderno-tectonico",
+      "currentStage": "conversacion",
+      "interactionsLog": [
+        {
+          "id": "int-nov-01",
+          "date": "2026-10-18",
+          "type": "email",
+          "summary": "Envío de media kit inicial de Ecuadorian Architecture con métricas de audiencia especializada.",
+          "nextFollowUp": "2026-11-12"
+        }
+      ],
+      "customProposalSummary": "Serie de 3 artículos analíticos sobre estructura mixta acero-hormigón en Quito, con ficha técnica de material y banner de marca.",
+      "estimatedBudgetRange": "$4.500 — $7.000 USD / semestre"
+    },
+    "sp-holcim": {
+      "id": "sp-holcim",
+      "companyName": "Holcim Ecuador S.A.",
+      "sector": "Cemento, hormigón ECOPact & edificación sostenible",
+      "country": "Ecuador",
+      "website": "https://www.holcim.com.ec",
+      "contactEmail": "sostenibilidad.ecuador@holcim.com",
+      "contactPerson": "Coordinación de Relaciones Institucionales",
+      "role": "Líder de Asuntos Corporativos",
+      "affinityScore": 95,
+      "possibleInterests": [
+        "Difusión del hormigón de bajo impacto de carbono ECOPact",
+        "Vinculación con los Premios de la Fundación Holcim para la Construcción Sostenible",
+        "Patrocinio exclusivo de la sección Territorio"
+      ],
+      "recommendedPackageId": "pkg-alianza-anual",
+      "currentStage": "propuesta_enviada",
+      "interactionsLog": [
+        {
+          "id": "int-hol-01",
+          "date": "2026-10-25",
+          "type": "presentacion",
+          "summary": "Reunión virtual presentando el enfoque crítico de EA sobre descarbonización de la construcción andina.",
+          "nextFollowUp": "2026-11-15"
+        }
+      ],
+      "customProposalSummary": "Patrocinador institucional de la serie 'Materia & Descarbonización', con presencia en newsletter mensual y web.",
+      "estimatedBudgetRange": "$8.000 — $12.000 USD / anual"
+    },
+    "sp-cotopaxi": {
+      "id": "sp-cotopaxi",
+      "companyName": "Aglomerados Cotopaxi",
+      "sector": "Maderas técnicas, tableros MDF/MDP & certificación FSC",
+      "country": "Ecuador",
+      "website": "https://www.cotopaxi.com.ec",
+      "contactEmail": "especificaciones@cotopaxi.com.ec",
+      "contactPerson": "Equipo de Especificación y Diseño",
+      "role": "Jefe de Producto Arquitectura",
+      "affinityScore": 94,
+      "possibleInterests": [
+        "Promover la madera certificada en interiores y envolventes contemporáneas",
+        "Conectar con estudios jóvenes de arquitectura que exploran madera andina",
+        "Patrocinio de carruseles de Instagram sobre detalle constructivo"
+      ],
+      "recommendedPackageId": "pkg-newsletter-podcast",
+      "currentStage": "contacto_inicial",
+      "interactionsLog": [
+        {
+          "id": "int-cot-01",
+          "date": "2026-11-02",
+          "type": "email",
+          "summary": "Borrador de acercamiento preparado por el Sponsorship Manager.",
+          "nextFollowUp": "2026-11-10"
+        }
+      ],
+      "customProposalSummary": "Auspicio del carrusel mensual sobre 'Madera y Tectónica en el Ecuador' en Instagram.",
+      "estimatedBudgetRange": "$3.000 — $5.000 USD / semestre"
+    }
+  },
+  "packages": [
+    {
+      "id": "pkg-cuaderno-tectonico",
+      "name": "Cuaderno Tectónico & Investigación Material",
+      "tagline": "Divulgación especializada de sistemas constructivos y materiales de vanguardia",
+      "description": "Una serie editorial de 3 piezas monográficas donde se documenta la aplicación real del material en obras ecuatorianas destacadas, con ficha técnica, despiece axonométrico y planimetría.",
+      "deliverables": [
+        "3 Artículos de investigación material en la web con módulos interactivos",
+        "Mención de patrocinio técnico 'Con el apoyo de [Marca]'",
+        "3 Carruseles de 10 diapositivas para Instagram con dirección visual",
+        "Inclusión en el Newsletter Mensual de EA",
+        "Separación editorial estricta: la marca no interviene en el dictamen crítico de las obras"
+      ],
+      "estimatedMonthlyOrAnnualRange": "$4.500 — $7.500 USD por ciclo",
+      "isEditorialIndependent": true
+    },
+    {
+      "id": "pkg-newsletter-podcast",
+      "name": "Patrocinio de Medios (Newsletter Mensual & Podcast)",
+      "tagline": "Presencia de marca en los canales de reflexión y debate más escuchados",
+      "description": "Presencia destacada en el boletín editorial mensual enviado a arquitectos, académicos y estudiantes, junto con mención institucional de apertura en cada episodio del Podcast de EA.",
+      "deliverables": [
+        "Banner editorial y logotipo en el Newsletter mensual de EA (12 ediciones al año)",
+        "Mención institucional 'Este episodio es presentado gracias al compromiso de [Marca]'",
+        "Acceso al reporte de métricas y lecturas auditado por el Data Analyst de EA"
+      ],
+      "estimatedMonthlyOrAnnualRange": "$500 — $900 USD / mes",
+      "isEditorialIndependent": true
+    },
+    {
+      "id": "pkg-alianza-anual",
+      "name": "Alianza Institucional Anual de Desarrollo Cultural",
+      "tagline": "Socio estratégico de la memoria arquitectónica del Ecuador",
+      "description": "El paquete de mayor prestigio para marcas comprometidas con la educación, el patrimonio y la innovación en el hábitat.",
+      "deliverables": [
+        "Patrocinio institucional global de la plataforma Ecuadorian Architecture",
+        "Presencia en el pie de página institucional como 'Socio Protector'",
+        "Coorganización de 2 conversatorios o mesas redondas anuales con arquitectos destacados",
+        "Prioridad de pauta no intrusiva en el catálogo de proyectos",
+        "Auditoría ética semestral de independencia editorial"
+      ],
+      "estimatedMonthlyOrAnnualRange": "$12.000 — $18.000 USD anual",
+      "isEditorialIndependent": true
+    }
+  ],
+  "pitches": {
+    "pitch-novacero-2026": {
+      "id": "pitch-novacero-2026",
+      "opportunityOrSponsorId": "sp-novacero",
+      "targetName": "Novacero S.A.",
+      "title": "Propuesta de Divulgación: Cuaderno de Estructuras Mixtas & Sismicidad Andina",
+      "summary": "Una alianza editorial para visibilizar el comportamiento del acero reciclado en obras emblemáticas de Quito y Guayaquil, articulando rigor académico e impacto visual.",
+      "whyEaIsRelevant": "Ecuadorian Architecture es el medio de mayor rigor crítico y lectura especializada entre arquitectos proyectistas y calculistas del Ecuador.",
+      "whatWeOffer": [
+        "Edición de 2 artículos monográficos de proyectos con estructura de acero",
+        "2 Carruseles de 10 diapositivas en Instagram con axonometrías explicativas",
+        "Presencia en banner superior de la sección Proyectos durante 3 meses"
+      ],
+      "whatWeNeed": [
+        "Auspicio financiero de $4.800 USD para gastos de fotografía y redacción",
+        "Acceso a fichas técnicas de acero sismorresistente certificadas"
+      ],
+      "preliminaryBudget": "$4.800 USD (Neto facturable)",
+      "mutualBenefits": [
+        "Novacero: Posicionamiento como líder de acero sostenible frente a más de 30.000 arquitectos y estudiantes",
+        "EA: Financiamiento para documentar obras complejas en territorio nacional"
+      ],
+      "timeline": "3 meses de ejecución a partir de la firma de carta de auspicio",
+      "pitchDeckOutline": [
+        "1. Quiénes somos: El referente crítico de la arquitectura en el Ecuador",
+        "2. El dilema: La necesidad de difundir soluciones sismorresistentes honestas",
+        "3. El proyecto: Cuaderno de Estructuras Mixtas EA x Novacero",
+        "4. Entregables y alcance de audiencia",
+        "5. Presupuesto y cronograma"
+      ],
+      "draftEmailSubject": "Propuesta de colaboración editorial: Ecuadorian Architecture & Novacero // Serie Estructuras Andinas",
+      "draftEmailBody": "Estimado equipo de Sostenibilidad y Comunicaciones de Novacero:\n\nNos dirigimos a ustedes desde la Dirección General de Ecuadorian Architecture (EA), la plataforma independiente de investigación, difusión y crítica arquitectónica del país.\n\nHemos seguido con gran interés el compromiso de Novacero con el reciclaje de acero y las soluciones sismorresistentes certificadas para la geografía andina. En EA creemos que la mejor manera de poner en valor la excelencia constructiva es a través de una documentación rigurosa que dialogue directamente con los arquitectos proyectistas y constructores.\n\nPor ello, hemos preparado una propuesta de colaboración institucional para desarrollar la serie monográfica 'Estructuras Mixtas y Materia Sostenible en el Ecuador', que incluirá análisis técnico de obras, planimetría de detalle y difusión en nuestros canales editoriales.\n\nAdjuntamos el dossier ejecutivo y quedamos a su entera disposición para coordinar una reunión de 15 minutos en los próximos días.\n\nAtentamente,\n\nDirección de Oportunidades & Alianzas\nEcuadorian Architecture\nhttps://ecuadorianarch.com",
+      "createdAt": "2026-11-04T22:45:00.000Z",
+      "approvedByHuman": false
+    },
+    "pitch-1793832392705": {
+      "id": "pitch-1793832392705",
+      "opportunityOrSponsorId": "sp-novacero",
+      "targetName": "Novacero S.A.",
+      "title": "Dossier de Colaboración Editorial: Ecuadorian Architecture & Novacero S.A.",
+      "summary": "Alianza estratégica para visibilizar el pensamiento arquitectónico y la excelencia constructiva en el Ecuador, articulando rigor académico e impacto visual en más de 30.000 profesionales.",
+      "whyEaIsRelevant": "Ecuadorian Architecture (EA) es el referente intelectual e independiente de mayor rigor documental del país, con una comunidad de arquitectos proyectistas, investigadores y estudiantes sin igual.",
+      "whatWeOffer": [
+        "Edición y difusión de investigaciones de materiales y técnicas en la plataforma web",
+        "Carruseles editoriales de 10 diapositivas en Instagram con axonometrías y planimetría",
+        "Presencia institucional en el Newsletter Mensual de EA",
+        "Auditoría y separación estricta: garantía de prestigio e independencia ética"
+      ],
+      "whatWeNeed": [
+        "Auspicio comercial según paquete institucional ($4.500 — $7.000 USD / semestre)",
+        "Fichas técnicas y acceso a memorias autorizadas de proyectos"
+      ],
+      "preliminaryBudget": "$4.500 — $7.000 USD / semestre",
+      "mutualBenefits": [
+        "Novacero S.A.: Legitimación frente al gremio de arquitectos especificadores y creadores de opinión",
+        "EA: Sostenibilidad financiera para continuar investigando la arquitectura del territorio"
+      ],
+      "timeline": "3 meses de ejecución a partir de la firma de carta de entendimiento",
+      "pitchDeckOutline": [
+        "1. Manifiesto y Misión de Ecuadorian Architecture",
+        "2. El problema del hábitat contemporáneo en el Ecuador",
+        "3. Propuesta de valor compartida con Novacero S.A.",
+        "4. Entregables cuantificados y cronograma",
+        "5. Presupuesto desglosado y próximos pasos"
+      ],
+      "draftEmailSubject": "Propuesta de colaboración institucional: Ecuadorian Architecture // Alianza con Novacero S.A.",
+      "draftEmailBody": "Estimado/a representante de Novacero S.A.:\n\nDesde la Dirección de Oportunidades y Alianzas de Ecuadorian Architecture (EA), nos ponemos en contacto para presentarles una propuesta de colaboración institucional diseñada a medida para su sector (Acero estructural, varilla microaleada & sostenibilidad).\n\nEn EA documentamos e investigamos la producción arquitectónica del país con el más alto rigor crítico y editorial. Reconocemos en Novacero S.A. una trayectoria afín a la calidad constructiva y la innovación en el hábitat.\n\nHemos estructurado un dossier que detalla cómo podemos colaborar de forma mutuamente beneficiosa sin comprometer la independencia editorial de nuestros análisis.\n\nQuedamos a su disposición para coordinar una reunión breve en los próximos días.\n\nAtentamente,\n\nDirección de Oportunidades & Alianzas\nEcuadorian Architecture\nhttps://ecuadorianarch.com",
+      "createdAt": "2026-11-04T22:46:32.706Z",
+      "approvedByHuman": false
+    }
+  },
+  "alerts": [
+    {
+      "id": "alt-sp-sp-novacero",
+      "type": "sponsor_followup",
+      "title": "Seguimiento de auspicio: Novacero S.A.",
+      "summary": "Etapa actual: conversacion. Afinidad estratégica: 92/100.",
+      "recommendedAction": "Enviar recordatorio o agendar reunión para presentar el paquete \"pkg-cuaderno-tectonico\".",
+      "priority": "ALTA",
+      "targetId": "sp-novacero",
+      "createdAt": "2026-11-05T17:30:25.629Z"
+    },
+    {
+      "id": "alt-sp-sp-holcim",
+      "type": "sponsor_followup",
+      "title": "Seguimiento de auspicio: Holcim Ecuador S.A.",
+      "summary": "Etapa actual: propuesta enviada. Afinidad estratégica: 95/100.",
+      "recommendedAction": "Enviar recordatorio o agendar reunión para presentar el paquete \"pkg-alianza-anual\".",
+      "priority": "ALTA",
+      "targetId": "sp-holcim",
+      "createdAt": "2026-11-05T17:30:25.629Z"
+    },
+    {
+      "id": "alt-sp-sp-cotopaxi",
+      "type": "sponsor_followup",
+      "title": "Seguimiento de auspicio: Aglomerados Cotopaxi",
+      "summary": "Etapa actual: contacto inicial. Afinidad estratégica: 94/100.",
+      "recommendedAction": "Enviar recordatorio o agendar reunión para presentar el paquete \"pkg-newsletter-podcast\".",
+      "priority": "ALTA",
+      "targetId": "sp-cotopaxi",
+      "createdAt": "2026-11-05T17:30:25.629Z"
+    }
+  ],
+  "monthlyReports": [
+    {
+      "id": "rep-1793832392740",
+      "month": "Noviembre 2026",
+      "totalIdentified": 4,
+      "totalRecommended": 3,
+      "totalApplied": 1,
+      "grantsValuePotential": "$23.000 USD (Fondos no reembolsables IFCI y AECID)",
+      "activeSponsorNegotiations": 3,
+      "upcomingCriticalDeadlines": [
+        {
+          "title": "Ayudas a la Creación y Mediación Cultural CCEQ / AECID",
+          "closingDate": "2026-05-30",
+          "daysRemaining": -158
+        },
+        {
+          "title": "Fondo de Fomento a Revistas y Medios Culturales IFCI 2026",
+          "closingDate": "2026-06-15",
+          "daysRemaining": -142
+        },
+        {
+          "title": "BAQ 2026 — Concurso de Publicaciones de Arquitectura",
+          "closingDate": "2026-07-31",
+          "daysRemaining": -96
+        },
+        {
+          "title": "Convenio de Divulgación de Tesis de Grado FAU-UCE",
+          "closingDate": "2026-12-31",
+          "daysRemaining": 57
+        }
+      ],
+      "strategicRecommendations": [
+        "Priorizar la postulación al Fondo IFCI de Revistas Culturales para financiar las investigaciones de campo de 2026.",
+        "Avanzar en el convenio marco de divulgación con FAU-UCE y FADA-PUCE para nutrir continuamente la sección Academia.",
+        "Agendar presentaciones de pitch con Novacero y Holcim antes del cierre de presupuesto comercial anual."
+      ],
+      "preparedByAgent": "Opportunities Director",
+      "timestamp": "2026-11-04T22:46:32.740Z"
+    },
+    {
+      "id": "rep-nov-2026",
+      "month": "Noviembre 2026",
+      "totalIdentified": 4,
+      "totalRecommended": 3,
+      "totalApplied": 1,
+      "grantsValuePotential": "$23.000 USD (IFCI $15k + AECID $8k)",
+      "activeSponsorNegotiations": 3,
+      "upcomingCriticalDeadlines": [
+        {
+          "title": "CCEQ / AECID Ayudas Culturales",
+          "closingDate": "2026-05-30",
+          "daysRemaining": 207
+        },
+        {
+          "title": "Fondo Editorial IFCI 2026",
+          "closingDate": "2026-06-15",
+          "daysRemaining": 223
+        },
+        {
+          "title": "BAQ 2026 Publicaciones",
+          "closingDate": "2026-07-31",
+          "daysRemaining": 269
+        }
+      ],
+      "strategicRecommendations": [
+        "Priorizar la postulación al Fondo IFCI como principal fuente de financiamiento no reembolsable del primer semestre de 2026.",
+        "Formalizar el convenio marco con FAU-UCE para dotar de contenido verificado continuo a la sección Academia.",
+        "Cerrar la negociación con Novacero o Holcim antes del fin de año fiscal para asegurar pauta anual 2026."
+      ],
+      "preparedByAgent": "Opportunities Director",
+      "timestamp": "2026-11-04T22:45:00.000Z"
+    }
+  ],
+  "activityLog": [
+    {
+      "id": "act-opp-init",
+      "timestamp": "2026-11-04T22:45:00.000Z",
+      "agentId": "ea-opp-01-director",
+      "agentName": "Opportunities Director",
+      "action": "DEPARTAMENTO_CONSTITUIDO",
+      "details": "Constitución de EA Opportunities & Partnerships Office con 7 agentes y 4 oportunidades iniciales verificadas."
+    }
+  ]
+}

@@ -6,22 +6,28 @@
     "kicker": "ECUADORIAN ARCHITECTURE // COMUNIDAD",
     "title": "SUSCRÍBETE A NUESTRO NEWSLETTER",
     "subtitle": "Investigaciones, proyectos, procesos de obra y debates sobre la arquitectura ecuatoriana directamente en tu correo.",
-    "desktopAsset": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=85",
-    "mobileAsset": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=85",
-    "horizontalBannerAsset": "/images/banners/ea_newsletter_banner_728x90.svg",
+    "desktopAsset": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793818258059-PORTADA-02.webp",
+    "mobileAsset": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793818280761-Sin_t_tulo-1__Recuperado_-05.webp",
+    "horizontalBannerAsset": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793818271225-Sin_t_tulo-1__Recuperado_-04.webp",
     "destinationUrl": "#newsletter",
     "ctaText": "SUSCRÍBETE A NUESTRO NEWSLETTER",
     "startDate": "2026-01-01",
     "endDate": "2030-12-31",
     "status": "activa",
-    "placements": ["entre-proyectos", "skyscrapers-laterales", "dossier-editorial", "inter-galeria"],
+    "placements": [
+      "entre-proyectos",
+      "skyscrapers-laterales",
+      "dossier-editorial",
+      "inter-galeria"
+    ],
     "priority": 1,
     "budget": 0,
     "targetImpressions": 100000,
     "shareToken": "ea_newsletter_official_2026",
     "shareEnabled": true,
     "notes": "Campaña editorial oficial para suscripción al newsletter de Ecuadorian Architecture.",
-    "createdAt": "2026-01-01"
+    "createdAt": "2026-01-01",
+    "verticalBannerAsset": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793818264190-Sin_t_tulo-1__Recuperado_-03.webp"
   },
   {
     "id": "camp-flos-running-magnet",
@@ -38,7 +44,12 @@
     "startDate": "2026-01-01",
     "endDate": "2026-12-31",
     "status": "pausada",
-    "placements": ["entre-proyectos", "skyscrapers-laterales", "dossier-editorial", "inter-galeria"],
+    "placements": [
+      "entre-proyectos",
+      "skyscrapers-laterales",
+      "dossier-editorial",
+      "inter-galeria"
+    ],
     "priority": 10,
     "budget": 2400,
     "targetImpressions": 30000,
@@ -62,7 +73,11 @@
     "startDate": "2026-01-01",
     "endDate": "2026-12-31",
     "status": "pausada",
-    "placements": ["entre-proyectos", "skyscrapers-laterales", "inter-galeria"],
+    "placements": [
+      "entre-proyectos",
+      "skyscrapers-laterales",
+      "inter-galeria"
+    ],
     "priority": 9,
     "budget": 1800,
     "targetImpressions": 20000,
@@ -86,7 +101,11 @@
     "startDate": "2026-01-01",
     "endDate": "2026-12-31",
     "status": "pausada",
-    "placements": ["entre-proyectos", "dossier-editorial", "inter-galeria"],
+    "placements": [
+      "entre-proyectos",
+      "dossier-editorial",
+      "inter-galeria"
+    ],
     "priority": 8,
     "budget": 1500,
     "targetImpressions": 15000,
@@ -109,7 +128,9 @@
     "startDate": "2026-01-01",
     "endDate": "2026-12-31",
     "status": "pausada",
-    "placements": ["entre-proyectos"],
+    "placements": [
+      "entre-proyectos"
+    ],
     "priority": 7,
     "budget": 1200,
     "targetImpressions": 10000,

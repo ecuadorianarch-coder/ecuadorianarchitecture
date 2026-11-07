@@ -15,6 +15,8 @@ import {
   BookOpen,
   Users,
   MessageSquare,
+  Briefcase,
+  Activity,
 } from 'lucide-react';
 import { HomePage } from '../Home';
 import { Navbar } from '../../components/layout/Navbar';
@@ -25,9 +27,13 @@ import { AdminLogin } from './AdminLogin';
 import { authService } from '../../services/authService';
 import { EditorialDashboard } from './EditorialDashboard';
 import { VisualEditorialEditor } from './VisualEditorialEditor';
+import { EditorialOfficePanel } from './EditorialOfficePanel';
+import { OpportunitiesOfficePanel } from './OpportunitiesOfficePanel';
+import { VisualWorkspaceOffice } from './VisualWorkspaceOffice';
 import { NewArticleModal } from './NewArticleModal';
 import { MediaLibraryModal } from './MediaLibraryModal';
 import { CommunityModerationManager } from './CommunityModerationManager';
+import { AudienceManager } from './AudienceManager';
 import { useCommunityModeration } from '../../services/communityService';
 import { EditorialArticle } from '../../types/editorial';
 
@@ -54,7 +60,7 @@ export const AdminPage: React.FC<{ onClose?: () => void }> = ({ onClose }) => {
   const { pendingCount } = useCommunityModeration();
 
   // Active views and modals
-  const [activeTab, setActiveTab] = useState<'editorial' | 'advertising' | 'profiles' | 'community' | 'site-config'>('editorial');
+  const [activeTab, setActiveTab] = useState<'visual-office' | 'editorial-office' | 'opportunities' | 'editorial' | 'advertising' | 'profiles' | 'community' | 'site-config' | 'audience'>('visual-office');
   const [editingArticle, setEditingArticle] = useState<EditorialArticle | null>(() => {
     try {
       const activeId = sessionStorage.getItem('ea_editing_article_id');
@@ -146,6 +152,30 @@ export const AdminPage: React.FC<{ onClose?: () => void }> = ({ onClose }) => {
         {/* Tab switchers */}
         <div className="flex items-center gap-2 bg-black/40 p-1 rounded border border-white/10">
           <button
+            onClick={() => setActiveTab('visual-office')}
+            className={`flex items-center gap-2 px-3 py-1.5 text-xs font-anton tracking-wider transition-colors relative ${
+              activeTab === 'visual-office' ? 'bg-amber-400 text-black shadow-lg shadow-amber-400/20' : 'text-amber-300 hover:text-white'
+            }`}
+          >
+            <Sparkles className="w-3.5 h-3.5 text-amber-500 animate-pulse" /> OFICINA VIRTUAL (VIVA)
+          </button>
+          <button
+            onClick={() => setActiveTab('editorial-office')}
+            className={`flex items-center gap-2 px-3 py-1.5 text-xs font-anton tracking-wider transition-colors relative ${
+              activeTab === 'editorial-office' ? 'bg-white text-black' : 'text-white/60 hover:text-white'
+            }`}
+          >
+            <BookOpen className="w-3.5 h-3.5" /> CONSOLA EDITORIAL
+          </button>
+          <button
+            onClick={() => setActiveTab('opportunities')}
+            className={`flex items-center gap-2 px-3 py-1.5 text-xs font-anton tracking-wider transition-colors relative ${
+              activeTab === 'opportunities' ? 'bg-white text-black' : 'text-white/60 hover:text-white'
+            }`}
+          >
+            <Briefcase className="w-3.5 h-3.5" /> OPORTUNIDADES &amp; ALIANZAS
+          </button>
+          <button
             onClick={() => setActiveTab('editorial')}
             className={`flex items-center gap-2 px-3 py-1.5 text-xs font-anton tracking-wider transition-colors ${
               activeTab === 'editorial' ? 'bg-white text-black' : 'text-white/60 hover:text-white'
@@ -160,6 +190,14 @@ export const AdminPage: React.FC<{ onClose?: () => void }> = ({ onClose }) => {
             }`}
           >
             <Megaphone className="w-3.5 h-3.5" /> PUBLICIDAD
+          </button>
+          <button
+            onClick={() => setActiveTab('audience')}
+            className={`flex items-center gap-2 px-3 py-1.5 text-xs font-anton tracking-wider transition-colors relative ${
+              activeTab === 'audience' ? 'bg-emerald-400 text-black shadow-lg shadow-emerald-400/20' : 'text-emerald-400 hover:text-white'
+            }`}
+          >
+            <Activity className="w-3.5 h-3.5" /> AUDIENCIA &amp; LEADS
           </button>
           <button
             onClick={() => setActiveTab('profiles')}
@@ -224,6 +262,16 @@ export const AdminPage: React.FC<{ onClose?: () => void }> = ({ onClose }) => {
           </button>
 
           <a
+            href="http://localhost:4000/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 bg-ea-crimson text-white hover:bg-ea-crimson/90 px-3 py-2 text-xs font-anton tracking-wider uppercase transition-all shadow-sm"
+            title="Abrir Cuartel General Autónomo 2D en nueva pestaña (Puerto 4000)"
+          >
+            <Sparkles className="w-3.5 h-3.5" /> OFICINA VIRTUAL 2D
+          </a>
+
+          <a
             href="/"
             target="_blank"
             rel="noopener noreferrer"
@@ -253,6 +301,10 @@ export const AdminPage: React.FC<{ onClose?: () => void }> = ({ onClose }) => {
       </header>
 
       {/* Main Workspace based on active tab */}
+      {activeTab === 'visual-office' && <VisualWorkspaceOffice />}
+      {activeTab === 'editorial-office' && <EditorialOfficePanel />}
+      {activeTab === 'opportunities' && <OpportunitiesOfficePanel />}
+
       {activeTab === 'editorial' && (
         <EditorialDashboard
           articles={getAllEditorialArticles()}
@@ -267,6 +319,8 @@ export const AdminPage: React.FC<{ onClose?: () => void }> = ({ onClose }) => {
       )}
 
       {activeTab === 'advertising' && <AdvertisingManager />}
+
+      {activeTab === 'audience' && <AudienceManager />}
 
       {activeTab === 'profiles' && <ProfilesManager />}
 

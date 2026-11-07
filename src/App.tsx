@@ -14,6 +14,7 @@ import { AcercaDeEA } from './pages/AcercaDeEA';
 import { AdvertiserReport } from './pages/AdvertiserReport';
 import { AdvertiserPortal } from './pages/AdvertiserPortal';
 import { parseCurrentRoute, pushAppRoute, replaceAppRoute } from './utils/navigation';
+import { useVisitorTracking } from './hooks/useVisitorTracking';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -31,6 +32,9 @@ export const AppContent: React.FC = () => {
   const [targetTab, setTargetTab] = useState<'proyectos' | 'academia' | 'territorios' | 'acerca'>(
     initialRoute.targetTab || initialRoute.catalogSection || 'proyectos'
   );
+
+  // Live Visitor Analytics Tracker (First-party, privacy-first)
+  useVisitorTracking(currentView, catalogSection);
 
   // Cinematic project transition state
   const [transitionState, setTransitionState] = useState<{
