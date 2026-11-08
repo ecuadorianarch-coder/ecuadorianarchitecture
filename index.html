@@ -4,17 +4,24 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ecuadorian Architecture — Crítica + Difusión + Conversación</title>
-    <meta name="description" content="Una plataforma para descubrir, contextualizar y cuestionar arquitectura ecuatoriana mediante experiencias narrativas interactivas." />
+    <title>Arquitectura Ecuatoriana — Obras, Estudios y Crítica | Ecuadorian Architecture</title>
+    <meta name="description" content="La plataforma de referencia de la arquitectura ecuatoriana: archivo documental, proyectos contemporáneos, estudios de arquitectura en Ecuador, investigación y crítica editorial." />
+    <meta name="keywords" content="arquitectura ecuatoriana, arquitectos ecuatorianos, proyectos de arquitectura en ecuador, estudios de arquitectura ecuador, arquitectura quito, arquitectura cuenca, arquitectura guayaquil, diseño arquitectónico ecuador, casas ecuatorianas, crítica de arquitectura" />
+    <meta name="author" content="Ecuadorian Architecture" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <link rel="canonical" href="https://ecuadorianarch.com/" />
 
+    <!-- AI & LLM Discovery Manifests (AVO / GEO Standard) -->
+    <link rel="help" href="/llms.txt" title="Documentación Canónica para Agentes de IA y LLMs" />
+    <link rel="alternate" type="text/plain" href="/llms-full.txt" title="Contexto Completo de Arquitectura Ecuatoriana para Modelos de Lenguaje" />
+    <link rel="alternate" type="application/json" href="/api/catalog.json" title="Feed Estructurado de Proyectos Arquitectónicos para IA" />
+
     <!-- Open Graph / WhatsApp / Facebook / LinkedIn -->
     <meta property="og:site_name" content="Ecuadorian Architecture" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Ecuadorian Architecture — Crítica + Difusión + Conversación" />
-    <meta property="og:description" content="Una plataforma para descubrir, contextualizar y cuestionar arquitectura ecuatoriana mediante experiencias narrativas interactivas." />
+    <meta property="og:title" content="Arquitectura Ecuatoriana — Obras, Estudios y Crítica | Ecuadorian Architecture" />
+    <meta property="og:description" content="La plataforma de referencia de la arquitectura ecuatoriana: archivo documental, proyectos contemporáneos, estudios de arquitectura en Ecuador, investigación y crítica editorial." />
     <meta property="og:url" content="https://ecuadorianarch.com/" />
     <meta property="og:image" content="https://ecuadorianarch.com/og-image.jpg" />
     <meta property="og:image:width" content="1024" />
@@ -25,9 +32,64 @@
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@ecuadorianarch" />
-    <meta name="twitter:title" content="Ecuadorian Architecture — Crítica + Difusión + Conversación" />
-    <meta name="twitter:description" content="Una plataforma para descubrir, contextualizar y cuestionar arquitectura ecuatoriana mediante experiencias narrativas interactivas." />
+    <meta name="twitter:title" content="Arquitectura Ecuatoriana — Obras, Estudios y Crítica | Ecuadorian Architecture" />
+    <meta name="twitter:description" content="La plataforma de referencia de la arquitectura ecuatoriana: archivo documental, proyectos contemporáneos, estudios de arquitectura en Ecuador, investigación y crítica editorial." />
     <meta name="twitter:image" content="https://ecuadorianarch.com/og-image.jpg" />
+
+    <!-- Knowledge Graph & Semantic JSON-LD Schema (Google & AI Engines) -->
+    <script type="application/ld+json" id="ea-root-schema">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://ecuadorianarch.com/#website",
+          "url": "https://ecuadorianarch.com/",
+          "name": "Ecuadorian Architecture",
+          "alternateName": [
+            "Arquitectura Ecuatoriana",
+            "EA Arquitectura",
+            "Ecuadorian Architecture Platform"
+          ],
+          "description": "Plataforma líder y archivo documental de arquitectura ecuatoriana contemporánea, proyectos, estudios y crítica especializada.",
+          "inLanguage": "es-EC",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://ecuadorianarch.com/?q={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://ecuadorianarch.com/#organization",
+          "name": "Ecuadorian Architecture",
+          "alternateName": "Arquitectura Ecuatoriana",
+          "url": "https://ecuadorianarch.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://ecuadorianarch.com/logo.svg",
+            "width": 512,
+            "height": 512
+          },
+          "sameAs": [
+            "https://www.instagram.com/ecuadorianarch",
+            "https://es.wikipedia.org/wiki/Arquitectura_de_Ecuador"
+          ],
+          "knowsAbout": [
+            "Arquitectura de Ecuador",
+            "Arquitectura ecuatoriana contemporánea",
+            "Estudios de arquitectura en Ecuador",
+            "Diseño arquitectónico en Quito, Guayaquil y Cuenca",
+            "Construcción en tierra compactada, ladrillo y madera",
+            "Crítica arquitectónica"
+          ]
+        }
+      ]
+    }
+    </script>
 
     <!-- Google Fonts Optimization: DNS Prefetch & Preconnect (0 CLS / swap) -->
     <link rel="dns-prefetch" href="https://fonts.googleapis.com" />

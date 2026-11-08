@@ -1,6 +1,9 @@
-# robots.txt for Ecuadorian Architecture
+# robots.txt for Ecuadorian Architecture (https://ecuadorianarch.com)
 User-agent: *
 Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /api/catalog.json
 
 # Disallow private editorial and administration routes
 Disallow: /admin.html
@@ -13,5 +16,34 @@ Disallow: /*?token=*
 Disallow: /*?ad-report=*
 Disallow: /*?ad-advertiser=*
 
-# Canonical Sitemap
+# Explicit Permissions for AI Agents & Search Crawlers (AEO / GEO)
+User-agent: GPTBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /api/catalog.json
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+User-agent: PerplexityBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# Canonical Sitemaps & AI Manifests
 Sitemap: https://ecuadorianarch.com/sitemap.xml

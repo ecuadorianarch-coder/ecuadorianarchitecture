@@ -1,57 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://ecuadorianarch.com</loc>
-    <lastmod>2026-11-07</lastmod>
+    <lastmod>2026-11-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://ecuadorianarch.com/proyectos</loc>
-    <lastmod>2026-11-07</lastmod>
+    <lastmod>2026-11-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://ecuadorianarch.com/territorios</loc>
-    <lastmod>2026-11-07</lastmod>
+    <lastmod>2026-11-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://ecuadorianarch.com/academia</loc>
-    <lastmod>2026-11-07</lastmod>
+    <lastmod>2026-11-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://ecuadorianarch.com/acerca-de-ea</loc>
-    <lastmod>2026-11-07</lastmod>
+    <lastmod>2026-11-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ecuadorianarch.com/proyectos/pabellon-vigilia</loc>
-    <lastmod>2026-11-07</lastmod>
+    <lastmod>2026-11-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793891869770-R2_FINAL.webp</image:loc>
+      <image:title>VIGILIA - LAMS ARQUITECTOS - Arquitectura Ecuatoriana (QUITO)</image:title>
+      <image:caption>Luz y memoria en el espacio público: un umbral poroso en el Carmen Alto que nace desde la esperanza para dar voz colectiva frente a la violencia.</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://ecuadorianarch.com/proyectos/por-favor-pisar-las-jardineras</loc>
-    <lastmod>2026-11-07</lastmod>
+    <lastmod>2026-11-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831209682-2.webp</image:loc>
+      <image:title>POR FAVOR PISAR LAS JARDINERAS - ISAAC FLORES - Arquitectura Ecuatoriana (QUITO)</image:title>
+      <image:caption>Un acto crítico frente a los límites urbanos: una estructura ligera y sin programa fijo que invita a desaprender la plaza y habitarla libremente.</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://ecuadorianarch.com/proyectos/clima-en-construccion</loc>
-    <lastmod>2026-11-07</lastmod>
+    <lastmod>2026-11-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793826295352-Capa_31.webp</image:loc>
+      <image:title>CLIMA EN CONSTRUCCIÓN - NATURA FUTURA - Arquitectura Ecuatoriana (BOULEVARD 24 DE MAYO)</image:title>
+      <image:caption>El clima es cimiento del acto construido: una experiencia sensorial que regula temperatura y trasciende lo efímero para sembrar investigación futura.</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://ecuadorianarch.com/proyectos/espacio-para-hablar-con-dios</loc>
-    <lastmod>2026-11-07</lastmod>
+    <lastmod>2026-10-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ecuadorianarch.com/images/uploads/1793233204996-RENDER_1__3_.webp</image:loc>
+      <image:title>ESPACIO PARA HABLAR CON DIOS - NOMADE TALLER - Arquitectura Ecuatoriana (QUITO)</image:title>
+      <image:caption>El proyecto nace como una respuesta íntima de la comunidad de Rumipamba a su propia necesidad espiritual, un intento de reconectar con lo divino en un espacio que les ha sido negado. A través de un proceso de diseño participativo, en el que toda la comunidad fue protagonista, se concibió un espacio que no solo uniera a las personas con lo sagrado, sino que también revitalizara técnicas ancestrales, honrando la maestría local en un acto de revalorización cultural.</image:caption>
+    </image:image>
   </url>
 </urlset>

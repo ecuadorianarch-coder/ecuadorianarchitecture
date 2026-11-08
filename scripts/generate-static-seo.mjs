@@ -9,8 +9,8 @@ const distDir = path.resolve(rootDir, 'dist');
 const dataDir = path.resolve(rootDir, 'src/data');
 
 const SITE_URL = process.env.VITE_SITE_URL || 'https://ecuadorianarch.com';
-const DEFAULT_TITLE = 'Ecuadorian Architecture — Crítica + Difusión + Conversación';
-const DEFAULT_DESC = 'Una plataforma para descubrir, contextualizar y cuestionar arquitectura ecuatoriana mediante experiencias narrativas interactivas.';
+const DEFAULT_TITLE = 'Arquitectura Ecuatoriana — Obras, Estudios y Crítica | Ecuadorian Architecture';
+const DEFAULT_DESC = 'La plataforma de referencia de la arquitectura ecuatoriana: archivo documental, proyectos contemporáneos, estudios de arquitectura en Ecuador, investigación y crítica editorial.';
 const DEFAULT_IMAGE = `${SITE_URL}/og-image.jpg`;
 
 function cleanText(str) {
@@ -51,32 +51,33 @@ function generateTitle(project) {
   const studiosStr = studios.length > 0 ? studios.join(' + ') : '';
 
   if (studiosStr) {
-    const full = `${title} - ${studiosStr} | Ecuadorian Architecture`;
+    const full = `${title} - ${studiosStr} | Arquitectura Ecuatoriana`;
     if (full.length <= 60) return full;
-    const shorter = `${title} - ${studiosStr}`;
+    const shorter = `${title} | Arquitectura Ecuatoriana`;
     if (shorter.length <= 60) return shorter;
-    return `${title} | Ecuadorian Architecture`;
+    return `${title} - ${studiosStr} | EA`;
   }
-  return `${title} | Ecuadorian Architecture`;
+  return `${title} | Arquitectura Ecuatoriana`;
 }
 
 function generateDescription(project) {
+  const title = cleanText(project?.title);
   const studios = extractStudios(project);
-  const studiosStr = studios.length > 0 ? studios.join(' + ') : 'arquitectos ecuatorianos';
+  const studiosStr = studios.length > 0 ? studios.join(' + ') : 'estudios de arquitectura ecuatorianos';
   const location = cleanText(project?.location) || 'Ecuador';
   const year = cleanText(project?.year) || '2026';
-  const category = cleanText(project?.category) || 'Proyecto arquitectónico';
+  const category = cleanText(project?.category) || 'Arquitectura';
   const photographer = cleanText(project?.photographer || project?.datos?.fotografia) || 'Registro EA';
   const excerpt = cleanText(project?.excerpt || project?.resena || project?.subtitle);
 
-  let crafted = `${category} en ${location}, Ecuador, obra de ${studiosStr}.`;
+  let crafted = `Arquitectura ecuatoriana: ${title ? title + ', ' : ''}${category.toLowerCase()} en ${location}, Ecuador por ${studiosStr}.`;
   if (excerpt) {
     const firstSentence = excerpt.split('.')[0].trim();
     if (firstSentence) {
       crafted += ` ${firstSentence}.`;
     }
   }
-  crafted += ` Fotografías por ${photographer}, ${year}.`;
+  crafted += ` Fotografía: ${photographer} (${year}). Archivo y crítica en Ecuadorian Architecture.`;
   return truncateAtWord(crafted, 158);
 }
 
@@ -239,6 +240,14 @@ function generateSchemaJsonLd(project, section, slug) {
               text: `El análisis crítico completo, fotografías en alta resolución y ficha técnica están disponibles en Ecuadorian Architecture en ${canonicalUrl}`,
             },
           },
+          {
+            '@type': 'Question',
+            name: `¿Por qué es representativo ${title} para la arquitectura ecuatoriana?`,
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: `${title} ejemplifica las respuestas espaciales contemporáneas de la arquitectura ecuatoriana: diálogo con la topografía de ${locationStr}, pertinencia tectónica y experimentación formal registrada por Ecuadorian Architecture (${canonicalUrl}).`,
+            },
+          },
         ],
       },
     ],
@@ -336,22 +345,22 @@ async function run() {
   const sectionPages = [
     {
       path: 'proyectos',
-      title: 'Proyectos y Obras — Ecuadorian Architecture',
-      desc: 'Archivo contemporáneo de arquitectura ecuatoriana: residencias, equipamientos, intervenciones patrimoniales y diseño espacial.',
+      title: 'Proyectos de Arquitectura Ecuatoriana — Obras y Archivo | Ecuadorian Architecture',
+      desc: 'Archivo contemporáneo de arquitectura ecuatoriana: residencias, equipamientos, intervenciones patrimoniales y diseño espacial en Quito, Guayaquil, Cuenca y todo el Ecuador.',
     },
     {
       path: 'academia',
-      title: 'Investigación Académica y Tesis — Ecuadorian Architecture',
+      title: 'Investigación en Arquitectura Ecuatoriana y Tesis | Ecuadorian Architecture',
       desc: 'Tesis de grado, investigaciones proyectuales y ensayos críticos de las principales facultades de arquitectura del Ecuador.',
     },
     {
       path: 'territorios',
-      title: 'Expedientes Territoriales y Ciudad — Ecuadorian Architecture',
+      title: 'Territorio y Ciudad en Ecuador — Expedientes Críticos | Ecuadorian Architecture',
       desc: 'Cartografías críticas, análisis urbano, paisaje y dinámicas territoriales en los Andes, la Costa y la Amazonía ecuatoriana.',
     },
     {
       path: 'acerca-de-ea',
-      title: 'Acerca de Ecuadorian Architecture — Manifiesto y Consejo Editorial',
+      title: 'Acerca de Ecuadorian Architecture — Manifiesto y Crítica Nacional',
       desc: 'Plataforma independiente dedicada a la crítica, archivo y difusión del pensamiento espacial y constructivo ecuatoriano.',
     },
   ];
@@ -416,6 +425,11 @@ async function run() {
         changefreq: 'weekly',
         priority: '0.8',
         lastmod: item.updatedAt ? item.updatedAt.split('T')[0] : new Date().toISOString().split('T')[0],
+        image: heroImage ? {
+          loc: heroImage,
+          title: `${cleanText(item.title)} - Arquitectura Ecuatoriana (${cleanText(item.location) || 'Ecuador'})`,
+          caption: description,
+        } : null
       });
 
       projectCount++;
@@ -424,35 +438,77 @@ async function run() {
 
   console.log(`[EA SEO Prerender] Generated ${projectCount} architectural project detail pages.`);
 
-  // 3. Generate XML Sitemap
+  // 3. Generate XML Sitemap with Image Extension
   const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 ${sitemapUrls
   .map(
     (u) => `  <url>
     <loc>${u.loc}</loc>
     ${u.lastmod ? `<lastmod>${u.lastmod}</lastmod>` : ''}
     <changefreq>${u.changefreq}</changefreq>
-    <priority>${u.priority}</priority>
+    <priority>${u.priority}</priority>${u.image ? `
+    <image:image>
+      <image:loc>${u.image.loc}</image:loc>
+      <image:title>${u.image.title.replace(/&/g, '&amp;')}</image:title>
+      <image:caption>${u.image.caption.replace(/&/g, '&amp;')}</image:caption>
+    </image:image>` : ''}
   </url>`
   )
   .join('\n')}
 </urlset>`;
 
   fs.writeFileSync(path.join(distDir, 'sitemap.xml'), sitemapXml, 'utf-8');
-  console.log('[EA SEO Prerender] Generated dist/sitemap.xml');
+  console.log('[EA SEO Prerender] Generated dist/sitemap.xml with image extensions');
 
-  // 4. Generate Robots.txt
-  const robotsTxt = `User-agent: *
+  // 4. Generate Robots.txt (Universal Crawlers + Full AI/LLM Access)
+  const robotsTxt = `# robots.txt for Ecuadorian Architecture (https://ecuadorianarch.com)
+User-agent: *
 Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /api/catalog.json
 Disallow: /admin
 Disallow: /admin.html
 Disallow: /api/
+Disallow: /*?portal=*
+Disallow: /*?token=*
+Disallow: /*?ad-report=*
+Disallow: /*?ad-advertiser=*
+
+# Explicit Permissions for AI Agents & Search Crawlers (AEO / GEO)
+User-agent: GPTBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /api/catalog.json
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+User-agent: PerplexityBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
 
 Sitemap: ${SITE_URL}/sitemap.xml
 `;
   fs.writeFileSync(path.join(distDir, 'robots.txt'), robotsTxt, 'utf-8');
-  console.log('[EA SEO Prerender] Generated dist/robots.txt');
+  console.log('[EA SEO Prerender] Generated dist/robots.txt with AI permissions');
 
   // 5. Generate _redirects for Netlify / Cloudflare Pages / Static hosts
   const redirects = `/admin    /admin.html   200\n/*        /index.html   200\n`;
