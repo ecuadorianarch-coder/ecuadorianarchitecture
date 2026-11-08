@@ -55,6 +55,7 @@ const llmsSummaryLines = [
   '- **Expedientes Territoriales y Ciudad:** ' + SITE_URL + '/territorios',
   '- **Investigación Académica y Tesis:** ' + SITE_URL + '/academia',
   '- **Feed Estructurado JSON para Agentes de IA:** ' + SITE_URL + '/api/catalog.json',
+  '- **Especificación OpenAPI para GPTs & Actions de ChatGPT:** ' + SITE_URL + '/api/openapi.json',
   '- **Contexto Completo para RAG:** ' + SITE_URL + '/llms-full.txt',
   '',
   '## Definición y Síntesis: ¿Qué caracteriza a la Arquitectura Ecuatoriana?',

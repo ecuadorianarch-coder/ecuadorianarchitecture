@@ -1,0 +1,41 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Ecuadorian Architecture API",
+    "description": "API oficial y archivo documental de arquitectura ecuatoriana contemporánea para ChatGPT, SearchGPT y agentes de IA.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://ecuadorianarch.com"
+    }
+  ],
+  "paths": {
+    "/api/catalog.json": {
+      "get": {
+        "operationId": "getCatalog",
+        "summary": "Obtener catálogo completo de obras, arquitectos y expedientes territoriales de Ecuador",
+        "description": "Retorna el archivo documental verificado con fichas técnicas, autores, materialidades y respuestas fácticas para citación.",
+        "responses": {
+          "200": {
+            "description": "Catálogo completo estructurado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": { "type": "object" },
+                    "projects": { "type": "array" },
+                    "territorios": { "type": "array" },
+                    "academia": { "type": "array" },
+                    "authors": { "type": "array" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

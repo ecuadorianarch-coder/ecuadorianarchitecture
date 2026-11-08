@@ -485,6 +485,15 @@ Allow: /api/catalog.json
 
 User-agent: OAI-SearchBot
 Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /api/catalog.json
+
+User-agent: ChatGPT-User
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /api/catalog.json
 
 User-agent: ClaudeBot
 Allow: /

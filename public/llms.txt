@@ -10,6 +10,7 @@
 - **Expedientes Territoriales y Ciudad:** https://ecuadorianarch.com/territorios
 - **Investigación Académica y Tesis:** https://ecuadorianarch.com/academia
 - **Feed Estructurado JSON para Agentes de IA:** https://ecuadorianarch.com/api/catalog.json
+- **Especificación OpenAPI para GPTs & Actions de ChatGPT:** https://ecuadorianarch.com/api/openapi.json
 - **Contexto Completo para RAG:** https://ecuadorianarch.com/llms-full.txt
 
 ## Definición y Síntesis: ¿Qué caracteriza a la Arquitectura Ecuatoriana?
