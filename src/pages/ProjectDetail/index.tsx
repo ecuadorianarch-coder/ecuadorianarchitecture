@@ -3,7 +3,7 @@ import { useContent } from '../../context/ContentContext';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowLeft, Share2, Compass, CheckCircle2, MoveDown, Calendar, MapPin, Users, Sliders, ChevronRight, ChevronLeft, ChevronDown } from 'lucide-react';
+import { ArrowLeft, Share2, Compass, CheckCircle2, MoveDown, Calendar, MapPin, Users, Sliders, ChevronRight, ChevronLeft, ChevronDown, Menu, X } from 'lucide-react';
 import { ImageCarouselLightbox, extractAllProjectImages } from '../../components/editorial/ImageCarouselLightbox';
 
 // Figma official SVG logos & doodles
@@ -395,14 +395,34 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
   // State for current motion variant (can be auto-assigned or manually previewed)
   const [motionVariant, setMotionVariant] = useState<MotionVariant>(() => getProjectDefaultVariant(project));
 
+  // Adaptive mobile hamburger navigation state
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+  const mobileNavRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
     setMotionVariant(getProjectDefaultVariant(project));
+    setIsMobileNavOpen(false);
     const currentAvailable = getAvailableModules(project);
     if (!currentAvailable.some((m) => m.id === activeTab)) {
       setActiveTab(currentAvailable[0]?.id || 'resena');
     }
   }, [projectId]);
+
+  useEffect(() => {
+    if (!isMobileNavOpen) return;
+    const handleClickOutside = (e: MouseEvent | TouchEvent) => {
+      if (mobileNavRef.current && !mobileNavRef.current.contains(e.target as Node)) {
+        setIsMobileNavOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
+  }, [isMobileNavOpen]);
 
   useEffect(() => {
     if (controlledActiveTab) {
@@ -896,9 +916,9 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
                 }
               }
             `}</style>
-            <header className="flex items-center justify-between gap-3 sm:gap-6 pb-2 sm:pb-3 border-b border-ea-black/10 mb-2">
+            <header className="flex items-center justify-between gap-2.5 sm:gap-6 pb-2 sm:pb-3 border-b border-ea-black/10 mb-2 relative">
               {/* Left: Brand Logo + Section Breadcrumb Back Button */}
-              <div className="flex items-center gap-2.5 sm:gap-4 shrink min-w-0">
+              <div className="flex items-center gap-2 sm:gap-3 shrink min-w-0">
                 <button
                   onClick={() => {
                     if (onNavigate) onNavigate('home');
@@ -915,17 +935,17 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
                   />
                 </button>
 
-                <span className="text-ea-black/25 font-mono text-xs">/</span>
+                <span className="text-ea-black/25 font-mono text-xs shrink-0">/</span>
 
                 <button
                   type="button"
                   onClick={onBack}
-                  className="inline-flex items-center gap-1.5 sm:gap-2 group cursor-pointer focus:outline-none py-1 px-2 rounded-sm hover:bg-ea-black/5 transition-colors shrink-0"
+                  className="inline-flex items-center gap-1.5 sm:gap-2 group cursor-pointer focus:outline-none py-1 px-1.5 sm:px-2 rounded-sm hover:bg-ea-black/5 transition-colors shrink-0"
                   title={`Volver a ${projectSection}`}
                   data-cursor
                 >
-                  <ArrowLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-ea-black group-hover:-translate-x-1 transition-transform" />
-                  <span className="font-anton text-xs sm:text-sm uppercase tracking-wider text-ea-black">
+                  <ArrowLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-ea-black group-hover:-translate-x-1 transition-transform shrink-0" />
+                  <span className="font-anton text-xs sm:text-sm uppercase tracking-wider text-ea-black whitespace-nowrap">
                     {projectSection.toUpperCase()}
                   </span>
                   <span className="text-[10px] font-mono text-ea-black/40 tracking-widest uppercase hidden lg:inline">
@@ -934,8 +954,8 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
                 </button>
               </div>
 
-              {/* Right: Section Links - Clean horizontal architectural links */}
-              <nav aria-label="Secciones de la plataforma" className="flex items-center gap-3.5 sm:gap-6 md:gap-7 shrink-0">
+              {/* Right Desktop: Section Links - Clean horizontal architectural links (hidden on mobile to prevent overlapping) */}
+              <nav aria-label="Secciones de la plataforma" className="hidden md:flex items-center gap-3.5 sm:gap-6 md:gap-7 shrink-0">
                 <button
                   onClick={() => onNavigate && onNavigate('territorios')}
                   className={`font-anton text-xs sm:text-[13px] tracking-[0.15em] uppercase transition-colors relative py-1 ${
@@ -987,15 +1007,171 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
                 <button
                   type="button"
                   onClick={handleShare}
-                  className="inline-flex items-center gap-1.5 px-2 sm:px-2.5 py-1 border border-ea-black/30 hover:border-ea-black text-ea-black hover:bg-ea-black hover:text-white transition-all rounded-[2px] font-anton text-[11px] sm:text-xs uppercase tracking-wider shrink-0 cursor-pointer active:scale-95 touch-manipulation ml-0.5"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 border border-ea-black/30 hover:border-ea-black text-ea-black hover:bg-ea-black hover:text-white transition-all rounded-[2px] font-anton text-xs uppercase tracking-wider shrink-0 cursor-pointer active:scale-95 touch-manipulation ml-0.5"
                   title="Compartir este expediente"
                   aria-label="Compartir este expediente"
                   data-cursor
                 >
                   <Share2 className="w-3.5 h-3.5" />
-                  <span className="hidden md:inline">COMPARTIR</span>
+                  <span className="hidden lg:inline">COMPARTIR</span>
                 </button>
               </nav>
+
+              {/* Right Mobile Actions: Compact Share + Adaptive Hamburger Menu (< md) */}
+              <div className="flex md:hidden items-center gap-1.5 shrink-0">
+                <button
+                  type="button"
+                  onClick={handleShare}
+                  className="w-8 h-8 flex items-center justify-center border border-ea-black/30 hover:border-ea-black text-ea-black hover:bg-ea-black hover:text-white transition-all rounded-[2px] cursor-pointer active:scale-95 touch-manipulation"
+                  title="Compartir este expediente"
+                  aria-label="Compartir este expediente"
+                  data-cursor
+                >
+                  <Share2 className="w-4 h-4" />
+                </button>
+
+                <button
+                  type="button"
+                  id="mobile-nav-toggle"
+                  onClick={() => setIsMobileNavOpen(!isMobileNavOpen)}
+                  className={`w-8 h-8 flex items-center justify-center border rounded-[2px] transition-all cursor-pointer active:scale-95 touch-manipulation ${
+                    isMobileNavOpen
+                      ? 'bg-ea-black text-white border-ea-black shadow-[1px_1px_0px_rgba(0,0,0,0.5)]'
+                      : 'bg-[#FAF8F5] text-ea-black border-ea-black/30 hover:border-ea-black'
+                  }`}
+                  title={isMobileNavOpen ? 'Cerrar menú' : 'Abrir menú de secciones'}
+                  aria-label={isMobileNavOpen ? 'Cerrar menú' : 'Abrir menú de secciones'}
+                  aria-expanded={isMobileNavOpen}
+                  data-cursor
+                >
+                  {isMobileNavOpen ? (
+                    <X className="w-4 h-4 stroke-[2.2]" />
+                  ) : (
+                    <Menu className="w-4 h-4 stroke-[2.2]" />
+                  )}
+                </button>
+              </div>
+
+              {/* Adaptive Mobile Navigation Dropdown Drawer */}
+              {isMobileNavOpen && (
+                <div
+                  ref={mobileNavRef}
+                  className="md:hidden absolute top-[calc(100%+6px)] left-0 right-0 z-50 bg-[#FAF8F5]/98 backdrop-blur-xl border-2 border-ea-black rounded-[3px] shadow-[0_16px_36px_rgba(0,0,0,0.35),3px_3px_0px_#000000] p-3.5 sm:p-4 animate-in fade-in slide-in-from-top-2 duration-150"
+                >
+                  <div className="flex items-center justify-between pb-2 mb-2.5 border-b border-ea-black/15">
+                    <span className="font-mono text-[10px] uppercase font-bold tracking-[0.2em] text-ea-black/60">
+                      SECCIONES DE LA PLATAFORMA
+                    </span>
+                    <span className="font-mono text-[9px] text-ea-black/40">
+                      EA / NAVEGACIÓN
+                    </span>
+                  </div>
+
+                  <nav className="flex flex-col gap-1.5">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsMobileNavOpen(false);
+                        onNavigate ? onNavigate('home') : (window.location.hash = '');
+                      }}
+                      className="min-h-[42px] flex items-center justify-between px-3 py-2 rounded-[2px] border border-ea-black/20 hover:border-ea-black bg-white hover:bg-ea-black hover:text-white transition-all text-left font-anton text-xs uppercase tracking-wider text-ea-black group cursor-pointer active:scale-[0.99]"
+                    >
+                      <span>01. INICIO (PORTADA)</span>
+                      <span className="font-mono text-[10px] text-ea-black/40 group-hover:text-white">↗</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsMobileNavOpen(false);
+                        onNavigate ? onNavigate('proyectos') : (window.location.hash = '#proyectos');
+                      }}
+                      className={`min-h-[42px] flex items-center justify-between px-3 py-2 rounded-[2px] border transition-all text-left font-anton text-xs uppercase tracking-wider cursor-pointer active:scale-[0.99] ${
+                        projectSection === 'proyectos'
+                          ? 'bg-ea-black text-white border-ea-black shadow-[2px_2px_0px_rgba(0,0,0,0.3)]'
+                          : 'border-ea-black/20 hover:border-ea-black bg-white text-ea-black hover:bg-ea-black hover:text-white'
+                      }`}
+                    >
+                      <span>02. PROYECTOS (ARCHIVO)</span>
+                      {projectSection === 'proyectos' ? (
+                        <span className="text-[9px] font-mono bg-white text-ea-black px-1.5 py-0.5 rounded-[1px] font-bold">ACTIVO</span>
+                      ) : (
+                        <span className="font-mono text-[10px] text-ea-black/40">↗</span>
+                      )}
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsMobileNavOpen(false);
+                        onNavigate ? onNavigate('academia') : (window.location.hash = '#academia');
+                      }}
+                      className={`min-h-[42px] flex items-center justify-between px-3 py-2 rounded-[2px] border transition-all text-left font-anton text-xs uppercase tracking-wider cursor-pointer active:scale-[0.99] ${
+                        projectSection === 'academia'
+                          ? 'bg-ea-black text-white border-ea-black shadow-[2px_2px_0px_rgba(0,0,0,0.3)]'
+                          : 'border-ea-black/20 hover:border-ea-black bg-white text-ea-black hover:bg-ea-black hover:text-white'
+                      }`}
+                    >
+                      <span>03. ACADEMIA (INVESTIGACIÓN)</span>
+                      {projectSection === 'academia' ? (
+                        <span className="text-[9px] font-mono bg-white text-ea-black px-1.5 py-0.5 rounded-[1px] font-bold">ACTIVO</span>
+                      ) : (
+                        <span className="font-mono text-[10px] text-ea-black/40">↗</span>
+                      )}
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsMobileNavOpen(false);
+                        onNavigate ? onNavigate('territorios') : (window.location.hash = '#territorios');
+                      }}
+                      className={`min-h-[42px] flex items-center justify-between px-3 py-2 rounded-[2px] border transition-all text-left font-anton text-xs uppercase tracking-wider cursor-pointer active:scale-[0.99] ${
+                        projectSection === 'territorios'
+                          ? 'bg-ea-black text-white border-ea-black shadow-[2px_2px_0px_rgba(0,0,0,0.3)]'
+                          : 'border-ea-black/20 hover:border-ea-black bg-white text-ea-black hover:bg-ea-black hover:text-white'
+                      }`}
+                    >
+                      <span>04. TERRITORIOS (EXPEDIENTES)</span>
+                      {projectSection === 'territorios' ? (
+                        <span className="text-[9px] font-mono bg-white text-ea-black px-1.5 py-0.5 rounded-[1px] font-bold">ACTIVO</span>
+                      ) : (
+                        <span className="font-mono text-[10px] text-ea-black/40">↗</span>
+                      )}
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsMobileNavOpen(false);
+                        onNavigate ? onNavigate('acerca') : (window.location.hash = '#acerca');
+                      }}
+                      className="min-h-[42px] flex items-center justify-between px-3 py-2 rounded-[2px] border border-ea-black/20 hover:border-ea-black bg-white hover:bg-ea-black hover:text-white transition-all text-left font-anton text-xs uppercase tracking-wider text-ea-black group cursor-pointer active:scale-[0.99]"
+                    >
+                      <span>05. ACERCA DE EA (MANIFIESTO)</span>
+                      <span className="font-mono text-[10px] text-ea-black/40 group-hover:text-white">↗</span>
+                    </button>
+                  </nav>
+
+                  <div className="mt-3 pt-2.5 border-t border-dashed border-ea-black/20 flex items-center justify-between">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsMobileNavOpen(false);
+                        handleShare();
+                      }}
+                      className="inline-flex items-center gap-1.5 text-xs font-anton uppercase tracking-wider text-ea-black hover:underline cursor-pointer"
+                    >
+                      <Share2 className="w-3.5 h-3.5" />
+                      <span>Compartir expediente</span>
+                    </button>
+
+                    <span className="font-mono text-[9px] text-ea-black/40">
+                      ECUADORIAN ARCHITECTURE
+                    </span>
+                  </div>
+                </div>
+              )}
             </header>
 
             {/* Pill Capsule Wrapper with smooth scroll, mouse drag & indicators */}
