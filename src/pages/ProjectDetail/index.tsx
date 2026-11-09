@@ -3,7 +3,7 @@ import { useContent } from '../../context/ContentContext';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowLeft, Share2, Compass, CheckCircle2, MoveDown, Calendar, MapPin, Users, Sliders, ChevronRight, ChevronLeft } from 'lucide-react';
+import { ArrowLeft, Share2, Compass, CheckCircle2, MoveDown, Calendar, MapPin, Users, Sliders, ChevronRight, ChevronLeft, ChevronDown } from 'lucide-react';
 import { ImageCarouselLightbox, extractAllProjectImages } from '../../components/editorial/ImageCarouselLightbox';
 
 // Figma official SVG logos & doodles
@@ -496,6 +496,21 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
     }
   };
 
+  const handleScrollToExplore = () => {
+    const el =
+      document.getElementById('dossier') ||
+      document.getElementById('folder-tabs-anchor') ||
+      document.getElementById('dossier-heading');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.scrollTo({
+        top: window.innerHeight * 4.25,
+        behavior: 'smooth',
+      });
+    }
+  };
+
   // Computed Focal Point / Object Position for Hero Photograph
   const heroObjectPosition = useMemo(() => {
     if (project.heroImagePosition && typeof project.heroImagePosition === 'string' && project.heroImagePosition.trim()) {
@@ -549,7 +564,13 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
         tl.to(initialEditorialRef.current, { y: -45, opacity: 0, scale: 0.95, duration: 0.14, ease: 'power1.inOut' }, 0);
       }
       if (scrollPromptRef.current) {
-        tl.to(scrollPromptRef.current, { opacity: 0, duration: 0.08, ease: 'power1.out' }, 0);
+        // Guía sutil al visitante móvil & desktop a lo largo de la secuencia inicial del hero
+        tl.fromTo(
+          scrollPromptRef.current,
+          { opacity: 1, y: 0, pointerEvents: 'auto' },
+          { opacity: 0, y: 16, pointerEvents: 'none', duration: 0.08, ease: 'power2.in' },
+          0.72
+        );
       }
 
       // Hero image expands with nuance depending on variant
@@ -796,7 +817,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
       <section ref={trackRef} className="relative w-full h-[420vh]">
         <div
           ref={stageRef}
-          className="sticky top-0 w-full h-screen overflow-hidden bg-white"
+          className="sticky top-0 w-full h-screen h-[100dvh] overflow-hidden bg-white"
         >
           {/* --------------------------------------------------------------------- */}
           {/* A. TOP BAR: Exact Figma Header & Pill Bar (media_1791919174953_b2b8f1f9.png) */}
@@ -807,6 +828,10 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
           >
             <style>{`
               /* Architectural Hero & Header Geometry: Balanced proportions, zero cropping */
+              .hero-scroll-cue {
+                transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.2s ease, opacity 0.3s ease;
+                touch-action: manipulation;
+              }
               .hero-photo-card {
                 top: 57.5%;
                 height: 56vh;
@@ -1351,12 +1376,18 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
             </div>
           </div>
 
+          {/* Subtle Mobile & Desktop Scroll Cue: Desliza hacia abajo para explorar */}
           <div
             ref={scrollPromptRef}
-            className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 text-ea-black/45 text-[11px] font-mono uppercase tracking-widest pointer-events-none"
+            onClick={handleScrollToExplore}
+            className="hero-scroll-cue absolute bottom-[calc(1.15rem+env(safe-area-inset-bottom,0px))] sm:bottom-6 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2 sm:gap-2.5 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-full bg-ea-black/85 hover:bg-black text-white backdrop-blur-md border border-white/25 shadow-[0_4px_24px_rgba(0,0,0,0.55)] cursor-pointer select-none hover:scale-105 active:scale-95 group pointer-events-auto"
+            title="Desliza o haz clic para explorar el expediente"
+            data-cursor
           >
-            <MoveDown className="w-3.5 h-3.5 animate-bounce" />
-            <span>DESPLAZA HACIA ABAJO PARA EXPLORAR</span>
+            <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-white/95 font-medium whitespace-nowrap">
+              DESLIZA HACIA ABAJO PARA EXPLORAR
+            </span>
+            <ChevronDown className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white animate-bounce group-hover:translate-y-0.5 transition-transform shrink-0" />
           </div>
 
           {/* --------------------------------------------------------------------- */}
