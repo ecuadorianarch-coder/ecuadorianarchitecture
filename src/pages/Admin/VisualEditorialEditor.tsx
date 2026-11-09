@@ -53,6 +53,7 @@ import {
   Crosshair,
   ZoomIn,
   RotateCcw,
+  BookOpen,
 } from 'lucide-react';
 import { ProfileSearchSelect } from '../../components/common/ProfileSearchSelect';
 import { ConstructionTeamMember } from '../../data/constructionTeams';
@@ -207,6 +208,7 @@ const MODULE_CATALOG: { type: EditorialModuleType; title: string; desc: string; 
   { type: 'map-location', title: 'Mapa y Ubicación', desc: 'Datos territoriales y geográficos', icon: MapPin },
   { type: 'credits', title: 'Bloque de Créditos', desc: 'Créditos completos de arquitectura y colaboradores', icon: Building2 },
   { type: 'external-links', title: 'Enlaces Externos', desc: 'Web del estudio, recursos y publicaciones', icon: ExternalLink },
+  { type: 'references', title: 'Referencias y Bibliografía', desc: 'Notas al pie, fuentes consultadas y citas en tipografía reducida', icon: BookOpen },
   { type: 'separator', title: 'Separador Editorial', desc: 'Línea de transición visual entre bloques', icon: ArrowUpDown },
 ];
 
@@ -609,8 +611,18 @@ export const VisualEditorialEditor: React.FC<VisualEditorialEditorProps> = ({
     const newModule: EditorialModuleItem = {
       id: `mod-${type}-${Date.now()}`,
       type,
-      title: type === 'title-subtitle' ? (isCrit ? 'ANÁLISIS DE IMPACTO' : 'NUEVA SECCIÓN') : undefined,
-      content: type === 'rich-text' ? 'Escribe aquí el contenido analítico de este bloque...' : undefined,
+      title:
+        type === 'title-subtitle'
+          ? (isCrit ? 'ANÁLISIS DE IMPACTO' : 'NUEVA SECCIÓN')
+          : type === 'references'
+          ? 'REFERENCIAS & BIBLIOGRAFÍA'
+          : undefined,
+      content:
+        type === 'rich-text'
+          ? 'Escribe aquí el contenido analítico de este bloque...'
+          : type === 'references'
+          ? '[1] Autor (Año). Título del libro o investigación. Editorial.\n[2] Fuente o enlace consultado para este expediente.'
+          : undefined,
       imageUrl: type === 'single-image' || type === 'fullscreen-image' ? article.heroImage : undefined,
       quoteText: type === 'blockquote' ? 'La arquitectura no es una forma, sino una respuesta a la geografía.' : undefined,
       quoteAuthor: type === 'blockquote' ? (isCrit ? (article.critic || 'Crítico') : (article.studio || 'Autor')) : undefined,
@@ -1078,7 +1090,8 @@ export const VisualEditorialEditor: React.FC<VisualEditorialEditorProps> = ({
               mod.type === 'podcast' ||
               mod.type === 'technical-specs' ||
               mod.type === 'materials-list' ||
-              mod.type === 'credits') && (
+              mod.type === 'credits' ||
+              mod.type === 'references') && (
               <div>
                 <label className="block text-[10px] font-mono uppercase tracking-widest text-white/50 mb-1">
                   Título del Módulo
@@ -1713,6 +1726,32 @@ export const VisualEditorialEditor: React.FC<VisualEditorialEditorProps> = ({
                     placeholder="42 min"
                     className="w-full bg-[#282828] border border-white/15 p-1.5 text-white"
                   />
+                </div>
+              </div>
+            )}
+
+            {/* References module */}
+            {mod.type === 'references' && (
+              <div className="space-y-3">
+                <div>
+                  <div className="flex items-center justify-between mb-1">
+                    <label className="block text-[10px] font-mono uppercase tracking-widest text-white/50">
+                      Referencias y Fuentes Bibliográficas (Una por renglón) *
+                    </label>
+                    <span className="text-[10px] font-mono text-emerald-400">
+                      Tipografía compacta al final
+                    </span>
+                  </div>
+                  <textarea
+                    rows={5}
+                    value={mod.content || ''}
+                    onChange={(e) => updateModule(mod.id, { content: e.target.value }, isCritica)}
+                    placeholder={`[1] Gehl, Jan (2010). Ciudades para la gente. Editorial Reverté.\n[2] Jacobs, Jane (1961). Muerte y vida de las grandes ciudades americanas.\n[3] BID (2024). Movilidad activa y espacio público en Ecuador.`}
+                    className="w-full bg-[#282828] border border-white/15 p-2.5 text-white font-mono text-xs leading-relaxed focus:outline-none focus:border-white"
+                  />
+                  <p className="text-[10px] font-mono text-white/40 mt-1">
+                    💡 Cada línea se formateará automáticamente con numeración [1], [2] y estilo de texto reducido en el pie del escrito.
+                  </p>
                 </div>
               </div>
             )}
@@ -3375,8 +3414,33 @@ export const VisualEditorialEditor: React.FC<VisualEditorialEditorProps> = ({
                           </div>
                         </div>
 
+                        <div>
+                          <label className="block text-[11px] font-mono uppercase tracking-wider text-white/70 mb-1">
+                            Referencias & Fuentes Bibliográficas (Opcional - Una por renglón)
+                          </label>
+                          <textarea
+                            rows={3}
+                            value={
+                              typeof article.references === 'string'
+                                ? article.references
+                                : Array.isArray(article.references)
+                                ? article.references.join('\n')
+                                : ''
+                            }
+                            onChange={(e) => {
+                              updateField('references', e.target.value);
+                              updateField('referencias', e.target.value);
+                            }}
+                            placeholder={`[1] Jan Gehl (2010). Ciudades para la gente.\n[2] Jane Jacobs (1961). Muerte y vida de las grandes ciudades.`}
+                            className="w-full bg-[#242424] border border-white/20 p-2 text-xs text-white font-mono leading-relaxed focus:border-white focus:outline-none"
+                          />
+                          <p className="text-[10px] text-white/40 mt-1">
+                            Aparecerán automáticamente con tipografía compacta al final del escrito de ciudad.
+                          </p>
+                        </div>
+
                         <div className="p-2.5 bg-[#141414] border border-dashed border-white/15 text-[11px] font-mono text-white/60">
-                          ℹ️ <strong className="text-white">Territorios:</strong> Se omiten automáticamente los campos de fotógrafo, superficie construida y visitas de obra, adaptando la ficha a variables territoriales.
+                          ℹ️ <strong className="text-white">Territorios:</strong> Se omiten automáticamente los campos de fotógrafo, superficie construida y visitas de obra, adaptando la ficha a escritos y reflexiones de ciudad.
                         </div>
                       </div>
                     ) : article.type === 'academia' ? (

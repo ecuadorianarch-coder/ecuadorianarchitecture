@@ -9,6 +9,7 @@ import {
   FileText,
   CheckCircle2,
   Maximize2,
+  BookOpen,
 } from 'lucide-react';
 import {
   ImageCarouselLightbox,
@@ -38,6 +39,34 @@ export const extractStudiosList = (project: any, fallbackStudio?: string): strin
     if (list.length > 0) return list;
   }
   return [raw.trim()];
+};
+
+/**
+ * Helper to identify if a project or article is from the "Territorios" section (escritos de ciudad/territorial).
+ * Territorios articles are urban reflections, city essays, or territorial dossiers.
+ * They MUST NOT display building construction factsheets (área construida, estudio de arquitectura, etc.).
+ */
+export const isTerritoriosProject = (project: any): boolean => {
+  if (!project) return false;
+  if (project.type === 'territorios' || project.section === 'territorios') return true;
+  const cat = String(project.category || '').toLowerCase();
+  if (
+    cat.includes('territorio') ||
+    cat.includes('ciudad') ||
+    cat.includes('urbano') ||
+    cat.includes('reflexion') ||
+    cat.includes('expediente territorial')
+  ) {
+    return true;
+  }
+  if (typeof window !== 'undefined') {
+    const pathname = window.location.pathname.toLowerCase();
+    const hash = window.location.hash.toLowerCase();
+    if (pathname.includes('/territorios') || hash.includes('territorios')) {
+      return true;
+    }
+  }
+  return false;
 };
 
 interface DynamicModulesRendererProps {
@@ -84,6 +113,7 @@ export const DynamicModulesRenderer: React.FC<DynamicModulesRendererProps> = ({
       {modules.map((mod) => {
         switch (mod.type) {
           case 'hero-header': {
+            const isTerritorios = isTerritoriosProject(project);
             const studios = extractStudiosList(project, mod.credits);
             const hasMultiple = studios.length > 1;
             const writtenBy = 
@@ -91,7 +121,7 @@ export const DynamicModulesRenderer: React.FC<DynamicModulesRendererProps> = ({
               project.escritoPor || 
               project.author || 
               project.authorName || 
-              (studios.length > 0 ? studios[0] : 'Redacción EA');
+              (studios.length > 0 ? studios[0] : isTerritorios ? 'Equipo Territorial EA' : 'Redacción EA');
             const editedBy = 
               project.editadoPor || 
               project.editor || 
@@ -114,58 +144,71 @@ export const DynamicModulesRenderer: React.FC<DynamicModulesRendererProps> = ({
                     {mod.content}
                   </p>
                 )}
-                {/* Ficha Técnica Editorial / Project Factsheet (Una sola línea continua con expansión vertical fluida) */}
-                <div className="w-full">
-                  <dl className="w-full my-2.5 sm:my-3 py-2 sm:py-2.5 border-y border-ea-black/15 grid grid-cols-[minmax(0,1.4fr)_minmax(0,1.05fr)_minmax(0,0.85fr)_minmax(0,0.7fr)] gap-x-1.5 sm:gap-x-4 text-left select-none items-start">
-                    <div className="min-w-0 pr-1.5 sm:pr-3 flex flex-col justify-start">
-                      <dt className="font-mono text-[8px] sm:text-[9px] uppercase tracking-widest text-neutral-400">
-                        {hasMultiple ? `ESTUDIOS (${studios.length})` : 'ESTUDIO'}
-                      </dt>
-                      <dd className="font-okcok text-[10.5px] sm:text-[13px] uppercase text-ea-black font-semibold mt-0.5 leading-snug break-words">
-                        {hasMultiple ? (
-                          <span className="flex flex-col gap-0.5">
-                            {studios.map((s, idx) => (
-                              <span key={idx} className="block leading-tight">
-                                {s}
-                                {idx < studios.length - 1 && (
-                                  <span className="text-ea-black/35 font-normal ml-1">+</span>
-                                )}
-                              </span>
-                            ))}
-                          </span>
-                        ) : (
-                          studios[0] || mod.credits || project.studio || 'ESTUDIO NO ESPECIFICADO'
-                        )}
-                      </dd>
-                    </div>
-                    <div className="min-w-0 pl-1.5 sm:pl-3.5 border-l border-ea-black/10 flex flex-col justify-start">
-                      <dt className="font-mono text-[8px] sm:text-[9px] uppercase tracking-widest text-neutral-400">LUGAR</dt>
-                      <dd className="font-okcok text-[10.5px] sm:text-[13px] uppercase text-ea-black font-semibold mt-0.5 leading-snug break-words">
-                        {project.location || 'ECUADOR'}
-                      </dd>
-                    </div>
-                    <div className="min-w-0 pl-1.5 sm:pl-3.5 border-l border-ea-black/10 flex flex-col justify-start">
-                      <dt className="font-mono text-[8px] sm:text-[9px] uppercase tracking-widest text-neutral-400">ÁREA</dt>
-                      <dd className="font-okcok text-[10.5px] sm:text-[13px] uppercase text-ea-black font-semibold mt-0.5 leading-snug whitespace-nowrap">
-                        {project.datos?.superficie || '3.850 M²'}
-                      </dd>
-                    </div>
-                    <div className="min-w-0 pl-1.5 sm:pl-3.5 border-l border-ea-black/10 flex flex-col justify-start">
-                      <dt className="font-mono text-[8px] sm:text-[9px] uppercase tracking-widest text-neutral-400">AÑO</dt>
-                      <dd className="font-okcok text-[10.5px] sm:text-[13px] uppercase text-ea-black font-semibold mt-0.5 leading-snug whitespace-nowrap">
-                        {project.year || '2024'}
-                      </dd>
-                    </div>
-                  </dl>
-                </div>
+
+                {/* En Territorios (escritos de ciudad), NO se muestra la barra de área/estudio/año porque son reflexiones urbanas, no proyectos construidos */}
+                {!isTerritorios && (
+                  <div className="w-full">
+                    <dl className="w-full my-2.5 sm:my-3 py-2 sm:py-2.5 border-y border-ea-black/15 grid grid-cols-[minmax(0,1.4fr)_minmax(0,1.05fr)_minmax(0,0.85fr)_minmax(0,0.7fr)] gap-x-1.5 sm:gap-x-4 text-left select-none items-start">
+                      <div className="min-w-0 pr-1.5 sm:pr-3 flex flex-col justify-start">
+                        <dt className="font-mono text-[8px] sm:text-[9px] uppercase tracking-widest text-neutral-400">
+                          {hasMultiple ? `ESTUDIOS (${studios.length})` : 'ESTUDIO'}
+                        </dt>
+                        <dd className="font-okcok text-[10.5px] sm:text-[13px] uppercase text-ea-black font-semibold mt-0.5 leading-snug break-words">
+                          {hasMultiple ? (
+                            <span className="flex flex-col gap-0.5">
+                              {studios.map((s, idx) => (
+                                <span key={idx} className="block leading-tight">
+                                  {s}
+                                  {idx < studios.length - 1 && (
+                                    <span className="text-ea-black/35 font-normal ml-1">+</span>
+                                  )}
+                                </span>
+                              ))}
+                            </span>
+                          ) : (
+                            studios[0] || mod.credits || project.studio || 'ESTUDIO NO ESPECIFICADO'
+                          )}
+                        </dd>
+                      </div>
+                      <div className="min-w-0 pl-1.5 sm:pl-3.5 border-l border-ea-black/10 flex flex-col justify-start">
+                        <dt className="font-mono text-[8px] sm:text-[9px] uppercase tracking-widest text-neutral-400">LUGAR</dt>
+                        <dd className="font-okcok text-[10.5px] sm:text-[13px] uppercase text-ea-black font-semibold mt-0.5 leading-snug break-words">
+                          {project.location || 'ECUADOR'}
+                        </dd>
+                      </div>
+                      <div className="min-w-0 pl-1.5 sm:pl-3.5 border-l border-ea-black/10 flex flex-col justify-start">
+                        <dt className="font-mono text-[8px] sm:text-[9px] uppercase tracking-widest text-neutral-400">ÁREA</dt>
+                        <dd className="font-okcok text-[10.5px] sm:text-[13px] uppercase text-ea-black font-semibold mt-0.5 leading-snug whitespace-nowrap">
+                          {project.datos?.superficie || project.superficie || project.area || 'S/D'}
+                        </dd>
+                      </div>
+                      <div className="min-w-0 pl-1.5 sm:pl-3.5 border-l border-ea-black/10 flex flex-col justify-start">
+                        <dt className="font-mono text-[8px] sm:text-[9px] uppercase tracking-widest text-neutral-400">AÑO</dt>
+                        <dd className="font-okcok text-[10.5px] sm:text-[13px] uppercase text-ea-black font-semibold mt-0.5 leading-snug whitespace-nowrap">
+                          {project.year || '2024'}
+                        </dd>
+                      </div>
+                    </dl>
+                  </div>
+                )}
 
                 {/* Créditos Editoriales / Byline */}
-                <div className="pt-1 pb-0.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] sm:text-[11.5px] font-mono uppercase text-ea-black/70 select-none">
+                <div
+                  className={`flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] sm:text-[11.5px] font-mono uppercase text-ea-black/70 select-none ${
+                    isTerritorios ? 'pt-2.5 mt-2.5 border-t border-ea-black/15' : 'pt-1 pb-0.5'
+                  }`}
+                >
                   <span className="text-neutral-400">ESCRITO POR:</span>
                   <span className="font-semibold text-ea-black font-okcok tracking-tight">{writtenBy}</span>
                   <span className="text-neutral-300 mx-1">,</span>
                   <span className="text-neutral-400">EDITADO POR:</span>
                   <span className="font-semibold text-ea-black font-okcok tracking-tight">{editedBy}</span>
+                  {isTerritorios && project.year && (
+                    <>
+                      <span className="text-neutral-300 mx-1">•</span>
+                      <span className="font-semibold text-ea-black/60 font-mono">{project.year}</span>
+                    </>
+                  )}
                 </div>
               </div>
             );
@@ -616,6 +659,97 @@ export const DynamicModulesRenderer: React.FC<DynamicModulesRendererProps> = ({
               </div>
             );
 
+          case 'references':
+          case 'footnotes': {
+            const rawContent = (mod.content || '').trim();
+            const hasDataList = Boolean(mod.dataList && mod.dataList.length > 0);
+            const hasLinks = Boolean(mod.externalLinks && mod.externalLinks.length > 0);
+
+            if (!rawContent && !hasDataList && !hasLinks) return null;
+
+            const lines = rawContent
+              ? rawContent
+                  .split('\n')
+                  .map((l) => l.trim())
+                  .filter(Boolean)
+              : [];
+
+            return (
+              <aside
+                key={mod.id}
+                aria-label="Referencias y Bibliografía"
+                className="mt-10 sm:mt-12 pt-6 sm:pt-7 border-t border-ea-black/20 space-y-3.5 select-text"
+              >
+                <div className="flex items-center gap-2.5 pb-1">
+                  <BookOpen className="w-3.5 h-3.5 text-neutral-500 shrink-0" />
+                  <span className="font-mono text-[9.5px] sm:text-[10.5px] uppercase font-bold tracking-[0.2em] text-neutral-500">
+                    {mod.title || 'REFERENCIAS & BIBLIOGRAFÍA'}
+                  </span>
+                  <span className="h-px flex-1 bg-ea-black/15" />
+                </div>
+
+                {lines.length > 0 && (
+                  <ol className="space-y-2 font-mono text-[11px] sm:text-[11.5px] text-neutral-600 leading-relaxed list-none pl-0">
+                    {lines.map((line, idx) => {
+                      const match = line.match(/^(\[\d+\]|\d+\.|\([0-9]+\))\s*(.*)$/);
+                      const prefix = match ? match[1] : `[${idx + 1}]`;
+                      const text = match ? match[2] : line;
+
+                      return (
+                        <li
+                          key={idx}
+                          className="flex items-start gap-2.5 pl-3 border-l-2 border-neutral-300 hover:border-ea-black transition-colors"
+                        >
+                          <span className="font-bold text-neutral-400 select-none text-[10px] sm:text-[10.5px] pt-0.5 shrink-0">
+                            {prefix}
+                          </span>
+                          <span className="flex-1 break-words leading-relaxed text-ea-black/85">
+                            {text}
+                          </span>
+                        </li>
+                      );
+                    })}
+                  </ol>
+                )}
+
+                {hasDataList && (
+                  <ul className="space-y-2 font-mono text-[11px] sm:text-[11.5px] text-neutral-600 leading-relaxed list-none pl-0">
+                    {mod.dataList!.map((item, idx) => (
+                      <li
+                        key={idx}
+                        className="flex items-start gap-2.5 pl-3 border-l-2 border-neutral-300 hover:border-ea-black transition-colors"
+                      >
+                        <span className="font-bold text-neutral-400 select-none text-[10px] sm:text-[10.5px] pt-0.5 shrink-0">
+                          {item.key ? item.key : `[${idx + 1}]`}
+                        </span>
+                        <span className="flex-1 break-words leading-relaxed text-ea-black/85">
+                          {item.value}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+
+                {hasLinks && (
+                  <div className="pt-2 flex flex-wrap gap-2">
+                    {mod.externalLinks!.map((link, idx) => (
+                      <a
+                        key={idx}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-neutral-100 hover:bg-ea-black hover:text-white text-neutral-700 text-[10.5px] font-mono uppercase border border-neutral-300 transition-colors"
+                      >
+                        <ExternalLink className="w-3 h-3" />
+                        <span>{link.label}</span>
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </aside>
+            );
+          }
+
           case 'separator':
             return (
               <hr key={mod.id} className="my-8 border-t-2 border-ea-black/30 border-dashed" />
@@ -625,6 +759,57 @@ export const DynamicModulesRenderer: React.FC<DynamicModulesRendererProps> = ({
             return null;
         }
       })}
+
+      {/* Auto-renderizado de referencias a nivel de proyecto si no se añadió un módulo explícito */}
+      {(() => {
+        const hasModuleRef = modules.some((m) => m.type === 'references' || m.type === 'footnotes');
+        const projectRefs = project?.references || project?.referencias;
+        if (hasModuleRef || !projectRefs) return null;
+
+        const lines: string[] = Array.isArray(projectRefs)
+          ? projectRefs.map((r: any) => (typeof r === 'string' ? r : r.title || r.text || '')).filter(Boolean)
+          : typeof projectRefs === 'string'
+          ? projectRefs.split('\n').map((l: string) => l.trim()).filter(Boolean)
+          : [];
+
+        if (lines.length === 0) return null;
+
+        return (
+          <aside
+            aria-label="Referencias y Bibliografía"
+            className="mt-10 sm:mt-12 pt-6 sm:pt-7 border-t border-ea-black/20 space-y-3.5 select-text"
+          >
+            <div className="flex items-center gap-2.5 pb-1">
+              <BookOpen className="w-3.5 h-3.5 text-neutral-500 shrink-0" />
+              <span className="font-mono text-[9.5px] sm:text-[10.5px] uppercase font-bold tracking-[0.2em] text-neutral-500">
+                REFERENCIAS & BIBLIOGRAFÍA
+              </span>
+              <span className="h-px flex-1 bg-ea-black/15" />
+            </div>
+            <ol className="space-y-2 font-mono text-[11px] sm:text-[11.5px] text-neutral-600 leading-relaxed list-none pl-0">
+              {lines.map((line, idx) => {
+                const match = line.match(/^(\[\d+\]|\d+\.|\([0-9]+\))\s*(.*)$/);
+                const prefix = match ? match[1] : `[${idx + 1}]`;
+                const text = match ? match[2] : line;
+
+                return (
+                  <li
+                    key={idx}
+                    className="flex items-start gap-2.5 pl-3 border-l-2 border-neutral-300 hover:border-ea-black transition-colors"
+                  >
+                    <span className="font-bold text-neutral-400 select-none text-[10px] sm:text-[10.5px] pt-0.5 shrink-0">
+                      {prefix}
+                    </span>
+                    <span className="flex-1 break-words leading-relaxed text-ea-black/85">
+                      {text}
+                    </span>
+                  </li>
+                );
+              })}
+            </ol>
+          </aside>
+        );
+      })()}
 
       {/* Interactive Fullscreen Image Carousel Lightbox */}
       <ImageCarouselLightbox

@@ -24,7 +24,7 @@ import academiaJson from '../../data/academia.json';
 import territoriosJson from '../../data/territorios.json';
 import { AuthenticFolderContainer } from './AuthenticFolderContainer';
 import { getAvailableModules } from './projectModules';
-import { extractStudiosList } from '../../components/editorial/DynamicModulesRenderer';
+import { extractStudiosList, isTerritoriosProject } from '../../components/editorial/DynamicModulesRenderer';
 import { StickySponsorWings } from '../../components/advertising/StickySponsorWings';
 import { InFeedProjectAdCard } from '../../components/advertising/InFeedProjectAdCard';
 import { PanoramicFolderCard } from '../../components/projects/PanoramicFolderCard';
@@ -143,14 +143,16 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
   const projectSection: 'proyectos' | 'academia' | 'territorios' = useMemo(() => {
     if (
       project?.type === 'academia' ||
+      project?.section === 'academia' ||
       project?.category === 'INVESTIGACIÓN ACADÉMICA' ||
-      (academia || []).some((a: any) => a.id === project?.id || a.slug === project?.slug)
+      /academia|investigaci|tesis|universidad/i.test(project?.category || '') ||
+      (academia || []).some((a: any) => a.id === project?.id || a.slug === project?.slug) ||
+      (typeof window !== 'undefined' && (window.location.pathname.includes('/academia') || window.location.hash.includes('academia')))
     ) {
       return 'academia';
     }
     if (
-      project?.type === 'territorios' ||
-      project?.category === 'EXPEDIENTE TERRITORIAL' ||
+      isTerritoriosProject(project) ||
       (territorios || []).some((t: any) => t.id === project?.id || t.slug === project?.slug)
     ) {
       return 'territorios';
@@ -236,7 +238,11 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
 
     // Independent collections: Territorios only shows Territorios, Academia only Academia, Proyectos only Proyectos
     for (const p of allProjects) {
-      const pType = (p as any).type || (p.category === 'EXPEDIENTE TERRITORIAL' ? 'territorios' : p.category === 'INVESTIGACIÓN ACADÉMICA' ? 'academia' : 'proyectos');
+      const pType = isTerritoriosProject(p)
+        ? 'territorios'
+        : (p as any).type === 'academia' || p.category === 'INVESTIGACIÓN ACADÉMICA'
+        ? 'academia'
+        : (p as any).type || 'proyectos';
       if (!seen.has(p.id) && pType === projectSection && (p.status === 'published' || !p.status)) {
         seen.add(p.id);
         list.push(p);

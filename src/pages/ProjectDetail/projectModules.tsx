@@ -1,9 +1,9 @@
 import React, { useState, useMemo } from 'react';
 import { PodcastSection } from './PodcastSection';
 import { CommunityFolderContent } from './CommunityFolderContent';
-import { DynamicModulesRenderer, extractStudiosList } from '../../components/editorial/DynamicModulesRenderer';
+import { DynamicModulesRenderer, extractStudiosList, isTerritoriosProject } from '../../components/editorial/DynamicModulesRenderer';
 import { ImageCarouselLightbox, extractAllProjectImages } from '../../components/editorial/ImageCarouselLightbox';
-import { Camera } from 'lucide-react';
+import { Camera, BookOpen } from 'lucide-react';
 import { EditorialEmptyState } from '../../components/common/EditorialEmptyState';
 
 export interface ProjectModuleContext {
@@ -41,7 +41,7 @@ const ResenaModuleContent: React.FC<ProjectModuleContext> = ({
   const studios = useMemo(() => extractStudiosList(project), [project]);
   const hasMultipleStudios = studios.length > 1;
 
-  const isTerritorios = project.type === 'territorios' || project.category === 'EXPEDIENTE TERRITORIAL';
+  const isTerritorios = isTerritoriosProject(project);
   const isAcademia = project.type === 'academia' || project.category === 'INVESTIGACIÓN ACADÉMICA';
 
   const writtenBy = 
@@ -95,189 +95,149 @@ const ResenaModuleContent: React.FC<ProjectModuleContext> = ({
           {project.title}
         </h3>
 
-        {/* Ficha Técnica Editorial / Project Factsheet (Totalmente responsiva, adaptada según sección) */}
-        <div className="w-full">
-          <dl className="w-full my-3 sm:my-4 py-2.5 sm:py-3 border-y border-ea-black/15 grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-5 gap-x-3 gap-y-2.5 text-left select-none items-start">
-            {isTerritorios ? (
-              <>
-                {/* 1. Colectivo / Equipo */}
-                <div className="min-w-0 pr-2 flex flex-col justify-start">
-                  <dt className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
-                    COLECTIVO
-                  </dt>
-                  <dd className="font-okcok text-[12px] sm:text-[13px] uppercase text-ea-black font-semibold mt-0.5 leading-snug break-words">
-                    {studios[0] || project.studio || 'COLECTIVO TERRITORIAL'}
-                  </dd>
-                </div>
+        {/* Ficha Técnica Editorial / Project Factsheet (Omitida en Territorios para escritos de ciudad) */}
+        {!isTerritorios && (
+          <div className="w-full">
+            <dl className="w-full my-3 sm:my-4 py-2.5 sm:py-3 border-y border-ea-black/15 grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-5 gap-x-3 gap-y-2.5 text-left select-none items-start">
+              {isAcademia ? (
+                <>
+                  {/* 1. Tesista / Autor */}
+                  <div className="min-w-0 pr-2 flex flex-col justify-start">
+                    <dt className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
+                      INVESTIGADOR
+                    </dt>
+                    <dd className="font-okcok text-[12px] sm:text-[13px] uppercase text-ea-black font-semibold mt-0.5 leading-snug break-words">
+                      {project.author || studios[0] || project.studio || 'TESISTA'}
+                    </dd>
+                  </div>
 
-                {/* 2. Territorio / Lugar */}
-                <div className="min-w-0 pl-2.5 border-l border-ea-black/10 flex flex-col justify-start">
-                  <dt className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
-                    TERRITORIO
-                  </dt>
-                  <dd className="font-okcok text-[12px] sm:text-[13px] uppercase text-ea-black font-semibold mt-0.5 leading-snug break-words">
-                    {project.location || project.region || 'ECUADOR'}
-                  </dd>
-                </div>
+                  {/* 2. Universidad */}
+                  <div className="min-w-0 pl-2.5 border-l border-ea-black/10 flex flex-col justify-start">
+                    <dt className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
+                      UNIVERSIDAD
+                    </dt>
+                    <dd className="font-okcok text-[12px] sm:text-[13px] uppercase text-ea-black font-semibold mt-0.5 leading-snug break-words">
+                      {project.universidad || project.institution || 'UNIVERSIDAD'}
+                    </dd>
+                  </div>
 
-                {/* 3. Escala */}
-                <div className="min-w-0 pl-2.5 border-l border-ea-black/10 flex flex-col justify-start">
-                  <dt className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
-                    ESCALA
-                  </dt>
-                  <dd className="font-okcok text-[12px] sm:text-[13px] uppercase text-ea-black font-semibold mt-0.5 leading-snug whitespace-nowrap">
-                    {project.region || project.datos?.superficie || 'TERRITORIAL'}
-                  </dd>
-                </div>
+                  {/* 3. Lugar / Sede */}
+                  <div className="min-w-0 pl-2.5 border-l border-ea-black/10 flex flex-col justify-start">
+                    <dt className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
+                      SEDE
+                    </dt>
+                    <dd className="font-okcok text-[12px] sm:text-[13px] uppercase text-ea-black font-semibold mt-0.5 leading-snug whitespace-nowrap">
+                      {project.location || 'ECUADOR'}
+                    </dd>
+                  </div>
 
-                {/* 4. Año */}
-                <div className="min-w-0 pl-2.5 sm:border-l border-ea-black/10 flex flex-col justify-start">
-                  <dt className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
-                    AÑO
-                  </dt>
-                  <dd className="font-okcok text-[12px] sm:text-[13px] uppercase text-ea-black font-semibold mt-0.5 leading-snug whitespace-nowrap">
-                    {project.year || '2024'}
-                  </dd>
-                </div>
+                  {/* 4. Año */}
+                  <div className="min-w-0 pl-2.5 sm:border-l border-ea-black/10 flex flex-col justify-start">
+                    <dt className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
+                      AÑO
+                    </dt>
+                    <dd className="font-okcok text-[12px] sm:text-[13px] uppercase text-ea-black font-semibold mt-0.5 leading-snug whitespace-nowrap">
+                      {project.year || '2024'}
+                    </dd>
+                  </div>
 
-                {/* 5. Problemática (en vez de fotografía) */}
-                <div className="min-w-0 pl-2.5 border-l border-ea-black/10 flex flex-col justify-start col-span-2 xs:col-span-1">
-                  <dt className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
-                    PROBLEMÁTICA
-                  </dt>
-                  <dd className="font-okcok text-[12px] sm:text-[13px] uppercase text-ea-black font-semibold mt-0.5 leading-snug break-words">
-                    {project.problematica || project.category || 'ANÁLISIS DEL TERRITORIO'}
-                  </dd>
-                </div>
-              </>
-            ) : isAcademia ? (
-              <>
-                {/* 1. Tesista / Autor */}
-                <div className="min-w-0 pr-2 flex flex-col justify-start">
-                  <dt className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
-                    INVESTIGADOR
-                  </dt>
-                  <dd className="font-okcok text-[12px] sm:text-[13px] uppercase text-ea-black font-semibold mt-0.5 leading-snug break-words">
-                    {project.author || studios[0] || project.studio || 'TESISTA'}
-                  </dd>
-                </div>
+                  {/* 5. Renders (Opcional) o Problemática */}
+                  <div className="min-w-0 pl-2.5 border-l border-ea-black/10 flex flex-col justify-start col-span-2 xs:col-span-1">
+                    <dt className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
+                      {Boolean(project.datos?.renders?.trim() || project.renders?.trim() || project.datos?.visualizacion?.trim()) ? 'RENDERS' : 'LÍNEA'}
+                    </dt>
+                    <dd className="font-okcok text-[12px] sm:text-[13px] uppercase text-ea-black font-semibold mt-0.5 leading-snug break-words">
+                      {project.datos?.renders || project.renders || project.datos?.visualizacion || project.problematica || 'TESIS DE GRADO'}
+                    </dd>
+                  </div>
+                </>
+              ) : (
+                <>
+                  {/* 1. Estudio(s) / Autoría */}
+                  <div className="min-w-0 pr-2 flex flex-col justify-start">
+                    <dt className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
+                      {hasMultipleStudios ? `ESTUDIOS (${studios.length})` : 'ESTUDIO'}
+                    </dt>
+                    <dd className="font-okcok text-[12px] sm:text-[13px] uppercase text-ea-black font-semibold mt-0.5 leading-snug break-words">
+                      {hasMultipleStudios ? (
+                        <span className="flex flex-col gap-0.5">
+                          {studios.map((s, idx) => (
+                            <span key={idx} className="block leading-tight">
+                              {s}
+                              {idx < studios.length - 1 && (
+                                <span className="text-ea-black/35 font-normal ml-1">+</span>
+                              )}
+                            </span>
+                          ))}
+                        </span>
+                      ) : (
+                        studios[0] || project.studio || 'ESTUDIO NO ESPECIFICADO'
+                      )}
+                    </dd>
+                  </div>
 
-                {/* 2. Universidad */}
-                <div className="min-w-0 pl-2.5 border-l border-ea-black/10 flex flex-col justify-start">
-                  <dt className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
-                    UNIVERSIDAD
-                  </dt>
-                  <dd className="font-okcok text-[12px] sm:text-[13px] uppercase text-ea-black font-semibold mt-0.5 leading-snug break-words">
-                    {project.universidad || project.institution || 'UNIVERSIDAD'}
-                  </dd>
-                </div>
+                  {/* 2. Ubicación / Lugar */}
+                  <div className="min-w-0 pl-2.5 border-l border-ea-black/10 flex flex-col justify-start">
+                    <dt className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
+                      LUGAR
+                    </dt>
+                    <dd className="font-okcok text-[12px] sm:text-[13px] uppercase text-ea-black font-semibold mt-0.5 leading-snug break-words">
+                      {project.location || 'ECUADOR'}
+                    </dd>
+                  </div>
 
-                {/* 3. Lugar / Sede */}
-                <div className="min-w-0 pl-2.5 border-l border-ea-black/10 flex flex-col justify-start">
-                  <dt className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
-                    SEDE
-                  </dt>
-                  <dd className="font-okcok text-[12px] sm:text-[13px] uppercase text-ea-black font-semibold mt-0.5 leading-snug whitespace-nowrap">
-                    {project.location || 'ECUADOR'}
-                  </dd>
-                </div>
+                  {/* 3. Área / Superficie */}
+                  <div className="min-w-0 pl-2.5 border-l border-ea-black/10 flex flex-col justify-start">
+                    <dt className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
+                      ÁREA
+                    </dt>
+                    <dd className="font-okcok text-[12px] sm:text-[13px] uppercase text-ea-black font-semibold mt-0.5 leading-snug whitespace-nowrap">
+                      {project.datos?.superficie || project.superficie || project.area || 'S/D'}
+                    </dd>
+                  </div>
 
-                {/* 4. Año */}
-                <div className="min-w-0 pl-2.5 sm:border-l border-ea-black/10 flex flex-col justify-start">
-                  <dt className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
-                    AÑO
-                  </dt>
-                  <dd className="font-okcok text-[12px] sm:text-[13px] uppercase text-ea-black font-semibold mt-0.5 leading-snug whitespace-nowrap">
-                    {project.year || '2024'}
-                  </dd>
-                </div>
+                  {/* 4. Año */}
+                  <div className="min-w-0 pl-2.5 sm:border-l border-ea-black/10 flex flex-col justify-start">
+                    <dt className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
+                      AÑO
+                    </dt>
+                    <dd className="font-okcok text-[12px] sm:text-[13px] uppercase text-ea-black font-semibold mt-0.5 leading-snug whitespace-nowrap">
+                      {project.year || '2024'}
+                    </dd>
+                  </div>
 
-                {/* 5. Renders (Opcional) o Problemática */}
-                <div className="min-w-0 pl-2.5 border-l border-ea-black/10 flex flex-col justify-start col-span-2 xs:col-span-1">
-                  <dt className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
-                    {Boolean(project.datos?.renders?.trim() || project.renders?.trim() || project.datos?.visualizacion?.trim()) ? 'RENDERS' : 'LÍNEA'}
-                  </dt>
-                  <dd className="font-okcok text-[12px] sm:text-[13px] uppercase text-ea-black font-semibold mt-0.5 leading-snug break-words">
-                    {project.datos?.renders || project.renders || project.datos?.visualizacion || project.problematica || 'TESIS DE GRADO'}
-                  </dd>
-                </div>
-              </>
-            ) : (
-              <>
-                {/* 1. Estudio(s) / Autoría */}
-                <div className="min-w-0 pr-2 flex flex-col justify-start">
-                  <dt className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
-                    {hasMultipleStudios ? `ESTUDIOS (${studios.length})` : 'ESTUDIO'}
-                  </dt>
-                  <dd className="font-okcok text-[12px] sm:text-[13px] uppercase text-ea-black font-semibold mt-0.5 leading-snug break-words">
-                    {hasMultipleStudios ? (
-                      <span className="flex flex-col gap-0.5">
-                        {studios.map((s, idx) => (
-                          <span key={idx} className="block leading-tight">
-                            {s}
-                            {idx < studios.length - 1 && (
-                              <span className="text-ea-black/35 font-normal ml-1">+</span>
-                            )}
-                          </span>
-                        ))}
-                      </span>
-                    ) : (
-                      studios[0] || project.studio || 'ESTUDIO NO ESPECIFICADO'
-                    )}
-                  </dd>
-                </div>
-
-                {/* 2. Ubicación / Lugar */}
-                <div className="min-w-0 pl-2.5 border-l border-ea-black/10 flex flex-col justify-start">
-                  <dt className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
-                    LUGAR
-                  </dt>
-                  <dd className="font-okcok text-[12px] sm:text-[13px] uppercase text-ea-black font-semibold mt-0.5 leading-snug break-words">
-                    {project.location || 'ECUADOR'}
-                  </dd>
-                </div>
-
-                {/* 3. Área / Superficie */}
-                <div className="min-w-0 pl-2.5 border-l border-ea-black/10 flex flex-col justify-start">
-                  <dt className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
-                    ÁREA
-                  </dt>
-                  <dd className="font-okcok text-[12px] sm:text-[13px] uppercase text-ea-black font-semibold mt-0.5 leading-snug whitespace-nowrap">
-                    {project.datos?.superficie || '3.850 M²'}
-                  </dd>
-                </div>
-
-                {/* 4. Año */}
-                <div className="min-w-0 pl-2.5 sm:border-l border-ea-black/10 flex flex-col justify-start">
-                  <dt className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
-                    AÑO
-                  </dt>
-                  <dd className="font-okcok text-[12px] sm:text-[13px] uppercase text-ea-black font-semibold mt-0.5 leading-snug whitespace-nowrap">
-                    {project.year || '2024'}
-                  </dd>
-                </div>
-
-                {/* 5. Fotografía */}
-                <div className="min-w-0 pl-2.5 border-l border-ea-black/10 flex flex-col justify-start col-span-2 xs:col-span-1">
-                  <dt className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
-                    FOTOGRAFÍA
-                  </dt>
-                  <dd className="font-okcok text-[12px] sm:text-[13px] uppercase text-ea-black font-semibold mt-0.5 leading-snug break-words">
-                    {project.datos?.fotografia || project.photographer || 'BICUBIK PHOTOGRAPHY'}
-                  </dd>
-                </div>
-              </>
-            )}
-          </dl>
-        </div>
+                  {/* 5. Fotografía */}
+                  <div className="min-w-0 pl-2.5 border-l border-ea-black/10 flex flex-col justify-start col-span-2 xs:col-span-1">
+                    <dt className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
+                      FOTOGRAFÍA
+                    </dt>
+                    <dd className="font-okcok text-[12px] sm:text-[13px] uppercase text-ea-black font-semibold mt-0.5 leading-snug break-words">
+                      {project.datos?.fotografia || project.photographer || 'BICUBIK PHOTOGRAPHY'}
+                    </dd>
+                  </div>
+                </>
+              )}
+            </dl>
+          </div>
+        )}
 
         {/* Créditos Editoriales / Byline */}
-        <div className="pt-2 pb-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] sm:text-[11.5px] font-mono uppercase text-ea-black/70 select-none">
+        <div
+          className={`flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] sm:text-[11.5px] font-mono uppercase text-ea-black/70 select-none ${
+            isTerritorios ? 'pt-2.5 mt-2.5 border-t border-ea-black/15' : 'pt-2 pb-1'
+          }`}
+        >
           <span className="text-neutral-400">ESCRITO POR:</span>
           <span className="font-semibold text-ea-black font-okcok tracking-tight">{writtenBy}</span>
           <span className="text-neutral-300 mx-1">,</span>
           <span className="text-neutral-400">EDITADO POR:</span>
           <span className="font-semibold text-ea-black font-okcok tracking-tight">{editedBy}</span>
+          {isTerritorios && project.year && (
+            <>
+              <span className="text-neutral-300 mx-1">•</span>
+              <span className="font-semibold text-ea-black/60 font-mono">{project.year}</span>
+            </>
+          )}
         </div>
       </div>
 
@@ -351,6 +311,54 @@ const ResenaModuleContent: React.FC<ProjectModuleContext> = ({
       <p className="font-creato text-[13.5px] sm:text-[14.5px] text-ea-black/85 leading-[1.72] my-4">
         En conclusión, la obra demuestra que la densidad colectiva en la ciudad andina no requiere renunciar a la luz natural ni a la porosidad comunitaria. La renuncia al área vendible en favor del vacío colectivo constituye el aporte más radical de {project.studio} a la práctica arquitectónica ecuatoriana.
       </p>
+
+      {/* Referencias & Bibliografía si existen en el proyecto */}
+      {(() => {
+        const projectRefs = project?.references || project?.referencias;
+        if (!projectRefs) return null;
+        const lines: string[] = Array.isArray(projectRefs)
+          ? projectRefs.map((r: any) => (typeof r === 'string' ? r : r.title || r.text || '')).filter(Boolean)
+          : typeof projectRefs === 'string'
+          ? projectRefs.split('\n').map((l: string) => l.trim()).filter(Boolean)
+          : [];
+        if (lines.length === 0) return null;
+
+        return (
+          <aside
+            aria-label="Referencias y Bibliografía"
+            className="mt-10 sm:mt-12 pt-6 sm:pt-7 border-t border-ea-black/20 space-y-3.5 select-text"
+          >
+            <div className="flex items-center gap-2.5 pb-1">
+              <BookOpen className="w-3.5 h-3.5 text-neutral-500 shrink-0" />
+              <span className="font-mono text-[9.5px] sm:text-[10.5px] uppercase font-bold tracking-[0.2em] text-neutral-500">
+                REFERENCIAS & BIBLIOGRAFÍA
+              </span>
+              <span className="h-px flex-1 bg-ea-black/15" />
+            </div>
+            <ol className="space-y-2 font-mono text-[11px] sm:text-[11.5px] text-neutral-600 leading-relaxed list-none pl-0">
+              {lines.map((line, idx) => {
+                const match = line.match(/^(\[\d+\]|\d+\.|\([0-9]+\))\s*(.*)$/);
+                const prefix = match ? match[1] : `[${idx + 1}]`;
+                const text = match ? match[2] : line;
+
+                return (
+                  <li
+                    key={idx}
+                    className="flex items-start gap-2.5 pl-3 border-l-2 border-neutral-300 hover:border-ea-black transition-colors"
+                  >
+                    <span className="font-bold text-neutral-400 select-none text-[10px] sm:text-[10.5px] pt-0.5 shrink-0">
+                      {prefix}
+                    </span>
+                    <span className="flex-1 break-words leading-relaxed text-ea-black/85">
+                      {text}
+                    </span>
+                  </li>
+                );
+              })}
+            </ol>
+          </aside>
+        );
+      })()}
 
       {/* Fullscreen Carousel Lightbox */}
       <ImageCarouselLightbox
@@ -483,7 +491,7 @@ const CriticaModuleContent: React.FC<ProjectModuleContext> = ({
                 ÁREA
               </dt>
               <dd className="font-okcok text-[12px] sm:text-[13px] uppercase text-ea-black font-semibold mt-0.5 leading-snug whitespace-nowrap">
-                {project.datos?.superficie || '3.850 M²'}
+                {project.datos?.superficie || project.superficie || project.area || 'S/D'}
               </dd>
             </div>
 

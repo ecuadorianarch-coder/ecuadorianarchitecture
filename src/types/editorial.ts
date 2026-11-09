@@ -24,6 +24,8 @@ export type EditorialModuleType =
   | 'map-location'
   | 'credits'
   | 'external-links'
+  | 'references'
+  | 'footnotes'
   | 'separator';
 
 export interface EditorialModuleItem {
@@ -124,6 +126,8 @@ export interface EditorialArticle {
   superficie?: string;
   memory?: string;
   resena?: string;
+  references?: string | string[];
+  referencias?: string | string[];
   hasCritica?: boolean;
   critica?: string;
   criticaHeadline?: string;
