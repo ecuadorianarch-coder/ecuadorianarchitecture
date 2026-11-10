@@ -61,20 +61,10 @@ export const NewsletterSubscriptionModal: React.FC<NewsletterSubscriptionModalPr
     e.preventDefault();
     setErrorMessage(null);
 
-    // 1. Validation
+    // 1. Validation (Email is the sole mandatory requirement)
+    const cleanEmail = email.trim().toLowerCase();
     const cleanNombre = nombre.trim();
     const cleanTelefono = telefono.trim();
-    const cleanEmail = email.trim().toLowerCase();
-
-    if (!cleanNombre) {
-      setErrorMessage('Por favor ingresa tu nombre completo.');
-      return;
-    }
-
-    if (!cleanTelefono) {
-      setErrorMessage('Por favor ingresa tu número de teléfono o WhatsApp.');
-      return;
-    }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!cleanEmail || !emailRegex.test(cleanEmail)) {
@@ -107,6 +97,15 @@ export const NewsletterSubscriptionModal: React.FC<NewsletterSubscriptionModalPr
       if (!res.ok) {
         const errorData = await res.json().catch(() => ({}));
         throw new Error(errorData.error || 'Ocurrió un error al registrar la suscripción.');
+      }
+
+      // GA4 event tracking
+      if (typeof (window as any).gtag === 'function') {
+        (window as any).gtag('event', 'newsletter_signup', {
+          event_category: 'engagement',
+          event_label: source || 'newsletter_modal',
+          value: 1,
+        });
       }
 
       setIsSuccess(true);
@@ -191,18 +190,22 @@ export const NewsletterSubscriptionModal: React.FC<NewsletterSubscriptionModalPr
 
               {/* Data Summary Card */}
               <div className="w-full bg-white border-2 border-ea-black/15 rounded-xl p-3.5 sm:p-4 text-left font-mono text-xs text-ea-black/80 space-y-1.5 mb-6">
-                <div className="flex items-center justify-between border-b border-ea-black/10 pb-1.5">
-                  <span className="text-ea-black/50 uppercase">Nombre:</span>
-                  <span className="font-bold text-ea-black">{nombre}</span>
-                </div>
-                <div className="flex items-center justify-between border-b border-ea-black/10 pb-1.5">
-                  <span className="text-ea-black/50 uppercase">Teléfono:</span>
-                  <span className="font-bold text-ea-black">{telefono}</span>
-                </div>
                 <div className="flex items-center justify-between">
                   <span className="text-ea-black/50 uppercase">Correo:</span>
                   <span className="font-bold text-ea-black truncate max-w-[220px]">{email}</span>
                 </div>
+                {Boolean(nombre) && (
+                  <div className="flex items-center justify-between border-t border-ea-black/10 pt-1.5">
+                    <span className="text-ea-black/50 uppercase">Nombre:</span>
+                    <span className="font-bold text-ea-black">{nombre}</span>
+                  </div>
+                )}
+                {Boolean(telefono) && (
+                  <div className="flex items-center justify-between border-t border-ea-black/10 pt-1.5">
+                    <span className="text-ea-black/50 uppercase">Teléfono:</span>
+                    <span className="font-bold text-ea-black">{telefono}</span>
+                  </div>
+                )}
               </div>
 
               <button
@@ -247,17 +250,35 @@ export const NewsletterSubscriptionModal: React.FC<NewsletterSubscriptionModalPr
                   aria-hidden="true"
                 />
 
-                {/* 1. Nombre completo */}
+                {/* 1. Correo electrónico (REQUISITO PRINCIPAL) */}
                 <div>
                   <label className="block font-mono text-[11px] sm:text-xs font-bold uppercase tracking-wider text-ea-black/80 mb-1.5">
-                    Nombre completo <span className="text-red-500">*</span>
+                    Correo electrónico <span className="text-red-500">*</span>
+                  </label>
+                  <div className="relative">
+                    <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-ea-black/40 pointer-events-none" />
+                    <input
+                      ref={firstInputRef}
+                      type="email"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="tu@correo.com"
+                      className="w-full bg-white border-2 border-ea-black/30 focus:border-ea-black rounded-xl pl-10 pr-4 py-2.5 sm:py-3 font-creato text-sm text-ea-black placeholder:text-ea-black/35 focus:outline-none transition-colors"
+                      disabled={isSubmitting}
+                    />
+                  </div>
+                </div>
+
+                {/* 2. Nombre completo (OPCIONAL) */}
+                <div>
+                  <label className="block font-mono text-[11px] sm:text-xs font-bold uppercase tracking-wider text-ea-black/80 mb-1.5">
+                    Nombre completo <span className="text-ea-black/40 font-normal text-[10px]">(opcional)</span>
                   </label>
                   <div className="relative">
                     <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-ea-black/40 pointer-events-none" />
                     <input
-                      ref={firstInputRef}
                       type="text"
-                      required
                       value={nombre}
                       onChange={(e) => setNombre(e.target.value)}
                       placeholder="Ej. Daniel Moreno Flores"
@@ -267,38 +288,18 @@ export const NewsletterSubscriptionModal: React.FC<NewsletterSubscriptionModalPr
                   </div>
                 </div>
 
-                {/* 2. Teléfono / WhatsApp */}
+                {/* 3. Teléfono / WhatsApp (OPCIONAL) */}
                 <div>
                   <label className="block font-mono text-[11px] sm:text-xs font-bold uppercase tracking-wider text-ea-black/80 mb-1.5">
-                    Teléfono / WhatsApp <span className="text-red-500">*</span>
+                    Teléfono / WhatsApp <span className="text-ea-black/40 font-normal text-[10px]">(opcional)</span>
                   </label>
                   <div className="relative">
                     <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-ea-black/40 pointer-events-none" />
                     <input
                       type="tel"
-                      required
                       value={telefono}
                       onChange={(e) => setTelefono(e.target.value)}
                       placeholder="Ej. +593 99 123 4567"
-                      className="w-full bg-white border-2 border-ea-black/30 focus:border-ea-black rounded-xl pl-10 pr-4 py-2.5 sm:py-3 font-creato text-sm text-ea-black placeholder:text-ea-black/35 focus:outline-none transition-colors"
-                      disabled={isSubmitting}
-                    />
-                  </div>
-                </div>
-
-                {/* 3. Correo electrónico */}
-                <div>
-                  <label className="block font-mono text-[11px] sm:text-xs font-bold uppercase tracking-wider text-ea-black/80 mb-1.5">
-                    Correo electrónico <span className="text-red-500">*</span>
-                  </label>
-                  <div className="relative">
-                    <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-ea-black/40 pointer-events-none" />
-                    <input
-                      type="email"
-                      required
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="tu@correo.com"
                       className="w-full bg-white border-2 border-ea-black/30 focus:border-ea-black rounded-xl pl-10 pr-4 py-2.5 sm:py-3 font-creato text-sm text-ea-black placeholder:text-ea-black/35 focus:outline-none transition-colors"
                       disabled={isSubmitting}
                     />

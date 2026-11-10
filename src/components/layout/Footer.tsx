@@ -6,6 +6,7 @@ import { Instagram, Facebook, Youtube, Linkedin } from 'lucide-react';
 import logoExtendidoUrl from '../../assets/logos/logo_extendido.svg';
 import mediaPartnersUrl from '../../assets/logos/media_partners.svg';
 import { FooterModal, FooterModalTab } from '../footer/FooterModal';
+import { EditorialNewsletterCard } from '../common/EditorialNewsletterCard';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -111,6 +112,15 @@ export const Footer: React.FC = () => {
                 draggable={false}
               />
             </div>
+          </div>
+        </div>
+
+        {/* ========================================================================= */}
+        {/* 2.5 FRANJA DE SUSCRIPCIÓN EDITORIAL (CAPTURA GLOBAL)                      */}
+        {/* ========================================================================= */}
+        <div className="w-full border-t border-ea-black/10 bg-[#FAF8F5] py-8 sm:py-10 px-6 sm:px-10">
+          <div className="w-full max-w-[1280px] mx-auto">
+            <EditorialNewsletterCard variant="footer" source="footer-global" />
           </div>
         </div>
 

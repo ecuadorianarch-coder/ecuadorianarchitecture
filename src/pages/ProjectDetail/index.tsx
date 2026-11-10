@@ -36,6 +36,7 @@ import { getConstructionTeamForProject } from '../../data/constructionTeams';
 import { hasAuthorProfile } from '../../data/authors';
 import { applyArchitectureSeoToDocument } from '../../services/architectureSeo';
 import { ShareProjectModal } from '../../components/common/ShareProjectModal';
+import { EditorialNewsletterCard } from '../../components/common/EditorialNewsletterCard';
 
 // Tape strip component for the taped tabs from Figma media_1791919174953_b2b8f1f9.png
 const TapeStrip: React.FC<{ className?: string }> = ({ className = '' }) => (
@@ -276,6 +277,23 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
       relatedCarouselRef.current.scrollBy({ left: step, behavior: 'smooth' });
     }
   };
+
+  const handleFilterByTerm = useCallback((term: string) => {
+    if (!term || typeof window === 'undefined') return;
+    const cleanTerm = term.trim();
+    if (!cleanTerm) return;
+    const targetUrl = `/proyectos?search=${encodeURIComponent(cleanTerm)}`;
+    if (window.history && window.history.pushState) {
+      window.history.pushState({ path: targetUrl }, '', targetUrl);
+      window.dispatchEvent(new PopStateEvent('popstate'));
+    } else {
+      window.location.href = targetUrl;
+    }
+    if (onNavigate) {
+      onNavigate('proyectos');
+    }
+    window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+  }, [onNavigate]);
 
   const allProjectImages = useMemo(() => extractAllProjectImages(project), [project]);
 
@@ -2005,19 +2023,35 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
                 <div className="space-y-4 font-creato text-sm">
                   {/* Ubicación (Sin duplicar ciudad y mostrando exactamente lo ingresado) */}
                   {Boolean(displayLocation) && (
-                    <div className="flex justify-between py-2 border-b border-ea-border">
+                    <div className="flex justify-between items-center py-2 border-b border-ea-border">
                       <span className="text-ea-black/60 uppercase text-xs font-mono">Ubicación</span>
-                      <span className="font-semibold text-right">{displayLocation}</span>
+                      <button
+                        type="button"
+                        onClick={() => handleFilterByTerm(displayLocation)}
+                        className="font-semibold text-right hover:text-blue-600 hover:underline transition-colors cursor-pointer group flex items-center gap-1"
+                        title={`Explorar todos los proyectos en ${displayLocation}`}
+                        data-cursor
+                      >
+                        <span>{displayLocation}</span>
+                        <span className="text-[10px] font-mono text-ea-black/35 group-hover:text-blue-600 transition-colors">↗</span>
+                      </button>
                     </div>
                   )}
 
                   {/* Tipología / Programa */}
                   {Boolean(project.category?.trim() || project.tipologia?.trim() || project.datos?.tipologia?.trim()) && (
-                    <div className="flex justify-between py-2 border-b border-ea-border">
+                    <div className="flex justify-between items-center py-2 border-b border-ea-border">
                       <span className="text-ea-black/60 uppercase text-xs font-mono">Tipología / Programa</span>
-                      <span className="font-semibold text-right">
-                        {project.tipologia || project.datos?.tipologia || project.category}
-                      </span>
+                      <button
+                        type="button"
+                        onClick={() => handleFilterByTerm(project.tipologia || project.datos?.tipologia || project.category || '')}
+                        className="font-semibold text-right hover:text-blue-600 hover:underline transition-colors cursor-pointer group flex items-center gap-1"
+                        title={`Explorar proyectos de tipología ${project.tipologia || project.datos?.tipologia || project.category}`}
+                        data-cursor
+                      >
+                        <span>{project.tipologia || project.datos?.tipologia || project.category}</span>
+                        <span className="text-[10px] font-mono text-ea-black/35 group-hover:text-blue-600 transition-colors">↗</span>
+                      </button>
                     </div>
                   )}
 
@@ -2084,11 +2118,18 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
 
                   {/* Sistema Estructural (OPCIONAL: solo si fue ingresado) */}
                   {Boolean(project.datos?.estructura?.trim() || project.sistemaEstructural?.trim() || project.materialidadPrincipal?.trim()) && (
-                    <div className="flex justify-between py-2 border-b border-ea-border">
+                    <div className="flex justify-between items-center py-2 border-b border-ea-border">
                       <span className="text-ea-black/60 uppercase text-xs font-mono">Sistema Estructural</span>
-                      <span className="font-semibold text-right">
-                        {(project.datos?.estructura || project.sistemaEstructural || project.materialidadPrincipal)?.trim()}
-                      </span>
+                      <button
+                        type="button"
+                        onClick={() => handleFilterByTerm((project.datos?.estructura || project.sistemaEstructural || project.materialidadPrincipal || '').split(',')[0])}
+                        className="font-semibold text-right hover:text-blue-600 hover:underline transition-colors cursor-pointer group flex items-center gap-1"
+                        title="Explorar proyectos con este material o sistema constructivo"
+                        data-cursor
+                      >
+                        <span>{(project.datos?.estructura || project.sistemaEstructural || project.materialidadPrincipal)?.trim()}</span>
+                        <span className="text-[10px] font-mono text-ea-black/35 group-hover:text-blue-600 transition-colors">↗</span>
+                      </button>
                     </div>
                   )}
 
@@ -2180,6 +2221,16 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
               </button>
             </div>
           </div>
+        </div>
+
+        {/* ======================================================================= */}
+        {/* IN-FEED EDITORIAL SUBSCRIPTION CARD (HIGH CONVERSION CRO)               */}
+        {/* ======================================================================= */}
+        <div className="pt-10 pb-4">
+          <EditorialNewsletterCard
+            source={`expediente-${project.slug || project.id}`}
+            variant="card"
+          />
         </div>
 
         {/* ======================================================================= */}

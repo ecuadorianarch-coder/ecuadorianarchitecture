@@ -51,13 +51,38 @@ export const ProjectsCatalog: React.FC<ProjectsCatalogProps> = ({
   const eligibleInFeedCampaigns = getEligibleCampaigns('entre-proyectos');
   const inFeedFrequency = Math.max(1, inFeedConfig?.frequency || 3);
   const [currentSection, setCurrentSection] = useState<CatalogSectionType>(initialSection);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('search') || params.get('q') || '';
+    }
+    return '';
+  });
+
+  // Sync search param from URL on popstate
+  useEffect(() => {
+    const syncQueryParam = () => {
+      if (typeof window === 'undefined') return;
+      const params = new URLSearchParams(window.location.search);
+      const q = params.get('search') || params.get('q');
+      if (q !== null) {
+        setSearchQuery(q);
+      }
+    };
+    syncQueryParam();
+    window.addEventListener('popstate', syncQueryParam);
+    return () => window.removeEventListener('popstate', syncQueryParam);
+  }, []);
 
   // Sync with prop if it changes
   useEffect(() => {
     if (initialSection) {
       setCurrentSection(initialSection);
-      setSearchQuery('');
+      if (typeof window !== 'undefined') {
+        const params = new URLSearchParams(window.location.search);
+        const q = params.get('search') || params.get('q');
+        setSearchQuery(q || '');
+      }
     }
   }, [initialSection]);
 
