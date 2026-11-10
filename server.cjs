@@ -1260,6 +1260,26 @@ const server = http.createServer((req, res) => {
     }
   }
 
+  // Microsoft Clarity & Historical Asset Fallback (Rescate de CSS y Chunks anteriores)
+  if (!fs.existsSync(filePath) && pathname.startsWith('/assets/')) {
+    const ext = path.extname(pathname).toLowerCase();
+    const assetsDir = path.join(distDir, 'assets');
+    if (fs.existsSync(assetsDir)) {
+      if (ext === '.css') {
+        const activeCss = fs.readdirSync(assetsDir).find((f) => f.endsWith('.css'));
+        if (activeCss) {
+          filePath = path.join(assetsDir, activeCss);
+        }
+      } else if (ext === '.js') {
+        const targetPrefix = path.basename(pathname).split('-')[0];
+        const matchingChunk = fs.readdirSync(assetsDir).find((f) => f.startsWith(targetPrefix) && f.endsWith('.js'));
+        if (matchingChunk) {
+          filePath = path.join(assetsDir, matchingChunk);
+        }
+      }
+    }
+  }
+
   // If path doesn't have an extension, try folder/index.html or .html
   if (!path.extname(filePath)) {
     if (fs.existsSync(path.join(filePath, 'index.html'))) {
@@ -1339,6 +1359,10 @@ function isKnownSpaRoute(pathname, query) {
     const ext = path.extname(filePath).toLowerCase();
     const contentType = MIME_TYPES[ext] || 'application/octet-stream';
     res.setHeader('Content-Type', contentType);
+    if (pathname.startsWith('/assets/') || pathname.startsWith('/images/')) {
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+    }
     res.writeHead(200);
     fs.createReadStream(filePath).pipe(res);
   } else {
