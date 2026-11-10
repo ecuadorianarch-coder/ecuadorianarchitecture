@@ -11,9 +11,10 @@
  */
 
 export interface ParsedRoute {
-  view: 'home' | 'catalog' | 'project-detail' | 'acerca';
+  view: 'home' | 'catalog' | 'project-detail' | 'acerca' | 'studio-detail';
   catalogSection?: 'proyectos' | 'academia' | 'territorios';
   projectId?: string;
+  studioSlug?: string;
   advertiserToken?: string | null;
   reportToken?: string | null;
   targetTab?: 'proyectos' | 'academia' | 'territorios' | 'acerca';
@@ -96,6 +97,13 @@ export function parseCurrentRoute(): ParsedRoute {
       return { view: 'project-detail', projectId: decodeURIComponent(second), catalogSection: 'territorios' };
     }
     return { view: 'catalog', catalogSection: 'territorios' };
+  }
+
+  if (first === 'estudios' || first === 'autores') {
+    if (second) {
+      return { view: 'studio-detail', studioSlug: decodeURIComponent(second), catalogSection: 'proyectos' };
+    }
+    return { view: 'catalog', catalogSection: 'proyectos' };
   }
 
   // Fallback to home

@@ -13,6 +13,7 @@ import { CinematicTransition } from './components/common/CinematicTransition';
 import { AcercaDeEA } from './pages/AcercaDeEA';
 import { AdvertiserReport } from './pages/AdvertiserReport';
 import { AdvertiserPortal } from './pages/AdvertiserPortal';
+import { AuthorProfileModal } from './components/author/AuthorProfileModal';
 import { parseCurrentRoute, pushAppRoute, replaceAppRoute } from './utils/navigation';
 import { useVisitorTracking } from './hooks/useVisitorTracking';
 
@@ -24,7 +25,10 @@ export const AppContent: React.FC = () => {
 
   const [advertiserToken, setAdvertiserToken] = useState<string | null>(initialRoute.advertiserToken || null);
   const [reportToken, setReportToken] = useState<string | null>(initialRoute.reportToken || null);
-  const [currentView, setCurrentView] = useState<'home' | 'catalog' | 'project-detail' | 'acerca'>(initialRoute.view);
+  const [selectedStudioSlug, setSelectedStudioSlug] = useState<string | null>(initialRoute.studioSlug || null);
+  const [currentView, setCurrentView] = useState<'home' | 'catalog' | 'project-detail' | 'acerca'>(
+    initialRoute.view === 'studio-detail' ? 'catalog' : initialRoute.view
+  );
   const [catalogSection, setCatalogSection] = useState<CatalogSectionType>(initialRoute.catalogSection || 'proyectos');
   const [selectedProjectId, setSelectedProjectId] = useState<string>(
     initialRoute.projectId || 'espacio-para-hablar-con-dios-ssqj'
@@ -67,6 +71,16 @@ export const AppContent: React.FC = () => {
     const prevView = currentViewRef.current;
     const prevSection = catalogSectionRef.current;
     const prevProj = selectedProjectIdRef.current;
+
+    if (route.view === 'studio-detail' && route.studioSlug) {
+      setSelectedStudioSlug(route.studioSlug);
+      setCatalogSection('proyectos');
+      setCurrentView('catalog');
+      window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+      return;
+    }
+
+    setSelectedStudioSlug(null);
 
     if (route.view === 'project-detail' && route.projectId) {
       const isDifferent = prevView !== 'project-detail' || prevProj !== route.projectId;
@@ -264,6 +278,23 @@ export const AppContent: React.FC = () => {
         <AcercaDeEA
           onNavigate={handleNavigate}
           onSelectProject={handleSelectProject}
+        />
+      )}
+
+      {/* Direct Author/Studio Profile Dialog for /estudios/:slug */}
+      {selectedStudioSlug && (
+        <AuthorProfileModal
+          studioName={selectedStudioSlug}
+          isOpen={Boolean(selectedStudioSlug)}
+          onClose={() => {
+            setSelectedStudioSlug(null);
+            pushAppRoute('/proyectos');
+          }}
+          allProjects={[...projects, ...academia, ...territorios]}
+          onSelectProject={(pid) => {
+            setSelectedStudioSlug(null);
+            handleSelectProject(pid);
+          }}
         />
       )}
 

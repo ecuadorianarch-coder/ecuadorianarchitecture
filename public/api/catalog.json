@@ -4,7 +4,7 @@
     "website": "https://ecuadorianarch.com",
     "description": "Catálogo abierto estructurado para agentes de inteligencia artificial y motores generativos de búsqueda.",
     "canonicalKeyword": "Arquitectura Ecuatoriana",
-    "generatedAt": "2026-11-09T21:21:20.667Z",
+    "generatedAt": "2026-11-10T19:23:20.861Z",
     "totalProjects": 4,
     "totalTerritorios": 0,
     "totalAcademia": 0,
@@ -96,6 +96,8 @@
     {
       "id": "estudio-mw3ou8ud",
       "name": "Lams arquitectos",
+      "slug": "lams-arquitectos",
+      "url": "https://ecuadorianarch.com/estudios/lams-arquitectos",
       "founder": "Luis Alberto Menéndez",
       "location": "Quito, Ecuador",
       "headline": "Práctica arquitectónica contemporánea, investigación y producción espacial."
@@ -103,6 +105,8 @@
     {
       "id": "estudio-mw2oqbw8",
       "name": "isaac flores",
+      "slug": "isaac-flores",
+      "url": "https://ecuadorianarch.com/estudios/isaac-flores",
       "founder": "Arquitecto Titular",
       "location": "Quito, Ecuador",
       "headline": "Práctica arquitectónica contemporánea, investigación y producción espacial."
@@ -110,6 +114,8 @@
     {
       "id": "estudio-mw2ilupu",
       "name": "Natura futura",
+      "slug": "natura-futura",
+      "url": "https://ecuadorianarch.com/estudios/natura-futura",
       "founder": "Jose Gomez",
       "location": "Babahoyo",
       "headline": "Práctica arquitectónica contemporánea, investigación y producción espacial."
@@ -117,6 +123,8 @@
     {
       "id": "estudio-felipe-escudero",
       "name": "ESTUDIO FELIPE ESCUDERO",
+      "slug": "estudio-felipe-escudero",
+      "url": "https://ecuadorianarch.com/estudios/estudio-felipe-escudero",
       "founder": "Felipe Escudero",
       "location": "Quito, Ecuador",
       "headline": "Arquitectura escultórica, vanguardia matérica y diálogo con la geografía andina."
@@ -124,6 +132,8 @@
     {
       "id": "rama-estudio",
       "name": "RAMA ESTUDIO",
+      "slug": "rama-estudio",
+      "url": "https://ecuadorianarch.com/estudios/rama-estudio",
       "founder": "Carolina Rodas, Felipe Donoso, Carla Chávez",
       "location": "Quito, Ecuador",
       "headline": "Taller de arquitectura, producción material y optimización de recursos en los Andes."
@@ -131,6 +141,8 @@
     {
       "id": "al-borde-arquitectos",
       "name": "AL BORDE ARQUITECTOS",
+      "slug": "al-borde-arquitectos",
+      "url": "https://ecuadorianarch.com/estudios/al-borde-arquitectos",
       "founder": "David Barragán, Pascual Gangotena, Marialuisa Borja, Esteban Benavides",
       "location": "Quito / Puembo, Ecuador",
       "headline": "Arquitectura radical de recursos escasos, tierra cruda y pedagogía comunitaria."
@@ -138,6 +150,8 @@
     {
       "id": "daniel-moreno-flores",
       "name": "DANIEL MORENO FLORES",
+      "slug": "daniel-moreno-flores",
+      "url": "https://ecuadorianarch.com/estudios/daniel-moreno-flores",
       "founder": "Daniel Moreno Flores",
       "location": "Quito / Tumbaco, Ecuador",
       "headline": "Estructuras ligeras de madera y metal en diálogo con la orografía volcánica."
@@ -145,6 +159,8 @@
     {
       "id": "diego-guayasamin",
       "name": "DIEGO GUAYASAMÍN",
+      "slug": "diego-guayasamin",
+      "url": "https://ecuadorianarch.com/estudios/diego-guayasamin",
       "founder": "Diego Guayasamín",
       "location": "Quito / Cuenca, Ecuador",
       "headline": "Monumentalidad cívica, hormigón escultórico e infraestructuras metropolitanas."
@@ -152,6 +168,8 @@
     {
       "id": "luis-lopez-lopez",
       "name": "LUIS LÓPEZ LÓPEZ",
+      "slug": "luis-lopez-lopez",
+      "url": "https://ecuadorianarch.com/estudios/luis-lopez-lopez",
       "founder": "Luis López López",
       "location": "Guayaquil, Ecuador",
       "headline": "Arquitectura tropical bioclimática, ventilación y memoria litoral."
@@ -159,6 +177,8 @@
     {
       "id": "enlace-arquitectura",
       "name": "ENLACE ARQUITECTURA",
+      "slug": "enlace-arquitectura",
+      "url": "https://ecuadorianarch.com/estudios/enlace-arquitectura",
       "founder": "Colectivo Enlace Manabí",
       "location": "Manabí / Portoviejo, Ecuador",
       "headline": "Innovación en caña guadúa y regeneración comunitaria en la costa ecuatoriana."
@@ -166,6 +186,8 @@
     {
       "id": "nomade-taller",
       "name": "NOMADE TALLER",
+      "slug": "nomade-taller",
+      "url": "https://ecuadorianarch.com/estudios/nomade-taller",
       "founder": "Nómade Taller de Arquitectura",
       "location": "Quito, Ecuador",
       "headline": "Arquitectura espiritual, mística matérica y reinterpretación del templo andino."

@@ -29,13 +29,16 @@ function escapeHtml(str) {
 
 function truncateAtWord(text, maxLength) {
   if (!text) return '';
-  if (text.length <= maxLength) return text;
-  const sub = text.substring(0, maxLength);
+  const clean = String(text).trim();
+  if (clean.length <= maxLength) return clean;
+  const sub = clean.substring(0, maxLength);
   const lastSpace = sub.lastIndexOf(' ');
-  if (lastSpace > maxLength * 0.75) {
-    return sub.substring(0, lastSpace) + '.';
-  }
-  return sub + '.';
+  let result = lastSpace > maxLength * 0.7 ? sub.substring(0, lastSpace) : sub;
+  // Strip trailing punctuation and dangling prepositions/articles
+  result = result.replace(/[\s,;:.\-–—]+$/, '');
+  result = result.replace(/\b(en|el|la|los|las|de|del|por|para|con|un|una|unos|unas|y|o|e|a)$/i, '').trim();
+  result = result.replace(/[\s,;:.\-–—]+$/, '');
+  return result + '.';
 }
 
 function extractStudios(project) {
@@ -70,24 +73,176 @@ function generateTitle(project) {
 }
 
 function generateDescription(project) {
-  const title = cleanText(project?.title);
+  const title = cleanText(project?.title) || 'Proyecto Arquitectónico';
   const studios = extractStudios(project);
   const studiosStr = studios.length > 0 ? studios.join(' + ') : 'estudios de arquitectura ecuatorianos';
   const location = cleanText(project?.location) || 'Ecuador';
   const year = cleanText(project?.year) || '2026';
   const category = cleanText(project?.category) || 'Arquitectura';
-  const photographer = cleanText(project?.photographer || project?.datos?.fotografia) || 'Registro EA';
   const excerpt = cleanText(project?.excerpt || project?.resena || project?.subtitle);
 
-  let crafted = `Arquitectura ecuatoriana: ${title ? title + ', ' : ''}${category.toLowerCase()} en ${location}, Ecuador por ${studiosStr}.`;
+  let lead = `Obra de ${category.toLowerCase()} en ${location}, Ecuador (${year}), diseñada por ${studiosStr}.`;
   if (excerpt) {
-    const firstSentence = excerpt.split('.')[0].trim();
-    if (firstSentence) {
-      crafted += ` ${firstSentence}.`;
+    const firstSentence = excerpt.split(/[.!?]/)[0].trim();
+    if (firstSentence && (lead + ' ' + firstSentence + '.').length <= 155) {
+      return `${lead} ${firstSentence}.`;
     }
   }
-  crafted += ` Fotografía: ${photographer} (${year}). Archivo y crítica en Ecuadorian Architecture.`;
-  return truncateAtWord(crafted, 158);
+  const fallback = `${lead} Ficha técnica, planimetría y crítica en Ecuadorian Architecture.`;
+  return truncateAtWord(fallback, 155);
+}
+
+function generateStudioTitle(author) {
+  const name = cleanText(author?.name) || 'Estudio de Arquitectura';
+  const loc = cleanText(author?.location) || 'Ecuador';
+  const city = loc.split(',')[0].trim();
+  const full = `${name} — Arquitectos en ${city}, Ecuador | EA`;
+  if (full.length <= 60) return full;
+  return `${name} | Arquitectos en Ecuador`;
+}
+
+function generateStudioDescription(author) {
+  const name = cleanText(author?.name) || 'Estudio';
+  const loc = cleanText(author?.location) || 'Ecuador';
+  const founder = cleanText(author?.founder);
+  const headline = cleanText(author?.headline);
+  let crafted = `Perfil y obras de ${name} en ${loc}.`;
+  if (founder && founder !== 'Arquitecto Titular') {
+    crafted += ` Fundado por ${founder}.`;
+  }
+  if (headline) {
+    crafted += ` ${headline}`;
+  }
+  crafted += ` Catálogo y archivo en Ecuadorian Architecture.`;
+  return truncateAtWord(crafted, 155);
+}
+
+function generateStudioSchemaJsonLd(author, slug) {
+  const name = cleanText(author?.name);
+  const canonicalUrl = `${SITE_URL}/estudios/${slug}`;
+  const loc = cleanText(author?.location) || 'Ecuador';
+  const city = loc.split(',')[0].trim();
+  const founder = cleanText(author?.founder);
+  const typologies = Array.isArray(author?.typologies) ? author.typologies : ['Arquitectura Contemporánea'];
+  const sameAs = [];
+  if (author?.contact?.instagram) sameAs.push(`https://instagram.com/${author.contact.instagram.replace(/^@/, '')}`);
+  if (author?.contact?.website && author.contact.website.startsWith('http')) sameAs.push(author.contact.website);
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ArchitecturalFirm',
+    '@id': `${canonicalUrl}#organization`,
+    name,
+    url: canonicalUrl,
+    logo: `${SITE_URL}/logo.svg`,
+    image: author?.coverImage || `${SITE_URL}/og-image.jpg`,
+    description: cleanText(author?.description || author?.headline),
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: city,
+      addressCountry: 'EC',
+    },
+    ...(founder && founder !== 'Arquitecto Titular' ? {
+      founder: {
+        '@type': 'Person',
+        name: founder,
+      }
+    } : {}),
+    knowsAbout: [
+      'Arquitectura Ecuatoriana',
+      'Arquitectura contemporánea en Ecuador',
+      ...typologies,
+    ],
+    sameAs,
+  };
+}
+
+function renderSemanticStudioBody(author, slug, studioProjects = []) {
+  const name = escapeHtml(cleanText(author?.name));
+  const loc = escapeHtml(cleanText(author?.location) || 'Ecuador');
+  const founder = escapeHtml(cleanText(author?.founder));
+  const year = escapeHtml(cleanText(author?.foundedYear));
+  const headline = escapeHtml(cleanText(author?.headline));
+  const description = escapeHtml(cleanText(author?.description));
+  const philosophy = escapeHtml(cleanText(author?.philosophy));
+  const typologies = Array.isArray(author?.typologies) ? author.typologies : [];
+
+  return `
+    <article class="ea-semantic-studio max-w-4xl mx-auto px-4 sm:px-6 py-8 text-[#111111] bg-white font-sans" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+      <nav aria-label="Miga de pan" class="text-xs text-neutral-500 mb-6 font-mono">
+        <a href="/" class="hover:underline text-neutral-600">Inicio</a> / 
+        <a href="/proyectos" class="hover:underline text-neutral-600">Estudios</a> / 
+        <span class="text-black font-semibold">${name}</span>
+      </nav>
+
+      <header class="mb-8 border-b border-neutral-200 pb-6">
+        <p class="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-2">
+          Estudio de Arquitectura • ${loc}${year ? ` • Fundado en ${year}` : ''}
+        </p>
+        <h1 class="text-3xl sm:text-4xl font-bold uppercase tracking-tight text-black mb-3">
+          ${name} — Arquitectos en Ecuador
+        </h1>
+        ${headline ? `<p class="text-lg text-neutral-800 font-medium leading-relaxed">${headline}</p>` : ''}
+        ${founder && founder !== 'Arquitecto Titular' ? `<p class="text-xs font-mono text-neutral-600 mt-2">Fundador / Dirección: <strong>${founder}</strong></p>` : ''}
+      </header>
+
+      ${description ? `
+      <section class="mb-8">
+        <h2 class="text-xs font-mono uppercase tracking-widest text-neutral-600 mb-3 font-bold">Trayectoria y Práctica Espacial</h2>
+        <p class="text-base text-neutral-700 leading-relaxed">${description}</p>
+      </section>
+      ` : ''}
+
+      ${philosophy ? `
+      <section class="mb-8">
+        <blockquote class="text-base italic text-neutral-800 border-l-4 border-black pl-4 py-2 leading-relaxed bg-neutral-50">
+          "${philosophy}"
+        </blockquote>
+      </section>
+      ` : ''}
+
+      ${typologies.length > 0 ? `
+      <section class="mb-8">
+        <h3 class="text-xs font-mono uppercase tracking-widest text-neutral-600 mb-2 font-bold">Campos de Enfoque y Tipologías</h3>
+        <div class="flex flex-wrap gap-2">
+          ${typologies.map(t => `<span class="text-xs font-mono px-2.5 py-1 bg-neutral-100 border border-neutral-200 rounded-xs text-neutral-800">${escapeHtml(t)}</span>`).join('')}
+        </div>
+      </section>
+      ` : ''}
+
+      <section class="mt-10 pt-8 border-t border-neutral-200">
+        <h3 class="text-sm font-mono uppercase tracking-widest text-neutral-700 mb-4 font-bold">
+          Obras Documentadas en Ecuadorian Architecture
+        </h3>
+        ${studioProjects.length > 0 ? `
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 list-none p-0">
+          ${studioProjects.map(p => {
+            const pSlug = cleanText(p.slug) || cleanText(p.id);
+            const pTitle = escapeHtml(cleanText(p.title));
+            const pLoc = escapeHtml(cleanText(p.location) || 'Ecuador');
+            const pYear = escapeHtml(cleanText(p.year) || '2026');
+            return `
+            <li class="border border-neutral-200 p-4 rounded-sm hover:border-black transition-colors bg-neutral-50/50">
+              <a href="/proyectos/${pSlug}" class="block group text-black no-underline">
+                <span class="block text-xs font-mono text-neutral-500 uppercase">${pLoc} • ${pYear}</span>
+                <span class="block font-bold text-black uppercase group-hover:underline text-base mt-0.5">${pTitle}</span>
+                <span class="inline-block text-xs font-mono text-neutral-700 mt-2 font-semibold">Ver expediente completo →</span>
+              </a>
+            </li>
+            `;
+          }).join('')}
+        </ul>
+        ` : `
+        <p class="text-xs text-neutral-500 font-mono">Este estudio forma parte del registro de despachos colaboradores de Ecuadorian Architecture.</p>
+        `}
+      </section>
+
+      <footer class="mt-12 pt-6 border-t border-neutral-200 text-xs text-neutral-500 font-mono flex flex-wrap justify-between gap-4">
+        <span>Ecuadorian Architecture — Directorio de Arquitectos y Estudios</span>
+        <a href="/proyectos" class="hover:underline text-black font-semibold">← Volver al catálogo</a>
+      </footer>
+    </article>
+  `;
 }
 
 function getWikidataPlaceUri(location) {
@@ -724,6 +879,64 @@ async function run() {
 
   console.log(`[EA SEO Prerender] Generated ${projectCount} architectural project detail pages.`);
 
+  // 4. Generate Individual Studio & Architect Profiles with Semantic Content
+  const authorsPath = path.join(dataDir, 'authors.json');
+  const authors = fs.existsSync(authorsPath)
+    ? JSON.parse(fs.readFileSync(authorsPath, 'utf-8') || '[]')
+    : [];
+
+  let studioCount = 0;
+  for (const author of authors) {
+    const slug = cleanText(author.slug) || cleanText(author.name).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    if (!slug) continue;
+
+    const title = generateStudioTitle(author);
+    const description = generateStudioDescription(author);
+    const canonicalUrl = `${SITE_URL}/estudios/${slug}`;
+    const coverImage = author.coverImage || `${SITE_URL}/og-image.jpg`;
+    const schemaJsonLd = generateStudioSchemaJsonLd(author, slug);
+
+    // Find projects associated with this studio
+    const studioProjects = projects.filter(p => {
+      const pStudios = extractStudios(p).map(s => s.toLowerCase());
+      const aName = (author.name || '').toLowerCase();
+      const aSlug = slug.toLowerCase();
+      return pStudios.some(s => s.includes(aName) || aName.includes(s) || s.replace(/[^a-z0-9]+/g, '-').includes(aSlug));
+    });
+
+    const bodyHtml = renderSemanticStudioBody(author, slug, studioProjects);
+
+    const html = injectMeta(baseHtml, {
+      title,
+      description,
+      canonicalUrl,
+      ogImage: coverImage,
+      schemaJsonLd,
+      bodyHtml,
+    });
+
+    writeStaticHtml(path.join(distDir, 'estudios', slug), html);
+
+    if (author.id && author.id !== slug) {
+      writeStaticHtml(path.join(distDir, 'estudios', author.id), html);
+    }
+
+    sitemapUrls.push({
+      loc: canonicalUrl,
+      changefreq: 'monthly',
+      priority: '0.8',
+      lastmod: new Date().toISOString().split('T')[0],
+      image: coverImage ? {
+        loc: coverImage,
+        title: `${cleanText(author.name)} - Arquitectos en Ecuador`,
+        caption: description,
+      } : null,
+    });
+
+    studioCount++;
+  }
+  console.log(`[EA SEO Prerender] Generated ${studioCount} architectural studio profile detail pages.`);
+
   // 3. Generate XML Sitemap with Image Extension
   const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
@@ -745,7 +958,17 @@ ${sitemapUrls
 </urlset>`;
 
   fs.writeFileSync(path.join(distDir, 'sitemap.xml'), sitemapXml, 'utf-8');
+  try {
+    fs.writeFileSync(path.join(rootDir, 'public', 'sitemap.xml'), sitemapXml, 'utf-8');
+  } catch (e) {}
   console.log('[EA SEO Prerender] Generated dist/sitemap.xml with image extensions');
+
+  // Copy 404.html to dist/
+  const public404 = path.join(rootDir, 'public', '404.html');
+  if (fs.existsSync(public404)) {
+    fs.copyFileSync(public404, path.join(distDir, '404.html'));
+    console.log('[EA SEO Prerender] Synchronized dist/404.html');
+  }
 
   // 4. Generate Robots.txt (Universal Crawlers + Full AI/LLM Access)
   const robotsTxt = `# robots.txt for Ecuadorian Architecture (https://ecuadorianarch.com)

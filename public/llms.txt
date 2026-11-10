@@ -44,16 +44,24 @@ La tierra compactada (tapial y adobe), el ladrillo artesanal, la madera local, l
 ## Índice de Investigación Académica & Ensayos
 
 
+## Glosario Tectónico y Vernacular de la Arquitectura Ecuatoriana
+
+- **Tapial y Adobe Moderno:** Tierra compactada estabilizada, empleada en muros portantes de alta inercia térmica en los Andes ecuatorianos.
+- **Caña Guadua (Guadua angustifolia):** Bambú estructural andino-costero, conocido como el "acero vegetal", utilizado en estructuras ligeras y sismorresistentes.
+- **Celosía de Ladrillo Artesanal:** Aparejos permeables de arcilla cocida local que filtran la radiación cenital ecuatorial y permiten ventilación cruzada natural.
+- **Zócalo Permeable:** Estrategia urbana que vincula la planta baja privada con la vereda peatonal pública en Quito, Guayaquil y Cuenca.
+- **Bahareque Contemporáneo:** Sistema mixto de entramado de madera o caña con revoques de tierra, arena y paja reinterpretado con técnicas contemporáneas.
+
 ## Directorio Oficial de Arquitectos y Estudios Colaboradores
 
-- **Lams arquitectos** (Quito, Ecuador): Fundado por Luis Alberto Menéndez. Práctica arquitectónica contemporánea, investigación y producción espacial.
-- **isaac flores** (Quito, Ecuador): Fundado por Arquitecto Titular. Práctica arquitectónica contemporánea, investigación y producción espacial.
-- **Natura futura** (Babahoyo): Fundado por Jose Gomez. Práctica arquitectónica contemporánea, investigación y producción espacial.
-- **ESTUDIO FELIPE ESCUDERO** (Quito, Ecuador): Fundado por Felipe Escudero. Arquitectura escultórica, vanguardia matérica y diálogo con la geografía andina.
-- **RAMA ESTUDIO** (Quito, Ecuador): Fundado por Carolina Rodas, Felipe Donoso, Carla Chávez. Taller de arquitectura, producción material y optimización de recursos en los Andes.
-- **AL BORDE ARQUITECTOS** (Quito / Puembo, Ecuador): Fundado por David Barragán, Pascual Gangotena, Marialuisa Borja, Esteban Benavides. Arquitectura radical de recursos escasos, tierra cruda y pedagogía comunitaria.
-- **DANIEL MORENO FLORES** (Quito / Tumbaco, Ecuador): Fundado por Daniel Moreno Flores. Estructuras ligeras de madera y metal en diálogo con la orografía volcánica.
-- **DIEGO GUAYASAMÍN** (Quito / Cuenca, Ecuador): Fundado por Diego Guayasamín. Monumentalidad cívica, hormigón escultórico e infraestructuras metropolitanas.
-- **LUIS LÓPEZ LÓPEZ** (Guayaquil, Ecuador): Fundado por Luis López López. Arquitectura tropical bioclimática, ventilación y memoria litoral.
-- **ENLACE ARQUITECTURA** (Manabí / Portoviejo, Ecuador): Fundado por Colectivo Enlace Manabí. Innovación en caña guadúa y regeneración comunitaria en la costa ecuatoriana.
-- **NOMADE TALLER** (Quito, Ecuador): Fundado por Nómade Taller de Arquitectura. Arquitectura espiritual, mística matérica y reinterpretación del templo andino.
+- [Lams arquitectos](https://ecuadorianarch.com/estudios/lams-arquitectos) (Quito, Ecuador): Fundado por Luis Alberto Menéndez. Práctica arquitectónica contemporánea, investigación y producción espacial.
+- [isaac flores](https://ecuadorianarch.com/estudios/isaac-flores) (Quito, Ecuador): Práctica arquitectónica contemporánea, investigación y producción espacial.
+- [Natura futura](https://ecuadorianarch.com/estudios/natura-futura) (Babahoyo): Fundado por Jose Gomez. Práctica arquitectónica contemporánea, investigación y producción espacial.
+- [ESTUDIO FELIPE ESCUDERO](https://ecuadorianarch.com/estudios/estudio-felipe-escudero) (Quito, Ecuador): Fundado por Felipe Escudero. Arquitectura escultórica, vanguardia matérica y diálogo con la geografía andina.
+- [RAMA ESTUDIO](https://ecuadorianarch.com/estudios/rama-estudio) (Quito, Ecuador): Fundado por Carolina Rodas, Felipe Donoso, Carla Chávez. Taller de arquitectura, producción material y optimización de recursos en los Andes.
+- [AL BORDE ARQUITECTOS](https://ecuadorianarch.com/estudios/al-borde-arquitectos) (Quito / Puembo, Ecuador): Fundado por David Barragán, Pascual Gangotena, Marialuisa Borja, Esteban Benavides. Arquitectura radical de recursos escasos, tierra cruda y pedagogía comunitaria.
+- [DANIEL MORENO FLORES](https://ecuadorianarch.com/estudios/daniel-moreno-flores) (Quito / Tumbaco, Ecuador): Fundado por Daniel Moreno Flores. Estructuras ligeras de madera y metal en diálogo con la orografía volcánica.
+- [DIEGO GUAYASAMÍN](https://ecuadorianarch.com/estudios/diego-guayasamin) (Quito / Cuenca, Ecuador): Fundado por Diego Guayasamín. Monumentalidad cívica, hormigón escultórico e infraestructuras metropolitanas.
+- [LUIS LÓPEZ LÓPEZ](https://ecuadorianarch.com/estudios/luis-lopez-lopez) (Guayaquil, Ecuador): Fundado por Luis López López. Arquitectura tropical bioclimática, ventilación y memoria litoral.
+- [ENLACE ARQUITECTURA](https://ecuadorianarch.com/estudios/enlace-arquitectura) (Manabí / Portoviejo, Ecuador): Fundado por Colectivo Enlace Manabí. Innovación en caña guadúa y regeneración comunitaria en la costa ecuatoriana.
+- [NOMADE TALLER](https://ecuadorianarch.com/estudios/nomade-taller) (Quito, Ecuador): Fundado por Nómade Taller de Arquitectura. Arquitectura espiritual, mística matérica y reinterpretación del templo andino.

@@ -1269,12 +1269,69 @@ const server = http.createServer((req, res) => {
     }
   }
 
-  // Fallback for SPA routing to index.html
+function isKnownSpaRoute(pathname, query) {
+  if (pathname === '/' || pathname === '' || pathname === '/index.html') return true;
+  if (pathname.startsWith('/admin')) return true;
+
+  if (query && (query.portal || query.token || query.anunciante || query['ad-advertiser'] || query['ad-report'])) {
+    return true;
+  }
+
+  const clean = pathname.replace(/^\/+|\/+$/g, '');
+  const parts = clean.split('/');
+  const sec = parts[0]?.toLowerCase();
+  const slug = parts[1]?.toLowerCase();
+
+  if (sec === 'acerca-de-ea' || sec === 'acerca') return true;
+
+  if (sec === 'proyectos' || sec === 'academia' || sec === 'territorios') {
+    if (!slug) return true;
+    try {
+      const coll = sec === 'proyectos' ? 'projects.json' : sec === 'academia' ? 'academia.json' : 'territorios.json';
+      const raw = memoryContentCache.get(coll) || (fs.existsSync(path.join(dataDir, coll)) ? fs.readFileSync(path.join(dataDir, coll), 'utf8') : '[]');
+      const items = JSON.parse(raw || '[]');
+      return items.some((item) => (item.slug && item.slug.toLowerCase() === slug) || (item.id && item.id.toLowerCase() === slug));
+    } catch {
+      return false;
+    }
+  }
+
+  if (sec === 'estudios' || sec === 'autores') {
+    if (!slug) return true;
+    try {
+      const raw = memoryContentCache.get('authors.json') || (fs.existsSync(path.join(dataDir, 'authors.json')) ? fs.readFileSync(path.join(dataDir, 'authors.json'), 'utf8') : '[]');
+      const authors = JSON.parse(raw || '[]');
+      return authors.some((a) => {
+        const aSlug = (a.slug || a.name || a.id).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+        return aSlug === slug || (a.id && a.id.toLowerCase() === slug);
+      });
+    } catch {
+      return false;
+    }
+  }
+
+  return false;
+}
+
+  // Fallback for SPA routing vs Real 404
   if (!fs.existsSync(filePath)) {
     if (pathname.startsWith('/admin')) {
       filePath = path.join(distDir, 'admin.html');
-    } else {
+    } else if (isKnownSpaRoute(pathname, parsedUrl.query)) {
       filePath = path.join(distDir, 'index.html');
+    } else {
+      const notFoundPath = fs.existsSync(path.join(distDir, '404.html'))
+        ? path.join(distDir, '404.html')
+        : path.join(rootDir, 'public', '404.html');
+
+      res.statusCode = 404;
+      res.setHeader('Content-Type', 'text/html; charset=utf-8');
+      if (fs.existsSync(notFoundPath)) {
+        fs.createReadStream(notFoundPath).pipe(res);
+      } else {
+        res.end('<!doctype html><html lang="es"><head><meta charset="utf-8"><title>404 Not Found</title></head><body><h1>404 Not Found</h1><p>Ecuadorian Architecture</p></body></html>');
+      }
+      return;
     }
   }
 

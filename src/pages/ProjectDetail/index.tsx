@@ -830,10 +830,42 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
     };
   }, [activeTab]);
 
+  const isNotFound = useMemo(() => {
+    if (customProjectData) return false;
+    if (!projectId) return false;
+    return !allProjects.some((p: any) => p.id === projectId || p.slug === projectId);
+  }, [customProjectData, projectId, allProjects]);
+
   const handleSelectCategory = (tab: string) => {
     setActiveTab(tab);
     // Preserves reader position in-flow without forcing an unwanted jump back to top
   };
+
+  if (isNotFound) {
+    return (
+      <div className="w-full min-h-[75vh] flex flex-col items-center justify-center p-8 text-center bg-white font-inter">
+        <span className="font-mono text-xs uppercase tracking-widest text-neutral-500 mb-2">Error 404 // Archivo Documental</span>
+        <h1 className="text-3xl sm:text-5xl font-black uppercase text-black mb-4">Obra no encontrada</h1>
+        <p className="text-sm sm:text-base text-neutral-600 max-w-lg mb-8 leading-relaxed">
+          El expediente que buscas no se encuentra en el archivo monográfico de Ecuadorian Architecture o ha sido reubicado.
+        </p>
+        <div className="flex flex-wrap gap-4 justify-center">
+          <button
+            onClick={onBack}
+            className="px-6 py-3 bg-black text-white text-xs font-mono uppercase tracking-widest hover:bg-neutral-800 transition-colors cursor-pointer"
+          >
+            ← Volver al Catálogo
+          </button>
+          <a
+            href="/"
+            className="px-6 py-3 border border-black text-black text-xs font-mono uppercase tracking-widest hover:bg-neutral-100 transition-colors no-underline inline-block"
+          >
+            Portada Principal
+          </a>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div ref={pageRef} className="w-full bg-white text-ea-black select-none">

@@ -152,18 +152,43 @@ export const Footer: React.FC = () => {
                 Envía tus proyectos
               </button>
 
-              <button
-                type="button"
-                onClick={() => {
-                  window.location.hash = '#acerca-de-ea';
+              <a
+                href="/proyectos"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (window.history && window.history.pushState) {
+                    window.history.pushState({ path: '/proyectos' }, '', '/proyectos');
+                    window.dispatchEvent(new PopStateEvent('popstate'));
+                  } else {
+                    window.location.href = '/proyectos';
+                  }
                   window.scrollTo({ top: 0, behavior: 'instant' });
                 }}
-                className="hover:text-blue-600 transition-colors duration-200 cursor-pointer font-medium hover:underline underline-offset-4 focus-visible:ring-2 focus-visible:ring-ea-black/70 focus-visible:outline-hidden min-h-[44px] py-2 px-1.5 inline-flex items-center active:scale-95"
+                className="hover:text-blue-600 transition-colors duration-200 cursor-pointer font-medium hover:underline underline-offset-4 focus-visible:ring-2 focus-visible:ring-ea-black/70 focus-visible:outline-hidden min-h-[44px] py-2 px-1.5 inline-flex items-center active:scale-95 no-underline"
+                title="Explorar el catálogo completo de proyectos arquitectónicos"
+                data-cursor
+              >
+                Proyectos
+              </a>
+
+              <a
+                href="/acerca-de-ea"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (window.history && window.history.pushState) {
+                    window.history.pushState({ path: '/acerca-de-ea' }, '', '/acerca-de-ea');
+                    window.dispatchEvent(new PopStateEvent('popstate'));
+                  } else {
+                    window.location.href = '/acerca-de-ea';
+                  }
+                  window.scrollTo({ top: 0, behavior: 'instant' });
+                }}
+                className="hover:text-blue-600 transition-colors duration-200 cursor-pointer font-medium hover:underline underline-offset-4 focus-visible:ring-2 focus-visible:ring-ea-black/70 focus-visible:outline-hidden min-h-[44px] py-2 px-1.5 inline-flex items-center active:scale-95 no-underline"
                 title="Leer el Manifiesto Editorial y Acerca de EA"
                 data-cursor
               >
                 Acerca de EA
-              </button>
+              </a>
 
               <a
                 href="#destacados"

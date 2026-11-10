@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 — Página no encontrada | Ecuadorian Architecture</title>
+    <meta name="description" content="El expediente, obra o documento solicitado no existe en el archivo de Ecuadorian Architecture." />
+    <meta name="robots" content="noindex, follow" />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        background-color: #ffffff;
+        color: #111111;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 24px;
+      }
+      header {
+        border-bottom: 1px solid #111111;
+        padding-bottom: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .logo-link {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        color: #111111;
+      }
+      .logo-img {
+        width: 38px;
+        height: 38px;
+      }
+      .brand-title {
+        font-size: 14px;
+        font-weight: 800;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+      }
+      main {
+        max-width: 680px;
+        margin: 60px auto;
+        width: 100%;
+        text-align: left;
+      }
+      .badge-404 {
+        font-family: monospace;
+        font-size: 13px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: #666666;
+        margin-bottom: 12px;
+        display: block;
+      }
+      h1 {
+        font-size: clamp(38px, 6vw, 64px);
+        font-weight: 900;
+        line-height: 1.05;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #111111;
+        padding-bottom: 16px;
+      }
+      p {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #333333;
+        margin-bottom: 32px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        padding: 12px 20px;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        border: 1px solid #111111;
+      }
+      .btn-primary {
+        background-color: #111111;
+        color: #ffffff;
+      }
+      .btn-primary:hover {
+        background-color: #333333;
+      }
+      .btn-secondary {
+        background-color: transparent;
+        color: #111111;
+      }
+      .btn-secondary:hover {
+        background-color: #f3f3f3;
+      }
+      footer {
+        border-top: 1px solid #e5e5e5;
+        padding-top: 16px;
+        font-family: monospace;
+        font-size: 11px;
+        color: #888888;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="/" class="logo-link">
+        <img src="/logo.svg" alt="Ecuadorian Architecture Logo" class="logo-img" />
+        <span class="brand-title">Ecuadorian Architecture</span>
+      </a>
+      <span style="font-family: monospace; font-size: 11px; text-transform: uppercase; color: #888;">Archivo Documental</span>
+    </header>
+
+    <main>
+      <span class="badge-404">Error 404 // Estado de Rastreo</span>
+      <h1>Expediente no encontrado</h1>
+      <p>
+        La página o documento que buscas no existe en este servidor, ha sido reubicada o el enlace es incorrecto. Puedes explorar las obras vigentes en el archivo monográfico o regresar al inicio.
+      </p>
+
+      <div class="actions">
+        <a href="/" class="btn btn-primary">← Volver al Inicio</a>
+        <a href="/proyectos" class="btn btn-secondary">Explorar Catálogo de Proyectos</a>
+        <a href="/acerca-de-ea" class="btn btn-secondary">Acerca de EA</a>
+      </div>
+    </main>
+
+    <footer>
+      <span>© Ecuadorian Architecture — Archivo y Crítica de Arquitectura en Ecuador</span>
+      <span>HTTP Status: 404 Not Found</span>
+    </footer>
+  </body>
+</html>

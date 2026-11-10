@@ -8,6 +8,8 @@ const publicDir = path.join(__dirname, '..', 'public');
 const projects = JSON.parse(fs.readFileSync(path.join(dataDir, 'projects.json'), 'utf8')).filter(p => p.status === 'published' || !p.status);
 const territorios = JSON.parse(fs.readFileSync(path.join(dataDir, 'territorios.json'), 'utf8')).filter(t => t.status === 'published' || !t.status);
 const academia = JSON.parse(fs.readFileSync(path.join(dataDir, 'academia.json'), 'utf8')).filter(a => a.status === 'published' || !a.status);
+const authorsPath = path.join(dataDir, 'authors.json');
+const authors = fs.existsSync(authorsPath) ? JSON.parse(fs.readFileSync(authorsPath, 'utf8') || '[]') : [];
 
 const today = new Date().toISOString().split('T')[0];
 
@@ -98,6 +100,26 @@ for (const a of academia) {
   </url>`);
 }
 
+for (const auth of authors) {
+  const slug = auth.slug || clean(auth.name).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  if (!slug) continue;
+  const coverImage = auth.coverImage ? (auth.coverImage.startsWith('http') ? auth.coverImage : `${baseUrl}${auth.coverImage}`) : null;
+  let imageXml = '';
+  if (coverImage) {
+    imageXml = `
+    <image:image>
+      <image:loc>${coverImage}</image:loc>
+      <image:title>${clean(auth.name).replace(/&/g, '&amp;')} - Arquitectos en Ecuador</image:title>
+    </image:image>`;
+  }
+  urls.push(`  <url>
+    <loc>${baseUrl}/estudios/${slug}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>${imageXml}
+  </url>`);
+}
+
 const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 ${urls.join('\n')}
@@ -105,4 +127,10 @@ ${urls.join('\n')}
 `;
 
 fs.writeFileSync(path.join(publicDir, 'sitemap.xml'), sitemapContent.trim() + '\n', 'utf8');
-console.log(`Generated public/sitemap.xml with ${urls.length} URLs (including image metadata) successfully.`);
+const distDir = path.join(__dirname, '..', 'dist');
+if (fs.existsSync(distDir)) {
+  try {
+    fs.writeFileSync(path.join(distDir, 'sitemap.xml'), sitemapContent.trim() + '\n', 'utf8');
+  } catch (e) {}
+}
+console.log(`Generated sitemap.xml with ${urls.length} URLs (including image metadata) successfully.`);

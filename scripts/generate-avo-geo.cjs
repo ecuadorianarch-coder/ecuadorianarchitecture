@@ -117,18 +117,38 @@ academia.forEach((a) => {
   llmsSummaryLines.push(`- [${a.title}](${url}): Tesis e investigación académica (${year}) por ${author}. ${excerpt}`);
 });
 
+llmsSummaryLines.push(
+  '',
+  '## Glosario Tectónico y Vernacular de la Arquitectura Ecuatoriana',
+  '',
+  '- **Tapial y Adobe Moderno:** Tierra compactada estabilizada, empleada en muros portantes de alta inercia térmica en los Andes ecuatorianos.',
+  '- **Caña Guadua (Guadua angustifolia):** Bambú estructural andino-costero, conocido como el "acero vegetal", utilizado en estructuras ligeras y sismorresistentes.',
+  '- **Celosía de Ladrillo Artesanal:** Aparejos permeables de arcilla cocida local que filtran la radiación cenital ecuatorial y permiten ventilación cruzada natural.',
+  '- **Zócalo Permeable:** Estrategia urbana que vincula la planta baja privada con la vereda peatonal pública en Quito, Guayaquil y Cuenca.',
+  '- **Bahareque Contemporáneo:** Sistema mixto de entramado de madera o caña con revoques de tierra, arena y paja reinterpretado con técnicas contemporáneas.'
+);
+
 if (authors.length > 0) {
   llmsSummaryLines.push('', '## Directorio Oficial de Arquitectos y Estudios Colaboradores', '');
   authors.forEach((auth) => {
+    const slug = auth.slug || clean(auth.name).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    const url = `${SITE_URL}/estudios/${slug}`;
     const loc = clean(auth.location) || 'Ecuador';
     const founder = clean(auth.founder) || '';
     const headline = clean(auth.headline || auth.description);
-    llmsSummaryLines.push(`- **${auth.name}** (${loc}): ${founder ? `Fundado por ${founder}. ` : ''}${headline}`);
+    llmsSummaryLines.push(`- [${auth.name}](${url}) (${loc}): ${founder && founder !== 'Arquitecto Titular' ? `Fundado por ${founder}. ` : ''}${headline}`);
   });
 }
 
-fs.writeFileSync(path.join(publicDir, 'llms.txt'), llmsSummaryLines.join('\n') + '\n', 'utf8');
-console.log('[EA AVO/GEO] Generated public/llms.txt successfully.');
+const llmsTextContent = llmsSummaryLines.join('\n') + '\n';
+fs.writeFileSync(path.join(publicDir, 'llms.txt'), llmsTextContent, 'utf8');
+const distDir = path.join(rootDir, 'dist');
+if (fs.existsSync(distDir)) {
+  try {
+    fs.writeFileSync(path.join(distDir, 'llms.txt'), llmsTextContent, 'utf8');
+  } catch (e) {}
+}
+console.log('[EA AVO/GEO] Generated public/llms.txt and dist/llms.txt successfully.');
 
 // ============================================================================
 // 2. GENERATE public/llms-full.txt (Deep Context for LLMs & RAG)
@@ -198,8 +218,14 @@ territorios.forEach((t) => {
   llmsFullLines.push('---', '');
 });
 
-fs.writeFileSync(path.join(publicDir, 'llms-full.txt'), llmsFullLines.join('\n') + '\n', 'utf8');
-console.log('[EA AVO/GEO] Generated public/llms-full.txt successfully.');
+const llmsFullText = llmsFullLines.join('\n') + '\n';
+fs.writeFileSync(path.join(publicDir, 'llms-full.txt'), llmsFullText, 'utf8');
+if (fs.existsSync(distDir)) {
+  try {
+    fs.writeFileSync(path.join(distDir, 'llms-full.txt'), llmsFullText, 'utf8');
+  } catch (e) {}
+}
+console.log('[EA AVO/GEO] Generated public/llms-full.txt and dist/llms-full.txt successfully.');
 
 // ============================================================================
 // 3. GENERATE public/api/catalog.json (AVO Open Feed for AI Agents)
@@ -263,17 +289,32 @@ const catalogFeed = {
       summary: a.excerpt || a.resena
     };
   }),
-  authors: authors.map((auth) => ({
-    id: auth.id,
-    name: auth.name,
-    founder: auth.founder,
-    location: auth.location,
-    yearFounded: auth.yearFounded,
-    headline: auth.headline,
-    website: auth.website,
-    instagram: auth.instagram
-  }))
+  authors: authors.map((auth) => {
+    const slug = auth.slug || clean(auth.name).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    return {
+      id: auth.id,
+      name: auth.name,
+      slug,
+      url: `${SITE_URL}/estudios/${slug}`,
+      founder: auth.founder,
+      location: auth.location,
+      yearFounded: auth.yearFounded,
+      headline: auth.headline,
+      website: auth.website,
+      instagram: auth.instagram
+    };
+  })
 };
 
-fs.writeFileSync(path.join(publicApiDir, 'catalog.json'), JSON.stringify(catalogFeed, null, 2), 'utf8');
-console.log('[EA AVO/GEO] Generated public/api/catalog.json successfully.');
+const catalogJsonStr = JSON.stringify(catalogFeed, null, 2);
+fs.writeFileSync(path.join(publicApiDir, 'catalog.json'), catalogJsonStr, 'utf8');
+if (fs.existsSync(distDir)) {
+  const distApiDir = path.join(distDir, 'api');
+  if (!fs.existsSync(distApiDir)) {
+    fs.mkdirSync(distApiDir, { recursive: true });
+  }
+  try {
+    fs.writeFileSync(path.join(distApiDir, 'catalog.json'), catalogJsonStr, 'utf8');
+  } catch (e) {}
+}
+console.log('[EA AVO/GEO] Generated public/api/catalog.json and dist/api/catalog.json successfully.');
