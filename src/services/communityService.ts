@@ -163,7 +163,7 @@ export const useCommunityNotes = (projectId: string, projectSlug?: string) => {
         photos: cleanPhotos,
         visitDate: data.visitDate || new Date().toISOString().split('T')[0],
         createdAt: new Date().toISOString(),
-        status: 'pendiente', // Enviado a moderación privada del CMS
+        status: 'aprobado', // Publicación directa abierta a la comunidad
         likes: 0,
         hasLiked: false,
       };
@@ -206,7 +206,7 @@ export const useCommunityNotes = (projectId: string, projectSlug?: string) => {
         argumentTitle: data.argumentTitle?.trim() || undefined,
         argument: data.argument.trim(),
         createdAt: new Date().toISOString(),
-        status: 'pendiente', // Enviado a moderación privada del CMS
+        status: 'aprobado', // Publicación directa abierta a la comunidad
         likes: 0,
         hasLiked: false,
       };

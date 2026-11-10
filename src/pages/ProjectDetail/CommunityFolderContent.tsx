@@ -298,7 +298,7 @@ export const CommunityFolderContent: React.FC<CommunityFolderContentProps> = ({ 
         return;
       }
 
-      setFormSuccess('✓ Visita de obra enviada a moderación editorial. Se publicará una vez aprobada.');
+      setFormSuccess('✓ Visita de obra registrada y publicada en las Notas de la Comunidad.');
       setVisitExperience('');
       setVisitDate('');
       setVisitPhotos([]);
@@ -325,7 +325,7 @@ export const CommunityFolderContent: React.FC<CommunityFolderContentProps> = ({ 
         return;
       }
 
-      setFormSuccess('✓ Argumento crítico enviado a moderación editorial. Se publicará una vez aprobado.');
+      setFormSuccess('✓ Argumento crítico publicado correctamente en las Notas de la Comunidad.');
       setArgTitle('');
       setArgContent('');
       setActiveStream('conversaciones');
@@ -368,11 +368,19 @@ export const CommunityFolderContent: React.FC<CommunityFolderContentProps> = ({ 
       {/* =================================================================== */}
       {viewMode === 'index' && (
         <div className="flex flex-col items-center justify-center min-h-[350px] sm:min-h-[380px] py-2 sm:py-3 select-none">
-          {criticalArguments.length === 0 && visits.length === 0 && (
-            <div className="w-full max-w-xl mb-6">
-              <EditorialEmptyState section="comunidad" variant="card" />
-            </div>
-          )}
+          {/* Header editorial abierto a la comunidad */}
+          <div className="text-center max-w-lg mb-6 sm:mb-7">
+            <span className="inline-block px-3 py-1 bg-ea-black text-white font-mono text-[10px] uppercase tracking-widest mb-2 shadow-xs">
+              NOTAS DE LA COMUNIDAD • ESPACIO ABIERTO
+            </span>
+            <h3 className="font-anton text-xl sm:text-2xl uppercase tracking-wide text-ea-black leading-tight">
+              Miradas, recorridos y debates sobre esta obra
+            </h3>
+            <p className="font-creato text-xs text-ea-black/70 mt-1">
+              Explora las conversaciones críticas y registros in situ, o comparte tu propia postura.
+            </p>
+          </div>
+
           {/* Post-it(s) Centrados: En Proyectos muestra Conversaciones y Visitas; en Territorios y Academia solo Conversaciones */}
           <div className={`flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-6 md:gap-7 w-full ${isVisitasEnabled ? 'max-w-xl' : 'max-w-md'} pb-6 sm:pb-7`}>
             <FigmaNoteConversaciones
@@ -480,8 +488,29 @@ export const CommunityFolderContent: React.FC<CommunityFolderContentProps> = ({ 
           {/* Tablero de Post-its de Conversación Crítica (2 columnas para lectura espaciosa y cómoda) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 w-full items-stretch">
             {criticalArguments.length === 0 && (
-              <div className="col-span-full mb-2">
-                <EditorialEmptyState section="comunidad" variant="card" />
+              <div className="col-span-full border-2 border-dashed border-ea-black/30 bg-[#FAF9F5] p-6 sm:p-8 text-center rounded-[12px] flex flex-col items-center justify-center my-3 shadow-sm">
+                <span className="font-mono text-[10px] uppercase tracking-widest text-ea-black/50 font-bold mb-1.5">
+                  CONVERSACIONES CRÍTICAS ABIERTAS
+                </span>
+                <h4 className="font-anton text-xl sm:text-2xl uppercase tracking-wider text-ea-black mb-2">
+                  Sé el primero en aportar una postura crítica
+                </h4>
+                <p className="font-creato text-xs sm:text-sm text-ea-black/75 max-w-md mb-4 leading-relaxed">
+                  ¿Tienes una postura sobre su planteamiento espacial, tectónico o social? Deja tu análisis para iniciar la conversación comunitaria.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setModalMode('conversaciones');
+                    setFormError(null);
+                    setFormSuccess(null);
+                    setIsModalOpen(true);
+                  }}
+                  className="bg-ea-black text-white hover:bg-black/90 active:scale-95 px-5 py-2.5 font-anton text-xs uppercase tracking-wider rounded-[2px] shadow-[3px_3px_0px_rgba(0,0,0,0.3)] transition-all cursor-pointer flex items-center gap-2"
+                >
+                  <MessageSquare className="w-4 h-4" />
+                  <span>+ ESCRIBIR EL PRIMER COMENTARIO</span>
+                </button>
               </div>
             )}
             {criticalArguments.map((arg, idx) => (
