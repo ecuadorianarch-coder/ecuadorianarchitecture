@@ -56,7 +56,7 @@ interface ProjectDetailProps {
   projectId: string;
   onBack: () => void;
   onSelectProject?: (id: string) => void;
-  onNavigate?: (section: string) => void;
+  onNavigate?: (section: string, searchQueryParam?: string) => void;
   customProjectData?: any;
   controlledActiveTab?: string;
   onTabChange?: (tab: string) => void;
@@ -282,15 +282,16 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
     if (!term || typeof window === 'undefined') return;
     const cleanTerm = term.trim();
     if (!cleanTerm) return;
-    const targetUrl = `/proyectos?search=${encodeURIComponent(cleanTerm)}`;
-    if (window.history && window.history.pushState) {
-      window.history.pushState({ path: targetUrl }, '', targetUrl);
-      window.dispatchEvent(new PopStateEvent('popstate'));
-    } else {
-      window.location.href = targetUrl;
-    }
     if (onNavigate) {
-      onNavigate('proyectos');
+      onNavigate('proyectos', cleanTerm);
+    } else {
+      const targetUrl = `/proyectos?search=${encodeURIComponent(cleanTerm)}`;
+      if (window.history && window.history.pushState) {
+        window.history.pushState({ path: targetUrl }, '', targetUrl);
+        window.dispatchEvent(new PopStateEvent('popstate'));
+      } else {
+        window.location.href = targetUrl;
+      }
     }
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
   }, [onNavigate]);

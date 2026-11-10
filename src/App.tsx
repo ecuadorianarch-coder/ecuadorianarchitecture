@@ -36,6 +36,13 @@ export const AppContent: React.FC = () => {
   const [targetTab, setTargetTab] = useState<'proyectos' | 'academia' | 'territorios' | 'acerca'>(
     initialRoute.targetTab || initialRoute.catalogSection || 'proyectos'
   );
+  const [catalogSearchQuery, setCatalogSearchQuery] = useState<string>(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('search') || params.get('q') || '';
+    }
+    return '';
+  });
 
   // Live Visitor Analytics Tracker (First-party, privacy-first)
   useVisitorTracking(currentView, catalogSection);
@@ -93,6 +100,11 @@ export const AppContent: React.FC = () => {
     } else if (route.view === 'catalog' && route.catalogSection) {
       const isDifferent = prevView !== 'catalog' || prevSection !== route.catalogSection;
       setCatalogSection(route.catalogSection);
+      if (typeof window !== 'undefined') {
+        const searchParams = new URLSearchParams(window.location.search);
+        const q = searchParams.get('search') || searchParams.get('q') || '';
+        setCatalogSearchQuery(q);
+      }
       setCurrentView('catalog');
       if (isDifferent) {
         window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
@@ -151,25 +163,32 @@ export const AppContent: React.FC = () => {
     return () => clearTimeout(timer);
   }, [currentView]);
 
-  const handleNavigate = (section: string) => {
+  const handleNavigate = (section: string, searchQueryParam?: string) => {
     if (section === 'proyectos' || section === 'academia' || section === 'territorios') {
       const sec = section as CatalogSectionType;
-      pushAppRoute(`/${sec}`);
+      const targetPath = searchQueryParam
+        ? `/${sec}?search=${encodeURIComponent(searchQueryParam)}`
+        : `/${sec}`;
+      pushAppRoute(targetPath);
       setCatalogSection(sec);
+      setCatalogSearchQuery(searchQueryParam || '');
       setCurrentView('catalog');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (section === 'home') {
       pushAppRoute('/');
+      setCatalogSearchQuery('');
       setCurrentView('home');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (section === 'acerca' || section === 'acerca-de-ea') {
       pushAppRoute('/acerca-de-ea');
+      setCatalogSearchQuery('');
       setCurrentView('acerca');
       setTargetTab('acerca');
       window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
     } else {
       if (currentView !== 'home') {
         pushAppRoute('/');
+        setCatalogSearchQuery('');
         setCurrentView('home');
       }
     }
@@ -259,6 +278,7 @@ export const AppContent: React.FC = () => {
       {currentView === 'catalog' && (
         <ProjectsCatalog
           initialSection={catalogSection}
+          initialSearchQuery={catalogSearchQuery}
           onSelectProject={handleSelectProject}
           onNavigate={handleNavigate}
           onSectionChange={(sec) => setCatalogSection(sec)}

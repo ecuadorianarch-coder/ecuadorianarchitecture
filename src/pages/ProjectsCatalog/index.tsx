@@ -34,6 +34,7 @@ export type CatalogSectionType = 'proyectos' | 'academia' | 'territorios';
 
 interface ProjectsCatalogProps {
   initialSection?: CatalogSectionType;
+  initialSearchQuery?: string;
   onSelectProject: (projectId: string) => void;
   onNavigate?: (section: string) => void;
   onSectionChange?: (section: CatalogSectionType) => void;
@@ -41,6 +42,7 @@ interface ProjectsCatalogProps {
 
 export const ProjectsCatalog: React.FC<ProjectsCatalogProps> = ({
   initialSection = 'proyectos',
+  initialSearchQuery = '',
   onSelectProject,
   onNavigate,
   onSectionChange,
@@ -52,12 +54,20 @@ export const ProjectsCatalog: React.FC<ProjectsCatalogProps> = ({
   const inFeedFrequency = Math.max(1, inFeedConfig?.frequency || 3);
   const [currentSection, setCurrentSection] = useState<CatalogSectionType>(initialSection);
   const [searchQuery, setSearchQuery] = useState(() => {
+    if (initialSearchQuery) return initialSearchQuery;
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
       return params.get('search') || params.get('q') || '';
     }
     return '';
   });
+
+  // Sync initialSearchQuery prop when passed or changed
+  useEffect(() => {
+    if (initialSearchQuery !== undefined) {
+      setSearchQuery(initialSearchQuery);
+    }
+  }, [initialSearchQuery]);
 
   // Sync search param from URL on popstate
   useEffect(() => {
@@ -306,7 +316,15 @@ export const ProjectsCatalog: React.FC<ProjectsCatalogProps> = ({
         normalize(p.studio).includes(q) ||
         normalize(p.location).includes(q) ||
         normalize(p.excerpt).includes(q) ||
-        normalize(p.critic).includes(q);
+        normalize(p.critic).includes(q) ||
+        normalize(p.category).includes(q) ||
+        normalize(p.tipologia).includes(q) ||
+        normalize(p.datos?.tipologia).includes(q) ||
+        normalize(p.datos?.ubicacion).includes(q) ||
+        normalize(p.datos?.estructura).includes(q) ||
+        normalize(p.materialidadPrincipal).includes(q) ||
+        normalize(p.sistemaEstructural).includes(q) ||
+        normalize(p.memory).includes(q);
 
       const matchesLugar = !selectedLugar || p.location === selectedLugar;
       const matchesAutor = !selectedAutor || p.studio === selectedAutor;
