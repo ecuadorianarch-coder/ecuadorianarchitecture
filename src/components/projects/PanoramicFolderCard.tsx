@@ -140,19 +140,6 @@ export const PanoramicFolderCard: React.FC<PanoramicFolderCardProps> = ({
       ? 'text-xl sm:text-2xl md:text-[25px] leading-[1.2]'
       : 'text-2xl sm:text-[28px] md:text-[32px] leading-[1.15]';
 
-  // Stats & Flags
-  const isVisitasEnabled =
-    project.type !== 'territorios' &&
-    project.type !== 'academia' &&
-    project.category !== 'EXPEDIENTE TERRITORIAL' &&
-    project.category !== 'INVESTIGACIÓN ACADÉMICA' &&
-    project.hasVisitas !== false;
-
-  const visitsCount =
-    project.visitas ?? (project.title?.includes('LOMA') ? 2 : 2 + (index % 3));
-  const commentsCount =
-    project.comentarios ?? (project.title?.includes('LOMA') ? 7 : 4 + (index % 4));
-
   return (
     <article
       onClick={() => onSelect(project.id)}
@@ -266,32 +253,15 @@ export const PanoramicFolderCard: React.FC<PanoramicFolderCardProps> = ({
           </p>
         </div>
 
-        {/* Bottom Action Pills: Visitas de Obra & Comentarios (Side by side on ONE row, never stacked or cut off) */}
-        <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap mt-auto pt-2 pb-0.5 shrink-0">
-          {isVisitasEnabled && (
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                onSelect(project.id);
-              }}
-              className="bg-[#70757D] hover:bg-[#5D626A] active:scale-95 text-white px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full font-okcok text-[10px] sm:text-[10.5px] uppercase tracking-normal sm:tracking-wide transition-all inline-flex items-center justify-center shadow-2xs whitespace-nowrap cursor-pointer shrink-0"
-              data-cursor
-            >
-              {visitsCount} VISITAS DE OBRAS
-            </button>
-          )}
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              onSelect(project.id);
-            }}
-            className="bg-[#70757D] hover:bg-[#5D626A] active:scale-95 text-white px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full font-okcok text-[10px] sm:text-[10.5px] uppercase tracking-normal sm:tracking-wide transition-all inline-flex items-center justify-center shadow-2xs whitespace-nowrap cursor-pointer shrink-0"
-            data-cursor
-          >
-            {commentsCount} COMENTARIOS
-          </button>
+        {/* Bottom Editorial Call-to-Action */}
+        <div className="flex items-center justify-between mt-auto pt-2 pb-0.5 shrink-0 border-t border-ea-black/10">
+          <span className="font-okcok text-xs uppercase tracking-wider text-ea-black flex items-center gap-1.5 group-hover:underline">
+            <span>EXPLORAR OBRA COMPLETA</span>
+            <span className="font-mono text-sm leading-none transition-transform group-hover:translate-x-1">→</span>
+          </span>
+          <span className="font-mono text-[10px] text-ea-black/40 uppercase tracking-widest hidden sm:inline">
+            EXPEDIENTE EDITORIAL
+          </span>
         </div>
       </div>
     </article>
