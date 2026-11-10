@@ -51,6 +51,20 @@ export function useVisitorTracking(currentView?: string, section?: string) {
     // Determine section
     const currentSection = section || (currentView === 'catalog' ? 'proyectos' : currentView || 'home');
 
+    // Notify Google Analytics 4 (GA4) on SPA route navigation
+    if (typeof window !== 'undefined' && typeof (window as any).gtag === 'function') {
+      try {
+        (window as any).gtag('event', 'page_view', {
+          page_path: window.location.pathname,
+          page_location: window.location.href,
+          page_title: document.title,
+          section: currentSection,
+        });
+      } catch {
+        // Non-blocking fail-safe
+      }
+    }
+
     const payload = {
       isNewVisitor,
       device,
