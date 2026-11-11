@@ -5,6 +5,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowLeft, Share2, Compass, CheckCircle2, MoveDown, Calendar, MapPin, Users, Sliders, ChevronRight, ChevronLeft, ChevronDown, Menu, X } from 'lucide-react';
 import { ImageCarouselLightbox, extractAllProjectImages } from '../../components/editorial/ImageCarouselLightbox';
+import { buildProjectImageAlt, toSeoImageUrl } from '../../services/architectureSeo';
 
 // Figma official SVG logos & doodles
 import logoUrl from '../../assets/logos/logo.svg';
@@ -799,8 +800,8 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
           title="Clic para ver en carrusel de fotos a pantalla completa"
         >
           <img
-            src={planImg}
-            alt="Plano arquitectónico"
+            src={toSeoImageUrl(planImg, project, 'plano-arquitectonico')}
+            alt={buildProjectImageAlt(project, 'Plano arquitectónico')}
             className="w-full h-auto max-h-[560px] object-contain mx-auto group-hover:scale-[1.01] transition-transform duration-500"
             loading="lazy"
           />
@@ -1581,8 +1582,8 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
           >
             <img
               ref={singleHeroImgRef}
-              src={project.heroImage}
-              alt={project.title}
+              src={toSeoImageUrl(project.heroImage, project, 'vista-principal')}
+              alt={buildProjectImageAlt(project)}
               className="w-full h-full object-cover transition-[object-position] duration-200"
               style={{
                 objectPosition: heroObjectPosition,

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowRight, Eye } from 'lucide-react';
 import { BROCHURE_FULL_PATH, BROCHURE_OUTER_PATH } from './folderPaths';
+import { buildProjectImageAlt, toSeoImageUrl } from '../../services/architectureSeo';
 
 export interface ProjectFolderData {
   id: string;
@@ -132,8 +133,8 @@ export const OrigamiFolderCard: React.FC<OrigamiFolderCardProps> = ({
           {/* Compact Architectural Photograph */}
           <div className="relative w-full h-[114px] my-1 bg-ea-offwhite border border-ea-black/35 overflow-hidden shadow-xs shrink-0">
             <img
-              src={photoUrl}
-              alt={project.title}
+              src={toSeoImageUrl(photoUrl, project, 'vista-principal')}
+              alt={buildProjectImageAlt(project)}
               className={`w-full h-full object-cover transition-all duration-700 ease-out ${
                 isOpen
                   ? 'grayscale-0 scale-105 contrast-105'

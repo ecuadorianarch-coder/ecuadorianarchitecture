@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowRight, BookOpen } from 'lucide-react';
 import { NOTEBOOK_FULL_PATH, NOTEBOOK_OUTER_PATH } from './folderPaths';
+import { buildProjectImageAlt, toSeoImageUrl } from '../../services/architectureSeo';
 
 export interface AcademiaItemData {
   id: string;
@@ -113,8 +114,8 @@ export const NotebookCard: React.FC<NotebookCardProps> = ({
           {/* Compact Architectural & Scientific Photograph */}
           <div className="relative w-full h-[112px] my-1 bg-ea-offwhite border border-ea-black/35 overflow-hidden shadow-xs shrink-0">
             <img
-              src={photoUrl}
-              alt={item.title}
+              src={toSeoImageUrl(photoUrl, item, 'academia')}
+              alt={buildProjectImageAlt(item, 'Investigación académica')}
               className={`w-full h-full object-cover transition-all duration-700 ease-out ${
                 isOpen
                   ? 'grayscale-0 scale-105 contrast-105'

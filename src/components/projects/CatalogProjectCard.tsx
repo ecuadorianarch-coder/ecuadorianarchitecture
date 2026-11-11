@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowUpRight, MapPin, Calendar, Compass, User } from 'lucide-react';
+import { buildProjectImageAlt, toSeoImageUrl } from '../../services/architectureSeo';
 
 export interface ProjectCardData {
   id: string;
@@ -54,8 +55,8 @@ export const CatalogProjectCard: React.FC<CatalogProjectCardProps> = ({
         )}
 
         <img
-          src={project.imageUrl}
-          alt={`Fotografía del proyecto ${project.title}`}
+          src={toSeoImageUrl(project.imageUrl, project, 'vista-principal')}
+          alt={buildProjectImageAlt(project)}
           onLoad={() => setIsLoaded(true)}
           loading="lazy"
           className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 ${

@@ -1297,6 +1297,60 @@ const server = http.createServer((req, res) => {
     }
   }
 
+  // 2.5. First-Party SEO Image Proxy (/media/s/<sourceFile>/<seoSlug>.<ext>)
+  if ((req.method === 'GET' || req.method === 'HEAD') && pathname.startsWith('/media/s/')) {
+    const mediaParts = pathname.replace(/^\/+|\/+$/g, '').split('/');
+    if (mediaParts.length >= 3) {
+      let sourceFile = '';
+      try { sourceFile = decodeURIComponent(mediaParts[2]); } catch { sourceFile = mediaParts[2]; }
+      if (/^[a-zA-Z0-9._-]+$/.test(sourceFile) && !sourceFile.includes('..')) {
+        const ext = path.extname(sourceFile).toLowerCase() || path.extname(pathname).toLowerCase() || '.webp';
+        const contentType = MIME_TYPES[ext] || 'image/webp';
+        const localCachedPath = path.join(uploadsDir, sourceFile);
+
+        if (fs.existsSync(localCachedPath) && fs.statSync(localCachedPath).isFile()) {
+          res.statusCode = 200;
+          res.setHeader('Content-Type', contentType);
+          res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+          res.setHeader('X-Robots-Tag', 'all');
+          if (req.method === 'HEAD') {
+            res.end();
+          } else {
+            fs.createReadStream(localCachedPath).pipe(res);
+          }
+          return;
+        }
+
+        const remoteUrl = `${SUPABASE_URL}/storage/v1/object/public/uploads/${encodeURIComponent(sourceFile)}`;
+        fetch(remoteUrl)
+          .then(async (upstream) => {
+            if (!upstream.ok) {
+              res.statusCode = 404;
+              res.end('Image not found');
+              return;
+            }
+            const buf = Buffer.from(await upstream.arrayBuffer());
+            try { fs.writeFileSync(localCachedPath, buf); } catch {}
+            res.statusCode = 200;
+            res.setHeader('Content-Type', contentType);
+            res.setHeader('Content-Length', buf.length);
+            res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+            res.setHeader('X-Robots-Tag', 'all');
+            if (req.method === 'HEAD') {
+              res.end();
+            } else {
+              res.end(buf);
+            }
+          })
+          .catch(() => {
+            res.statusCode = 502;
+            res.end('Upstream error');
+          });
+        return;
+      }
+    }
+  }
+
   // 3. Serve Static Files from dist/ or public/
   let filePath = path.join(distDir, pathname === '/' ? 'index.html' : pathname);
 

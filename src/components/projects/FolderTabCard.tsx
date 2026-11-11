@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowRight, Compass } from 'lucide-react';
 import { FOLDER_FULL_PATH, FOLDER_OUTER_PATH } from './folderPaths';
+import { buildProjectImageAlt, toSeoImageUrl } from '../../services/architectureSeo';
 
 export interface TerritorioItemData {
   id: string;
@@ -109,8 +110,8 @@ export const FolderTabCard: React.FC<FolderTabCardProps> = ({
           {/* Compact Territorial Landscape Photograph */}
           <div className="relative w-full h-[94px] my-1 bg-ea-offwhite border border-ea-black/35 overflow-hidden shadow-xs shrink-0">
             <img
-              src={photoUrl}
-              alt={item.title}
+              src={toSeoImageUrl(photoUrl, item, 'territorio')}
+              alt={buildProjectImageAlt(item, 'Expediente territorial')}
               className={`w-full h-full object-cover transition-all duration-700 ease-out ${
                 isOpen
                   ? 'grayscale-0 scale-105 contrast-105'

@@ -1,5 +1,10 @@
 const fs = require('fs');
 const path = require('path');
+const {
+  cleanText,
+  extractProjectSeoImages,
+  toFirstPartySeoImageUrl,
+} = require('./image-seo-helpers.cjs');
 
 const baseUrl = process.env.VITE_SITE_URL || 'https://ecuadorianarch.com';
 const dataDir = path.join(__dirname, '..', 'src', 'data');
@@ -12,17 +17,6 @@ const authorsPath = path.join(dataDir, 'authors.json');
 const authors = fs.existsSync(authorsPath) ? JSON.parse(fs.readFileSync(authorsPath, 'utf8') || '[]') : [];
 
 const today = new Date().toISOString().split('T')[0];
-
-function clean(str) {
-  if (!str) return '';
-  return String(str).trim();
-}
-
-function getStudios(p) {
-  if (Array.isArray(p.studios) && p.studios.length > 0) return p.studios;
-  if (p.studio) return [p.studio];
-  return ['Estudios Ecuatorianos'];
-}
 
 const staticRoutes = [
   { path: '', priority: '1.0', changefreq: 'daily' },
@@ -43,73 +37,63 @@ for (const r of staticRoutes) {
   </url>`);
 }
 
-for (const p of projects) {
-  const slug = p.slug || p.id;
-  const title = clean(p.title) || 'Proyecto Arquitectónico';
-  const studios = getStudios(p).join(' + ');
-  const loc = clean(p.location) || 'Ecuador';
-  const heroImage = p.heroImage ? (p.heroImage.startsWith('http') ? p.heroImage : `${baseUrl}${p.heroImage}`) : null;
+function escapeXml(str) {
+  return String(str || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
 
-  let imageXml = '';
-  if (heroImage) {
-    const imgTitle = `${title} - ${studios} - Arquitectura Ecuatoriana (${loc})`.replace(/&/g, '&amp;');
-    const imgCaption = clean(p.excerpt || p.resena || p.subtitle || '').replace(/&/g, '&amp;');
-    imageXml = `
+function buildImagesXml(item, section, baseUrl) {
+  const images = extractProjectSeoImages(item, baseUrl);
+  if (!images.length) return '';
+  return images
+    .map((img) => {
+      const cap = escapeXml(img.caption || '');
+      const title = escapeXml(img.title || '');
+      return `
     <image:image>
-      <image:loc>${heroImage}</image:loc>
-      <image:title>${imgTitle}</image:title>
-      ${imgCaption ? `<image:caption>${imgCaption}</image:caption>` : ''}
+      <image:loc>${escapeXml(img.url)}</image:loc>
+      <image:title>${title}</image:title>${cap ? `\n      <image:caption>${cap}</image:caption>` : ''}
     </image:image>`;
-  }
+    })
+    .join('');
+}
 
-  urls.push(`  <url>
-    <loc>${baseUrl}/proyectos/${slug}</loc>
-    <lastmod>${p.updatedAt ? p.updatedAt.split('T')[0] : today}</lastmod>
+for (const { list, section } of [
+  { list: projects, section: 'proyectos' },
+  { list: territorios, section: 'territorios' },
+  { list: academia, section: 'academia' },
+]) {
+  for (const item of list) {
+    const slug = item.slug || item.id;
+    const imageXml = buildImagesXml(item, section, baseUrl);
+    urls.push(`  <url>
+    <loc>${baseUrl}/${section}/${slug}</loc>
+    <lastmod>${item.updatedAt ? item.updatedAt.split('T')[0] : today}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>${imageXml}
   </url>`);
-}
-
-for (const t of territorios) {
-  const slug = t.slug || t.id;
-  const heroImage = t.heroImage ? (t.heroImage.startsWith('http') ? t.heroImage : `${baseUrl}${t.heroImage}`) : null;
-  let imageXml = '';
-  if (heroImage) {
-    imageXml = `
-    <image:image>
-      <image:loc>${heroImage}</image:loc>
-      <image:title>${clean(t.title).replace(/&/g, '&amp;')} - Territorio y Ciudad en Ecuador</image:title>
-    </image:image>`;
   }
-
-  urls.push(`  <url>
-    <loc>${baseUrl}/territorios/${slug}</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>${imageXml}
-  </url>`);
-}
-
-for (const a of academia) {
-  const slug = a.slug || a.id;
-  urls.push(`  <url>
-    <loc>${baseUrl}/academia/${slug}</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>`);
 }
 
 for (const auth of authors) {
-  const slug = auth.slug || clean(auth.name).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const slug = auth.slug || cleanText(auth.name).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
   if (!slug) continue;
-  const coverImage = auth.coverImage ? (auth.coverImage.startsWith('http') ? auth.coverImage : `${baseUrl}${auth.coverImage}`) : null;
+  const rawCover = cleanText(auth.coverImage || '');
+  const isStockUnsplash = rawCover.includes('images.unsplash.com');
   let imageXml = '';
-  if (coverImage) {
+  if (rawCover && !isStockUnsplash) {
+    const seoCover = toFirstPartySeoImageUrl(
+      rawCover,
+      { slug, title: auth.name, studio: auth.name },
+      'estudio-arquitectura',
+      baseUrl
+    );
     imageXml = `
     <image:image>
-      <image:loc>${coverImage}</image:loc>
-      <image:title>${clean(auth.name).replace(/&/g, '&amp;')} - Arquitectos en Ecuador</image:title>
+      <image:loc>${escapeXml(seoCover)}</image:loc>
+      <image:title>${escapeXml(cleanText(auth.name))} - Estudio de Arquitectura en Ecuador | Arquitectura Ecuatoriana</image:title>
     </image:image>`;
   }
   urls.push(`  <url>

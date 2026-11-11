@@ -10,6 +10,7 @@ import tagProyectosUrl from '../../assets/logos/tag_proyectos.svg';
 import tagCiudadUrl from '../../assets/logos/tag_ciudad.svg';
 import tagDatosUrl from '../../assets/logos/tag_datos.svg';
 import { FigmaSectionTransition, TransitionSectionType } from './FigmaSectionTransition';
+import { buildProjectImageAlt, toSeoImageUrl } from '../../services/architectureSeo';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 if (typeof window !== 'undefined') {
@@ -1611,8 +1612,8 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
                     >
                       {/* Primary Image: Exterior / Fachada */}
                       <img
-                        src={project.imageUrl}
-                        alt={project.title}
+                        src={toSeoImageUrl(project.imageUrl, project, 'vista-principal')}
+                        alt={buildProjectImageAlt(project)}
                         draggable={false}
                         onDragStart={(e) => e.preventDefault()}
                         className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out pointer-events-none select-none ${
@@ -1635,8 +1636,8 @@ export const PhysicalCardDeck: React.FC<PhysicalCardDeckProps> = ({
                           }}
                         >
                           <img
-                            src={project.secondaryImageUrl}
-                            alt={`${project.title} - Vista interior`}
+                            src={toSeoImageUrl(project.secondaryImageUrl, project, 'vista-interior')}
+                            alt={buildProjectImageAlt(project, 'Vista interior y detalle constructivo')}
                             draggable={false}
                             onDragStart={(e) => e.preventDefault()}
                             className="w-full h-full object-cover scale-100 transition-transform duration-700 pointer-events-none select-none"

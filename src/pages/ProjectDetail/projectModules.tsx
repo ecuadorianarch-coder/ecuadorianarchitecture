@@ -3,6 +3,7 @@ import { PodcastSection } from './PodcastSection';
 import { CommunityFolderContent } from './CommunityFolderContent';
 import { DynamicModulesRenderer, extractStudiosList, isTerritoriosProject } from '../../components/editorial/DynamicModulesRenderer';
 import { ImageCarouselLightbox, extractAllProjectImages } from '../../components/editorial/ImageCarouselLightbox';
+import { buildProjectImageAlt, toSeoImageUrl } from '../../services/architectureSeo';
 import { Camera, BookOpen } from 'lucide-react';
 import { EditorialEmptyState } from '../../components/common/EditorialEmptyState';
 
@@ -261,12 +262,14 @@ const ResenaModuleContent: React.FC<ProjectModuleContext> = ({
           title="Clic para ver en carrusel de fotos a pantalla completa"
         >
           <img
-            src={
+            src={toSeoImageUrl(
               project.plans?.planta ||
               project.planImage ||
-              'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=80'
-            }
-            alt="Planta arquitectónica"
+              'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=80',
+              project,
+              'planta-arquitectonica'
+            )}
+            alt={buildProjectImageAlt(project, 'Planta arquitectónica')}
             className="w-full h-auto max-h-[560px] object-contain mx-auto group-hover:scale-[1.01] transition-transform duration-500"
             loading="lazy"
           />
@@ -294,8 +297,8 @@ const ResenaModuleContent: React.FC<ProjectModuleContext> = ({
           title="Clic para ver en carrusel de fotos a pantalla completa"
         >
           <img
-            src={project.heroImage}
-            alt={project.title}
+            src={toSeoImageUrl(project.heroImage, project, 'fotografia-obra')}
+            alt={buildProjectImageAlt(project, 'Fotografía de obra')}
             className="w-full h-[320px] sm:h-[460px] md:h-[520px] object-cover group-hover:scale-[1.015] transition-transform duration-500"
           />
           <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity bg-ea-black/90 text-white px-3 py-1.5 text-[10px] font-anton uppercase tracking-wider flex items-center gap-2 shadow-lg backdrop-blur-xs">
@@ -529,12 +532,14 @@ const CriticaModuleContent: React.FC<ProjectModuleContext> = ({
           title="Clic para ver en carrusel de fotos a pantalla completa"
         >
           <img
-            src={
+            src={toSeoImageUrl(
               project.plans?.corte ||
               project.sectionImage ||
-              'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=1600&q=80'
-            }
-            alt="Corte arquitectónico"
+              'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=1600&q=80',
+              project,
+              'corte-arquitectonico'
+            )}
+            alt={buildProjectImageAlt(project, 'Corte arquitectónico')}
             className="w-full h-auto max-h-[560px] object-contain mx-auto group-hover:scale-[1.01] transition-transform duration-500"
             loading="lazy"
           />
@@ -563,12 +568,14 @@ const CriticaModuleContent: React.FC<ProjectModuleContext> = ({
           title="Clic para ver en carrusel de fotos a pantalla completa"
         >
           <img
-            src={
+            src={toSeoImageUrl(
               project.plans?.axonometria ||
               project.axonometriaImage ||
-              'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1600&q=80'
-            }
-            alt="Axonometría arquitectónica"
+              'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1600&q=80',
+              project,
+              'axonometria-arquitectonica'
+            )}
+            alt={buildProjectImageAlt(project, 'Axonometría arquitectónica')}
             className="w-full h-auto max-h-[560px] object-cover mx-auto group-hover:scale-[1.01] transition-transform duration-500"
             loading="lazy"
           />

@@ -15,6 +15,7 @@ import {
   ImageCarouselLightbox,
   extractAllProjectImages,
 } from './ImageCarouselLightbox';
+import { buildProjectImageAlt, toSeoImageUrl } from '../../services/architectureSeo';
 
 /**
  * Helper to extract and cleanly format collaborating studios list.
@@ -248,8 +249,8 @@ export const DynamicModulesRenderer: React.FC<DynamicModulesRendererProps> = ({
                   title="Clic para ampliar en carrusel a pantalla completa"
                 >
                   <img
-                    src={mod.imageUrl || project.heroImage}
-                    alt={mod.caption || mod.title || 'Fotografía de proyecto'}
+                    src={toSeoImageUrl(mod.imageUrl || project.heroImage, project, mod.category === 'planimetria' ? 'planimetria' : 'fotografia')}
+                    alt={buildProjectImageAlt(project, mod.caption || mod.title || (mod.category === 'planimetria' ? 'Planimetría arquitectónica' : 'Fotografía'))}
                     className={`w-full h-auto max-h-[640px] object-cover group-hover:scale-[1.015] transition-transform duration-500 ${
                       mod.settings?.focalPoint === 'top'
                         ? 'object-top'
@@ -282,8 +283,8 @@ export const DynamicModulesRenderer: React.FC<DynamicModulesRendererProps> = ({
                     title="Clic para ampliar en carrusel a pantalla completa"
                   >
                     <img
-                      src={mod.imageUrl || project.heroImage}
-                      alt={mod.caption || 'Imagen a pantalla completa'}
+                      src={toSeoImageUrl(mod.imageUrl || project.heroImage, project, 'vista-panoramica')}
+                      alt={buildProjectImageAlt(project, mod.caption || mod.title || 'Vista panorámica')}
                       className="w-full h-[400px] sm:h-[550px] object-cover group-hover:scale-[1.015] transition-transform duration-500"
                       loading="lazy"
                     />
@@ -326,8 +327,8 @@ export const DynamicModulesRenderer: React.FC<DynamicModulesRendererProps> = ({
                       title="Clic para ver en carrusel"
                     >
                       <img
-                        src={url}
-                        alt={`Galería ${idx + 1}`}
+                        src={toSeoImageUrl(url, project, `galeria-${idx + 1}`)}
+                        alt={buildProjectImageAlt(project, `Galería fotográfica ${idx + 1}`)}
                         className="w-full h-[220px] sm:h-[260px] object-cover group-hover:scale-105 transition-transform duration-500"
                         loading="lazy"
                       />
@@ -359,8 +360,8 @@ export const DynamicModulesRenderer: React.FC<DynamicModulesRendererProps> = ({
                 <div className="relative w-full h-[320px] sm:h-[420px] overflow-hidden select-none">
                   {/* Before image */}
                   <img
-                    src={mod.beforeImageUrl || project.heroImage}
-                    alt="Antes"
+                    src={toSeoImageUrl(mod.beforeImageUrl || project.heroImage, project, 'antes')}
+                    alt={buildProjectImageAlt(project, 'Estado previo')}
                     className="absolute inset-0 w-full h-full object-cover"
                   />
                   {/* After image with clip */}
@@ -369,8 +370,8 @@ export const DynamicModulesRenderer: React.FC<DynamicModulesRendererProps> = ({
                     style={{ width: `${sliderVal}%` }}
                   >
                     <img
-                      src={mod.afterImageUrl || project.heroImage}
-                      alt="Después"
+                      src={toSeoImageUrl(mod.afterImageUrl || project.heroImage, project, 'despues')}
+                      alt={buildProjectImageAlt(project, 'Estado intervenido')}
                       className="absolute inset-0 w-full h-full object-cover max-w-none"
                       style={{ width: '100%', minWidth: '100%' }}
                     />
@@ -554,13 +555,15 @@ export const DynamicModulesRenderer: React.FC<DynamicModulesRendererProps> = ({
                   title="Clic para ampliar en carrusel de fotos"
                 >
                   <img
-                    src={
+                    src={toSeoImageUrl(
                       mod.imageUrl ||
                       project.plans?.planta ||
                       project.planImage ||
-                      'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=80'
-                    }
-                    alt="Planta arquitectónica"
+                      'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=80',
+                      project,
+                      'planimetria-arquitectonica'
+                    )}
+                    alt={buildProjectImageAlt(project, 'Planta arquitectónica y planimetría')}
                     className="w-full h-auto max-h-[560px] object-contain mx-auto group-hover:scale-[1.01] transition-transform duration-500"
                     loading="lazy"
                   />

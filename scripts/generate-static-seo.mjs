@@ -1,6 +1,12 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { createRequire } from 'module';
+
+const require = createRequire(import.meta.url);
+const {
+  extractProjectSeoImages,
+} = require('./image-seo-helpers.cjs');
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -263,9 +269,27 @@ function generateSchemaJsonLd(project, section, slug) {
   const title = cleanText(project?.title) || 'Proyecto Arquitectónico';
   const canonicalUrl = `${SITE_URL}/${section}/${slug}`;
   const studios = extractStudios(project);
-  const heroImage = project?.heroImage
-    ? (project.heroImage.startsWith('http') ? project.heroImage : `${SITE_URL}${project.heroImage}`)
-    : DEFAULT_IMAGE;
+  const projectImages = extractProjectSeoImages(project, SITE_URL);
+  const schemaImages = projectImages.length > 0
+    ? projectImages.map((img) => ({
+        '@type': 'ImageObject',
+        url: img.url,
+        contentUrl: img.url,
+        name: img.alt,
+        caption: img.caption,
+        representativeOfPage: Boolean(img.isHero),
+        width: 1600,
+        height: 1060,
+      }))
+    : [{
+        '@type': 'ImageObject',
+        url: DEFAULT_IMAGE,
+        contentUrl: DEFAULT_IMAGE,
+        name: title,
+        caption: `${title} — Arquitectura Ecuatoriana`,
+        width: 1600,
+        height: 1060,
+      }];
   const desc = generateDescription(project);
   const datePublished = project?.createdAt || '2026-01-01T00:00:00Z';
   const dateModified = project?.updatedAt || new Date().toISOString();
@@ -300,13 +324,7 @@ function generateSchemaJsonLd(project, section, slug) {
         headline: generateTitle(project),
         name: title,
         description: desc,
-        image: {
-          '@type': 'ImageObject',
-          url: heroImage,
-          caption: `${title} - Fotografía arquitectónica por ${photographerStr}`,
-          width: 1600,
-          height: 1060,
-        },
+        image: schemaImages,
         author: authors.length > 0 ? authors : [{ '@type': 'Organization', name: 'Redacción Ecuadorian Architecture' }],
         publisher: {
           '@type': 'Organization',
@@ -444,6 +462,11 @@ function renderSemanticProjectBody(project, section, slug, allProjects = []) {
     }
   }
 
+  // Extract SEO-ready project images (hero + modules) for Google Images
+  const projectImages = extractProjectSeoImages(project, SITE_URL);
+  const heroSeoImage = projectImages[0] || null;
+  const gallerySeoImages = projectImages.slice(1);
+
   // Cross-linking to other projects in the catalog
   const otherProjects = (allProjects || [])
     .filter(p => (cleanText(p.slug) || cleanText(p.id)) !== slug)
@@ -468,6 +491,13 @@ function renderSemanticProjectBody(project, section, slug, allProjects = []) {
           Diseño y autoría: <strong class="text-black">${studiosStr}</strong>
         </p>
       </header>
+
+      ${heroSeoImage ? `
+      <figure class="mb-8">
+        <img src="${escapeHtml(heroSeoImage.url)}" alt="${escapeHtml(heroSeoImage.alt)}" width="1600" height="1060" loading="eager" class="w-full h-auto rounded-sm border border-neutral-200 object-cover" />
+        <figcaption class="text-xs text-neutral-500 font-mono mt-2">${escapeHtml(heroSeoImage.alt)} — Fotografía: ${escapeHtml(heroSeoImage.credit)}</figcaption>
+      </figure>
+      ` : ''}
 
       ${excerpt ? `
       <section class="mb-8">
@@ -502,6 +532,22 @@ function renderSemanticProjectBody(project, section, slug, allProjects = []) {
           : `<p class="leading-relaxed">${excerpt || 'Expediente monográfico y registro arquitectónico contemporáneo en Ecuador.'}</p>`
         }
       </section>
+
+      ${gallerySeoImages.length > 0 ? `
+      <section class="mb-10 pt-6 border-t border-neutral-200">
+        <h2 class="text-lg font-bold uppercase tracking-wide text-black mb-4">
+          Galería Fotográfica y Planimetría
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          ${gallerySeoImages.map((img) => `
+          <figure class="border border-neutral-200 p-2 rounded-sm bg-neutral-50/40">
+            <img src="${escapeHtml(img.url)}" alt="${escapeHtml(img.alt)}" loading="lazy" class="w-full h-auto rounded-sm object-cover" />
+            <figcaption class="text-xs text-neutral-600 font-mono mt-2">${escapeHtml(img.rawCaption || img.alt)}</figcaption>
+          </figure>
+          `).join('\n')}
+        </div>
+      </section>
+      ` : ''}
 
       ${otherProjects.length > 0 ? `
       <aside class="mt-12 pt-8 border-t-2 border-neutral-200">
@@ -565,8 +611,14 @@ function renderSemanticCategoryBody(sectionPage, items = []) {
           const loc = escapeHtml(cleanText(item.location) || 'Ecuador');
           const year = escapeHtml(cleanText(item.year) || '2026');
           const exc = escapeHtml(cleanText(item.excerpt || item.subtitle || ''));
+          const cardImg = extractProjectSeoImages(item, SITE_URL)[0] || null;
           return `
           <article class="border border-neutral-200 p-5 rounded-sm hover:border-black transition-colors bg-neutral-50/50">
+            ${cardImg ? `
+            <a href="/${sectionPage.path}/${slug}" class="block mb-3 overflow-hidden rounded-sm">
+              <img src="${escapeHtml(cardImg.url)}" alt="${escapeHtml(cardImg.alt)}" loading="lazy" class="w-full h-48 object-cover" />
+            </a>
+            ` : ''}
             <span class="text-xs font-mono uppercase text-neutral-500 block mb-1">
               ${loc} — ${year}
             </span>
@@ -654,8 +706,14 @@ function renderSemanticHomeBody(allProjects = []) {
             const loc = escapeHtml(cleanText(p.location) || 'Ecuador');
             const year = escapeHtml(cleanText(p.year) || '2026');
             const exc = escapeHtml(cleanText(p.excerpt || p.subtitle || ''));
+            const cardImg = extractProjectSeoImages(p, SITE_URL)[0] || null;
             return `
             <article class="border border-neutral-200 p-5 rounded-sm hover:border-black transition-all bg-neutral-50/50">
+              ${cardImg ? `
+              <a href="/proyectos/${slug}" class="block mb-3 overflow-hidden rounded-sm">
+                <img src="${escapeHtml(cardImg.url)}" alt="${escapeHtml(cardImg.alt)}" loading="lazy" class="w-full h-48 object-cover" />
+              </a>
+              ` : ''}
               <span class="text-xs font-mono uppercase tracking-wider text-neutral-500 block mb-1">
                 ${loc} — ${year}
               </span>
@@ -872,9 +930,8 @@ async function run() {
       const title = generateTitle(item);
       const description = generateDescription(item);
       const canonicalUrl = `${SITE_URL}/${section}/${slug}`;
-      const heroImage = item.heroImage
-        ? (item.heroImage.startsWith('http') ? item.heroImage : `${SITE_URL}${item.heroImage}`)
-        : DEFAULT_IMAGE;
+      const projectImages = extractProjectSeoImages(item, SITE_URL);
+      const heroImage = projectImages[0]?.url || DEFAULT_IMAGE;
       const schemaJsonLd = generateSchemaJsonLd(item, section, slug);
       const bodyHtml = renderSemanticProjectBody(item, section, slug, items);
 
@@ -900,11 +957,11 @@ async function run() {
         changefreq: 'weekly',
         priority: '0.8',
         lastmod: item.updatedAt ? item.updatedAt.split('T')[0] : new Date().toISOString().split('T')[0],
-        image: heroImage ? {
-          loc: heroImage,
-          title: `${cleanText(item.title)} - Arquitectura Ecuatoriana (${cleanText(item.location) || 'Ecuador'})`,
-          caption: description,
-        } : null
+        images: projectImages.map((img) => ({
+          loc: img.url,
+          title: img.title,
+          caption: img.caption || description,
+        })),
       });
 
       projectCount++;
@@ -975,19 +1032,25 @@ async function run() {
   const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 ${sitemapUrls
-  .map(
-    (u) => `  <url>
+  .map((u) => {
+    const imgs = Array.isArray(u.images) ? u.images : u.image ? [u.image] : [];
+    const imgXml = imgs
+      .map(
+        (img) => `
+    <image:image>
+      <image:loc>${img.loc}</image:loc>
+      <image:title>${img.title.replace(/&/g, '&amp;')}</image:title>
+      <image:caption>${(img.caption || '').replace(/&/g, '&amp;')}</image:caption>
+    </image:image>`
+      )
+      .join('');
+    return `  <url>
     <loc>${u.loc}</loc>
     ${u.lastmod ? `<lastmod>${u.lastmod}</lastmod>` : ''}
     <changefreq>${u.changefreq}</changefreq>
-    <priority>${u.priority}</priority>${u.image ? `
-    <image:image>
-      <image:loc>${u.image.loc}</image:loc>
-      <image:title>${u.image.title.replace(/&/g, '&amp;')}</image:title>
-      <image:caption>${u.image.caption.replace(/&/g, '&amp;')}</image:caption>
-    </image:image>` : ''}
-  </url>`
-  )
+    <priority>${u.priority}</priority>${imgXml}
+  </url>`;
+  })
   .join('\n')}
 </urlset>`;
 
@@ -1008,6 +1071,7 @@ ${sitemapUrls
   const robotsTxt = `# robots.txt for Ecuadorian Architecture (https://ecuadorianarch.com)
 User-agent: *
 Allow: /
+Allow: /media/
 Allow: /llms.txt
 Allow: /llms-full.txt
 Allow: /api/catalog.json

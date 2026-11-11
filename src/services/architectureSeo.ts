@@ -185,7 +185,9 @@ export function generateArchitectureSchemaJsonLd(project: any): Record<string, a
   const section = project?.type || 'proyectos';
   const canonicalUrl = `https://ecuadorianarchitecture.com/${section}/${slug}`;
   const studios = extractSeoStudios(project);
-  const heroImage = cleanText(project?.heroImage) || 'https://ecuadorianarchitecture.com/logo.svg';
+  const rawHero = cleanText(project?.heroImage) || `${CANONICAL_SITE_URL}/logo.svg`;
+  const seoHero = toSeoImageUrl(rawHero, project, 'vista-principal');
+  const heroImage = seoHero.startsWith('/') ? `${CANONICAL_SITE_URL}${seoHero}` : seoHero;
   const desc = generateArchitectureDescription(project);
   const datePublished = project?.createdAt || '2026-01-01T00:00:00Z';
   const dateModified = project?.updatedAt || new Date().toISOString();
@@ -350,7 +352,9 @@ export function compileArchitectureSeo(project: any): ArchitectureSeoData {
   const slug = cleanText(project?.slug) || cleanText(project?.id) || 'proyecto';
   const section = project?.type || 'proyectos';
   const canonicalUrl = `${CANONICAL_SITE_URL}/${section}/${slug}`;
-  const ogImage = cleanText(project?.heroImage) || `${CANONICAL_SITE_URL}/og-image.jpg`;
+  const rawOg = cleanText(project?.heroImage) || `${CANONICAL_SITE_URL}/og-image.jpg`;
+  const seoOg = toSeoImageUrl(rawOg, project, 'vista-principal');
+  const ogImage = seoOg.startsWith('/') ? `${CANONICAL_SITE_URL}${seoOg}` : seoOg;
   const schemaJsonLd = generateArchitectureSchemaJsonLd(project);
 
   const titleLength = metaTitle.length;
@@ -451,4 +455,90 @@ export function applyArchitectureSeoToDocument(project: any): () => void {
       jsonLdScript.parentNode.removeChild(jsonLdScript);
     }
   };
+}
+
+function slugifySeoSegment(str: string): string {
+  return String(str || '')
+    .trim()
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function isPavilionProject(project: any): boolean {
+  if (!project) return false;
+  const parts = [
+    project.title,
+    project.seo?.metaTitle,
+    project.category,
+    project.excerpt,
+    project.subtitle,
+    project.resena,
+  ];
+  if (Array.isArray(project.modules)) {
+    for (const mod of project.modules) {
+      if (mod?.content) parts.push(mod.content);
+      if (mod?.title) parts.push(mod.title);
+      if (mod?.caption) parts.push(mod.caption);
+    }
+  }
+  const haystack = parts.filter(Boolean).join(' ').toLowerCase();
+  return haystack.includes('pabellon') || haystack.includes('pabellón');
+}
+
+/**
+ * Generates an accurate, rich Spanish alt attribute for Google Images & accessibility.
+ */
+export function buildProjectImageAlt(project: any, detail?: string): string {
+  const title = cleanText(project?.title) || 'Proyecto Arquitectónico';
+  const studios = extractSeoStudios(project);
+  const studiosStr = studios.length > 0 ? studios.join(' + ') : 'Arquitectos ecuatorianos';
+  const location = cleanText(project?.location) || 'Ecuador';
+  const category = cleanText(project?.category) || 'Arquitectura';
+  const hasPavilion = isPavilionProject(project) && !title.toLowerCase().includes('pabell');
+
+  const prefix = detail ? `${cleanText(detail)} de ${title}` : title;
+  const typology = hasPavilion ? `Pabellón de ${category}` : category;
+  return `${prefix} — ${typology} por ${studiosStr} en ${location}, Ecuador | Arquitectura Ecuatoriana`;
+}
+
+/**
+ * Resolves uploaded image URLs to first-party `/media/s/<file>/<seo-slug>.<ext>` in production builds
+ * so Google Images indexes assets under ecuadorianarch.com with descriptive filenames.
+ */
+export function toSeoImageUrl(rawUrl: string | undefined, project?: any, descriptor: string = 'vista'): string {
+  if (!rawUrl || typeof rawUrl !== 'string') return '';
+  if (!import.meta.env.PROD || rawUrl.startsWith('data:')) return rawUrl;
+
+  const cleaned = rawUrl.split('?')[0].trim();
+  const supaMatch = cleaned.match(/\/storage\/v1\/object\/public\/uploads\/([^/]+)$/i);
+  const localMatch = cleaned.match(/\/images\/uploads\/([^/]+)$/i);
+  const sourceFile = supaMatch?.[1] || localMatch?.[1];
+  if (!sourceFile) return rawUrl;
+
+  const dotIdx = sourceFile.lastIndexOf('.');
+  const ext = dotIdx >= 0 ? sourceFile.slice(dotIdx).toLowerCase() : '.webp';
+  const baseName = (dotIdx >= 0 ? sourceFile.slice(0, dotIdx) : sourceFile).replace(/^\d+-/, '');
+  const cleanedFileSlug = slugifySeoSegment(baseName);
+  const useFileSlug =
+    cleanedFileSlug &&
+    !/^(\d+|capa-\d+|r\d+(-\d+)?|whatsapp-image.*)$/.test(cleanedFileSlug);
+
+  const titleSlug = slugifySeoSegment(project?.slug || project?.title || 'obra');
+  const studioSlug = slugifySeoSegment(extractSeoStudios(project)[0] || '');
+  const hasPavilion = isPavilionProject(project) && !titleSlug.includes('pabellon');
+  const descSlug = slugifySeoSegment(useFileSlug ? cleanedFileSlug.slice(0, 48) : descriptor || 'fotografia');
+
+  const tokens = [
+    hasPavilion ? 'pabellon' : '',
+    titleSlug,
+    studioSlug,
+    descSlug,
+    'arquitectura-ecuatoriana',
+  ].filter(Boolean);
+
+  const seoFilename = `${tokens.join('-').slice(0, 110)}${ext}`;
+  return `/media/s/${encodeURIComponent(sourceFile)}/${seoFilename}`;
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { ProjectFolderData } from './OrigamiFolderCard';
+import { buildProjectImageAlt, toSeoImageUrl } from '../../services/architectureSeo';
 
 interface PanoramicFolderCardProps {
   project: ProjectFolderData;
@@ -149,8 +150,8 @@ export const PanoramicFolderCard: React.FC<PanoramicFolderCardProps> = ({
       {/* 1. Left Column (Dezeen / ArchDaily visual hook): Architectural Photo Window */}
       <div className="w-full md:w-[38%] lg:w-[40%] aspect-square md:aspect-auto md:h-full max-h-[280px] md:max-h-none rounded-[20px] sm:rounded-[24px] md:rounded-[26px] overflow-hidden bg-neutral-100 relative shrink-0 shadow-xs">
         <img
-          src={photoUrl}
-          alt={project.title}
+          src={toSeoImageUrl(photoUrl, project, 'vista-principal')}
+          alt={buildProjectImageAlt(project)}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
           style={{
             objectPosition:
