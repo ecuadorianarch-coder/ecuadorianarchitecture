@@ -4439,7 +4439,17 @@ export const VisualEditorialEditor: React.FC<VisualEditorialEditorProps> = ({
                         <input
                           type="text"
                           value={article.slug || ''}
-                          onChange={(e) => updateField('slug', e.target.value.toLowerCase().replace(/\s+/g, '-'))}
+                          onChange={(e) =>
+                            updateField(
+                              'slug',
+                              e.target.value
+                                .toLowerCase()
+                                .normalize('NFD')
+                                .replace(/[\u0300-\u036f]/g, '')
+                                .replace(/\s+/g, '-')
+                                .replace(/[^a-z0-9-_]/g, '')
+                            )
+                          }
                           placeholder="nombre-del-proyecto"
                           className="flex-1 bg-transparent text-white focus:outline-none"
                         />

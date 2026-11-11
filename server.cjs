@@ -4,7 +4,11 @@ const path = require('path');
 const url = require('url');
 const { exec } = require('child_process');
 let sharp = null;
-try { sharp = require('sharp'); } catch {}
+try {
+  sharp = require('sharp');
+} catch (err) {
+  console.warn('[Sharp Load Warning]:', err && err.message ? err.message : err);
+}
 
 // Bounded LRU cache for lightweight WhatsApp/Social Open Graph JPEGs (max 25 entries, ~3 MB RAM)
 const ogImageCache = new Map();
@@ -212,7 +216,10 @@ const MIME_TYPES = {
 
 const server = http.createServer((req, res) => {
   const parsedUrl = url.parse(req.url, true);
-  const pathname = parsedUrl.pathname || '/';
+  let pathname = parsedUrl.pathname || '/';
+  try {
+    pathname = decodeURIComponent(pathname);
+  } catch {}
 
   // Enable CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -1341,12 +1348,13 @@ const server = http.createServer((req, res) => {
       let sourceFile = '';
       try { sourceFile = decodeURIComponent(mediaParts[2]); } catch { sourceFile = mediaParts[2]; }
       if (/^[a-zA-Z0-9._-]+$/.test(sourceFile) && !sourceFile.includes('..')) {
-        const sendMediaBuf = (buf, contentType) => {
+        const sendMediaBuf = (buf, contentType, ogMode) => {
           res.statusCode = 200;
           res.setHeader('Content-Type', contentType);
           res.setHeader('Content-Length', buf.length);
           res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
           res.setHeader('X-Robots-Tag', 'all');
+          if (ogMode) res.setHeader('X-OG-Converter', ogMode);
           if (req.method === 'HEAD') {
             res.end();
           } else {
@@ -1357,7 +1365,7 @@ const server = http.createServer((req, res) => {
         if (isOgRoute) {
           const cached = getCachedOgImage(sourceFile);
           if (cached) {
-            sendMediaBuf(cached.buffer, cached.contentType);
+            sendMediaBuf(cached.buffer, cached.contentType, cached.mode || 'cached');
             return;
           }
           fetchUploadSourceBuffer(sourceFile)
@@ -1370,6 +1378,7 @@ const server = http.createServer((req, res) => {
               let outBuffer = fetched.buffer;
               const ext = path.extname(sourceFile).toLowerCase() || '.webp';
               let outType = MIME_TYPES[ext] || 'image/webp';
+              let outMode = 'fallback-source';
 
               if (sharp) {
                 try {
@@ -1389,13 +1398,14 @@ const server = http.createServer((req, res) => {
 
                   outBuffer = jpgBuf;
                   outType = 'image/jpeg';
+                  outMode = 'sharp-jpeg';
                 } catch (convErr) {
                   console.warn(`[OG JPEG Fallback for ${sourceFile}]:`, convErr.message);
                 }
               }
 
-              setCachedOgImage(sourceFile, { buffer: outBuffer, contentType: outType });
-              sendMediaBuf(outBuffer, outType);
+              setCachedOgImage(sourceFile, { buffer: outBuffer, contentType: outType, mode: outMode });
+              sendMediaBuf(outBuffer, outType, outMode);
             })
             .catch(() => {
               res.statusCode = 502;
@@ -1479,6 +1489,14 @@ const server = http.createServer((req, res) => {
     }
   }
 
+function normalizeSlugCompare(s) {
+  return String(s || '')
+    .trim()
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
+}
+
 function isKnownSpaRoute(pathname, query) {
   if (pathname === '/' || pathname === '' || pathname === '/index.html') return true;
   if (pathname.startsWith('/admin')) return true;
@@ -1500,7 +1518,8 @@ function isKnownSpaRoute(pathname, query) {
       const coll = sec === 'proyectos' ? 'projects.json' : sec === 'academia' ? 'academia.json' : 'territorios.json';
       const raw = memoryContentCache.get(coll) || (fs.existsSync(path.join(dataDir, coll)) ? fs.readFileSync(path.join(dataDir, coll), 'utf8') : '[]');
       const items = JSON.parse(raw || '[]');
-      return items.some((item) => (item.slug && item.slug.toLowerCase() === slug) || (item.id && item.id.toLowerCase() === slug));
+      const normSlug = normalizeSlugCompare(slug);
+      return items.some((item) => normalizeSlugCompare(item.slug) === normSlug || normalizeSlugCompare(item.id) === normSlug);
     } catch {
       return false;
     }
@@ -1526,7 +1545,7 @@ function isKnownSpaRoute(pathname, query) {
 function resolveLegacyRedirect(pathname) {
   const clean = pathname.replace(/^\/+|\/+$/g, '');
   if (!clean || clean.includes('/') || clean.includes('.')) return null;
-  const slug = clean.toLowerCase();
+  const slug = normalizeSlugCompare(clean);
 
   const collections = [
     { section: 'proyectos', file: 'projects.json' },
@@ -1539,8 +1558,8 @@ function resolveLegacyRedirect(pathname) {
       const raw = memoryContentCache.get(file) || (fs.existsSync(path.join(dataDir, file)) ? fs.readFileSync(path.join(dataDir, file), 'utf8') : '[]');
       const items = JSON.parse(raw || '[]');
       const match = items.find((item) =>
-        (item.slug && item.slug.toLowerCase() === slug) ||
-        (item.id && item.id.toLowerCase() === slug)
+        normalizeSlugCompare(item.slug) === slug ||
+        normalizeSlugCompare(item.id) === slug
       );
       if (match) {
         return `/${section}/${match.slug || match.id}`;

@@ -964,8 +964,14 @@ async function run() {
       // Write by slug
       writeStaticHtml(path.join(distDir, section, slug), html);
 
+      // Also write accent-stripped alias if slug has diacritics (e.g. pabellón-kancha -> pabellon-kancha)
+      const asciiSlug = slug.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      if (asciiSlug && asciiSlug !== slug) {
+        writeStaticHtml(path.join(distDir, section, asciiSlug), html);
+      }
+
       // If id differs from slug, also generate for id to prevent 404
-      if (id && id !== slug) {
+      if (id && id !== slug && id !== asciiSlug) {
         writeStaticHtml(path.join(distDir, section, id), html);
       }
 
