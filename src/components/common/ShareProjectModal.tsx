@@ -9,7 +9,9 @@ import {
   Mail,
   QrCode,
   ExternalLink,
+  Image as ImageIcon,
 } from 'lucide-react';
+import { buildProjectImageAlt, toSeoImageUrl } from '../../services/architectureSeo';
 
 export interface ShareProjectModalProps {
   isOpen: boolean;
@@ -37,6 +39,8 @@ export const ShareProjectModal: React.FC<ShareProjectModalProps> = ({
 }) => {
   const [copied, setCopied] = useState(false);
   const [showQr, setShowQr] = useState(false);
+  const [isPreparingPhoto, setIsPreparingPhoto] = useState(false);
+  const [photoFeedback, setPhotoFeedback] = useState<string | null>(null);
   const modalRef = useRef<HTMLDivElement>(null);
 
   // Close on Escape key
@@ -85,14 +89,89 @@ export const ShareProjectModal: React.FC<ShareProjectModalProps> = ({
   const shareTitle = `${displayTitle} — ${displayStudio}`;
   const shareText = `Descubre "${displayTitle}" (${displayStudio}) en Ecuadorian Architecture:`;
 
-  const coverImage =
+  const rawCoverImage =
     project.heroImage ||
     project.coverImage ||
     'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80';
+  const coverImage = toSeoImageUrl(rawCoverImage, project, 'vista-principal') || rawCoverImage;
 
   // Native share handler
   const canNativeShare =
     typeof navigator !== 'undefined' && typeof navigator.share === 'function';
+
+  const buildLightweightShareJpeg = async (imgUrl: string, fileSlug: string): Promise<File> => {
+    const img = new window.Image();
+    img.crossOrigin = 'anonymous';
+    await new Promise<void>((resolve, reject) => {
+      img.onload = () => resolve();
+      img.onerror = () => reject(new Error('No se pudo cargar la imagen'));
+      img.src = imgUrl;
+    });
+
+    const maxW = 1080;
+    const scale = img.naturalWidth > maxW ? maxW / img.naturalWidth : 1;
+    const targetW = Math.max(1, Math.round(img.naturalWidth * scale));
+    const targetH = Math.max(1, Math.round(img.naturalHeight * scale));
+
+    const canvas = document.createElement('canvas');
+    canvas.width = targetW;
+    canvas.height = targetH;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) throw new Error('Canvas no disponible');
+    ctx.drawImage(img, 0, 0, targetW, targetH);
+
+    const blob = await new Promise<Blob | null>((resolve) =>
+      canvas.toBlob((b) => resolve(b), 'image/jpeg', 0.82)
+    );
+    canvas.width = 0;
+    canvas.height = 0;
+    if (!blob) throw new Error('Error generando JPEG');
+    return new File([blob], `${fileSlug || 'proyecto'}-ecuadorianarch.jpg`, {
+      type: 'image/jpeg',
+    });
+  };
+
+  const handleShareWithPhoto = async () => {
+    if (isPreparingPhoto) return;
+    setIsPreparingPhoto(true);
+    setPhotoFeedback(null);
+    try {
+      const jpegFile = await buildLightweightShareJpeg(coverImage, slug);
+      const nav = navigator as Navigator & {
+        canShare?: (data: ShareData) => boolean;
+      };
+
+      if (typeof nav.share === 'function' && typeof nav.canShare === 'function' && nav.canShare({ files: [jpegFile] })) {
+        await nav.share({
+          files: [jpegFile],
+          title: shareTitle,
+          text: `${shareText} ${shareUrl}`,
+        });
+      } else {
+        const blobUrl = URL.createObjectURL(jpegFile);
+        const link = document.createElement('a');
+        link.href = blobUrl;
+        link.download = jpegFile.name;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        setTimeout(() => URL.revokeObjectURL(blobUrl), 2500);
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(`${shareText} ${shareUrl}`);
+          }
+        } catch {}
+        setPhotoFeedback('Foto JPEG ligera descargada y enlace copiado');
+        setTimeout(() => setPhotoFeedback(null), 3500);
+      }
+    } catch {
+      await handleCopyLink();
+      setPhotoFeedback('Enlace copiado al portapapeles');
+      setTimeout(() => setPhotoFeedback(null), 3000);
+    } finally {
+      setIsPreparingPhoto(false);
+    }
+  };
 
   const handleNativeShare = async () => {
     try {
@@ -209,7 +288,7 @@ export const ShareProjectModal: React.FC<ShareProjectModalProps> = ({
             <div className="w-20 h-20 sm:w-24 sm:h-24 bg-black shrink-0 overflow-hidden relative">
               <img
                 src={coverImage}
-                alt={displayTitle}
+                alt={buildProjectImageAlt(project)}
                 className="w-full h-full object-cover"
                 loading="lazy"
               />
@@ -244,6 +323,21 @@ export const ShareProjectModal: React.FC<ShareProjectModalProps> = ({
               <span>COMPARTIR EN CUALQUIER APLICACIÓN</span>
             </button>
           )}
+
+          {/* Share / Download Lightweight Hero Photo JPEG */}
+          <button
+            type="button"
+            onClick={handleShareWithPhoto}
+            disabled={isPreparingPhoto}
+            className="w-full py-2.5 px-4 bg-[#222222] hover:bg-[#2c2c2c] active:bg-[#1a1a1a] border border-white/20 text-white font-mono text-[11px] uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-60 touch-manipulation"
+          >
+            <ImageIcon className="w-4 h-4 text-amber-400 shrink-0" />
+            <span>
+              {isPreparingPhoto
+                ? 'PREPARANDO FOTO...'
+                : photoFeedback || 'COMPARTIR / GUARDAR CON HERO FOTO (JPEG)'}
+            </span>
+          </button>
 
           {/* Social Channels Grid */}
           <div>

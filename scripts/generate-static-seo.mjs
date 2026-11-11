@@ -6,6 +6,8 @@ import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 const {
   extractProjectSeoImages,
+  toFirstPartyOgImageUrl,
+  buildImageAlt,
 } = require('./image-seo-helpers.cjs');
 
 const __filename = fileURLToPath(import.meta.url);
@@ -761,7 +763,7 @@ function renderSemanticHomeBody(allProjects = []) {
   `;
 }
 
-function injectMeta(html, { title, description, canonicalUrl, ogImage, schemaJsonLd, bodyHtml }) {
+function injectMeta(html, { title, description, canonicalUrl, ogImage, ogImageAlt, schemaJsonLd, bodyHtml }) {
   let updated = html;
 
   // Title
@@ -787,7 +789,10 @@ function injectMeta(html, { title, description, canonicalUrl, ogImage, schemaJso
   updated = updated.replace(/<meta property="og:[^>]*>/gi, '');
   updated = updated.replace(/<meta name="twitter:[^>]*>/gi, '');
 
-  // Injected Open Graph & Twitter Tags
+  const isJpeg = /\.jpe?g(\?|$)/i.test(ogImage || '');
+  const imgAlt = escapeHtml(ogImageAlt || title);
+
+  // Injected Open Graph & Twitter Tags (WhatsApp/Facebook/LinkedIn/X compatible JPEG 1200x630)
   const socialTags = `
     <!-- Open Graph / WhatsApp / Facebook / LinkedIn -->
     <meta property="og:site_name" content="Ecuadorian Architecture" />
@@ -797,8 +802,10 @@ function injectMeta(html, { title, description, canonicalUrl, ogImage, schemaJso
     <meta property="og:url" content="${canonicalUrl}" />
     <meta property="og:image" content="${ogImage}" />
     <meta property="og:image:secure_url" content="${ogImage}" />
-    <meta property="og:image:width" content="1600" />
-    <meta property="og:image:height" content="1060" />
+    ${isJpeg ? `<meta property="og:image:type" content="image/jpeg" />` : ''}
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="${imgAlt}" />
     <meta property="og:locale" content="es_EC" />
 
     <!-- Twitter Cards -->
@@ -807,6 +814,7 @@ function injectMeta(html, { title, description, canonicalUrl, ogImage, schemaJso
     <meta name="twitter:title" content="${title}" />
     <meta name="twitter:description" content="${description}" />
     <meta name="twitter:image" content="${ogImage}" />
+    <meta name="twitter:image:alt" content="${imgAlt}" />
   `;
   updated = updated.replace('</head>', `${socialTags}\n  </head>`);
 
@@ -894,11 +902,16 @@ async function run() {
   for (const page of sectionPages) {
     const isAbout = page.path === 'acerca-de-ea';
     const categoryItems = page.path === 'proyectos' ? projects : page.path === 'academia' ? academia : territorios;
+    const leadItem = !isAbout && Array.isArray(categoryItems) ? categoryItems.find((it) => it?.heroImage) : null;
+    const sectionOgImage = leadItem
+      ? toFirstPartyOgImageUrl(leadItem.heroImage, leadItem, 'vista-principal', SITE_URL)
+      : `${SITE_URL}/og-image.jpg`;
     const pageHtml = injectMeta(baseHtml, {
       title: page.title,
       description: page.desc,
       canonicalUrl: `${SITE_URL}/${page.path}`,
-      ogImage: `${SITE_URL}/logo.svg`,
+      ogImage: sectionOgImage,
+      ogImageAlt: page.title,
       bodyHtml: isAbout
         ? renderSemanticAboutBody(page)
         : renderSemanticCategoryBody(page, categoryItems),
@@ -931,7 +944,10 @@ async function run() {
       const description = generateDescription(item);
       const canonicalUrl = `${SITE_URL}/${section}/${slug}`;
       const projectImages = extractProjectSeoImages(item, SITE_URL);
-      const heroImage = projectImages[0]?.url || DEFAULT_IMAGE;
+      const ogImageUrl = item.heroImage
+        ? toFirstPartyOgImageUrl(item.heroImage, item, 'vista-principal', SITE_URL)
+        : DEFAULT_IMAGE;
+      const ogImageAlt = buildImageAlt(item);
       const schemaJsonLd = generateSchemaJsonLd(item, section, slug);
       const bodyHtml = renderSemanticProjectBody(item, section, slug, items);
 
@@ -939,7 +955,8 @@ async function run() {
         title,
         description,
         canonicalUrl,
-        ogImage: heroImage,
+        ogImage: ogImageUrl,
+        ogImageAlt,
         schemaJsonLd,
         bodyHtml,
       });

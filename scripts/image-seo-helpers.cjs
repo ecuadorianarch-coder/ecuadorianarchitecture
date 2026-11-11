@@ -81,6 +81,31 @@ function toFirstPartySeoImageUrl(rawUrl, project, descriptor = 'vista', siteUrl 
   return `${origin}/media/s/${encodeURIComponent(sourceFile)}/${seoFilename}`;
 }
 
+function toFirstPartyOgImageUrl(rawUrl, project, descriptor = 'vista-principal', siteUrl = 'https://ecuadorianarch.com') {
+  if (!rawUrl || typeof rawUrl !== 'string') return `${siteUrl}/og-image.jpg`;
+  const sourceFile = extractUploadFilename(rawUrl);
+  if (!sourceFile) {
+    return rawUrl.startsWith('http') ? rawUrl : `${siteUrl}${rawUrl.startsWith('/') ? '' : '/'}${rawUrl}`;
+  }
+
+  const titleSlug = slugifySeo(project?.slug || project?.title || 'obra');
+  const studioSlug = slugifySeo(extractStudios(project)[0] || '');
+  const descSlug = slugifySeo(descriptor || 'vista-principal');
+  const hasPavilion = projectMentionsPavilion(project) && !titleSlug.includes('pabellon');
+
+  const nameTokens = [
+    hasPavilion ? 'pabellon' : '',
+    titleSlug,
+    studioSlug,
+    descSlug,
+    'arquitectura-ecuatoriana',
+  ].filter(Boolean);
+
+  const seoBase = nameTokens.join('-').slice(0, 110);
+  const origin = siteUrl ? siteUrl.replace(/\/+$/, '') : '';
+  return `${origin}/media/og/${encodeURIComponent(sourceFile)}/${seoBase}.jpg`;
+}
+
 function buildImageAlt(project, { caption, label, isPlan } = {}) {
   const title = cleanText(project?.title) || 'Proyecto Arquitectónico';
   const studios = extractStudios(project).join(' + ');
@@ -214,6 +239,7 @@ module.exports = {
   projectMentionsPavilion,
   extractUploadFilename,
   toFirstPartySeoImageUrl,
+  toFirstPartyOgImageUrl,
   buildImageAlt,
   extractProjectSeoImages,
 };

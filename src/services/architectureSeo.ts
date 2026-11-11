@@ -353,7 +353,7 @@ export function compileArchitectureSeo(project: any): ArchitectureSeoData {
   const section = project?.type || 'proyectos';
   const canonicalUrl = `${CANONICAL_SITE_URL}/${section}/${slug}`;
   const rawOg = cleanText(project?.heroImage) || `${CANONICAL_SITE_URL}/og-image.jpg`;
-  const seoOg = toSeoImageUrl(rawOg, project, 'vista-principal');
+  const seoOg = toSeoImageUrl(rawOg, project, 'vista-principal', true);
   const ogImage = seoOg.startsWith('/') ? `${CANONICAL_SITE_URL}${seoOg}` : seoOg;
   const schemaJsonLd = generateArchitectureSchemaJsonLd(project);
 
@@ -417,9 +417,12 @@ export function applyArchitectureSeoToDocument(project: any): () => void {
   setMeta('property', 'og:url', seo.canonicalUrl);
   setMeta('property', 'og:image', seo.ogImage);
   setMeta('property', 'og:image:secure_url', seo.ogImage);
-  setMeta('property', 'og:image:width', '1600');
-  setMeta('property', 'og:image:height', '1060');
-  setMeta('property', 'og:image:alt', seo.metaTitle);
+  if (/\.jpe?g(\?|$)/i.test(seo.ogImage)) {
+    setMeta('property', 'og:image:type', 'image/jpeg');
+  }
+  setMeta('property', 'og:image:width', '1200');
+  setMeta('property', 'og:image:height', '630');
+  setMeta('property', 'og:image:alt', buildProjectImageAlt(project));
   setMeta('property', 'og:locale', 'es_EC');
 
   // 4. Twitter Card
@@ -508,7 +511,12 @@ export function buildProjectImageAlt(project: any, detail?: string): string {
  * Resolves uploaded image URLs to first-party `/media/s/<file>/<seo-slug>.<ext>` in production builds
  * so Google Images indexes assets under ecuadorianarch.com with descriptive filenames.
  */
-export function toSeoImageUrl(rawUrl: string | undefined, project?: any, descriptor: string = 'vista'): string {
+export function toSeoImageUrl(
+  rawUrl: string | undefined,
+  project?: any,
+  descriptor: string = 'vista',
+  forOpenGraph: boolean = false
+): string {
   if (!rawUrl || typeof rawUrl !== 'string') return '';
   if (!import.meta.env.PROD || rawUrl.startsWith('data:')) return rawUrl;
 
@@ -519,7 +527,7 @@ export function toSeoImageUrl(rawUrl: string | undefined, project?: any, descrip
   if (!sourceFile) return rawUrl;
 
   const dotIdx = sourceFile.lastIndexOf('.');
-  const ext = dotIdx >= 0 ? sourceFile.slice(dotIdx).toLowerCase() : '.webp';
+  const ext = forOpenGraph ? '.jpg' : dotIdx >= 0 ? sourceFile.slice(dotIdx).toLowerCase() : '.webp';
   const baseName = (dotIdx >= 0 ? sourceFile.slice(0, dotIdx) : sourceFile).replace(/^\d+-/, '');
   const cleanedFileSlug = slugifySeoSegment(baseName);
   const useFileSlug =
@@ -540,5 +548,6 @@ export function toSeoImageUrl(rawUrl: string | undefined, project?: any, descrip
   ].filter(Boolean);
 
   const seoFilename = `${tokens.join('-').slice(0, 110)}${ext}`;
-  return `/media/s/${encodeURIComponent(sourceFile)}/${seoFilename}`;
+  const routePrefix = forOpenGraph ? '/media/og' : '/media/s';
+  return `${routePrefix}/${encodeURIComponent(sourceFile)}/${seoFilename}`;
 }

@@ -3,6 +3,42 @@ const fs = require('fs');
 const path = require('path');
 const url = require('url');
 const { exec } = require('child_process');
+let sharp = null;
+try { sharp = require('sharp'); } catch {}
+
+// Bounded LRU cache for lightweight WhatsApp/Social Open Graph JPEGs (max 25 entries, ~3 MB RAM)
+const ogImageCache = new Map();
+const MAX_OG_CACHE_ENTRIES = 25;
+
+async function fetchUploadSourceBuffer(sourceFile) {
+  const localCachedPath = path.join(uploadsDir, sourceFile);
+  if (fs.existsSync(localCachedPath) && fs.statSync(localCachedPath).isFile()) {
+    return { buffer: fs.readFileSync(localCachedPath), fromDisk: true };
+  }
+  const remoteUrl = `${SUPABASE_URL}/storage/v1/object/public/uploads/${encodeURIComponent(sourceFile)}`;
+  const upstream = await fetch(remoteUrl);
+  if (!upstream.ok) return null;
+  const buf = Buffer.from(await upstream.arrayBuffer());
+  try { fs.writeFileSync(localCachedPath, buf); } catch {}
+  return { buffer: buf, fromDisk: false };
+}
+
+function getCachedOgImage(key) {
+  if (!ogImageCache.has(key)) return null;
+  const val = ogImageCache.get(key);
+  ogImageCache.delete(key);
+  ogImageCache.set(key, val);
+  return val;
+}
+
+function setCachedOgImage(key, value) {
+  if (ogImageCache.has(key)) ogImageCache.delete(key);
+  else if (ogImageCache.size >= MAX_OG_CACHE_ENTRIES) {
+    const oldestKey = ogImageCache.keys().next().value;
+    ogImageCache.delete(oldestKey);
+  }
+  ogImageCache.set(key, value);
+}
 
 const PORT = process.env.PORT || 3000;
 const rootDir = __dirname;
@@ -1297,13 +1333,77 @@ const server = http.createServer((req, res) => {
     }
   }
 
-  // 2.5. First-Party SEO Image Proxy (/media/s/<sourceFile>/<seoSlug>.<ext>)
-  if ((req.method === 'GET' || req.method === 'HEAD') && pathname.startsWith('/media/s/')) {
+  // 2.5. First-Party SEO Image Proxy (/media/s/<sourceFile>/<seoSlug>.<ext> & /media/og/<sourceFile>/<seoSlug>.jpg)
+  if ((req.method === 'GET' || req.method === 'HEAD') && (pathname.startsWith('/media/s/') || pathname.startsWith('/media/og/'))) {
+    const isOgRoute = pathname.startsWith('/media/og/');
     const mediaParts = pathname.replace(/^\/+|\/+$/g, '').split('/');
     if (mediaParts.length >= 3) {
       let sourceFile = '';
       try { sourceFile = decodeURIComponent(mediaParts[2]); } catch { sourceFile = mediaParts[2]; }
       if (/^[a-zA-Z0-9._-]+$/.test(sourceFile) && !sourceFile.includes('..')) {
+        const sendMediaBuf = (buf, contentType) => {
+          res.statusCode = 200;
+          res.setHeader('Content-Type', contentType);
+          res.setHeader('Content-Length', buf.length);
+          res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+          res.setHeader('X-Robots-Tag', 'all');
+          if (req.method === 'HEAD') {
+            res.end();
+          } else {
+            res.end(buf);
+          }
+        };
+
+        if (isOgRoute) {
+          const cached = getCachedOgImage(sourceFile);
+          if (cached) {
+            sendMediaBuf(cached.buffer, cached.contentType);
+            return;
+          }
+          fetchUploadSourceBuffer(sourceFile)
+            .then(async (fetched) => {
+              if (!fetched) {
+                res.statusCode = 404;
+                res.end('Image not found');
+                return;
+              }
+              let outBuffer = fetched.buffer;
+              const ext = path.extname(sourceFile).toLowerCase() || '.webp';
+              let outType = MIME_TYPES[ext] || 'image/webp';
+
+              if (sharp) {
+                try {
+                  let jpgBuf = await sharp(fetched.buffer)
+                    .rotate()
+                    .resize(1200, 630, { fit: 'cover', position: 'centre' })
+                    .jpeg({ quality: 82, mozjpeg: true })
+                    .toBuffer();
+
+                  if (jpgBuf.length > 220 * 1024) {
+                    jpgBuf = await sharp(fetched.buffer)
+                      .rotate()
+                      .resize(1200, 630, { fit: 'cover', position: 'centre' })
+                      .jpeg({ quality: 68, mozjpeg: true })
+                      .toBuffer();
+                  }
+
+                  outBuffer = jpgBuf;
+                  outType = 'image/jpeg';
+                } catch (convErr) {
+                  console.warn(`[OG JPEG Fallback for ${sourceFile}]:`, convErr.message);
+                }
+              }
+
+              setCachedOgImage(sourceFile, { buffer: outBuffer, contentType: outType });
+              sendMediaBuf(outBuffer, outType);
+            })
+            .catch(() => {
+              res.statusCode = 502;
+              res.end('Upstream error');
+            });
+          return;
+        }
+
         const ext = path.extname(sourceFile).toLowerCase() || path.extname(pathname).toLowerCase() || '.webp';
         const contentType = MIME_TYPES[ext] || 'image/webp';
         const localCachedPath = path.join(uploadsDir, sourceFile);
@@ -1321,26 +1421,14 @@ const server = http.createServer((req, res) => {
           return;
         }
 
-        const remoteUrl = `${SUPABASE_URL}/storage/v1/object/public/uploads/${encodeURIComponent(sourceFile)}`;
-        fetch(remoteUrl)
-          .then(async (upstream) => {
-            if (!upstream.ok) {
+        fetchUploadSourceBuffer(sourceFile)
+          .then((fetched) => {
+            if (!fetched) {
               res.statusCode = 404;
               res.end('Image not found');
               return;
             }
-            const buf = Buffer.from(await upstream.arrayBuffer());
-            try { fs.writeFileSync(localCachedPath, buf); } catch {}
-            res.statusCode = 200;
-            res.setHeader('Content-Type', contentType);
-            res.setHeader('Content-Length', buf.length);
-            res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
-            res.setHeader('X-Robots-Tag', 'all');
-            if (req.method === 'HEAD') {
-              res.end();
-            } else {
-              res.end(buf);
-            }
+            sendMediaBuf(fetched.buffer, contentType);
           })
           .catch(() => {
             res.statusCode = 502;
