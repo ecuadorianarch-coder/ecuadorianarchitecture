@@ -155,7 +155,7 @@ function runSeoRegenerationNow() {
   seoRegenRunning = true;
   seoRegenPending = false;
   exec(
-    'node scripts/generate-static-seo.mjs && node scripts/generate-avo-geo.cjs && node scripts/generate-sitemap.cjs',
+    'node scripts/generate-static-seo.mjs && node scripts/generate-avo-geo.cjs && node scripts/generate-sitemap.cjs && node scripts/generate-pinterest-rss.cjs',
     { cwd: rootDir },
     (err, stdout, stderr) => {
       seoRegenRunning = false;

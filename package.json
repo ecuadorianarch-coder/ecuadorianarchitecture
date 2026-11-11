@@ -10,9 +10,10 @@
     "dev": "vite",
     "start": "node server.cjs",
     "backup": "node scripts/backup.cjs",
-    "build": "node scripts/verify-content-integrity.cjs && vite build && node scripts/generate-static-seo.mjs && node scripts/generate-avo-geo.cjs && node scripts/generate-sitemap.cjs",
+    "build": "node scripts/verify-content-integrity.cjs && vite build && node scripts/generate-static-seo.mjs && node scripts/generate-avo-geo.cjs && node scripts/generate-sitemap.cjs && node scripts/generate-pinterest-rss.cjs",
     "build:seo": "node scripts/generate-static-seo.mjs",
     "generate:avo": "node scripts/generate-avo-geo.cjs",
+    "generate:pinterest": "node scripts/generate-pinterest-rss.cjs",
     "preview": "vite preview"
   },
   "dependencies": {
