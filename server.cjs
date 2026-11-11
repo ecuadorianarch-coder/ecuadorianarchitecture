@@ -2,6 +2,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const url = require('url');
+const { exec } = require('child_process');
 
 const PORT = process.env.PORT || 3000;
 const rootDir = __dirname;
@@ -102,14 +103,55 @@ const contentFilesToWarm = [
   'siteMetrics.json'
 ];
 
-contentFilesToWarm.forEach((file) => {
-  readFromSupabase(file).then((content) => {
-    if (content) {
-      console.log(`[Supabase CDN Cache] Sincronizado ${file} desde la nube.`);
-      const localFilePath = path.join(dataDir, file);
-      try { fs.writeFileSync(localFilePath, content, 'utf-8'); } catch (e) {}
+let seoRegenTimer = null;
+let seoRegenRunning = false;
+let seoRegenPending = false;
+
+function runSeoRegenerationNow() {
+  if (seoRegenRunning) {
+    seoRegenPending = true;
+    return;
+  }
+  seoRegenRunning = true;
+  seoRegenPending = false;
+  exec(
+    'node scripts/generate-static-seo.mjs && node scripts/generate-avo-geo.cjs && node scripts/generate-sitemap.cjs',
+    { cwd: rootDir },
+    (err, stdout, stderr) => {
+      seoRegenRunning = false;
+      if (err) {
+        console.error('[SEO Auto-Regen Error]:', err.message);
+        if (stderr) console.error('[SEO Auto-Regen Stderr]:', stderr);
+      } else {
+        console.log('[SEO Auto-Regen] Static HTML, GEO manifests, and sitemap.xml updated.');
+      }
+      if (seoRegenPending) {
+        runSeoRegenerationNow();
+      }
     }
-  }).catch(() => {});
+  );
+}
+
+function scheduleSeoRegeneration(delayMs = 1500) {
+  if (seoRegenTimer) clearTimeout(seoRegenTimer);
+  seoRegenTimer = setTimeout(() => {
+    seoRegenTimer = null;
+    runSeoRegenerationNow();
+  }, delayMs);
+}
+
+Promise.allSettled(
+  contentFilesToWarm.map((file) =>
+    readFromSupabase(file).then((content) => {
+      if (content) {
+        console.log(`[Supabase CDN Cache] Sincronizado ${file} desde la nube.`);
+        const localFilePath = path.join(dataDir, file);
+        try { fs.writeFileSync(localFilePath, content, 'utf-8'); } catch (e) {}
+      }
+    }).catch(() => {})
+  )
+).then(() => {
+  scheduleSeoRegeneration(500);
 });
 
 // MIME types dictionary
@@ -1229,13 +1271,19 @@ const server = http.createServer((req, res) => {
               }
             }
 
-            // Guardar localmente
+            // Guardar localmente y actualizar caché en memoria
             fs.writeFileSync(filePath, body, 'utf-8');
+            memoryContentCache.set(filename, body);
 
             // Guardar en Supabase Cloud Storage de forma permanente
             writeToSupabase(filename, body).catch((err) => {
               console.error(`Error guardando ${filename} en Supabase:`, err);
             });
+
+            // Regenerar HTML estático SEO, manifiestos GEO y sitemap.xml en segundo plano
+            if (['projects.json', 'articles.json', 'academia.json', 'territorios.json', 'authors.json'].includes(filename)) {
+              scheduleSeoRegeneration();
+            }
 
             res.setHeader('Content-Type', 'application/json');
             res.end(JSON.stringify({ success: true, updated: filename, cloud: true }));
@@ -1333,13 +1381,50 @@ function isKnownSpaRoute(pathname, query) {
   return false;
 }
 
-  // Fallback for SPA routing vs Real 404
+function resolveLegacyRedirect(pathname) {
+  const clean = pathname.replace(/^\/+|\/+$/g, '');
+  if (!clean || clean.includes('/') || clean.includes('.')) return null;
+  const slug = clean.toLowerCase();
+
+  const collections = [
+    { section: 'proyectos', file: 'projects.json' },
+    { section: 'academia', file: 'academia.json' },
+    { section: 'territorios', file: 'territorios.json' },
+  ];
+
+  for (const { section, file } of collections) {
+    try {
+      const raw = memoryContentCache.get(file) || (fs.existsSync(path.join(dataDir, file)) ? fs.readFileSync(path.join(dataDir, file), 'utf8') : '[]');
+      const items = JSON.parse(raw || '[]');
+      const match = items.find((item) =>
+        (item.slug && item.slug.toLowerCase() === slug) ||
+        (item.id && item.id.toLowerCase() === slug)
+      );
+      if (match) {
+        return `/${section}/${match.slug || match.id}`;
+      }
+    } catch {
+      // Ignore parse errors for non-fatal legacy fallback
+    }
+  }
+  return null;
+}
+
+  // Fallback for SPA routing vs 301 legacy redirects vs Real 404
   if (!fs.existsSync(filePath)) {
     if (pathname.startsWith('/admin')) {
       filePath = path.join(distDir, 'admin.html');
     } else if (isKnownSpaRoute(pathname, parsedUrl.query)) {
       filePath = path.join(distDir, 'index.html');
     } else {
+      const legacyTarget = resolveLegacyRedirect(pathname);
+      if (legacyTarget) {
+        res.statusCode = 301;
+        res.setHeader('Location', legacyTarget);
+        res.setHeader('Cache-Control', 'public, max-age=3600');
+        res.end();
+        return;
+      }
       const notFoundPath = fs.existsSync(path.join(distDir, '404.html'))
         ? path.join(distDir, '404.html')
         : path.join(rootDir, 'public', '404.html');

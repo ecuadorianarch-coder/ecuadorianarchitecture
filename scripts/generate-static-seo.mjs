@@ -64,10 +64,12 @@ function generateTitle(project) {
 
   if (studiosStr) {
     const full = `${title} - ${studiosStr} | Arquitectura Ecuatoriana`;
-    if (full.length <= 60) return full;
-    const shorter = `${title} | Arquitectura Ecuatoriana`;
-    if (shorter.length <= 60) return shorter;
-    return `${title} - ${studiosStr} | EA`;
+    if (full.length <= 65) return full;
+    const compact = `${title} - ${studiosStr} | EA`;
+    if (compact.length <= 65) return compact;
+    const noBrand = `${title} - ${studiosStr}`;
+    if (noBrand.length <= 65) return noBrand;
+    return compact;
   }
   return `${title} | Arquitectura Ecuatoriana`;
 }
@@ -591,6 +593,35 @@ function renderSemanticCategoryBody(sectionPage, items = []) {
   `;
 }
 
+function renderSemanticAboutBody(sectionPage) {
+  return `
+    <main class="ea-semantic-about max-w-4xl mx-auto px-4 sm:px-6 py-10 text-[#111111] bg-white font-sans" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+      <nav aria-label="Breadcrumb" class="mb-6 text-xs text-neutral-500 font-mono flex items-center gap-2">
+        <a href="/" class="hover:underline text-black font-semibold">Inicio</a>
+        <span>/</span>
+        <span class="text-neutral-700">Acerca de EA</span>
+      </nav>
+      <header class="mb-10 border-b border-neutral-200 pb-6">
+        <p class="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-2">Manifiesto &amp; Crítica Arquitectónica</p>
+        <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-black mb-4">${escapeHtml(sectionPage.title)}</h1>
+        <p class="text-base sm:text-lg text-neutral-700 leading-relaxed">${escapeHtml(sectionPage.desc)}</p>
+      </header>
+      <section class="space-y-4 mb-10 text-neutral-800 leading-relaxed">
+        <p>Ecuadorian Architecture (EA) documenta, cataloga y difunde obras contemporáneas, arquitectura vernácula, investigaciones académicas y reflexiones territoriales en el Ecuador.</p>
+        <nav aria-label="Explorar secciones" class="flex flex-wrap gap-4 pt-4 text-xs font-mono uppercase tracking-widest">
+          <a href="/proyectos" class="text-black underline underline-offset-4 font-semibold">Explorar Proyectos →</a>
+          <a href="/academia" class="text-black underline underline-offset-4 font-semibold">Explorar Academia →</a>
+          <a href="/territorios" class="text-black underline underline-offset-4 font-semibold">Explorar Territorios →</a>
+        </nav>
+      </section>
+      <footer class="pt-6 border-t border-neutral-200 text-xs text-neutral-500 font-mono flex justify-between">
+        <span>Ecuadorian Architecture</span>
+        <a href="/" class="hover:underline text-black font-semibold">← Volver al inicio</a>
+      </footer>
+    </main>
+  `;
+}
+
 function renderSemanticHomeBody(allProjects = []) {
   return `
     <main class="ea-semantic-home max-w-5xl mx-auto px-4 sm:px-6 py-10 text-[#111111] bg-white font-sans" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
@@ -728,11 +759,11 @@ function injectMeta(html, { title, description, canonicalUrl, ogImage, schemaJso
     updated = updated.replace('</head>', `${jsonLdTag}</head>`);
   }
 
-  // Inject semantic HTML inside <div id="root"></div> for Googlebot & SEO Crawlers
+  // Inject semantic HTML inside <div id="root">...</div> idempotently for Googlebot & SEO Crawlers
   if (bodyHtml) {
     updated = updated.replace(
-      /<div id="root"><\/div>/i,
-      `<div id="root">\n${bodyHtml}\n    </div>`
+      /<div id="root">[\s\S]*?<\/body>/i,
+      `<div id="root">\n${bodyHtml}\n    </div>\n  </body>`
     );
   }
 
@@ -803,16 +834,19 @@ async function run() {
   ];
 
   for (const page of sectionPages) {
-    const categoryItems = page.path === 'proyectos' ? projects : page.path === 'academia' ? academia : page.path === 'territorios' ? territorios : projects;
+    const isAbout = page.path === 'acerca-de-ea';
+    const categoryItems = page.path === 'proyectos' ? projects : page.path === 'academia' ? academia : territorios;
     const pageHtml = injectMeta(baseHtml, {
       title: page.title,
       description: page.desc,
       canonicalUrl: `${SITE_URL}/${page.path}`,
       ogImage: `${SITE_URL}/logo.svg`,
-      bodyHtml: renderSemanticCategoryBody(page, categoryItems),
+      bodyHtml: isAbout
+        ? renderSemanticAboutBody(page)
+        : renderSemanticCategoryBody(page, categoryItems),
       schemaJsonLd: {
         '@context': 'https://schema.org',
-        '@type': 'CollectionPage',
+        '@type': isAbout ? 'AboutPage' : 'CollectionPage',
         name: page.title,
         description: page.desc,
         url: `${SITE_URL}/${page.path}`,

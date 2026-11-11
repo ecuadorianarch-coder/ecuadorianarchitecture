@@ -80,13 +80,14 @@ export function generateArchitectureTitle(project: any): string {
 
   if (studiosStr) {
     const full = `${title} - ${studiosStr} | Ecuadorian Architecture`;
-    if (full.length <= 60) return full;
+    if (full.length <= 65) return full;
 
-    // Slightly shorter variant if title is long
+    const eaShort = `${title} - ${studiosStr} | EA`;
+    if (eaShort.length <= 65) return eaShort;
+
     const shorter = `${title} - ${studiosStr}`;
-    if (shorter.length <= 60) return shorter;
+    if (shorter.length <= 65) return shorter;
 
-    // Fallback if very long title
     return `${title} | Ecuadorian Architecture`;
   }
 
