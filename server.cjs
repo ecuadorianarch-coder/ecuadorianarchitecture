@@ -163,7 +163,7 @@ function runSeoRegenerationNow() {
         console.error('[SEO Auto-Regen Error]:', err.message);
         if (stderr) console.error('[SEO Auto-Regen Stderr]:', stderr);
       } else {
-        console.log('[SEO Auto-Regen] Static HTML, GEO manifests, and sitemap.xml updated.');
+        console.log('[SEO Auto-Regen] Static HTML, GEO manifests, sitemap.xml, and pinterest-rss.xml updated.');
       }
       if (seoRegenPending) {
         runSeoRegenerationNow();
@@ -485,6 +485,85 @@ const server = http.createServer((req, res) => {
             res.end(JSON.stringify({ error: e.message }));
           }
         });
+        return;
+      }
+
+      // Agente Navegador Web Real (Chrome Headless + RSS Live Signals)
+      if (pathname === '/api/editorial/navigator/report' && req.method === 'GET') {
+        try {
+          const navPath = path.resolve(__dirname, '..', 'OFICINA', 'ea-web-navigator.cjs');
+          if (!fs.existsSync(navPath)) {
+            res.statusCode = 404;
+            res.end(JSON.stringify({ error: 'ea-web-navigator.cjs no encontrado' }));
+            return;
+          }
+          const navigator = require(navPath);
+          const report = navigator.readLatestReport();
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ success: true, report }));
+        } catch (e) {
+          res.statusCode = 500;
+          res.end(JSON.stringify({ error: e.message }));
+        }
+        return;
+      }
+
+      if (pathname === '/api/editorial/navigator/scan' && req.method === 'POST') {
+        let body = '';
+        req.on('data', chunk => body += chunk);
+        req.on('end', async () => {
+          try {
+            const payload = body ? JSON.parse(body) : {};
+            const navPath = path.resolve(__dirname, '..', 'OFICINA', 'ea-web-navigator.cjs');
+            if (!fs.existsSync(navPath)) {
+              res.statusCode = 404;
+              res.end(JSON.stringify({ error: 'ea-web-navigator.cjs no encontrado' }));
+              return;
+            }
+            const navigator = require(navPath);
+            const report = await navigator.runLiveWebNavigation(payload);
+            const fullState = engine.readEditorialState();
+            writeToSupabase('editorialOffice.json', JSON.stringify(fullState)).catch(() => {});
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({ success: true, report }));
+          } catch (e) {
+            res.statusCode = 500;
+            res.end(JSON.stringify({ error: e.message }));
+          }
+        });
+        return;
+      }
+
+      // Agente Autónomo de Inteligencia Editorial & UX Semanal
+      if (pathname === '/api/editorial/intelligence/run' && (req.method === 'POST' || req.method === 'GET')) {
+        try {
+          const intelligenceModule = require('./scripts/ea-weekly-intelligence.cjs');
+          intelligenceModule.runWeeklyAudit({ sendEmail: true })
+            .then((result) => {
+              res.setHeader('Content-Type', 'application/json');
+              res.end(JSON.stringify({ success: true, ...result }));
+            })
+            .catch((e) => {
+              res.statusCode = 500;
+              res.end(JSON.stringify({ error: e.message }));
+            });
+        } catch (e) {
+          res.statusCode = 500;
+          res.end(JSON.stringify({ error: e.message }));
+        }
+        return;
+      }
+
+      if (pathname === '/api/editorial/intelligence/reports' && req.method === 'GET') {
+        try {
+          const reportsPath = path.join(dataDir, 'weeklyReports.json');
+          const reports = fs.existsSync(reportsPath) ? JSON.parse(fs.readFileSync(reportsPath, 'utf8') || '[]') : [];
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ success: true, reports }));
+        } catch (e) {
+          res.statusCode = 500;
+          res.end(JSON.stringify({ error: e.message }));
+        }
         return;
       }
 
@@ -1619,4 +1698,26 @@ function resolveLegacyRedirect(pathname) {
 
 server.listen(PORT, '0.0.0.0', () => {
   console.log(`[EA Production Server] Listening on port ${PORT} with Supabase Cloud Storage integration.`);
+
+  // Scheduler semanal autónomo: Lunes 08:00 AM Ecuador (13:00 UTC)
+  let lastAuditWeek = null;
+  setInterval(() => {
+    try {
+      const now = new Date();
+      // UTC-5 (Ecuador): 13:00 UTC = 08:00 AM
+      const isMonday = now.getUTCDay() === 1;
+      const isEightAm = now.getUTCHours() === 13;
+      const weekKey = `${now.getUTCFullYear()}-${Math.floor(now.getUTCDate() / 7)}`;
+      if (isMonday && isEightAm && lastAuditWeek !== weekKey) {
+        lastAuditWeek = weekKey;
+        console.log('[EA Weekly Intelligence Scheduler] Executing autonomous Monday audit...');
+        const intelligenceModule = require('./scripts/ea-weekly-intelligence.cjs');
+        intelligenceModule.runWeeklyAudit({ sendEmail: true }).catch((err) => {
+          console.error('[EA Weekly Intelligence Scheduler Error]:', err.message);
+        });
+      }
+    } catch (e) {
+      console.error('[EA Weekly Intelligence Scheduler Tick Error]:', e.message);
+    }
+  }, 1000 * 60 * 30);
 });
