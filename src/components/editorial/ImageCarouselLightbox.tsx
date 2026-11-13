@@ -8,6 +8,9 @@ import {
   Camera,
   Layers,
   Compass,
+  ZoomIn,
+  ZoomOut,
+  RotateCcw,
 } from 'lucide-react';
 import { useAdvertising } from '../../context/AdvertisingContext';
 import { VerticalAdCarousel } from '../advertising/VerticalAdCarousel';
@@ -360,9 +363,32 @@ export const ImageCarouselLightbox: React.FC<ImageCarouselLightboxProps> = ({
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isAdDismissed, setIsAdDismissed] = useState(false);
-  const [touchStart, setTouchStart] = useState<number | null>(null);
-  const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
+
+  // Isolated image zoom & pan state (strictly prevents webpage viewport zoom)
+  const [zoomScale, setZoomScale] = useState(1);
+  const [panOffset, setPanOffset] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [isGesturing, setIsGesturing] = useState(false);
+
+  const isZoomed = zoomScale > 1.05;
+
+  const resetZoom = useCallback(() => {
+    setZoomScale(1);
+    setPanOffset({ x: 0, y: 0 });
+  }, []);
+
+  const handleZoomIn = useCallback(() => {
+    setZoomScale((prev) => Math.min(4, Math.round((prev + 0.5) * 10) / 10));
+  }, []);
+
+  const handleZoomOut = useCallback(() => {
+    setZoomScale((prev) => {
+      const next = Math.max(1, Math.round((prev - 0.5) * 10) / 10);
+      if (next <= 1.05) setPanOffset({ x: 0, y: 0 });
+      return next;
+    });
+  }, []);
 
   const { getEligibleCampaigns, getBrandById, isNewsletterModalOpen } = useAdvertising();
 
@@ -487,7 +513,12 @@ export const ImageCarouselLightbox: React.FC<ImageCarouselLightboxProps> = ({
     setCurrentIndex((prev) => (prev < filteredImages.length - 1 ? prev + 1 : 0));
   }, [filteredImages.length]);
 
-  // Keyboard navigation
+  // Reset zoom whenever image changes, filter changes, or lightbox toggles
+  useEffect(() => {
+    resetZoom();
+  }, [currentIndex, activeFilter, isOpen, resetZoom]);
+
+  // Keyboard navigation & zoom shortcuts
   useEffect(() => {
     if (!isOpen) return;
 
@@ -498,11 +529,21 @@ export const ImageCarouselLightbox: React.FC<ImageCarouselLightboxProps> = ({
       if (targetTag === 'INPUT' || targetTag === 'TEXTAREA' || targetTag === 'SELECT') return;
 
       if (e.key === 'Escape') {
-        onClose();
+        if (isZoomed) {
+          resetZoom();
+        } else {
+          onClose();
+        }
       } else if (e.key === 'ArrowLeft') {
-        handlePrev();
+        if (!isZoomed) handlePrev();
       } else if (e.key === 'ArrowRight') {
-        handleNext();
+        if (!isZoomed) handleNext();
+      } else if (e.key === '+' || e.key === '=') {
+        handleZoomIn();
+      } else if (e.key === '-' || e.key === '_') {
+        handleZoomOut();
+      } else if (e.key === '0') {
+        resetZoom();
       } else if (e.key === '1') {
         handleFilterChange('todas');
       } else if (e.key === '2') {
@@ -514,29 +555,175 @@ export const ImageCarouselLightbox: React.FC<ImageCarouselLightboxProps> = ({
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, isNewsletterModalOpen, handlePrev, handleNext, onClose, activeFilter, filteredImages, currentIndex]);
+  }, [isOpen, isNewsletterModalOpen, isZoomed, handlePrev, handleNext, handleZoomIn, handleZoomOut, resetZoom, onClose, activeFilter, filteredImages, currentIndex]);
 
-  // Touch gesture handlers for mobile
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchEnd(null);
-    setTouchStart(e.targetTouches[0].clientX);
-  };
+  // Gesture state reference for non-passive mobile pinch-to-zoom & pan
+  const gestureStateRef = useRef({
+    scale: 1,
+    pan: { x: 0, y: 0 },
+    initialDist: 0,
+    initialScale: 1,
+    startPan: { x: 0, y: 0 },
+    touchStartPos: { x: 0, y: 0 },
+    isPinching: false,
+    isPanning: false,
+    lastTapTime: 0,
+    lastTapPos: { x: 0, y: 0 },
+  });
 
-  const handleTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
+  useEffect(() => {
+    gestureStateRef.current.scale = zoomScale;
+    gestureStateRef.current.pan = panOffset;
+  }, [zoomScale, panOffset]);
 
-  const handleTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > 50;
-    const isRightSwipe = distance < -50;
-    if (isLeftSwipe) {
-      handleNext();
-    } else if (isRightSwipe) {
-      handlePrev();
-    }
-  };
+  // Native non-passive touch listeners on image stage (strictly suppresses whole-page viewport zoom)
+  useEffect(() => {
+    const stage = stageRef.current;
+    if (!stage || !isOpen) return;
+
+    const onTouchStart = (e: TouchEvent) => {
+      const state = gestureStateRef.current;
+      if (e.touches.length === 2) {
+        state.isPinching = true;
+        state.isPanning = false;
+        const x1 = e.touches[0].clientX;
+        const y1 = e.touches[0].clientY;
+        const x2 = e.touches[1].clientX;
+        const y2 = e.touches[1].clientY;
+        state.initialDist = Math.hypot(x2 - x1, y2 - y1);
+        state.initialScale = state.scale;
+        setIsGesturing(true);
+        if (e.cancelable) e.preventDefault();
+      } else if (e.touches.length === 1) {
+        const touch = e.touches[0];
+        state.touchStartPos = { x: touch.clientX, y: touch.clientY };
+        state.startPan = { x: state.pan.x, y: state.pan.y };
+
+        const now = Date.now();
+        const distFromLast = Math.hypot(
+          touch.clientX - state.lastTapPos.x,
+          touch.clientY - state.lastTapPos.y
+        );
+
+        // Double tap detection (300ms window)
+        if (now - state.lastTapTime < 320 && distFromLast < 35) {
+          if (e.cancelable) e.preventDefault();
+          if (state.scale > 1.05) {
+            resetZoom();
+          } else {
+            const nextScale = 2.5;
+            setZoomScale(nextScale);
+            state.scale = nextScale;
+            const rect = stage.getBoundingClientRect();
+            const tapX = touch.clientX - rect.left - rect.width / 2;
+            const tapY = touch.clientY - rect.top - rect.height / 2;
+            const maxPanX = (rect.width * (nextScale - 1)) / 2;
+            const maxPanY = (rect.height * (nextScale - 1)) / 2;
+            const newPan = {
+              x: Math.max(-maxPanX, Math.min(maxPanX, -tapX * 0.7)),
+              y: Math.max(-maxPanY, Math.min(maxPanY, -tapY * 0.7)),
+            };
+            setPanOffset(newPan);
+            state.pan = newPan;
+          }
+          state.lastTapTime = 0;
+          return;
+        }
+
+        state.lastTapTime = now;
+        state.lastTapPos = { x: touch.clientX, y: touch.clientY };
+
+        if (state.scale > 1.05) {
+          state.isPanning = true;
+          setIsGesturing(true);
+        }
+      }
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      const state = gestureStateRef.current;
+
+      if (e.touches.length === 2 && state.isPinching) {
+        // Crucial: prevent browser viewport pinch-to-zoom on the entire page
+        if (e.cancelable) e.preventDefault();
+        const x1 = e.touches[0].clientX;
+        const y1 = e.touches[0].clientY;
+        const x2 = e.touches[1].clientX;
+        const y2 = e.touches[1].clientY;
+        const dist = Math.hypot(x2 - x1, y2 - y1);
+        if (state.initialDist > 0) {
+          const factor = dist / state.initialDist;
+          const nextScale = Math.min(4, Math.max(1, state.initialScale * factor));
+          state.scale = nextScale;
+          setZoomScale(nextScale);
+          if (nextScale <= 1.05) {
+            setPanOffset({ x: 0, y: 0 });
+            state.pan = { x: 0, y: 0 };
+          }
+        }
+      } else if (e.touches.length === 1 && state.isPanning && state.scale > 1.05) {
+        // Pan the zoomed image inside the stage
+        if (e.cancelable) e.preventDefault();
+        const touch = e.touches[0];
+        const dx = touch.clientX - state.touchStartPos.x;
+        const dy = touch.clientY - state.touchStartPos.y;
+
+        const maxPanX = (stage.clientWidth * (state.scale - 1)) / 1.8;
+        const maxPanY = (stage.clientHeight * (state.scale - 1)) / 1.8;
+
+        const nextX = Math.max(-maxPanX, Math.min(maxPanX, state.startPan.x + dx));
+        const nextY = Math.max(-maxPanY, Math.min(maxPanY, state.startPan.y + dy));
+
+        state.pan = { x: nextX, y: nextY };
+        setPanOffset({ x: nextX, y: nextY });
+      }
+    };
+
+    const onTouchEnd = (e: TouchEvent) => {
+      const state = gestureStateRef.current;
+      setIsGesturing(false);
+
+      if (state.isPinching) {
+        state.isPinching = false;
+        if (state.scale < 1.08) {
+          resetZoom();
+        }
+        return;
+      }
+
+      if (state.isPanning) {
+        state.isPanning = false;
+        return;
+      }
+
+      // Normal 1-finger swipe navigation when image is NOT zoomed
+      if (state.scale <= 1.05 && e.changedTouches.length === 1) {
+        const touch = e.changedTouches[0];
+        const dx = touch.clientX - state.touchStartPos.x;
+        const dy = touch.clientY - state.touchStartPos.y;
+
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.4) {
+          if (dx < 0) {
+            handleNext();
+          } else {
+            handlePrev();
+          }
+        }
+      }
+    };
+
+    stage.addEventListener('touchstart', onTouchStart, { passive: false });
+    stage.addEventListener('touchmove', onTouchMove, { passive: false });
+    stage.addEventListener('touchend', onTouchEnd, { passive: false });
+    stage.addEventListener('touchcancel', onTouchEnd, { passive: false });
+
+    return () => {
+      stage.removeEventListener('touchstart', onTouchStart);
+      stage.removeEventListener('touchmove', onTouchMove);
+      stage.removeEventListener('touchend', onTouchEnd);
+      stage.removeEventListener('touchcancel', onTouchEnd);
+    };
+  }, [isOpen, resetZoom, handleNext, handlePrev]);
 
   const toggleFullscreen = () => {
     if (!document.fullscreenElement) {
@@ -686,12 +873,7 @@ export const ImageCarouselLightbox: React.FC<ImageCarouselLightboxProps> = ({
       {/* ==================================================================== */}
       {/* CENTER: LARGE ACTIVE IMAGE, NAVIGATION ARROWS & LATERAL AD BANNERS   */}
       {/* ==================================================================== */}
-      <main
-        className="flex-1 relative flex items-center justify-between px-3 sm:px-6 2xl:px-8 py-2 overflow-hidden gap-3 2xl:gap-6 min-h-0"
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-      >
+      <main className="flex-1 relative flex items-center justify-between px-3 sm:px-6 2xl:px-8 py-2 overflow-hidden gap-3 2xl:gap-6 min-h-0">
         {/* Left Lateral Skyscraper Ad Banner */}
         {hasLeftAd && (
           <aside
@@ -715,26 +897,40 @@ export const ImageCarouselLightbox: React.FC<ImageCarouselLightboxProps> = ({
         )}
 
         {/* Center Stage: Image and Navigation Controls */}
-        <div className="flex-1 relative flex items-center justify-center h-full max-h-full min-w-0">
+        <div
+          ref={stageRef}
+          style={{ touchAction: 'none' }}
+          className="flex-1 relative flex items-center justify-center h-full max-h-full min-w-0 overflow-hidden select-none"
+        >
           {/* Previous Button */}
           {filteredImages.length > 1 && (
             <button
               onClick={handlePrev}
-              className="absolute left-2 sm:left-4 z-30 p-2.5 sm:p-3.5 bg-black/80 hover:bg-white hover:text-black border border-white/25 text-white rounded-full transition-all backdrop-blur-sm shadow-2xl hover:scale-105 cursor-pointer"
+              className={`absolute left-2 sm:left-4 z-30 p-2.5 sm:p-3.5 bg-black/80 hover:bg-white hover:text-black border border-white/25 text-white rounded-full transition-all backdrop-blur-sm shadow-2xl hover:scale-105 cursor-pointer ${
+                isZoomed ? 'opacity-30 hover:opacity-100' : ''
+              }`}
               aria-label="Imagen anterior"
             >
               <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
           )}
 
-          {/* Main Active Image Container */}
-          <div className="relative max-h-full max-w-full flex items-center justify-center">
+          {/* Main Active Image Container with hardware-accelerated transform */}
+          <div
+            className="relative max-h-full max-w-full flex items-center justify-center will-change-transform"
+            style={{
+              transform: `translate3d(${panOffset.x}px, ${panOffset.y}px, 0) scale(${zoomScale})`,
+              transition: isGesturing ? 'none' : 'transform 0.22s cubic-bezier(0.16, 1, 0.3, 1)',
+              cursor: isZoomed ? (isGesturing ? 'grabbing' : 'grab') : 'default',
+            }}
+          >
             {filteredImages.length > 0 ? (
               <img
                 key={currentImage.url}
                 src={currentImage.url}
                 alt={currentImage.caption || `Imagen ${currentIndex + 1}`}
-                className="max-h-[50vh] xs:max-h-[56vh] sm:max-h-[62vh] xl:max-h-[68vh] max-w-full object-contain shadow-2xl border border-white/15 animate-in fade-in duration-200"
+                draggable={false}
+                className="max-h-[50vh] xs:max-h-[56vh] sm:max-h-[62vh] xl:max-h-[68vh] max-w-full object-contain shadow-2xl border border-white/15 animate-in fade-in duration-200 pointer-events-none select-none"
               />
             ) : (
               <div className="py-20 text-center font-mono text-sm text-white/50">
@@ -747,11 +943,55 @@ export const ImageCarouselLightbox: React.FC<ImageCarouselLightboxProps> = ({
           {filteredImages.length > 1 && (
             <button
               onClick={handleNext}
-              className="absolute right-2 sm:right-4 z-30 p-2.5 sm:p-3.5 bg-black/80 hover:bg-white hover:text-black border border-white/25 text-white rounded-full transition-all backdrop-blur-sm shadow-2xl hover:scale-105 cursor-pointer"
+              className={`absolute right-2 sm:right-4 z-30 p-2.5 sm:p-3.5 bg-black/80 hover:bg-white hover:text-black border border-white/25 text-white rounded-full transition-all backdrop-blur-sm shadow-2xl hover:scale-105 cursor-pointer ${
+                isZoomed ? 'opacity-30 hover:opacity-100' : ''
+              }`}
               aria-label="Imagen siguiente"
             >
               <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
+          )}
+
+          {/* Floating Zoom Controls & Indicator */}
+          <div className="absolute bottom-2 right-2 sm:bottom-4 sm:right-4 z-30 flex items-center gap-1 bg-black/80 backdrop-blur-md border border-white/20 p-1 rounded-xs shadow-2xl">
+            {isZoomed && (
+              <button
+                type="button"
+                onClick={resetZoom}
+                className="flex items-center gap-1 px-2 py-1 text-[10px] font-mono uppercase bg-amber-400 text-black font-bold rounded-[2px] hover:bg-amber-300 transition-colors cursor-pointer"
+                title="Restablecer zoom (0)"
+              >
+                <RotateCcw className="w-3 h-3" />
+                <span>{zoomScale.toFixed(1)}x</span>
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={handleZoomIn}
+              disabled={zoomScale >= 4}
+              className="p-1.5 text-white/80 hover:text-white hover:bg-white/10 disabled:opacity-30 rounded-[2px] transition-colors cursor-pointer"
+              title="Acercar (+)"
+              aria-label="Acercar imagen"
+            >
+              <ZoomIn className="w-4 h-4" />
+            </button>
+            <button
+              type="button"
+              onClick={handleZoomOut}
+              disabled={zoomScale <= 1}
+              className="p-1.5 text-white/80 hover:text-white hover:bg-white/10 disabled:opacity-30 rounded-[2px] transition-colors cursor-pointer"
+              title="Alejar (-)"
+              aria-label="Alejar imagen"
+            >
+              <ZoomOut className="w-4 h-4" />
+            </button>
+          </div>
+
+          {/* Floating gesture hint when zoomed on mobile */}
+          {isZoomed && (
+            <div className="absolute top-2 left-1/2 -translate-x-1/2 z-30 bg-black/85 backdrop-blur-md border border-amber-400/40 px-3 py-1 rounded-full text-[10px] sm:text-xs font-mono text-amber-300 shadow-2xl pointer-events-none tracking-wider animate-in fade-in duration-200">
+              {zoomScale.toFixed(1)}x · Arrastra para explorar · Doble toque para reiniciar
+            </div>
           )}
         </div>
 
