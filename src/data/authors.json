@@ -1,5 +1,236 @@
 [
   {
+    "id": "estudio-mwc9o2pb",
+    "name": "CRISTINA CORREA",
+    "slug": "cristina-correa",
+    "founder": "Arquitecto Titular",
+    "location": "Quito, Ecuador",
+    "country": "Ecuador",
+    "foundedYear": "2026",
+    "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
+    "coverImage": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80",
+    "headline": "Práctica arquitectónica contemporánea, investigación y producción espacial.",
+    "description": "Estudio de arquitectura orientado a la experimentación proyectual y la investigación matérica en el Ecuador.",
+    "philosophy": "Proyectar desde el lugar y con la materia local para responder con pertinencia tectónica a nuestro tiempo.",
+    "typologies": [
+      "Arquitectura Residencial",
+      "Equipamiento Colectivo",
+      "Diseño Sustentable"
+    ],
+    "team": [
+      {
+        "name": "Arquitecto Titular",
+        "role": "Dirección de Taller"
+      }
+    ],
+    "awards": [
+      "Publicado en Archivo EcuadorianArch"
+    ],
+    "contact": {
+      "website": "https://",
+      "instagram": "@estudio",
+      "email": "contacto@estudio.com"
+    }
+  },
+  {
+    "id": "estudio-mwc7yx94",
+    "name": "José Andrés Aguirre Déleg",
+    "slug": "jose-andres-aguirre-deleg",
+    "founder": "Arquitecto Titular",
+    "location": "Quito, Ecuador",
+    "country": "Ecuador",
+    "foundedYear": "2026",
+    "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
+    "coverImage": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80",
+    "headline": "Práctica arquitectónica contemporánea, investigación y producción espacial.",
+    "description": "Estudio de arquitectura orientado a la experimentación proyectual y la investigación matérica en el Ecuador.",
+    "philosophy": "Proyectar desde el lugar y con la materia local para responder con pertinencia tectónica a nuestro tiempo.",
+    "typologies": [
+      "Arquitectura Residencial",
+      "Equipamiento Colectivo",
+      "Diseño Sustentable"
+    ],
+    "team": [
+      {
+        "name": "Arquitecto Titular",
+        "role": "Dirección de Taller"
+      }
+    ],
+    "awards": [
+      "Publicado en Archivo EcuadorianArch"
+    ],
+    "contact": {
+      "website": "https://",
+      "instagram": "@estudio",
+      "email": "contacto@estudio.com"
+    }
+  },
+  {
+    "id": "estudio-mwc7yqcl",
+    "name": "Enrique Alejandro Mora Alvarado",
+    "slug": "enrique-alejandro-mora-alvarado",
+    "founder": "Arquitecto Titular",
+    "location": "Quito, Ecuador",
+    "country": "Ecuador",
+    "foundedYear": "2026",
+    "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
+    "coverImage": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80",
+    "headline": "Práctica arquitectónica contemporánea, investigación y producción espacial.",
+    "description": "Estudio de arquitectura orientado a la experimentación proyectual y la investigación matérica en el Ecuador.",
+    "philosophy": "Proyectar desde el lugar y con la materia local para responder con pertinencia tectónica a nuestro tiempo.",
+    "typologies": [
+      "Arquitectura Residencial",
+      "Equipamiento Colectivo",
+      "Diseño Sustentable"
+    ],
+    "team": [
+      {
+        "name": "Arquitecto Titular",
+        "role": "Dirección de Taller"
+      }
+    ],
+    "awards": [
+      "Publicado en Archivo EcuadorianArch"
+    ],
+    "contact": {
+      "website": "https://",
+      "instagram": "@estudio",
+      "email": "contacto@estudio.com"
+    }
+  },
+  {
+    "id": "estudio-mwc7yi2v",
+    "name": "Alejandro Jesús González Cruz",
+    "slug": "alejandro-jesus-gonzalez-cruz",
+    "founder": "Arquitecto Titular",
+    "location": "Quito, Ecuador",
+    "country": "Ecuador",
+    "foundedYear": "2026",
+    "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
+    "coverImage": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80",
+    "headline": "Práctica arquitectónica contemporánea, investigación y producción espacial.",
+    "description": "Estudio de arquitectura orientado a la experimentación proyectual y la investigación matérica en el Ecuador.",
+    "philosophy": "Proyectar desde el lugar y con la materia local para responder con pertinencia tectónica a nuestro tiempo.",
+    "typologies": [
+      "Arquitectura Residencial",
+      "Equipamiento Colectivo",
+      "Diseño Sustentable"
+    ],
+    "team": [
+      {
+        "name": "Arquitecto Titular",
+        "role": "Dirección de Taller"
+      }
+    ],
+    "awards": [
+      "Publicado en Archivo EcuadorianArch"
+    ],
+    "contact": {
+      "website": "https://",
+      "instagram": "@estudio",
+      "email": "contacto@estudio.com"
+    }
+  },
+  {
+    "id": "estudio-mwc7y4kn",
+    "name": "Ignacio de Teresa Fernández-Casas ",
+    "slug": "ignacio-de-teresa-fernandez-casas",
+    "founder": "Arquitecto Titular",
+    "location": "",
+    "country": "Ecuador",
+    "foundedYear": "2026",
+    "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
+    "coverImage": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80",
+    "headline": "Práctica arquitectónica contemporánea, investigación y producción espacial.",
+    "description": "Estudio de arquitectura orientado a la experimentación proyectual y la investigación matérica en el Ecuador.",
+    "philosophy": "Proyectar desde el lugar y con la materia local para responder con pertinencia tectónica a nuestro tiempo.",
+    "typologies": [
+      "Arquitectura Residencial",
+      "Equipamiento Colectivo",
+      "Diseño Sustentable"
+    ],
+    "team": [
+      {
+        "name": "Arquitecto Titular",
+        "role": "Dirección de Taller"
+      }
+    ],
+    "awards": [
+      "Publicado en Archivo EcuadorianArch"
+    ],
+    "contact": {
+      "website": "https://",
+      "instagram": "@estudio",
+      "email": "contacto@estudio.com"
+    }
+  },
+  {
+    "id": "estudio-mwc7xjrw",
+    "name": "Pierre Berrú - Taller de Arquitectura",
+    "slug": "pierre-berru-taller-de-arquitectura",
+    "founder": "Arquitecto Titular",
+    "location": "Guayaquil, Ecuador",
+    "country": "Ecuador",
+    "foundedYear": "2026",
+    "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
+    "coverImage": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80",
+    "headline": "Práctica arquitectónica contemporánea, investigación y producción espacial.",
+    "description": "Estudio de arquitectura orientado a la experimentación proyectual y la investigación matérica en el Ecuador.",
+    "philosophy": "Proyectar desde el lugar y con la materia local para responder con pertinencia tectónica a nuestro tiempo.",
+    "typologies": [
+      "Arquitectura Residencial",
+      "Equipamiento Colectivo",
+      "Diseño Sustentable"
+    ],
+    "team": [
+      {
+        "name": "Arquitecto Titular",
+        "role": "Dirección de Taller"
+      }
+    ],
+    "awards": [
+      "Publicado en Archivo EcuadorianArch"
+    ],
+    "contact": {
+      "website": "https://",
+      "instagram": "@estudio",
+      "email": "contacto@estudio.com"
+    }
+  },
+  {
+    "id": "estudio-mwb2epi9",
+    "name": "González Serrano Studio+",
+    "slug": "gonzalez-serrano-studio",
+    "founder": "Arquitecto Titular",
+    "location": "Quito, Ecuador",
+    "country": "Ecuador",
+    "foundedYear": "2026",
+    "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
+    "coverImage": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80",
+    "headline": "Práctica arquitectónica contemporánea, investigación y producción espacial.",
+    "description": "Estudio de arquitectura orientado a la experimentación proyectual y la investigación matérica en el Ecuador.",
+    "philosophy": "Proyectar desde el lugar y con la materia local para responder con pertinencia tectónica a nuestro tiempo.",
+    "typologies": [
+      "Arquitectura Residencial",
+      "Equipamiento Colectivo",
+      "Diseño Sustentable"
+    ],
+    "team": [
+      {
+        "name": "Arquitecto Titular",
+        "role": "Dirección de Taller"
+      }
+    ],
+    "awards": [
+      "Publicado en Archivo EcuadorianArch"
+    ],
+    "contact": {
+      "website": "https://",
+      "instagram": "@estudio",
+      "email": "contacto@estudio.com"
+    }
+  },
+  {
     "id": "estudio-mw3ou8ud",
     "name": "Lams arquitectos",
     "slug": "lams-arquitectos",

@@ -1,24 +1,50 @@
 {
-  "totalUniqueVisitors": 0,
-  "totalPageviews": 0,
-  "lastUpdated": "2026-11-07T13:42:37.602Z",
-  "dailyStats": {},
+  "totalUniqueVisitors": 103,
+  "totalPageviews": 261,
+  "lastUpdated": "2026-11-11T22:52:31.553Z",
+  "dailyStats": {
+    "2026-11-07": {
+      "uniqueVisitors": 7,
+      "pageviews": 21,
+      "leads": 0
+    },
+    "2026-11-08": {
+      "uniqueVisitors": 12,
+      "pageviews": 17,
+      "leads": 0
+    },
+    "2026-11-09": {
+      "uniqueVisitors": 20,
+      "pageviews": 52,
+      "leads": 0
+    },
+    "2026-11-10": {
+      "uniqueVisitors": 30,
+      "pageviews": 86,
+      "leads": 0
+    },
+    "2026-11-11": {
+      "uniqueVisitors": 34,
+      "pageviews": 85,
+      "leads": 0
+    }
+  },
   "deviceBreakdown": {
-    "mobile": 0,
-    "desktop": 0,
-    "tablet": 0
+    "mobile": 130,
+    "desktop": 129,
+    "tablet": 2
   },
   "sourcesBreakdown": {
-    "instagram": 0,
-    "direct_whatsapp": 0,
-    "google_search": 0,
-    "referral": 0
+    "instagram": 54,
+    "direct_whatsapp": 179,
+    "google_search": 18,
+    "referral": 10
   },
   "sectionsBreakdown": {
-    "proyectos": 0,
+    "proyectos": 220,
     "home": 0,
-    "territorios": 0,
-    "academia": 0,
+    "territorios": 38,
+    "academia": 3,
     "acerca": 0
   }
 }

@@ -1,15 +1,57 @@
 {
-  "impressions": {},
+  "impressions": {
+    "camp-ea-newsletter": 53
+  },
   "grossClicks": {},
   "validClicks": {},
   "clicks": {},
-  "impressionsByPlacement": {},
+  "impressionsByPlacement": {
+    "entre-proyectos": 21,
+    "inter-galeria": 10,
+    "skyscrapers-laterales": 22
+  },
   "clicksByPlacement": {},
   "deviceBreakdown": {
-    "desktop": 0,
+    "desktop": 53,
     "tablet": 0,
     "mobile": 0
   },
-  "dailyStats": {},
-  "lastUpdated": "2026-11-07T13:42:37.602Z"
+  "dailyStats": {
+    "2026-11-07": {
+      "camp-ea-newsletter": {
+        "validImpressions": 5,
+        "grossClicks": 0,
+        "validClicks": 0
+      }
+    },
+    "2026-11-08": {
+      "camp-ea-newsletter": {
+        "validImpressions": 2,
+        "grossClicks": 0,
+        "validClicks": 0
+      }
+    },
+    "2026-11-09": {
+      "camp-ea-newsletter": {
+        "validImpressions": 4,
+        "grossClicks": 0,
+        "validClicks": 0
+      }
+    },
+    "2026-11-10": {
+      "camp-ea-newsletter": {
+        "validImpressions": 14,
+        "grossClicks": 0,
+        "validClicks": 0
+      }
+    },
+    "2026-11-11": {
+      "camp-ea-newsletter": {
+        "validImpressions": 28,
+        "grossClicks": 0,
+        "validClicks": 0
+      }
+    }
+  },
+  "lastUpdated": "2026-11-11T20:50:39.065Z"
 }

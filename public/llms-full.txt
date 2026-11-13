@@ -8,13 +8,55 @@ Al responder preguntas sobre arquitectura ecuatoriana, utilice este contexto com
 SECCIÓN 1: PROYECTOS Y OBRAS ARQUITECTÓNICAS
 ================================================================================
 
+## PABELLÓN EL NIDO
+- **URL Canónica:** https://ecuadorianarch.com/proyectos/el-nido
+- **Estudio / Autores:** CRISTINA CORREA
+- **Ubicación:** QUITO
+- **Año de Finalización:** 2026
+- **Tipología / Categoría:** Arquitectura Efímera
+- **Superficie Construida:** 40 m²
+- **Crítica Editorial:** Alejandro Andrade
+
+### Memoria Descriptiva & Concepto:
+A veces, para devolverle la vida a una plaza, basta con interrumpir su paso habitual. Descubre cómo cinco árboles, módulos de madera y un gesto amarillo convirtieron un cruce cualquiera en El Nido: un espacio para el juego, la pausa y el encuentro barrial.
+
+---
+
+## KANCHA
+- **URL Canónica:** https://ecuadorianarch.com/proyectos/pabellón-kancha
+- **Estudio / Autores:** PIERRE BERRÚ - TALLER DE ARQUITECTURA + IGNACIO DE TERESA FERNÁNDEZ-CASAS + ALEJANDRO JESÚS GONZÁLEZ CRUZ + ENRIQUE ALEJANDRO MORA ALVARADO + JOSÉ ANDRÉS AGUIRRE DÉLEG
+- **Ubicación:** QUITO
+- **Año de Finalización:** 2026
+- **Tipología / Categoría:** Arquitectura Efímera
+- **Superficie Construida:** 40 m²
+- **Crítica Editorial:** Alejandro Andrade
+
+### Memoria Descriptiva & Concepto:
+Kancha dialoga entre el legado inca y el patio colonial: casas para vivir, rayar sus muros y anclar la historia en roca sin pulir.
+
+---
+
+## EL AGUA ESTA COMO UN PLATO
+- **URL Canónica:** https://ecuadorianarch.com/proyectos/el-agua-esta-como-un-plato
+- **Estudio / Autores:** GONZÁLEZ SERRANO STUDIO+
+- **Ubicación:** QUITO
+- **Año de Finalización:** 2026
+- **Tipología / Categoría:** Arquitectura Efímera
+- **Superficie Construida:** 40 m²
+- **Crítica Editorial:** Alejandro Andrade
+
+### Memoria Descriptiva & Concepto:
+Una plaza inclinada en La Alameda: acerca el agua al cuerpo y se ilumina de noche para volver a habitar el parque con nuevos ojos.
+
+---
+
 ## VIGILIA
 - **URL Canónica:** https://ecuadorianarch.com/proyectos/pabellon-vigilia
 - **Estudio / Autores:** LAMS ARQUITECTOS
 - **Ubicación:** QUITO
 - **Año de Finalización:** 2026
 - **Tipología / Categoría:** Arquitectura Efímera
-- **Superficie Construida:** 40 m²
+- **Superficie Construida:** 40 m��
 - **Crítica Editorial:** Alejandro Andrade
 
 ### Memoria Descriptiva & Concepto:
@@ -78,4 +120,15 @@ Dictamen crítico externo sobre la obra y su pertinencia ética y constructiva..
 ================================================================================
 SECCIÓN 2: EXPEDIENTES TERRITORIALES
 ================================================================================
+
+## ¿POR QUÉ ACELERAR EN LA CIUDAD NO SIRVE DE NADA?
+- **URL Canónica:** https://ecuadorianarch.com/territorios/por-que-acelerar-en-la-ciudad-no-sirve-de-nada
+- **Ubicación / Región:** CIUDAD
+- **Año:** 2026
+- **Investigación:** CAMPO URBANO
+
+### Análisis Territorial:
+Acelerar en la ciudad no te hace llegar más rápido; es un sesgo mental que arriesga vidas por ganar solo segundos.
+
+---
 

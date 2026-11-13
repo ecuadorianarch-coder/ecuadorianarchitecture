@@ -1,5 +1,486 @@
 [
   {
+    "id": "el-nido-c9ok",
+    "slug": "el-nido",
+    "type": "proyectos",
+    "title": "PABELLÓN EL NIDO",
+    "subtitle": "OBRA EN CONSTRUCCIÓN",
+    "studio": "CRISTINA CORREA",
+    "studios": [
+      "CRISTINA CORREA"
+    ],
+    "critic": "",
+    "location": "QUITO",
+    "year": "2026",
+    "excerpt": "A veces, para devolverle la vida a una plaza, basta con interrumpir su paso habitual. Descubre cómo cinco árboles, módulos de madera y un gesto amarillo convirtieron un cruce cualquiera en El Nido: un espacio para el juego, la pausa y el encuentro barrial.",
+    "status": "published",
+    "featured": false,
+    "showOnLanding": true,
+    "landingTab": "proyectos",
+    "actionButtonText": "VER PROYECTO",
+    "hasMaestroMayor": false,
+    "enableAuthorModal": false,
+    "materialidadPrincipal": "",
+    "escritoPor": "Alejandro Andrade",
+    "editadoPor": "Dirección Editorial EA",
+    "superficie": "40 m²",
+    "category": "Arquitectura Efímera",
+    "tags": [
+      "arquitectura ecuatoriana",
+      "ecuadorian architecture",
+      "el nido",
+      "cristina correa",
+      "cristina correa arquitectura",
+      "arquitectura en quito",
+      "quito ecuador",
+      "arquitectura efímera",
+      "arquitectura andina",
+      "fotografia de arquitectura",
+      "diseño arquitectonico contemporaneo"
+    ],
+    "heroImage": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410615803-20_20.webp",
+    "heroImageFocalPoint": "center",
+    "resena": "A veces, para devolverle la vida a una plaza, basta con interrumpir su paso habitual. Descubre cómo cinco árboles, módulos de madera y un gesto amarillo convirtieron un cruce cualquiera en El Nido: un espacio para el juego, la pausa y el encuentro barrial.",
+    "hasCritica": false,
+    "hasVisitas": true,
+    "critica": "",
+    "criticaHeadline": "",
+    "criticaQuote": "",
+    "criticaConclusion": "",
+    "hasPodcast": false,
+    "hasNotasComunidad": true,
+    "modules": [
+      {
+        "id": "mod-intro-1794410502439",
+        "type": "hero-header",
+        "title": "EL NIDO",
+        "subtitle": "LECTURA ARQUITECTÓNICA",
+        "content": "Estructura radial de madera tejida entre cinco árboles que dialoga con las ventanas del entorno, convirtiendo el paso peatonal en refugio, juego y auditorio barrial."
+      },
+      {
+        "id": "mod-text-1794410502440",
+        "type": "rich-text",
+        "content": "El Nido nace como una composición resultante del diálogo entre dos elementos clave del lugar: las preexistencias construidas y las naturales —cinco árboles existentes que abrazan el sitio y dan sentido tanto a la forma como al nombre de la obra—. Desde esa lectura, el proyecto busca consolidarse simultáneamente como un nuevo recorrido y como una nueva estancia."
+      },
+      {
+        "id": "mod-single-image-1794410799476",
+        "type": "single-image",
+        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410615803-20_20.webp",
+        "credits": "Cristina Correa",
+        "category": "fotografia"
+      },
+      {
+        "id": "mod-rich-text-1794410850595",
+        "type": "rich-text",
+        "content": "Su emplazamiento, justo en el centro de la plaza y resguardado entre esos cinco árboles, actúa como un umbral capaz de detonar dinámicas distintas en el sitio. Al reconocer su vocación conectora entre dos edificaciones preexistentes, la propuesta apuesta por desarrollar un módulo inspirado en la geometría y la proporción de sus ventanas."
+      },
+      {
+        "id": "mod-single-image-1794410863302",
+        "type": "single-image",
+        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410875452-001_CONTEXTO.webp",
+        "credits": "Cristina Correa",
+        "category": "planimetria"
+      },
+      {
+        "id": "mod-rich-text-1794410898805",
+        "type": "rich-text",
+        "content": "Hacia el exterior, esas ventanas funcionan como el elemento que dirige el diálogo arquitectónico; por ello, la estructura replica su materialidad en madera. Al repetirse, estos módulos configuran un trazado radial que se teje orgánicamente entre los troncos, reforzando la idea de refugio."
+      },
+      {
+        "id": "mod-single-image-1794410915289",
+        "type": "single-image",
+        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410925189-004_ESQUEMA.webp",
+        "credits": "Cristina Correa",
+        "category": "planimetria"
+      },
+      {
+        "id": "mod-rich-text-1794410947096",
+        "type": "rich-text",
+        "content": "Al interponerse deliberadamente sobre lo que debería ser la circulación principal, la pieza invita a romper el paso automático e interactuar de otra manera con la plaza. El color amarillo refuerza esa intención como un detonante lúdico que llama al juego y abre la puerta a apropiaciones inesperadas del espacio público."
+      },
+      {
+        "id": "mod-single-image-1794410967871",
+        "type": "single-image",
+        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410978921-17_17.webp",
+        "credits": "Cristina Correa",
+        "category": "fotografia"
+      },
+      {
+        "id": "mod-rich-text-1794411002340",
+        "type": "rich-text",
+        "content": "Pero la forma no se agota en el tránsito. El proyecto asume su vocación pública para invitar a la pausa, y esa estancia se amplifica para transformarse, cuando la comunidad lo requiera, en un pequeño auditorio barrial.\n\nDe esta manera, El Nido demuestra que la arquitectura de pequeña escala no necesita imponerse sobre el entorno para transformarlo: le basta con saber leer lo que ya está ahí. Al tejer módulos de madera entre cinco árboles y suspender por un momento la inercia del cruce peatonal, la plaza deja de ser un simple lugar de paso y recupera su verdadero sentido como escenario de encuentro, juego y vida vecinal."
+      },
+      {
+        "id": "mod-single-image-1794411011040",
+        "type": "single-image",
+        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794411025226-11_11.webp",
+        "credits": "Cristina Correa",
+        "category": "fotografia"
+      }
+    ],
+    "datos": {
+      "superficie": "40 m²",
+      "estructura": "",
+      "fotografia": "",
+      "colaboradores": "Raquel Villaquiran, Accel Apolo, Whitekiu Chiang, Xavier Peñafiel",
+      "certificacion": "Eficiencia Bioclimática",
+      "ubicacion": "Biblioteca Nacional Eugenio Espejo"
+    },
+    "ciudad": {
+      "barrio": "Biblioteca Nacional Eugenio Espejo",
+      "altura": "2.850 msnm",
+      "orientacion": "Norte-Sur",
+      "clima": "Ecuatorial Andino"
+    },
+    "createdAt": "2026-11-11T15:21:42.439Z",
+    "updatedAt": "2026-11-11T17:08:47.740Z",
+    "imageCategories": {
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410615803-20_20.webp": "fotografia",
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410875452-001_CONTEXTO.webp": "planimetria",
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410925189-004_ESQUEMA.webp": "planimetria",
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410978921-17_17.webp": "fotografia",
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794411025226-11_11.webp": "fotografia"
+    },
+    "secondaryExcerpt": "",
+    "seo": {
+      "metaTitle": "EL NIDO - CRISTINA CORREA | Ecuadorian Architecture",
+      "metaDescription": "EL NIDO: Arquitectura Efímera en QUITO, Ecuador, obra de CRISTINA CORREA. A veces, para devolverle la vida a una plaza, basta con interrumpir su paso."
+    },
+    "colaboradores": "Raquel Villaquiran, Accel Apolo, Whitekiu Chiang, Xavier Peñafiel"
+  },
+  {
+    "id": "kancha-c818",
+    "slug": "pabellón-kancha",
+    "type": "proyectos",
+    "title": "KANCHA",
+    "subtitle": "OBRA EN CONSTRUCCIÓN",
+    "studio": "PIERRE BERRÚ - TALLER DE ARQUITECTURA + IGNACIO DE TERESA FERNÁNDEZ-CASAS + ALEJANDRO JESÚS GONZÁLEZ CRUZ + ENRIQUE ALEJANDRO MORA ALVARADO + JOSÉ ANDRÉS AGUIRRE DÉLEG",
+    "studios": [
+      "PIERRE BERRÚ - TALLER DE ARQUITECTURA",
+      "IGNACIO DE TERESA FERNÁNDEZ-CASAS",
+      "ALEJANDRO JESÚS GONZÁLEZ CRUZ",
+      "ENRIQUE ALEJANDRO MORA ALVARADO",
+      "JOSÉ ANDRÉS AGUIRRE DÉLEG"
+    ],
+    "critic": "",
+    "location": "QUITO",
+    "year": "2026",
+    "excerpt": "Kancha dialoga entre el legado inca y el patio colonial: casas para vivir, rayar sus muros y anclar la historia en roca sin pulir.",
+    "status": "published",
+    "featured": false,
+    "showOnLanding": true,
+    "landingTab": "proyectos",
+    "actionButtonText": "VER PROYECTO",
+    "hasMaestroMayor": false,
+    "enableAuthorModal": false,
+    "materialidadPrincipal": "",
+    "escritoPor": "Alejandro Andrade",
+    "editadoPor": "Dirección Editorial EA",
+    "superficie": "40 m²",
+    "category": "Arquitectura Efímera",
+    "tags": [
+      "Lugar",
+      "Materia",
+      "Ecuador"
+    ],
+    "heroImage": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794407839628-AXO.webp",
+    "heroImageFocalPoint": "center",
+    "resena": "Kancha dialoga entre el legado inca y el patio colonial: casas para vivir, rayar sus muros y anclar la historia en roca sin pulir.",
+    "hasCritica": false,
+    "hasVisitas": true,
+    "critica": "",
+    "criticaHeadline": "",
+    "criticaQuote": "",
+    "criticaConclusion": "",
+    "hasPodcast": false,
+    "hasNotasComunidad": true,
+    "modules": [
+      {
+        "id": "mod-intro-1794407733526",
+        "type": "hero-header",
+        "title": "KANCHA",
+        "subtitle": "LECTURA ARQUITECTÓNICA",
+        "content": "En el trazo colonial del Centro Histórico, Kancha desentierra la memoria inca para ponerla a dialogar de nuevo con la ciudad viva."
+      },
+      {
+        "id": "mod-text-1794407733527",
+        "type": "rich-text",
+        "content": "Kancha se entiende desde su contexto y se propone con radicalidad. En el tejido colonial del Centro Histórico —erigido sobre una historia andina que la traza urbana posterior intentó ocultar—, el proyecto busca desenterrar esa memoria para que vuelva a leerse como parte viva de la ciudad."
+      },
+      {
+        "id": "mod-single-image-1794408118012",
+        "type": "single-image",
+        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794407839628-AXO.webp",
+        "caption": "Registro fotográfico de obra"
+      },
+      {
+        "id": "mod-rich-text-1794408126112",
+        "type": "rich-text",
+        "content": "La propuesta comprende, estrato por estrato, la evolución de este espacio: lo que nació como kancha y más tarde fue transformado en patio. En el urbanismo incaico, la kancha era la célula básica del hábitat: un recinto perimetral donde varias estructuras o unidades habitacionales se volcaban hacia un espacio central abierto y compartido. La colonia, en su afán de superponer su propio orden sobre la traza preexistente, asimiló esa distribución espacial rebautizándola bajo la figura del patio claustral español."
+      },
+      {
+        "id": "mod-single-image-1794408149280",
+        "type": "single-image",
+        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408337720-kancha.webp",
+        "caption": "Vacío central bioclimático en Quito",
+        "credits": "La kancha Inca",
+        "category": "planimetria"
+      },
+      {
+        "id": "mod-rich-text-1794408368628",
+        "type": "rich-text",
+        "content": "En pleno corazón de la ciudad, el pabellón reactiva esta conversación histórica, poniendo a dialogar la matriz inca con el patio virreinal. Los espacios que articulan el recorrido se conciben deliberadamente como «casas»: una pensada para niños —y para adultos dispuestos a adaptarse a su escala—, y otra para adultos, abierta también al juego de la infancia.\n"
+      },
+      {
+        "id": "mod-image-gallery-1794408576721",
+        "type": "image-gallery",
+        "title": "",
+        "caption": "Las dos casas",
+        "settings": {
+          "columns": 2
+        },
+        "imageUrls": [
+          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408625945-k2.webp",
+          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408582785-k1.webp"
+        ],
+        "credits": "",
+        "category": "planimetria"
+      },
+      {
+        "id": "mod-rich-text-1794408661352",
+        "type": "rich-text",
+        "content": "Este interior se convierte en un itinerario que invita tanto a la pausa como a la interacción activa. En sus muros internos se permite rayar y dibujar, en un manifiesto claro de que el arte público debe habitarse: una invitación a intervenir el adentro de estas «casas». Es una reivindicación del arte urbano que opera en una doble condición: está adentro pero pertenece al afuera; se contempla, pero sobre todo se construye en comunidad."
+      },
+      {
+        "id": "mod-single-image-1794408678925",
+        "type": "single-image",
+        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408689851-INTERIOR.webp",
+        "credits": "Pabellón",
+        "category": "fotografia"
+      },
+      {
+        "id": "mod-rich-text-1794408728623",
+        "type": "rich-text",
+        "content": "El espacio adquiere así un carácter íntimo. Su emplazamiento no es casual: utiliza preexistencias del lugar —como una luminaria pública— para transformar lo colectivo en un ámbito de escala doméstica y de cercanía. A su vez, un árbol incorporado por los arquitectos actúa como testimonio de que una intervención efímera puede dejar una huella vegetal permanente."
+      },
+      {
+        "id": "mod-single-image-1794408738096",
+        "type": "single-image",
+        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794409270186-k6.webp",
+        "credits": "Pabellón",
+        "category": "fotografia"
+      },
+      {
+        "id": "mod-rich-text-1794408817167",
+        "type": "rich-text",
+        "content": "En lo estructural, el proyecto persigue la eficiencia a través de una pieza poco convencional: una roca en bruto, sin pulir. La piedra hace visible la materia prima con la que se cimentó la ciudad histórica; dejarla intacta, sin labrar, es un acierto metafórico que expone con honestidad el diálogo entre las distintas capas culturales que conviven bajo nuestros pies."
+      },
+      {
+        "id": "mod-single-image-1794408870244",
+        "type": "single-image",
+        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794409301297-k5.webp",
+        "credits": "Pabellón",
+        "category": "fotografia"
+      },
+      {
+        "id": "mod-single-image-1794408907450",
+        "type": "single-image",
+        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408916941-FRONTAL__1_.webp",
+        "credits": "Pabellón",
+        "category": "fotografia"
+      }
+    ],
+    "datos": {
+      "superficie": "40 m²",
+      "estructura": "",
+      "fotografia": "",
+      "colaboradores": "Pierre Berrú - Taller de Arquitectura, Ignacio de Teresa Fernández-Casas, Alejandro Jesús González Cruz,  Enrique Alejandro Mora Alvarado, José Andrés Aguirre Déleg, Franklin Ariel Murillo Rojas, John Dylan Freire Murillo",
+      "certificacion": "Eficiencia Bioclimática",
+      "ubicacion": "Boulervard 24 de mayo"
+    },
+    "ciudad": {
+      "barrio": "Boulervard 24 de mayo",
+      "altura": "2.850 msnm",
+      "orientacion": "Norte-Sur",
+      "clima": "Ecuatorial Andino"
+    },
+    "createdAt": "2026-11-11T14:35:33.526Z",
+    "updatedAt": "2026-11-11T19:39:41.205Z",
+    "colaboradores": "Pierre Berrú - Taller de Arquitectura, Ignacio de Teresa Fernández-Casas, Alejandro Jesús González Cruz,  Enrique Alejandro Mora Alvarado, José Andrés Aguirre Déleg, Franklin Ariel Murillo Rojas, John Dylan Freire Murillo",
+    "imageCategories": {
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408337720-kancha.webp": "planimetria",
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408504281-k1.webp": "planimetria",
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408689851-INTERIOR.webp": "fotografia",
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408796890-k3.webp": "planimetria",
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408879166-k4.webp": "planimetria",
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408916941-FRONTAL__1_.webp": "fotografia",
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408625945-k2.webp": "planimetria",
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408582785-k1.webp": "planimetria",
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794409270186-k6.webp": "fotografia",
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794409301297-k5.webp": "fotografia"
+    },
+    "secondaryExcerpt": ""
+  },
+  {
+    "id": "el-agua-esta-como-un-plato-b2fe",
+    "slug": "el-agua-esta-como-un-plato",
+    "type": "proyectos",
+    "title": "EL AGUA ESTA COMO UN PLATO",
+    "subtitle": "OBRA SIN CONSTRUIR",
+    "studio": "GONZÁLEZ SERRANO STUDIO+",
+    "studios": [
+      "GONZÁLEZ SERRANO STUDIO+"
+    ],
+    "critic": "",
+    "location": "QUITO",
+    "year": "2026",
+    "excerpt": "Una plaza inclinada en La Alameda: acerca el agua al cuerpo y se ilumina de noche para volver a habitar el parque con nuevos ojos.",
+    "status": "published",
+    "featured": false,
+    "showOnLanding": true,
+    "landingTab": "proyectos",
+    "actionButtonText": "VER PROYECTO",
+    "hasMaestroMayor": false,
+    "enableAuthorModal": false,
+    "materialidadPrincipal": "",
+    "escritoPor": "Alejandro Andrade",
+    "editadoPor": "Dirección Editorial EA",
+    "superficie": "40 m²",
+    "category": "Arquitectura Efímera",
+    "tags": [
+      "Lugar",
+      "Materia",
+      "Ecuador"
+    ],
+    "heroImage": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338138696-Aerea_lejos_v2.webp",
+    "heroImageFocalPoint": "center",
+    "resena": "Una plaza inclinada en La Alameda: acerca el agua al cuerpo y se ilumina de noche para volver a habitar el parque con nuevos ojos.",
+    "hasCritica": false,
+    "hasVisitas": true,
+    "critica": "",
+    "criticaHeadline": "",
+    "criticaQuote": "",
+    "criticaConclusion": "",
+    "hasPodcast": false,
+    "hasNotasComunidad": true,
+    "modules": [
+      {
+        "id": "mod-intro-1794337851230",
+        "type": "hero-header",
+        "title": "EL AGUA ESTA COMO UN PLATO",
+        "subtitle": "LECTURA ARQUITECTÓNICA",
+        "content": "Una plaza inclinada en La Alameda: acerca el agua al cuerpo y se ilumina de noche para volver a habitar el parque con nuevos ojos."
+      },
+      {
+        "id": "mod-text-1794337851231",
+        "type": "rich-text",
+        "content": "Desde España, el lugar se empieza a entender a partir de conversaciones: de mirar el territorio a través del prisma de otros ojos y, mediante esos decires, construir un entendimiento propio. Se acompaña de la historia para comprenderlo en su contexto: qué significa, cómo se compone y de qué manera se ha relacionado con la ciudad a lo largo del tiempo."
+      },
+      {
+        "id": "mod-quote-1794337851232",
+        "type": "blockquote",
+        "quoteText": "La arquitectura no es una forma aislada, sino una respuesta al lugar, al contexto y a la gente.",
+        "quoteAuthor": "Alejandro Andrade",
+        "content": "La arquitectura no es una forma aislada, sino una respuesta al lugar, al contexto y a la gente."
+      },
+      {
+        "id": "mod-single-image-1794338437396",
+        "type": "single-image",
+        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338454772-Croquis.webp",
+        "caption": "Vacío central bioclimático en Quito",
+        "credits": "González Serrano Studio+",
+        "category": "planimetria"
+      },
+      {
+        "id": "mod-rich-text-1794338533220",
+        "type": "rich-text",
+        "content": "Ubicada en el parque La Alameda, la propuesta se concibe como una plaza más, pero con una particularidad: se inclina para ponerse al servicio del parque. Esa inclinación se convierte en la solución formal de la obra: a partir de ella, el plano se transforma en un espacio de descanso, en un graderío o auditorio al aire libre, y en un catalizador de luz y actividad."
+      },
+      {
+        "id": "mod-single-image-1794338555540",
+        "type": "single-image",
+        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338570097-Diagrama_contexto.webp",
+        "caption": "Vacío central bioclimático en Quito",
+        "credits": "González Serrano Studio+",
+        "category": "planimetria"
+      },
+      {
+        "id": "mod-rich-text-1794338597533",
+        "type": "rich-text",
+        "content": "La intención es acercar lo que siempre vemos pero nunca podemos tocar. Entendemos que la laguna hoy responde únicamente a una vocación estética, olvidando su dimensión humana; el borde del agua se ha vuelto una frontera. Por eso, esta plaza inclinada propone aproximar el agua a la gente: no solo para contemplarla desde lejos, sino para sentirla."
+      },
+      {
+        "id": "mod-single-image-1794338631319",
+        "type": "single-image",
+        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338647110-Frontal.webp",
+        "caption": "Vacío central bioclimático en Quito",
+        "credits": "González Serrano Studio+",
+        "category": "fotografia"
+      },
+      {
+        "id": "mod-rich-text-1794338665474",
+        "type": "rich-text",
+        "content": "El proyecto se apoya en aspersores y sistemas de nebulización que permiten experimentar el agua a quienes estén dispuestos a vivirla con el cuerpo.\n\nLa implantación es, por tanto, una respuesta integral al sitio: se posa cerca del agua y de la vegetación existente, pero asumiendo también su impacto urbano a escala de barrio. La propuesta apuesta por ser luz: la zona inferior que libera la inclinación se ilumina por las noches, no de forma egoísta como un monumento aislado, sino como una iluminación pública pensada para devolverle seguridad y vida a la ciudad."
+      },
+      {
+        "id": "mod-single-image-1794338687260",
+        "type": "single-image",
+        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338703948-Perspectiva.webp",
+        "caption": "Vacío central bioclimático en Quito",
+        "credits": "González Serrano Studio+",
+        "category": "fotografia"
+      },
+      {
+        "id": "mod-rich-text-1794338717477",
+        "type": "rich-text",
+        "content": "Este proyecto es el resultado de una lectura sensible del lugar y de una intención genuina: construir un espacio para experimentar, sentir y rescatar percepciones que la rutina y la normalización del espacio público habían vuelto invisibles. Es, en el fondo, una invitación a mirar y habitar el parque con nuevos ojos.\n"
+      },
+      {
+        "id": "mod-image-gallery-1794338732110",
+        "type": "image-gallery",
+        "settings": {
+          "columns": 2
+        },
+        "imageUrls": [
+          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338747603-Seccion.webp",
+          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338756047-Seccion_2.webp"
+        ]
+      },
+      {
+        "id": "mod-single-image-1794338764127",
+        "type": "single-image",
+        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338779484-Planta.webp",
+        "caption": "Vacío central bioclimático en Quito",
+        "credits": "González Serrano Studio+",
+        "category": "planimetria"
+      }
+    ],
+    "datos": {
+      "superficie": "40 m²",
+      "estructura": "",
+      "fotografia": "",
+      "colaboradores": "González Serrano Studio+",
+      "certificacion": "Eficiencia Bioclimática",
+      "ubicacion": "Parque La Alameda"
+    },
+    "ciudad": {
+      "barrio": "Parque La Alameda",
+      "altura": "2.850 msnm",
+      "orientacion": "Norte-Sur",
+      "clima": "Ecuatorial Andino"
+    },
+    "createdAt": "2026-11-10T19:10:51.230Z",
+    "updatedAt": "2026-11-10T19:29:16.619Z",
+    "imageCategories": {
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338454772-Croquis.webp": "planimetria",
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338570097-Diagrama_contexto.webp": "planimetria",
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338647110-Frontal.webp": "fotografia",
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338703948-Perspectiva.webp": "fotografia",
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338779484-Planta.webp": "planimetria"
+    },
+    "secondaryExcerpt": ""
+  },
+  {
     "id": "vigilia-3ovi",
     "slug": "pabellon-vigilia",
     "type": "proyectos",
@@ -23,7 +504,7 @@
     "materialidadPrincipal": "",
     "escritoPor": "Alejandro Andrade",
     "editadoPor": "Dirección Editorial EA",
-    "superficie": "40 m²",
+    "superficie": "40 m��",
     "category": "Arquitectura Efímera",
     "tags": [
       "Lugar",
@@ -512,10 +993,10 @@
     "critic": "REDACCIÓN CRÍTICA EA",
     "location": "QUITO",
     "year": "2024",
-    "excerpt": "El proyecto nace como una respuesta íntima de la comunidad de Rumipamba a su propia necesidad espiritual, un intento de reconectar con lo divino en un espacio que les ha sido negado. A través de un proceso de diseño participativo, en el que toda la comunidad fue protagonista, se concibió un espacio que no solo uniera a las personas con lo sagrado, sino que también revitalizara técnicas ancestrales, honrando la maestría local en un acto de revalorización cultural.\n",
+    "excerpt": "El proyecto nace como una respuesta íntima de la comunidad de Rumipamba a su propia necesidad espiritual, un intento de reconectar con lo divino en un espacio que les ha sido negado. A través de un proceso de diseño participativo, en el que toda la comunidad fue protagonista, se concibió un espacio que no solo uniera a las personas con lo sagrado, sino que también revitalizara técnicas ancestrales, honrando la maestría local en un acto de revalorización cultural.",
     "status": "published",
     "featured": false,
-    "showOnLanding": true,
+    "showOnLanding": false,
     "landingTab": "proyectos",
     "actionButtonText": "VER PROYECTO",
     "photographer": "",
@@ -532,7 +1013,7 @@
     "heroImageFocalPoint": "bottom",
     "heroImagePosition": "50% 75%",
     "heroImageZoom": 100,
-    "resena": "",
+    "resena": "El proyecto nace como una respuesta íntima de la comunidad de Rumipamba a su propia necesidad espiritual, un intento de reconectar con lo divino en un espacio que les ha sido negado. A través de un proceso de diseño participativo, en el que toda la comunidad fue protagonista, se concibió un espacio que no solo uniera a las personas con lo sagrado, sino que también revitalizara técnicas ancestrales, honrando la maestría local en un acto de revalorización cultural.",
     "hasCritica": false,
     "critica": "Dictamen crítico externo sobre la obra y su pertinencia ética y constructiva...",
     "criticaHeadline": "Desafiar la convención inmobiliaria desde la inercia térmica",
@@ -574,7 +1055,7 @@
       {
         "id": "mod-rich-text-1793233689946",
         "type": "rich-text",
-        "content": "En la primera reunión, nos acercamos a las autoridades locales para presentarles la visión. En la segunda, 15 miembros de la comunidad se reunieron para escuchar y compartir sus perspectivas. La tercera fue un taller de diseño participativo con toda la comunidad, donde se diseñaron dispositivos que nos ayudaron a entender la cosmovisión de Dios y el significado de una iglesia para cada persona, además de identificar sus necesidades. La cuarta reunión nos permitió regresar con un proyecto más definido, para recibir retroalimentación y realizar ajustes. Finalmente, en la quinta reunión, la comunidad aprobó el proyecto con satisfacción.\n\nEl diseño arquitectónico resultante no es más que una manifestación física de la cosmovisión de los futuros usuarios. Este proyecto se fundamenta en un diseño profundamente responsable con su contexto social y cultural. Optamos por utilizar muros de tierra, no solo como un homenaje al conocimiento vernáculo de la región, sino también como una manera de aprovechar los recursos locales y reducir costos. La premisa principal del espacio es sencilla pero poderosa: crear un lugar donde se pueda hablar con Dios.\n\n"
+        "content": "En la primera reunión, nos acercamos a las autoridades locales para presentarles la visión. En la segunda, 15 miembros de la comunidad se reunieron para escuchar y compartir sus perspectivas. La tercera fue un taller de diseño participativo con toda la comunidad, donde se diseñaron dispositivos que nos ayudaron a entender la cosmovisión de Dios y el significado de una iglesia para cada persona, además de identificar sus necesidades. La cuarta reunión nos permitió regresar con un proyecto más definido, para recibir retroalimentación y realizar ajustes. Finalmente, en la quinta reunión, la comunidad aprobó el proyecto con satisfacción.\n\nEl diseño arquitectónico resultante no es más que una manifestación física de la cosmovisión de los futuros usuarios. Este proyecto se fundamenta en un diseño profundamente responsable con su contexto social y cultural. Optamos por utilizar muros de tierra, no solo como un homenaje al conocimiento vernáculo de la región, sino tambi��n como una manera de aprovechar los recursos locales y reducir costos. La premisa principal del espacio es sencilla pero poderosa: crear un lugar donde se pueda hablar con Dios.\n\n"
       },
       {
         "id": "mod-single-image-1793233740022",
@@ -648,7 +1129,7 @@
       "clima": "Ecuatorial Andino"
     },
     "createdAt": "2026-10-29T00:19:42.760Z",
-    "updatedAt": "2026-10-29T00:34:49.441Z",
+    "updatedAt": "2026-11-11T15:21:05.761Z",
     "motion": {
       "variant": "quadrant-aperture"
     },

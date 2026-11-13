@@ -1,6 +1,6 @@
 {
   "version": "2026-11-04-ea-opps-v1",
-  "lastUpdated": "2026-11-05T17:30:25.629Z",
+  "lastUpdated": "2026-11-11T22:52:30.223Z",
   "opportunities": {
     "opp-baq-2026": {
       "id": "opp-baq-2026",
@@ -34,7 +34,7 @@
       "status": "recomendada",
       "assignedAgentId": "ea-opp-02-competitions",
       "notes": "Oportunidad prioritaria número 1 para el posicionamiento institucional de EA.",
-      "daysRemaining": -97
+      "daysRemaining": -103
     },
     "opp-ifci-editorial-2026": {
       "id": "opp-ifci-editorial-2026",
@@ -68,7 +68,7 @@
       "status": "en_preparacion",
       "assignedAgentId": "ea-opp-03-grants",
       "notes": "Permitirá remunerar investigaciones de campo en provincias y fotografía de arquitectura.",
-      "daysRemaining": -143
+      "daysRemaining": -149
     },
     "opp-cceq-aecid-2026": {
       "id": "opp-cceq-aecid-2026",
@@ -101,7 +101,7 @@
       "status": "en_preparacion",
       "assignedAgentId": "ea-opp-03-grants",
       "notes": "Excelente encaje con la infraestructura existente de PodcastSection.tsx.",
-      "daysRemaining": -159
+      "daysRemaining": -165
     },
     "opp-convenio-fau-uce": {
       "id": "opp-convenio-fau-uce",
@@ -133,7 +133,7 @@
       "status": "en_negociacion",
       "assignedAgentId": "ea-opp-05-institutional",
       "notes": "Resolverá el estado vacío actual de academia.json con tesis de alto nivel.",
-      "daysRemaining": 56
+      "daysRemaining": 50
     }
   },
   "sponsors": {
@@ -350,7 +350,7 @@
       "recommendedAction": "Enviar recordatorio o agendar reunión para presentar el paquete \"pkg-cuaderno-tectonico\".",
       "priority": "ALTA",
       "targetId": "sp-novacero",
-      "createdAt": "2026-11-05T17:30:25.629Z"
+      "createdAt": "2026-11-11T22:52:30.223Z"
     },
     {
       "id": "alt-sp-sp-holcim",
@@ -360,7 +360,7 @@
       "recommendedAction": "Enviar recordatorio o agendar reunión para presentar el paquete \"pkg-alianza-anual\".",
       "priority": "ALTA",
       "targetId": "sp-holcim",
-      "createdAt": "2026-11-05T17:30:25.629Z"
+      "createdAt": "2026-11-11T22:52:30.223Z"
     },
     {
       "id": "alt-sp-sp-cotopaxi",
@@ -370,7 +370,7 @@
       "recommendedAction": "Enviar recordatorio o agendar reunión para presentar el paquete \"pkg-newsletter-podcast\".",
       "priority": "ALTA",
       "targetId": "sp-cotopaxi",
-      "createdAt": "2026-11-05T17:30:25.629Z"
+      "createdAt": "2026-11-11T22:52:30.223Z"
     }
   ],
   "monthlyReports": [

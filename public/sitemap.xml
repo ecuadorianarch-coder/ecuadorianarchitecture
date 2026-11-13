@@ -2,33 +2,156 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://ecuadorianarch.com</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://ecuadorianarch.com/proyectos</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://ecuadorianarch.com/territorios</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://ecuadorianarch.com/academia</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://ecuadorianarch.com/acerca-de-ea</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ecuadorianarch.com/proyectos/el-nido</loc>
+    <lastmod>2026-11-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ecuadorianarch.com/media/s/1794410615803-20_20.webp/pabellon-el-nido-cristina-correa-20-20-arquitectura-ecuatoriana.webp</image:loc>
+      <image:title>PABELLÓN EL NIDO — Arquitectura Efímera por CRISTINA CORREA en QUITO, Ecuador | Arquitectura Ecuatoriana</image:title>
+      <image:caption>PABELLÓN EL NIDO — Arquitectura Efímera por CRISTINA CORREA en QUITO, Ecuador | Arquitectura Ecuatoriana</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ecuadorianarch.com/media/s/1794410875452-001_CONTEXTO.webp/pabellon-el-nido-cristina-correa-001-contexto-arquitectura-ecuatoriana.webp</image:loc>
+      <image:title>Planimetría 2 de PABELLÓN EL NIDO — Arquitectura Efímera por CRISTINA CORREA en QUITO, Ecuador | Arquitectura Ecuatoriana</image:title>
+      <image:caption>Planimetría 2 de PABELLÓN EL NIDO — Arquitectura Efímera por CRISTINA CORREA en QUITO, Ecuador | Arquitectura Ecuatoriana</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ecuadorianarch.com/media/s/1794410925189-004_ESQUEMA.webp/pabellon-el-nido-cristina-correa-004-esquema-arquitectura-ecuatoriana.webp</image:loc>
+      <image:title>Planimetría 3 de PABELLÓN EL NIDO — Arquitectura Efímera por CRISTINA CORREA en QUITO, Ecuador | Arquitectura Ecuatoriana</image:title>
+      <image:caption>Planimetría 3 de PABELLÓN EL NIDO — Arquitectura Efímera por CRISTINA CORREA en QUITO, Ecuador | Arquitectura Ecuatoriana</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ecuadorianarch.com/media/s/1794410978921-17_17.webp/pabellon-el-nido-cristina-correa-17-17-arquitectura-ecuatoriana.webp</image:loc>
+      <image:title>Fotografía 4 de PABELLÓN EL NIDO — Arquitectura Efímera por CRISTINA CORREA en QUITO, Ecuador | Arquitectura Ecuatoriana</image:title>
+      <image:caption>Fotografía 4 de PABELLÓN EL NIDO — Arquitectura Efímera por CRISTINA CORREA en QUITO, Ecuador | Arquitectura Ecuatoriana</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ecuadorianarch.com/media/s/1794411025226-11_11.webp/pabellon-el-nido-cristina-correa-11-11-arquitectura-ecuatoriana.webp</image:loc>
+      <image:title>Fotografía 5 de PABELLÓN EL NIDO — Arquitectura Efímera por CRISTINA CORREA en QUITO, Ecuador | Arquitectura Ecuatoriana</image:title>
+      <image:caption>Fotografía 5 de PABELLÓN EL NIDO — Arquitectura Efímera por CRISTINA CORREA en QUITO, Ecuador | Arquitectura Ecuatoriana</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ecuadorianarch.com/proyectos/pabellón-kancha</loc>
+    <lastmod>2026-11-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ecuadorianarch.com/media/s/1794407839628-AXO.webp/pabellon-kancha-pierre-berru-taller-de-arquitectura-axo-arquitectura-ecuatoriana.webp</image:loc>
+      <image:title>KANCHA — Pabellón de Arquitectura Efímera por PIERRE BERRÚ - TALLER DE ARQUITECTURA + IGNACIO DE TERESA FERNÁNDEZ-CASAS + ALEJANDRO JESÚS GONZÁLEZ CRUZ + ENRIQUE ALEJANDRO MORA ALVARADO + JOSÉ ANDRÉS AGUIRRE DÉLEG en QUITO, Ecuador | Arquitectura Ecuatoriana</image:title>
+      <image:caption>KANCHA — Pabellón de Arquitectura Efímera por PIERRE BERRÚ - TALLER DE ARQUITECTURA + IGNACIO DE TERESA FERNÁNDEZ-CASAS + ALEJANDRO JESÚS GONZÁLEZ CRUZ + ENRIQUE ALEJANDRO MORA ALVARADO + JOSÉ ANDRÉS AGUIRRE DÉLEG en QUITO, Ecuador | Arquitectura Ecuatoriana</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ecuadorianarch.com/media/s/1794408337720-kancha.webp/pabellon-kancha-pierre-berru-taller-de-arquitectura-kancha-arquitectura-ecuatoriana.webp</image:loc>
+      <image:title>Vacío central bioclimático en Quito — Pabellón de Arquitectura Efímera por PIERRE BERRÚ - TALLER DE ARQUITECTURA + IGNACIO DE TERESA FERNÁNDEZ-CASAS + ALEJANDRO JESÚS GONZÁLEZ CRUZ + ENRIQUE ALEJANDRO MORA ALVARADO + JOSÉ ANDRÉS AGUIRRE DÉLEG en QUITO, Ecuador | Arquitectura Ecuatoriana</image:title>
+      <image:caption>Vacío central bioclimático en Quito</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ecuadorianarch.com/media/s/1794408625945-k2.webp/pabellon-kancha-pierre-berru-taller-de-arquitectura-k2-arquitectura-ecuatoriana.webp</image:loc>
+      <image:title>Galería fotográfica 3 de KANCHA — Pabellón de Arquitectura Efímera por PIERRE BERRÚ - TALLER DE ARQUITECTURA + IGNACIO DE TERESA FERNÁNDEZ-CASAS + ALEJANDRO JESÚS GONZÁLEZ CRUZ + ENRIQUE ALEJANDRO MORA ALVARADO + JOSÉ ANDRÉS AGUIRRE DÉLEG en QUITO, Ecuador | Arquitectura Ecuatoriana</image:title>
+      <image:caption>Galería fotográfica 3 de KANCHA — Pabellón de Arquitectura Efímera por PIERRE BERRÚ - TALLER DE ARQUITECTURA + IGNACIO DE TERESA FERNÁNDEZ-CASAS + ALEJANDRO JESÚS GONZÁLEZ CRUZ + ENRIQUE ALEJANDRO MORA ALVARADO + JOSÉ ANDRÉS AGUIRRE DÉLEG en QUITO, Ecuador | Arquitectura Ecuatoriana</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ecuadorianarch.com/media/s/1794408582785-k1.webp/pabellon-kancha-pierre-berru-taller-de-arquitectura-k1-arquitectura-ecuatoriana.webp</image:loc>
+      <image:title>Galería fotográfica 4 de KANCHA — Pabellón de Arquitectura Efímera por PIERRE BERRÚ - TALLER DE ARQUITECTURA + IGNACIO DE TERESA FERNÁNDEZ-CASAS + ALEJANDRO JESÚS GONZÁLEZ CRUZ + ENRIQUE ALEJANDRO MORA ALVARADO + JOSÉ ANDRÉS AGUIRRE DÉLEG en QUITO, Ecuador | Arquitectura Ecuatoriana</image:title>
+      <image:caption>Galería fotográfica 4 de KANCHA — Pabellón de Arquitectura Efímera por PIERRE BERRÚ - TALLER DE ARQUITECTURA + IGNACIO DE TERESA FERNÁNDEZ-CASAS + ALEJANDRO JESÚS GONZÁLEZ CRUZ + ENRIQUE ALEJANDRO MORA ALVARADO + JOSÉ ANDRÉS AGUIRRE DÉLEG en QUITO, Ecuador | Arquitectura Ecuatoriana</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ecuadorianarch.com/media/s/1794408689851-INTERIOR.webp/pabellon-kancha-pierre-berru-taller-de-arquitectura-interior-arquitectura-ecuatoriana.webp</image:loc>
+      <image:title>Fotografía 5 de KANCHA — Pabellón de Arquitectura Efímera por PIERRE BERRÚ - TALLER DE ARQUITECTURA + IGNACIO DE TERESA FERNÁNDEZ-CASAS + ALEJANDRO JESÚS GONZÁLEZ CRUZ + ENRIQUE ALEJANDRO MORA ALVARADO + JOSÉ ANDRÉS AGUIRRE DÉLEG en QUITO, Ecuador | Arquitectura Ecuatoriana</image:title>
+      <image:caption>Fotografía 5 de KANCHA — Pabellón de Arquitectura Efímera por PIERRE BERRÚ - TALLER DE ARQUITECTURA + IGNACIO DE TERESA FERNÁNDEZ-CASAS + ALEJANDRO JESÚS GONZÁLEZ CRUZ + ENRIQUE ALEJANDRO MORA ALVARADO + JOSÉ ANDRÉS AGUIRRE DÉLEG en QUITO, Ecuador | Arquitectura Ecuatoriana</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ecuadorianarch.com/media/s/1794409270186-k6.webp/pabellon-kancha-pierre-berru-taller-de-arquitectura-k6-arquitectura-ecuatoriana.webp</image:loc>
+      <image:title>Fotografía 6 de KANCHA — Pabellón de Arquitectura Efímera por PIERRE BERRÚ - TALLER DE ARQUITECTURA + IGNACIO DE TERESA FERNÁNDEZ-CASAS + ALEJANDRO JESÚS GONZÁLEZ CRUZ + ENRIQUE ALEJANDRO MORA ALVARADO + JOSÉ ANDRÉS AGUIRRE DÉLEG en QUITO, Ecuador | Arquitectura Ecuatoriana</image:title>
+      <image:caption>Fotografía 6 de KANCHA — Pabellón de Arquitectura Efímera por PIERRE BERRÚ - TALLER DE ARQUITECTURA + IGNACIO DE TERESA FERNÁNDEZ-CASAS + ALEJANDRO JESÚS GONZÁLEZ CRUZ + ENRIQUE ALEJANDRO MORA ALVARADO + JOSÉ ANDRÉS AGUIRRE DÉLEG en QUITO, Ecuador | Arquitectura Ecuatoriana</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ecuadorianarch.com/media/s/1794409301297-k5.webp/pabellon-kancha-pierre-berru-taller-de-arquitectura-k5-arquitectura-ecuatoriana.webp</image:loc>
+      <image:title>Fotografía 7 de KANCHA — Pabellón de Arquitectura Efímera por PIERRE BERRÚ - TALLER DE ARQUITECTURA + IGNACIO DE TERESA FERNÁNDEZ-CASAS + ALEJANDRO JESÚS GONZÁLEZ CRUZ + ENRIQUE ALEJANDRO MORA ALVARADO + JOSÉ ANDRÉS AGUIRRE DÉLEG en QUITO, Ecuador | Arquitectura Ecuatoriana</image:title>
+      <image:caption>Fotografía 7 de KANCHA — Pabellón de Arquitectura Efímera por PIERRE BERRÚ - TALLER DE ARQUITECTURA + IGNACIO DE TERESA FERNÁNDEZ-CASAS + ALEJANDRO JESÚS GONZÁLEZ CRUZ + ENRIQUE ALEJANDRO MORA ALVARADO + JOSÉ ANDRÉS AGUIRRE DÉLEG en QUITO, Ecuador | Arquitectura Ecuatoriana</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ecuadorianarch.com/media/s/1794408916941-FRONTAL__1_.webp/pabellon-kancha-pierre-berru-taller-de-arquitectura-frontal-1-arquitectura-ecuatoriana.webp</image:loc>
+      <image:title>Fotografía 8 de KANCHA — Pabellón de Arquitectura Efímera por PIERRE BERRÚ - TALLER DE ARQUITECTURA + IGNACIO DE TERESA FERNÁNDEZ-CASAS + ALEJANDRO JESÚS GONZÁLEZ CRUZ + ENRIQUE ALEJANDRO MORA ALVARADO + JOSÉ ANDRÉS AGUIRRE DÉLEG en QUITO, Ecuador | Arquitectura Ecuatoriana</image:title>
+      <image:caption>Fotografía 8 de KANCHA — Pabellón de Arquitectura Efímera por PIERRE BERRÚ - TALLER DE ARQUITECTURA + IGNACIO DE TERESA FERNÁNDEZ-CASAS + ALEJANDRO JESÚS GONZÁLEZ CRUZ + ENRIQUE ALEJANDRO MORA ALVARADO + JOSÉ ANDRÉS AGUIRRE DÉLEG en QUITO, Ecuador | Arquitectura Ecuatoriana</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ecuadorianarch.com/proyectos/el-agua-esta-como-un-plato</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ecuadorianarch.com/media/s/1794338138696-Aerea_lejos_v2.webp/el-agua-esta-como-un-plato-gonzalez-serrano-studio-aerea-lejos-v2-arquitectura-ecuatoriana.webp</image:loc>
+      <image:title>EL AGUA ESTA COMO UN PLATO — Arquitectura Efímera por GONZÁLEZ SERRANO STUDIO+ en QUITO, Ecuador | Arquitectura Ecuatoriana</image:title>
+      <image:caption>EL AGUA ESTA COMO UN PLATO — Arquitectura Efímera por GONZÁLEZ SERRANO STUDIO+ en QUITO, Ecuador | Arquitectura Ecuatoriana</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ecuadorianarch.com/media/s/1794338454772-Croquis.webp/el-agua-esta-como-un-plato-gonzalez-serrano-studio-croquis-arquitectura-ecuatoriana.webp</image:loc>
+      <image:title>Vacío central bioclimático en Quito — Arquitectura Efímera por GONZÁLEZ SERRANO STUDIO+ en QUITO, Ecuador | Arquitectura Ecuatoriana</image:title>
+      <image:caption>Vacío central bioclimático en Quito</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ecuadorianarch.com/media/s/1794338570097-Diagrama_contexto.webp/el-agua-esta-como-un-plato-gonzalez-serrano-studio-diagrama-contexto-arquitectura-ecuatoriana.webp</image:loc>
+      <image:title>Vacío central bioclimático en Quito — Arquitectura Efímera por GONZÁLEZ SERRANO STUDIO+ en QUITO, Ecuador | Arquitectura Ecuatoriana</image:title>
+      <image:caption>Vacío central bioclimático en Quito</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ecuadorianarch.com/media/s/1794338647110-Frontal.webp/el-agua-esta-como-un-plato-gonzalez-serrano-studio-frontal-arquitectura-ecuatoriana.webp</image:loc>
+      <image:title>Vacío central bioclimático en Quito — Arquitectura Efímera por GONZÁLEZ SERRANO STUDIO+ en QUITO, Ecuador | Arquitectura Ecuatoriana</image:title>
+      <image:caption>Vacío central bioclimático en Quito</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ecuadorianarch.com/media/s/1794338703948-Perspectiva.webp/el-agua-esta-como-un-plato-gonzalez-serrano-studio-perspectiva-arquitectura-ecuatoriana.webp</image:loc>
+      <image:title>Vacío central bioclimático en Quito — Arquitectura Efímera por GONZÁLEZ SERRANO STUDIO+ en QUITO, Ecuador | Arquitectura Ecuatoriana</image:title>
+      <image:caption>Vacío central bioclimático en Quito</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ecuadorianarch.com/media/s/1794338747603-Seccion.webp/el-agua-esta-como-un-plato-gonzalez-serrano-studio-seccion-arquitectura-ecuatoriana.webp</image:loc>
+      <image:title>Galería fotográfica 5 de EL AGUA ESTA COMO UN PLATO — Arquitectura Efímera por GONZÁLEZ SERRANO STUDIO+ en QUITO, Ecuador | Arquitectura Ecuatoriana</image:title>
+      <image:caption>Galería fotográfica 5 de EL AGUA ESTA COMO UN PLATO — Arquitectura Efímera por GONZÁLEZ SERRANO STUDIO+ en QUITO, Ecuador | Arquitectura Ecuatoriana</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ecuadorianarch.com/media/s/1794338756047-Seccion_2.webp/el-agua-esta-como-un-plato-gonzalez-serrano-studio-seccion-2-arquitectura-ecuatoriana.webp</image:loc>
+      <image:title>Galería fotográfica 6 de EL AGUA ESTA COMO UN PLATO — Arquitectura Efímera por GONZÁLEZ SERRANO STUDIO+ en QUITO, Ecuador | Arquitectura Ecuatoriana</image:title>
+      <image:caption>Galería fotográfica 6 de EL AGUA ESTA COMO UN PLATO — Arquitectura Efímera por GONZÁLEZ SERRANO STUDIO+ en QUITO, Ecuador | Arquitectura Ecuatoriana</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ecuadorianarch.com/media/s/1794338779484-Planta.webp/el-agua-esta-como-un-plato-gonzalez-serrano-studio-planta-arquitectura-ecuatoriana.webp</image:loc>
+      <image:title>Vacío central bioclimático en Quito — Arquitectura Efímera por GONZÁLEZ SERRANO STUDIO+ en QUITO, Ecuador | Arquitectura Ecuatoriana</image:title>
+      <image:caption>Vacío central bioclimático en Quito</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://ecuadorianarch.com/proyectos/pabellon-vigilia</loc>
@@ -145,7 +268,7 @@
   </url>
   <url>
     <loc>https://ecuadorianarch.com/proyectos/espacio-para-hablar-con-dios</loc>
-    <lastmod>2026-10-29</lastmod>
+    <lastmod>2026-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -195,68 +318,141 @@
     </image:image>
   </url>
   <url>
+    <loc>https://ecuadorianarch.com/territorios/por-que-acelerar-en-la-ciudad-no-sirve-de-nada</loc>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ecuadorianarch.com/media/s/1794241484389-562768852a2a011dab6eefc820c9f87d_jpg_71701403_2K.webp/por-que-acelerar-en-la-ciudad-no-sirve-de-nada-campo-urbano-562768852a2a011dab6eefc820c9f87d-jpg-71701403-2k-a.webp</image:loc>
+      <image:title>¿POR QUÉ ACELERAR EN LA CIUDAD NO SIRVE DE NADA? — Tráfico y ciudad por CAMPO URBANO en CIUDAD, Ecuador | Arquitectura Ecuatoriana</image:title>
+      <image:caption>¿POR QUÉ ACELERAR EN LA CIUDAD NO SIRVE DE NADA? — Tráfico y ciudad por CAMPO URBANO en CIUDAD, Ecuador | Arquitectura Ecuatoriana</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ecuadorianarch.com/media/s/1794241871375-4962e3de6d6122ddf70f1aea996c7e7e.webp/por-que-acelerar-en-la-ciudad-no-sirve-de-nada-campo-urbano-4962e3de6d6122ddf70f1aea996c7e7e-arquitectura-ecua.webp</image:loc>
+      <image:title>Fotografía 1 de ¿POR QUÉ ACELERAR EN LA CIUDAD NO SIRVE DE NADA? — Tráfico y ciudad por CAMPO URBANO en CIUDAD, Ecuador | Arquitectura Ecuatoriana</image:title>
+      <image:caption>Fotografía 1 de ¿POR QUÉ ACELERAR EN LA CIUDAD NO SIRVE DE NADA? — Tráfico y ciudad por CAMPO URBANO en CIUDAD, Ecuador | Arquitectura Ecuatoriana</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ecuadorianarch.com/media/s/1794242262932-filters_format_webp__quality_75_.webp/por-que-acelerar-en-la-ciudad-no-sirve-de-nada-campo-urbano-filters-format-webp-quality-75-arquitectura-ecuato.webp</image:loc>
+      <image:title>Fotografía 2 de ¿POR QUÉ ACELERAR EN LA CIUDAD NO SIRVE DE NADA? — Tráfico y ciudad por CAMPO URBANO en CIUDAD, Ecuador | Arquitectura Ecuatoriana</image:title>
+      <image:caption>Fotografía 2 de ¿POR QUÉ ACELERAR EN LA CIUDAD NO SIRVE DE NADA? — Tráfico y ciudad por CAMPO URBANO en CIUDAD, Ecuador | Arquitectura Ecuatoriana</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ecuadorianarch.com/media/s/1794242587796-424e75c70fcc6f7de9a142d1a0da06b9.webp/por-que-acelerar-en-la-ciudad-no-sirve-de-nada-campo-urbano-424e75c70fcc6f7de9a142d1a0da06b9-arquitectura-ecua.webp</image:loc>
+      <image:title>Fotografía 3 de ¿POR QUÉ ACELERAR EN LA CIUDAD NO SIRVE DE NADA? — Tráfico y ciudad por CAMPO URBANO en CIUDAD, Ecuador | Arquitectura Ecuatoriana</image:title>
+      <image:caption>Fotografía 3 de ¿POR QUÉ ACELERAR EN LA CIUDAD NO SIRVE DE NADA? — Tráfico y ciudad por CAMPO URBANO en CIUDAD, Ecuador | Arquitectura Ecuatoriana</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ecuadorianarch.com/media/s/1794242968812-45fe0252b4fd983d4a6808b631186a04.webp/por-que-acelerar-en-la-ciudad-no-sirve-de-nada-campo-urbano-45fe0252b4fd983d4a6808b631186a04-arquitectura-ecua.webp</image:loc>
+      <image:title>Fotografía 4 de ¿POR QUÉ ACELERAR EN LA CIUDAD NO SIRVE DE NADA? — Tráfico y ciudad por CAMPO URBANO en CIUDAD, Ecuador | Arquitectura Ecuatoriana</image:title>
+      <image:caption>Fotografía 4 de ¿POR QUÉ ACELERAR EN LA CIUDAD NO SIRVE DE NADA? — Tráfico y ciudad por CAMPO URBANO en CIUDAD, Ecuador | Arquitectura Ecuatoriana</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ecuadorianarch.com/estudios/cristina-correa</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ecuadorianarch.com/estudios/jose-andres-aguirre-deleg</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ecuadorianarch.com/estudios/enrique-alejandro-mora-alvarado</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ecuadorianarch.com/estudios/alejandro-jesus-gonzalez-cruz</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ecuadorianarch.com/estudios/ignacio-de-teresa-fernandez-casas</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ecuadorianarch.com/estudios/pierre-berru-taller-de-arquitectura</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ecuadorianarch.com/estudios/gonzalez-serrano-studio</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://ecuadorianarch.com/estudios/lams-arquitectos</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ecuadorianarch.com/estudios/isaac-flores</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ecuadorianarch.com/estudios/natura-futura</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ecuadorianarch.com/estudios/estudio-felipe-escudero</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ecuadorianarch.com/estudios/rama-estudio</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ecuadorianarch.com/estudios/al-borde-arquitectos</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ecuadorianarch.com/estudios/daniel-moreno-flores</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ecuadorianarch.com/estudios/diego-guayasamin</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ecuadorianarch.com/estudios/luis-lopez-lopez</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ecuadorianarch.com/estudios/enlace-arquitectura</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ecuadorianarch.com/estudios/nomade-taller</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

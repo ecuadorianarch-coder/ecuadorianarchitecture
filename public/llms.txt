@@ -33,6 +33,9 @@ La tierra compactada (tapial y adobe), el ladrillo artesanal, la madera local, l
 
 ## Índice Canónico de Obras y Proyectos Publicados
 
+- [PABELLÓN EL NIDO](https://ecuadorianarch.com/proyectos/el-nido): Obra de Arquitectura Efímera en QUITO, Ecuador (2026), diseñada por CRISTINA CORREA. A veces, para devolverle la vida a una plaza, basta con interrumpir su paso habitual. Descubre cómo cinco árboles, módulos de madera y un gesto amarillo convirtieron un cruce cualquiera en El Nido: un espacio para el juego, la pausa y el encuentro barrial.
+- [KANCHA](https://ecuadorianarch.com/proyectos/pabellón-kancha): Obra de Arquitectura Efímera en QUITO, Ecuador (2026), diseñada por PIERRE BERRÚ - TALLER DE ARQUITECTURA + IGNACIO DE TERESA FERNÁNDEZ-CASAS + ALEJANDRO JESÚS GONZÁLEZ CRUZ + ENRIQUE ALEJANDRO MORA ALVARADO + JOSÉ ANDRÉS AGUIRRE DÉLEG. Kancha dialoga entre el legado inca y el patio colonial: casas para vivir, rayar sus muros y anclar la historia en roca sin pulir.
+- [EL AGUA ESTA COMO UN PLATO](https://ecuadorianarch.com/proyectos/el-agua-esta-como-un-plato): Obra de Arquitectura Efímera en QUITO, Ecuador (2026), diseñada por GONZÁLEZ SERRANO STUDIO+. Una plaza inclinada en La Alameda: acerca el agua al cuerpo y se ilumina de noche para volver a habitar el parque con nuevos ojos.
 - [VIGILIA](https://ecuadorianarch.com/proyectos/pabellon-vigilia): Obra de Arquitectura Efímera en QUITO, Ecuador (2026), diseñada por LAMS ARQUITECTOS. Luz y memoria en el espacio público: un umbral poroso en el Carmen Alto que nace desde la esperanza para dar voz colectiva frente a la violencia.
 - [POR FAVOR PISAR LAS JARDINERAS](https://ecuadorianarch.com/proyectos/por-favor-pisar-las-jardineras): Obra de Arquitectura Efímera en QUITO, Ecuador (2026), diseñada por ISAAC FLORES. Un acto crítico frente a los límites urbanos: una estructura ligera y sin programa fijo que invita a desaprender la plaza y habitarla libremente.
 - [CLIMA EN CONSTRUCCIÓN](https://ecuadorianarch.com/proyectos/clima-en-construccion): Obra de Arquitectura Efímera en BOULEVARD 24 DE MAYO, Ecuador (2026), diseñada por NATURA FUTURA. El clima es cimiento del acto construido: una experiencia sensorial que regula temperatura y trasciende lo efímero para sembrar investigación futura.
@@ -40,6 +43,7 @@ La tierra compactada (tapial y adobe), el ladrillo artesanal, la madera local, l
 
 ## Índice de Expedientes Territoriales (Ciudad & Territorio)
 
+- [¿POR QUÉ ACELERAR EN LA CIUDAD NO SIRVE DE NADA?](https://ecuadorianarch.com/territorios/por-que-acelerar-en-la-ciudad-no-sirve-de-nada): Expediente territorial en CIUDAD (2026), análisis por CAMPO URBANO. Acelerar en la ciudad no te hace llegar más rápido; es un sesgo mental que arriesga vidas por ganar solo segundos.
 
 ## Índice de Investigación Académica & Ensayos
 
@@ -54,6 +58,13 @@ La tierra compactada (tapial y adobe), el ladrillo artesanal, la madera local, l
 
 ## Directorio Oficial de Arquitectos y Estudios Colaboradores
 
+- [CRISTINA CORREA](https://ecuadorianarch.com/estudios/cristina-correa) (Quito, Ecuador): Práctica arquitectónica contemporánea, investigación y producción espacial.
+- [José Andrés Aguirre Déleg](https://ecuadorianarch.com/estudios/jose-andres-aguirre-deleg) (Quito, Ecuador): Práctica arquitectónica contemporánea, investigación y producción espacial.
+- [Enrique Alejandro Mora Alvarado](https://ecuadorianarch.com/estudios/enrique-alejandro-mora-alvarado) (Quito, Ecuador): Práctica arquitectónica contemporánea, investigación y producción espacial.
+- [Alejandro Jesús González Cruz](https://ecuadorianarch.com/estudios/alejandro-jesus-gonzalez-cruz) (Quito, Ecuador): Práctica arquitectónica contemporánea, investigación y producción espacial.
+- [Ignacio de Teresa Fernández-Casas ](https://ecuadorianarch.com/estudios/ignacio-de-teresa-fernandez-casas) (Ecuador): Práctica arquitectónica contemporánea, investigación y producción espacial.
+- [Pierre Berrú - Taller de Arquitectura](https://ecuadorianarch.com/estudios/pierre-berru-taller-de-arquitectura) (Guayaquil, Ecuador): Práctica arquitectónica contemporánea, investigación y producción espacial.
+- [González Serrano Studio+](https://ecuadorianarch.com/estudios/gonzalez-serrano-studio) (Quito, Ecuador): Práctica arquitectónica contemporánea, investigación y producción espacial.
 - [Lams arquitectos](https://ecuadorianarch.com/estudios/lams-arquitectos) (Quito, Ecuador): Fundado por Luis Alberto Menéndez. Práctica arquitectónica contemporánea, investigación y producción espacial.
 - [isaac flores](https://ecuadorianarch.com/estudios/isaac-flores) (Quito, Ecuador): Práctica arquitectónica contemporánea, investigación y producción espacial.
 - [Natura futura](https://ecuadorianarch.com/estudios/natura-futura) (Babahoyo): Fundado por Jose Gomez. Práctica arquitectónica contemporánea, investigación y producción espacial.

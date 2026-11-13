@@ -1,0 +1,490 @@
+{
+  "agentId": "ea-web-navigator",
+  "executedAt": "2026-11-11T22:52:39.939Z",
+  "durationMs": 9675,
+  "browserEngine": "chrome.exe (Headless CDP Real)",
+  "browserError": null,
+  "summary": {
+    "routesAudited": 5,
+    "routesOnline": 5,
+    "uptimePercentage": 100,
+    "averageLoadTimeMs": 903,
+    "totalFailuresDetected": 0,
+    "criticalFailures": 0,
+    "liveSituationsFound": 24,
+    "liveOpportunitiesFound": 24
+  },
+  "aiAnalysis": {
+    "llmPowered": false,
+    "provider": "Sin API Key (Motor de Navegación Real Directo)",
+    "note": "Agrega GEMINI_API_KEY en tu archivo .env local para que Gemini analice e interprete estos datos reales con razonamiento estratégico.",
+    "diagnosis": null
+  },
+  "routes": [
+    {
+      "url": "http://localhost:3000/",
+      "reachable": true,
+      "httpStatus": 200,
+      "navigationTimedOut": false,
+      "loadTimeMs": 1493,
+      "ttfbMs": 12,
+      "domReadyMs": 442,
+      "transferSizeKB": 23,
+      "title": "Arquitectura Ecuatoriana — Obras, Estudios y Crítica | Ecuadorian Architecture",
+      "metaDescLen": 177,
+      "h1Count": 2,
+      "bodyTextLen": 2713,
+      "totalImages": 19,
+      "brokenImages": [],
+      "consoleErrors": [],
+      "failedRequests": []
+    },
+    {
+      "url": "https://ecuadorianarch.com/",
+      "reachable": true,
+      "httpStatus": 200,
+      "navigationTimedOut": false,
+      "loadTimeMs": 1457,
+      "ttfbMs": 260,
+      "domReadyMs": 850,
+      "transferSizeKB": 6,
+      "title": "Arquitectura Ecuatoriana — Obras, Estudios y Crítica | Ecuadorian Architecture",
+      "metaDescLen": 177,
+      "h1Count": 2,
+      "bodyTextLen": 2713,
+      "totalImages": 19,
+      "brokenImages": [],
+      "consoleErrors": [],
+      "failedRequests": []
+    },
+    {
+      "url": "https://ecuadorianarch.com/proyectos",
+      "reachable": true,
+      "httpStatus": 200,
+      "navigationTimedOut": false,
+      "loadTimeMs": 815,
+      "ttfbMs": 248,
+      "domReadyMs": 273,
+      "transferSizeKB": 6,
+      "title": "Proyectos de Arquitectura Ecuatoriana — Obras y Archivo | Ecuadorian Architecture",
+      "metaDescLen": 172,
+      "h1Count": 1,
+      "bodyTextLen": 3240,
+      "totalImages": 17,
+      "brokenImages": [],
+      "consoleErrors": [],
+      "failedRequests": []
+    },
+    {
+      "url": "https://ecuadorianarch.com/academia",
+      "reachable": true,
+      "httpStatus": 200,
+      "navigationTimedOut": false,
+      "loadTimeMs": 320,
+      "ttfbMs": 178,
+      "domReadyMs": 193,
+      "transferSizeKB": 4,
+      "title": "Investigación en Arquitectura Ecuatoriana y Tesis | Ecuadorian Architecture",
+      "metaDescLen": 122,
+      "h1Count": 1,
+      "bodyTextLen": 1199,
+      "totalImages": 9,
+      "brokenImages": [],
+      "consoleErrors": [],
+      "failedRequests": []
+    },
+    {
+      "url": "https://ecuadorianarch.com/territorios",
+      "reachable": true,
+      "httpStatus": 200,
+      "navigationTimedOut": false,
+      "loadTimeMs": 429,
+      "ttfbMs": 179,
+      "domReadyMs": 222,
+      "transferSizeKB": 4,
+      "title": "Territorio y Ciudad en Ecuador — Expedientes Críticos | Ecuadorian Architecture",
+      "metaDescLen": 123,
+      "h1Count": 1,
+      "bodyTextLen": 870,
+      "totalImages": 9,
+      "brokenImages": [],
+      "consoleErrors": [],
+      "failedRequests": []
+    }
+  ],
+  "failures": [],
+  "liveSituations": [
+    {
+      "title": "El clima, naturaleza y arquitectura de Cuenca son atractivos para extranjeros que llegan a vivir a esta ciudad - El Universo",
+      "url": "https://news.google.com/rss/articles/CBMimgJBVV95cUxOQkZzU0xPcXVLblhyZ2tRczhvaFA0Ukk5X3M5dW1rVEpEbDNPb19xbHZxTHhydDdlcktNWkl0VjVUdGJCeWp4aFpId0o3RnZuOXdMSVU4clB4LUtRTnlabXhsUU5GU18zWnFnUlVsVjhiN1BhYUlxOEdMLTQ5QklXRkxwWDhITTBBSm1wWm1sandfT2VOcFA0VzB6TkdmMEg5WUtCOUxSRFRqR09RZ3lBOGVHX1pWbzFvWDlpSmcxMWpwTXlxaW93dl8xbF9ub18zbzNLblh1cEdEQWR5bFNxaXozR3lPZF9zcVh3QnVlakU2MjV5T0JnclZreWoyMzlnZnNJWG1aSlhYYnlRR0V3R1RSODkzZXZZaWfSAYQCQVVfeXFMTlZNYS1UaVVTYi1UZ3E4Y01FeHZLLW5SZTdKT3RKRDU0WEFKUGZCbUswYWh3SFpNTWMwblhqVmxZMkMzcGtzTlVuZ2FoRVhIVG1NTG82ZGhVZTNZNlZvZktIT3BpM0pnUVRKX2N3a2JzcTV3UDh6dHVMaTFXU284Ry1Zbl9DR2FUeW8yWnVycUJDcnNOc3RoS1ZDRkxoc21lWFZwRDUyM3FxNnBNYTl1R1BrUE51bzJUOXczNVJhMzlhNDVTdllLNXhmU0NJUHBhZ2cteTd2Y0Y2VnJ3QVgzTHlweVpoTEZ2dXBXNEFvTXozOHJXb1pCMGowMGYxcmxXVEo4S3M?oc=5",
+      "pubDate": "Tue, 10 Nov 2026 23:13:00 GMT",
+      "source": "El Universo",
+      "category": "Situación Actual Ecuador"
+    },
+    {
+      "title": "Así están los candidatos en Pichincha, Guayas y Azuay y en las alcaldías de Quito, Guayaquil y Cuenca - Metro Ecuador",
+      "url": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxNY3FZeGVBdmgtZmdSODZlUE5VX3k3bjhFWGlSWEtuUWR0YnZYT3N2QUhkMFJmbVdaUUJkWkJ0bU9xcmhCOFQyaENSa25uQ2R0dXR2U1NkVkoxMlc5RWhYWUl5QWIydXBLRkNvTVRNSlZFenBZb3FwWmpNU3ZjeDh2dDZMYnZFSDdXQzVmSGxiemNPWS0xV19UVnFaMjd1dTZuc3YwMnUwTjFfeUdJSkZqWllObzBRRmlPOWJOQWJkajNtZ2hkbUxmcUNPVzlkbnRDVkpZT2pyYnV4TndzQWFrRjhvZndWVTg?oc=5",
+      "pubDate": "Mon, 05 Oct 2026 07:00:00 GMT",
+      "source": "Metro Ecuador",
+      "category": "Situación Actual Ecuador"
+    },
+    {
+      "title": "Terremoto en Venezuela, así puede enviar ayuda desde Quito, Guayaquil y Cuenca - El Comercio",
+      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPcE9QN2xiZ3pVdm9tdGI2cGIxTllBTngtQ0wtRDdYdjg4NTk5YXR1VUJGUDc1M01TZ1poT3Uydlo5QkxJbkFncVd6bEEzbG54SGtFMVJzX3BlamhEdVNicFdKamtJWlJ0c2NoUTM3aUlhYW43RWI3Z0lUQkxuWjhZOGhxbUlFMVpiS3FFT2ZtNE5QWmhueVRTM0x6bkpBZzVRNXZKeS1yTnM?oc=5",
+      "pubDate": "Thu, 25 Jun 2026 07:00:00 GMT",
+      "source": "El Comercio",
+      "category": "Situación Actual Ecuador"
+    },
+    {
+      "title": "Uribe Schwarzkopf, la firma que impone arquitectura icónica en Ecuador - Diario La Hora",
+      "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQV2UwRUF2SG1Wb082SkZWZkh2akJmQjdXcHZZWWVLNzZ4aDRNQXNfQXlQazNaZy1jR2g2ZjZuODNCQlgwVEhuNndFWV80MDk5MFRxT08td0lQYnl1REt4bkZtd1dMQlI5SDVqQkR5dUFhY3hzRkZ0Ti02T2dPY3JkWVNRdUp5U3NaWm15SXZ5dWY0Yk5oRjVGQlpiRFNzZDdNd3J5R0JUVWhqMnFCanJRZ2lDRnc3NUZjV1dzVWZyaHVnVE0?oc=5",
+      "pubDate": "Mon, 27 Apr 2026 07:00:00 GMT",
+      "source": "Diario La Hora",
+      "category": "Situación Actual Ecuador"
+    },
+    {
+      "title": "Fallece Freddy Olmedo, referente de la arquitectura y la gestión cultural en Ecuador - El Universo",
+      "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxPOTYyLU5BSmNOZ0VlQUhPUlVvR0lZazZOU1VMRWZnTm9kR3pPRVVIZDF0YUk1aTRkWDQtWVJNNWlPZFRYbmJjRU1BblI1Y0F0UlQ3ZFlNc2ZKVU9zaEd3ZlV0aXcwSFB1UThMY3ZySm1NRmxmTXVnM3JsekFsaFo4TzRIaDExNGEyRzloNzk3VmZmSlZzR0FpWThEdno1dUNlLTVkaWt0bjF0dmtTSUU3VTg0SUgycTFGQmw1ZUFZcDZLRXhqR3FxS21SckF4S2kwMnB4dFlkQdIB6wFBVV95cUxOUDUzamRzOEtyc2pBdXgtQUkxdWRsRzFuU09wSWFUcGRzTWlXc2FITVJsWUVxQlF2d0Vkcy1TeVdpTTktbWZoMElYSXpCU0pZQUdxYzRBUWE1S2VGVlpMelg0LURiM1Z5d2tzUjF0TWdjS09zZXNNbUpHLU1VTmd4eEJwRWVMV0lUSS01ZVhRWE5PZWNXTDZvejBFMGJuVlF1akYzTG5xOUZXZGxzV1FNV2JkUmJoOFQtNFZHTXYzQVp6Tks5YlVGRWhYS0FWLUJIMDI0SmkwdjYyblZfSjhFOTFaV29FMUcyay0w?oc=5",
+      "pubDate": "Fri, 17 Apr 2026 07:00:00 GMT",
+      "source": "El Universo",
+      "category": "Situación Actual Ecuador"
+    },
+    {
+      "title": "Más de 40 obras de arquitectura contemporánea en todo Ecuador capturadas por Francesco Russo y Luca Piffaretti - ArchDaily",
+      "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxON05ZeVRta0E4VkRqTUlTZV9jaGNFcHhaX0lZdHIwUUZjMjBCZmRmTWU5WU9ocS1WN1VBbDFkbnhDYnFqalkzWGdjSTg5ZnFHLUVQb2tDVlJHRGs1SlEwallQU0d3cWVfX003bVJfX3hhb2FtTzJEY1ZqQTg3RlJqYXJLNHV6ZGMwYi1ROGE4WHpnWXZsMVFnckMyVEJSVFFjQXFrQ2s2RlJhQnQzbWtSc1VxVS1maHY1VmNxVkR0RlpRUW5WZVpTcFozODVrTDV2M3hVV2wtZzB3WXM?oc=5",
+      "pubDate": "Wed, 15 Apr 2026 07:00:00 GMT",
+      "source": "ArchDaily",
+      "category": "Situación Actual Ecuador"
+    },
+    {
+      "title": "ANT reactiva asignación de placas para vehículos nuevos en Quito, Guayaquil, Cuenca y cinco ciudades más - El Comercio",
+      "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxOUzdna3JWZlItYi1WeEZHRTBEMXpxZVdURm00MWJtTXEtUmlPaG9wVWhrNG1mbTBNemQ5OFQ1T3BFMmdDXzJhazJaX21pRTZDc2lmNU5fRFdzblItbVdwMkpaNy1jVjItT3dIdE13bnFsYnYxQ3FqTmtGeG02aWFBS0d3dzdNNUNHaHE3MU1aeUlSYmZoR0VXaEZTLUNGY2tLVmpNS2NfaVQ3eUlZZldVcG1YeEZWUG15RkR4SE1LVzJ1LXl0S1Jkcmprdw?oc=5",
+      "pubDate": "Fri, 20 Feb 2026 08:00:00 GMT",
+      "source": "El Comercio",
+      "category": "Situación Actual Ecuador"
+    },
+    {
+      "title": "Unesco reconoce a Quito como Ciudad Creativa por su diseño urbano y su patrimonio arquitectónico - El Universo",
+      "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOeE5FTmd1YnNaWGRWRUQ1WEFLMVJEdnd0R29RMXFJc0xiNXRGSWxZaWNneWxjdDFqMGt6ZEk2R1dBRm9Eb2dMT1F3UnhwcnBGU2xSbkNNVEdNWkcwS0xBY3R4b3RSWExNYW03dUhyeVp5cmN5d09Pa3R2UGdpeWJkbFNYQmFtcHRlZGpIbGw5eFZBMGs3dzk3RXhpVVgySEhHb3hVWHhtbzhjaFB0UlljUWwtcHdLNHJ2SGxobDZWWnpfbldpYlHSAdoBQVVfeXFMTmdYWmVPYVMwNEhxckFoZnVkcTU1ZHliOGlhZTFILVRJZ1dmdzZxejZ4aGRCX1R5NWlxM2hTN1RFQkQzbUpkTWU3S0lzNGExb1pVLXdtcXo0ai1XcXlBSTBVVkNTNTRyOHZUZEtkV0stTmJsQlVIOWF0allyVGxtY09MNmI2QmQxem1KTEJqMy1SaEhkN1pXcHZhTXFqMksxVko4N3YwRG1yRUFrV3Blb0plaGRqQnN3eU9SMk9FQWo3N1daTlQxNHRsZjdOZHowWW4xdGlPQ3B5bWc?oc=5",
+      "pubDate": "Sat, 01 Nov 2025 07:00:00 GMT",
+      "source": "El Universo",
+      "category": "Situación Actual Ecuador"
+    },
+    {
+      "title": "Feriado 10 de agosto en Ecuador: planes para Guayaquil, Quito y Cuenca - expreso.ec",
+      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxOZ2M1NVV4bV9uT1BWVnVfeXlCT2tUNVhLWVc1Qlh4Z0FSLXAtQ21KQzEtWkRJMmNzQVZjemQzRm5vWHBsZDgxS2I0LU45WTA3SEl1WFVnSlBibWlZWENzd2QzLUkyeDhsWHVMcElvMHJkaTh2QjNncHdiaXhiejdjSFhIUnBOX2J1TmFHekdsSjFIRGo0S1d0ckJtMTRXUQ?oc=5",
+      "pubDate": "Thu, 31 Jul 2025 07:00:00 GMT",
+      "source": "expreso.ec",
+      "category": "Situación Actual Ecuador"
+    },
+    {
+      "title": "Conciertos 2025, artistas y fechas confirmadas en Quito, Guayaquil y Cuenca - El Comercio",
+      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOMEk5Z3RwUnZlT1l4WFhhZzh1QVhEajFNcUF3NG5IY2NCNTl1RTRpSlcyR0thdDNPMGlNbV9LUjNhVVN1a24zeFVpemhkekVTTEZfZ1gxRThVNHNXalUwaVl6bHl4dFZwZ2RWbEQzUkFyUHpzby04TjdNeEhlN0dsUjZ6MmpyOXlSX2JJX2huZUhJMnVzTFE?oc=5",
+      "pubDate": "Thu, 03 Jul 2025 07:00:00 GMT",
+      "source": "El Comercio",
+      "category": "Situación Actual Ecuador"
+    },
+    {
+      "title": "Importantes empresas del Ecuador ofrecen vacantes laborales en Quito, Guayaquil, Cuenca y otras localidades - Vistazo",
+      "url": "https://news.google.com/rss/articles/CBMi-AFBVV95cUxPcWQ0T1lnbVY0eDFXenl5T19OUXAzX3F5RjhOcTdETGpYMk4tQnE5VENxT21IUFRKQklKQThHeWZtbVVRZmtveVVjRnRBV3AtOGtickxLUmFXQnc3RmpjMnJkaVFuM0wxSk05U0pMRmNmM3dneW5sWDJOWHhKTnFsLThYNElNQUJycXNLZEdkX3d4dzFObmZVdnpSTnBZby1lTTRwemxXazJiWUpUZ2hxM1h2UnBFTy04ZW9oQy1PVGlaN3JkVE9NdFUyMVN3YkRmbDA5TEsxQVc0a280NDlBSFNnWDBnaGVzYnVGYmRlNVgtSUlOSmxmVtIB_gFBVV95cUxQdEtHbi1temNuSV9aNXZzYm1wMDUyODdoQmlKQjB3S294V25MQXktNFZlZVNSSWctUTkwbE9IZjg5Y0xIcjJReGh4d1BWWWhCYk8zVG5reHpSLTdjQkRZWmFnWWxsVjJLQlhLVGM2aEYycU1HSm13MG8zUlhUUVdnZTVFRHN5VkhWWVFseGpYb3NxSG1QZmNaWjVKcGl3UmhMSWl4MFpoZklaaGt1UGwyZldnNmw3UXB0UU5pNmhxenpMUjZuUS1TdVQxQjBmdEdlWDZkUFZqNmZhYTVRel92Vl9DdGhVV2lqSkpsa1NrRno0aEt0REVwdk1EeHptQQ?oc=5",
+      "pubDate": "Mon, 20 May 2024 07:00:00 GMT",
+      "source": "Vistazo",
+      "category": "Situación Actual Ecuador"
+    },
+    {
+      "title": "Quito, Guayaquil y Cuenca tuvieron la mayor cantidad de emergencias durante el feriado - El Universo",
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOdDhoVlJMcUExb3lHLXBGSVVtYUNHckw3TDFDLTNMMnloNGRMMWJXTUFFemEwNDZrb1g4Q1RmZ3l6c3dXTS04c3Vac3lFTkNMUkRoSEh0dEQ3OTdkaUpKWWI2VENlaUFLNUU3bHlfbzVEbWZFU3NJZERhTkxNbWRaNXR2ald1UzB4WlA2cHpuYXhKdHN2SEJCY1d3SG9QbjFJUmFLYVlkR0JhUWtW0gHAAUFVX3lxTE4yd1BTSEtRNWc3QWNjdklITGVXTlRGMjJjMkVuRkxmeTFYVl9Dbm9hMXg1cEVmYllEMnpKRHhLMTY4dC1EenF5d3hLYWZEUFFyWFh3VXBEVTd6WXVnejhVZVAtZnFSTkZ6Ri1RbkVFLTg1bktnLUZlS3M4QmlVOXN3RW0zcWExc3g1X1NtN0JwS25HVWNDbEEzSmN2YWpfdWFFZjR1RUxSX1dKTGtya1o4R2hwSVFhRUhxM0gtSFNXdQ?oc=5",
+      "pubDate": "Sun, 05 Nov 2023 07:00:00 GMT",
+      "source": "El Universo",
+      "category": "Situación Actual Ecuador"
+    },
+    {
+      "title": "Casa en Comporta / Aurora Arquitectos",
+      "url": "https://www.archdaily.cl/es/1188425/casa-en-comporta-aurora-arquitectos",
+      "pubDate": "Wed, 11 Nov 2026 17:00:00 +0000",
+      "source": "ArchDaily en Español",
+      "category": "Tendencias Arquitectura Latam"
+    },
+    {
+      "title": "CST #185 / tini + delavegacanolasso",
+      "url": "https://www.archdaily.cl/es/1188487/cst-number-185-tini-plus-delavegacanolasso",
+      "pubDate": "Wed, 11 Nov 2026 15:00:00 +0000",
+      "source": "ArchDaily en Español",
+      "category": "Tendencias Arquitectura Latam"
+    },
+    {
+      "title": "Casa Fuego / Pablo Patriota Arquitetos Associados",
+      "url": "https://www.archdaily.cl/es/1188434/casa-fuego-pablo-patriota-arquitetos-associados",
+      "pubDate": "Wed, 11 Nov 2026 13:00:00 +0000",
+      "source": "ArchDaily en Español",
+      "category": "Tendencias Arquitectura Latam"
+    },
+    {
+      "title": "Anfiteatro Freedom Mobile Arch / Revery Architecture",
+      "url": "https://www.archdaily.cl/es/1188422/anfiteatro-freedom-mobile-arch-revery-architecture",
+      "pubDate": "Wed, 11 Nov 2026 12:00:00 +0000",
+      "source": "ArchDaily en Español",
+      "category": "Tendencias Arquitectura Latam"
+    },
+    {
+      "title": "Edificio Danubio Budapest / T2.a Architects",
+      "url": "https://www.archdaily.cl/es/1172502/edificio-danubio-budapest-t-architects",
+      "pubDate": "Wed, 11 Nov 2026 11:00:00 +0000",
+      "source": "ArchDaily en Español",
+      "category": "Tendencias Arquitectura Latam"
+    },
+    {
+      "title": "Jardín de infantes Planá / PROAM ARCHITEKTI",
+      "url": "https://www.archdaily.cl/es/1188246/jardin-de-infantes-plana-proam-architekti",
+      "pubDate": "Wed, 11 Nov 2026 10:00:00 +0000",
+      "source": "ArchDaily en Español",
+      "category": "Tendencias Arquitectura Latam"
+    },
+    {
+      "title": "Construir desde el lugar: dentro de la obra de RAMA Estudio",
+      "url": "https://www.archdaily.cl/es/1188457/construir-desde-el-lugar-dentro-de-la-obra-de-rama-estudio",
+      "pubDate": "Wed, 11 Nov 2026 07:30:00 +0000",
+      "source": "ArchDaily en Español",
+      "category": "Tendencias Arquitectura Latam"
+    },
+    {
+      "title": "Fincas Gamaya / Biome Environmental Solutions",
+      "url": "https://www.archdaily.cl/es/1188329/fincas-gamaya-biome-environmental-solutions",
+      "pubDate": "Wed, 11 Nov 2026 07:00:00 +0000",
+      "source": "ArchDaily en Español",
+      "category": "Tendencias Arquitectura Latam"
+    },
+    {
+      "title": "Sumayya Vally presenta su primer proyecto permanente en los Emiratos Árabes Unidos junto a la Fundación de Arte Elie Khouri de Dubái",
+      "url": "https://www.archdaily.cl/es/1188484/sumayya-vally-presenta-su-primer-proyecto-permanente-en-los-emiratos-arabes-unidos-junto-a-la-fundacion-de-arte-elie-khouri-de-dubai",
+      "pubDate": "Wed, 11 Nov 2026 06:30:00 +0000",
+      "source": "ArchDaily en Español",
+      "category": "Tendencias Arquitectura Latam"
+    },
+    {
+      "title": "Centro Cultural y Comunitario Stara Fužina / OFIS Architects",
+      "url": "https://www.archdaily.cl/es/1188413/centro-cultural-y-comunitario-stara-fuzina-ofis-architects",
+      "pubDate": "Wed, 11 Nov 2026 06:00:00 +0000",
+      "source": "ArchDaily en Español",
+      "category": "Tendencias Arquitectura Latam"
+    },
+    {
+      "title": "La Nueva Capital Administrativa de Egipto a través del lente de Manuel Álvarez Diestro",
+      "url": "https://www.archdaily.cl/es/1188465/la-nueva-capital-administrativa-de-egipto-a-traves-del-lente-de-manuel-alvarez-diestro",
+      "pubDate": "Wed, 11 Nov 2026 05:30:00 +0000",
+      "source": "ArchDaily en Español",
+      "category": "Tendencias Arquitectura Latam"
+    },
+    {
+      "title": "Lectura de la ciudad desde arriba: imágenes con drones y las capas materiales de los entornos urbanos",
+      "url": "https://www.archdaily.cl/es/1188454/lectura-de-la-ciudad-desde-arriba-imagenes-con-drones-y-las-capas-materiales-de-los-entornos-urbanos",
+      "pubDate": "Wed, 11 Nov 2026 04:00:00 +0000",
+      "source": "ArchDaily en Español",
+      "category": "Tendencias Arquitectura Latam"
+    }
+  ],
+  "liveOpportunities": [
+    {
+      "title": "Archivo Digital de la Bienal Panamericana de Arquitectura de Quito [Ecuador] - Junta de Andalucía",
+      "url": "https://news.google.com/rss/articles/CBMikgJBVV95cUxPaEpFZXMyby1SS1AtUWVWaERWdE04cmV0TGN6S0hVS2hBWXJuUGxDRExMTThsdkRZVU9QdGR4LVBsdnViS2Y1VmlIX29OdEdHd3ZfT0xqMHAxYjlGUDBXX0pWR3paT3oxQVMzRVJ5RDdaSnBPME54QmFsY3Y2bE1LUUY3QXRabVh1bmR2MFdQUjQtUklLUmVJdFBuLWNuZzVEN1RwXzREOGVYd2NKWHl2NTVCb0hFRjRBN3l6ejRqQXVkWWZOMXdnSTBuU3pOZXVGRkE5bjFubTBOYUE3Y2lkbHJFSFppTjNHUTFpQTJlSWNUSjktSGR3T2RnX1pqdGgzeHl4bFpqUk5uMW5DOVhOYVp3?oc=5",
+      "pubDate": "Sat, 22 Aug 2026 06:44:30 GMT",
+      "source": "Junta de Andalucía",
+      "category": "Concursos & Bienales"
+    },
+    {
+      "title": "Galería de Ganadores del Concurso Centro de Innovación de la Salud en Cuenca, Ecuador - 4 - ArchDaily",
+      "url": "https://news.google.com/rss/articles/CBMiuwJBVV95cUxPZXFxUXBWRjFMYTBuUFpDUVlDSmRWc3NMZ0FSV0lEbThQX0NMdXRQY1B0Z1BXMXVLb1pwaU5JOTdpSHJRMmM0RGw2a2pPeVp4VTlLWGpOY2FHcUFFcVB0MTNFVDNCT1IydHZGcUZOVVRSNlZ0ZDRDckJadl9yQ3lqNUlyOWVpTEN5V19zU1VUeEt1UkFObjQyaUF4NDByamc1aHR5cERSN1pLQzR5Qkk4Zm1iYVU0eTBVM0VQQkM0V2UzVDBRd3EyUmpjOHMydjd0TGlKQjctTDVyT2NGbUdSZnUxb3VTU0hfVEV2VVhqWXkyeDZnMDBINDViU3BGcFRWWkxobTdtUjBMZG50WGR2dnhPV2ZMSG15alFYejgwZXRPQnZBT3hkNEZjZHpTTm0ycTU1QXJCb0xnMjg?oc=5",
+      "pubDate": "Sat, 08 Aug 2026 16:28:47 GMT",
+      "source": "ArchDaily",
+      "category": "Concursos & Bienales"
+    },
+    {
+      "title": "Pronunciamiento de ARQA LATAM ante los acontecimientos suscitados por el Concurso para el diseño del Museo Nacional del Ecuador - ARQA",
+      "url": "https://news.google.com/rss/articles/CBMi9AFBVV95cUxNZmhCWWV6NVZfUDBLZGd2QjJVU2pSXzJtRXcyZ3ZDaTYtWUhLVUFjY0FpS0l0TGtadDhVb0VKNWUxcWRWalVXMVVJb2JQRTJDaldtM1dLX1JYRU1YODRPZThlUzg2cmN5UjBNZEp6Nkp1TWVGaExJc19YVlNNWVFHOV92YUI5ZVNxb2tjQXJIY0h0enZNWE9FejhoTVVmd2t4clR4b3liYkNBdFRIWDZzTV9mV3BfN3RkMWpxSUI3TDhSMDM5MVFrUF9aMUpsZU9INVJfRGV6ZzhySDdIcE1zaFNaNUNqOFpVaTBCVkxNdnNIdjVG?oc=5",
+      "pubDate": "Thu, 30 Jul 2026 07:00:00 GMT",
+      "source": "ARQA",
+      "category": "Concursos & Bienales"
+    },
+    {
+      "title": "El Gobierno de Daniel Noboa cancela el diseño del nuevo Museo Nacional de Ecuador tras una ola de críticas en redes sociales - EL PAÍS",
+      "url": "https://news.google.com/rss/articles/CBMi-wFBVV95cUxPWjdjeGJoMDN6SWRHaHVuZ3M5SEEtVnNHTjNlYk1NZVkydmRCeWpDU3lqdS1zQTV6ZHl6OGNpUmRyQ0lLUVYwbS0wb0JGZFl3Rml2LVJHUlVhMUZkMUlOdWgwUlNOUTVNUGI0bml1dXVDLVY1Zk8tRjB0SkZzVlYwa0NrQjktak9hSXVOUFdaalUzTGp3S2IyZEtRdUxZejc3VE9PM2F3bWNLb1JNZWVMbjQ5VFVxaVUtc0xHSVJucnNvM3l2T3UzWlhMT1JFNXhaaTBGM1RoRTlGNlJlQ3pIVkVhRks0NHdDbE5ieEdGYi0wSnJDWDFsb1lYQdIBjwJBVV95cUxNbkNPLVNaVVpXX1BuRlRieWU1WndwM04zZkJBZXhrUGRVTXdXV0hfT0M1bHd4YTdVdUtfYWdJc2NtOFF5MHRYZlNUYXh0TXprdUV2UXZNOW44aW80VW5rcy1tLU9BOGhBWW4yY0pYVzV2aXdhV3FKT0xHbTA0VnJkQ2hSQjNpUEdHd3VVVVdZWXNtU1IxZmI0c28yalVzdFU3czQwVS0xd2hteFcxeDVZNF9TcmdXV3JfYzg1UmRiSWg2SWt1TW81Yl81MFhwakd1S0U0NS1VLUFaZExtbWtzNUhWMjdFOTd4dW81SWQ1SlNLWk1PQmk4T0N0aERNb1E1ZUxhMWZqWERTVy1BMF9R?oc=5",
+      "pubDate": "Sat, 18 Jul 2026 07:00:00 GMT",
+      "source": "EL PAÍS",
+      "category": "Concursos & Bienales"
+    },
+    {
+      "title": "Ocho estudios rechazan nueva etapa del concurso del Museo Nacional de Ecuador - Diario La Hora",
+      "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPcl9PWmlJcld3b2c5STV1WUxlTFB3bXBGWTFRZHduUGFhcTZUTW9pTU9xMEpURmttVVhiUUZQWXMybEZFSUpWT2tCeUR1Z3d0bkVLVEtOTHA4bUVmVjhPbXk5M2pqWHN1QzZaamhraHgtNHQ3UnUzX2lpSVJldUdYSl9sb0dFUnNsN1VKdkxiMmNuZVJ3ckRIbXZUV1ZGM3RVaEF3VnpVNkE2YUtOU0VmeS1qOXFTWHMyamNiU1k4alIyQk5wZ29QS1pwcw?oc=5",
+      "pubDate": "Wed, 15 Jul 2026 07:00:00 GMT",
+      "source": "Diario La Hora",
+      "category": "Concursos & Bienales"
+    },
+    {
+      "title": "Crece la negativa de estudios al nuevo concurso del MuNa - El Comercio",
+      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPU2tERklWRG1hOVpqbXZFQkVFRnNER2VGdXcxM205ZHBLUGFPYmtrcDdIYWNhSTkyMkNJa0tRSFk3RmhhOEUzcVpjdEJ5RkVnRHVTTVdZbXRwSmZhaGJIa2w1OGdsdFlGaGJTRlN1bDVERko2MFg1eUVTQVlWdm56a09COHVjUjR2dkluQU1ISEJWdmwt?oc=5",
+      "pubDate": "Tue, 14 Jul 2026 07:00:00 GMT",
+      "source": "El Comercio",
+      "category": "Concursos & Bienales"
+    },
+    {
+      "title": "Así fue el fallido concurso del diseño del Museo Nacional del Ecuador, rechazado por el Gobierno - Primicias",
+      "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQLWNTTjNwR1FPa1lqSDlMbUtrbmhBVUlEZVRMcHZuUVdPQ09wLV9hN09WcGZkaUVVYlJIUWcyaVNtd1dXOFhraHZNdGRKTzFqOGRQOWVKQjU4eWd5N0tGc2k0QzJHak1WdkFWZmV2WVYwLW96TlVGd2JFMmVrbWJ5dHFCVEx1ZnNDZjA0ZVB4bkRrZjdiR3FsTGIxNXdiSDg4djlBUldwVTVKMEMwNTV6eUZPT3hFOWpveVhfVWJSUEp5cmc?oc=5",
+      "pubDate": "Tue, 14 Jul 2026 07:00:00 GMT",
+      "source": "Primicias",
+      "category": "Concursos & Bienales"
+    },
+    {
+      "title": "Museo Nacional del Ecuador: ¿qué responde el Colegio de Arquitectos sobre la polémica del concurso? - expreso.ec",
+      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOc1czWVVEWEk3YlE4dU8yZng0dm45MElqb0gwTkozN0o0MkdLVjB4eWhJSzM1TWNzamd0YjZMUVZCWnNqNEZLekEySWw2WExmaEk1WVlncFk4aE5ieFJxbU5TU2FRcVRNeVhnZG14Q2o0NHItV0V5S0c5WjA0cHAwcS1HbjAyRkJ0Qk5fQ2VJZmdsSVRWWmlLbldzUEJ4X0ZBcEQ2bENUcjBsN1BnOC1CWGFpdVJWcHpLZEpr?oc=5",
+      "pubDate": "Sun, 12 Jul 2026 07:00:00 GMT",
+      "source": "expreso.ec",
+      "category": "Concursos & Bienales"
+    },
+    {
+      "title": "«Ecos del sol» por Campo Baeza + Maoda, ganador del concurso para el Museo Nacional del Ecuador - Metalocus",
+      "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPOHFwMjR6VFJnMVpZWmNITU5STnhKWTBPeVZHVGx5bjB0cjlDQjUyM2VlZjg0SEtRTTlDekhYWFdRaVVVTF9hYi1KdG5zM29LS0hqTVhrWFJsSWc3cnNzbXdmRjZJSE5nQk1lMU85Ym1MbUNlbFFpeVBMZ1pwcDJFSjdrck94UWZkMEpaV3FPU0xJaWxFQ1lZWDk1aGZTb1d3UVZFR0tXeHlIVWo5V1E1bUI5T1ZuZVhHd1E2Nk1vYXptMU9vNVE?oc=5",
+      "pubDate": "Wed, 08 Jul 2026 07:00:00 GMT",
+      "source": "Metalocus",
+      "category": "Concursos & Bienales"
+    },
+    {
+      "title": "Studio Campo Baeza y Maoda ganan el concurso para diseñar el nuevo Museo Nacional de Ecuador en Quito - ArchDaily",
+      "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNS1BOVTNYWUdFYVBDSmdROHhLck93R0k0TVhTT0RUbmxjUENmbnBWX1QzMEVjZW16YjFfQzJSSlYxdVl1Nkx5V2ZwdzdnYjVPSGd1V3lMX3pZTG16ZVIzYmplM2lYMDcyeWdNNDNpakJjQnktZUFMN0JyNjdqQnBjclNWUHpVQk1sYzZsM1JCVHNrNjJyVG5RNE4zNUREamhoNDBiWW5idFItMm9vRk5TeTZUMTZaWW11MHFidTNISEd0Q05QYXBGemRIVWx1OEtVTVZ5NQ?oc=5",
+      "pubDate": "Wed, 08 Jul 2026 07:00:00 GMT",
+      "source": "ArchDaily",
+      "category": "Concursos & Bienales"
+    },
+    {
+      "title": "Campo Baeza en Ecuador - Arquitectura Viva",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5td2NKZF96Z01Oc2pDbWFmei05b3RZdEN6R1luUzdSdmVKWVVFTWNkbEJmNlItSGVTdVV0WlBTNGFSQjN2ZDlpT3pxaGI0dFJoOXVsby1HN1ZCZ25zR1Z0d0pETXpUd1FNbUpCQmxB?oc=5",
+      "pubDate": "Tue, 07 Jul 2026 07:00:00 GMT",
+      "source": "Arquitectura Viva",
+      "category": "Concursos & Bienales"
+    },
+    {
+      "title": "Concurso de Ideas - Diseño de la Nueva Sede del Quito Tenis y Golf Club - ArchDaily",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOQU90N2s3amV1Mkd2anFvZkRoc3o5QmJQTS11TTdXdF9iSVJVUjN1TXo3aGRqSl96SVBSMWV2OVFzc1hjSkNCd0lVaV9NLUlFaC1fUkZnUnBqTWRIdDNxM2x5T3pnMDhWRDhpdlJCQWlMbGJnUTF1bmxvQjBHSHZaTEstTFgzUnYzZ2QxbDdJSjRMWDNGV1ktX1R2a2FoNjBXaW55WU8wZ0NBUQ?oc=5",
+      "pubDate": "Mon, 29 Jun 2026 07:00:00 GMT",
+      "source": "ArchDaily",
+      "category": "Concursos & Bienales"
+    },
+    {
+      "title": "BID | Del patrimonio al crecimiento: por qué los museos son clave para el desarrollo - Inter-American Development Bank",
+      "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNcnFYYmpjTG14ajVrU0lyMXdvQkRWbmJMY3I5MzFSQlg5TW9FdWFHRG42emkyLXpjVTZ5X1ZnTlRYOTJ3S0pvZzBxalo2cV8xTUZwbEhtYU9TTkhadE56Rk43bWMzdGZfUHgzTko5dXlGS3pYS3d6SXVCSDlRbDlDTm10MGVrOERPdUowWUF0TS1OSDVaWDhQQWlnT2hNM25hbGxJS2FDT0h2T09Ib1NtUVpiQWdoeUhwYUtXTFc5MEhjNkloRkhYUGVkR0RrNWJmNnplOA?oc=5",
+      "pubDate": "Tue, 23 Jun 2026 07:00:00 GMT",
+      "source": "Inter-American Development Bank",
+      "category": "Fondos & Becas"
+    },
+    {
+      "title": "La UNESCO financia 16 nuevos proyectos para apoyar a artistas alrededor del mundo - unesco",
+      "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQa2pWOXZGR2dka2I5dU9rZ0VndWpmTG1HZ0dOVzNVTFY2dm1Ya1BxZGhvYTJVN2EwSHJYclNfakhKUlo2LXdhOW1NN09ka1EzNmk0YzJOazBRcUhSa19pbk43ME51ZzRnQWtXVlhEN05fbXFjZFQ5MjNQV0l6czUxeGxoZWpoVXhpaFoxLXlibmd4bGxfOEVHZThPT2FhT21mRFpKSnZQTEZiZ2w3eVZRNUMtTUsycGJraWtUcG5MQjcwNWs?oc=5",
+      "pubDate": "Fri, 19 Jun 2026 07:00:00 GMT",
+      "source": "unesco",
+      "category": "Fondos & Becas"
+    },
+    {
+      "title": "Convocatoria «Maleta Abierta 2026» para proyectos de arte migrante en Iberoamérica - SEGIB: Secretaría General Iberoamericana",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPV2JKZ3lVTnRkQzNhc25WLS14VnFueEZ0dXk4VkNCc1FuM2RoQjBNMmc4aDJfWDFfWGVMTHB6OFZSa25iSjU1QVlnSGQ5SnkyZDg3UHRxaDBCd0lNVFR5UTZ4M09BNkQtMG9lX3BDNGNPR2lTbXhxWnV2Zy1aT1ZoaVRWYkdjWTJEUld6eDNNeFdwa3I1Njg4TFpXWVJCVEpYeVlhNQ?oc=5",
+      "pubDate": "Wed, 17 Jun 2026 07:00:00 GMT",
+      "source": "SEGIB: Secretaría General Iberoamericana",
+      "category": "Fondos & Becas"
+    },
+    {
+      "title": "Fondo de Ayuda «Maleta Abierta 2026» - GUB.UY",
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNbm54YWhLbS1pMEl6MnZULTFpTjNNU1ZFWXFJZm9VbW1VaXhBRW5XUnJpd3VpM094RkhoUmdYSjRwOVVyclBmVmU2MFF1RmdZY1o4dElpVWRPOWhoaWJ5VC1JeXV2YXA3U3YzODhidGlUdVNqQ2V6bjJBVHRKVXVZTE5jY1dIUHNkNVRzaUZmTWo1dmdjWTB2djlIOTZIblNiUWp3?oc=5",
+      "pubDate": "Mon, 15 Jun 2026 07:00:00 GMT",
+      "source": "GUB.UY",
+      "category": "Fondos & Becas"
+    },
+    {
+      "title": "Ecuador y la UNESCO refuerzan su cooperación en educación, cultura y deporte - UNESCO",
+      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNMW1GMWNYSjlDeXhnT3hnVnhwdmNqdGxYdlY1akFOZm1WMVFfTnd3VkpuWkRJaWZKR1ZVa2Q0RVBDNU5nZUR3bHFOOEV3NzRUNHZDa2lEX3YtLWItZjRERks4RTJ1NXU0RFFTZG5IaVFiMU5uQWpUd3YzcFg2R2NkNi05UVdSd2kxLWdqUUk1Q21ndE1XTGNRMUFZWTV1R3dnREtHQnZUNEFIMUt2bjUw?oc=5",
+      "pubDate": "Mon, 13 Apr 2026 07:00:00 GMT",
+      "source": "UNESCO",
+      "category": "Fondos & Becas"
+    },
+    {
+      "title": "Viceministerio de Cultura entrega más de $ 1 millón a proyectos ganadores de fondos concursables no reembolsables en Guayas - El Universo",
+      "url": "https://news.google.com/rss/articles/CBMiigJBVV95cUxQQ3lDWV90a3Q2ZU5RVVRadlptYzNYYTVwSUVnSjRfLWdOM19XZ244NFFZRENUd3FPaFQ3c0xGdDU1cE5pMHBncmxkcU10UmxFbFFUZ1lsSk5SUXlTQWR0aWpvOWw5OGN0RllGYl9BdjZraGlUTV84alFvUEdZR0RLQkJJZTEydFJ3ZzRDcUxaekwxQWVKS0JsNUlIdzl5bkIyVkkzSzJ4S3ViSHZJZGdycWZVLUxLTzJjWk5lZXNIWXQxc3dVRjJfOVN4d2R4dFdSSS15Q3g2bGhZYzZTTGE3dmpNcXAxZmFCTnJUakJBRk5wdzNlVGxnZFk1NHUteExEVEdRZWZIWWpIQdIBngJBVV95cUxNb21oNmVmMG5mRFN6VXFFZlcybGUzX0o1dmRFajNKNXl4LWdNeDFQWmpSamlDSXJHTU8xbFZ6UThjOHVTMmM4bER2aENwbjRZWUxrTjM5b3M4LXZkckQwY1A2enpTRFQya2hWOGYyZk9WanlHOVVwWDZuNW9nWkxNRTlwY29pclBJQmZRS0hQWUJyMW4tVHB6Yld4NUk4QWlSeEhIZUt4a0gtUXJYdnp0LVhfdGQzV3BTdHRRWG1OQVU1X1J5SWhaWUtBNnRWUjNFYy1mWkUyNUNJY0xHbVp2ZmZFZG1seUNZWEZQUWJVeHQybkZzQi1iTWhQdU9RSzdRczBXeHdXbmNwcE9wTk9qLWJLd0k0VmRmQ3RCUDJB?oc=5",
+      "pubDate": "Thu, 26 Feb 2026 08:00:00 GMT",
+      "source": "El Universo",
+      "category": "Fondos & Becas"
+    },
+    {
+      "title": "Cooperación Iberoamericana: qué es, cómo funciona y qué países participan - SEGIB: Secretaría General Iberoamericana",
+      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE1HeW9FNFRTaTNEenNIRVMwdUhPbGtnUzZ2Q3JLVmttbW5uVDVqY1hnX3JhVVh5M2ktVkFuY1pxMVgxUF9ETUtjOW1oLUhIdXRGMWxTVDBaU1VZUDI4?oc=5",
+      "pubDate": "Fri, 10 Oct 2025 10:45:32 GMT",
+      "source": "SEGIB: Secretaría General Iberoamericana",
+      "category": "Fondos & Becas"
+    },
+    {
+      "title": "Programa Iberoamericano de Industrias Culturales y Creativas - Organización de Estados Iberoamericanos",
+      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxOQm1QZXBrbTNJOXo4aFdGankxV1BuYnA1MDJYZ3FjcFN0WURSOUc4VEEzV3d1eGxIcVRhYWxBOWFZN2ZUeWtIZUdCU1BNeGtNeExUcC04TEctOUtpa0RZQzhVR1ZtTkpSd0I2V3JINzlKQWNGUHhRS0NFNXVBMG5sMTdTVnBZdm1rU2IxczZBUzEwWWI0eGs1T0N6cXNBd1dmUjVSMGZqWlVCX0xfSU04YUJMUFVjazBHcWdBV3VR?oc=5",
+      "pubDate": "Tue, 12 Aug 2025 20:28:56 GMT",
+      "source": "Organización de Estados Iberoamericanos",
+      "category": "Fondos & Becas"
+    },
+    {
+      "title": "Laçzos Artísticos - Organización de Estados Iberoamericanos",
+      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5teFZSbFZxMWdZZi1CTnBpUzFjTjg4VjBXMl9MOG1KdlRFSkw0TXFJRmhDUllvZzdEdXBBcEZ6dGpLRmNodm1zNXNCX2poVWNuSktzWFBENDIzUnk3SkJaT2tVY2tmTWx0eTdlWkRHdw?oc=5",
+      "pubDate": "Mon, 02 Jun 2025 11:33:39 GMT",
+      "source": "Organización de Estados Iberoamericanos",
+      "category": "Fondos & Becas"
+    },
+    {
+      "title": "¿Qué países reciben más fondos de USAID en América Latina y para qué lo usan? - CNN en Español",
+      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPV3Q2UXh4ZDZZcHNrSDJ3bVhqSkJNLU1DU2JYLWRBeWktelhCNHRDS0NrS1JtdHZnOThKU0I4ZFVDZEdSWVZvcWg4VC1LV1FRXzAyTHRRZmhSSVU1VmR4QW5MNGR2aGRqeXc0T3pDT1A0cmhCUXBDUFZTWEpXMXc0dVk1ZlJUdV9mUEN1Zw?oc=5",
+      "pubDate": "Tue, 04 Feb 2025 08:00:00 GMT",
+      "source": "CNN en Español",
+      "category": "Fondos & Becas"
+    },
+    {
+      "title": "Qué consecuencias tendrá en América Latina la paralización de la ayuda al desarrollo ordenada por Trump - BBC",
+      "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE80aWt3ZGFaSFdIa2RTVllfX1RrbnVBZ3dxSUVvMDllaTJYeXdPUHhRNFFRVHgzSF9BbGl3V1E4RDJpajhyd3g0RWZIZnBfeG5FYzhuamtlSUF5Y0nSAWBBVV95cUxOVnc2ZXREVDJrbjJiQUV4bklUcjAzVVdELTJRRkdLTXZSVWlXM0NIaW1KM1RpOUhVVTdZUkY0MHVaWXRqdjVWYXVCU0F1cDVZTHh1dm5kdVp5MThxRTVXbEs?oc=5",
+      "pubDate": "Mon, 03 Feb 2025 08:00:00 GMT",
+      "source": "BBC",
+      "category": "Fondos & Becas"
+    },
+    {
+      "title": "Puntos de Cultura ofrece fondos para proyectos culturales y comunitarios - Recursos Culturales",
+      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxORC1rZnFrMXFLek1RaUJSNF9CZ056aHpMNTJRX0E1Uk1Ecm4xcHp1TFZ0OEpFVVJSZmJKZGZubWR5NWUxNW5nbExPVmp4LWhKRVNnQnlqZ3luNzZocjhFbHpoMUxRVlRRazB2cVd4NG9OemFrQTZWOWc0Ry05MklJel9MWUtTcGl4N0xQYnQ5ME1xbFg5ZlM4?oc=5",
+      "pubDate": "Tue, 02 May 2023 07:00:00 GMT",
+      "source": "Recursos Culturales",
+      "category": "Fondos & Becas"
+    }
+  ],
+  "feedStatuses": [
+    {
+      "source": "ArchDaily en Español",
+      "category": "Tendencias Arquitectura Latam",
+      "url": "https://www.archdaily.cl/cl/rss",
+      "httpStatus": 200,
+      "elapsedMs": 885,
+      "itemsExtracted": 12
+    },
+    {
+      "source": "Noticias Arquitectura Ecuador",
+      "category": "Situación Actual Ecuador",
+      "url": "https://news.google.com/rss/search?q=arquitectura+ecuador+OR+urbanismo+quito+guayaquil+cuenca&hl=es-419&gl=EC&ceid=EC:es-419",
+      "httpStatus": 200,
+      "elapsedMs": 961,
+      "itemsExtracted": 12
+    },
+    {
+      "source": "Concursos Arquitectura",
+      "category": "Concursos & Bienales",
+      "url": "https://news.google.com/rss/search?q=(concurso+OR+bienal+OR+premio+OR+convocatoria)+arquitectura+(ecuador+OR+latinoamerica)&hl=es-419&gl=EC&ceid=EC:es-419",
+      "httpStatus": 200,
+      "elapsedMs": 966,
+      "itemsExtracted": 12
+    },
+    {
+      "source": "Fondos Culturales y Becas",
+      "category": "Fondos & Becas",
+      "url": "https://news.google.com/rss/search?q=(fondos+culturales+OR+subvencion+OR+beca)+(cultura+OR+arquitectura)+(ecuador+OR+iberoamerica)&hl=es-419&gl=EC&ceid=EC:es-419",
+      "httpStatus": 200,
+      "elapsedMs": 1391,
+      "itemsExtracted": 12
+    }
+  ]
+}

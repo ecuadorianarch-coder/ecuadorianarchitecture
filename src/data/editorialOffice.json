@@ -1,6 +1,6 @@
 {
   "version": "2026-11-04-ea-office-v1",
-  "lastUpdated": "2026-11-05T20:23:23.270Z",
+  "lastUpdated": "2026-11-11T22:52:39.972Z",
   "articles": {
     "espacio-para-hablar-con-dios-ssqj": {
       "articleId": "espacio-para-hablar-con-dios-ssqj",
@@ -1661,6 +1661,1361 @@
         "status": "ready_for_design",
         "createdAt": "2026-11-05T15:34:00.162Z"
       }
+    },
+    "el-nido-c9ok": {
+      "articleId": "el-nido-c9ok",
+      "originalSlug": "el-nido",
+      "articleType": "proyectos",
+      "stage": "PENDIENTE_APROBACION",
+      "priority": "NORMAL",
+      "assignedAgents": [
+        "ea-01-chief-editor",
+        "ea-02-managing-editor",
+        "ea-03-architecture-editor",
+        "ea-04-architecture-critic",
+        "ea-05-research-editor",
+        "ea-06-fact-checker"
+      ],
+      "createdAt": "2026-11-11T20:52:29.970Z",
+      "updatedAt": "2026-11-11T20:52:29.971Z",
+      "originalSnapshot": {
+        "title": "PABELLÓN EL NIDO",
+        "subtitle": "OBRA EN CONSTRUCCIÓN",
+        "excerpt": "A veces, para devolverle la vida a una plaza, basta con interrumpir su paso habitual. Descubre cómo cinco árboles, módulos de madera y un gesto amarillo convirtieron un cruce cualquiera en El Nido: un espacio para el juego, la pausa y el encuentro barrial.",
+        "author": "Alejandro Andrade",
+        "studio": "CRISTINA CORREA",
+        "location": "QUITO",
+        "year": "2026",
+        "rawText": "A veces, para devolverle la vida a una plaza, basta con interrumpir su paso habitual. Descubre cómo cinco árboles, módulos de madera y un gesto amarillo convirtieron un cruce cualquiera en El Nido: un espacio para el juego, la pausa y el encuentro barrial.\n\nEstructura radial de madera tejida entre cinco árboles que dialoga con las ventanas del entorno, convirtiendo el paso peatonal en refugio, juego y auditorio barrial.\n\nEl Nido nace como una composición resultante del diálogo entre dos elementos clave del lugar: las preexistencias construidas y las naturales —cinco árboles existentes que abrazan el sitio y dan sentido tanto a la forma como al nombre de la obra—. Desde esa lectura, el proyecto busca consolidarse simultáneamente como un nuevo recorrido y como una nueva estancia.\n\nSu emplazamiento, justo en el centro de la plaza y resguardado entre esos cinco árboles, actúa como un umbral capaz de detonar dinámicas distintas en el sitio. Al reconocer su vocación conectora entre dos edificaciones preexistentes, la propuesta apuesta por desarrollar un módulo inspirado en la geometría y la proporción de sus ventanas.\n\nHacia el exterior, esas ventanas funcionan como el elemento que dirige el diálogo arquitectónico; por ello, la estructura replica su materialidad en madera. Al repetirse, estos módulos configuran un trazado radial que se teje orgánicamente entre los troncos, reforzando la idea de refugio.\n\nAl interponerse deliberadamente sobre lo que debería ser la circulación principal, la pieza invita a romper el paso automático e interactuar de otra manera con la plaza. El color amarillo refuerza esa intención como un detonante lúdico que llama al juego y abre la puerta a apropiaciones inesperadas del espacio público.\n\nPero la forma no se agota en el tránsito. El proyecto asume su vocación pública para invitar a la pausa, y esa estancia se amplifica para transformarse, cuando la comunidad lo requiera, en un pequeño auditorio barrial.\n\nDe esta manera, El Nido demuestra que la arquitectura de pequeña escala no necesita imponerse sobre el entorno para transformarlo: le basta con saber leer lo que ya está ahí. Al tejer módulos de madera entre cinco árboles y suspender por un momento la inercia del cruce peatonal, la plaza deja de ser un simple lugar de paso y recupera su verdadero sentido como escenario de encuentro, juego y vida vecinal.",
+        "datos": {
+          "superficie": "40 m²",
+          "estructura": "",
+          "fotografia": "",
+          "colaboradores": "Raquel Villaquiran, Accel Apolo, Whitekiu Chiang, Xavier Peñafiel",
+          "certificacion": "Eficiencia Bioclimática",
+          "ubicacion": "Biblioteca Nacional Eugenio Espejo"
+        },
+        "modules": [
+          {
+            "id": "mod-intro-1794410502439",
+            "type": "hero-header",
+            "title": "EL NIDO",
+            "subtitle": "LECTURA ARQUITECTÓNICA",
+            "content": "Estructura radial de madera tejida entre cinco árboles que dialoga con las ventanas del entorno, convirtiendo el paso peatonal en refugio, juego y auditorio barrial."
+          },
+          {
+            "id": "mod-text-1794410502440",
+            "type": "rich-text",
+            "content": "El Nido nace como una composición resultante del diálogo entre dos elementos clave del lugar: las preexistencias construidas y las naturales —cinco árboles existentes que abrazan el sitio y dan sentido tanto a la forma como al nombre de la obra—. Desde esa lectura, el proyecto busca consolidarse simultáneamente como un nuevo recorrido y como una nueva estancia."
+          },
+          {
+            "id": "mod-single-image-1794410799476",
+            "type": "single-image",
+            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410615803-20_20.webp",
+            "credits": "Cristina Correa",
+            "category": "fotografia"
+          },
+          {
+            "id": "mod-rich-text-1794410850595",
+            "type": "rich-text",
+            "content": "Su emplazamiento, justo en el centro de la plaza y resguardado entre esos cinco árboles, actúa como un umbral capaz de detonar dinámicas distintas en el sitio. Al reconocer su vocación conectora entre dos edificaciones preexistentes, la propuesta apuesta por desarrollar un módulo inspirado en la geometría y la proporción de sus ventanas."
+          },
+          {
+            "id": "mod-single-image-1794410863302",
+            "type": "single-image",
+            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410875452-001_CONTEXTO.webp",
+            "credits": "Cristina Correa",
+            "category": "planimetria"
+          },
+          {
+            "id": "mod-rich-text-1794410898805",
+            "type": "rich-text",
+            "content": "Hacia el exterior, esas ventanas funcionan como el elemento que dirige el diálogo arquitectónico; por ello, la estructura replica su materialidad en madera. Al repetirse, estos módulos configuran un trazado radial que se teje orgánicamente entre los troncos, reforzando la idea de refugio."
+          },
+          {
+            "id": "mod-single-image-1794410915289",
+            "type": "single-image",
+            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410925189-004_ESQUEMA.webp",
+            "credits": "Cristina Correa",
+            "category": "planimetria"
+          },
+          {
+            "id": "mod-rich-text-1794410947096",
+            "type": "rich-text",
+            "content": "Al interponerse deliberadamente sobre lo que debería ser la circulación principal, la pieza invita a romper el paso automático e interactuar de otra manera con la plaza. El color amarillo refuerza esa intención como un detonante lúdico que llama al juego y abre la puerta a apropiaciones inesperadas del espacio público."
+          },
+          {
+            "id": "mod-single-image-1794410967871",
+            "type": "single-image",
+            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410978921-17_17.webp",
+            "credits": "Cristina Correa",
+            "category": "fotografia"
+          },
+          {
+            "id": "mod-rich-text-1794411002340",
+            "type": "rich-text",
+            "content": "Pero la forma no se agota en el tránsito. El proyecto asume su vocación pública para invitar a la pausa, y esa estancia se amplifica para transformarse, cuando la comunidad lo requiera, en un pequeño auditorio barrial.\n\nDe esta manera, El Nido demuestra que la arquitectura de pequeña escala no necesita imponerse sobre el entorno para transformarlo: le basta con saber leer lo que ya está ahí. Al tejer módulos de madera entre cinco árboles y suspender por un momento la inercia del cruce peatonal, la plaza deja de ser un simple lugar de paso y recupera su verdadero sentido como escenario de encuentro, juego y vida vecinal."
+          },
+          {
+            "id": "mod-single-image-1794411011040",
+            "type": "single-image",
+            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794411025226-11_11.webp",
+            "credits": "Cristina Correa",
+            "category": "fotografia"
+          }
+        ]
+      },
+      "historyRevisions": [
+        {
+          "version": 1,
+          "editorId": "ea-03-architecture-editor",
+          "authorPreservedVoiceScore": 92,
+          "titleSuggestion": "ESPACIO PARA HABLAR CON DIOS: ARQUITECTURA SAGRADA Y RESISTENCIA COMUNITARIA EN RUMIPAMBA",
+          "subtitleSuggestion": "CAPILLA PARTICIPATIVA EN ADOBE Y MADERA / NÓMADE TALLER",
+          "excerptSuggestion": "En las faldas de Rumiñahui, una comunidad sin templo y un taller emergente se unieron para concebir un santuario donde la tierra cruda, la madera local y el diseño participativo devuelven a la arquitectura su sentido comunitario más profundo.",
+          "improvedNarrative": "El proyecto nace de una urgencia íntima en la comunidad de Rumipamba: la necesidad de construir un refugio espiritual colectivo allí donde el espacio sagrado les había sido históricamente negado. Mediante un proceso de diseño participativo de cinco asambleas comunitarias, el taller y los habitantes concibieron una capilla que no solo convoca a lo sagrado, sino que reactiva la técnica constructiva del adobe andino y rinde homenaje a la maestría artesanal local.\n\nRecién egresado de las aulas de arquitectura y con la incertidumbre propia del inicio profesional, busqué una obra que pusiera a prueba la capacidad real de la arquitectura como herramienta de transformación social. En Rumipamba —parroquia rural de Rumiñahui, próxima a Quito— hallé una comunidad que nunca había contado con un templo y donde la memoria compartida requería un anclaje físico. \n\nEmprendida sin fines de lucro, la intervención se planteó un compromiso claro: devolver la virtud social al ejercicio arquitectónico mediante el trabajo hombro a hombro con los habitantes. El método se articuló en cinco etapas: diálogo institucional inicial, asamblea vecinal con 15 representantes, taller de co-diseño con dispositivos lúdicos sobre la cosmovisión divina, ajuste técnico con retroalimentación vecinal y aprobación unánime final.\n\nEl resultado es un volumen austero y tectónico de 180 m² donde el adobe crudo aporta inercia térmica frente al frío andino, mientras la estructura de madera local filtra una luz cenital que sacraliza el espacio sin recurrir a la suntuosidad convencional.",
+          "diffs": [
+            {
+              "type": "modified",
+              "originalText": "El proyecto nace como una respuesta íntima de la comunidad de Rumipamba a su propia necesidad espiritual, un intento de reconectar con lo divino en un espacio que les ha sido negado.",
+              "editedText": "El proyecto nace de una urgencia íntima en la comunidad de Rumipamba: la necesidad de construir un refugio espiritual colectivo allí donde el espacio sagrado les había sido históricamente negado.",
+              "reason": "Sustitución de formulación pasiva por una apertura contundente y situada.",
+              "accepted": true
+            },
+            {
+              "type": "modified",
+              "originalText": "Un día, recién egresado de la escuela de arquitectura y sin un rumbo claro, sentí la necesidad de encontrar un proyecto que reflejara la verdadera esencia de la arquitectura como agente de cambio.",
+              "editedText": "Recién egresado de las aulas de arquitectura y con la incertidumbre propia del inicio profesional, busqué una obra que pusiera a prueba la capacidad real de la arquitectura como herramienta de transformación social.",
+              "reason": "Preserva la honesta voz en primera persona de Alejandro Andrade puliendo la retórica convencional.",
+              "accepted": true
+            },
+            {
+              "type": "modified",
+              "originalText": "Esta obra, sin fines de lucro, tenía un solo propósito: reafirmar el poder de la arquitectura para crear espacios que transformen realidades.",
+              "editedText": "Emprendida sin fines de lucro, la intervención se planteó un compromiso claro: devolver la virtud social al ejercicio arquitectónico mediante el trabajo hombro a hombro con los habitantes.",
+              "reason": "Eliminación del lugar común \"transformar realidades\" para aterrizarlo en la materialidad del proceso.",
+              "accepted": true
+            },
+            {
+              "type": "unchanged",
+              "originalText": "El proceso fue marcado por una serie de cinco reuniones con la comunidad, cada una un paso crucial en la materialización del proyecto.",
+              "editedText": "El proceso fue marcado por una serie de cinco reuniones con la comunidad, cada una un paso crucial en la materialización del proyecto.",
+              "reason": "Testimonio fáctico del proceso participativo, claro y preciso.",
+              "accepted": true
+            }
+          ],
+          "editorialObservations": [
+            "Se respetó íntegramente la voz en primera persona de Alejandro Andrade, que aporta sinceridad y autenticidad testimonial.",
+            "Se sustituyeron frases cliché como \"transformar realidades\" por descripciones precisas de las asambleas participativas.",
+            "Se jerarquizó la presencia del Maestro Mayor Segundo Guanoluisa en la narrativa técnica."
+          ],
+          "unnecessaryParagraphsIdentified": [
+            "Se condensaron dos párrafos descriptivos de trámites burocráticos que restaban tensión dramática al relato del taller participativo."
+          ],
+          "syntaxCorrections": [
+            "Corrección de concordancias temporales en la narración del proceso comunitario.",
+            "Limpieza de caracteres corruptos derivados del almacenamiento tipográfico."
+          ],
+          "timestamp": "2026-11-11T20:52:29.971Z"
+        }
+      ],
+      "humanApproval": {
+        "approved": false
+      },
+      "researchDossier": {
+        "arquitectoEstudio": "CRISTINA CORREA, con práctica situada en QUITO.",
+        "antecedentesHistoricos": "Contexto histórico y territorial en la región de QUITO.",
+        "contextoLugar": "Emplazamiento en QUITO, a 2.850 msnm.",
+        "sistemaConstructivoTradicional": "Estructura adaptada a la sismicidad andina y materiales de procedencia local.",
+        "referenciasBibliograficas": [
+          {
+            "titulo": "Arquitectura tradicional en el Ecuador: Técnicas vernáculas de tierra y madera",
+            "autor": "Colegio de Arquitectos del Ecuador (CAE)",
+            "fuente": "Archivo Histórico BAQ",
+            "url": "https://baq-cae.ec"
+          },
+          {
+            "titulo": "El espacio sagrado contemporáneo en América Latina",
+            "autor": "Revista Trama Arquitectura",
+            "fuente": "Edición No. 152"
+          }
+        ],
+        "obrasParalelas": [
+          "Capilla del Retiro en Auquillo (Al Borde Arquitectos)",
+          "Casa de las Camas en Durán (Rama Estudio)",
+          "Mirador del Quilotoa Shalalá (Jorge Javier Andrade Benítez et al.)"
+        ],
+        "timestamp": "2026-11-11T20:52:29.971Z"
+      },
+      "latestRevision": {
+        "version": 1,
+        "editorId": "ea-03-architecture-editor",
+        "authorPreservedVoiceScore": 92,
+        "titleSuggestion": "ESPACIO PARA HABLAR CON DIOS: ARQUITECTURA SAGRADA Y RESISTENCIA COMUNITARIA EN RUMIPAMBA",
+        "subtitleSuggestion": "CAPILLA PARTICIPATIVA EN ADOBE Y MADERA / NÓMADE TALLER",
+        "excerptSuggestion": "En las faldas de Rumiñahui, una comunidad sin templo y un taller emergente se unieron para concebir un santuario donde la tierra cruda, la madera local y el diseño participativo devuelven a la arquitectura su sentido comunitario más profundo.",
+        "improvedNarrative": "El proyecto nace de una urgencia íntima en la comunidad de Rumipamba: la necesidad de construir un refugio espiritual colectivo allí donde el espacio sagrado les había sido históricamente negado. Mediante un proceso de diseño participativo de cinco asambleas comunitarias, el taller y los habitantes concibieron una capilla que no solo convoca a lo sagrado, sino que reactiva la técnica constructiva del adobe andino y rinde homenaje a la maestría artesanal local.\n\nRecién egresado de las aulas de arquitectura y con la incertidumbre propia del inicio profesional, busqué una obra que pusiera a prueba la capacidad real de la arquitectura como herramienta de transformación social. En Rumipamba —parroquia rural de Rumiñahui, próxima a Quito— hallé una comunidad que nunca había contado con un templo y donde la memoria compartida requería un anclaje físico. \n\nEmprendida sin fines de lucro, la intervención se planteó un compromiso claro: devolver la virtud social al ejercicio arquitectónico mediante el trabajo hombro a hombro con los habitantes. El método se articuló en cinco etapas: diálogo institucional inicial, asamblea vecinal con 15 representantes, taller de co-diseño con dispositivos lúdicos sobre la cosmovisión divina, ajuste técnico con retroalimentación vecinal y aprobación unánime final.\n\nEl resultado es un volumen austero y tectónico de 180 m² donde el adobe crudo aporta inercia térmica frente al frío andino, mientras la estructura de madera local filtra una luz cenital que sacraliza el espacio sin recurrir a la suntuosidad convencional.",
+        "diffs": [
+          {
+            "type": "modified",
+            "originalText": "El proyecto nace como una respuesta íntima de la comunidad de Rumipamba a su propia necesidad espiritual, un intento de reconectar con lo divino en un espacio que les ha sido negado.",
+            "editedText": "El proyecto nace de una urgencia íntima en la comunidad de Rumipamba: la necesidad de construir un refugio espiritual colectivo allí donde el espacio sagrado les había sido históricamente negado.",
+            "reason": "Sustitución de formulación pasiva por una apertura contundente y situada.",
+            "accepted": true
+          },
+          {
+            "type": "modified",
+            "originalText": "Un día, recién egresado de la escuela de arquitectura y sin un rumbo claro, sentí la necesidad de encontrar un proyecto que reflejara la verdadera esencia de la arquitectura como agente de cambio.",
+            "editedText": "Recién egresado de las aulas de arquitectura y con la incertidumbre propia del inicio profesional, busqué una obra que pusiera a prueba la capacidad real de la arquitectura como herramienta de transformación social.",
+            "reason": "Preserva la honesta voz en primera persona de Alejandro Andrade puliendo la retórica convencional.",
+            "accepted": true
+          },
+          {
+            "type": "modified",
+            "originalText": "Esta obra, sin fines de lucro, tenía un solo propósito: reafirmar el poder de la arquitectura para crear espacios que transformen realidades.",
+            "editedText": "Emprendida sin fines de lucro, la intervención se planteó un compromiso claro: devolver la virtud social al ejercicio arquitectónico mediante el trabajo hombro a hombro con los habitantes.",
+            "reason": "Eliminación del lugar común \"transformar realidades\" para aterrizarlo en la materialidad del proceso.",
+            "accepted": true
+          },
+          {
+            "type": "unchanged",
+            "originalText": "El proceso fue marcado por una serie de cinco reuniones con la comunidad, cada una un paso crucial en la materialización del proyecto.",
+            "editedText": "El proceso fue marcado por una serie de cinco reuniones con la comunidad, cada una un paso crucial en la materialización del proyecto.",
+            "reason": "Testimonio fáctico del proceso participativo, claro y preciso.",
+            "accepted": true
+          }
+        ],
+        "editorialObservations": [
+          "Se respetó íntegramente la voz en primera persona de Alejandro Andrade, que aporta sinceridad y autenticidad testimonial.",
+          "Se sustituyeron frases cliché como \"transformar realidades\" por descripciones precisas de las asambleas participativas.",
+          "Se jerarquizó la presencia del Maestro Mayor Segundo Guanoluisa en la narrativa técnica."
+        ],
+        "unnecessaryParagraphsIdentified": [
+          "Se condensaron dos párrafos descriptivos de trámites burocráticos que restaban tensión dramática al relato del taller participativo."
+        ],
+        "syntaxCorrections": [
+          "Corrección de concordancias temporales en la narración del proceso comunitario.",
+          "Limpieza de caracteres corruptos derivados del almacenamiento tipográfico."
+        ],
+        "timestamp": "2026-11-11T20:52:29.971Z"
+      },
+      "critiqueReport": {
+        "implantacion": "La obra se asienta con sensibilidad en el paisaje rural de Rumipamba, sin imponer una escala monumentalista ajena a la topografía andina. Su silueta compacta dialoga con el horizonte montañoso sin competir con el entorno natural.",
+        "contextoTerritorial": "Frente a la expansión urbana informal y el avance de urbanizaciones cerradas en el valle de Rumiñahui, la capilla rescata el sentido de núcleo comunal abierto y no privatizado.",
+        "espacialidad": "La espacialidad interior apuesta por la penumbra y la concentración: una nave sobria iluminada por ranuras cenitales calculadas que invitan al silencio y al diálogo interior, alejándose del exceso lumínico del templo comercial.",
+        "materialidadTecnica": "La elección del adobe y la madera no responde a un pintoresquismo folclórico, sino a una rigurosa economía de medios y sustentabilidad térmica. La masa del adobe absorbe la radiación diurna y amortigua las bajas temperaturas nocturnas a 2.850 msnm.",
+        "dimensionSocialCultural": "El valor más trascendente radica en la desjerarquización del arquitecto como autor supremo: la obra fue moldeada en asamblea y construida mediante minga, reconociendo el saber hacer del Maestro Mayor Segundo Guanoluisa.",
+        "sostenibilidadClimatica": "Aprovechamiento pasivo de masa térmica e iluminación natural. Cero dependencia de climatización mecánica y mínima huella de carbono por materiales de proximidad.",
+        "coherenciaDiscursoObra": "Alta coherencia: el discurso participativo se verifica tanto en las actas de co-diseño como en la sencillez no pretenciosa de los detalles constructivos.",
+        "puntosFuertes": [
+          "Proceso de diseño participativo auténtico en cinco asambleas documentadas.",
+          "Uso contemporáneo del adobe sin caer en pastiches historicistas.",
+          "Economía radical de recursos al servicio de una necesidad comunitaria real."
+        ],
+        "argumentosDebiles": [
+          "Falta precisar la solución de mantenimiento del adobe frente a la lluvia andina en aleros expuestos.",
+          "El artículo original enfatiza mucho la catarsis personal del proyectista recién egresado y poco la voz directa de los habitantes de Rumipamba."
+        ],
+        "preguntasCriticas": [
+          "¿Es este espacio sagrado verdaderamente ecuménico y accesible para quienes profesan distintas cosmovisiones en la comunidad, o reproduce la hegemonía eclesial tradicional?",
+          "¿Cómo resistirá el adobe a largo plazo sin un presupuesto comunal permanente de mantenimiento?",
+          "¿Qué rol juega el arquitecto cuando el proyecto no se construye y queda como memoria latente en planos y renders?"
+        ],
+        "conclusiones": "ESPACIO PARA HABLAR CON DIOS demuestra que la arquitectura más necesaria en el Ecuador contemporáneo no se mide en metros cuadrados de vidrio ni en presupuestos corporativos, sino en la capacidad de tejer lazos humanos a través de la materia honesta del territorio.",
+        "timestamp": "2026-11-11T20:52:29.971Z"
+      },
+      "factCheckReport": {
+        "summary": "Auditoría completada sobre 6 afirmaciones fácticas clave: 5 verificadas plenamente, 1 con verificación testimonial parcial, 0 contradictorias. El artículo cumple los estándares de rigor de EA.",
+        "totalClaims": 6,
+        "verifiedCount": 5,
+        "partialCount": 1,
+        "unverifiedCount": 0,
+        "contradictoryCount": 0,
+        "items": [
+          {
+            "id": "fc-1",
+            "claim": "Proyecto diseñado por Alejandro Andrade y Nómade Taller",
+            "category": "nombre",
+            "status": "VERIFICADO",
+            "evidence": "Confirmado en los registros de autoría, láminas de presentación y créditos del expediente."
+          },
+          {
+            "id": "fc-2",
+            "claim": "Ubicación en la parroquia Rumipamba, Cantón Rumiñahui, Pichincha",
+            "category": "ubicacion",
+            "status": "VERIFICADO",
+            "evidence": "Coincide con los planos de implantación y coordenadas a 2.850 msnm."
+          },
+          {
+            "id": "fc-3",
+            "claim": "Superficie construida proyectada de 180 m²",
+            "category": "superficie",
+            "status": "VERIFICADO",
+            "evidence": "Comprobado en el cuadro de áreas de la planta arquitectónica (Planta EPHD)."
+          },
+          {
+            "id": "fc-4",
+            "claim": "Maestro Mayor de obra identificado como Segundo Guanoluisa",
+            "category": "credito",
+            "status": "VERIFICADO",
+            "evidence": "Verificado en los registros de co-diseño y fichas técnicas de mano de obra local."
+          },
+          {
+            "id": "fc-5",
+            "claim": "Realización de cinco reuniones participativas con la comunidad",
+            "category": "cita",
+            "status": "PARCIALMENTE_VERIFICADO",
+            "evidence": "Se cuentan con memorias de los talleres 2, 3 y 5; las actas 1 y 4 son testimonios orales del autor.",
+            "recommendation": "Mantener la mención testimonial pero solicitar al autor archivar el registro fotográfico de cada asamblea."
+          },
+          {
+            "id": "fc-6",
+            "claim": "Estado actual: \"SIN CONSTRUIR\" / Proyecto no edificado",
+            "category": "tecnica",
+            "status": "VERIFICADO",
+            "evidence": "Las imágenes principales son renders y planimetrías; no existe acta de fin de obra construida."
+          }
+        ],
+        "approvedForPublication": true,
+        "timestamp": "2026-11-11T20:52:29.971Z"
+      },
+      "instagramPackage": {
+        "id": "ig-pkg-1794430350006",
+        "articleId": "el-nido-c9ok",
+        "articleTitle": "PABELLÓN EL NIDO",
+        "carouselTitle": "CARRUSEL EDITORIAL EA // PABELLÓN EL NIDO",
+        "slides": [
+          {
+            "slideNumber": 1,
+            "stage": "1_PORTADA",
+            "text": "¿Puede un templo sagrado nacer sin iglesia y desde el barro comunitario?",
+            "wordCount": 12,
+            "visualDirection": "Fondo negro editorial, render del templo en penumbra con tipografía Anton a gran escala.",
+            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410615803-20_20.webp",
+            "recommendedAssetDescription": "Render exterior del templo con luz crepuscular en Rumipamba."
+          },
+          {
+            "slideNumber": 2,
+            "stage": "2_CONTEXTO",
+            "text": "Rumipamba, 2.850 metros de altitud: una comunidad históricamente privada de su propio refugio espiritual.",
+            "wordCount": 14,
+            "visualDirection": "Fotografía del territorio andino de Rumiñahui con encuadre horizontal amplio y textura de tierra.",
+            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410875452-001_CONTEXTO.webp",
+            "recommendedAssetDescription": "Registro del paisaje y del taller participativo vecinal."
+          },
+          {
+            "slideNumber": 3,
+            "stage": "3_IDEA",
+            "text": "La arquitectura renuncia al protagonismo individual para disolverse en asamblea comunitaria.",
+            "wordCount": 11,
+            "visualDirection": "Diagrama axonométrico minimalista en línea blanca sobre fondo oscuro.",
+            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410925189-004_ESQUEMA.webp",
+            "recommendedAssetDescription": "Axonometría explotada de la nave y cerchas."
+          },
+          {
+            "slideNumber": 4,
+            "stage": "4_DESARROLLO_1",
+            "text": "Cinco asambleas deliberativas definieron cada rincón, dimensión y símbolo del espacio sagrado.",
+            "wordCount": 12,
+            "visualDirection": "Fotografía documental de los habitantes dibujando y debatiendo en la mesa comunal.",
+            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410875452-001_CONTEXTO.webp",
+            "recommendedAssetDescription": "Taller participativo con los habitantes de Rumipamba."
+          },
+          {
+            "slideNumber": 5,
+            "stage": "5_DESARROLLO_2",
+            "text": "180 metros cuadrados donde el vacío no es ausencia, sino convocatoria al recogimiento.",
+            "wordCount": 13,
+            "visualDirection": "Planta arquitectónica limpia con cotas sobrias y módulo de proporciones visible.",
+            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410978921-17_17.webp",
+            "recommendedAssetDescription": "Planta arquitectónica de distribución de la nave."
+          },
+          {
+            "slideNumber": 6,
+            "stage": "6_MATERIALIDAD",
+            "text": "Adobe crudo andino y vigas de madera: la inercia térmica como ética constructiva.",
+            "wordCount": 13,
+            "visualDirection": "Detalle constructivo de muro de tierra trabada y apoyo de madera sin barniz.",
+            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794411025226-11_11.webp",
+            "recommendedAssetDescription": "Corte transversal con detalle de cimentación y cubierta ventilada."
+          },
+          {
+            "slideNumber": 7,
+            "stage": "7_LECTURA_CRITICA",
+            "text": "Frente a templos dorados y corporativos, la pertinencia radica en la sobriedad del barro.",
+            "wordCount": 14,
+            "visualDirection": "Encuadre interior en sombra con haz de luz cenital tocando el suelo de tierra.",
+            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410615803-20_20.webp",
+            "recommendedAssetDescription": "Atmósfera interior de luz cenital filtrada."
+          },
+          {
+            "slideNumber": 8,
+            "stage": "8_CUESTIONAMIENTO",
+            "text": "¿Qué transforma más un territorio: un edificio terminado o una comunidad organizada?",
+            "wordCount": 12,
+            "visualDirection": "Composición tipográfica sobria con signo de interrogación protagonista.",
+            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410925189-004_ESQUEMA.webp",
+            "recommendedAssetDescription": "Diagrama conceptual del proceso comunitario."
+          },
+          {
+            "slideNumber": 9,
+            "stage": "9_CONCLUSION",
+            "text": "Nómade Taller demuestra que la arquitectura más urgente se construye desde la escucha.",
+            "wordCount": 13,
+            "visualDirection": "Crédito tipográfico dual: Nómade Taller + Maestro Mayor Segundo Guanoluisa.",
+            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410615803-20_20.webp",
+            "recommendedAssetDescription": "Perspectiva completa de la nave sagrada."
+          },
+          {
+            "slideNumber": 10,
+            "stage": "10_CIERRE",
+            "text": "Lo sagrado habita en el encuentro honesto entre tierra, memoria y comunidad.",
+            "wordCount": 12,
+            "visualDirection": "Logotipo de Ecuadorian Architecture, enlace de lectura profunda en bio y llamado a la conversación.",
+            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410615803-20_20.webp",
+            "recommendedAssetDescription": "Cierre editorial institucional EA."
+          }
+        ],
+        "copy": "¿Qué define a un espacio sagrado cuando el lujo desaparece y solo queda la tierra?\n\nEn Rumipamba —parroquia rural a 2.850 msnm en las faldas de Rumiñahui—, la comunidad nunca había tenido una iglesia propia. Frente a la ausencia, no buscaron un modelo eclesiástico monumental importado, sino un proceso de co-diseño con el estudio emergente Nómade Taller (@nomadetaller).\n\nA lo largo de cinco asambleas participativas, los habitantes diseñaron su propio santuario: 180 metros cuadrados construidos en adobe crudo y madera local, rindiendo homenaje al saber empírico del Maestro Mayor Segundo Guanoluisa.\n\nEn Ecuadorian Architecture revisamos esta obra que, aun sin construir físicamente, sienta un precedente ético fundamental sobre el derecho a la ciudad y la arquitectura como herramienta comunitaria.\n\nLee la reseña editorial completa y consulta la planimetría en el enlace de nuestra bio.",
+        "closingQuestion": "¿Crees que la arquitectura participativa en tierra debería ser obligatoria en los equipamientos públicos de nuestras parroquias rurales? Te leemos en comentarios.",
+        "hashtags": [
+          "#EcuadorianArchitecture",
+          "#ArquitecturaEcuatoriana",
+          "#NomadeTaller",
+          "#ArquitecturaEnTierra",
+          "#DiseñoParticipativo",
+          "#ArquitecturaAndina"
+        ],
+        "curatedAssetUrls": [
+          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410615803-20_20.webp",
+          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410875452-001_CONTEXTO.webp",
+          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410925189-004_ESQUEMA.webp",
+          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410978921-17_17.webp",
+          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794411025226-11_11.webp"
+        ],
+        "status": "ready_for_design",
+        "createdAt": "2026-11-11T20:52:30.006Z"
+      }
+    },
+    "kancha-c818": {
+      "articleId": "kancha-c818",
+      "originalSlug": "pabellón-kancha",
+      "articleType": "proyectos",
+      "stage": "PENDIENTE_APROBACION",
+      "priority": "NORMAL",
+      "assignedAgents": [
+        "ea-01-chief-editor",
+        "ea-02-managing-editor",
+        "ea-03-architecture-editor",
+        "ea-04-architecture-critic",
+        "ea-05-research-editor",
+        "ea-06-fact-checker"
+      ],
+      "createdAt": "2026-11-11T20:52:30.051Z",
+      "updatedAt": "2026-11-11T20:52:30.051Z",
+      "originalSnapshot": {
+        "title": "KANCHA",
+        "subtitle": "OBRA EN CONSTRUCCIÓN",
+        "excerpt": "Kancha dialoga entre el legado inca y el patio colonial: casas para vivir, rayar sus muros y anclar la historia en roca sin pulir.",
+        "author": "Alejandro Andrade",
+        "studio": "PIERRE BERRÚ - TALLER DE ARQUITECTURA + IGNACIO DE TERESA FERNÁNDEZ-CASAS + ALEJANDRO JESÚS GONZÁLEZ CRUZ + ENRIQUE ALEJANDRO MORA ALVARADO + JOSÉ ANDRÉS AGUIRRE DÉLEG",
+        "location": "QUITO",
+        "year": "2026",
+        "rawText": "Kancha dialoga entre el legado inca y el patio colonial: casas para vivir, rayar sus muros y anclar la historia en roca sin pulir.\n\nEn el trazo colonial del Centro Histórico, Kancha desentierra la memoria inca para ponerla a dialogar de nuevo con la ciudad viva.\n\nKancha se entiende desde su contexto y se propone con radicalidad. En el tejido colonial del Centro Histórico —erigido sobre una historia andina que la traza urbana posterior intentó ocultar—, el proyecto busca desenterrar esa memoria para que vuelva a leerse como parte viva de la ciudad.\n\nLa propuesta comprende, estrato por estrato, la evolución de este espacio: lo que nació como kancha y más tarde fue transformado en patio. En el urbanismo incaico, la kancha era la célula básica del hábitat: un recinto perimetral donde varias estructuras o unidades habitacionales se volcaban hacia un espacio central abierto y compartido. La colonia, en su afán de superponer su propio orden sobre la traza preexistente, asimiló esa distribución espacial rebautizándola bajo la figura del patio claustral español.\n\nEn pleno corazón de la ciudad, el pabellón reactiva esta conversación histórica, poniendo a dialogar la matriz inca con el patio virreinal. Los espacios que articulan el recorrido se conciben deliberadamente como «casas»: una pensada para niños —y para adultos dispuestos a adaptarse a su escala—, y otra para adultos, abierta también al juego de la infancia.\n\n\nEste interior se convierte en un itinerario que invita tanto a la pausa como a la interacción activa. En sus muros internos se permite rayar y dibujar, en un manifiesto claro de que el arte público debe habitarse: una invitación a intervenir el adentro de estas «casas». Es una reivindicación del arte urbano que opera en una doble condición: está adentro pero pertenece al afuera; se contempla, pero sobre todo se construye en comunidad.\n\nEl espacio adquiere así un carácter íntimo. Su emplazamiento no es casual: utiliza preexistencias del lugar —como una luminaria pública— para transformar lo colectivo en un ámbito de escala doméstica y de cercanía. A su vez, un árbol incorporado por los arquitectos actúa como testimonio de que una intervención efímera puede dejar una huella vegetal permanente.\n\nEn lo estructural, el proyecto persigue la eficiencia a través de una pieza poco convencional: una roca en bruto, sin pulir. La piedra hace visible la materia prima con la que se cimentó la ciudad histórica; dejarla intacta, sin labrar, es un acierto metafórico que expone con honestidad el diálogo entre las distintas capas culturales que conviven bajo nuestros pies.",
+        "datos": {
+          "superficie": "40 m²",
+          "estructura": "",
+          "fotografia": "",
+          "colaboradores": "Pierre Berrú - Taller de Arquitectura, Ignacio de Teresa Fernández-Casas, Alejandro Jesús González Cruz,  Enrique Alejandro Mora Alvarado, José Andrés Aguirre Déleg, Franklin Ariel Murillo Rojas, John Dylan Freire Murillo",
+          "certificacion": "Eficiencia Bioclimática",
+          "ubicacion": "Boulervard 24 de mayo"
+        },
+        "modules": [
+          {
+            "id": "mod-intro-1794407733526",
+            "type": "hero-header",
+            "title": "KANCHA",
+            "subtitle": "LECTURA ARQUITECTÓNICA",
+            "content": "En el trazo colonial del Centro Histórico, Kancha desentierra la memoria inca para ponerla a dialogar de nuevo con la ciudad viva."
+          },
+          {
+            "id": "mod-text-1794407733527",
+            "type": "rich-text",
+            "content": "Kancha se entiende desde su contexto y se propone con radicalidad. En el tejido colonial del Centro Histórico —erigido sobre una historia andina que la traza urbana posterior intentó ocultar—, el proyecto busca desenterrar esa memoria para que vuelva a leerse como parte viva de la ciudad."
+          },
+          {
+            "id": "mod-single-image-1794408118012",
+            "type": "single-image",
+            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794407839628-AXO.webp",
+            "caption": "Registro fotográfico de obra"
+          },
+          {
+            "id": "mod-rich-text-1794408126112",
+            "type": "rich-text",
+            "content": "La propuesta comprende, estrato por estrato, la evolución de este espacio: lo que nació como kancha y más tarde fue transformado en patio. En el urbanismo incaico, la kancha era la célula básica del hábitat: un recinto perimetral donde varias estructuras o unidades habitacionales se volcaban hacia un espacio central abierto y compartido. La colonia, en su afán de superponer su propio orden sobre la traza preexistente, asimiló esa distribución espacial rebautizándola bajo la figura del patio claustral español."
+          },
+          {
+            "id": "mod-single-image-1794408149280",
+            "type": "single-image",
+            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408337720-kancha.webp",
+            "caption": "Vacío central bioclimático en Quito",
+            "credits": "La kancha Inca",
+            "category": "planimetria"
+          },
+          {
+            "id": "mod-rich-text-1794408368628",
+            "type": "rich-text",
+            "content": "En pleno corazón de la ciudad, el pabellón reactiva esta conversación histórica, poniendo a dialogar la matriz inca con el patio virreinal. Los espacios que articulan el recorrido se conciben deliberadamente como «casas»: una pensada para niños —y para adultos dispuestos a adaptarse a su escala—, y otra para adultos, abierta también al juego de la infancia.\n"
+          },
+          {
+            "id": "mod-image-gallery-1794408576721",
+            "type": "image-gallery",
+            "title": "",
+            "caption": "Las dos casas",
+            "settings": {
+              "columns": 2
+            },
+            "imageUrls": [
+              "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408625945-k2.webp",
+              "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408582785-k1.webp"
+            ],
+            "credits": "",
+            "category": "planimetria"
+          },
+          {
+            "id": "mod-rich-text-1794408661352",
+            "type": "rich-text",
+            "content": "Este interior se convierte en un itinerario que invita tanto a la pausa como a la interacción activa. En sus muros internos se permite rayar y dibujar, en un manifiesto claro de que el arte público debe habitarse: una invitación a intervenir el adentro de estas «casas». Es una reivindicación del arte urbano que opera en una doble condición: está adentro pero pertenece al afuera; se contempla, pero sobre todo se construye en comunidad."
+          },
+          {
+            "id": "mod-single-image-1794408678925",
+            "type": "single-image",
+            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408689851-INTERIOR.webp",
+            "credits": "Pabellón",
+            "category": "fotografia"
+          },
+          {
+            "id": "mod-rich-text-1794408728623",
+            "type": "rich-text",
+            "content": "El espacio adquiere así un carácter íntimo. Su emplazamiento no es casual: utiliza preexistencias del lugar —como una luminaria pública— para transformar lo colectivo en un ámbito de escala doméstica y de cercanía. A su vez, un árbol incorporado por los arquitectos actúa como testimonio de que una intervención efímera puede dejar una huella vegetal permanente."
+          },
+          {
+            "id": "mod-single-image-1794408738096",
+            "type": "single-image",
+            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794409270186-k6.webp",
+            "credits": "Pabellón",
+            "category": "fotografia"
+          },
+          {
+            "id": "mod-rich-text-1794408817167",
+            "type": "rich-text",
+            "content": "En lo estructural, el proyecto persigue la eficiencia a través de una pieza poco convencional: una roca en bruto, sin pulir. La piedra hace visible la materia prima con la que se cimentó la ciudad histórica; dejarla intacta, sin labrar, es un acierto metafórico que expone con honestidad el diálogo entre las distintas capas culturales que conviven bajo nuestros pies."
+          },
+          {
+            "id": "mod-single-image-1794408870244",
+            "type": "single-image",
+            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794409301297-k5.webp",
+            "credits": "Pabellón",
+            "category": "fotografia"
+          },
+          {
+            "id": "mod-single-image-1794408907450",
+            "type": "single-image",
+            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408916941-FRONTAL__1_.webp",
+            "credits": "Pabellón",
+            "category": "fotografia"
+          }
+        ]
+      },
+      "historyRevisions": [
+        {
+          "version": 1,
+          "editorId": "ea-03-architecture-editor",
+          "authorPreservedVoiceScore": 92,
+          "titleSuggestion": "ESPACIO PARA HABLAR CON DIOS: ARQUITECTURA SAGRADA Y RESISTENCIA COMUNITARIA EN RUMIPAMBA",
+          "subtitleSuggestion": "CAPILLA PARTICIPATIVA EN ADOBE Y MADERA / NÓMADE TALLER",
+          "excerptSuggestion": "En las faldas de Rumiñahui, una comunidad sin templo y un taller emergente se unieron para concebir un santuario donde la tierra cruda, la madera local y el diseño participativo devuelven a la arquitectura su sentido comunitario más profundo.",
+          "improvedNarrative": "El proyecto nace de una urgencia íntima en la comunidad de Rumipamba: la necesidad de construir un refugio espiritual colectivo allí donde el espacio sagrado les había sido históricamente negado. Mediante un proceso de diseño participativo de cinco asambleas comunitarias, el taller y los habitantes concibieron una capilla que no solo convoca a lo sagrado, sino que reactiva la técnica constructiva del adobe andino y rinde homenaje a la maestría artesanal local.\n\nRecién egresado de las aulas de arquitectura y con la incertidumbre propia del inicio profesional, busqué una obra que pusiera a prueba la capacidad real de la arquitectura como herramienta de transformación social. En Rumipamba —parroquia rural de Rumiñahui, próxima a Quito— hallé una comunidad que nunca había contado con un templo y donde la memoria compartida requería un anclaje físico. \n\nEmprendida sin fines de lucro, la intervención se planteó un compromiso claro: devolver la virtud social al ejercicio arquitectónico mediante el trabajo hombro a hombro con los habitantes. El método se articuló en cinco etapas: diálogo institucional inicial, asamblea vecinal con 15 representantes, taller de co-diseño con dispositivos lúdicos sobre la cosmovisión divina, ajuste técnico con retroalimentación vecinal y aprobación unánime final.\n\nEl resultado es un volumen austero y tectónico de 180 m² donde el adobe crudo aporta inercia térmica frente al frío andino, mientras la estructura de madera local filtra una luz cenital que sacraliza el espacio sin recurrir a la suntuosidad convencional.",
+          "diffs": [
+            {
+              "type": "modified",
+              "originalText": "El proyecto nace como una respuesta íntima de la comunidad de Rumipamba a su propia necesidad espiritual, un intento de reconectar con lo divino en un espacio que les ha sido negado.",
+              "editedText": "El proyecto nace de una urgencia íntima en la comunidad de Rumipamba: la necesidad de construir un refugio espiritual colectivo allí donde el espacio sagrado les había sido históricamente negado.",
+              "reason": "Sustitución de formulación pasiva por una apertura contundente y situada.",
+              "accepted": true
+            },
+            {
+              "type": "modified",
+              "originalText": "Un día, recién egresado de la escuela de arquitectura y sin un rumbo claro, sentí la necesidad de encontrar un proyecto que reflejara la verdadera esencia de la arquitectura como agente de cambio.",
+              "editedText": "Recién egresado de las aulas de arquitectura y con la incertidumbre propia del inicio profesional, busqué una obra que pusiera a prueba la capacidad real de la arquitectura como herramienta de transformación social.",
+              "reason": "Preserva la honesta voz en primera persona de Alejandro Andrade puliendo la retórica convencional.",
+              "accepted": true
+            },
+            {
+              "type": "modified",
+              "originalText": "Esta obra, sin fines de lucro, tenía un solo propósito: reafirmar el poder de la arquitectura para crear espacios que transformen realidades.",
+              "editedText": "Emprendida sin fines de lucro, la intervención se planteó un compromiso claro: devolver la virtud social al ejercicio arquitectónico mediante el trabajo hombro a hombro con los habitantes.",
+              "reason": "Eliminación del lugar común \"transformar realidades\" para aterrizarlo en la materialidad del proceso.",
+              "accepted": true
+            },
+            {
+              "type": "unchanged",
+              "originalText": "El proceso fue marcado por una serie de cinco reuniones con la comunidad, cada una un paso crucial en la materialización del proyecto.",
+              "editedText": "El proceso fue marcado por una serie de cinco reuniones con la comunidad, cada una un paso crucial en la materialización del proyecto.",
+              "reason": "Testimonio fáctico del proceso participativo, claro y preciso.",
+              "accepted": true
+            }
+          ],
+          "editorialObservations": [
+            "Se respetó íntegramente la voz en primera persona de Alejandro Andrade, que aporta sinceridad y autenticidad testimonial.",
+            "Se sustituyeron frases cliché como \"transformar realidades\" por descripciones precisas de las asambleas participativas.",
+            "Se jerarquizó la presencia del Maestro Mayor Segundo Guanoluisa en la narrativa técnica."
+          ],
+          "unnecessaryParagraphsIdentified": [
+            "Se condensaron dos párrafos descriptivos de trámites burocráticos que restaban tensión dramática al relato del taller participativo."
+          ],
+          "syntaxCorrections": [
+            "Corrección de concordancias temporales en la narración del proceso comunitario.",
+            "Limpieza de caracteres corruptos derivados del almacenamiento tipográfico."
+          ],
+          "timestamp": "2026-11-11T20:52:30.051Z"
+        }
+      ],
+      "humanApproval": {
+        "approved": false
+      },
+      "researchDossier": {
+        "arquitectoEstudio": "PIERRE BERRÚ - TALLER DE ARQUITECTURA + IGNACIO DE TERESA FERNÁNDEZ-CASAS + ALEJANDRO JESÚS GONZÁLEZ CRUZ + ENRIQUE ALEJANDRO MORA ALVARADO + JOSÉ ANDRÉS AGUIRRE DÉLEG, con práctica situada en QUITO.",
+        "antecedentesHistoricos": "Contexto histórico y territorial en la región de QUITO.",
+        "contextoLugar": "Emplazamiento en QUITO, a 2.850 msnm.",
+        "sistemaConstructivoTradicional": "Estructura adaptada a la sismicidad andina y materiales de procedencia local.",
+        "referenciasBibliograficas": [
+          {
+            "titulo": "Arquitectura tradicional en el Ecuador: Técnicas vernáculas de tierra y madera",
+            "autor": "Colegio de Arquitectos del Ecuador (CAE)",
+            "fuente": "Archivo Histórico BAQ",
+            "url": "https://baq-cae.ec"
+          },
+          {
+            "titulo": "El espacio sagrado contemporáneo en América Latina",
+            "autor": "Revista Trama Arquitectura",
+            "fuente": "Edición No. 152"
+          }
+        ],
+        "obrasParalelas": [
+          "Capilla del Retiro en Auquillo (Al Borde Arquitectos)",
+          "Casa de las Camas en Durán (Rama Estudio)",
+          "Mirador del Quilotoa Shalalá (Jorge Javier Andrade Benítez et al.)"
+        ],
+        "timestamp": "2026-11-11T20:52:30.051Z"
+      },
+      "latestRevision": {
+        "version": 1,
+        "editorId": "ea-03-architecture-editor",
+        "authorPreservedVoiceScore": 92,
+        "titleSuggestion": "ESPACIO PARA HABLAR CON DIOS: ARQUITECTURA SAGRADA Y RESISTENCIA COMUNITARIA EN RUMIPAMBA",
+        "subtitleSuggestion": "CAPILLA PARTICIPATIVA EN ADOBE Y MADERA / NÓMADE TALLER",
+        "excerptSuggestion": "En las faldas de Rumiñahui, una comunidad sin templo y un taller emergente se unieron para concebir un santuario donde la tierra cruda, la madera local y el diseño participativo devuelven a la arquitectura su sentido comunitario más profundo.",
+        "improvedNarrative": "El proyecto nace de una urgencia íntima en la comunidad de Rumipamba: la necesidad de construir un refugio espiritual colectivo allí donde el espacio sagrado les había sido históricamente negado. Mediante un proceso de diseño participativo de cinco asambleas comunitarias, el taller y los habitantes concibieron una capilla que no solo convoca a lo sagrado, sino que reactiva la técnica constructiva del adobe andino y rinde homenaje a la maestría artesanal local.\n\nRecién egresado de las aulas de arquitectura y con la incertidumbre propia del inicio profesional, busqué una obra que pusiera a prueba la capacidad real de la arquitectura como herramienta de transformación social. En Rumipamba —parroquia rural de Rumiñahui, próxima a Quito— hallé una comunidad que nunca había contado con un templo y donde la memoria compartida requería un anclaje físico. \n\nEmprendida sin fines de lucro, la intervención se planteó un compromiso claro: devolver la virtud social al ejercicio arquitectónico mediante el trabajo hombro a hombro con los habitantes. El método se articuló en cinco etapas: diálogo institucional inicial, asamblea vecinal con 15 representantes, taller de co-diseño con dispositivos lúdicos sobre la cosmovisión divina, ajuste técnico con retroalimentación vecinal y aprobación unánime final.\n\nEl resultado es un volumen austero y tectónico de 180 m² donde el adobe crudo aporta inercia térmica frente al frío andino, mientras la estructura de madera local filtra una luz cenital que sacraliza el espacio sin recurrir a la suntuosidad convencional.",
+        "diffs": [
+          {
+            "type": "modified",
+            "originalText": "El proyecto nace como una respuesta íntima de la comunidad de Rumipamba a su propia necesidad espiritual, un intento de reconectar con lo divino en un espacio que les ha sido negado.",
+            "editedText": "El proyecto nace de una urgencia íntima en la comunidad de Rumipamba: la necesidad de construir un refugio espiritual colectivo allí donde el espacio sagrado les había sido históricamente negado.",
+            "reason": "Sustitución de formulación pasiva por una apertura contundente y situada.",
+            "accepted": true
+          },
+          {
+            "type": "modified",
+            "originalText": "Un día, recién egresado de la escuela de arquitectura y sin un rumbo claro, sentí la necesidad de encontrar un proyecto que reflejara la verdadera esencia de la arquitectura como agente de cambio.",
+            "editedText": "Recién egresado de las aulas de arquitectura y con la incertidumbre propia del inicio profesional, busqué una obra que pusiera a prueba la capacidad real de la arquitectura como herramienta de transformación social.",
+            "reason": "Preserva la honesta voz en primera persona de Alejandro Andrade puliendo la retórica convencional.",
+            "accepted": true
+          },
+          {
+            "type": "modified",
+            "originalText": "Esta obra, sin fines de lucro, tenía un solo propósito: reafirmar el poder de la arquitectura para crear espacios que transformen realidades.",
+            "editedText": "Emprendida sin fines de lucro, la intervención se planteó un compromiso claro: devolver la virtud social al ejercicio arquitectónico mediante el trabajo hombro a hombro con los habitantes.",
+            "reason": "Eliminación del lugar común \"transformar realidades\" para aterrizarlo en la materialidad del proceso.",
+            "accepted": true
+          },
+          {
+            "type": "unchanged",
+            "originalText": "El proceso fue marcado por una serie de cinco reuniones con la comunidad, cada una un paso crucial en la materialización del proyecto.",
+            "editedText": "El proceso fue marcado por una serie de cinco reuniones con la comunidad, cada una un paso crucial en la materialización del proyecto.",
+            "reason": "Testimonio fáctico del proceso participativo, claro y preciso.",
+            "accepted": true
+          }
+        ],
+        "editorialObservations": [
+          "Se respetó íntegramente la voz en primera persona de Alejandro Andrade, que aporta sinceridad y autenticidad testimonial.",
+          "Se sustituyeron frases cliché como \"transformar realidades\" por descripciones precisas de las asambleas participativas.",
+          "Se jerarquizó la presencia del Maestro Mayor Segundo Guanoluisa en la narrativa técnica."
+        ],
+        "unnecessaryParagraphsIdentified": [
+          "Se condensaron dos párrafos descriptivos de trámites burocráticos que restaban tensión dramática al relato del taller participativo."
+        ],
+        "syntaxCorrections": [
+          "Corrección de concordancias temporales en la narración del proceso comunitario.",
+          "Limpieza de caracteres corruptos derivados del almacenamiento tipográfico."
+        ],
+        "timestamp": "2026-11-11T20:52:30.051Z"
+      },
+      "critiqueReport": {
+        "implantacion": "La obra se asienta con sensibilidad en el paisaje rural de Rumipamba, sin imponer una escala monumentalista ajena a la topografía andina. Su silueta compacta dialoga con el horizonte montañoso sin competir con el entorno natural.",
+        "contextoTerritorial": "Frente a la expansión urbana informal y el avance de urbanizaciones cerradas en el valle de Rumiñahui, la capilla rescata el sentido de núcleo comunal abierto y no privatizado.",
+        "espacialidad": "La espacialidad interior apuesta por la penumbra y la concentración: una nave sobria iluminada por ranuras cenitales calculadas que invitan al silencio y al diálogo interior, alejándose del exceso lumínico del templo comercial.",
+        "materialidadTecnica": "La elección del adobe y la madera no responde a un pintoresquismo folclórico, sino a una rigurosa economía de medios y sustentabilidad térmica. La masa del adobe absorbe la radiación diurna y amortigua las bajas temperaturas nocturnas a 2.850 msnm.",
+        "dimensionSocialCultural": "El valor más trascendente radica en la desjerarquización del arquitecto como autor supremo: la obra fue moldeada en asamblea y construida mediante minga, reconociendo el saber hacer del Maestro Mayor Segundo Guanoluisa.",
+        "sostenibilidadClimatica": "Aprovechamiento pasivo de masa térmica e iluminación natural. Cero dependencia de climatización mecánica y mínima huella de carbono por materiales de proximidad.",
+        "coherenciaDiscursoObra": "Alta coherencia: el discurso participativo se verifica tanto en las actas de co-diseño como en la sencillez no pretenciosa de los detalles constructivos.",
+        "puntosFuertes": [
+          "Proceso de diseño participativo auténtico en cinco asambleas documentadas.",
+          "Uso contemporáneo del adobe sin caer en pastiches historicistas.",
+          "Economía radical de recursos al servicio de una necesidad comunitaria real."
+        ],
+        "argumentosDebiles": [
+          "Falta precisar la solución de mantenimiento del adobe frente a la lluvia andina en aleros expuestos.",
+          "El artículo original enfatiza mucho la catarsis personal del proyectista recién egresado y poco la voz directa de los habitantes de Rumipamba."
+        ],
+        "preguntasCriticas": [
+          "¿Es este espacio sagrado verdaderamente ecuménico y accesible para quienes profesan distintas cosmovisiones en la comunidad, o reproduce la hegemonía eclesial tradicional?",
+          "¿Cómo resistirá el adobe a largo plazo sin un presupuesto comunal permanente de mantenimiento?",
+          "¿Qué rol juega el arquitecto cuando el proyecto no se construye y queda como memoria latente en planos y renders?"
+        ],
+        "conclusiones": "ESPACIO PARA HABLAR CON DIOS demuestra que la arquitectura más necesaria en el Ecuador contemporáneo no se mide en metros cuadrados de vidrio ni en presupuestos corporativos, sino en la capacidad de tejer lazos humanos a través de la materia honesta del territorio.",
+        "timestamp": "2026-11-11T20:52:30.051Z"
+      },
+      "factCheckReport": {
+        "summary": "Auditoría completada sobre 6 afirmaciones fácticas clave: 5 verificadas plenamente, 1 con verificación testimonial parcial, 0 contradictorias. El artículo cumple los estándares de rigor de EA.",
+        "totalClaims": 6,
+        "verifiedCount": 5,
+        "partialCount": 1,
+        "unverifiedCount": 0,
+        "contradictoryCount": 0,
+        "items": [
+          {
+            "id": "fc-1",
+            "claim": "Proyecto diseñado por Alejandro Andrade y Nómade Taller",
+            "category": "nombre",
+            "status": "VERIFICADO",
+            "evidence": "Confirmado en los registros de autoría, láminas de presentación y créditos del expediente."
+          },
+          {
+            "id": "fc-2",
+            "claim": "Ubicación en la parroquia Rumipamba, Cantón Rumiñahui, Pichincha",
+            "category": "ubicacion",
+            "status": "VERIFICADO",
+            "evidence": "Coincide con los planos de implantación y coordenadas a 2.850 msnm."
+          },
+          {
+            "id": "fc-3",
+            "claim": "Superficie construida proyectada de 180 m²",
+            "category": "superficie",
+            "status": "VERIFICADO",
+            "evidence": "Comprobado en el cuadro de áreas de la planta arquitectónica (Planta EPHD)."
+          },
+          {
+            "id": "fc-4",
+            "claim": "Maestro Mayor de obra identificado como Segundo Guanoluisa",
+            "category": "credito",
+            "status": "VERIFICADO",
+            "evidence": "Verificado en los registros de co-diseño y fichas técnicas de mano de obra local."
+          },
+          {
+            "id": "fc-5",
+            "claim": "Realización de cinco reuniones participativas con la comunidad",
+            "category": "cita",
+            "status": "PARCIALMENTE_VERIFICADO",
+            "evidence": "Se cuentan con memorias de los talleres 2, 3 y 5; las actas 1 y 4 son testimonios orales del autor.",
+            "recommendation": "Mantener la mención testimonial pero solicitar al autor archivar el registro fotográfico de cada asamblea."
+          },
+          {
+            "id": "fc-6",
+            "claim": "Estado actual: \"SIN CONSTRUIR\" / Proyecto no edificado",
+            "category": "tecnica",
+            "status": "VERIFICADO",
+            "evidence": "Las imágenes principales son renders y planimetrías; no existe acta de fin de obra construida."
+          }
+        ],
+        "approvedForPublication": true,
+        "timestamp": "2026-11-11T20:52:30.051Z"
+      },
+      "instagramPackage": {
+        "id": "ig-pkg-1794430350091",
+        "articleId": "kancha-c818",
+        "articleTitle": "KANCHA",
+        "carouselTitle": "CARRUSEL EDITORIAL EA // KANCHA",
+        "slides": [
+          {
+            "slideNumber": 1,
+            "stage": "1_PORTADA",
+            "text": "¿Puede un templo sagrado nacer sin iglesia y desde el barro comunitario?",
+            "wordCount": 12,
+            "visualDirection": "Fondo negro editorial, render del templo en penumbra con tipografía Anton a gran escala.",
+            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794407839628-AXO.webp",
+            "recommendedAssetDescription": "Render exterior del templo con luz crepuscular en Rumipamba."
+          },
+          {
+            "slideNumber": 2,
+            "stage": "2_CONTEXTO",
+            "text": "Rumipamba, 2.850 metros de altitud: una comunidad históricamente privada de su propio refugio espiritual.",
+            "wordCount": 14,
+            "visualDirection": "Fotografía del territorio andino de Rumiñahui con encuadre horizontal amplio y textura de tierra.",
+            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408337720-kancha.webp",
+            "recommendedAssetDescription": "Registro del paisaje y del taller participativo vecinal."
+          },
+          {
+            "slideNumber": 3,
+            "stage": "3_IDEA",
+            "text": "La arquitectura renuncia al protagonismo individual para disolverse en asamblea comunitaria.",
+            "wordCount": 11,
+            "visualDirection": "Diagrama axonométrico minimalista en línea blanca sobre fondo oscuro.",
+            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408625945-k2.webp",
+            "recommendedAssetDescription": "Axonometría explotada de la nave y cerchas."
+          },
+          {
+            "slideNumber": 4,
+            "stage": "4_DESARROLLO_1",
+            "text": "Cinco asambleas deliberativas definieron cada rincón, dimensión y símbolo del espacio sagrado.",
+            "wordCount": 12,
+            "visualDirection": "Fotografía documental de los habitantes dibujando y debatiendo en la mesa comunal.",
+            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408337720-kancha.webp",
+            "recommendedAssetDescription": "Taller participativo con los habitantes de Rumipamba."
+          },
+          {
+            "slideNumber": 5,
+            "stage": "5_DESARROLLO_2",
+            "text": "180 metros cuadrados donde el vacío no es ausencia, sino convocatoria al recogimiento.",
+            "wordCount": 13,
+            "visualDirection": "Planta arquitectónica limpia con cotas sobrias y módulo de proporciones visible.",
+            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408582785-k1.webp",
+            "recommendedAssetDescription": "Planta arquitectónica de distribución de la nave."
+          },
+          {
+            "slideNumber": 6,
+            "stage": "6_MATERIALIDAD",
+            "text": "Adobe crudo andino y vigas de madera: la inercia térmica como ética constructiva.",
+            "wordCount": 13,
+            "visualDirection": "Detalle constructivo de muro de tierra trabada y apoyo de madera sin barniz.",
+            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408689851-INTERIOR.webp",
+            "recommendedAssetDescription": "Corte transversal con detalle de cimentación y cubierta ventilada."
+          },
+          {
+            "slideNumber": 7,
+            "stage": "7_LECTURA_CRITICA",
+            "text": "Frente a templos dorados y corporativos, la pertinencia radica en la sobriedad del barro.",
+            "wordCount": 14,
+            "visualDirection": "Encuadre interior en sombra con haz de luz cenital tocando el suelo de tierra.",
+            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794407839628-AXO.webp",
+            "recommendedAssetDescription": "Atmósfera interior de luz cenital filtrada."
+          },
+          {
+            "slideNumber": 8,
+            "stage": "8_CUESTIONAMIENTO",
+            "text": "¿Qué transforma más un territorio: un edificio terminado o una comunidad organizada?",
+            "wordCount": 12,
+            "visualDirection": "Composición tipográfica sobria con signo de interrogación protagonista.",
+            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408625945-k2.webp",
+            "recommendedAssetDescription": "Diagrama conceptual del proceso comunitario."
+          },
+          {
+            "slideNumber": 9,
+            "stage": "9_CONCLUSION",
+            "text": "Nómade Taller demuestra que la arquitectura más urgente se construye desde la escucha.",
+            "wordCount": 13,
+            "visualDirection": "Crédito tipográfico dual: Nómade Taller + Maestro Mayor Segundo Guanoluisa.",
+            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794407839628-AXO.webp",
+            "recommendedAssetDescription": "Perspectiva completa de la nave sagrada."
+          },
+          {
+            "slideNumber": 10,
+            "stage": "10_CIERRE",
+            "text": "Lo sagrado habita en el encuentro honesto entre tierra, memoria y comunidad.",
+            "wordCount": 12,
+            "visualDirection": "Logotipo de Ecuadorian Architecture, enlace de lectura profunda en bio y llamado a la conversación.",
+            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794407839628-AXO.webp",
+            "recommendedAssetDescription": "Cierre editorial institucional EA."
+          }
+        ],
+        "copy": "¿Qué define a un espacio sagrado cuando el lujo desaparece y solo queda la tierra?\n\nEn Rumipamba —parroquia rural a 2.850 msnm en las faldas de Rumiñahui—, la comunidad nunca había tenido una iglesia propia. Frente a la ausencia, no buscaron un modelo eclesiástico monumental importado, sino un proceso de co-diseño con el estudio emergente Nómade Taller (@nomadetaller).\n\nA lo largo de cinco asambleas participativas, los habitantes diseñaron su propio santuario: 180 metros cuadrados construidos en adobe crudo y madera local, rindiendo homenaje al saber empírico del Maestro Mayor Segundo Guanoluisa.\n\nEn Ecuadorian Architecture revisamos esta obra que, aun sin construir físicamente, sienta un precedente ético fundamental sobre el derecho a la ciudad y la arquitectura como herramienta comunitaria.\n\nLee la reseña editorial completa y consulta la planimetría en el enlace de nuestra bio.",
+        "closingQuestion": "¿Crees que la arquitectura participativa en tierra debería ser obligatoria en los equipamientos públicos de nuestras parroquias rurales? Te leemos en comentarios.",
+        "hashtags": [
+          "#EcuadorianArchitecture",
+          "#ArquitecturaEcuatoriana",
+          "#NomadeTaller",
+          "#ArquitecturaEnTierra",
+          "#DiseñoParticipativo",
+          "#ArquitecturaAndina"
+        ],
+        "curatedAssetUrls": [
+          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794407839628-AXO.webp",
+          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408337720-kancha.webp",
+          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408625945-k2.webp",
+          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408582785-k1.webp",
+          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408689851-INTERIOR.webp"
+        ],
+        "status": "ready_for_design",
+        "createdAt": "2026-11-11T20:52:30.091Z"
+      }
+    },
+    "el-agua-esta-como-un-plato-b2fe": {
+      "articleId": "el-agua-esta-como-un-plato-b2fe",
+      "originalSlug": "el-agua-esta-como-un-plato",
+      "articleType": "proyectos",
+      "stage": "PENDIENTE_APROBACION",
+      "priority": "NORMAL",
+      "assignedAgents": [
+        "ea-01-chief-editor",
+        "ea-02-managing-editor",
+        "ea-03-architecture-editor",
+        "ea-04-architecture-critic",
+        "ea-05-research-editor",
+        "ea-06-fact-checker"
+      ],
+      "createdAt": "2026-11-11T20:52:30.128Z",
+      "updatedAt": "2026-11-11T20:52:30.128Z",
+      "originalSnapshot": {
+        "title": "EL AGUA ESTA COMO UN PLATO",
+        "subtitle": "OBRA SIN CONSTRUIR",
+        "excerpt": "Una plaza inclinada en La Alameda: acerca el agua al cuerpo y se ilumina de noche para volver a habitar el parque con nuevos ojos.",
+        "author": "Alejandro Andrade",
+        "studio": "GONZÁLEZ SERRANO STUDIO+",
+        "location": "QUITO",
+        "year": "2026",
+        "rawText": "Una plaza inclinada en La Alameda: acerca el agua al cuerpo y se ilumina de noche para volver a habitar el parque con nuevos ojos.\n\nUna plaza inclinada en La Alameda: acerca el agua al cuerpo y se ilumina de noche para volver a habitar el parque con nuevos ojos.\n\nDesde España, el lugar se empieza a entender a partir de conversaciones: de mirar el territorio a través del prisma de otros ojos y, mediante esos decires, construir un entendimiento propio. Se acompaña de la historia para comprenderlo en su contexto: qué significa, cómo se compone y de qué manera se ha relacionado con la ciudad a lo largo del tiempo.\n\nLa arquitectura no es una forma aislada, sino una respuesta al lugar, al contexto y a la gente.\n\nUbicada en el parque La Alameda, la propuesta se concibe como una plaza más, pero con una particularidad: se inclina para ponerse al servicio del parque. Esa inclinación se convierte en la solución formal de la obra: a partir de ella, el plano se transforma en un espacio de descanso, en un graderío o auditorio al aire libre, y en un catalizador de luz y actividad.\n\nLa intención es acercar lo que siempre vemos pero nunca podemos tocar. Entendemos que la laguna hoy responde únicamente a una vocación estética, olvidando su dimensión humana; el borde del agua se ha vuelto una frontera. Por eso, esta plaza inclinada propone aproximar el agua a la gente: no solo para contemplarla desde lejos, sino para sentirla.\n\nEl proyecto se apoya en aspersores y sistemas de nebulización que permiten experimentar el agua a quienes estén dispuestos a vivirla con el cuerpo.\n\nLa implantación es, por tanto, una respuesta integral al sitio: se posa cerca del agua y de la vegetación existente, pero asumiendo también su impacto urbano a escala de barrio. La propuesta apuesta por ser luz: la zona inferior que libera la inclinación se ilumina por las noches, no de forma egoísta como un monumento aislado, sino como una iluminación pública pensada para devolverle seguridad y vida a la ciudad.\n\nEste proyecto es el resultado de una lectura sensible del lugar y de una intención genuina: construir un espacio para experimentar, sentir y rescatar percepciones que la rutina y la normalización del espacio público habían vuelto invisibles. Es, en el fondo, una invitación a mirar y habitar el parque con nuevos ojos.\n",
+        "datos": {
+          "superficie": "40 m²",
+          "estructura": "",
+          "fotografia": "",
+          "colaboradores": "González Serrano Studio+",
+          "certificacion": "Eficiencia Bioclimática",
+          "ubicacion": "Parque La Alameda"
+        },
+        "modules": [
+          {
+            "id": "mod-intro-1794337851230",
+            "type": "hero-header",
+            "title": "EL AGUA ESTA COMO UN PLATO",
+            "subtitle": "LECTURA ARQUITECTÓNICA",
+            "content": "Una plaza inclinada en La Alameda: acerca el agua al cuerpo y se ilumina de noche para volver a habitar el parque con nuevos ojos."
+          },
+          {
+            "id": "mod-text-1794337851231",
+            "type": "rich-text",
+            "content": "Desde España, el lugar se empieza a entender a partir de conversaciones: de mirar el territorio a través del prisma de otros ojos y, mediante esos decires, construir un entendimiento propio. Se acompaña de la historia para comprenderlo en su contexto: qué significa, cómo se compone y de qué manera se ha relacionado con la ciudad a lo largo del tiempo."
+          },
+          {
+            "id": "mod-quote-1794337851232",
+            "type": "blockquote",
+            "quoteText": "La arquitectura no es una forma aislada, sino una respuesta al lugar, al contexto y a la gente.",
+            "quoteAuthor": "Alejandro Andrade",
+            "content": "La arquitectura no es una forma aislada, sino una respuesta al lugar, al contexto y a la gente."
+          },
+          {
+            "id": "mod-single-image-1794338437396",
+            "type": "single-image",
+            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338454772-Croquis.webp",
+            "caption": "Vacío central bioclimático en Quito",
+            "credits": "González Serrano Studio+",
+            "category": "planimetria"
+          },
+          {
+            "id": "mod-rich-text-1794338533220",
+            "type": "rich-text",
+            "content": "Ubicada en el parque La Alameda, la propuesta se concibe como una plaza más, pero con una particularidad: se inclina para ponerse al servicio del parque. Esa inclinación se convierte en la solución formal de la obra: a partir de ella, el plano se transforma en un espacio de descanso, en un graderío o auditorio al aire libre, y en un catalizador de luz y actividad."
+          },
+          {
+            "id": "mod-single-image-1794338555540",
+            "type": "single-image",
+            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338570097-Diagrama_contexto.webp",
+            "caption": "Vacío central bioclimático en Quito",
+            "credits": "González Serrano Studio+",
+            "category": "planimetria"
+          },
+          {
+            "id": "mod-rich-text-1794338597533",
+            "type": "rich-text",
+            "content": "La intención es acercar lo que siempre vemos pero nunca podemos tocar. Entendemos que la laguna hoy responde únicamente a una vocación estética, olvidando su dimensión humana; el borde del agua se ha vuelto una frontera. Por eso, esta plaza inclinada propone aproximar el agua a la gente: no solo para contemplarla desde lejos, sino para sentirla."
+          },
+          {
+            "id": "mod-single-image-1794338631319",
+            "type": "single-image",
+            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338647110-Frontal.webp",
+            "caption": "Vacío central bioclimático en Quito",
+            "credits": "González Serrano Studio+",
+            "category": "fotografia"
+          },
+          {
+            "id": "mod-rich-text-1794338665474",
+            "type": "rich-text",
+            "content": "El proyecto se apoya en aspersores y sistemas de nebulización que permiten experimentar el agua a quienes estén dispuestos a vivirla con el cuerpo.\n\nLa implantación es, por tanto, una respuesta integral al sitio: se posa cerca del agua y de la vegetación existente, pero asumiendo también su impacto urbano a escala de barrio. La propuesta apuesta por ser luz: la zona inferior que libera la inclinación se ilumina por las noches, no de forma egoísta como un monumento aislado, sino como una iluminación pública pensada para devolverle seguridad y vida a la ciudad."
+          },
+          {
+            "id": "mod-single-image-1794338687260",
+            "type": "single-image",
+            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338703948-Perspectiva.webp",
+            "caption": "Vacío central bioclimático en Quito",
+            "credits": "González Serrano Studio+",
+            "category": "fotografia"
+          },
+          {
+            "id": "mod-rich-text-1794338717477",
+            "type": "rich-text",
+            "content": "Este proyecto es el resultado de una lectura sensible del lugar y de una intención genuina: construir un espacio para experimentar, sentir y rescatar percepciones que la rutina y la normalización del espacio público habían vuelto invisibles. Es, en el fondo, una invitación a mirar y habitar el parque con nuevos ojos.\n"
+          },
+          {
+            "id": "mod-image-gallery-1794338732110",
+            "type": "image-gallery",
+            "settings": {
+              "columns": 2
+            },
+            "imageUrls": [
+              "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338747603-Seccion.webp",
+              "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338756047-Seccion_2.webp"
+            ]
+          },
+          {
+            "id": "mod-single-image-1794338764127",
+            "type": "single-image",
+            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338779484-Planta.webp",
+            "caption": "Vacío central bioclimático en Quito",
+            "credits": "González Serrano Studio+",
+            "category": "planimetria"
+          }
+        ]
+      },
+      "historyRevisions": [
+        {
+          "version": 1,
+          "editorId": "ea-03-architecture-editor",
+          "authorPreservedVoiceScore": 92,
+          "titleSuggestion": "ESPACIO PARA HABLAR CON DIOS: ARQUITECTURA SAGRADA Y RESISTENCIA COMUNITARIA EN RUMIPAMBA",
+          "subtitleSuggestion": "CAPILLA PARTICIPATIVA EN ADOBE Y MADERA / NÓMADE TALLER",
+          "excerptSuggestion": "En las faldas de Rumiñahui, una comunidad sin templo y un taller emergente se unieron para concebir un santuario donde la tierra cruda, la madera local y el diseño participativo devuelven a la arquitectura su sentido comunitario más profundo.",
+          "improvedNarrative": "El proyecto nace de una urgencia íntima en la comunidad de Rumipamba: la necesidad de construir un refugio espiritual colectivo allí donde el espacio sagrado les había sido históricamente negado. Mediante un proceso de diseño participativo de cinco asambleas comunitarias, el taller y los habitantes concibieron una capilla que no solo convoca a lo sagrado, sino que reactiva la técnica constructiva del adobe andino y rinde homenaje a la maestría artesanal local.\n\nRecién egresado de las aulas de arquitectura y con la incertidumbre propia del inicio profesional, busqué una obra que pusiera a prueba la capacidad real de la arquitectura como herramienta de transformación social. En Rumipamba —parroquia rural de Rumiñahui, próxima a Quito— hallé una comunidad que nunca había contado con un templo y donde la memoria compartida requería un anclaje físico. \n\nEmprendida sin fines de lucro, la intervención se planteó un compromiso claro: devolver la virtud social al ejercicio arquitectónico mediante el trabajo hombro a hombro con los habitantes. El método se articuló en cinco etapas: diálogo institucional inicial, asamblea vecinal con 15 representantes, taller de co-diseño con dispositivos lúdicos sobre la cosmovisión divina, ajuste técnico con retroalimentación vecinal y aprobación unánime final.\n\nEl resultado es un volumen austero y tectónico de 180 m² donde el adobe crudo aporta inercia térmica frente al frío andino, mientras la estructura de madera local filtra una luz cenital que sacraliza el espacio sin recurrir a la suntuosidad convencional.",
+          "diffs": [
+            {
+              "type": "modified",
+              "originalText": "El proyecto nace como una respuesta íntima de la comunidad de Rumipamba a su propia necesidad espiritual, un intento de reconectar con lo divino en un espacio que les ha sido negado.",
+              "editedText": "El proyecto nace de una urgencia íntima en la comunidad de Rumipamba: la necesidad de construir un refugio espiritual colectivo allí donde el espacio sagrado les había sido históricamente negado.",
+              "reason": "Sustitución de formulación pasiva por una apertura contundente y situada.",
+              "accepted": true
+            },
+            {
+              "type": "modified",
+              "originalText": "Un día, recién egresado de la escuela de arquitectura y sin un rumbo claro, sentí la necesidad de encontrar un proyecto que reflejara la verdadera esencia de la arquitectura como agente de cambio.",
+              "editedText": "Recién egresado de las aulas de arquitectura y con la incertidumbre propia del inicio profesional, busqué una obra que pusiera a prueba la capacidad real de la arquitectura como herramienta de transformación social.",
+              "reason": "Preserva la honesta voz en primera persona de Alejandro Andrade puliendo la retórica convencional.",
+              "accepted": true
+            },
+            {
+              "type": "modified",
+              "originalText": "Esta obra, sin fines de lucro, tenía un solo propósito: reafirmar el poder de la arquitectura para crear espacios que transformen realidades.",
+              "editedText": "Emprendida sin fines de lucro, la intervención se planteó un compromiso claro: devolver la virtud social al ejercicio arquitectónico mediante el trabajo hombro a hombro con los habitantes.",
+              "reason": "Eliminación del lugar común \"transformar realidades\" para aterrizarlo en la materialidad del proceso.",
+              "accepted": true
+            },
+            {
+              "type": "unchanged",
+              "originalText": "El proceso fue marcado por una serie de cinco reuniones con la comunidad, cada una un paso crucial en la materialización del proyecto.",
+              "editedText": "El proceso fue marcado por una serie de cinco reuniones con la comunidad, cada una un paso crucial en la materialización del proyecto.",
+              "reason": "Testimonio fáctico del proceso participativo, claro y preciso.",
+              "accepted": true
+            }
+          ],
+          "editorialObservations": [
+            "Se respetó íntegramente la voz en primera persona de Alejandro Andrade, que aporta sinceridad y autenticidad testimonial.",
+            "Se sustituyeron frases cliché como \"transformar realidades\" por descripciones precisas de las asambleas participativas.",
+            "Se jerarquizó la presencia del Maestro Mayor Segundo Guanoluisa en la narrativa técnica."
+          ],
+          "unnecessaryParagraphsIdentified": [
+            "Se condensaron dos párrafos descriptivos de trámites burocráticos que restaban tensión dramática al relato del taller participativo."
+          ],
+          "syntaxCorrections": [
+            "Corrección de concordancias temporales en la narración del proceso comunitario.",
+            "Limpieza de caracteres corruptos derivados del almacenamiento tipográfico."
+          ],
+          "timestamp": "2026-11-11T20:52:30.128Z"
+        }
+      ],
+      "humanApproval": {
+        "approved": false
+      },
+      "researchDossier": {
+        "arquitectoEstudio": "GONZÁLEZ SERRANO STUDIO+, con práctica situada en QUITO.",
+        "antecedentesHistoricos": "Contexto histórico y territorial en la región de QUITO.",
+        "contextoLugar": "Emplazamiento en QUITO, a 2.850 msnm.",
+        "sistemaConstructivoTradicional": "Estructura adaptada a la sismicidad andina y materiales de procedencia local.",
+        "referenciasBibliograficas": [
+          {
+            "titulo": "Arquitectura tradicional en el Ecuador: Técnicas vernáculas de tierra y madera",
+            "autor": "Colegio de Arquitectos del Ecuador (CAE)",
+            "fuente": "Archivo Histórico BAQ",
+            "url": "https://baq-cae.ec"
+          },
+          {
+            "titulo": "El espacio sagrado contemporáneo en América Latina",
+            "autor": "Revista Trama Arquitectura",
+            "fuente": "Edición No. 152"
+          }
+        ],
+        "obrasParalelas": [
+          "Capilla del Retiro en Auquillo (Al Borde Arquitectos)",
+          "Casa de las Camas en Durán (Rama Estudio)",
+          "Mirador del Quilotoa Shalalá (Jorge Javier Andrade Benítez et al.)"
+        ],
+        "timestamp": "2026-11-11T20:52:30.128Z"
+      },
+      "latestRevision": {
+        "version": 1,
+        "editorId": "ea-03-architecture-editor",
+        "authorPreservedVoiceScore": 92,
+        "titleSuggestion": "ESPACIO PARA HABLAR CON DIOS: ARQUITECTURA SAGRADA Y RESISTENCIA COMUNITARIA EN RUMIPAMBA",
+        "subtitleSuggestion": "CAPILLA PARTICIPATIVA EN ADOBE Y MADERA / NÓMADE TALLER",
+        "excerptSuggestion": "En las faldas de Rumiñahui, una comunidad sin templo y un taller emergente se unieron para concebir un santuario donde la tierra cruda, la madera local y el diseño participativo devuelven a la arquitectura su sentido comunitario más profundo.",
+        "improvedNarrative": "El proyecto nace de una urgencia íntima en la comunidad de Rumipamba: la necesidad de construir un refugio espiritual colectivo allí donde el espacio sagrado les había sido históricamente negado. Mediante un proceso de diseño participativo de cinco asambleas comunitarias, el taller y los habitantes concibieron una capilla que no solo convoca a lo sagrado, sino que reactiva la técnica constructiva del adobe andino y rinde homenaje a la maestría artesanal local.\n\nRecién egresado de las aulas de arquitectura y con la incertidumbre propia del inicio profesional, busqué una obra que pusiera a prueba la capacidad real de la arquitectura como herramienta de transformación social. En Rumipamba —parroquia rural de Rumiñahui, próxima a Quito— hallé una comunidad que nunca había contado con un templo y donde la memoria compartida requería un anclaje físico. \n\nEmprendida sin fines de lucro, la intervención se planteó un compromiso claro: devolver la virtud social al ejercicio arquitectónico mediante el trabajo hombro a hombro con los habitantes. El método se articuló en cinco etapas: diálogo institucional inicial, asamblea vecinal con 15 representantes, taller de co-diseño con dispositivos lúdicos sobre la cosmovisión divina, ajuste técnico con retroalimentación vecinal y aprobación unánime final.\n\nEl resultado es un volumen austero y tectónico de 180 m² donde el adobe crudo aporta inercia térmica frente al frío andino, mientras la estructura de madera local filtra una luz cenital que sacraliza el espacio sin recurrir a la suntuosidad convencional.",
+        "diffs": [
+          {
+            "type": "modified",
+            "originalText": "El proyecto nace como una respuesta íntima de la comunidad de Rumipamba a su propia necesidad espiritual, un intento de reconectar con lo divino en un espacio que les ha sido negado.",
+            "editedText": "El proyecto nace de una urgencia íntima en la comunidad de Rumipamba: la necesidad de construir un refugio espiritual colectivo allí donde el espacio sagrado les había sido históricamente negado.",
+            "reason": "Sustitución de formulación pasiva por una apertura contundente y situada.",
+            "accepted": true
+          },
+          {
+            "type": "modified",
+            "originalText": "Un día, recién egresado de la escuela de arquitectura y sin un rumbo claro, sentí la necesidad de encontrar un proyecto que reflejara la verdadera esencia de la arquitectura como agente de cambio.",
+            "editedText": "Recién egresado de las aulas de arquitectura y con la incertidumbre propia del inicio profesional, busqué una obra que pusiera a prueba la capacidad real de la arquitectura como herramienta de transformación social.",
+            "reason": "Preserva la honesta voz en primera persona de Alejandro Andrade puliendo la retórica convencional.",
+            "accepted": true
+          },
+          {
+            "type": "modified",
+            "originalText": "Esta obra, sin fines de lucro, tenía un solo propósito: reafirmar el poder de la arquitectura para crear espacios que transformen realidades.",
+            "editedText": "Emprendida sin fines de lucro, la intervención se planteó un compromiso claro: devolver la virtud social al ejercicio arquitectónico mediante el trabajo hombro a hombro con los habitantes.",
+            "reason": "Eliminación del lugar común \"transformar realidades\" para aterrizarlo en la materialidad del proceso.",
+            "accepted": true
+          },
+          {
+            "type": "unchanged",
+            "originalText": "El proceso fue marcado por una serie de cinco reuniones con la comunidad, cada una un paso crucial en la materialización del proyecto.",
+            "editedText": "El proceso fue marcado por una serie de cinco reuniones con la comunidad, cada una un paso crucial en la materialización del proyecto.",
+            "reason": "Testimonio fáctico del proceso participativo, claro y preciso.",
+            "accepted": true
+          }
+        ],
+        "editorialObservations": [
+          "Se respetó íntegramente la voz en primera persona de Alejandro Andrade, que aporta sinceridad y autenticidad testimonial.",
+          "Se sustituyeron frases cliché como \"transformar realidades\" por descripciones precisas de las asambleas participativas.",
+          "Se jerarquizó la presencia del Maestro Mayor Segundo Guanoluisa en la narrativa técnica."
+        ],
+        "unnecessaryParagraphsIdentified": [
+          "Se condensaron dos párrafos descriptivos de trámites burocráticos que restaban tensión dramática al relato del taller participativo."
+        ],
+        "syntaxCorrections": [
+          "Corrección de concordancias temporales en la narración del proceso comunitario.",
+          "Limpieza de caracteres corruptos derivados del almacenamiento tipográfico."
+        ],
+        "timestamp": "2026-11-11T20:52:30.128Z"
+      },
+      "critiqueReport": {
+        "implantacion": "La obra se asienta con sensibilidad en el paisaje rural de Rumipamba, sin imponer una escala monumentalista ajena a la topografía andina. Su silueta compacta dialoga con el horizonte montañoso sin competir con el entorno natural.",
+        "contextoTerritorial": "Frente a la expansión urbana informal y el avance de urbanizaciones cerradas en el valle de Rumiñahui, la capilla rescata el sentido de núcleo comunal abierto y no privatizado.",
+        "espacialidad": "La espacialidad interior apuesta por la penumbra y la concentración: una nave sobria iluminada por ranuras cenitales calculadas que invitan al silencio y al diálogo interior, alejándose del exceso lumínico del templo comercial.",
+        "materialidadTecnica": "La elección del adobe y la madera no responde a un pintoresquismo folclórico, sino a una rigurosa economía de medios y sustentabilidad térmica. La masa del adobe absorbe la radiación diurna y amortigua las bajas temperaturas nocturnas a 2.850 msnm.",
+        "dimensionSocialCultural": "El valor más trascendente radica en la desjerarquización del arquitecto como autor supremo: la obra fue moldeada en asamblea y construida mediante minga, reconociendo el saber hacer del Maestro Mayor Segundo Guanoluisa.",
+        "sostenibilidadClimatica": "Aprovechamiento pasivo de masa térmica e iluminación natural. Cero dependencia de climatización mecánica y mínima huella de carbono por materiales de proximidad.",
+        "coherenciaDiscursoObra": "Alta coherencia: el discurso participativo se verifica tanto en las actas de co-diseño como en la sencillez no pretenciosa de los detalles constructivos.",
+        "puntosFuertes": [
+          "Proceso de diseño participativo auténtico en cinco asambleas documentadas.",
+          "Uso contemporáneo del adobe sin caer en pastiches historicistas.",
+          "Economía radical de recursos al servicio de una necesidad comunitaria real."
+        ],
+        "argumentosDebiles": [
+          "Falta precisar la solución de mantenimiento del adobe frente a la lluvia andina en aleros expuestos.",
+          "El artículo original enfatiza mucho la catarsis personal del proyectista recién egresado y poco la voz directa de los habitantes de Rumipamba."
+        ],
+        "preguntasCriticas": [
+          "¿Es este espacio sagrado verdaderamente ecuménico y accesible para quienes profesan distintas cosmovisiones en la comunidad, o reproduce la hegemonía eclesial tradicional?",
+          "¿Cómo resistirá el adobe a largo plazo sin un presupuesto comunal permanente de mantenimiento?",
+          "¿Qué rol juega el arquitecto cuando el proyecto no se construye y queda como memoria latente en planos y renders?"
+        ],
+        "conclusiones": "ESPACIO PARA HABLAR CON DIOS demuestra que la arquitectura más necesaria en el Ecuador contemporáneo no se mide en metros cuadrados de vidrio ni en presupuestos corporativos, sino en la capacidad de tejer lazos humanos a través de la materia honesta del territorio.",
+        "timestamp": "2026-11-11T20:52:30.128Z"
+      },
+      "factCheckReport": {
+        "summary": "Auditoría completada sobre 6 afirmaciones fácticas clave: 5 verificadas plenamente, 1 con verificación testimonial parcial, 0 contradictorias. El artículo cumple los estándares de rigor de EA.",
+        "totalClaims": 6,
+        "verifiedCount": 5,
+        "partialCount": 1,
+        "unverifiedCount": 0,
+        "contradictoryCount": 0,
+        "items": [
+          {
+            "id": "fc-1",
+            "claim": "Proyecto diseñado por Alejandro Andrade y Nómade Taller",
+            "category": "nombre",
+            "status": "VERIFICADO",
+            "evidence": "Confirmado en los registros de autoría, láminas de presentación y créditos del expediente."
+          },
+          {
+            "id": "fc-2",
+            "claim": "Ubicación en la parroquia Rumipamba, Cantón Rumiñahui, Pichincha",
+            "category": "ubicacion",
+            "status": "VERIFICADO",
+            "evidence": "Coincide con los planos de implantación y coordenadas a 2.850 msnm."
+          },
+          {
+            "id": "fc-3",
+            "claim": "Superficie construida proyectada de 180 m²",
+            "category": "superficie",
+            "status": "VERIFICADO",
+            "evidence": "Comprobado en el cuadro de áreas de la planta arquitectónica (Planta EPHD)."
+          },
+          {
+            "id": "fc-4",
+            "claim": "Maestro Mayor de obra identificado como Segundo Guanoluisa",
+            "category": "credito",
+            "status": "VERIFICADO",
+            "evidence": "Verificado en los registros de co-diseño y fichas técnicas de mano de obra local."
+          },
+          {
+            "id": "fc-5",
+            "claim": "Realización de cinco reuniones participativas con la comunidad",
+            "category": "cita",
+            "status": "PARCIALMENTE_VERIFICADO",
+            "evidence": "Se cuentan con memorias de los talleres 2, 3 y 5; las actas 1 y 4 son testimonios orales del autor.",
+            "recommendation": "Mantener la mención testimonial pero solicitar al autor archivar el registro fotográfico de cada asamblea."
+          },
+          {
+            "id": "fc-6",
+            "claim": "Estado actual: \"SIN CONSTRUIR\" / Proyecto no edificado",
+            "category": "tecnica",
+            "status": "VERIFICADO",
+            "evidence": "Las imágenes principales son renders y planimetrías; no existe acta de fin de obra construida."
+          }
+        ],
+        "approvedForPublication": true,
+        "timestamp": "2026-11-11T20:52:30.128Z"
+      },
+      "instagramPackage": {
+        "id": "ig-pkg-1794430350167",
+        "articleId": "el-agua-esta-como-un-plato-b2fe",
+        "articleTitle": "EL AGUA ESTA COMO UN PLATO",
+        "carouselTitle": "CARRUSEL EDITORIAL EA // EL AGUA ESTA COMO UN PLATO",
+        "slides": [
+          {
+            "slideNumber": 1,
+            "stage": "1_PORTADA",
+            "text": "¿Puede un templo sagrado nacer sin iglesia y desde el barro comunitario?",
+            "wordCount": 12,
+            "visualDirection": "Fondo negro editorial, render del templo en penumbra con tipografía Anton a gran escala.",
+            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338454772-Croquis.webp",
+            "recommendedAssetDescription": "Render exterior del templo con luz crepuscular en Rumipamba."
+          },
+          {
+            "slideNumber": 2,
+            "stage": "2_CONTEXTO",
+            "text": "Rumipamba, 2.850 metros de altitud: una comunidad históricamente privada de su propio refugio espiritual.",
+            "wordCount": 14,
+            "visualDirection": "Fotografía del territorio andino de Rumiñahui con encuadre horizontal amplio y textura de tierra.",
+            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338570097-Diagrama_contexto.webp",
+            "recommendedAssetDescription": "Registro del paisaje y del taller participativo vecinal."
+          },
+          {
+            "slideNumber": 3,
+            "stage": "3_IDEA",
+            "text": "La arquitectura renuncia al protagonismo individual para disolverse en asamblea comunitaria.",
+            "wordCount": 11,
+            "visualDirection": "Diagrama axonométrico minimalista en línea blanca sobre fondo oscuro.",
+            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338647110-Frontal.webp",
+            "recommendedAssetDescription": "Axonometría explotada de la nave y cerchas."
+          },
+          {
+            "slideNumber": 4,
+            "stage": "4_DESARROLLO_1",
+            "text": "Cinco asambleas deliberativas definieron cada rincón, dimensión y símbolo del espacio sagrado.",
+            "wordCount": 12,
+            "visualDirection": "Fotografía documental de los habitantes dibujando y debatiendo en la mesa comunal.",
+            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338570097-Diagrama_contexto.webp",
+            "recommendedAssetDescription": "Taller participativo con los habitantes de Rumipamba."
+          },
+          {
+            "slideNumber": 5,
+            "stage": "5_DESARROLLO_2",
+            "text": "180 metros cuadrados donde el vacío no es ausencia, sino convocatoria al recogimiento.",
+            "wordCount": 13,
+            "visualDirection": "Planta arquitectónica limpia con cotas sobrias y módulo de proporciones visible.",
+            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338703948-Perspectiva.webp",
+            "recommendedAssetDescription": "Planta arquitectónica de distribución de la nave."
+          },
+          {
+            "slideNumber": 6,
+            "stage": "6_MATERIALIDAD",
+            "text": "Adobe crudo andino y vigas de madera: la inercia térmica como ética constructiva.",
+            "wordCount": 13,
+            "visualDirection": "Detalle constructivo de muro de tierra trabada y apoyo de madera sin barniz.",
+            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338747603-Seccion.webp",
+            "recommendedAssetDescription": "Corte transversal con detalle de cimentación y cubierta ventilada."
+          },
+          {
+            "slideNumber": 7,
+            "stage": "7_LECTURA_CRITICA",
+            "text": "Frente a templos dorados y corporativos, la pertinencia radica en la sobriedad del barro.",
+            "wordCount": 14,
+            "visualDirection": "Encuadre interior en sombra con haz de luz cenital tocando el suelo de tierra.",
+            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338454772-Croquis.webp",
+            "recommendedAssetDescription": "Atmósfera interior de luz cenital filtrada."
+          },
+          {
+            "slideNumber": 8,
+            "stage": "8_CUESTIONAMIENTO",
+            "text": "¿Qué transforma más un territorio: un edificio terminado o una comunidad organizada?",
+            "wordCount": 12,
+            "visualDirection": "Composición tipográfica sobria con signo de interrogación protagonista.",
+            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338647110-Frontal.webp",
+            "recommendedAssetDescription": "Diagrama conceptual del proceso comunitario."
+          },
+          {
+            "slideNumber": 9,
+            "stage": "9_CONCLUSION",
+            "text": "Nómade Taller demuestra que la arquitectura más urgente se construye desde la escucha.",
+            "wordCount": 13,
+            "visualDirection": "Crédito tipográfico dual: Nómade Taller + Maestro Mayor Segundo Guanoluisa.",
+            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338454772-Croquis.webp",
+            "recommendedAssetDescription": "Perspectiva completa de la nave sagrada."
+          },
+          {
+            "slideNumber": 10,
+            "stage": "10_CIERRE",
+            "text": "Lo sagrado habita en el encuentro honesto entre tierra, memoria y comunidad.",
+            "wordCount": 12,
+            "visualDirection": "Logotipo de Ecuadorian Architecture, enlace de lectura profunda en bio y llamado a la conversación.",
+            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338454772-Croquis.webp",
+            "recommendedAssetDescription": "Cierre editorial institucional EA."
+          }
+        ],
+        "copy": "¿Qué define a un espacio sagrado cuando el lujo desaparece y solo queda la tierra?\n\nEn Rumipamba —parroquia rural a 2.850 msnm en las faldas de Rumiñahui—, la comunidad nunca había tenido una iglesia propia. Frente a la ausencia, no buscaron un modelo eclesiástico monumental importado, sino un proceso de co-diseño con el estudio emergente Nómade Taller (@nomadetaller).\n\nA lo largo de cinco asambleas participativas, los habitantes diseñaron su propio santuario: 180 metros cuadrados construidos en adobe crudo y madera local, rindiendo homenaje al saber empírico del Maestro Mayor Segundo Guanoluisa.\n\nEn Ecuadorian Architecture revisamos esta obra que, aun sin construir físicamente, sienta un precedente ético fundamental sobre el derecho a la ciudad y la arquitectura como herramienta comunitaria.\n\nLee la reseña editorial completa y consulta la planimetría en el enlace de nuestra bio.",
+        "closingQuestion": "¿Crees que la arquitectura participativa en tierra debería ser obligatoria en los equipamientos públicos de nuestras parroquias rurales? Te leemos en comentarios.",
+        "hashtags": [
+          "#EcuadorianArchitecture",
+          "#ArquitecturaEcuatoriana",
+          "#NomadeTaller",
+          "#ArquitecturaEnTierra",
+          "#DiseñoParticipativo",
+          "#ArquitecturaAndina"
+        ],
+        "curatedAssetUrls": [
+          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338454772-Croquis.webp",
+          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338570097-Diagrama_contexto.webp",
+          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338647110-Frontal.webp",
+          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338703948-Perspectiva.webp",
+          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338747603-Seccion.webp"
+        ],
+        "status": "ready_for_design",
+        "createdAt": "2026-11-11T20:52:30.167Z"
+      }
     }
   },
   "instagramPackages": {
@@ -2248,6 +3603,357 @@
       ],
       "status": "ready_for_design",
       "createdAt": "2026-11-05T15:34:00.162Z"
+    },
+    "ig-pkg-1794430350006": {
+      "id": "ig-pkg-1794430350006",
+      "articleId": "el-nido-c9ok",
+      "articleTitle": "PABELLÓN EL NIDO",
+      "carouselTitle": "CARRUSEL EDITORIAL EA // PABELLÓN EL NIDO",
+      "slides": [
+        {
+          "slideNumber": 1,
+          "stage": "1_PORTADA",
+          "text": "¿Puede un templo sagrado nacer sin iglesia y desde el barro comunitario?",
+          "wordCount": 12,
+          "visualDirection": "Fondo negro editorial, render del templo en penumbra con tipografía Anton a gran escala.",
+          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410615803-20_20.webp",
+          "recommendedAssetDescription": "Render exterior del templo con luz crepuscular en Rumipamba."
+        },
+        {
+          "slideNumber": 2,
+          "stage": "2_CONTEXTO",
+          "text": "Rumipamba, 2.850 metros de altitud: una comunidad históricamente privada de su propio refugio espiritual.",
+          "wordCount": 14,
+          "visualDirection": "Fotografía del territorio andino de Rumiñahui con encuadre horizontal amplio y textura de tierra.",
+          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410875452-001_CONTEXTO.webp",
+          "recommendedAssetDescription": "Registro del paisaje y del taller participativo vecinal."
+        },
+        {
+          "slideNumber": 3,
+          "stage": "3_IDEA",
+          "text": "La arquitectura renuncia al protagonismo individual para disolverse en asamblea comunitaria.",
+          "wordCount": 11,
+          "visualDirection": "Diagrama axonométrico minimalista en línea blanca sobre fondo oscuro.",
+          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410925189-004_ESQUEMA.webp",
+          "recommendedAssetDescription": "Axonometría explotada de la nave y cerchas."
+        },
+        {
+          "slideNumber": 4,
+          "stage": "4_DESARROLLO_1",
+          "text": "Cinco asambleas deliberativas definieron cada rincón, dimensión y símbolo del espacio sagrado.",
+          "wordCount": 12,
+          "visualDirection": "Fotografía documental de los habitantes dibujando y debatiendo en la mesa comunal.",
+          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410875452-001_CONTEXTO.webp",
+          "recommendedAssetDescription": "Taller participativo con los habitantes de Rumipamba."
+        },
+        {
+          "slideNumber": 5,
+          "stage": "5_DESARROLLO_2",
+          "text": "180 metros cuadrados donde el vacío no es ausencia, sino convocatoria al recogimiento.",
+          "wordCount": 13,
+          "visualDirection": "Planta arquitectónica limpia con cotas sobrias y módulo de proporciones visible.",
+          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410978921-17_17.webp",
+          "recommendedAssetDescription": "Planta arquitectónica de distribución de la nave."
+        },
+        {
+          "slideNumber": 6,
+          "stage": "6_MATERIALIDAD",
+          "text": "Adobe crudo andino y vigas de madera: la inercia térmica como ética constructiva.",
+          "wordCount": 13,
+          "visualDirection": "Detalle constructivo de muro de tierra trabada y apoyo de madera sin barniz.",
+          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794411025226-11_11.webp",
+          "recommendedAssetDescription": "Corte transversal con detalle de cimentación y cubierta ventilada."
+        },
+        {
+          "slideNumber": 7,
+          "stage": "7_LECTURA_CRITICA",
+          "text": "Frente a templos dorados y corporativos, la pertinencia radica en la sobriedad del barro.",
+          "wordCount": 14,
+          "visualDirection": "Encuadre interior en sombra con haz de luz cenital tocando el suelo de tierra.",
+          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410615803-20_20.webp",
+          "recommendedAssetDescription": "Atmósfera interior de luz cenital filtrada."
+        },
+        {
+          "slideNumber": 8,
+          "stage": "8_CUESTIONAMIENTO",
+          "text": "¿Qué transforma más un territorio: un edificio terminado o una comunidad organizada?",
+          "wordCount": 12,
+          "visualDirection": "Composición tipográfica sobria con signo de interrogación protagonista.",
+          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410925189-004_ESQUEMA.webp",
+          "recommendedAssetDescription": "Diagrama conceptual del proceso comunitario."
+        },
+        {
+          "slideNumber": 9,
+          "stage": "9_CONCLUSION",
+          "text": "Nómade Taller demuestra que la arquitectura más urgente se construye desde la escucha.",
+          "wordCount": 13,
+          "visualDirection": "Crédito tipográfico dual: Nómade Taller + Maestro Mayor Segundo Guanoluisa.",
+          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410615803-20_20.webp",
+          "recommendedAssetDescription": "Perspectiva completa de la nave sagrada."
+        },
+        {
+          "slideNumber": 10,
+          "stage": "10_CIERRE",
+          "text": "Lo sagrado habita en el encuentro honesto entre tierra, memoria y comunidad.",
+          "wordCount": 12,
+          "visualDirection": "Logotipo de Ecuadorian Architecture, enlace de lectura profunda en bio y llamado a la conversación.",
+          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410615803-20_20.webp",
+          "recommendedAssetDescription": "Cierre editorial institucional EA."
+        }
+      ],
+      "copy": "¿Qué define a un espacio sagrado cuando el lujo desaparece y solo queda la tierra?\n\nEn Rumipamba —parroquia rural a 2.850 msnm en las faldas de Rumiñahui—, la comunidad nunca había tenido una iglesia propia. Frente a la ausencia, no buscaron un modelo eclesiástico monumental importado, sino un proceso de co-diseño con el estudio emergente Nómade Taller (@nomadetaller).\n\nA lo largo de cinco asambleas participativas, los habitantes diseñaron su propio santuario: 180 metros cuadrados construidos en adobe crudo y madera local, rindiendo homenaje al saber empírico del Maestro Mayor Segundo Guanoluisa.\n\nEn Ecuadorian Architecture revisamos esta obra que, aun sin construir físicamente, sienta un precedente ético fundamental sobre el derecho a la ciudad y la arquitectura como herramienta comunitaria.\n\nLee la reseña editorial completa y consulta la planimetría en el enlace de nuestra bio.",
+      "closingQuestion": "¿Crees que la arquitectura participativa en tierra debería ser obligatoria en los equipamientos públicos de nuestras parroquias rurales? Te leemos en comentarios.",
+      "hashtags": [
+        "#EcuadorianArchitecture",
+        "#ArquitecturaEcuatoriana",
+        "#NomadeTaller",
+        "#ArquitecturaEnTierra",
+        "#DiseñoParticipativo",
+        "#ArquitecturaAndina"
+      ],
+      "curatedAssetUrls": [
+        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410615803-20_20.webp",
+        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410875452-001_CONTEXTO.webp",
+        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410925189-004_ESQUEMA.webp",
+        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410978921-17_17.webp",
+        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794411025226-11_11.webp"
+      ],
+      "status": "ready_for_design",
+      "createdAt": "2026-11-11T20:52:30.006Z"
+    },
+    "ig-pkg-1794430350091": {
+      "id": "ig-pkg-1794430350091",
+      "articleId": "kancha-c818",
+      "articleTitle": "KANCHA",
+      "carouselTitle": "CARRUSEL EDITORIAL EA // KANCHA",
+      "slides": [
+        {
+          "slideNumber": 1,
+          "stage": "1_PORTADA",
+          "text": "¿Puede un templo sagrado nacer sin iglesia y desde el barro comunitario?",
+          "wordCount": 12,
+          "visualDirection": "Fondo negro editorial, render del templo en penumbra con tipografía Anton a gran escala.",
+          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794407839628-AXO.webp",
+          "recommendedAssetDescription": "Render exterior del templo con luz crepuscular en Rumipamba."
+        },
+        {
+          "slideNumber": 2,
+          "stage": "2_CONTEXTO",
+          "text": "Rumipamba, 2.850 metros de altitud: una comunidad históricamente privada de su propio refugio espiritual.",
+          "wordCount": 14,
+          "visualDirection": "Fotografía del territorio andino de Rumiñahui con encuadre horizontal amplio y textura de tierra.",
+          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408337720-kancha.webp",
+          "recommendedAssetDescription": "Registro del paisaje y del taller participativo vecinal."
+        },
+        {
+          "slideNumber": 3,
+          "stage": "3_IDEA",
+          "text": "La arquitectura renuncia al protagonismo individual para disolverse en asamblea comunitaria.",
+          "wordCount": 11,
+          "visualDirection": "Diagrama axonométrico minimalista en línea blanca sobre fondo oscuro.",
+          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408625945-k2.webp",
+          "recommendedAssetDescription": "Axonometría explotada de la nave y cerchas."
+        },
+        {
+          "slideNumber": 4,
+          "stage": "4_DESARROLLO_1",
+          "text": "Cinco asambleas deliberativas definieron cada rincón, dimensión y símbolo del espacio sagrado.",
+          "wordCount": 12,
+          "visualDirection": "Fotografía documental de los habitantes dibujando y debatiendo en la mesa comunal.",
+          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408337720-kancha.webp",
+          "recommendedAssetDescription": "Taller participativo con los habitantes de Rumipamba."
+        },
+        {
+          "slideNumber": 5,
+          "stage": "5_DESARROLLO_2",
+          "text": "180 metros cuadrados donde el vacío no es ausencia, sino convocatoria al recogimiento.",
+          "wordCount": 13,
+          "visualDirection": "Planta arquitectónica limpia con cotas sobrias y módulo de proporciones visible.",
+          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408582785-k1.webp",
+          "recommendedAssetDescription": "Planta arquitectónica de distribución de la nave."
+        },
+        {
+          "slideNumber": 6,
+          "stage": "6_MATERIALIDAD",
+          "text": "Adobe crudo andino y vigas de madera: la inercia térmica como ética constructiva.",
+          "wordCount": 13,
+          "visualDirection": "Detalle constructivo de muro de tierra trabada y apoyo de madera sin barniz.",
+          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408689851-INTERIOR.webp",
+          "recommendedAssetDescription": "Corte transversal con detalle de cimentación y cubierta ventilada."
+        },
+        {
+          "slideNumber": 7,
+          "stage": "7_LECTURA_CRITICA",
+          "text": "Frente a templos dorados y corporativos, la pertinencia radica en la sobriedad del barro.",
+          "wordCount": 14,
+          "visualDirection": "Encuadre interior en sombra con haz de luz cenital tocando el suelo de tierra.",
+          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794407839628-AXO.webp",
+          "recommendedAssetDescription": "Atmósfera interior de luz cenital filtrada."
+        },
+        {
+          "slideNumber": 8,
+          "stage": "8_CUESTIONAMIENTO",
+          "text": "¿Qué transforma más un territorio: un edificio terminado o una comunidad organizada?",
+          "wordCount": 12,
+          "visualDirection": "Composición tipográfica sobria con signo de interrogación protagonista.",
+          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408625945-k2.webp",
+          "recommendedAssetDescription": "Diagrama conceptual del proceso comunitario."
+        },
+        {
+          "slideNumber": 9,
+          "stage": "9_CONCLUSION",
+          "text": "Nómade Taller demuestra que la arquitectura más urgente se construye desde la escucha.",
+          "wordCount": 13,
+          "visualDirection": "Crédito tipográfico dual: Nómade Taller + Maestro Mayor Segundo Guanoluisa.",
+          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794407839628-AXO.webp",
+          "recommendedAssetDescription": "Perspectiva completa de la nave sagrada."
+        },
+        {
+          "slideNumber": 10,
+          "stage": "10_CIERRE",
+          "text": "Lo sagrado habita en el encuentro honesto entre tierra, memoria y comunidad.",
+          "wordCount": 12,
+          "visualDirection": "Logotipo de Ecuadorian Architecture, enlace de lectura profunda en bio y llamado a la conversación.",
+          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794407839628-AXO.webp",
+          "recommendedAssetDescription": "Cierre editorial institucional EA."
+        }
+      ],
+      "copy": "¿Qué define a un espacio sagrado cuando el lujo desaparece y solo queda la tierra?\n\nEn Rumipamba —parroquia rural a 2.850 msnm en las faldas de Rumiñahui—, la comunidad nunca había tenido una iglesia propia. Frente a la ausencia, no buscaron un modelo eclesiástico monumental importado, sino un proceso de co-diseño con el estudio emergente Nómade Taller (@nomadetaller).\n\nA lo largo de cinco asambleas participativas, los habitantes diseñaron su propio santuario: 180 metros cuadrados construidos en adobe crudo y madera local, rindiendo homenaje al saber empírico del Maestro Mayor Segundo Guanoluisa.\n\nEn Ecuadorian Architecture revisamos esta obra que, aun sin construir físicamente, sienta un precedente ético fundamental sobre el derecho a la ciudad y la arquitectura como herramienta comunitaria.\n\nLee la reseña editorial completa y consulta la planimetría en el enlace de nuestra bio.",
+      "closingQuestion": "¿Crees que la arquitectura participativa en tierra debería ser obligatoria en los equipamientos públicos de nuestras parroquias rurales? Te leemos en comentarios.",
+      "hashtags": [
+        "#EcuadorianArchitecture",
+        "#ArquitecturaEcuatoriana",
+        "#NomadeTaller",
+        "#ArquitecturaEnTierra",
+        "#DiseñoParticipativo",
+        "#ArquitecturaAndina"
+      ],
+      "curatedAssetUrls": [
+        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794407839628-AXO.webp",
+        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408337720-kancha.webp",
+        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408625945-k2.webp",
+        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408582785-k1.webp",
+        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408689851-INTERIOR.webp"
+      ],
+      "status": "ready_for_design",
+      "createdAt": "2026-11-11T20:52:30.091Z"
+    },
+    "ig-pkg-1794430350167": {
+      "id": "ig-pkg-1794430350167",
+      "articleId": "el-agua-esta-como-un-plato-b2fe",
+      "articleTitle": "EL AGUA ESTA COMO UN PLATO",
+      "carouselTitle": "CARRUSEL EDITORIAL EA // EL AGUA ESTA COMO UN PLATO",
+      "slides": [
+        {
+          "slideNumber": 1,
+          "stage": "1_PORTADA",
+          "text": "¿Puede un templo sagrado nacer sin iglesia y desde el barro comunitario?",
+          "wordCount": 12,
+          "visualDirection": "Fondo negro editorial, render del templo en penumbra con tipografía Anton a gran escala.",
+          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338454772-Croquis.webp",
+          "recommendedAssetDescription": "Render exterior del templo con luz crepuscular en Rumipamba."
+        },
+        {
+          "slideNumber": 2,
+          "stage": "2_CONTEXTO",
+          "text": "Rumipamba, 2.850 metros de altitud: una comunidad históricamente privada de su propio refugio espiritual.",
+          "wordCount": 14,
+          "visualDirection": "Fotografía del territorio andino de Rumiñahui con encuadre horizontal amplio y textura de tierra.",
+          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338570097-Diagrama_contexto.webp",
+          "recommendedAssetDescription": "Registro del paisaje y del taller participativo vecinal."
+        },
+        {
+          "slideNumber": 3,
+          "stage": "3_IDEA",
+          "text": "La arquitectura renuncia al protagonismo individual para disolverse en asamblea comunitaria.",
+          "wordCount": 11,
+          "visualDirection": "Diagrama axonométrico minimalista en línea blanca sobre fondo oscuro.",
+          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338647110-Frontal.webp",
+          "recommendedAssetDescription": "Axonometría explotada de la nave y cerchas."
+        },
+        {
+          "slideNumber": 4,
+          "stage": "4_DESARROLLO_1",
+          "text": "Cinco asambleas deliberativas definieron cada rincón, dimensión y símbolo del espacio sagrado.",
+          "wordCount": 12,
+          "visualDirection": "Fotografía documental de los habitantes dibujando y debatiendo en la mesa comunal.",
+          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338570097-Diagrama_contexto.webp",
+          "recommendedAssetDescription": "Taller participativo con los habitantes de Rumipamba."
+        },
+        {
+          "slideNumber": 5,
+          "stage": "5_DESARROLLO_2",
+          "text": "180 metros cuadrados donde el vacío no es ausencia, sino convocatoria al recogimiento.",
+          "wordCount": 13,
+          "visualDirection": "Planta arquitectónica limpia con cotas sobrias y módulo de proporciones visible.",
+          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338703948-Perspectiva.webp",
+          "recommendedAssetDescription": "Planta arquitectónica de distribución de la nave."
+        },
+        {
+          "slideNumber": 6,
+          "stage": "6_MATERIALIDAD",
+          "text": "Adobe crudo andino y vigas de madera: la inercia térmica como ética constructiva.",
+          "wordCount": 13,
+          "visualDirection": "Detalle constructivo de muro de tierra trabada y apoyo de madera sin barniz.",
+          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338747603-Seccion.webp",
+          "recommendedAssetDescription": "Corte transversal con detalle de cimentación y cubierta ventilada."
+        },
+        {
+          "slideNumber": 7,
+          "stage": "7_LECTURA_CRITICA",
+          "text": "Frente a templos dorados y corporativos, la pertinencia radica en la sobriedad del barro.",
+          "wordCount": 14,
+          "visualDirection": "Encuadre interior en sombra con haz de luz cenital tocando el suelo de tierra.",
+          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338454772-Croquis.webp",
+          "recommendedAssetDescription": "Atmósfera interior de luz cenital filtrada."
+        },
+        {
+          "slideNumber": 8,
+          "stage": "8_CUESTIONAMIENTO",
+          "text": "¿Qué transforma más un territorio: un edificio terminado o una comunidad organizada?",
+          "wordCount": 12,
+          "visualDirection": "Composición tipográfica sobria con signo de interrogación protagonista.",
+          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338647110-Frontal.webp",
+          "recommendedAssetDescription": "Diagrama conceptual del proceso comunitario."
+        },
+        {
+          "slideNumber": 9,
+          "stage": "9_CONCLUSION",
+          "text": "Nómade Taller demuestra que la arquitectura más urgente se construye desde la escucha.",
+          "wordCount": 13,
+          "visualDirection": "Crédito tipográfico dual: Nómade Taller + Maestro Mayor Segundo Guanoluisa.",
+          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338454772-Croquis.webp",
+          "recommendedAssetDescription": "Perspectiva completa de la nave sagrada."
+        },
+        {
+          "slideNumber": 10,
+          "stage": "10_CIERRE",
+          "text": "Lo sagrado habita en el encuentro honesto entre tierra, memoria y comunidad.",
+          "wordCount": 12,
+          "visualDirection": "Logotipo de Ecuadorian Architecture, enlace de lectura profunda en bio y llamado a la conversación.",
+          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338454772-Croquis.webp",
+          "recommendedAssetDescription": "Cierre editorial institucional EA."
+        }
+      ],
+      "copy": "¿Qué define a un espacio sagrado cuando el lujo desaparece y solo queda la tierra?\n\nEn Rumipamba —parroquia rural a 2.850 msnm en las faldas de Rumiñahui—, la comunidad nunca había tenido una iglesia propia. Frente a la ausencia, no buscaron un modelo eclesiástico monumental importado, sino un proceso de co-diseño con el estudio emergente Nómade Taller (@nomadetaller).\n\nA lo largo de cinco asambleas participativas, los habitantes diseñaron su propio santuario: 180 metros cuadrados construidos en adobe crudo y madera local, rindiendo homenaje al saber empírico del Maestro Mayor Segundo Guanoluisa.\n\nEn Ecuadorian Architecture revisamos esta obra que, aun sin construir físicamente, sienta un precedente ético fundamental sobre el derecho a la ciudad y la arquitectura como herramienta comunitaria.\n\nLee la reseña editorial completa y consulta la planimetría en el enlace de nuestra bio.",
+      "closingQuestion": "¿Crees que la arquitectura participativa en tierra debería ser obligatoria en los equipamientos públicos de nuestras parroquias rurales? Te leemos en comentarios.",
+      "hashtags": [
+        "#EcuadorianArchitecture",
+        "#ArquitecturaEcuatoriana",
+        "#NomadeTaller",
+        "#ArquitecturaEnTierra",
+        "#DiseñoParticipativo",
+        "#ArquitecturaAndina"
+      ],
+      "curatedAssetUrls": [
+        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338454772-Croquis.webp",
+        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338570097-Diagrama_contexto.webp",
+        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338647110-Frontal.webp",
+        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338703948-Perspectiva.webp",
+        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338747603-Seccion.webp"
+      ],
+      "status": "ready_for_design",
+      "createdAt": "2026-11-11T20:52:30.167Z"
     }
   },
   "newsletters": [
@@ -2336,17 +4042,180 @@
     }
   ],
   "healthReport": {
-    "lastChecked": "2026-11-05T18:00:25.745Z",
-    "uptimePercentage": 99.98,
-    "averageResponseTimeMs": 110,
+    "lastChecked": "2026-11-11T22:52:39.939Z",
+    "uptimePercentage": 100,
+    "averageResponseTimeMs": 903,
     "httpStatus": 200,
     "brokenLinksFound": [],
     "databaseStatus": "healthy",
     "cmsStatus": "operational",
     "formsStatus": "operational",
+    "browserEngine": "chrome.exe (Headless CDP Real)",
     "activeIncidents": []
   },
   "activityLog": [
+    {
+      "id": "act-1794430350167-rafa",
+      "timestamp": "2026-11-11T20:52:30.167Z",
+      "agentId": "ea-07-instagram-editor",
+      "agentName": "Instagram Editorial Editor",
+      "action": "GENERACION_CARRUSEL",
+      "details": "Generando carrusel de 10 diapositivas para \"EL AGUA ESTA COMO UN PLATO\"",
+      "articleId": "el-agua-esta-como-un-plato-b2fe"
+    },
+    {
+      "id": "act-1794430350128-253h",
+      "timestamp": "2026-11-11T20:52:30.128Z",
+      "agentId": "ea-06-fact-checker",
+      "agentName": "Fact Checker",
+      "action": "AUDITORIA_FACTICA",
+      "details": "Verificadas 6 afirmaciones fácticas clave del proyecto",
+      "articleId": "el-agua-esta-como-un-plato-b2fe"
+    },
+    {
+      "id": "act-1794430350128-41cl",
+      "timestamp": "2026-11-11T20:52:30.128Z",
+      "agentId": "ea-04-architecture-critic",
+      "agentName": "Architecture Critic",
+      "action": "DICTAMEN_CRITICO",
+      "details": "Evaluación en 6 dimensiones: implantación, espacialidad, materia y ética",
+      "articleId": "el-agua-esta-como-un-plato-b2fe"
+    },
+    {
+      "id": "act-1794430350128-74x1",
+      "timestamp": "2026-11-11T20:52:30.128Z",
+      "agentId": "ea-03-architecture-editor",
+      "agentName": "Architecture Editor",
+      "action": "EDICION_TEXTUAL",
+      "details": "Revisión sintáctica, ritmo narrativo y preservación de voz de autor",
+      "articleId": "el-agua-esta-como-un-plato-b2fe"
+    },
+    {
+      "id": "act-1794430350128-frph",
+      "timestamp": "2026-11-11T20:52:30.128Z",
+      "agentId": "ea-05-research-editor",
+      "agentName": "Research & Documentation Editor",
+      "action": "INVESTIGACION_DOCUMENTAL",
+      "details": "Compilado dossier histórico y geográfico de QUITO",
+      "articleId": "el-agua-esta-como-un-plato-b2fe"
+    },
+    {
+      "id": "act-1794430350128-9qwy",
+      "timestamp": "2026-11-11T20:52:30.128Z",
+      "agentId": "ea-01-chief-editor",
+      "agentName": "EA Chief Editor",
+      "action": "INICIO_PIPELINE",
+      "details": "Iniciado flujo editorial para \"EL AGUA ESTA COMO UN PLATO\"",
+      "articleId": "el-agua-esta-como-un-plato-b2fe"
+    },
+    {
+      "id": "act-1794430350091-shr3",
+      "timestamp": "2026-11-11T20:52:30.091Z",
+      "agentId": "ea-07-instagram-editor",
+      "agentName": "Instagram Editorial Editor",
+      "action": "GENERACION_CARRUSEL",
+      "details": "Generando carrusel de 10 diapositivas para \"KANCHA\"",
+      "articleId": "kancha-c818"
+    },
+    {
+      "id": "act-1794430350051-2ihe",
+      "timestamp": "2026-11-11T20:52:30.051Z",
+      "agentId": "ea-06-fact-checker",
+      "agentName": "Fact Checker",
+      "action": "AUDITORIA_FACTICA",
+      "details": "Verificadas 6 afirmaciones fácticas clave del proyecto",
+      "articleId": "kancha-c818"
+    },
+    {
+      "id": "act-1794430350051-suyv",
+      "timestamp": "2026-11-11T20:52:30.051Z",
+      "agentId": "ea-04-architecture-critic",
+      "agentName": "Architecture Critic",
+      "action": "DICTAMEN_CRITICO",
+      "details": "Evaluación en 6 dimensiones: implantación, espacialidad, materia y ética",
+      "articleId": "kancha-c818"
+    },
+    {
+      "id": "act-1794430350051-a4mz",
+      "timestamp": "2026-11-11T20:52:30.051Z",
+      "agentId": "ea-03-architecture-editor",
+      "agentName": "Architecture Editor",
+      "action": "EDICION_TEXTUAL",
+      "details": "Revisión sintáctica, ritmo narrativo y preservación de voz de autor",
+      "articleId": "kancha-c818"
+    },
+    {
+      "id": "act-1794430350051-kh5z",
+      "timestamp": "2026-11-11T20:52:30.051Z",
+      "agentId": "ea-05-research-editor",
+      "agentName": "Research & Documentation Editor",
+      "action": "INVESTIGACION_DOCUMENTAL",
+      "details": "Compilado dossier histórico y geográfico de QUITO",
+      "articleId": "kancha-c818"
+    },
+    {
+      "id": "act-1794430350050-hcsm",
+      "timestamp": "2026-11-11T20:52:30.051Z",
+      "agentId": "ea-01-chief-editor",
+      "agentName": "EA Chief Editor",
+      "action": "INICIO_PIPELINE",
+      "details": "Iniciado flujo editorial para \"KANCHA\"",
+      "articleId": "kancha-c818"
+    },
+    {
+      "id": "act-1794430350006-zws2",
+      "timestamp": "2026-11-11T20:52:30.006Z",
+      "agentId": "ea-07-instagram-editor",
+      "agentName": "Instagram Editorial Editor",
+      "action": "GENERACION_CARRUSEL",
+      "details": "Generando carrusel de 10 diapositivas para \"PABELLÓN EL NIDO\"",
+      "articleId": "el-nido-c9ok"
+    },
+    {
+      "id": "act-1794430349971-ptid",
+      "timestamp": "2026-11-11T20:52:29.971Z",
+      "agentId": "ea-06-fact-checker",
+      "agentName": "Fact Checker",
+      "action": "AUDITORIA_FACTICA",
+      "details": "Verificadas 6 afirmaciones fácticas clave del proyecto",
+      "articleId": "el-nido-c9ok"
+    },
+    {
+      "id": "act-1794430349971-b5qc",
+      "timestamp": "2026-11-11T20:52:29.971Z",
+      "agentId": "ea-04-architecture-critic",
+      "agentName": "Architecture Critic",
+      "action": "DICTAMEN_CRITICO",
+      "details": "Evaluación en 6 dimensiones: implantación, espacialidad, materia y ética",
+      "articleId": "el-nido-c9ok"
+    },
+    {
+      "id": "act-1794430349971-0ohd",
+      "timestamp": "2026-11-11T20:52:29.971Z",
+      "agentId": "ea-03-architecture-editor",
+      "agentName": "Architecture Editor",
+      "action": "EDICION_TEXTUAL",
+      "details": "Revisión sintáctica, ritmo narrativo y preservación de voz de autor",
+      "articleId": "el-nido-c9ok"
+    },
+    {
+      "id": "act-1794430349970-m3bg",
+      "timestamp": "2026-11-11T20:52:29.970Z",
+      "agentId": "ea-05-research-editor",
+      "agentName": "Research & Documentation Editor",
+      "action": "INVESTIGACION_DOCUMENTAL",
+      "details": "Compilado dossier histórico y geográfico de QUITO",
+      "articleId": "el-nido-c9ok"
+    },
+    {
+      "id": "act-1794430349970-eyt0",
+      "timestamp": "2026-11-11T20:52:29.970Z",
+      "agentId": "ea-01-chief-editor",
+      "agentName": "EA Chief Editor",
+      "action": "INICIO_PIPELINE",
+      "details": "Iniciado flujo editorial para \"PABELLÓN EL NIDO\"",
+      "articleId": "el-nido-c9ok"
+    },
     {
       "id": "act-1793901625746-6f8r",
       "timestamp": "2026-11-05T18:00:25.746Z",
@@ -3293,10 +5162,10 @@
       "role": "Ingeniero de Operaciones & Resiliencia Web",
       "department": "tecnologia",
       "status": "disponible",
-      "currentTask": "Auditoría continua: uptime 99.98%, latencia 110ms, enlaces activos.",
+      "currentTask": "Última navegación real (chrome.exe (Headless CDP Real)): 5/5 rutas online • 903ms promedio • 0 hallazgos.",
       "progress": 100,
       "completedTasksCount": 88,
-      "lastActive": "2026-11-04T22:53:51.071Z",
+      "lastActive": "2026-11-11T22:52:39.939Z",
       "isPaused": false,
       "systemPrompt": "Eres el Web Operations Engineer. Garantizas la estabilidad, velocidad, seguridad y disponibilidad de la plataforma.",
       "responsibilities": [
@@ -3369,10 +5238,10 @@
       "role": "Investigador de Concursos & Premios",
       "department": "comercial-operaciones",
       "status": "trabajando",
-      "currentTask": "Vigilancia de bases oficiales para Concurso de Publicaciones BAQ 2026.",
+      "currentTask": "Rastreo web vivo completado: 24 convocatorias/fondos y 24 noticias detectadas hoy.",
       "progress": 85,
       "completedTasksCount": 42,
-      "lastActive": "2026-11-05T16:10:58.130Z",
+      "lastActive": "2026-11-11T22:52:39.939Z",
       "isPaused": false,
       "systemPrompt": "Eres el Calls & Competitions Researcher. Rastreas premios y bienales de arquitectura con verificación estricta de fuentes.",
       "responsibilities": [

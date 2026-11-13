@@ -4,14 +4,75 @@
     "website": "https://ecuadorianarch.com",
     "description": "Catálogo abierto estructurado para agentes de inteligencia artificial y motores generativos de búsqueda.",
     "canonicalKeyword": "Arquitectura Ecuatoriana",
-    "generatedAt": "2026-11-11T19:59:04.119Z",
-    "totalProjects": 4,
-    "totalTerritorios": 0,
+    "generatedAt": "2026-11-13T16:07:21.331Z",
+    "totalProjects": 7,
+    "totalTerritorios": 1,
     "totalAcademia": 0,
-    "totalAuthors": 11,
+    "totalAuthors": 18,
     "license": "Información pública para citación con atribución a Ecuadorian Architecture (https://ecuadorianarch.com)"
   },
   "projects": [
+    {
+      "id": "el-nido-c9ok",
+      "slug": "el-nido",
+      "url": "https://ecuadorianarch.com/proyectos/el-nido",
+      "title": "PABELLÓN EL NIDO",
+      "subtitle": "OBRA EN CONSTRUCCIÓN",
+      "studios": [
+        "CRISTINA CORREA"
+      ],
+      "location": "QUITO",
+      "year": "2026",
+      "category": "Arquitectura Efímera",
+      "area": "40 m²",
+      "photographer": "",
+      "critic": "Alejandro Andrade",
+      "summary": "A veces, para devolverle la vida a una plaza, basta con interrumpir su paso habitual. Descubre cómo cinco árboles, módulos de madera y un gesto amarillo convirtieron un cruce cualquiera en El Nido: un espacio para el juego, la pausa y el encuentro barrial.",
+      "heroImage": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410615803-20_20.webp",
+      "factualAnswer": "PABELLÓN EL NIDO es una obra destacada de arquitectura ecuatoriana (Arquitectura Efímera) diseñada por CRISTINA CORREA en QUITO (2026). Documentada críticamente en Ecuadorian Architecture (https://ecuadorianarch.com/proyectos/el-nido)."
+    },
+    {
+      "id": "kancha-c818",
+      "slug": "pabellón-kancha",
+      "url": "https://ecuadorianarch.com/proyectos/pabellón-kancha",
+      "title": "KANCHA",
+      "subtitle": "OBRA EN CONSTRUCCIÓN",
+      "studios": [
+        "PIERRE BERRÚ - TALLER DE ARQUITECTURA",
+        "IGNACIO DE TERESA FERNÁNDEZ-CASAS",
+        "ALEJANDRO JESÚS GONZÁLEZ CRUZ",
+        "ENRIQUE ALEJANDRO MORA ALVARADO",
+        "JOSÉ ANDRÉS AGUIRRE DÉLEG"
+      ],
+      "location": "QUITO",
+      "year": "2026",
+      "category": "Arquitectura Efímera",
+      "area": "40 m²",
+      "photographer": "",
+      "critic": "Alejandro Andrade",
+      "summary": "Kancha dialoga entre el legado inca y el patio colonial: casas para vivir, rayar sus muros y anclar la historia en roca sin pulir.",
+      "heroImage": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794407839628-AXO.webp",
+      "factualAnswer": "KANCHA es una obra destacada de arquitectura ecuatoriana (Arquitectura Efímera) diseñada por PIERRE BERRÚ - TALLER DE ARQUITECTURA + IGNACIO DE TERESA FERNÁNDEZ-CASAS + ALEJANDRO JESÚS GONZÁLEZ CRUZ + ENRIQUE ALEJANDRO MORA ALVARADO + JOSÉ ANDRÉS AGUIRRE DÉLEG en QUITO (2026). Documentada críticamente en Ecuadorian Architecture (https://ecuadorianarch.com/proyectos/pabellón-kancha)."
+    },
+    {
+      "id": "el-agua-esta-como-un-plato-b2fe",
+      "slug": "el-agua-esta-como-un-plato",
+      "url": "https://ecuadorianarch.com/proyectos/el-agua-esta-como-un-plato",
+      "title": "EL AGUA ESTA COMO UN PLATO",
+      "subtitle": "OBRA SIN CONSTRUIR",
+      "studios": [
+        "GONZÁLEZ SERRANO STUDIO+"
+      ],
+      "location": "QUITO",
+      "year": "2026",
+      "category": "Arquitectura Efímera",
+      "area": "40 m²",
+      "photographer": "",
+      "critic": "Alejandro Andrade",
+      "summary": "Una plaza inclinada en La Alameda: acerca el agua al cuerpo y se ilumina de noche para volver a habitar el parque con nuevos ojos.",
+      "heroImage": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338138696-Aerea_lejos_v2.webp",
+      "factualAnswer": "EL AGUA ESTA COMO UN PLATO es una obra destacada de arquitectura ecuatoriana (Arquitectura Efímera) diseñada por GONZÁLEZ SERRANO STUDIO+ en QUITO (2026). Documentada críticamente en Ecuadorian Architecture (https://ecuadorianarch.com/proyectos/el-agua-esta-como-un-plato)."
+    },
     {
       "id": "vigilia-3ovi",
       "slug": "pabellon-vigilia",
@@ -24,7 +85,7 @@
       "location": "QUITO",
       "year": "2026",
       "category": "Arquitectura Efímera",
-      "area": "40 m²",
+      "area": "40 m��",
       "photographer": "",
       "critic": "Alejandro Andrade",
       "summary": "Luz y memoria en el espacio público: un umbral poroso en el Carmen Alto que nace desde la esperanza para dar voz colectiva frente a la violencia.",
@@ -85,14 +146,88 @@
       "materials": "Adobe y Madera ",
       "photographer": "",
       "critic": "REDACCIÓN CRÍTICA EA",
-      "summary": "El proyecto nace como una respuesta íntima de la comunidad de Rumipamba a su propia necesidad espiritual, un intento de reconectar con lo divino en un espacio que les ha sido negado. A través de un proceso de diseño participativo, en el que toda la comunidad fue protagonista, se concibió un espacio que no solo uniera a las personas con lo sagrado, sino que también revitalizara técnicas ancestrales, honrando la maestría local en un acto de revalorización cultural.\n",
+      "summary": "El proyecto nace como una respuesta íntima de la comunidad de Rumipamba a su propia necesidad espiritual, un intento de reconectar con lo divino en un espacio que les ha sido negado. A través de un proceso de diseño participativo, en el que toda la comunidad fue protagonista, se concibió un espacio que no solo uniera a las personas con lo sagrado, sino que también revitalizara técnicas ancestrales, honrando la maestría local en un acto de revalorización cultural.",
       "heroImage": "/images/uploads/1793233204996-RENDER_1__3_.webp",
       "factualAnswer": "ESPACIO PARA HABLAR CON DIOS es una obra destacada de arquitectura ecuatoriana (Equipamiento Cultural) diseñada por NOMADE TALLER en QUITO (2024). Documentada críticamente en Ecuadorian Architecture (https://ecuadorianarch.com/proyectos/espacio-para-hablar-con-dios)."
     }
   ],
-  "territorios": [],
+  "territorios": [
+    {
+      "id": "por-que-acelerar-en-la-ciudad-no-sirve-de-nada-9gwy",
+      "slug": "por-que-acelerar-en-la-ciudad-no-sirve-de-nada",
+      "url": "https://ecuadorianarch.com/territorios/por-que-acelerar-en-la-ciudad-no-sirve-de-nada",
+      "title": "¿POR QUÉ ACELERAR EN LA CIUDAD NO SIRVE DE NADA?",
+      "location": "CIUDAD",
+      "year": "2026",
+      "author": "CAMPO URBANO",
+      "summary": "Acelerar en la ciudad no te hace llegar más rápido; es un sesgo mental que arriesga vidas por ganar solo segundos."
+    }
+  ],
   "academia": [],
   "authors": [
+    {
+      "id": "estudio-mwc9o2pb",
+      "name": "CRISTINA CORREA",
+      "slug": "cristina-correa",
+      "url": "https://ecuadorianarch.com/estudios/cristina-correa",
+      "founder": "Arquitecto Titular",
+      "location": "Quito, Ecuador",
+      "headline": "Práctica arquitectónica contemporánea, investigación y producción espacial."
+    },
+    {
+      "id": "estudio-mwc7yx94",
+      "name": "José Andrés Aguirre Déleg",
+      "slug": "jose-andres-aguirre-deleg",
+      "url": "https://ecuadorianarch.com/estudios/jose-andres-aguirre-deleg",
+      "founder": "Arquitecto Titular",
+      "location": "Quito, Ecuador",
+      "headline": "Práctica arquitectónica contemporánea, investigación y producción espacial."
+    },
+    {
+      "id": "estudio-mwc7yqcl",
+      "name": "Enrique Alejandro Mora Alvarado",
+      "slug": "enrique-alejandro-mora-alvarado",
+      "url": "https://ecuadorianarch.com/estudios/enrique-alejandro-mora-alvarado",
+      "founder": "Arquitecto Titular",
+      "location": "Quito, Ecuador",
+      "headline": "Práctica arquitectónica contemporánea, investigación y producción espacial."
+    },
+    {
+      "id": "estudio-mwc7yi2v",
+      "name": "Alejandro Jesús González Cruz",
+      "slug": "alejandro-jesus-gonzalez-cruz",
+      "url": "https://ecuadorianarch.com/estudios/alejandro-jesus-gonzalez-cruz",
+      "founder": "Arquitecto Titular",
+      "location": "Quito, Ecuador",
+      "headline": "Práctica arquitectónica contemporánea, investigación y producción espacial."
+    },
+    {
+      "id": "estudio-mwc7y4kn",
+      "name": "Ignacio de Teresa Fernández-Casas ",
+      "slug": "ignacio-de-teresa-fernandez-casas",
+      "url": "https://ecuadorianarch.com/estudios/ignacio-de-teresa-fernandez-casas",
+      "founder": "Arquitecto Titular",
+      "location": "",
+      "headline": "Práctica arquitectónica contemporánea, investigación y producción espacial."
+    },
+    {
+      "id": "estudio-mwc7xjrw",
+      "name": "Pierre Berrú - Taller de Arquitectura",
+      "slug": "pierre-berru-taller-de-arquitectura",
+      "url": "https://ecuadorianarch.com/estudios/pierre-berru-taller-de-arquitectura",
+      "founder": "Arquitecto Titular",
+      "location": "Guayaquil, Ecuador",
+      "headline": "Práctica arquitectónica contemporánea, investigación y producción espacial."
+    },
+    {
+      "id": "estudio-mwb2epi9",
+      "name": "González Serrano Studio+",
+      "slug": "gonzalez-serrano-studio",
+      "url": "https://ecuadorianarch.com/estudios/gonzalez-serrano-studio",
+      "founder": "Arquitecto Titular",
+      "location": "Quito, Ecuador",
+      "headline": "Práctica arquitectónica contemporánea, investigación y producción espacial."
+    },
     {
       "id": "estudio-mw3ou8ud",
       "name": "Lams arquitectos",

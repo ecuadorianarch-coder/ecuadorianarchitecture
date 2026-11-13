@@ -518,7 +518,7 @@ export const AcercaDeEA: React.FC<AcercaDeEAProps> = ({ onNavigate }) => {
       {/* Izquierda: "ACERCA DE" + logo doodle "ea"                                 */}
       {/* Derecha: Pilares CIUDAD (Territorios), DATOS (Academia), BOX (Acerca de)  */}
       {/* ========================================================================= */}
-      <header className="w-full max-w-[1440px] mx-auto px-4 sm:px-12 md:px-20 pt-6 sm:pt-12 pb-4 flex items-center justify-between select-none">
+      <header className="w-full max-w-[1440px] mx-auto px-4 sm:px-12 md:px-20 pt-4 sm:pt-12 pb-2 sm:pb-4 flex items-center justify-between select-none">
         {/* Left: ACERCA DE + logo.svg (Exacto a Figma) */}
         <div
           onClick={() => {
@@ -636,9 +636,9 @@ export const AcercaDeEA: React.FC<AcercaDeEAProps> = ({ onNavigate }) => {
       {/* ========================================================================= */}
       <section
         ref={sheetsPinSectionRef}
-        className="relative w-full min-h-screen md:h-screen flex items-center justify-center px-4 sm:px-6 py-4 sm:py-6 overflow-hidden bg-white select-none"
+        className="relative w-full h-[calc(100svh-70px)] sm:h-screen min-h-[500px] flex items-center justify-center px-3 sm:px-6 py-2 sm:py-6 overflow-hidden bg-white select-none"
       >
-        <div className="relative w-full max-w-[620px] sm:max-w-[680px] md:max-w-[720px] aspect-[991/1136] max-h-[82vh] sm:max-h-[85vh] flex items-center justify-center">
+        <div className="relative w-full max-w-[390px] xs:max-w-[430px] sm:max-w-[620px] md:max-w-[700px] lg:max-w-[720px] aspect-[991/1136] max-h-[74svh] sm:max-h-[82vh] flex items-center justify-center">
           {/* ------------------------------------------------------------------- */}
           {/* HOJA 3 – CONVERSACIONES (REPOSA EN EL FONDO, z-index 10)            */}
           {/* ------------------------------------------------------------------- */}
@@ -653,10 +653,10 @@ export const AcercaDeEA: React.FC<AcercaDeEAProps> = ({ onNavigate }) => {
               className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-10"
             />
 
-            {/* Zona segura de texto: confinada al 58% superior */}
-            <div className="absolute top-[12%] sm:top-[14%] left-[13%] right-[13%] bottom-[28%] z-20 flex flex-col items-center justify-center text-center px-2 sm:px-4">
+            {/* Zona segura de texto: confinada al interior blanco por encima del doblez */}
+            <div className="absolute top-[9%] sm:top-[12%] left-[9%] right-[9%] sm:left-[12%] sm:right-[12%] bottom-[23%] sm:bottom-[27%] z-20 flex flex-col items-center justify-center text-center px-2 sm:px-4">
               {/* Logo / Doodle de conversación idéntico a Figma */}
-              <div className="w-12 sm:w-14 md:w-16 mb-3 sm:mb-4 shrink-0">
+              <div className="w-10 sm:w-12 md:w-14 mb-2 sm:mb-3 shrink-0">
                 <img
                   src={tagAcercaDeNosotrosUrl}
                   alt=""
@@ -665,14 +665,14 @@ export const AcercaDeEA: React.FC<AcercaDeEAProps> = ({ onNavigate }) => {
               </div>
 
               {/* Texto exacto requerido para Hoja 3 */}
-              <div className="font-okcok uppercase text-ea-black text-center max-w-[480px] space-y-2 sm:space-y-3">
-                <p className="text-[clamp(10px,2.4vw,13px)] leading-[clamp(14px,3.2vw,19px)] tracking-wider text-ea-black/75">
+              <div className="font-okcok uppercase text-ea-black text-center max-w-[480px] space-y-1.5 sm:space-y-3">
+                <p className="text-[clamp(8.5px,1.9vw,13px)] leading-[clamp(12px,2.6vw,19px)] tracking-wider text-ea-black/75">
                   ESTE ESPACIO SE CONSTRUYÓ TRAS PROFUNDAS CONVERSACIONES CON:
                 </p>
-                <p className="text-[clamp(10.5px,2.5vw,14px)] leading-[clamp(15px,3.5vw,22px)] tracking-wide text-ea-black font-bold">
+                <p className="text-[clamp(9px,2.1vw,14px)] leading-[clamp(13px,2.9vw,22px)] tracking-wide text-ea-black font-bold">
                   JOSE GRANDA, ESTEBAN NAJAS, ERDC ARQUITECTOS, JOSE MARIA SAENZ, PASCUAL GANGOTENA, BERNARDO ROSERO, JOSE GOMEZ, TODOS LOS ASISTENTES DEL PAREDÓN DEL 29 DE OCTUBRE DE 2026.
                 </p>
-                <p className="text-[clamp(10px,2.4vw,13px)] leading-[clamp(14px,3.2vw,19px)] tracking-wider text-ea-black/90 pt-0.5 sm:pt-1">
+                <p className="text-[clamp(8.5px,1.9vw,13px)] leading-[clamp(12px,2.6vw,19px)] tracking-wider text-ea-black/90 pt-0.5 sm:pt-1">
                   GRACIAS POR SER LOS CIMIENTOS DE ESTE ESPACIO.
                 </p>
               </div>
@@ -693,10 +693,10 @@ export const AcercaDeEA: React.FC<AcercaDeEAProps> = ({ onNavigate }) => {
               className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-10"
             />
 
-            {/* Zona segura de texto: confinada al 58% superior (termina en Y=72%, muy por encima del fold a Y=76.5%) */}
-            <div className="absolute top-[12%] sm:top-[14%] left-[13%] right-[13%] bottom-[28%] z-20 flex flex-col items-center justify-center text-center px-2 sm:px-4">
+            {/* Zona segura de texto: confinada al interior blanco por encima del doblez */}
+            <div className="absolute top-[9%] sm:top-[12%] left-[9%] right-[9%] sm:left-[12%] sm:right-[12%] bottom-[23%] sm:bottom-[27%] z-20 flex flex-col items-center justify-center text-center px-2 sm:px-4">
               {/* Logo / Doodle de conversación idéntico a Figma */}
-              <div className="w-12 sm:w-14 md:w-16 mb-3 sm:mb-4 shrink-0">
+              <div className="w-10 sm:w-12 md:w-14 mb-2 sm:mb-3 shrink-0">
                 <img
                   src={tagAcercaDeNosotrosUrl}
                   alt=""
@@ -705,7 +705,7 @@ export const AcercaDeEA: React.FC<AcercaDeEAProps> = ({ onNavigate }) => {
               </div>
 
               {/* Texto exacto requerido para Hoja 2 */}
-              <p className="font-okcok text-[clamp(11px,2.8vw,15.5px)] uppercase text-ea-black leading-[clamp(15.5px,3.8vw,24px)] tracking-wide text-center max-w-[440px]">
+              <p className="font-okcok text-[clamp(9.5px,2.3vw,15.5px)] uppercase text-ea-black leading-[clamp(13.5px,3.2vw,24px)] tracking-wide text-center max-w-[440px]">
                 “Ecuadorian Architecture busca democratizar el acceso a la opinión, a la crítica y a la conversación, lejos del elitismo de una profesión que ha buscado que sea así. La arquitectura y las decisiones de ciudad nos afectan a todos y, por ello, es justo que todos seamos parte. Porque tenemos la convicción de que aquí todas las voces son relevantes.”
               </p>
             </div>
@@ -726,10 +726,10 @@ export const AcercaDeEA: React.FC<AcercaDeEAProps> = ({ onNavigate }) => {
               className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none z-10"
             />
 
-            {/* Zona segura de texto: confinada al 58% superior, garantizando 0 colisión con el trazo y dog-ear */}
-            <div className="absolute top-[12%] sm:top-[13%] left-[13%] right-[13%] bottom-[28%] z-20 flex flex-col items-center justify-center text-center px-2 sm:px-4">
+            {/* Zona segura de texto: confinada al interior blanco por encima del doblez */}
+            <div className="absolute top-[9%] sm:top-[12%] left-[9%] right-[9%] sm:left-[12%] sm:right-[12%] bottom-[23%] sm:bottom-[27%] z-20 flex flex-col items-center justify-center text-center px-2 sm:px-4">
               {/* Doodle superior: e 💬 9 de Figma */}
-              <div className="w-10 sm:w-12 md:w-15 mb-1.5 sm:mb-2.5 shrink-0">
+              <div className="w-9 sm:w-12 md:w-14 mb-1.5 sm:mb-2.5 shrink-0">
                 <img
                   src={tagAcercaDeNosotrosUrl}
                   alt=""
@@ -737,8 +737,24 @@ export const AcercaDeEA: React.FC<AcercaDeEAProps> = ({ onNavigate }) => {
                 />
               </div>
 
-              {/* Texto exacto del manifiesto con las 15 líneas formateadas limpiamente */}
-              <div className="font-okcok text-[clamp(9.5px,2.4vw,12.5px)] uppercase text-ea-black leading-[clamp(13px,3.3vw,18.5px)] tracking-tight text-center max-w-[460px]">
+              {/* Versión Mobile: 4 bloques equilibrados que fluyen dentro del contenedor sin huérfanos */}
+              <div className="sm:hidden font-okcok text-[clamp(8px,2.2vw,9.5px)] uppercase text-ea-black leading-[clamp(11.5px,3vw,13.5px)] tracking-tight text-center px-1 max-w-[310px]">
+                <p className="mb-1.5">
+                  EL FIN ÚLTIMO DE ESTE ESPACIO ES GENERAR UN CAMBIO, SURGE DE UN NATURAL DESEO DE CONSTRUIR, RE PENSAR Y DESAPRENDER CONCEPTOS PARADIGMÁTICOS DE UNA PROFESIÓN ENALTECIDA POR MUCHOS,
+                </p>
+                <p className="mb-1.5">
+                  EN UNA SOCIEDAD TAN POLARIZADA, ESTE ES NUESTRO INTENTO POR APORTAR A MEJORAR, CON CONVICCIONES PERO SIN PRETENSIONES,
+                </p>
+                <p className="mb-1.5">
+                  CREEMOS QUE CRITICAR ES CONSTRUIR, NO CREEMOS QUE EXISTE CRÍTICA POSITIVA Y NEGATIVA, CREEMOS QUE EXISTE CRÍTICA, Y ESTA DEBE SER ENTENDIDA COMO UNA PERSPECTIVA DIFERENTE A LOS OJOS EGOÍSTAS QUE CREEN TENER LA RAZÓN,
+                </p>
+                <p>
+                  CON ELLO LA CRÍTICA ES UN PROFUNDO ACTO DE RESPETO, DE ENTENDER QUE EL OTRO TIENE MUCHO QUE DECIR, QUE EXISTE Y POR ELLO ES JUSTO CONVERSAR, OPINAR Y CRITICAR.
+                </p>
+              </div>
+
+              {/* Versión Desktop: las 15 líneas editoriales de Figma perfectamente calibradas */}
+              <div className="hidden sm:block font-okcok text-[clamp(9.5px,1.25vw,12px)] uppercase text-ea-black leading-[clamp(13px,1.8vw,17.5px)] tracking-tight text-center max-w-[460px]">
                 <p>EL FIN ÚLTIMO DE ESTE ESPACIO ES GENERAR UN</p>
                 <p>CAMBIO, SURGE DE UN NATURAL DESEO DE CONSTRUIR,</p>
                 <p>RE PENSAR Y DESAPRENDER CONCEPTOS</p>

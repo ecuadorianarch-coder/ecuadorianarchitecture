@@ -1,1 +1,145 @@
-[]
+[
+  {
+    "id": "por-que-acelerar-en-la-ciudad-no-sirve-de-nada-9gwy",
+    "slug": "por-que-acelerar-en-la-ciudad-no-sirve-de-nada",
+    "type": "territorios",
+    "title": "¿POR QUÉ ACELERAR EN LA CIUDAD NO SIRVE DE NADA?",
+    "subtitle": "EXPEDIENTE TERRITORIAL",
+    "studio": "CAMPO URBANO",
+    "studios": [
+      "CAMPO URBANO"
+    ],
+    "critic": "",
+    "location": "CIUDAD",
+    "year": "2026",
+    "excerpt": "Acelerar en la ciudad no te hace llegar más rápido; es un sesgo mental que arriesga vidas por ganar solo segundos.",
+    "status": "published",
+    "featured": false,
+    "showOnLanding": true,
+    "landingTab": "territorios",
+    "actionButtonText": "VER TERRITORIO",
+    "hasMaestroMayor": false,
+    "enableAuthorModal": false,
+    "escritoPor": "CAMPO URBANO",
+    "editadoPor": "Dirección Editorial EA",
+    "category": "Tráfico y ciudad",
+    "tags": [
+      "Lugar",
+      "Materia",
+      "Ecuador"
+    ],
+    "heroImage": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794241484389-562768852a2a011dab6eefc820c9f87d_jpg_71701403_2K.webp",
+    "heroImageFocalPoint": "center",
+    "resena": "Acelerar en la ciudad no te hace llegar más rápido; es un sesgo mental que arriesga vidas por ganar solo segundos.",
+    "hasCritica": false,
+    "hasVisitas": false,
+    "critica": "",
+    "criticaHeadline": "",
+    "criticaQuote": "",
+    "criticaConclusion": "",
+    "hasPodcast": false,
+    "hasNotasComunidad": true,
+    "modules": [
+      {
+        "id": "mod-intro-1794241252106",
+        "type": "hero-header",
+        "title": "¿POR QUÉ ACELERAR EN LA CIUDAD NO SIRVE DE NADA?",
+        "subtitle": "REFLEXIONES DE CIUDAD",
+        "content": "Acelerar en la ciudad es una ilusión mental: arriesgas la vida por ganar segundos, no minutos."
+      },
+      {
+        "id": "mod-text-1794241252107",
+        "type": "rich-text",
+        "content": "El otro día circulaba en mi auto por la ciudad, sin afán, un tráfico moderado a mi alrededor, waze mi buen compañero de aventuras marcaba que faltaban 15 minutos para llegar a mi destino. De repente, un auto, pasa casi al doble de la velocidad que yo por mi lado izquierdo, aunque ahora que redactó eso me parece peculiar enojarme por esas cosas, ese instante no fue la excepción."
+      },
+      {
+        "id": "mod-rich-text-1794241760339",
+        "type": "rich-text",
+        "content": "Inevitablemente no pude dejar de cuestionarme, ¿a dónde se atrasa? Entonces, caí en un hoyo mental que se resumió en unas cuantas preguntas pero en resumen: ¿Realmente si conduce más rápido llega más rápido? ¿Es más lo que gana o lo que puede perder? Esas dudas me acompañaron hasta mi destino, donde por fin pude leer acerca de eso y entender que no es solo una percepción mía, sino un fallo profundo de nuestra mente."
+      },
+      {
+        "id": "mod-single-image-1794241863589",
+        "type": "single-image",
+        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794241871375-4962e3de6d6122ddf70f1aea996c7e7e.webp",
+        "category": "fotografia"
+      },
+      {
+        "id": "mod-quote-1794241252108",
+        "type": "blockquote",
+        "quoteText": "La cultura de seguridad vial es una deuda histórica que no recae únicamente en los gobernantes, sino también en nosotros como usuarios de la ciudad.",
+        "quoteAuthor": "CAMPO URBANO",
+        "content": "La cultura de seguridad vial es una deuda histórica que no recae únicamente en los gobernantes, sino también en nosotros como usuarios de la ciudad."
+      },
+      {
+        "id": "mod-rich-text-1794242208170",
+        "type": "rich-text",
+        "content": "En 2008, el psicólogo sueco Ola Svenson demostró con el Sesgo de Ahorro de Tiempo (Time-Saving Bias) que los seres humanos somos pésimos calculando el tiempo que ahorramos al ir más rápido: sobreestimamos el tiempo que ganamos al acelerar desde una velocidad alta y subestimamos drásticamente el que ganamos al acelerar desde una velocidad baja."
+      },
+      {
+        "id": "mod-single-image-1794242229252",
+        "type": "single-image",
+        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794242262932-filters_format_webp__quality_75_.webp",
+        "category": "fotografia"
+      },
+      {
+        "id": "mod-rich-text-1794242311676",
+        "type": "rich-text",
+        "content": "El experimento clásico de Svenson puso este problema a prueba con decenas de conductores en un recorrido de 100 kilómetros:\n\nEscenario A: Un carro sube su velocidad de 30 km/h a 40 km/h (aumenta solo 10 km/h).\n\nEscenario B: Otro carro sube su velocidad de 70 km/h a 110 km/h (aumenta 40 km/h, cuatro veces más).\n\nCuando les preguntó en cuál de los dos casos se ahorraba más tiempo, casi todos eligieron el Escenario B porque subir 40 km/h suena muchísimo más potente que subir 10 km/h. Pero el reloj dice exactamente lo contrario:\n\nEn el Escenario A (pasar de 30 a 40 km/h), el viaje baja de 3 horas y 20 minutos a 2 horas y 30 minutos. Ahorras 50 minutos.\n\nEn el Escenario B (pasar de 70 a 110 km/h), el viaje baja de 1 hora y 26 minutos a 55 minutos. Solo ahorras 31 minutos."
+      },
+      {
+        "id": "mod-blockquote-1794242408550",
+        "type": "blockquote",
+        "content": "Cuando se incrementa la velocidad, el tiempo ahorrado se subestima cuando la velocidad es baja y se sobreestima cuando es alta",
+        "quoteText": "Cuando se incrementa la velocidad, el tiempo ahorrado se subestima cuando la velocidad es baja y se sobreestima cuando es alta",
+        "quoteAuthor": "Ola Svenson"
+      },
+      {
+        "id": "mod-single-image-1794242546332",
+        "type": "single-image",
+        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794242587796-424e75c70fcc6f7de9a142d1a0da06b9.webp",
+        "category": "fotografia"
+      },
+      {
+        "id": "mod-rich-text-1794242435580",
+        "type": "rich-text",
+        "content": "¿Por qué caemos en esta trampa mental una y otra vez?\nLa investigación psicológica señala tres razones principales:\n1. Confundimos velocidad con tiempo: Nuestro cerebro usa un atajo mental o heurística de proporción. Si pasas de 60 km/h a 90 km/h, sientes que aumentaste tu esfuerzo en un 50 % y asumes que el tiempo se va a reducir en una proporción gigante. Pero el tiempo no funciona de forma lineal, responde a una división matemática (Tiempo = Distancia / Velocidad), lo que significa que cada kilómetro por hora extra que sumas al velocímetro vale cada vez menos segundos en el reloj.\n\n2. Pensamos en kilómetros por hora y no en minutos por kilómetro: Si los velocímetros de los carros vinieran como el reloj de un runner, marcando el ritmo en min/km en lugar de km/h, nadie correría desesperado en la ciudad. Pasar de 20 km/h a 40 km/h es bajar tu ritmo de 3:00 min/km a 1:30 min/km (le quitas minuto y medio a cada kilómetro). En cambio, pasar de 60 km/h a 80 km/h es bajar de 1:00 min/km a 0:45 min/km (apenas le quitas 15 segundos a cada kilómetro).\n\n3. La adicción al estímulo visual: A 80 km/h los postes, los árboles y los demás carros pasan rápido por tu ventana y tu cerebro libera dopamina sintiendo que \"estás avanzando muchísimo\". Pero cuando el semáforo te frena 40 segundos en la esquina, tu cerebro ignora ese tiempo muerto y se queda solo con la falsa sensación de velocidad del tramo anterior."
+      },
+      {
+        "id": "mod-single-image-1794242920011",
+        "type": "single-image",
+        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794242968812-45fe0252b4fd983d4a6808b631186a04.webp",
+        "category": "fotografia"
+      },
+      {
+        "id": "mod-rich-text-1794242986447",
+        "type": "rich-text",
+        "content": "En resumen, el estudio de Svenson probó que cuando alguien va tarde y pisa el acelerador en una avenida para subir de 50 a 80 km/h, no está tomando una decisión matemática para llegar temprano; está sufriendo una ilusión óptica y cognitiva que le hace creer que está comprando minutos cuando en realidad solo está comprando segundos sueltos.\n\nY en una realidad meramente urbana, aparece la letalidad exponencial sin ganancia de movilidad. Mientras el tiempo ahorrado cruzando un semáforo más rápido en la ciudad es estadísticamente marginal, el riesgo de muerte para un peatón atropellado pasa de un 10 % a 30 km/h a más de un 80 % a 50 km/h, y supera el 90 % a 60 km/h. Arriesgar una vida humana entera por ahorrarte treinta segundos de trayecto no es solo una pésima matemática; es el recordatorio más triste de que vamos corriendo a ninguna parte."
+      },
+      {
+        "id": "mod-references-1794260759318",
+        "type": "references",
+        "title": "REFERENCIAS & BIBLIOGRAFÍA",
+        "content": "Referencias: \nSvenson, O. (2008). Decisions among time saving options: When intuition is strong and wrong. Acta Psychologica, 127(2), 501-509. (Estudio original donde se define formalmente el Time-Saving Bias o Sesgo de Ahorro de Tiempo y el análisis de la heurística de proporción en los incrementos de velocidad).\n\nPeer, E., & Gamliel, E. (2013). Improving time-saving judgments when increasing activity speed. Judgment and Decision Making, 8(6), 736-745. (Investigación complementaria sobre cómo la representación mental del tiempo en formato de ritmo —minutos por kilómetro— mitiga los errores de percepción al conducir).\n\nSvenson, O. (2009). The relationship between perceived time savings and perceived crash risk when increasing speed. Transportation Research Part F: Traffic Psychology and Behaviour. (Análisis sobre la relación cognitiva entre la falsa percepción de ahorro de tiempo y la subestimación del riesgo de accidentalidad vial)."
+      }
+    ],
+    "datos": {
+      "colaboradores": ""
+    },
+    "ciudad": {
+      "altura": "2.850 msnm",
+      "orientacion": "Norte-Sur",
+      "clima": "Variable Territorial"
+    },
+    "createdAt": "2026-11-09T16:20:52.106Z",
+    "updatedAt": "2026-11-09T21:46:12.675Z",
+    "heroImagePosition": "50% 50%",
+    "heroImageZoom": 100,
+    "imageCategories": {
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794241871375-4962e3de6d6122ddf70f1aea996c7e7e.webp": "fotografia",
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794242262932-filters_format_webp__quality_75_.webp": "fotografia",
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794242587796-424e75c70fcc6f7de9a142d1a0da06b9.webp": "fotografia",
+      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794242968812-45fe0252b4fd983d4a6808b631186a04.webp": "fotografia"
+    },
+    "secondaryExcerpt": ""
+  }
+]
