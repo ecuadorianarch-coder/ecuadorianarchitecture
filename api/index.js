@@ -403,7 +403,7 @@ export default async function handler(req, res) {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            from: 'Ecuadorian Architecture Editorial <onboarding@resend.dev>',
+            from: 'Ecuadorian Architecture Editorial <editorial@ecuadorianarch.com>',
             to: [editorEmail],
             subject: notifySubject,
             html: notifyHtml
@@ -445,7 +445,7 @@ export default async function handler(req, res) {
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-              from: 'Ecuadorian Architecture <onboarding@resend.dev>',
+              from: 'Ecuadorian Architecture <editorial@ecuadorianarch.com>',
               to: [submission.contactEmail],
               subject: `✓ Propuesta Recibida: ${submission.projectTitle || 'Expediente'} — Ecuadorian Architecture`,
               html: confirmationHtml

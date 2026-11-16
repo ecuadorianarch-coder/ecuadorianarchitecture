@@ -863,7 +863,7 @@ const apiPlugin = () => ({
                   'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                  from: 'Ecuadorian Architecture <onboarding@resend.dev>',
+                  from: 'Ecuadorian Architecture Editorial <editorial@ecuadorianarch.com>',
                   to: [editorEmail],
                   subject: notifySubject,
                   html: notifyHtml
@@ -905,7 +905,7 @@ const apiPlugin = () => ({
                     'Content-Type': 'application/json'
                   },
                   body: JSON.stringify({
-                    from: 'Ecuadorian Architecture <onboarding@resend.dev>',
+                    from: 'Ecuadorian Architecture Editorial <editorial@ecuadorianarch.com>',
                     to: [submission.contactEmail],
                     subject: `📐 Confirmación de recepción: ${submission.projectTitle || 'Tu propuesta'} — Ecuadorian Architecture`,
                     html: confirmationHtml

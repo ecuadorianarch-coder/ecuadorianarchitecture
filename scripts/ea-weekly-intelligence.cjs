@@ -200,7 +200,7 @@ async function sendViaResend(htmlContent, subject) {
   }
 
   const payload = {
-    from: 'Ecuadorian Architecture AI <onboarding@resend.dev>',
+    from: 'Ecuadorian Architecture AI <editorial@ecuadorianarch.com>',
     to: [RECIPIENT_EMAIL],
     subject: subject,
     html: htmlContent,
