@@ -554,6 +554,7 @@ const server = http.createServer((req, res) => {
             };
             submissions.unshift(newEntry);
             fs.writeFileSync(submissionsPath, JSON.stringify(submissions, null, 2), 'utf8');
+            writeToSupabase('submissions.json', JSON.stringify(submissions, null, 2)).catch(() => {});
 
             // Notificación vía Resend al equipo editorial
             const resendKey = process.env.RESEND_API_KEY;
