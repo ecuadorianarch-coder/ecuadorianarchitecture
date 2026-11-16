@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { AuthModal } from '../auth/AuthModal';
+import { StudioProfileModal } from '../studio/StudioProfileModal';
+import { studioAuthService, StudioProfile } from '../../services/studioAuthService';
 import { User, Compass } from 'lucide-react';
 // Artwork mapping:
 // 'btn_explorar.svg' contains the 'INICIAR SESIÓN' artwork (with key/circle doodle)
@@ -24,7 +26,14 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [isDestacadosInView, setIsDestacadosInView] = useState(false);
   const [isScrollingDown, setIsScrollingDown] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [isStudioModalOpen, setIsStudioModalOpen] = useState(false);
+  const [studio, setStudio] = useState<StudioProfile | null>(() => studioAuthService.getStudio());
   const lastScrollYRef = useRef(0);
+
+  useEffect(() => {
+    const unsub = studioAuthService.subscribe((s) => setStudio(s));
+    return unsub;
+  }, []);
 
   useEffect(() => {
     const checkScroll = () => {
@@ -93,9 +102,11 @@ export const Navbar: React.FC<NavbarProps> = ({
     }
   };
 
-  // Click on INICIAR SESIÓN opens the AuthModal pop-up
+  // Click on INICIAR SESIÓN abre su perfil si ya está logueado, o el AuthModal
   const handleLoginClick = () => {
-    if (onLogin) {
+    if (studioAuthService.isAuthenticated()) {
+      setIsStudioModalOpen(true);
+    } else if (onLogin) {
       onLogin();
     } else {
       setIsAuthModalOpen(true);
@@ -119,13 +130,17 @@ export const Navbar: React.FC<NavbarProps> = ({
         <button
           type="button"
           onClick={handleLoginClick}
-          className="group min-h-[44px] min-w-[44px] flex items-center justify-center transition-transform duration-200 hover:scale-105 active:scale-90 cursor-pointer focus-visible:ring-2 focus-visible:ring-ea-black/70 focus-visible:outline-hidden"
-          title="Iniciar sesión o crear cuenta — Ecuadorian Architecture"
+          className="group relative min-h-[44px] min-w-[44px] flex items-center justify-center transition-transform duration-200 hover:scale-105 active:scale-90 cursor-pointer focus-visible:ring-2 focus-visible:ring-ea-black/70 focus-visible:outline-hidden"
+          title={
+            studio
+              ? `Perfil de ${studio.studioName} — Ver propuestas y catálogo`
+              : 'Iniciar sesión o crear cuenta — Ecuadorian Architecture'
+          }
           data-cursor
         >
           <img
             src={btnIniciarSesionUrl}
-            alt="INICIAR SESIÓN"
+            alt={studio ? studio.studioName : 'INICIAR SESIÓN'}
             className={`h-7 sm:h-9 md:h-10 lg:h-11 w-auto object-contain transition-all duration-500 ${
               isDestacadosInView
                 ? 'filter-none drop-shadow-2xs'
@@ -133,6 +148,12 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
             draggable={false}
           />
+          {studio && (
+            <span
+              className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-500 border border-white shadow-xs"
+              title="Sesión de estudio activa"
+            />
+          )}
         </button>
       </div>
 
@@ -224,6 +245,28 @@ export const Navbar: React.FC<NavbarProps> = ({
       <AuthModal
         isOpen={isAuthModalOpen}
         onClose={() => setIsAuthModalOpen(false)}
+        onLoginSuccess={(st) => {
+          setStudio(st);
+          setIsStudioModalOpen(true);
+        }}
+        onNavigateSubmit={() => {
+          setIsAuthModalOpen(false);
+          if (onNavigate) onNavigate('sube-tu-trabajo');
+          else window.location.href = '/sube-tu-trabajo';
+        }}
+      />
+
+      {/* ------------------------------------------------------------------- */}
+      {/* 5. MODAL DE PERFIL DE ESTUDIO (TRABAJOS ENVIADOS & CATÁLOGO)       */}
+      {/* ------------------------------------------------------------------- */}
+      <StudioProfileModal
+        isOpen={isStudioModalOpen}
+        onClose={() => setIsStudioModalOpen(false)}
+        onNavigateSubmit={() => {
+          setIsStudioModalOpen(false);
+          if (onNavigate) onNavigate('sube-tu-trabajo');
+          else window.location.href = '/sube-tu-trabajo';
+        }}
       />
     </>
   );

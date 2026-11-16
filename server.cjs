@@ -2,12 +2,71 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const url = require('url');
+const crypto = require('crypto');
 const { exec } = require('child_process');
 let sharp = null;
 try {
   sharp = require('sharp');
 } catch (err) {
   console.warn('[Sharp Load Warning]:', err && err.message ? err.message : err);
+}
+
+// ---------------------------------------------------------------------------
+// Criptografía y Seguridad para Cuentas de Estudios (Blindaje OWASP / NIST)
+// ---------------------------------------------------------------------------
+const JWT_STUDIO_SECRET = process.env.JWT_STUDIO_SECRET || 'ea_sec_studio_key_2026_94xkL8!scrypt_vault';
+
+function hashStudioPassword(password) {
+  const salt = crypto.randomBytes(16).toString('hex');
+  const hash = crypto.scryptSync(password, salt, 64).toString('hex');
+  return `${salt}:${hash}`;
+}
+
+function verifyStudioPassword(password, storedHash) {
+  if (!storedHash || !storedHash.includes(':')) return false;
+  try {
+    const [salt, key] = storedHash.split(':');
+    const keyBuffer = Buffer.from(key, 'hex');
+    const derivedKey = crypto.scryptSync(password, salt, 64);
+    return crypto.timingSafeEqual(keyBuffer, derivedKey);
+  } catch (err) {
+    return false;
+  }
+}
+
+function generateStudioToken(studio) {
+  const header = Buffer.from(JSON.stringify({ alg: 'HS256', typ: 'JWT' })).toString('base64url');
+  const payload = Buffer.from(JSON.stringify({
+    studioId: studio.id,
+    email: studio.email,
+    studioName: studio.studioName,
+    exp: Math.floor(Date.now() / 1000) + (60 * 24 * 3600), // 60 días de validez
+  })).toString('base64url');
+  const sig = crypto.createHmac('sha256', JWT_STUDIO_SECRET).update(`${header}.${payload}`).digest('base64url');
+  return `${header}.${payload}.${sig}`;
+}
+
+function verifyStudioToken(token) {
+  if (!token) return null;
+  const parts = token.split('.');
+  if (parts.length !== 3) return null;
+  const [header, payload, sig] = parts;
+  const expectedSig = crypto.createHmac('sha256', JWT_STUDIO_SECRET).update(`${header}.${payload}`).digest('base64url');
+  if (sig !== expectedSig) return null;
+  try {
+    const data = JSON.parse(Buffer.from(payload, 'base64url').toString('utf8'));
+    if (data.exp && data.exp < Math.floor(Date.now() / 1000)) return null;
+    return data;
+  } catch {
+    return null;
+  }
+}
+
+function extractStudioTokenFromHeader(req) {
+  const authHeader = req.headers['authorization'];
+  if (!authHeader) return null;
+  const match = authHeader.match(/^Bearer\s+(.+)$/i);
+  return match ? match[1] : null;
 }
 
 // Bounded LRU cache for lightweight WhatsApp/Social Open Graph JPEGs (max 25 entries, ~3 MB RAM)
@@ -541,6 +600,43 @@ const server = http.createServer((req, res) => {
         req.on('end', async () => {
           try {
             const submission = JSON.parse(body);
+
+            // Registro / Actualización Segura de Cuenta de Estudio (Cifrado scrypt)
+            const studiosPath = path.join(dataDir, 'studios.json');
+            let studios = fs.existsSync(studiosPath) ? JSON.parse(fs.readFileSync(studiosPath, 'utf8') || '[]') : [];
+            const cleanEmail = (submission.contactEmail || '').toLowerCase().trim();
+            let studio = studios.find(s => s.email.toLowerCase() === cleanEmail);
+
+            if (!studio && submission.studioPassword) {
+              studio = {
+                id: `studio-${Date.now()}`,
+                email: cleanEmail,
+                passwordHash: hashStudioPassword(submission.studioPassword),
+                studioName: submission.studioName || '',
+                studioPrincipals: submission.studioPrincipals || '',
+                studioLocation: submission.studioLocation || '',
+                foundationYear: submission.foundationYear || '',
+                studioWebsite: submission.studioWebsite || '',
+                studioAvatarUrl: submission.studioAvatarUrl || '',
+                studioCoverUrl: submission.studioCoverUrl || '',
+                createdAt: new Date().toISOString(),
+              };
+              studios.push(studio);
+              fs.writeFileSync(studiosPath, JSON.stringify(studios, null, 2), 'utf8');
+              writeToSupabase('studios.json', JSON.stringify(studios, null, 2)).catch(() => {});
+            } else if (studio && submission.studioPassword && !studio.passwordHash) {
+              // Si el estudio existía sin contraseña, la establecemos de forma segura
+              studio.passwordHash = hashStudioPassword(submission.studioPassword);
+              fs.writeFileSync(studiosPath, JSON.stringify(studios, null, 2), 'utf8');
+              writeToSupabase('studios.json', JSON.stringify(studios, null, 2)).catch(() => {});
+            }
+
+            const studioToken = studio ? generateStudioToken(studio) : null;
+
+            // Guardar propuesta (NUNCA guardamos contraseñas en submissions.json)
+            const safeSubmissionToStore = { ...submission };
+            delete safeSubmissionToStore.studioPassword;
+
             const submissionsPath = path.join(dataDir, 'submissions.json');
             const submissions = fs.existsSync(submissionsPath)
               ? JSON.parse(fs.readFileSync(submissionsPath, 'utf8') || '[]')
@@ -548,9 +644,10 @@ const server = http.createServer((req, res) => {
             
             const newEntry = {
               id: `sub-${Date.now()}`,
+              studioId: studio ? studio.id : undefined,
               status: 'pendiente_curaduria',
               receivedAt: new Date().toISOString(),
-              ...submission
+              ...safeSubmissionToStore
             };
             submissions.unshift(newEntry);
             fs.writeFileSync(submissionsPath, JSON.stringify(submissions, null, 2), 'utf8');
@@ -610,12 +707,136 @@ const server = http.createServer((req, res) => {
             }
 
             res.setHeader('Content-Type', 'application/json');
-            res.end(JSON.stringify({ success: true, id: newEntry.id }));
+            res.end(JSON.stringify({
+              success: true,
+              id: newEntry.id,
+              token: studioToken,
+              studio: studio ? {
+                id: studio.id,
+                email: studio.email,
+                studioName: studio.studioName,
+                studioPrincipals: studio.studioPrincipals,
+                studioLocation: studio.studioLocation,
+                foundationYear: studio.foundationYear,
+                studioWebsite: studio.studioWebsite,
+                studioAvatarUrl: studio.studioAvatarUrl,
+                studioCoverUrl: studio.studioCoverUrl,
+              } : null
+            }));
           } catch (e) {
             res.statusCode = 500;
             res.end(JSON.stringify({ error: e.message }));
           }
         });
+        return;
+      }
+
+      // -----------------------------------------------------------------------
+      // Autenticación de Cuentas de Estudio (Portal Arquitectos / Mi Perfil)
+      // -----------------------------------------------------------------------
+      if (pathname === '/api/auth/studio/login' && req.method === 'POST') {
+        let body = '';
+        req.on('data', chunk => body += chunk);
+        req.on('end', () => {
+          try {
+            const { email, password } = JSON.parse(body);
+            const cleanEmail = (email || '').trim().toLowerCase();
+            const cleanPass = (password || '').trim();
+
+            if (!cleanEmail || !cleanPass) {
+              res.statusCode = 400;
+              res.end(JSON.stringify({ error: 'Por favor ingresa tu correo y contraseña.' }));
+              return;
+            }
+
+            const studiosPath = path.join(dataDir, 'studios.json');
+            const studios = fs.existsSync(studiosPath) ? JSON.parse(fs.readFileSync(studiosPath, 'utf8') || '[]') : [];
+            const studio = studios.find(s => s.email.toLowerCase() === cleanEmail);
+
+            if (!studio || !verifyStudioPassword(cleanPass, studio.passwordHash)) {
+              res.statusCode = 401;
+              res.end(JSON.stringify({ error: 'Credenciales inválidas. Verifica tu correo y contraseña.' }));
+              return;
+            }
+
+            const token = generateStudioToken(studio);
+            const safeStudio = {
+              id: studio.id,
+              email: studio.email,
+              studioName: studio.studioName,
+              studioPrincipals: studio.studioPrincipals,
+              studioLocation: studio.studioLocation,
+              foundationYear: studio.foundationYear,
+              studioWebsite: studio.studioWebsite,
+              studioAvatarUrl: studio.studioAvatarUrl,
+              studioCoverUrl: studio.studioCoverUrl,
+            };
+
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({ success: true, token, studio: safeStudio }));
+          } catch (e) {
+            res.statusCode = 500;
+            res.end(JSON.stringify({ error: e.message }));
+          }
+        });
+        return;
+      }
+
+      if (pathname === '/api/auth/studio/me' && req.method === 'GET') {
+        const token = extractStudioTokenFromHeader(req);
+        const decoded = verifyStudioToken(token);
+        if (!decoded) {
+          res.statusCode = 401;
+          res.end(JSON.stringify({ error: 'Sesión no válida o expirada.' }));
+          return;
+        }
+
+        const studiosPath = path.join(dataDir, 'studios.json');
+        const studios = fs.existsSync(studiosPath) ? JSON.parse(fs.readFileSync(studiosPath, 'utf8') || '[]') : [];
+        const studio = studios.find(s => s.id === decoded.studioId || s.email.toLowerCase() === decoded.email.toLowerCase());
+
+        if (!studio) {
+          res.statusCode = 404;
+          res.end(JSON.stringify({ error: 'Estudio no encontrado.' }));
+          return;
+        }
+
+        const safeStudio = {
+          id: studio.id,
+          email: studio.email,
+          studioName: studio.studioName,
+          studioPrincipals: studio.studioPrincipals,
+          studioLocation: studio.studioLocation,
+          foundationYear: studio.foundationYear,
+          studioWebsite: studio.studioWebsite,
+          studioAvatarUrl: studio.studioAvatarUrl,
+          studioCoverUrl: studio.studioCoverUrl,
+        };
+
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify({ success: true, studio: safeStudio }));
+        return;
+      }
+
+      // Obtener exclusivamente las propuestas enviadas por el estudio autenticado
+      if (pathname === '/api/studio/my-submissions' && req.method === 'GET') {
+        const token = extractStudioTokenFromHeader(req);
+        const decoded = verifyStudioToken(token);
+        if (!decoded) {
+          res.statusCode = 401;
+          res.end(JSON.stringify({ error: 'Sesión no válida o expirada.' }));
+          return;
+        }
+
+        const submissionsPath = path.join(dataDir, 'submissions.json');
+        const allSubmissions = fs.existsSync(submissionsPath) ? JSON.parse(fs.readFileSync(submissionsPath, 'utf8') || '[]') : [];
+        const mySubs = allSubmissions.filter(s =>
+          (s.contactEmail || '').toLowerCase() === decoded.email.toLowerCase() ||
+          (s.studioId && s.studioId === decoded.studioId)
+        );
+
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify({ success: true, submissions: mySubs }));
         return;
       }
 

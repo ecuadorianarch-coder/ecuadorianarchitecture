@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   CheckCircle2,
   UploadCloud,
@@ -9,7 +9,13 @@ import {
   ArrowRight,
   ArrowLeft,
   Users,
+  Lock,
+  Eye,
+  EyeOff,
+  ShieldCheck,
 } from 'lucide-react';
+import { studioAuthService } from '../../services/studioAuthService';
+import { StudioProfileModal } from '../../components/studio/StudioProfileModal';
 
 // Brand Assets
 import logoUrl from '../../assets/logos/logo.svg';
@@ -36,6 +42,7 @@ export interface SubmissionFormData {
   studioLocation: string;
   foundationYear: string;
   contactEmail: string;
+  studioPassword?: string;
   contactPhone: string;
   studioWebsite: string;
   studioBio: string;
@@ -74,6 +81,7 @@ const initialFormState: SubmissionFormData = {
   studioLocation: '',
   foundationYear: '',
   contactEmail: '',
+  studioPassword: '',
   contactPhone: '',
   studioWebsite: '',
   studioBio: '',
@@ -108,6 +116,26 @@ export const SubeTuTrabajo: React.FC<SubeTuTrabajoProps> = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [showPassword, setShowPassword] = useState(false);
+  const [isStudioModalOpen, setIsStudioModalOpen] = useState(false);
+
+  // Pre-poblar datos de estudio si ya está autenticado
+  useEffect(() => {
+    const existing = studioAuthService.getStudio();
+    if (existing) {
+      setFormData((prev) => ({
+        ...prev,
+        studioName: prev.studioName || existing.studioName,
+        studioPrincipals: prev.studioPrincipals || existing.studioPrincipals,
+        studioLocation: prev.studioLocation || existing.studioLocation,
+        foundationYear: prev.foundationYear || existing.foundationYear,
+        contactEmail: prev.contactEmail || existing.email,
+        studioWebsite: prev.studioWebsite || existing.studioWebsite,
+        studioAvatarUrl: prev.studioAvatarUrl || existing.studioAvatarUrl,
+        studioCoverUrl: prev.studioCoverUrl || existing.studioCoverUrl,
+      }));
+    }
+  }, []);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -166,6 +194,12 @@ export const SubeTuTrabajo: React.FC<SubeTuTrabajoProps> = ({
       return;
     }
 
+    const isAlreadyLoggedIn = studioAuthService.isAuthenticated();
+    if (!isAlreadyLoggedIn && (!formData.studioPassword || formData.studioPassword.length < 6)) {
+      setErrorMessage('Por favor define una contraseña de al menos 6 caracteres para proteger tu perfil y consultar el estatus de tu obra.');
+      return;
+    }
+
     setStage('proyecto');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -194,7 +228,7 @@ export const SubeTuTrabajo: React.FC<SubeTuTrabajoProps> = ({
     setIsSubmitting(true);
 
     try {
-      await fetch('/api/editorial/submissions', {
+      const response = await fetch('/api/editorial/submissions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -204,6 +238,13 @@ export const SubeTuTrabajo: React.FC<SubeTuTrabajoProps> = ({
           submittedAt: new Date().toISOString(),
         }),
       });
+
+      if (response.ok) {
+        const data = await response.json();
+        if (data.token && data.studio) {
+          studioAuthService.setSession(data.token, data.studio);
+        }
+      }
 
       // Guardar respaldo local
       try {
@@ -367,6 +408,13 @@ export const SubeTuTrabajo: React.FC<SubeTuTrabajoProps> = ({
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
                 type="button"
+                onClick={() => setIsStudioModalOpen(true)}
+                className="w-full sm:w-auto px-8 py-3.5 bg-ea-crimson text-white font-okcok uppercase text-sm rounded-full hover:bg-black transition-all active:scale-95 cursor-pointer shadow-xs flex items-center justify-center gap-2"
+              >
+                VER ESTATUS EN MI PERFIL DE ESTUDIO →
+              </button>
+              <button
+                type="button"
                 onClick={() => {
                   setFormData(initialFormState);
                   setStage('landing');
@@ -474,11 +522,26 @@ export const SubeTuTrabajo: React.FC<SubeTuTrabajoProps> = ({
 
             {/* CAJA 2 FIGMA: 1. PERFIL DEL ESTUDIO (RECTANGLE #158:2123) */}
             <section className="w-full border border-black rounded-[36px] sm:rounded-[52px] p-6 sm:p-10 md:p-12 bg-white space-y-8">
-              <h2 className="font-okcok text-2xl sm:text-3xl md:text-4xl uppercase tracking-normal text-ea-black">
-                1. PERFIL DEL ESTUDIO
-              </h2>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <h2 className="font-okcok text-2xl sm:text-3xl md:text-4xl uppercase tracking-normal text-ea-black">
+                  1. PERFIL DEL ESTUDIO
+                </h2>
+                {studioAuthService.isAuthenticated() && (
+                  <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-emerald-50 border border-emerald-300 rounded-full text-xs font-mono text-emerald-800">
+                    <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                    <span>Sesión de estudio activa ✓</span>
+                    <button
+                      type="button"
+                      onClick={() => setIsStudioModalOpen(true)}
+                      className="underline font-bold hover:text-black ml-1 cursor-pointer"
+                    >
+                      Ver mi perfil
+                    </button>
+                  </div>
+                )}
+              </div>
 
-              {/* Los 4 campos exactos de Figma en cuadrícula 2x2 */}
+              {/* Los campos de Figma en cuadrícula 2x2 */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
                 {/* 1. Nombre del Estudio o Arquitecto */}
                 <div className="flex flex-col gap-2">
@@ -579,8 +642,44 @@ export const SubeTuTrabajo: React.FC<SubeTuTrabajoProps> = ({
                   />
                 </div>
 
-                {/* Instagram / Sitio Web */}
+                {/* Contraseña para proteger el perfil y consultar estatus */}
                 <div className="flex flex-col gap-2">
+                  <div className="flex items-center justify-between">
+                    <label
+                      htmlFor="studioPassword"
+                      className="font-okcok text-sm sm:text-base uppercase tracking-normal text-ea-black flex items-center gap-1.5"
+                    >
+                      <Lock className="w-4 h-4 text-neutral-500" /> CREAR CONTRASEÑA *
+                    </label>
+                    <span className="text-[11px] font-mono text-neutral-500">Mínimo 6 caracteres</span>
+                  </div>
+                  <div className="relative">
+                    <input
+                      id="studioPassword"
+                      name="studioPassword"
+                      type={showPassword ? 'text' : 'password'}
+                      required={!studioAuthService.isAuthenticated()}
+                      disabled={studioAuthService.isAuthenticated()}
+                      value={studioAuthService.isAuthenticated() ? '••••••••••••' : (formData.studioPassword || '')}
+                      onChange={handleInputChange}
+                      placeholder={studioAuthService.isAuthenticated() ? 'Perfil ya vinculado' : 'Contraseña para ver el estatus'}
+                      className="w-full h-14 bg-[#E8E8E8] rounded-[30px] px-6 pr-12 text-sm sm:text-base font-sans text-ea-black placeholder:text-neutral-500 focus:outline-hidden focus:ring-2 focus:ring-black transition-all disabled:opacity-60"
+                    />
+                    {!studioAuthService.isAuthenticated() && (
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-black cursor-pointer"
+                        tabIndex={-1}
+                      >
+                        {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                {/* Instagram / Sitio Web */}
+                <div className="flex flex-col gap-2 md:col-span-2">
                   <label
                     htmlFor="studioWebsite"
                     className="font-okcok text-sm sm:text-base uppercase tracking-normal text-ea-black"
@@ -1186,6 +1285,17 @@ export const SubeTuTrabajo: React.FC<SubeTuTrabajoProps> = ({
           </form>
         )}
       </main>
+
+      {/* MODAL DE PERFIL DE ESTUDIO (TRABAJOS ENVIADOS & CATÁLOGO) */}
+      <StudioProfileModal
+        isOpen={isStudioModalOpen}
+        onClose={() => setIsStudioModalOpen(false)}
+        onNavigateSubmit={() => {
+          setIsStudioModalOpen(false);
+          setStage('landing');
+          setIsSuccess(false);
+        }}
+      />
     </div>
   );
 };
