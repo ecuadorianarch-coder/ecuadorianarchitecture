@@ -634,6 +634,30 @@ const server = http.createServer((req, res) => {
         return;
       }
 
+      // Actualizar estado de una propuesta (pendiente_curaduria, revisado, aprobado, archivado)
+      if (pathname === '/api/editorial/submissions/status' && req.method === 'POST') {
+        let body = '';
+        req.on('data', chunk => body += chunk);
+        req.on('end', () => {
+          try {
+            const { id, status } = JSON.parse(body);
+            const submissionsPath = path.join(dataDir, 'submissions.json');
+            let submissions = fs.existsSync(submissionsPath)
+              ? JSON.parse(fs.readFileSync(submissionsPath, 'utf8') || '[]')
+              : [];
+            submissions = submissions.map(sub => sub.id === id ? { ...sub, status, updatedAt: new Date().toISOString() } : sub);
+            fs.writeFileSync(submissionsPath, JSON.stringify(submissions, null, 2), 'utf8');
+            writeToSupabase('submissions.json', JSON.stringify(submissions, null, 2)).catch(() => {});
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({ success: true, submissions }));
+          } catch (e) {
+            res.statusCode = 500;
+            res.end(JSON.stringify({ error: e.message }));
+          }
+        });
+        return;
+      }
+
       // Agente Autónomo de Inteligencia Editorial & UX Semanal
       if (pathname === '/api/editorial/intelligence/run' && (req.method === 'POST' || req.method === 'GET')) {
         try {

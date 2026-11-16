@@ -28,8 +28,6 @@ import { authService } from '../../services/authService';
 import { EditorialDashboard } from './EditorialDashboard';
 import { VisualEditorialEditor } from './VisualEditorialEditor';
 import { EditorialOfficePanel } from './EditorialOfficePanel';
-import { OpportunitiesOfficePanel } from './OpportunitiesOfficePanel';
-import { VisualWorkspaceOffice } from './VisualWorkspaceOffice';
 import { NewArticleModal } from './NewArticleModal';
 import { MediaLibraryModal } from './MediaLibraryModal';
 import { CommunityModerationManager } from './CommunityModerationManager';
@@ -59,8 +57,32 @@ export const AdminPage: React.FC<{ onClose?: () => void }> = ({ onClose }) => {
   } = useContent();
   const { pendingCount } = useCommunityModeration();
 
-  // Active views and modals
-  const [activeTab, setActiveTab] = useState<'visual-office' | 'editorial-office' | 'opportunities' | 'editorial' | 'advertising' | 'profiles' | 'community' | 'site-config' | 'audience'>('visual-office');
+  // Contador de propuestas recibidas de "Sube tu trabajo"
+  const [submissionsPendingCount, setSubmissionsPendingCount] = useState<number>(0);
+
+  const fetchSubmissionsCount = React.useCallback(async () => {
+    try {
+      const res = await fetch('/api/editorial/submissions');
+      if (res.ok) {
+        const data = await res.json();
+        const pending = (data.submissions || []).filter(
+          (s: any) => s.status !== 'aprobado' && s.status !== 'descartado'
+        );
+        setSubmissionsPendingCount(pending.length);
+      }
+    } catch {}
+  }, []);
+
+  React.useEffect(() => {
+    fetchSubmissionsCount();
+    const interval = setInterval(fetchSubmissionsCount, 15000);
+    return () => clearInterval(interval);
+  }, [fetchSubmissionsCount]);
+
+  // Active views and modals (Por defecto: 'editorial-office')
+  const [activeTab, setActiveTab] = useState<
+    'editorial-office' | 'editorial' | 'advertising' | 'profiles' | 'community' | 'site-config' | 'audience'
+  >('editorial-office');
   const [editingArticle, setEditingArticle] = useState<EditorialArticle | null>(() => {
     try {
       const activeId = sessionStorage.getItem('ea_editing_article_id');
@@ -152,28 +174,20 @@ export const AdminPage: React.FC<{ onClose?: () => void }> = ({ onClose }) => {
         {/* Tab switchers */}
         <div className="flex items-center gap-2 bg-black/40 p-1 rounded border border-white/10">
           <button
-            onClick={() => setActiveTab('visual-office')}
-            className={`flex items-center gap-2 px-3 py-1.5 text-xs font-anton tracking-wider transition-colors relative ${
-              activeTab === 'visual-office' ? 'bg-amber-400 text-black shadow-lg shadow-amber-400/20' : 'text-amber-300 hover:text-white'
-            }`}
-          >
-            <Sparkles className="w-3.5 h-3.5 text-amber-500 animate-pulse" /> OFICINA VIRTUAL (VIVA)
-          </button>
-          <button
             onClick={() => setActiveTab('editorial-office')}
             className={`flex items-center gap-2 px-3 py-1.5 text-xs font-anton tracking-wider transition-colors relative ${
               activeTab === 'editorial-office' ? 'bg-white text-black' : 'text-white/60 hover:text-white'
             }`}
           >
             <BookOpen className="w-3.5 h-3.5" /> CONSOLA EDITORIAL
-          </button>
-          <button
-            onClick={() => setActiveTab('opportunities')}
-            className={`flex items-center gap-2 px-3 py-1.5 text-xs font-anton tracking-wider transition-colors relative ${
-              activeTab === 'opportunities' ? 'bg-white text-black' : 'text-white/60 hover:text-white'
-            }`}
-          >
-            <Briefcase className="w-3.5 h-3.5" /> OPORTUNIDADES &amp; ALIANZAS
+            {submissionsPendingCount > 0 && (
+              <span
+                className="ml-1 px-1.5 py-0.5 bg-ea-crimson text-white font-mono text-[10px] font-bold rounded-full animate-pulse shadow-xs"
+                title={`${submissionsPendingCount} propuestas recibidas pendientes de curaduría`}
+              >
+                {submissionsPendingCount}
+              </span>
+            )}
           </button>
           <button
             onClick={() => setActiveTab('editorial')}
@@ -301,9 +315,7 @@ export const AdminPage: React.FC<{ onClose?: () => void }> = ({ onClose }) => {
       </header>
 
       {/* Main Workspace based on active tab */}
-      {activeTab === 'visual-office' && <VisualWorkspaceOffice />}
       {activeTab === 'editorial-office' && <EditorialOfficePanel />}
-      {activeTab === 'opportunities' && <OpportunitiesOfficePanel />}
 
       {activeTab === 'editorial' && (
         <EditorialDashboard

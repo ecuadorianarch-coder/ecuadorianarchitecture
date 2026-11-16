@@ -29,6 +29,14 @@ import {
   Flame,
   ArrowRight,
   RefreshCw,
+  UploadCloud,
+  FolderOpen,
+  CheckCircle2,
+  Trash2,
+  Phone,
+  Globe,
+  MapPin,
+  Calendar,
 } from 'lucide-react';
 import {
   AgentId,
@@ -44,13 +52,20 @@ import { EA_INSTITUTIONAL_MEMORY } from '../../editorial-office/core/institution
 
 export const EditorialOfficePanel: React.FC = () => {
   const [activeSubTab, setActiveSubTab] = useState<
-    'dashboard' | 'agents' | 'redaccion' | 'instagram' | 'newsletter' | 'webops' | 'memoria'
+    'dashboard' | 'submissions' | 'agents' | 'redaccion' | 'instagram' | 'newsletter' | 'webops' | 'memoria'
   >('dashboard');
 
   const [officeState, setOfficeState] = useState<EditorialOfficeState | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isProcessing, setIsProcessing] = useState(false);
   const [actionNotice, setActionNotice] = useState<string | null>(null);
+
+  // Propuestas recibidas desde "Sube tu trabajo"
+  const [submissions, setSubmissions] = useState<any[]>([]);
+  const [isLoadingSubmissions, setIsLoadingSubmissions] = useState(false);
+  const [selectedSubmissionId, setSelectedSubmissionId] = useState<string | null>(null);
+  const [submissionFilter, setSubmissionFilter] = useState<'all' | 'pendiente_curaduria' | 'revisado' | 'aprobado'>('all');
+  const [submissionSearch, setSubmissionSearch] = useState('');
 
   // Redacción view state
   const [selectedArticleId, setSelectedArticleId] = useState<string>('espacio-para-hablar-con-dios-ssqj');
@@ -72,9 +87,47 @@ export const EditorialOfficePanel: React.FC = () => {
     }
   };
 
+  // Fetch propuestas de Sube tu trabajo
+  const fetchSubmissions = async () => {
+    setIsLoadingSubmissions(true);
+    try {
+      const res = await fetch('/api/editorial/submissions');
+      if (res.ok) {
+        const data = await res.json();
+        const subs = data.submissions || [];
+        setSubmissions(subs);
+        if (subs.length > 0 && !selectedSubmissionId) {
+          setSelectedSubmissionId(subs[0].id);
+        }
+      }
+    } catch (e) {
+      console.warn('Could not fetch submissions:', e);
+    } finally {
+      setIsLoadingSubmissions(false);
+    }
+  };
+
   useEffect(() => {
     fetchState();
+    fetchSubmissions();
   }, []);
+
+  const handleUpdateSubmissionStatus = async (id: string, status: string) => {
+    try {
+      const res = await fetch('/api/editorial/submissions/status', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, status }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setSubmissions(data.submissions || []);
+        triggerNotice(`Propuesta actualizada a: ${status.toUpperCase()}`);
+      }
+    } catch (err: any) {
+      triggerNotice(`Error: ${err.message}`);
+    }
+  };
 
   const triggerNotice = (msg: string) => {
     setActionNotice(msg);
@@ -169,6 +222,27 @@ export const EditorialOfficePanel: React.FC = () => {
   const currentNewsletter = officeState?.newsletters?.[0];
   const healthReport = officeState?.healthReport;
 
+  // Filtrado y selección de propuestas ("Sube tu trabajo")
+  const filteredSubmissions = submissions.filter((sub) => {
+    const matchesFilter =
+      submissionFilter === 'all'
+        ? true
+        : sub.status === submissionFilter;
+    const matchesSearch =
+      submissionSearch === '' ||
+      (sub.projectTitle || '').toLowerCase().includes(submissionSearch.toLowerCase()) ||
+      (sub.studioName || '').toLowerCase().includes(submissionSearch.toLowerCase()) ||
+      (sub.studioPrincipals || '').toLowerCase().includes(submissionSearch.toLowerCase());
+    return matchesFilter && matchesSearch;
+  });
+
+  const activeSubmission =
+    submissions.find((s) => s.id === selectedSubmissionId) || filteredSubmissions[0] || null;
+
+  const pendingSubmissionsCount = submissions.filter(
+    (s) => s.status !== 'aprobado' && s.status !== 'descartado'
+  ).length;
+
   return (
     <div className="flex-1 flex flex-col bg-[#0f0f0f] text-white overflow-hidden font-inter">
       {/* Top Bar Office Navigation */}
@@ -198,6 +272,21 @@ export const EditorialOfficePanel: React.FC = () => {
             }`}
           >
             A. DASHBOARD
+          </button>
+          <button
+            onClick={() => setActiveSubTab('submissions')}
+            className={`flex items-center gap-1.5 px-3 py-1 text-xs font-anton tracking-wider uppercase transition-colors relative ${
+              activeSubTab === 'submissions'
+                ? 'bg-amber-400 text-black shadow-xs font-bold'
+                : 'text-amber-300 hover:text-white'
+            }`}
+          >
+            <UploadCloud className="w-3.5 h-3.5" /> SUBE TU TRABAJO ({submissions.length})
+            {pendingSubmissionsCount > 0 && (
+              <span className="ml-1 px-1.5 py-0.2 bg-ea-crimson text-white font-mono text-[10px] font-bold rounded-full animate-pulse">
+                {pendingSubmissionsCount}
+              </span>
+            )}
           </button>
           <button
             onClick={() => setActiveSubTab('agents')}
@@ -295,6 +384,22 @@ export const EditorialOfficePanel: React.FC = () => {
                 <span className="font-mono text-[10px] text-neutral-500 uppercase tracking-widest block">AGENTES ACTIVOS</span>
                 <span className="font-anton text-3xl text-white mt-1 block">13 / 13</span>
                 <span className="text-[10px] text-emerald-400 font-mono mt-1 block">100% operativos</span>
+              </div>
+              <div
+                onClick={() => setActiveSubTab('submissions')}
+                className="bg-[#161616] border border-amber-400/40 p-4 cursor-pointer hover:border-amber-400 hover:bg-black/60 transition-all group"
+                title="Ver propuestas enviadas por arquitectos"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-[10px] text-amber-400 uppercase tracking-widest block">
+                    SUBE TU TRABAJO
+                  </span>
+                  <UploadCloud className="w-3.5 h-3.5 text-amber-400 group-hover:scale-110 transition-transform" />
+                </div>
+                <span className="font-anton text-3xl text-white mt-1 block">{submissions.length}</span>
+                <span className="text-[10px] text-amber-300 font-mono mt-1 block">
+                  {pendingSubmissionsCount} pendientes →
+                </span>
               </div>
               <div className="bg-[#161616] border border-white/10 p-4">
                 <span className="font-mono text-[10px] text-neutral-500 uppercase tracking-widest block">EN EDICIÓN / REVISIÓN</span>
@@ -409,7 +514,371 @@ export const EditorialOfficePanel: React.FC = () => {
           </div>
         )}
 
-        {/* SUBTAB B: AGENTES (13 ESPECIALISTAS) */}
+        {/* SUBTAB: SUBE TU TRABAJO (PROPUESTAS DE ARQUITECTOS) */}
+        {activeSubTab === 'submissions' && (
+          <div className="max-w-7xl mx-auto space-y-6">
+            {/* Header */}
+            <div className="bg-[#181818] border border-white/15 p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div>
+                <span className="font-mono text-xs text-amber-400 uppercase tracking-widest block mb-1">
+                  CURADURÍA EDITORIAL // OBRAS Y PERFILES EXTERNOS
+                </span>
+                <h1 className="font-anton text-2xl md:text-3xl text-white uppercase tracking-wider flex items-center gap-3">
+                  <UploadCloud className="w-7 h-7 text-amber-400" /> PROPUESTAS RECIBIDAS (SUBE TU TRABAJO)
+                </h1>
+                <p className="text-xs text-neutral-400 mt-1 max-w-2xl font-light">
+                  Revisa los perfiles de estudio, fichas técnicas, reconocimiento a los maestros mayores y carpetas de alta resolución enviadas por despachos y arquitectos ecuatorianos.
+                </p>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={fetchSubmissions}
+                  disabled={isLoadingSubmissions}
+                  className="flex items-center gap-2 px-3 py-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 text-xs font-anton tracking-wider uppercase transition-colors"
+                >
+                  <RefreshCw className={`w-3.5 h-3.5 ${isLoadingSubmissions ? 'animate-spin' : ''}`} />
+                  Actualizar Lista
+                </button>
+              </div>
+            </div>
+
+            {/* Main two-column layout */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 min-h-[600px]">
+              {/* Left Column: List of submissions (4 cols) */}
+              <div className="lg:col-span-4 bg-[#161616] border border-white/10 p-4 flex flex-col space-y-4">
+                {/* Search & Filter */}
+                <div className="space-y-2">
+                  <div className="relative">
+                    <Search className="w-3.5 h-3.5 text-neutral-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                    <input
+                      type="text"
+                      value={submissionSearch}
+                      onChange={(e) => setSubmissionSearch(e.target.value)}
+                      placeholder="Buscar por obra o estudio..."
+                      className="w-full bg-black/50 border border-white/15 rounded pl-8 pr-3 py-1.5 text-xs text-white placeholder:text-neutral-500 focus:outline-hidden focus:border-amber-400 font-mono"
+                    />
+                  </div>
+
+                  <div className="flex items-center gap-1 overflow-x-auto pb-1 text-[11px] font-anton tracking-wider uppercase">
+                    <button
+                      onClick={() => setSubmissionFilter('all')}
+                      className={`px-2.5 py-1 rounded transition-colors ${
+                        submissionFilter === 'all' ? 'bg-white text-black' : 'bg-black/40 text-neutral-400 hover:text-white'
+                      }`}
+                    >
+                      Todos ({submissions.length})
+                    </button>
+                    <button
+                      onClick={() => setSubmissionFilter('pendiente_curaduria')}
+                      className={`px-2.5 py-1 rounded transition-colors ${
+                        submissionFilter === 'pendiente_curaduria' ? 'bg-amber-400 text-black' : 'bg-black/40 text-neutral-400 hover:text-white'
+                      }`}
+                    >
+                      Pendientes ({submissions.filter((s) => s.status === 'pendiente_curaduria' || !s.status).length})
+                    </button>
+                    <button
+                      onClick={() => setSubmissionFilter('aprobado')}
+                      className={`px-2.5 py-1 rounded transition-colors ${
+                        submissionFilter === 'aprobado' ? 'bg-emerald-400 text-black' : 'bg-black/40 text-neutral-400 hover:text-white'
+                      }`}
+                    >
+                      Aprobados
+                    </button>
+                  </div>
+                </div>
+
+                {/* Submissions List */}
+                <div className="flex-1 overflow-y-auto space-y-2 max-h-[650px] pr-1">
+                  {filteredSubmissions.length === 0 ? (
+                    <div className="text-center py-12 text-neutral-500 text-xs font-mono">
+                      No hay propuestas registradas en esta vista.
+                    </div>
+                  ) : (
+                    filteredSubmissions.map((sub) => {
+                      const isSelected = activeSubmission?.id === sub.id;
+                      const isPending = sub.status === 'pendiente_curaduria' || !sub.status;
+                      const isApproved = sub.status === 'aprobado';
+                      return (
+                        <div
+                          key={sub.id}
+                          onClick={() => setSelectedSubmissionId(sub.id)}
+                          className={`p-3 border rounded cursor-pointer transition-all ${
+                            isSelected
+                              ? 'bg-white/10 border-amber-400 shadow-sm'
+                              : 'bg-black/30 border-white/5 hover:border-white/20'
+                          }`}
+                        >
+                          <div className="flex items-start justify-between gap-2 mb-1">
+                            <span className="font-anton text-sm text-white uppercase tracking-wider truncate">
+                              {sub.projectTitle || 'Proyecto sin título'}
+                            </span>
+                            <span
+                              className={`text-[9px] font-mono uppercase px-1.5 py-0.5 rounded shrink-0 font-bold ${
+                                isApproved
+                                  ? 'bg-emerald-400/20 text-emerald-300 border border-emerald-400/30'
+                                  : isPending
+                                  ? 'bg-amber-400/20 text-amber-300 border border-amber-400/30'
+                                  : 'bg-neutral-700 text-neutral-300'
+                              }`}
+                            >
+                              {sub.status || 'pendiente'}
+                            </span>
+                          </div>
+                          <div className="text-xs text-neutral-300 font-medium truncate">
+                            {sub.studioName || 'Estudio no especificado'}
+                          </div>
+                          <div className="flex items-center justify-between text-[10px] text-neutral-500 font-mono mt-2">
+                            <span className="uppercase text-amber-400/80">
+                              {sub.category || 'PROYECTOS'}
+                            </span>
+                            <span>
+                              {sub.receivedAt
+                                ? new Date(sub.receivedAt).toLocaleDateString()
+                                : 'Reciente'}
+                            </span>
+                          </div>
+                        </div>
+                      );
+                    })
+                  )}
+                </div>
+              </div>
+
+              {/* Right Column: Submission Details (8 cols) */}
+              <div className="lg:col-span-8 bg-[#161616] border border-white/10 p-6 flex flex-col space-y-6 overflow-y-auto max-h-[750px]">
+                {activeSubmission ? (
+                  <>
+                    {/* Top detail header */}
+                    <div className="border-b border-white/10 pb-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                      <div>
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="font-mono text-[10px] uppercase px-2 py-0.5 bg-amber-400/10 border border-amber-400/30 text-amber-400 font-bold rounded">
+                            {activeSubmission.category || 'PROYECTO'}
+                          </span>
+                          <span className="text-xs font-mono text-neutral-500">
+                            Recibido: {activeSubmission.receivedAt ? new Date(activeSubmission.receivedAt).toLocaleString() : 'N/A'}
+                          </span>
+                        </div>
+                        <h2 className="font-anton text-2xl md:text-3xl text-white uppercase tracking-wider">
+                          {activeSubmission.projectTitle || 'Sin título'}
+                        </h2>
+                        <p className="text-sm text-neutral-300 font-sans mt-0.5">
+                          Por <strong>{activeSubmission.studioName}</strong> ({activeSubmission.studioLocation || 'Ecuador'})
+                        </p>
+                      </div>
+
+                      {/* Status Action Buttons */}
+                      <div className="flex flex-wrap items-center gap-2">
+                        <button
+                          onClick={() => handleUpdateSubmissionStatus(activeSubmission.id, 'aprobado')}
+                          className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-500 hover:bg-emerald-600 text-black font-anton text-xs uppercase tracking-wider transition-colors rounded shadow-xs"
+                          title="Aprobar para publicar en Ecuadorian Architecture"
+                        >
+                          <CheckCircle2 className="w-3.5 h-3.5" /> Aprobar
+                        </button>
+                        <button
+                          onClick={() => handleUpdateSubmissionStatus(activeSubmission.id, 'revisado')}
+                          className="flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white border border-white/20 font-anton text-xs uppercase tracking-wider transition-colors rounded"
+                          title="Marcar como revisado"
+                        >
+                          <Eye className="w-3.5 h-3.5" /> Revisado
+                        </button>
+                        <button
+                          onClick={() => handleUpdateSubmissionStatus(activeSubmission.id, 'descartado')}
+                          className="flex items-center gap-1.5 px-3 py-1.5 bg-red-500/20 hover:bg-red-500/30 text-red-300 border border-red-500/30 font-anton text-xs uppercase tracking-wider transition-colors rounded"
+                          title="Archivar o descartar propuesta"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" /> Archivar
+                        </button>
+                        <a
+                          href={`mailto:${activeSubmission.contactEmail}?subject=Ecuadorian%20Architecture%20%E2%80%94%20Propuesta%20de%20${encodeURIComponent(activeSubmission.projectTitle || 'obra')}`}
+                          className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-400 hover:bg-amber-500 text-black font-anton text-xs uppercase tracking-wider transition-colors rounded"
+                          title="Contactar al estudio por correo"
+                        >
+                          <Mail className="w-3.5 h-3.5" /> Contactar
+                        </a>
+                      </div>
+                    </div>
+
+                    {/* Fila: Enlace a Carpeta Cloud de Alta Resolución */}
+                    {activeSubmission.cloudStorageUrl && (
+                      <div className="p-4 bg-amber-400/10 border border-amber-400/30 rounded flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                        <div className="flex items-center gap-3">
+                          <FolderOpen className="w-6 h-6 text-amber-400 shrink-0" />
+                          <div>
+                            <span className="font-anton text-xs text-amber-300 uppercase tracking-wider block">
+                              CARPETA DE FOTOGRAFÍAS Y PLANIMETRÍAS EN LA NUBE
+                            </span>
+                            <span className="text-xs font-mono text-neutral-300 truncate max-w-md block">
+                              {activeSubmission.cloudStorageUrl}
+                            </span>
+                          </div>
+                        </div>
+                        <a
+                          href={activeSubmission.cloudStorageUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 px-4 py-2 bg-amber-400 text-black font-anton text-xs uppercase tracking-wider rounded hover:bg-amber-300 transition-colors shrink-0"
+                        >
+                          <ExternalLink className="w-3.5 h-3.5" /> ABRIR EN NUBE ↗
+                        </a>
+                      </div>
+                    )}
+
+                    {/* Bloque 1: Perfil del Estudio */}
+                    <div className="bg-black/40 border border-white/5 p-4 rounded space-y-3">
+                      <span className="font-anton text-xs uppercase tracking-wider text-amber-400 block border-b border-white/10 pb-1">
+                        1. PERFIL DEL ESTUDIO
+                      </span>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-mono">
+                        <div>
+                          <span className="text-neutral-500 block text-[10px]">NOMBRE:</span>
+                          <span className="text-white font-medium">{activeSubmission.studioName || 'N/A'}</span>
+                        </div>
+                        <div>
+                          <span className="text-neutral-500 block text-[10px]">TITULARES:</span>
+                          <span className="text-white font-medium">{activeSubmission.studioPrincipals || 'N/A'}</span>
+                        </div>
+                        <div>
+                          <span className="text-neutral-500 block text-[10px]">UBICACIÓN:</span>
+                          <span className="text-white font-medium">{activeSubmission.studioLocation || 'N/A'}</span>
+                        </div>
+                        <div>
+                          <span className="text-neutral-500 block text-[10px]">AÑO FUNDACIÓN:</span>
+                          <span className="text-white font-medium">{activeSubmission.foundationYear || 'N/A'}</span>
+                        </div>
+                        <div>
+                          <span className="text-neutral-500 block text-[10px]">CORREO OFICIAL:</span>
+                          <span className="text-white font-medium">{activeSubmission.contactEmail || 'N/A'}</span>
+                        </div>
+                        <div>
+                          <span className="text-neutral-500 block text-[10px]">WEB / INSTAGRAM:</span>
+                          <span className="text-white font-medium">{activeSubmission.studioWebsite || 'N/A'}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Bloque 2: Ficha Técnica */}
+                    <div className="bg-black/40 border border-white/5 p-4 rounded space-y-3">
+                      <span className="font-anton text-xs uppercase tracking-wider text-amber-400 block border-b border-white/10 pb-1">
+                        2. FICHA TÉCNICA DEL PROYECTO
+                      </span>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono">
+                        <div>
+                          <span className="text-neutral-500 block text-[10px]">AÑO DE LA OBRA:</span>
+                          <span className="text-white font-medium">{activeSubmission.projectYear || 'N/A'}</span>
+                        </div>
+                        <div>
+                          <span className="text-neutral-500 block text-[10px]">UBICACIÓN OBRA:</span>
+                          <span className="text-white font-medium">{activeSubmission.projectLocation || 'N/A'}</span>
+                        </div>
+                        <div>
+                          <span className="text-neutral-500 block text-[10px]">ÁREA CONSTRUIDA:</span>
+                          <span className="text-white font-medium">{activeSubmission.builtArea || 'N/A'}</span>
+                        </div>
+                        <div className="sm:col-span-2">
+                          <span className="text-neutral-500 block text-[10px]">FOTÓGRAFOS / CRÉDITOS:</span>
+                          <span className="text-white font-medium">{activeSubmission.photographers || 'N/A'}</span>
+                        </div>
+                        <div>
+                          <span className="text-neutral-500 block text-[10px]">EQUIPO DE PROYECTO:</span>
+                          <span className="text-white font-medium">{activeSubmission.projectTeam || 'N/A'}</span>
+                        </div>
+                      </div>
+                      {activeSubmission.shortSummary && (
+                        <div className="pt-2 border-t border-white/5 text-xs text-neutral-300 font-sans">
+                          <span className="text-neutral-500 text-[10px] font-mono uppercase block mb-1">
+                            RESUMEN CORTO:
+                          </span>
+                          <p>{activeSubmission.shortSummary}</p>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Bloque 3: Mano de Obra & Oficio */}
+                    <div className="bg-black/40 border border-white/5 p-4 rounded space-y-3">
+                      <span className="font-anton text-xs uppercase tracking-wider text-amber-400 block border-b border-white/10 pb-1">
+                        3. MANO DE OBRA &amp; MAESTRO MAYOR
+                      </span>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-mono">
+                        <div>
+                          <span className="text-neutral-500 block text-[10px]">MAESTRO MAYOR:</span>
+                          <span className="text-white font-medium">{activeSubmission.maestroMayorName || 'No indicado'}</span>
+                        </div>
+                        <div>
+                          <span className="text-neutral-500 block text-[10px]">ESPECIALIDAD TÉCNICA:</span>
+                          <span className="text-white font-medium">{activeSubmission.maestroMayorSpecialty || 'N/A'}</span>
+                        </div>
+                        <div className="sm:col-span-2">
+                          <span className="text-neutral-500 block text-[10px]">CUADRILLA DE ARTESANOS / OBREROS:</span>
+                          <span className="text-white font-medium">{activeSubmission.constructionCrew || 'N/A'}</span>
+                        </div>
+                        {activeSubmission.craftsmanshipTribute && (
+                          <div className="sm:col-span-2">
+                            <span className="text-neutral-500 block text-[10px]">RECONOCIMIENTO A LA TÉCNICA:</span>
+                            <span className="text-white font-medium">{activeSubmission.craftsmanshipTribute}</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Bloque 4: Curaduría Crítica */}
+                    <div className="bg-black/40 border border-white/5 p-4 rounded space-y-4">
+                      <span className="font-anton text-xs uppercase tracking-wider text-amber-400 block border-b border-white/10 pb-1">
+                        4. PREGUNTAS CURATORIALES &amp; ENFOQUE CRÍTICO
+                      </span>
+                      {activeSubmission.contextRelation && (
+                        <div>
+                          <span className="text-neutral-400 text-xs font-mono font-bold block mb-1">
+                            ¿Cómo dialoga o cuestiona la obra su contexto geográfico y cultural?
+                          </span>
+                          <p className="text-xs text-neutral-300 font-sans leading-relaxed bg-black/30 p-3 border border-white/5 rounded">
+                            {activeSubmission.contextRelation}
+                          </p>
+                        </div>
+                      )}
+                      {activeSubmission.usersAppropriation && (
+                        <div>
+                          <span className="text-neutral-400 text-xs font-mono font-bold block mb-1">
+                            ¿De qué manera los usuarios habitan y transforman el espacio?
+                          </span>
+                          <p className="text-xs text-neutral-300 font-sans leading-relaxed bg-black/30 p-3 border border-white/5 rounded">
+                            {activeSubmission.usersAppropriation}
+                          </p>
+                        </div>
+                      )}
+                      {activeSubmission.materialityTectonics && (
+                        <div>
+                          <span className="text-neutral-400 text-xs font-mono font-bold block mb-1">
+                            ¿Cuáles son las decisiones tectónicas y materiales fundamentales?
+                          </span>
+                          <p className="text-xs text-neutral-300 font-sans leading-relaxed bg-black/30 p-3 border border-white/5 rounded">
+                            {activeSubmission.materialityTectonics}
+                          </p>
+                        </div>
+                      )}
+                      {activeSubmission.fullDescription && (
+                        <div>
+                          <span className="text-neutral-400 text-xs font-mono font-bold block mb-1">
+                            Memoria Descriptiva Completa:
+                          </span>
+                          <p className="text-xs text-neutral-300 font-sans leading-relaxed bg-black/30 p-3 border border-white/5 rounded whitespace-pre-line">
+                            {activeSubmission.fullDescription}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </>
+                ) : (
+                  <div className="h-full flex items-center justify-center text-neutral-500 font-mono text-sm py-20">
+                    Selecciona una propuesta del panel izquierdo para ver todos los detalles.
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
         {activeSubTab === 'agents' && (
           <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Agent Sidebar Selector */}
