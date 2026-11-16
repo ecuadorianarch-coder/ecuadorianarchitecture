@@ -273,7 +273,7 @@ const MIME_TYPES = {
   '.txt': 'text/plain; charset=utf-8',
 };
 
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
   const parsedUrl = url.parse(req.url, true);
   let pathname = parsedUrl.pathname || '/';
   try {
@@ -347,8 +347,8 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // 1.5. API: EA AI Editorial Office Engine Endpoints
-  if (pathname.startsWith('/api/editorial')) {
+  // 1.5. API: EA AI Editorial Office Engine Endpoints & Studio Auth
+  if (pathname.startsWith('/api/editorial') || pathname.startsWith('/api/auth') || pathname.startsWith('/api/studio')) {
     let engine;
     try {
       engine = require('./scripts/editorial-engine.cjs');
@@ -781,7 +781,7 @@ const server = http.createServer((req, res) => {
       if (pathname === '/api/auth/studio/login' && req.method === 'POST') {
         let body = '';
         req.on('data', chunk => body += chunk);
-        req.on('end', () => {
+        req.on('end', async () => {
           try {
             const { email, password } = JSON.parse(body);
             const cleanEmail = (email || '').trim().toLowerCase();
@@ -794,8 +794,22 @@ const server = http.createServer((req, res) => {
             }
 
             const studiosPath = path.join(dataDir, 'studios.json');
-            const studios = fs.existsSync(studiosPath) ? JSON.parse(fs.readFileSync(studiosPath, 'utf8') || '[]') : [];
-            const studio = studios.find(s => s.email.toLowerCase() === cleanEmail);
+            let studios = fs.existsSync(studiosPath) ? JSON.parse(fs.readFileSync(studiosPath, 'utf8') || '[]') : [];
+            let studio = studios.find(s => s.email.toLowerCase() === cleanEmail);
+
+            if (!studio) {
+              const cloud = await readFromSupabase('studios.json');
+              if (cloud) {
+                try {
+                  const cloudStudios = JSON.parse(cloud);
+                  studio = cloudStudios.find(s => s.email.toLowerCase() === cleanEmail);
+                  if (studio) {
+                    studios = cloudStudios;
+                    try { fs.writeFileSync(studiosPath, JSON.stringify(studios, null, 2), 'utf8'); } catch {}
+                  }
+                } catch {}
+              }
+            }
 
             if (!studio || !verifyStudioPassword(cleanPass, studio.passwordHash)) {
               res.statusCode = 401;
@@ -836,8 +850,18 @@ const server = http.createServer((req, res) => {
         }
 
         const studiosPath = path.join(dataDir, 'studios.json');
-        const studios = fs.existsSync(studiosPath) ? JSON.parse(fs.readFileSync(studiosPath, 'utf8') || '[]') : [];
-        const studio = studios.find(s => s.id === decoded.studioId || s.email.toLowerCase() === decoded.email.toLowerCase());
+        let studios = fs.existsSync(studiosPath) ? JSON.parse(fs.readFileSync(studiosPath, 'utf8') || '[]') : [];
+        let studio = studios.find(s => s.id === decoded.studioId || s.email.toLowerCase() === decoded.email.toLowerCase());
+
+        if (!studio) {
+          const cloud = await readFromSupabase('studios.json');
+          if (cloud) {
+            try {
+              const cloudStudios = JSON.parse(cloud);
+              studio = cloudStudios.find(s => s.id === decoded.studioId || s.email.toLowerCase() === decoded.email.toLowerCase());
+            } catch {}
+          }
+        }
 
         if (!studio) {
           res.statusCode = 404;
@@ -873,7 +897,14 @@ const server = http.createServer((req, res) => {
         }
 
         const submissionsPath = path.join(dataDir, 'submissions.json');
-        const allSubmissions = fs.existsSync(submissionsPath) ? JSON.parse(fs.readFileSync(submissionsPath, 'utf8') || '[]') : [];
+        let allSubmissions = fs.existsSync(submissionsPath) ? JSON.parse(fs.readFileSync(submissionsPath, 'utf8') || '[]') : [];
+        if (!allSubmissions.length) {
+          const cloud = await readFromSupabase('submissions.json');
+          if (cloud) {
+            try { allSubmissions = JSON.parse(cloud); } catch {}
+          }
+        }
+
         const mySubs = allSubmissions.filter(s =>
           (s.contactEmail || '').toLowerCase() === decoded.email.toLowerCase() ||
           (s.studioId && s.studioId === decoded.studioId)
