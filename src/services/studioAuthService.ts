@@ -104,9 +104,16 @@ export const studioAuthService = {
         body: JSON.stringify({ email, password }),
       });
 
-      const data = await res.json();
+      const text = await res.text();
+      let data: any;
+      try {
+        data = JSON.parse(text);
+      } catch {
+        return { success: false, error: 'El servidor respondió con un formato no reconocido. Por favor recarga e intenta de nuevo.' };
+      }
+
       if (!res.ok || !data.success) {
-        return { success: false, error: data.error || 'Credenciales inválidas' };
+        return { success: false, error: data.error || 'Credenciales inválidas. Verifica tu correo y contraseña.' };
       }
 
       this.setSession(data.token, data.studio);
@@ -129,7 +136,14 @@ export const studioAuthService = {
         },
       });
 
-      const data = await res.json();
+      const text = await res.text();
+      let data: any;
+      try {
+        data = JSON.parse(text);
+      } catch {
+        return { success: false, error: 'Respuesta inválida del servidor al obtener propuestas.' };
+      }
+
       if (!res.ok || !data.success) {
         return { success: false, error: data.error || 'No se pudieron cargar las propuestas.' };
       }

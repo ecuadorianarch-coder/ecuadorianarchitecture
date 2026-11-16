@@ -239,11 +239,20 @@ export const SubeTuTrabajo: React.FC<SubeTuTrabajoProps> = ({
         }),
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        if (data.token && data.studio) {
-          studioAuthService.setSession(data.token, data.studio);
-        }
+      const text = await response.text();
+      let data: any = {};
+      try {
+        data = JSON.parse(text);
+      } catch {
+        throw new Error('El servidor no devolvió una respuesta válida al enviar tu propuesta.');
+      }
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || 'No se pudo registrar la propuesta en el servidor.');
+      }
+
+      if (data.token && data.studio) {
+        studioAuthService.setSession(data.token, data.studio);
       }
 
       // Guardar respaldo local
@@ -251,7 +260,7 @@ export const SubeTuTrabajo: React.FC<SubeTuTrabajoProps> = ({
         const local = JSON.parse(localStorage.getItem('ea_my_submissions') || '[]');
         local.unshift({
           ...formData,
-          id: `ea-sub-${Date.now()}`,
+          id: data.id || `ea-sub-${Date.now()}`,
           date: new Date().toISOString(),
         });
         localStorage.setItem('ea_my_submissions', JSON.stringify(local));
@@ -262,7 +271,7 @@ export const SubeTuTrabajo: React.FC<SubeTuTrabajoProps> = ({
       setIsSuccess(true);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (err: any) {
-      setIsSuccess(true);
+      setErrorMessage(err.message || 'Error al enviar la propuesta.');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } finally {
       setIsSubmitting(false);

@@ -691,6 +691,7 @@ const server = http.createServer((req, res) => {
                 </div>
               `;
 
+              // 1. Notificación al equipo editorial
               fetch('https://api.resend.com/emails', {
                 method: 'POST',
                 headers: {
@@ -704,6 +705,49 @@ const server = http.createServer((req, res) => {
                   html: notifyHtml
                 })
               }).catch(err => console.error('[Submission Resend Error]:', err));
+
+              // 2. Notificación de confirmación al arquitecto postulante
+              if (submission.contactEmail && submission.contactEmail.includes('@')) {
+                const confirmationHtml = `
+                  <div style="font-family:sans-serif; background:#FFFFFF; color:#18181B; padding:32px; border:1px solid #E4E4E7; border-radius:12px; max-width:600px; margin:0 auto;">
+                    <h1 style="font-size:20px; color:#000; text-transform:uppercase; margin-bottom:4px;">Ecuadorian Architecture</h1>
+                    <p style="font-size:13px; color:#71717A; margin-top:0;">Comité Curatorial y Editorial</p>
+                    <hr style="border:none; border-top:1px solid #E4E4E7; margin:20px 0;" />
+                    <p style="font-size:15px; line-height:1.6;">
+                      Hola <strong>${submission.studioName || 'Colega Arquitecto/a'}</strong>,
+                    </p>
+                    <p style="font-size:14px; line-height:1.6; color:#3F3F46;">
+                      Hemos recibido exitosamente el expediente y documentación de tu obra <strong>${submission.projectTitle || 'propuesta'}</strong> para el proceso de curaduría crítica en Ecuadorian Architecture.
+                    </p>
+                    <div style="background:#F4F4F5; padding:16px; border-radius:8px; margin:20px 0; font-size:13px; color:#27272A; line-height:1.6;">
+                      <p style="margin:0 0 6px 0;"><strong>• Estado inicial:</strong> Pendiente de Curaduría</p>
+                      <p style="margin:0 0 6px 0;"><strong>• Tiempo de revisión:</strong> De 3 a 5 días hábiles</p>
+                      <p style="margin:0;"><strong>• Acceso a tu perfil:</strong> Tu cuenta de estudio ha quedado registrada. Puedes iniciar sesión en <a href="https://ecuadorianarch.com" style="color:#000; font-weight:bold;">ecuadorianarch.com</a> con este correo (<strong>${submission.contactEmail}</strong>) para consultar el estatus en vivo de tus obras enviadas.</p>
+                    </div>
+                    <p style="font-size:13px; color:#71717A;">
+                      Agradecemos tu confianza en compartir tu producción arquitectónica para la memoria colectiva del país.
+                    </p>
+                    <hr style="border:none; border-top:1px solid #E4E4E7; margin:20px 0;" />
+                    <p style="font-size:12px; color:#A1A1AA; margin:0;">
+                      Ecuadorian Architecture · Archivo Crítico y Editorial · Quito, Ecuador
+                    </p>
+                  </div>
+                `;
+
+                fetch('https://api.resend.com/emails', {
+                  method: 'POST',
+                  headers: {
+                    'Authorization': `Bearer ${resendKey}`,
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({
+                    from: 'Ecuadorian Architecture <onboarding@resend.dev>',
+                    to: [submission.contactEmail],
+                    subject: `✓ Propuesta Recibida: ${submission.projectTitle || 'Expediente'} — Ecuadorian Architecture`,
+                    html: confirmationHtml
+                  })
+                }).catch(err => console.error('[Architect Confirmation Resend Error]:', err));
+              }
             }
 
             res.setHeader('Content-Type', 'application/json');

@@ -2,6 +2,76 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import fs from 'fs';
+import crypto from 'crypto';
+
+// ---------------------------------------------------------------------------
+// Helpers Criptográficos y de Seguridad para Cuentas de Estudio (Dev & Server)
+// ---------------------------------------------------------------------------
+const JWT_STUDIO_SECRET = process.env.JWT_STUDIO_SECRET || 'ea_sec_studio_key_2026_94xkL8!scrypt_vault';
+
+function getResendApiKey(): string {
+  if (process.env.RESEND_API_KEY) return process.env.RESEND_API_KEY;
+  try {
+    const envContent = fs.readFileSync(path.resolve(__dirname, '.env'), 'utf8');
+    const match = envContent.match(/RESEND_API_KEY=([^\r\n]+)/);
+    return match ? match[1].trim() : '';
+  } catch {
+    return '';
+  }
+}
+
+function hashStudioPassword(password: string): string {
+  const salt = crypto.randomBytes(16).toString('hex');
+  const hash = crypto.scryptSync(password, salt, 64).toString('hex');
+  return `${salt}:${hash}`;
+}
+
+function verifyStudioPassword(password: string, storedHash?: string): boolean {
+  if (!storedHash || !storedHash.includes(':')) return false;
+  try {
+    const [salt, key] = storedHash.split(':');
+    const keyBuffer = Buffer.from(key, 'hex');
+    const derivedKey = crypto.scryptSync(password, salt, 64);
+    return crypto.timingSafeEqual(keyBuffer, derivedKey);
+  } catch (err) {
+    return false;
+  }
+}
+
+function generateStudioToken(studio: any): string {
+  const header = Buffer.from(JSON.stringify({ alg: 'HS256', typ: 'JWT' })).toString('base64url');
+  const payload = Buffer.from(JSON.stringify({
+    studioId: studio.id,
+    email: studio.email,
+    studioName: studio.studioName,
+    exp: Math.floor(Date.now() / 1000) + (60 * 24 * 3600),
+  })).toString('base64url');
+  const sig = crypto.createHmac('sha256', JWT_STUDIO_SECRET).update(`${header}.${payload}`).digest('base64url');
+  return `${header}.${payload}.${sig}`;
+}
+
+function verifyStudioToken(token?: string | null): any {
+  if (!token) return null;
+  const parts = token.split('.');
+  if (parts.length !== 3) return null;
+  const [header, payload, sig] = parts;
+  const expectedSig = crypto.createHmac('sha256', JWT_STUDIO_SECRET).update(`${header}.${payload}`).digest('base64url');
+  if (sig !== expectedSig) return null;
+  try {
+    const data = JSON.parse(Buffer.from(payload, 'base64url').toString('utf8'));
+    if (data.exp && data.exp < Math.floor(Date.now() / 1000)) return null;
+    return data;
+  } catch {
+    return null;
+  }
+}
+
+function extractStudioTokenFromHeader(req: any): string | null {
+  const authHeader = req.headers['authorization'];
+  if (!authHeader) return null;
+  const match = String(authHeader).match(/^Bearer\s+(.+)$/i);
+  return match ? match[1] : null;
+}
 
 const apiPlugin = () => ({
   name: 'ea-cms-api',
@@ -535,6 +605,335 @@ const apiPlugin = () => ({
             res.end(JSON.stringify({ success: true, today: metrics.dailyStats[today] }));
           } catch (e: any) {
             res.statusCode = 500;
+            res.end(JSON.stringify({ error: e.message }));
+          }
+        });
+        return;
+      }
+
+      // -----------------------------------------------------------------------
+      // PORTAL DE ESTUDIOS & SUBMISSIONS ("Sube tu trabajo")
+      // -----------------------------------------------------------------------
+      if (req.url?.startsWith('/api/auth/studio/login') && req.method === 'POST') {
+        let body = '';
+        req.on('data', (chunk: any) => body += chunk);
+        req.on('end', () => {
+          try {
+            const { email, password } = JSON.parse(body);
+            const cleanEmail = (email || '').trim().toLowerCase();
+            const cleanPass = (password || '').trim();
+
+            if (!cleanEmail || !cleanPass) {
+              res.statusCode = 400;
+              res.setHeader('Content-Type', 'application/json');
+              res.end(JSON.stringify({ error: 'Por favor ingresa tu correo y contraseña.' }));
+              return;
+            }
+
+            const studiosPath = path.join(dataPath, 'studios.json');
+            const studios = fs.existsSync(studiosPath) ? JSON.parse(fs.readFileSync(studiosPath, 'utf8') || '[]') : [];
+            const studio = studios.find((s: any) => s.email.toLowerCase() === cleanEmail);
+
+            if (!studio || !verifyStudioPassword(cleanPass, studio.passwordHash)) {
+              res.statusCode = 401;
+              res.setHeader('Content-Type', 'application/json');
+              res.end(JSON.stringify({ error: 'Credenciales inválidas. Verifica tu correo y contraseña.' }));
+              return;
+            }
+
+            const token = generateStudioToken(studio);
+            const safeStudio = {
+              id: studio.id,
+              email: studio.email,
+              studioName: studio.studioName,
+              studioPrincipals: studio.studioPrincipals,
+              studioLocation: studio.studioLocation,
+              foundationYear: studio.foundationYear,
+              studioWebsite: studio.studioWebsite,
+              studioAvatarUrl: studio.studioAvatarUrl,
+              studioCoverUrl: studio.studioCoverUrl,
+            };
+
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({ success: true, token, studio: safeStudio }));
+          } catch (e: any) {
+            res.statusCode = 500;
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({ error: e.message }));
+          }
+        });
+        return;
+      }
+
+      if (req.url?.startsWith('/api/auth/studio/me') && req.method === 'GET') {
+        const token = extractStudioTokenFromHeader(req);
+        const decoded = verifyStudioToken(token);
+        if (!decoded) {
+          res.statusCode = 401;
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ error: 'Sesión no válida o expirada.' }));
+          return;
+        }
+
+        const studiosPath = path.join(dataPath, 'studios.json');
+        const studios = fs.existsSync(studiosPath) ? JSON.parse(fs.readFileSync(studiosPath, 'utf8') || '[]') : [];
+        const studio = studios.find((s: any) => s.id === decoded.studioId || s.email.toLowerCase() === decoded.email.toLowerCase());
+
+        if (!studio) {
+          res.statusCode = 404;
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ error: 'Estudio no encontrado.' }));
+          return;
+        }
+
+        const safeStudio = {
+          id: studio.id,
+          email: studio.email,
+          studioName: studio.studioName,
+          studioPrincipals: studio.studioPrincipals,
+          studioLocation: studio.studioLocation,
+          foundationYear: studio.foundationYear,
+          studioWebsite: studio.studioWebsite,
+          studioAvatarUrl: studio.studioAvatarUrl,
+          studioCoverUrl: studio.studioCoverUrl,
+        };
+
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify({ success: true, studio: safeStudio }));
+        return;
+      }
+
+      if (req.url?.startsWith('/api/studio/my-submissions') && req.method === 'GET') {
+        const token = extractStudioTokenFromHeader(req);
+        const decoded = verifyStudioToken(token);
+        if (!decoded) {
+          res.statusCode = 401;
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ error: 'Sesión no válida o expirada.' }));
+          return;
+        }
+
+        const submissionsPath = path.join(dataPath, 'submissions.json');
+        const allSubmissions = fs.existsSync(submissionsPath) ? JSON.parse(fs.readFileSync(submissionsPath, 'utf8') || '[]') : [];
+        const mySubs = allSubmissions.filter((s: any) =>
+          (s.contactEmail || '').toLowerCase() === decoded.email.toLowerCase() ||
+          (s.studioId && s.studioId === decoded.studioId)
+        );
+
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify({ success: true, submissions: mySubs }));
+        return;
+      }
+
+      if (req.url?.startsWith('/api/editorial/submissions/status') && req.method === 'POST') {
+        let body = '';
+        req.on('data', (chunk: any) => body += chunk);
+        req.on('end', () => {
+          try {
+            const { id, status } = JSON.parse(body);
+            const submissionsPath = path.join(dataPath, 'submissions.json');
+            let submissions = fs.existsSync(submissionsPath)
+              ? JSON.parse(fs.readFileSync(submissionsPath, 'utf8') || '[]')
+              : [];
+            submissions = submissions.map((sub: any) => sub.id === id ? { ...sub, status, updatedAt: new Date().toISOString() } : sub);
+            fs.writeFileSync(submissionsPath, JSON.stringify(submissions, null, 2), 'utf8');
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({ success: true, submissions }));
+          } catch (e: any) {
+            res.statusCode = 500;
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({ error: e.message }));
+          }
+        });
+        return;
+      }
+
+      if (req.url?.startsWith('/api/editorial/submissions') && req.method === 'GET') {
+        try {
+          const submissionsPath = path.join(dataPath, 'submissions.json');
+          const submissions = fs.existsSync(submissionsPath)
+            ? JSON.parse(fs.readFileSync(submissionsPath, 'utf8') || '[]')
+            : [];
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ success: true, submissions }));
+        } catch (e: any) {
+          res.statusCode = 500;
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ error: e.message }));
+        }
+        return;
+      }
+
+      if (req.url?.startsWith('/api/editorial/submissions') && req.method === 'POST') {
+        let body = '';
+        req.on('data', (chunk: any) => body += chunk);
+        req.on('end', async () => {
+          try {
+            const submission = JSON.parse(body);
+
+            // Registro / Actualización Segura de Cuenta de Estudio (Cifrado scrypt)
+            const studiosPath = path.join(dataPath, 'studios.json');
+            let studios = fs.existsSync(studiosPath) ? JSON.parse(fs.readFileSync(studiosPath, 'utf8') || '[]') : [];
+            const cleanEmail = (submission.contactEmail || '').toLowerCase().trim();
+            let studio = studios.find((s: any) => s.email.toLowerCase() === cleanEmail);
+
+            if (!studio && submission.studioPassword) {
+              studio = {
+                id: `studio-${Date.now()}`,
+                email: cleanEmail,
+                passwordHash: hashStudioPassword(submission.studioPassword),
+                studioName: submission.studioName || '',
+                studioPrincipals: submission.studioPrincipals || '',
+                studioLocation: submission.studioLocation || '',
+                foundationYear: submission.foundationYear || '',
+                studioWebsite: submission.studioWebsite || '',
+                studioAvatarUrl: submission.studioAvatarUrl || '',
+                studioCoverUrl: submission.studioCoverUrl || '',
+                createdAt: new Date().toISOString(),
+              };
+              studios.push(studio);
+              fs.writeFileSync(studiosPath, JSON.stringify(studios, null, 2), 'utf8');
+            } else if (studio && submission.studioPassword && !studio.passwordHash) {
+              studio.passwordHash = hashStudioPassword(submission.studioPassword);
+              fs.writeFileSync(studiosPath, JSON.stringify(studios, null, 2), 'utf8');
+            }
+
+            const studioToken = studio ? generateStudioToken(studio) : null;
+
+            // Guardar propuesta en submissions.json
+            const safeSubmissionToStore = { ...submission };
+            delete safeSubmissionToStore.studioPassword;
+
+            const submissionsPath = path.join(dataPath, 'submissions.json');
+            const submissions = fs.existsSync(submissionsPath)
+              ? JSON.parse(fs.readFileSync(submissionsPath, 'utf8') || '[]')
+              : [];
+
+            const newEntry = {
+              id: `sub-${Date.now()}`,
+              studioId: studio ? studio.id : undefined,
+              status: 'pendiente_curaduria',
+              receivedAt: new Date().toISOString(),
+              ...safeSubmissionToStore
+            };
+            submissions.unshift(newEntry);
+            fs.writeFileSync(submissionsPath, JSON.stringify(submissions, null, 2), 'utf8');
+
+            // Enviar notificaciones vía Resend
+            const resendKey = getResendApiKey();
+            if (resendKey) {
+              const editorEmail = process.env.RECIPIENT_EMAIL || 'ecuadorianarch@gmail.com';
+              const notifySubject = `📐 Nueva Propuesta: ${submission.projectTitle || 'Sin título'} — ${submission.studioName || 'Estudio'}`;
+              const notifyHtml = `
+                <div style="font-family:sans-serif; background:#09090B; color:#E4E4E7; padding:32px; border-radius:8px;">
+                  <h1 style="color:#FFF; font-size:20px;">Nueva Propuesta Recibida para Curaduría</h1>
+                  <p><strong>Estudio:</strong> ${submission.studioName || 'N/A'} (${submission.studioLocation || 'Ecuador'})</p>
+                  <p><strong>Titulares:</strong> ${submission.studioPrincipals || 'N/A'}</p>
+                  <p><strong>Contacto:</strong> ${submission.contactEmail} · ${submission.contactPhone || 'N/A'}</p>
+                  <p><strong>Web/IG:</strong> ${submission.studioWebsite || 'N/A'}</p>
+                  <hr style="border-color:#27272A; margin:20px 0;" />
+                  <h2 style="color:#FFF; font-size:16px;">Ficha Técnica</h2>
+                  <p><strong>Obra:</strong> ${submission.projectTitle} (${submission.projectYear || 'Reciente'})</p>
+                  <p><strong>Ubicación:</strong> ${submission.projectLocation || 'N/A'}</p>
+                  <p><strong>Área:</strong> ${submission.builtArea || 'N/A'}</p>
+                  <p><strong>Fotografía:</strong> ${submission.photographers || 'N/A'}</p>
+                  <p><strong>Resumen:</strong> ${submission.shortSummary || 'N/A'}</p>
+                  <hr style="border-color:#27272A; margin:20px 0;" />
+                  <h2 style="color:#FFF; font-size:16px;">Mano de Obra &amp; Oficio</h2>
+                  <p><strong>Maestro Mayor:</strong> ${submission.maestroMayorName || 'No indicado'} (${submission.maestroMayorSpecialty || 'N/A'})</p>
+                  <p><strong>Cuadrilla:</strong> ${submission.constructionCrew || 'N/A'}</p>
+                  <hr style="border-color:#27272A; margin:20px 0;" />
+                  <h2 style="color:#FFF; font-size:16px;">Curaduría Crítica</h2>
+                  <p><strong>Contexto:</strong> ${submission.contextRelation || 'N/A'}</p>
+                  <p><strong>Usuarios:</strong> ${submission.usersAppropriation || 'N/A'}</p>
+                  <p><strong>Materialidad:</strong> ${submission.materialityTectonics || 'N/A'}</p>
+                  <p><strong>Memoria:</strong> ${submission.fullDescription || 'Ver enlace'}</p>
+                  <hr style="border-color:#27272A; margin:20px 0;" />
+                  <p style="background:#18181B; padding:16px; border-radius:6px;">
+                    📂 <strong>Carpeta Cloud:</strong> <a href="${submission.cloudStorageUrl}" style="color:#38BDF8;" target="_blank">${submission.cloudStorageUrl}</a>
+                  </p>
+                </div>
+              `;
+
+              // 1. Notificación al equipo editorial
+              fetch('https://api.resend.com/emails', {
+                method: 'POST',
+                headers: {
+                  'Authorization': `Bearer ${resendKey}`,
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  from: 'Ecuadorian Architecture <onboarding@resend.dev>',
+                  to: [editorEmail],
+                  subject: notifySubject,
+                  html: notifyHtml
+                })
+              }).catch(err => console.error('[Resend Dev Editor Error]:', err));
+
+              // 2. Confirmación al arquitecto / estudio postulante
+              if (submission.contactEmail && submission.contactEmail.includes('@')) {
+                const confirmationHtml = `
+                  <div style="font-family:sans-serif; background:#FFFFFF; color:#18181B; padding:32px; border:1px solid #E4E4E7; border-radius:12px; max-width:600px; margin:0 auto;">
+                    <h1 style="font-size:20px; color:#000; text-transform:uppercase; margin-bottom:4px;">Ecuadorian Architecture</h1>
+                    <p style="font-size:13px; color:#71717A; margin-top:0;">Comité Curatorial y Editorial</p>
+                    <hr style="border:none; border-top:1px solid #E4E4E7; margin:20px 0;" />
+                    <p style="font-size:15px; line-height:1.6;">
+                      Hola <strong>${submission.studioName || 'Colega Arquitecto/a'}</strong>,
+                    </p>
+                    <p style="font-size:14px; line-height:1.6; color:#3F3F46;">
+                      Hemos recibido exitosamente el expediente y documentación de tu obra <strong>${submission.projectTitle || 'propuesta'}</strong> para el proceso de curaduría crítica en Ecuadorian Architecture.
+                    </p>
+                    <div style="background:#F4F4F5; padding:16px; border-radius:8px; margin:20px 0; font-size:13px; color:#27272A; line-height:1.6;">
+                      <p style="margin:0 0 6px 0;"><strong>• Estado inicial:</strong> Pendiente de Curaduría</p>
+                      <p style="margin:0 0 6px 0;"><strong>• Tiempo de revisión:</strong> De 3 a 5 días hábiles</p>
+                      <p style="margin:0;"><strong>• Acceso a tu perfil:</strong> Tu cuenta de estudio ha quedado registrada. Puedes iniciar sesión en <a href="https://ecuadorianarch.com" style="color:#000; font-weight:bold;">ecuadorianarch.com</a> con este correo (<strong>${submission.contactEmail}</strong>) para consultar el estatus en vivo de tus obras enviadas.</p>
+                    </div>
+                    <p style="font-size:13px; color:#71717A;">
+                      Agradecemos tu confianza en compartir tu producción arquitectónica para la memoria colectiva del país.
+                    </p>
+                    <hr style="border:none; border-top:1px solid #E4E4E7; margin:20px 0;" />
+                    <p style="font-size:12px; color:#A1A1AA; margin:0;">
+                      Ecuadorian Architecture · Archivo Crítico y Editorial · Quito, Ecuador
+                    </p>
+                  </div>
+                `;
+
+                fetch('https://api.resend.com/emails', {
+                  method: 'POST',
+                  headers: {
+                    'Authorization': `Bearer ${resendKey}`,
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({
+                    from: 'Ecuadorian Architecture <onboarding@resend.dev>',
+                    to: [submission.contactEmail],
+                    subject: `📐 Confirmación de recepción: ${submission.projectTitle || 'Tu propuesta'} — Ecuadorian Architecture`,
+                    html: confirmationHtml
+                  })
+                }).catch(err => console.error('[Resend Dev Studio Confirm Error]:', err));
+              }
+            }
+
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({
+              success: true,
+              id: newEntry.id,
+              token: studioToken,
+              studio: studio ? {
+                id: studio.id,
+                email: studio.email,
+                studioName: studio.studioName,
+                studioPrincipals: studio.studioPrincipals,
+                studioLocation: studio.studioLocation,
+                foundationYear: studio.foundationYear,
+                studioWebsite: studio.studioWebsite,
+                studioAvatarUrl: studio.studioAvatarUrl,
+                studioCoverUrl: studio.studioCoverUrl,
+              } : null
+            }));
+          } catch (e: any) {
+            res.statusCode = 500;
+            res.setHeader('Content-Type', 'application/json');
             res.end(JSON.stringify({ error: e.message }));
           }
         });
