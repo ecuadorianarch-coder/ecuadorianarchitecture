@@ -1,0 +1,29 @@
+name: EA Weekly Intelligence & UX Audit
+
+on:
+  schedule:
+    # Se ejecuta todos los lunes a las 13:00 UTC (08:00 AM hora de Ecuador UTC-5)
+    - cron: '0 13 * * 1'
+  workflow_dispatch: # Permite disparar la auditoría manualmente desde la pestaña Actions en GitHub
+
+jobs:
+  audit-and-report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run Autonomous Weekly Intelligence Audit
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL || 'ecuadorianarch@gmail.com' }}
+          VITE_SITE_URL: https://ecuadorianarch.com
+          GA4_PROPERTY_ID: '563538451'
+          CLARITY_PROJECT_ID: 'z8k98ghi6h'
+        run: node scripts/ea-weekly-intelligence.cjs --send
