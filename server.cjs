@@ -575,6 +575,11 @@ const server = http.createServer((req, res) => {
                   <p><strong>Fotografía:</strong> ${submission.photographers || 'N/A'}</p>
                   <p><strong>Resumen:</strong> ${submission.shortSummary || 'N/A'}</p>
                   <hr style="border-color:#27272A; margin:20px 0;" />
+                  <h2 style="color:#FFF; font-size:16px;">Mano de Obra &amp; Oficio</h2>
+                  <p><strong>Maestro Mayor:</strong> ${submission.maestroMayorName || 'No indicado'} (${submission.maestroMayorSpecialty || 'N/A'})</p>
+                  <p><strong>Cuadrilla / Artesanos:</strong><br/>${submission.constructionCrew || 'N/A'}</p>
+                  <p><strong>Reconocimiento a la Mano de Obra:</strong><br/>${submission.craftsmanshipTribute || 'N/A'}</p>
+                  <hr style="border-color:#27272A; margin:20px 0;" />
                   <h2 style="color:#FFF; font-size:16px;">Curaduría Crítica</h2>
                   <p><strong>Contexto y Territorio:</strong><br/>${submission.contextRelation || 'N/A'}</p>
                   <p><strong>Usuarios y Apropiación:</strong><br/>${submission.usersAppropriation || 'N/A'}</p>
