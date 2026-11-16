@@ -11,7 +11,7 @@
  */
 
 export interface ParsedRoute {
-  view: 'home' | 'catalog' | 'project-detail' | 'acerca' | 'studio-detail';
+  view: 'home' | 'catalog' | 'project-detail' | 'acerca' | 'studio-detail' | 'sube-tu-trabajo';
   catalogSection?: 'proyectos' | 'academia' | 'territorios';
   projectId?: string;
   studioSlug?: string;
@@ -60,6 +60,8 @@ export function parseCurrentRoute(): ParsedRoute {
     return { view: 'catalog', catalogSection: 'territorios' };
   } else if (hash === '#acerca-de-ea' || hash === '#acerca') {
     return { view: 'acerca', targetTab: 'acerca' };
+  } else if (hash === '#sube-tu-trabajo' || hash === '#sube-tu-proyecto' || hash === '#contribuir') {
+    return { view: 'sube-tu-trabajo' };
   }
 
   // 3. Clean Path-based Routing (ArchDaily / Dezeen standard)
@@ -76,6 +78,10 @@ export function parseCurrentRoute(): ParsedRoute {
 
   if (first === 'acerca-de-ea' || first === 'acerca') {
     return { view: 'acerca', targetTab: 'acerca' };
+  }
+
+  if (first === 'sube-tu-trabajo' || first === 'sube-tu-proyecto' || first === 'contribuir') {
+    return { view: 'sube-tu-trabajo' };
   }
 
   if (first === 'proyectos') {

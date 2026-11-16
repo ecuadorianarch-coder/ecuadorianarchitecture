@@ -201,6 +201,25 @@ export const Footer: React.FC = () => {
               </a>
 
               <a
+                href="/sube-tu-trabajo"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (window.history && window.history.pushState) {
+                    window.history.pushState({ path: '/sube-tu-trabajo' }, '', '/sube-tu-trabajo');
+                    window.dispatchEvent(new PopStateEvent('popstate'));
+                  } else {
+                    window.location.href = '/sube-tu-trabajo';
+                  }
+                  window.scrollTo({ top: 0, behavior: 'instant' });
+                }}
+                className="hover:text-blue-600 transition-colors duration-200 cursor-pointer font-medium hover:underline underline-offset-4 focus-visible:ring-2 focus-visible:ring-ea-black/70 focus-visible:outline-hidden min-h-[44px] py-2 px-1.5 inline-flex items-center active:scale-95 no-underline font-semibold"
+                title="Enviar tu proyecto u obra para curaduría editorial"
+                data-cursor
+              >
+                Sube tu trabajo
+              </a>
+
+              <a
                 href="#destacados"
                 onClick={(e) => {
                   if (window.location.hash === '#destacados' || window.location.hash === '' || window.location.hash === '#home') {

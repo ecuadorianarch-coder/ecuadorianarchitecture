@@ -534,6 +534,100 @@ const server = http.createServer((req, res) => {
         return;
       }
 
+      // Recepción de Proyectos y Perfiles de Estudio ("Sube tu trabajo")
+      if (pathname === '/api/editorial/submissions' && req.method === 'POST') {
+        let body = '';
+        req.on('data', chunk => body += chunk);
+        req.on('end', async () => {
+          try {
+            const submission = JSON.parse(body);
+            const submissionsPath = path.join(dataDir, 'submissions.json');
+            const submissions = fs.existsSync(submissionsPath)
+              ? JSON.parse(fs.readFileSync(submissionsPath, 'utf8') || '[]')
+              : [];
+            
+            const newEntry = {
+              id: `sub-${Date.now()}`,
+              status: 'pendiente_curaduria',
+              receivedAt: new Date().toISOString(),
+              ...submission
+            };
+            submissions.unshift(newEntry);
+            fs.writeFileSync(submissionsPath, JSON.stringify(submissions, null, 2), 'utf8');
+
+            // Notificación vía Resend al equipo editorial
+            const resendKey = process.env.RESEND_API_KEY;
+            if (resendKey) {
+              const editorEmail = process.env.RECIPIENT_EMAIL || 'editor@ecuadorianarch.com';
+              const subject = `📐 Nueva Propuesta Editorial: ${submission.projectTitle || 'Sin título'} — ${submission.studioName || 'Estudio'}`;
+              const notifyHtml = `
+                <div style="font-family:sans-serif; background:#09090B; color:#E4E4E7; padding:32px; border-radius:8px;">
+                  <h1 style="color:#FFF; font-size:20px;">Nueva Propuesta Recibida para Curaduría</h1>
+                  <p><strong>Estudio:</strong> ${submission.studioName || 'N/A'} (${submission.studioLocation || 'Ecuador'})</p>
+                  <p><strong>Titulares:</strong> ${submission.studioPrincipals || 'N/A'}</p>
+                  <p><strong>Contacto:</strong> ${submission.contactEmail} · ${submission.contactPhone || 'N/A'}</p>
+                  <p><strong>Web/IG:</strong> ${submission.studioWebsite || 'N/A'}</p>
+                  <hr style="border-color:#27272A; margin:20px 0;" />
+                  <h2 style="color:#FFF; font-size:16px;">Ficha Técnica</h2>
+                  <p><strong>Obra:</strong> ${submission.projectTitle} (${submission.projectYear || 'Reciente'})</p>
+                  <p><strong>Ubicación Obra:</strong> ${submission.projectLocation || 'N/A'}</p>
+                  <p><strong>Área:</strong> ${submission.builtArea || 'N/A'}</p>
+                  <p><strong>Fotografía:</strong> ${submission.photographers || 'N/A'}</p>
+                  <p><strong>Resumen:</strong> ${submission.shortSummary || 'N/A'}</p>
+                  <hr style="border-color:#27272A; margin:20px 0;" />
+                  <h2 style="color:#FFF; font-size:16px;">Curaduría Crítica</h2>
+                  <p><strong>Contexto y Territorio:</strong><br/>${submission.contextRelation || 'N/A'}</p>
+                  <p><strong>Usuarios y Apropiación:</strong><br/>${submission.usersAppropriation || 'N/A'}</p>
+                  <p><strong>Materialidad y Tectónica:</strong><br/>${submission.materialityTectonics || 'N/A'}</p>
+                  <p><strong>Memoria Completa:</strong><br/>${submission.fullDescription || 'Ver enlace'}</p>
+                  <hr style="border-color:#27272A; margin:20px 0;" />
+                  <p style="background:#18181B; padding:16px; border-radius:6px;">
+                    📂 <strong>Carpeta de Archivos Gráficos:</strong><br/>
+                    <a href="${submission.cloudStorageUrl}" style="color:#38BDF8;" target="_blank">${submission.cloudStorageUrl}</a>
+                  </p>
+                </div>
+              `;
+
+              fetch('https://api.resend.com/emails', {
+                method: 'POST',
+                headers: {
+                  'Authorization': `Bearer ${resendKey}`,
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  from: 'Ecuadorian Architecture Editorial <onboarding@resend.dev>',
+                  to: [editorEmail],
+                  subject: subject,
+                  html: notifyHtml
+                })
+              }).catch(err => console.error('[Submission Resend Error]:', err));
+            }
+
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({ success: true, id: newEntry.id }));
+          } catch (e) {
+            res.statusCode = 500;
+            res.end(JSON.stringify({ error: e.message }));
+          }
+        });
+        return;
+      }
+
+      if (pathname === '/api/editorial/submissions' && req.method === 'GET') {
+        try {
+          const submissionsPath = path.join(dataDir, 'submissions.json');
+          const submissions = fs.existsSync(submissionsPath)
+            ? JSON.parse(fs.readFileSync(submissionsPath, 'utf8') || '[]')
+            : [];
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ success: true, submissions }));
+        } catch (e) {
+          res.statusCode = 500;
+          res.end(JSON.stringify({ error: e.message }));
+        }
+        return;
+      }
+
       // Agente Autónomo de Inteligencia Editorial & UX Semanal
       if (pathname === '/api/editorial/intelligence/run' && (req.method === 'POST' || req.method === 'GET')) {
         try {

@@ -676,6 +676,31 @@ function renderSemanticAboutBody(sectionPage) {
   `;
 }
 
+function renderSemanticSubmitBody(sectionPage) {
+  return `
+    <main class="ea-semantic-submit max-w-4xl mx-auto px-4 sm:px-6 py-10 text-[#111111] bg-white font-sans" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+      <nav aria-label="Breadcrumb" class="mb-6 text-xs text-neutral-500 font-mono flex items-center gap-2">
+        <a href="/" class="hover:underline text-black font-semibold">Inicio</a>
+        <span>/</span>
+        <span class="text-neutral-700">Sube tu trabajo</span>
+      </nav>
+      <header class="mb-10 border-b border-neutral-200 pb-6">
+        <p class="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-2">Convocatoria Editorial Abierta</p>
+        <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-black mb-4">${escapeHtml(sectionPage.title)}</h1>
+        <p class="text-base sm:text-lg text-neutral-700 leading-relaxed">${escapeHtml(sectionPage.desc)}</p>
+      </header>
+      <section class="space-y-4 mb-10 text-neutral-800 leading-relaxed">
+        <p>Si eres arquitecto, investigador o parte de un estudio de arquitectura en Ecuador o Latinoamérica, puedes postular tus proyectos construidos, investigaciones académicas o análisis territoriales para ser catalogados y publicados en Ecuadorian Architecture.</p>
+        <p>Requisitos: Planimetrías completas en fondo blanco (plantas, cortes, fachadas), fotografías de obra en alta resolución con créditos y memoria conceptual que responda a contexto, usuarios y materialidad.</p>
+      </section>
+      <footer class="pt-6 border-t border-neutral-200 text-xs text-neutral-500 font-mono flex justify-between">
+        <span>Ecuadorian Architecture — Curaduría Editorial</span>
+        <a href="/" class="hover:underline text-black font-semibold">← Volver al inicio</a>
+      </footer>
+    </main>
+  `;
+}
+
 function renderSemanticHomeBody(allProjects = []) {
   return `
     <main class="ea-semantic-home max-w-5xl mx-auto px-4 sm:px-6 py-10 text-[#111111] bg-white font-sans" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
@@ -862,6 +887,7 @@ async function run() {
     { loc: `${SITE_URL}/academia`, changefreq: 'weekly', priority: '0.8' },
     { loc: `${SITE_URL}/territorios`, changefreq: 'weekly', priority: '0.8' },
     { loc: `${SITE_URL}/acerca-de-ea`, changefreq: 'monthly', priority: '0.7' },
+    { loc: `${SITE_URL}/sube-tu-trabajo`, changefreq: 'monthly', priority: '0.8' },
   ];
 
   // 1. Generate Root Homepage Semantic HTML
@@ -897,12 +923,18 @@ async function run() {
       title: 'Acerca de Ecuadorian Architecture — Manifiesto y Crítica Nacional',
       desc: 'Plataforma independiente dedicada a la crítica, archivo y difusión del pensamiento espacial y constructivo ecuatoriano.',
     },
+    {
+      path: 'sube-tu-trabajo',
+      title: 'Sube tu Trabajo — Convocatoria y Curaduría Editorial | Ecuadorian Architecture',
+      desc: 'Envía tu obra de arquitectura, proyecto de investigación o perfil de estudio para evaluación y publicación en el catálogo oficial de Ecuadorian Architecture.',
+    },
   ];
 
   for (const page of sectionPages) {
     const isAbout = page.path === 'acerca-de-ea';
+    const isSubmit = page.path === 'sube-tu-trabajo';
     const categoryItems = page.path === 'proyectos' ? projects : page.path === 'academia' ? academia : territorios;
-    const leadItem = !isAbout && Array.isArray(categoryItems) ? categoryItems.find((it) => it?.heroImage) : null;
+    const leadItem = !isAbout && !isSubmit && Array.isArray(categoryItems) ? categoryItems.find((it) => it?.heroImage) : null;
     const sectionOgImage = leadItem
       ? toFirstPartyOgImageUrl(leadItem.heroImage, leadItem, 'vista-principal', SITE_URL)
       : `${SITE_URL}/og-image.jpg`;
@@ -914,10 +946,12 @@ async function run() {
       ogImageAlt: page.title,
       bodyHtml: isAbout
         ? renderSemanticAboutBody(page)
+        : isSubmit
+        ? renderSemanticSubmitBody(page)
         : renderSemanticCategoryBody(page, categoryItems),
       schemaJsonLd: {
         '@context': 'https://schema.org',
-        '@type': isAbout ? 'AboutPage' : 'CollectionPage',
+        '@type': isAbout ? 'AboutPage' : isSubmit ? 'WebPage' : 'CollectionPage',
         name: page.title,
         description: page.desc,
         url: `${SITE_URL}/${page.path}`,

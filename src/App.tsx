@@ -11,6 +11,7 @@ import { ProjectsCatalog, CatalogSectionType } from './pages/ProjectsCatalog';
 import { ProjectDetail } from './pages/ProjectDetail';
 import { CinematicTransition } from './components/common/CinematicTransition';
 import { AcercaDeEA } from './pages/AcercaDeEA';
+import { SubeTuTrabajo } from './pages/SubeTuTrabajo';
 import { AdvertiserReport } from './pages/AdvertiserReport';
 import { AdvertiserPortal } from './pages/AdvertiserPortal';
 import { AuthorProfileModal } from './components/author/AuthorProfileModal';
@@ -26,7 +27,7 @@ export const AppContent: React.FC = () => {
   const [advertiserToken, setAdvertiserToken] = useState<string | null>(initialRoute.advertiserToken || null);
   const [reportToken, setReportToken] = useState<string | null>(initialRoute.reportToken || null);
   const [selectedStudioSlug, setSelectedStudioSlug] = useState<string | null>(initialRoute.studioSlug || null);
-  const [currentView, setCurrentView] = useState<'home' | 'catalog' | 'project-detail' | 'acerca'>(
+  const [currentView, setCurrentView] = useState<'home' | 'catalog' | 'project-detail' | 'acerca' | 'sube-tu-trabajo'>(
     initialRoute.view === 'studio-detail' ? 'catalog' : initialRoute.view
   );
   const [catalogSection, setCatalogSection] = useState<CatalogSectionType>(initialRoute.catalogSection || 'proyectos');
@@ -116,6 +117,12 @@ export const AppContent: React.FC = () => {
       if (isDifferent) {
         window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
       }
+    } else if (route.view === 'sube-tu-trabajo') {
+      const isDifferent = prevView !== 'sube-tu-trabajo';
+      setCurrentView('sube-tu-trabajo');
+      if (isDifferent) {
+        window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+      }
     } else {
       const isDifferent = prevView !== 'home';
       setCurrentView('home');
@@ -142,6 +149,8 @@ export const AppContent: React.FC = () => {
       replaceAppRoute('/territorios');
     } else if (hash === '#acerca-de-ea' || hash === '#acerca') {
       replaceAppRoute('/acerca-de-ea');
+    } else if (hash === '#sube-tu-trabajo' || hash === '#sube-tu-proyecto' || hash === '#contribuir') {
+      replaceAppRoute('/sube-tu-trabajo');
     }
 
     window.addEventListener('popstate', syncRoute);
@@ -184,6 +193,11 @@ export const AppContent: React.FC = () => {
       setCatalogSearchQuery('');
       setCurrentView('acerca');
       setTargetTab('acerca');
+      window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+    } else if (section === 'sube-tu-trabajo' || section === 'sube-tu-proyecto' || section === 'contribuir') {
+      pushAppRoute('/sube-tu-trabajo');
+      setCatalogSearchQuery('');
+      setCurrentView('sube-tu-trabajo');
       window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
     } else {
       if (currentView !== 'home') {
@@ -298,6 +312,12 @@ export const AppContent: React.FC = () => {
         <AcercaDeEA
           onNavigate={handleNavigate}
           onSelectProject={handleSelectProject}
+        />
+      )}
+
+      {currentView === 'sube-tu-trabajo' && (
+        <SubeTuTrabajo
+          onNavigate={handleNavigate}
         />
       )}
 
