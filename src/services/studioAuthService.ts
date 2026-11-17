@@ -202,9 +202,6 @@ export const studioAuthService = {
           this.setSession(token, data.studio);
           return data.studio;
         }
-      } else if (res.status === 401) {
-        this.logout();
-        return null;
       }
     } catch (e) {
       console.warn('[studioAuthService] Could not verify remote session:', e);

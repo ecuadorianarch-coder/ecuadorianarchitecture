@@ -13,6 +13,10 @@ import {
   Eye,
   EyeOff,
   ShieldCheck,
+  Sparkles,
+  FileText,
+  Wand2,
+  Layers,
 } from 'lucide-react';
 import { studioAuthService } from '../../services/studioAuthService';
 import { StudioProfileModal } from '../../components/studio/StudioProfileModal';
@@ -54,6 +58,7 @@ export interface SubmissionFormData {
   projectYear: string;
   projectLocation: string;
   builtArea: string;
+  typology: string;
   projectTeam: string;
   photographers: string;
   shortSummary: string;
@@ -74,6 +79,152 @@ export interface SubmissionFormData {
   consentTerms: boolean;
 }
 
+export const TYPOLOGY_PRESETS = [
+  'Vivienda Unifamiliar',
+  'Vivienda Colectiva',
+  'Equipamiento Cultural / Educativo',
+  'Comercial & Mixto',
+  'Pabellón / Efímero',
+  'Rehabilitación & Patrimonio',
+  'Paisaje & Espacio Público',
+  'Arquitectura Sacra / Espiritual',
+  'Infraestructura Territorial',
+];
+
+export const AREA_PRESETS = ['< 120 m²', '180 m²', '280 m²', '450 m²', '720 m²', '> 1200 m²'];
+
+export const YEAR_PRESETS = ['2026', '2025', '2024', '2023', '2022', 'En Construcción'];
+
+export const LOCATION_PRESETS = [
+  'Quito, Pichincha',
+  'Cumbayá / Tumbaco',
+  'Guayaquil, Guayas',
+  'Samborondón',
+  'Cuenca, Azuay',
+  'Manta, Manabí',
+  'Loja',
+  'Otavalo / Imbabura',
+  'Galápagos',
+];
+
+export const PHOTO_PRESETS = [
+  'BICUBIK Photography',
+  'JAG Studio',
+  'Sebastián Crespo',
+  'Lorena Darquea',
+  'Nicolás Provoste',
+  'Fotografía del Estudio',
+];
+
+export function parseProjectMemory(rawText: string): Partial<SubmissionFormData> {
+  const result: Partial<SubmissionFormData> = {};
+  if (!rawText || !rawText.trim()) return result;
+
+  const lines = rawText.split('\n').map((l) => l.trim()).filter(Boolean);
+
+  // 1. Título de la obra
+  const titleMatch = rawText.match(/(?:proyecto|obra|título|titulo|nombre(?:\s+de\s+la\s+obra)?)\s*[:\-–]\s*([^\n\r]+)/i);
+  if (titleMatch) {
+    result.projectTitle = titleMatch[1].trim();
+  } else if (lines.length > 0 && lines[0].length < 60 && !lines[0].includes(':')) {
+    result.projectTitle = lines[0].replace(/^[#\*\-]+\s*/, '').trim();
+  }
+
+  // 2. Año de finalización
+  const yearMatch =
+    rawText.match(/(?:año(?:\s+de\s+construcción|\s+de\s+finalización)?|fecha|year)\s*[:\-–]?\s*(20\d{2})/i) ||
+    rawText.match(/\b(20[12]\d)\b/);
+  if (yearMatch) {
+    result.projectYear = yearMatch[1];
+  }
+
+  // 3. Ubicación
+  const locMatch = rawText.match(/(?:ubicación|ubicacion|lugar|ciudad|emplazamiento|location)\s*[:\-–]\s*([^\n\r,]+(?:,\s*[^\n\r]+)?)/i);
+  if (locMatch) {
+    result.projectLocation = locMatch[1].trim();
+  }
+
+  // 4. Área construida / m²
+  const areaMatch =
+    rawText.match(/(?:área(?:\s+construida|\s+útil)?|area|superficie|m2|m²)\s*[:\-–]?\s*(\d+[\.,]?\d*)\s*(?:m2|m²|metros\s*cuadrados)?/i) ||
+    rawText.match(/(\d+[\.,]?\d*)\s*(?:m2|m²)/i);
+  if (areaMatch) {
+    result.builtArea = `${areaMatch[1].trim()} m²`;
+  }
+
+  // 5. Tipología
+  const typMatch = rawText.match(/(?:tipología|tipologia|programa|uso|categoría)\s*[:\-–]\s*([^\n\r]+)/i);
+  if (typMatch) {
+    result.typology = typMatch[1].trim();
+  } else {
+    const lower = rawText.toLowerCase();
+    if (lower.includes('unifamiliar') || lower.includes('casa') || lower.includes('vivienda individual')) {
+      result.typology = 'Vivienda Unifamiliar';
+    } else if (lower.includes('colectiva') || lower.includes('edificio residencial') || lower.includes('departamentos')) {
+      result.typology = 'Vivienda Colectiva';
+    } else if (lower.includes('cultural') || lower.includes('museo') || lower.includes('centro cultural') || lower.includes('educativo') || lower.includes('escuela')) {
+      result.typology = 'Equipamiento Cultural / Educativo';
+    } else if (lower.includes('comercial') || lower.includes('oficinas') || lower.includes('restaurante') || lower.includes('café')) {
+      result.typology = 'Comercial & Mixto';
+    } else if (lower.includes('pabellón') || lower.includes('pabellon') || lower.includes('efímero') || lower.includes('instalación')) {
+      result.typology = 'Pabellón / Efímero';
+    } else if (lower.includes('rehabilitación') || lower.includes('rehabilitacion') || lower.includes('patrimonio') || lower.includes('restauración') || lower.includes('reforma')) {
+      result.typology = 'Rehabilitación & Patrimonio';
+    } else if (lower.includes('paisaje') || lower.includes('parque') || lower.includes('espacio público') || lower.includes('plaza')) {
+      result.typology = 'Paisaje & Espacio Público';
+    } else if (lower.includes('capilla') || lower.includes('templo') || lower.includes('iglesia') || lower.includes('sacro') || lower.includes('espiritual')) {
+      result.typology = 'Arquitectura Sacra / Espiritual';
+    }
+  }
+
+  // 6. Fotografía
+  const photoMatch = rawText.match(/(?:fotograf[ií]a|fot[oó]grafo|fotos|photos?)\s*[:\-–]\s*([^\n\r]+)/i);
+  if (photoMatch) {
+    result.photographers = photoMatch[1].trim();
+  }
+
+  // 7. Maestro Mayor y Mano de Obra
+  const maestroMatch = rawText.match(/(?:maestro(?:\s+mayor)?|constructor|ejecución|mano\s+de\s+obra)\s*[:\-–]\s*([^\n\r]+)/i);
+  if (maestroMatch) {
+    result.maestroMayorName = maestroMatch[1].trim();
+  }
+
+  // 8. Equipo de colaboradores
+  const teamMatch = rawText.match(/(?:equipo|colaboradores|asesores|arquitectos\s+colaboradores)\s*[:\-–]\s*([^\n\r]+)/i);
+  if (teamMatch) {
+    result.projectTeam = teamMatch[1].trim();
+  }
+
+  // 9. Materialidad / Tectónica
+  const matMatch = rawText.match(/(?:materiales|materialidad|tect[oó]nica|estructura)\s*[:\-–]\s*([^\n\r]+(?:\n[^\n\r]+)?)/i);
+  if (matMatch) {
+    result.materialityTectonics = matMatch[1].trim();
+  }
+
+  // 10. Memoria y Resumen
+  const memMatch = rawText.match(/(?:memoria(?:\s+descriptiva|\s+del\s+proyecto)?|descripci[oó]n|concepto)\s*[:\-–]\s*([\s\S]+?)(?=(?:materiales|fotograf|equipo|ubicaci|área|$))/i);
+  if (memMatch && memMatch[1].trim().length > 30) {
+    const full = memMatch[1].trim();
+    result.fullDescription = full;
+    const firstSentences = full.split('. ').slice(0, 2).join('. ') + '.';
+    result.shortSummary = firstSentences.length < 250 ? firstSentences : full.slice(0, 240) + '...';
+  } else {
+    const paragraphs = rawText.split(/\n\s*\n/).map((p) => p.trim()).filter((p) => p.length > 50 && !p.includes(':'));
+    if (paragraphs.length > 0) {
+      result.fullDescription = paragraphs.join('\n\n');
+      result.shortSummary = paragraphs[0].slice(0, 240);
+    }
+  }
+
+  // 11. Carpeta en la nube (Drive/Dropbox/OneDrive/Wetransfer)
+  const driveMatch = rawText.match(/(https?:\/\/(?:drive\.google\.com|dropbox\.com|we\.tl|onedrive\.live\.com)[^\s]+)/i);
+  if (driveMatch) {
+    result.cloudStorageUrl = driveMatch[1].trim();
+  }
+
+  return result;
+}
+
 const initialFormState: SubmissionFormData = {
   category: 'proyectos',
   studioName: '',
@@ -91,6 +242,7 @@ const initialFormState: SubmissionFormData = {
   projectYear: '',
   projectLocation: '',
   builtArea: '',
+  typology: '',
   projectTeam: '',
   photographers: '',
   shortSummary: '',
@@ -130,12 +282,49 @@ export const SubeTuTrabajo: React.FC<SubeTuTrabajoProps> = ({
         studioLocation: prev.studioLocation || existing.studioLocation,
         foundationYear: prev.foundationYear || existing.foundationYear,
         contactEmail: prev.contactEmail || existing.email,
+        contactPhone: prev.contactPhone || existing.phone || '',
         studioWebsite: prev.studioWebsite || existing.studioWebsite,
+        studioBio: prev.studioBio || existing.description || existing.philosophy || '',
         studioAvatarUrl: prev.studioAvatarUrl || existing.studioAvatarUrl,
         studioCoverUrl: prev.studioCoverUrl || existing.studioCoverUrl,
+        // Valores iniciales inteligentes para la ficha técnica del proyecto
+        projectLocation: prev.projectLocation || existing.studioLocation || '',
+        projectTeam: prev.projectTeam || existing.studioPrincipals || '',
+        typology: prev.typology || (existing.typologies && existing.typologies.length ? existing.typologies[0] : ''),
       }));
     }
   }, []);
+
+  const [memoryInput, setMemoryInput] = useState('');
+  const [extractedFeedback, setExtractedFeedback] = useState<string | null>(null);
+
+  const handleExtractMemory = () => {
+    if (!memoryInput.trim()) {
+      setExtractedFeedback('⚠️ Pega el texto de la memoria o ficha técnica primero.');
+      return;
+    }
+
+    const parsed = parseProjectMemory(memoryInput);
+    let count = 0;
+    setFormData((prev) => {
+      const next = { ...prev };
+      if (parsed.projectTitle) { next.projectTitle = parsed.projectTitle; count++; }
+      if (parsed.projectYear) { next.projectYear = parsed.projectYear; count++; }
+      if (parsed.projectLocation) { next.projectLocation = parsed.projectLocation; count++; }
+      if (parsed.builtArea) { next.builtArea = parsed.builtArea; count++; }
+      if (parsed.typology) { next.typology = parsed.typology; count++; }
+      if (parsed.photographers) { next.photographers = parsed.photographers; count++; }
+      if (parsed.projectTeam) { next.projectTeam = parsed.projectTeam; count++; }
+      if (parsed.maestroMayorName) { next.maestroMayorName = parsed.maestroMayorName; count++; }
+      if (parsed.shortSummary) { next.shortSummary = parsed.shortSummary; count++; }
+      if (parsed.fullDescription) { next.fullDescription = parsed.fullDescription; count++; }
+      if (parsed.materialityTectonics) { next.materialityTectonics = parsed.materialityTectonics; count++; }
+      if (parsed.cloudStorageUrl) { next.cloudStorageUrl = parsed.cloudStorageUrl; count++; }
+      return next;
+    });
+
+    setExtractedFeedback(`✓ ¡Éxito! ${count} campos extraídos y completados automáticamente.`);
+  };
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -550,6 +739,40 @@ export const SubeTuTrabajo: React.FC<SubeTuTrabajoProps> = ({
                 )}
               </div>
 
+              {studioAuthService.isAuthenticated() && (
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 sm:p-5 bg-emerald-50 border-2 border-emerald-500/40 rounded-[28px] gap-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full border border-emerald-500/40 bg-white overflow-hidden shrink-0 flex items-center justify-center">
+                      {formData.studioAvatarUrl ? (
+                        <img src={formData.studioAvatarUrl} alt="" className="w-full h-full object-cover" />
+                      ) : (
+                        <span className="font-okcok text-emerald-800 text-sm font-bold">{(formData.studioName || 'A')[0]}</span>
+                      )}
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="font-okcok text-sm sm:text-base uppercase text-ea-black">
+                          {formData.studioName || 'Estudio Conectado'}
+                        </span>
+                        <span className="font-mono text-[10px] bg-emerald-600 text-white font-bold px-2 py-0.5 rounded-full">
+                          VINCULADO ✓
+                        </span>
+                      </div>
+                      <p className="text-xs text-emerald-900/70 font-sans">
+                        Perfil cargado. Puedes editar los campos abajo o avanzar directo a subir tu proyecto.
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleProceedToProject}
+                    className="w-full sm:w-auto px-6 py-3 bg-ea-black text-white font-okcok uppercase text-xs sm:text-sm rounded-full hover:bg-neutral-800 transition-all active:scale-95 cursor-pointer flex items-center justify-center gap-2 shadow-xs shrink-0"
+                  >
+                    CONTINUAR DIRECTO AL PROYECTO ➔
+                  </button>
+                </div>
+              )}
+
               {/* Los campos de Figma en cuadrícula 2x2 */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
                 {/* 1. Nombre del Estudio o Arquitecto */}
@@ -895,9 +1118,49 @@ export const SubeTuTrabajo: React.FC<SubeTuTrabajoProps> = ({
             {/* 2. FICHA TÉCNICA DEL PROYECTO                                     */}
             {/* ================================================================= */}
             <section className="w-full border border-black rounded-[36px] sm:rounded-[52px] p-6 sm:p-10 md:p-12 bg-white">
-              <h2 className="font-okcok text-2xl sm:text-3xl md:text-4xl uppercase tracking-normal text-ea-black mb-8">
+              <h2 className="font-okcok text-2xl sm:text-3xl md:text-4xl uppercase tracking-normal text-ea-black mb-6">
                 2. FICHA TÉCNICA DEL PROYECTO
               </h2>
+
+              {/* EXTRACTOR INTELIGENTE DE MEMORIA O FICHA TÉCNICA */}
+              <div className="mb-8 p-5 sm:p-6 bg-[#FAF8F5] border-2 border-dashed border-ea-black/30 rounded-[28px] space-y-3">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xl">⚡</span>
+                    <h3 className="font-okcok text-sm sm:text-base uppercase text-ea-black tracking-normal">
+                      AUTO-RELLENAR FICHA DESDE MEMORIA O TEXTO
+                    </h3>
+                  </div>
+                  <span className="text-[11px] font-mono text-neutral-500">
+                    Pega tu memoria descriptiva o ficha técnica y completaremos los campos
+                  </span>
+                </div>
+
+                <textarea
+                  value={memoryInput}
+                  onChange={(e) => setMemoryInput(e.target.value)}
+                  placeholder="Pega aquí la memoria del proyecto (Ej: 'Casa Lasso, 2024. Ubicada en Lasso, Cotopaxi. Área: 350 m². Tipología: Vivienda Unifamiliar. Fotografía: BICUBIK. Materialidad: Tierra compactada y madera de eucalipto...')"
+                  className="w-full h-24 p-4 bg-white border border-black/20 rounded-[18px] text-xs sm:text-sm font-sans text-ea-black placeholder:text-neutral-400 focus:outline-hidden focus:ring-2 focus:ring-black resize-y"
+                />
+
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-1">
+                  <button
+                    type="button"
+                    onClick={handleExtractMemory}
+                    disabled={!memoryInput.trim()}
+                    className="w-full sm:w-auto px-6 py-2.5 bg-ea-black text-white font-okcok uppercase text-xs rounded-full hover:bg-neutral-800 transition-all active:scale-95 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  >
+                    <span>⚡</span> EXTRAER Y AUTO-RELLENAR FICHA
+                  </button>
+
+                  {extractedFeedback && (
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-100 text-emerald-900 border border-emerald-300 rounded-full font-mono text-[11px] font-bold">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700" />
+                      {extractedFeedback}
+                    </span>
+                  )}
+                </div>
+              </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
                 {/* Título de la Obra */}
@@ -920,6 +1183,44 @@ export const SubeTuTrabajo: React.FC<SubeTuTrabajoProps> = ({
                   />
                 </div>
 
+                {/* Tipología de la Obra */}
+                <div className="flex flex-col gap-2">
+                  <label
+                    htmlFor="typology"
+                    className="font-okcok text-sm sm:text-base uppercase tracking-normal text-ea-black flex items-center justify-between"
+                  >
+                    <span>TIPOLOGÍA DE LA OBRA *</span>
+                    <span className="text-[11px] font-mono text-neutral-500 font-normal">Clic para seleccionar</span>
+                  </label>
+                  <input
+                    id="typology"
+                    name="typology"
+                    type="text"
+                    required
+                    value={formData.typology || ''}
+                    onChange={handleInputChange}
+                    placeholder="Ej. Vivienda Unifamiliar, Equipamiento, etc."
+                    className="w-full h-14 bg-[#E8E8E8] rounded-[30px] px-6 text-sm sm:text-base font-sans text-ea-black placeholder:text-neutral-500 focus:outline-hidden focus:ring-2 focus:ring-black transition-all"
+                  />
+                  {/* Chips interactivos de Tipología */}
+                  <div className="flex flex-wrap gap-1.5 pt-1">
+                    {TYPOLOGY_PRESETS.map((t) => (
+                      <button
+                        key={t}
+                        type="button"
+                        onClick={() => setFormData((prev) => ({ ...prev, typology: t }))}
+                        className={`px-3 py-1 rounded-full text-xs font-mono transition-all cursor-pointer ${
+                          formData.typology === t
+                            ? 'bg-ea-black text-white font-bold ring-1 ring-black'
+                            : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
+                        }`}
+                      >
+                        {t}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
                 {/* Año de Construcción */}
                 <div className="flex flex-col gap-2">
                   <label
@@ -938,6 +1239,23 @@ export const SubeTuTrabajo: React.FC<SubeTuTrabajoProps> = ({
                     placeholder="Ej. 2024"
                     className="w-full h-14 bg-[#E8E8E8] rounded-[30px] px-6 text-sm sm:text-base font-sans text-ea-black placeholder:text-neutral-500 focus:outline-hidden focus:ring-2 focus:ring-black transition-all"
                   />
+                  {/* Chips interactivos de Año */}
+                  <div className="flex flex-wrap gap-1.5 pt-1">
+                    {YEAR_PRESETS.map((y) => (
+                      <button
+                        key={y}
+                        type="button"
+                        onClick={() => setFormData((prev) => ({ ...prev, projectYear: y }))}
+                        className={`px-2.5 py-0.5 rounded-full text-xs font-mono transition-all cursor-pointer ${
+                          formData.projectYear === y
+                            ? 'bg-ea-black text-white font-bold'
+                            : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
+                        }`}
+                      >
+                        {y}
+                      </button>
+                    ))}
+                  </div>
                 </div>
 
                 {/* Ubicación de la Obra */}
@@ -958,6 +1276,23 @@ export const SubeTuTrabajo: React.FC<SubeTuTrabajoProps> = ({
                     placeholder="Lasso, Cotopaxi / Nayón, Quito"
                     className="w-full h-14 bg-[#E8E8E8] rounded-[30px] px-6 text-sm sm:text-base font-sans text-ea-black placeholder:text-neutral-500 focus:outline-hidden focus:ring-2 focus:ring-black transition-all"
                   />
+                  {/* Chips interactivos de Ciudades / Provincias */}
+                  <div className="flex flex-wrap gap-1.5 pt-1">
+                    {LOCATION_PRESETS.map((loc) => (
+                      <button
+                        key={loc}
+                        type="button"
+                        onClick={() => setFormData((prev) => ({ ...prev, projectLocation: loc }))}
+                        className={`px-2.5 py-0.5 rounded-full text-xs font-mono transition-all cursor-pointer ${
+                          formData.projectLocation === loc
+                            ? 'bg-ea-black text-white font-bold'
+                            : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
+                        }`}
+                      >
+                        {loc}
+                      </button>
+                    ))}
+                  </div>
                 </div>
 
                 {/* Área Construida */}
@@ -977,6 +1312,23 @@ export const SubeTuTrabajo: React.FC<SubeTuTrabajoProps> = ({
                     placeholder="350 m²"
                     className="w-full h-14 bg-[#E8E8E8] rounded-[30px] px-6 text-sm sm:text-base font-sans text-ea-black placeholder:text-neutral-500 focus:outline-hidden focus:ring-2 focus:ring-black transition-all"
                   />
+                  {/* Chips interactivos de Área */}
+                  <div className="flex flex-wrap gap-1.5 pt-1">
+                    {AREA_PRESETS.map((area) => (
+                      <button
+                        key={area}
+                        type="button"
+                        onClick={() => setFormData((prev) => ({ ...prev, builtArea: area }))}
+                        className={`px-2.5 py-0.5 rounded-full text-xs font-mono transition-all cursor-pointer ${
+                          formData.builtArea === area
+                            ? 'bg-ea-black text-white font-bold'
+                            : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
+                        }`}
+                      >
+                        {area}
+                      </button>
+                    ))}
+                  </div>
                 </div>
 
                 {/* Equipo de Colaboradores */}
@@ -999,7 +1351,7 @@ export const SubeTuTrabajo: React.FC<SubeTuTrabajoProps> = ({
                 </div>
 
                 {/* Fotógrafo(s) */}
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2 md:col-span-2">
                   <label
                     htmlFor="photographers"
                     className="font-okcok text-sm sm:text-base uppercase tracking-normal text-ea-black"
@@ -1016,6 +1368,23 @@ export const SubeTuTrabajo: React.FC<SubeTuTrabajoProps> = ({
                     placeholder="JAG Studio / BICUBIK / Sebastián Crespo"
                     className="w-full h-14 bg-[#E8E8E8] rounded-[30px] px-6 text-sm sm:text-base font-sans text-ea-black placeholder:text-neutral-500 focus:outline-hidden focus:ring-2 focus:ring-black transition-all"
                   />
+                  {/* Chips interactivos de Fotógrafos */}
+                  <div className="flex flex-wrap gap-1.5 pt-1">
+                    {PHOTO_PRESETS.map((ph) => (
+                      <button
+                        key={ph}
+                        type="button"
+                        onClick={() => setFormData((prev) => ({ ...prev, photographers: ph }))}
+                        className={`px-3 py-1 rounded-full text-xs font-mono transition-all cursor-pointer ${
+                          formData.photographers === ph
+                            ? 'bg-ea-black text-white font-bold ring-1 ring-black'
+                            : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
+                        }`}
+                      >
+                        {ph}
+                      </button>
+                    ))}
+                  </div>
                 </div>
 
                 {/* Resumen Ejecutivo */}

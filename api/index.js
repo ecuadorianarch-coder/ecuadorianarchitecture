@@ -98,7 +98,13 @@ function getResendApiKey() {
 // ---------------------------------------------------------------------------
 // Criptografía y Sesiones Seguras para Estudios y Autores
 // ---------------------------------------------------------------------------
-const JWT_STUDIO_SECRET = process.env.STUDIO_JWT_SECRET || 'ea-studio-production-key-2026-critical-architecture-ecuador';
+const JWT_STUDIO_SECRETS = [
+  process.env.JWT_STUDIO_SECRET,
+  process.env.STUDIO_JWT_SECRET,
+  'ea_sec_studio_key_2026_94xkL8!scrypt_vault',
+  'ea-studio-production-key-2026-critical-architecture-ecuador',
+].filter(Boolean);
+const PRIMARY_STUDIO_SECRET = JWT_STUDIO_SECRETS[0] || 'ea_sec_studio_key_2026_94xkL8!scrypt_vault';
 
 function hashStudioPassword(password) {
   const salt = crypto.randomBytes(16).toString('hex');
@@ -121,7 +127,7 @@ function generateStudioToken(studio) {
     studioName: studio.studioName,
     exp: Math.floor(Date.now() / 1000) + (60 * 24 * 3600), // 60 días
   })).toString('base64url');
-  const sig = crypto.createHmac('sha256', JWT_STUDIO_SECRET).update(`${header}.${payload}`).digest('base64url');
+  const sig = crypto.createHmac('sha256', PRIMARY_STUDIO_SECRET).update(`${header}.${payload}`).digest('base64url');
   return `${header}.${payload}.${sig}`;
 }
 
@@ -130,8 +136,18 @@ function verifyStudioToken(token) {
   const parts = token.split('.');
   if (parts.length !== 3) return null;
   const [header, payload, sig] = parts;
-  const expectedSig = crypto.createHmac('sha256', JWT_STUDIO_SECRET).update(`${header}.${payload}`).digest('base64url');
-  if (sig !== expectedSig) return null;
+  
+  // Validar firma contra cualquiera de los secretos conocidos (garantiza compatibilidad total)
+  let isValid = false;
+  for (const secret of JWT_STUDIO_SECRETS) {
+    const expectedSig = crypto.createHmac('sha256', secret).update(`${header}.${payload}`).digest('base64url');
+    if (sig === expectedSig) {
+      isValid = true;
+      break;
+    }
+  }
+  if (!isValid) return null;
+
   try {
     const data = JSON.parse(Buffer.from(payload, 'base64url').toString('utf8'));
     if (data.exp && data.exp < Math.floor(Date.now() / 1000)) return null;
@@ -735,20 +751,24 @@ export default async function handler(req, res) {
           </div>
         `;
 
+        const emailDispatches = [];
+
         // 1. Notificación al equipo editorial
-        fetch('https://api.resend.com/emails', {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${resendKey}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            from: 'Ecuadorian Architecture Editorial <editorial@ecuadorianarch.com>',
-            to: [editorEmail],
-            subject: notifySubject,
-            html: notifyHtml
-          })
-        }).catch(err => console.error('[Resend Vercel Editor Error]:', err));
+        emailDispatches.push(
+          fetch('https://api.resend.com/emails', {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${resendKey}`,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              from: 'Ecuadorian Architecture Editorial <editorial@ecuadorianarch.com>',
+              to: [editorEmail],
+              subject: notifySubject,
+              html: notifyHtml
+            })
+          }).catch(err => console.error('[Resend Vercel Editor Error]:', err))
+        );
 
         // 2. Confirmación al arquitecto postulante
         if (submission.contactEmail && submission.contactEmail.includes('@')) {
@@ -778,20 +798,24 @@ export default async function handler(req, res) {
             </div>
           `;
 
-          fetch('https://api.resend.com/emails', {
-            method: 'POST',
-            headers: {
-              'Authorization': `Bearer ${resendKey}`,
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              from: 'Ecuadorian Architecture <editorial@ecuadorianarch.com>',
-              to: [submission.contactEmail],
-              subject: `✓ Propuesta Recibida: ${submission.projectTitle || 'Expediente'} — Ecuadorian Architecture`,
-              html: confirmationHtml
-            })
-          }).catch(err => console.error('[Resend Vercel Architect Error]:', err));
+          emailDispatches.push(
+            fetch('https://api.resend.com/emails', {
+              method: 'POST',
+              headers: {
+                'Authorization': `Bearer ${resendKey}`,
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                from: 'Ecuadorian Architecture <editorial@ecuadorianarch.com>',
+                to: [submission.contactEmail],
+                subject: `✓ Propuesta Recibida: ${submission.projectTitle || 'Expediente'} — Ecuadorian Architecture`,
+                html: confirmationHtml
+              })
+            }).catch(err => console.error('[Resend Vercel Architect Error]:', err))
+          );
         }
+
+        await Promise.allSettled(emailDispatches);
       }
 
       res.setHeader('Content-Type', 'application/json');
