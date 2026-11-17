@@ -624,6 +624,60 @@ export default async function handler(req, res) {
         };
         studios.push(studio);
         await saveJsonData(dataDir, 'studios.json', studios);
+
+        // Sincronizar de inmediato en authors.json para que el pop-up del proyecto funcione al instante
+        try {
+          const authors = await loadJsonData(dataDir, 'authors.json');
+          const slug = (studio.studioName || 'estudio')
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/(^-|-$)/g, '');
+
+          let authorIdx = -1;
+          if (Array.isArray(authors)) {
+            authorIdx = authors.findIndex(a =>
+              a.id === slug ||
+              a.slug === slug ||
+              (a.name && a.name.toLowerCase() === (studio.studioName || '').toLowerCase())
+            );
+          }
+
+          const authorEntry = {
+            id: slug,
+            name: studio.studioName,
+            slug: slug,
+            founder: studio.studioPrincipals || studio.studioName,
+            location: studio.studioLocation || 'Ecuador',
+            country: 'Ecuador',
+            foundedYear: studio.foundationYear || '2024',
+            avatarUrl: studio.studioAvatarUrl || '',
+            coverImage: studio.studioCoverUrl || '',
+            headline: `Práctica de arquitectura contemporánea, investigación y producción espacial en el Ecuador.`,
+            description: `${studio.studioName} es una práctica arquitectónica activa en el Ecuador.`,
+            philosophy: submission.philosophy || submission.shortSummary || 'Proyectar desde el lugar y con la materia local para responder con pertinencia tectónica a nuestro tiempo.',
+            typologies: ['Arquitectura Contemporánea', 'Investigación Proyectual', 'Hábitat Sustentable'],
+            team: (studio.studioPrincipals || studio.studioName).split(',').map(n => ({ name: n.trim(), role: 'Dirección de Taller' })),
+            awards: ['Publicado en Archivo EcuadorianArch'],
+            contact: {
+              website: studio.studioWebsite || '',
+              instagram: submission.studioInstagram || '',
+              email: studio.email || ''
+            }
+          };
+
+          if (Array.isArray(authors)) {
+            if (authorIdx >= 0) {
+              authors[authorIdx] = { ...authors[authorIdx], ...authorEntry };
+            } else {
+              authors.push(authorEntry);
+            }
+            await saveJsonData(dataDir, 'authors.json', authors);
+          }
+        } catch (errAuthor) {
+          console.warn('[Auto Author Sync on Registration Serverless Error]:', errAuthor);
+        }
       } else if (studio && submission.studioPassword && !studio.passwordHash) {
         studio.passwordHash = hashStudioPassword(submission.studioPassword);
         await saveJsonData(dataDir, 'studios.json', studios);

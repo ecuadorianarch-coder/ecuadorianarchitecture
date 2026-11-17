@@ -188,8 +188,8 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
 
   const canOpenAuthorModal = (studioName?: string) => {
     if (!studioName || !studioName.trim()) return false;
-    // Only open popup if explicitly enabled on this project in CMS AND a genuine registered profile exists
-    if (!project?.enableAuthorModal) return false;
+    // Si el proyecto lo deshabilita explícitamente en CMS como false, respetarlo; de lo contrario, si el autor/estudio tiene perfil registrado, abrirlo
+    if (project?.enableAuthorModal === false) return false;
     return hasAuthorProfile(studioName);
   };
 

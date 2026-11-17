@@ -289,6 +289,22 @@ export const hasAuthorProfile = (studioName?: string): boolean => {
   if (!studioName || !studioName.trim()) return false;
   const cleanName = studioName.trim().toUpperCase();
   const slug = normalizeStudioToSlug(studioName);
+
+  // 1. Check active studio session in storage
+  try {
+    if (typeof window !== 'undefined') {
+      const rawStudio = localStorage.getItem('ea_studio_data') || sessionStorage.getItem('ea_studio_data');
+      if (rawStudio) {
+        const s = JSON.parse(rawStudio);
+        const sName = (s.studioName || '').trim().toUpperCase();
+        const sSlug = normalizeStudioToSlug(s.studioName || '');
+        if (sName === cleanName || sSlug === slug || (cleanName.length > 3 && (sName.includes(cleanName) || cleanName.includes(sName)))) {
+          return true;
+        }
+      }
+    }
+  } catch {}
+
   const allAuthors = getAllAuthorProfiles();
 
   return (

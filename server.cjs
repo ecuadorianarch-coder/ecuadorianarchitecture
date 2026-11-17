@@ -629,6 +629,58 @@ const server = http.createServer(async (req, res) => {
               studios.push(studio);
               fs.writeFileSync(studiosPath, JSON.stringify(studios, null, 2), 'utf8');
               writeToSupabase('studios.json', JSON.stringify(studios, null, 2)).catch(() => {});
+
+              // Sincronizar de inmediato en authors.json para que el pop-up del proyecto funcione al instante
+              try {
+                const authorsPath = path.join(dataDir, 'authors.json');
+                let authors = fs.existsSync(authorsPath) ? JSON.parse(fs.readFileSync(authorsPath, 'utf8') || '[]') : [];
+                const slug = (studio.studioName || 'estudio')
+                  .toLowerCase()
+                  .normalize('NFD')
+                  .replace(/[\u0300-\u036f]/g, '')
+                  .replace(/[^a-z0-9]+/g, '-')
+                  .replace(/(^-|-$)/g, '');
+
+                const authorIdx = authors.findIndex(a =>
+                  a.id === slug ||
+                  a.slug === slug ||
+                  (a.name && a.name.toLowerCase() === (studio.studioName || '').toLowerCase())
+                );
+
+                const authorEntry = {
+                  id: slug,
+                  name: studio.studioName,
+                  slug: slug,
+                  founder: studio.studioPrincipals || studio.studioName,
+                  location: studio.studioLocation || 'Ecuador',
+                  country: 'Ecuador',
+                  foundedYear: studio.foundationYear || '2024',
+                  avatarUrl: studio.studioAvatarUrl || '',
+                  coverImage: studio.studioCoverUrl || '',
+                  headline: `Práctica de arquitectura contemporánea, investigación y producción espacial en el Ecuador.`,
+                  description: `${studio.studioName} es una práctica arquitectónica activa en el Ecuador.`,
+                  philosophy: submission.philosophy || submission.shortSummary || 'Proyectar desde el lugar y con la materia local para responder con pertinencia tectónica a nuestro tiempo.',
+                  typologies: ['Arquitectura Contemporánea', 'Investigación Proyectual', 'Hábitat Sustentable'],
+                  team: (studio.studioPrincipals || studio.studioName).split(',').map(n => ({ name: n.trim(), role: 'Dirección de Taller' })),
+                  awards: ['Publicado en Archivo EcuadorianArch'],
+                  contact: {
+                    website: studio.studioWebsite || '',
+                    instagram: submission.studioInstagram || '',
+                    email: studio.email || ''
+                  }
+                };
+
+                if (authorIdx >= 0) {
+                  authors[authorIdx] = { ...authors[authorIdx], ...authorEntry };
+                } else {
+                  authors.push(authorEntry);
+                }
+
+                fs.writeFileSync(authorsPath, JSON.stringify(authors, null, 2), 'utf8');
+                writeToSupabase('authors.json', JSON.stringify(authors, null, 2)).catch(() => {});
+              } catch (errAuthor) {
+                console.warn('[Auto Author Sync on Registration Error]:', errAuthor);
+              }
             } else if (studio && submission.studioPassword && !studio.passwordHash) {
               // Si el estudio existía sin contraseña, la establecemos de forma segura
               studio.passwordHash = hashStudioPassword(submission.studioPassword);
