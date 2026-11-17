@@ -237,7 +237,13 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
       localStorage.setItem('ea_content_master_builders', JSON.stringify(masterBuilders));
       localStorage.setItem('ea_content_site_config', JSON.stringify(siteConfig));
     } catch (e) {
-      console.warn('Storage quota warning', e);
+      console.warn('Storage quota warning in ContentContext, freeing large items:', e);
+      try {
+        localStorage.removeItem('ea_content_projects');
+        localStorage.removeItem('ea_content_academia');
+        localStorage.removeItem('ea_content_territorios');
+        localStorage.removeItem('ea_content_articles');
+      } catch {}
     }
   }, [projects, academia, territorios, articles, authors, photographers, masterBuilders, siteConfig]);
 

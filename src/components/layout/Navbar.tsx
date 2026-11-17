@@ -32,6 +32,9 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   useEffect(() => {
     const unsub = studioAuthService.subscribe((s) => setStudio(s));
+    studioAuthService.verifySession().then((s) => {
+      if (s) setStudio(s);
+    });
     return unsub;
   }, []);
 

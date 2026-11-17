@@ -39,6 +39,79 @@ export interface StudioSubmission {
 const TOKEN_KEY = 'ea_studio_token';
 const STUDIO_DATA_KEY = 'ea_studio_data';
 
+const BLOATED_CACHE_KEYS = [
+  'ea_content_projects',
+  'ea_content_academia',
+  'ea_content_territorios',
+  'ea_content_articles',
+  'ea_content_authors',
+  'ea_content_photographers',
+  'ea_content_master_builders',
+  'ea_media_library',
+  'ea_editorial_office_state',
+  'ea_project_submissions',
+];
+
+function purgeBloatedCaches() {
+  if (typeof window === 'undefined') return;
+  for (const k of BLOATED_CACHE_KEYS) {
+    try {
+      localStorage.removeItem(k);
+    } catch {}
+  }
+}
+
+// Proactive quota probe: if localStorage is nearly full, free up space now
+if (typeof window !== 'undefined') {
+  try {
+    const probe = '__ea_quota_probe__';
+    localStorage.setItem(probe, '1');
+    localStorage.removeItem(probe);
+  } catch {
+    purgeBloatedCaches();
+  }
+}
+
+let memoryToken: string | null = null;
+let memoryStudio: StudioProfile | null = null;
+
+function safeStorageSet(key: string, value: string) {
+  if (typeof window === 'undefined') return;
+  try {
+    localStorage.setItem(key, value);
+  } catch (err) {
+    console.warn(`[studioAuthService] localStorage set failed for ${key}, clearing cache and retrying...`, err);
+    purgeBloatedCaches();
+    try {
+      localStorage.setItem(key, value);
+    } catch (e2) {
+      console.warn(`[studioAuthService] localStorage set failed even after purge:`, e2);
+    }
+  }
+  try {
+    sessionStorage.setItem(key, value);
+  } catch {}
+}
+
+function safeStorageGet(key: string): string | null {
+  if (typeof window === 'undefined') return null;
+  try {
+    const val = localStorage.getItem(key);
+    if (val) return val;
+  } catch {}
+  try {
+    return sessionStorage.getItem(key);
+  } catch {
+    return null;
+  }
+}
+
+function safeStorageRemove(key: string) {
+  if (typeof window === 'undefined') return;
+  try { localStorage.removeItem(key); } catch {}
+  try { sessionStorage.removeItem(key); } catch {}
+}
+
 type AuthListener = (studio: StudioProfile | null) => void;
 const listeners: Set<AuthListener> = new Set();
 
@@ -56,20 +129,22 @@ export const studioAuthService = {
   },
 
   getToken(): string | null {
-    try {
-      return localStorage.getItem(TOKEN_KEY);
-    } catch {
-      return null;
-    }
+    if (memoryToken) return memoryToken;
+    const t = safeStorageGet(TOKEN_KEY);
+    if (t) memoryToken = t;
+    return t;
   },
 
   getStudio(): StudioProfile | null {
+    if (memoryStudio) return memoryStudio;
     try {
-      const raw = localStorage.getItem(STUDIO_DATA_KEY);
-      return raw ? JSON.parse(raw) : null;
-    } catch {
-      return null;
-    }
+      const raw = safeStorageGet(STUDIO_DATA_KEY);
+      if (raw) {
+        memoryStudio = JSON.parse(raw);
+        return memoryStudio;
+      }
+    } catch {}
+    return null;
   },
 
   isAuthenticated(): boolean {
@@ -77,50 +152,58 @@ export const studioAuthService = {
   },
 
   setSession(token: string, studio: StudioProfile) {
-    try {
-      localStorage.setItem(TOKEN_KEY, token);
+    memoryToken = token;
 
-      // Limpiar imágenes extremadamente pesadas en base64 para evitar QuotaExceededError en localStorage
-      const safeStudio: StudioProfile = { ...studio };
-      if (safeStudio.studioAvatarUrl && safeStudio.studioAvatarUrl.length > 50000) {
-        safeStudio.studioAvatarUrl = '';
-      }
-      if (safeStudio.studioCoverUrl && safeStudio.studioCoverUrl.length > 50000) {
-        safeStudio.studioCoverUrl = '';
-      }
-
-      localStorage.setItem(STUDIO_DATA_KEY, JSON.stringify(safeStudio));
-      this.notify();
-    } catch (e) {
-      console.warn('Could not save studio session to localStorage:', e);
-      try {
-        // Fallback mínimo
-        localStorage.setItem(TOKEN_KEY, token);
-        const minimalStudio = {
-          id: studio.id,
-          email: studio.email,
-          studioName: studio.studioName,
-          studioPrincipals: studio.studioPrincipals,
-          studioLocation: studio.studioLocation,
-          foundationYear: studio.foundationYear,
-          studioWebsite: studio.studioWebsite,
-          studioAvatarUrl: '',
-          studioCoverUrl: '',
-        };
-        localStorage.setItem(STUDIO_DATA_KEY, JSON.stringify(minimalStudio));
-        this.notify();
-      } catch {}
+    // Limpiar imágenes extremadamente pesadas en base64 para evitar QuotaExceededError en localStorage
+    const safeStudio: StudioProfile = { ...studio };
+    if (safeStudio.studioAvatarUrl && safeStudio.studioAvatarUrl.length > 50000) {
+      safeStudio.studioAvatarUrl = '';
     }
+    if (safeStudio.studioCoverUrl && safeStudio.studioCoverUrl.length > 50000) {
+      safeStudio.studioCoverUrl = '';
+    }
+    memoryStudio = safeStudio;
+
+    safeStorageSet(TOKEN_KEY, token);
+    safeStorageSet(STUDIO_DATA_KEY, JSON.stringify(safeStudio));
+    this.notify();
   },
 
   logout() {
+    memoryToken = null;
+    memoryStudio = null;
+    safeStorageRemove(TOKEN_KEY);
+    safeStorageRemove(STUDIO_DATA_KEY);
+    this.notify();
+  },
+
+  async verifySession(): Promise<StudioProfile | null> {
+    const token = this.getToken();
+    if (!token) return null;
+
     try {
-      localStorage.removeItem(TOKEN_KEY);
-      localStorage.removeItem(STUDIO_DATA_KEY);
-      this.notify();
+      const res = await fetch('/api/auth/studio/me', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (res.ok) {
+        const text = await res.text();
+        const data = JSON.parse(text);
+        if (data.success && data.studio) {
+          this.setSession(token, data.studio);
+          return data.studio;
+        }
+      } else if (res.status === 401) {
+        this.logout();
+        return null;
+      }
     } catch (e) {
-      console.warn('Could not clear studio session:', e);
+      console.warn('[studioAuthService] Could not verify remote session:', e);
     }
+
+    return this.getStudio();
   },
 
   async login(email: string, password: string): Promise<{ success: boolean; error?: string; studio?: StudioProfile }> {
