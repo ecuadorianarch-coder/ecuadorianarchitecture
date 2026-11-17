@@ -79,10 +79,37 @@ export const studioAuthService = {
   setSession(token: string, studio: StudioProfile) {
     try {
       localStorage.setItem(TOKEN_KEY, token);
-      localStorage.setItem(STUDIO_DATA_KEY, JSON.stringify(studio));
+
+      // Limpiar imágenes extremadamente pesadas en base64 para evitar QuotaExceededError en localStorage
+      const safeStudio: StudioProfile = { ...studio };
+      if (safeStudio.studioAvatarUrl && safeStudio.studioAvatarUrl.length > 50000) {
+        safeStudio.studioAvatarUrl = '';
+      }
+      if (safeStudio.studioCoverUrl && safeStudio.studioCoverUrl.length > 50000) {
+        safeStudio.studioCoverUrl = '';
+      }
+
+      localStorage.setItem(STUDIO_DATA_KEY, JSON.stringify(safeStudio));
       this.notify();
     } catch (e) {
-      console.warn('Could not save studio session:', e);
+      console.warn('Could not save studio session to localStorage:', e);
+      try {
+        // Fallback mínimo
+        localStorage.setItem(TOKEN_KEY, token);
+        const minimalStudio = {
+          id: studio.id,
+          email: studio.email,
+          studioName: studio.studioName,
+          studioPrincipals: studio.studioPrincipals,
+          studioLocation: studio.studioLocation,
+          foundationYear: studio.foundationYear,
+          studioWebsite: studio.studioWebsite,
+          studioAvatarUrl: '',
+          studioCoverUrl: '',
+        };
+        localStorage.setItem(STUDIO_DATA_KEY, JSON.stringify(minimalStudio));
+        this.notify();
+      } catch {}
     }
   },
 
@@ -98,10 +125,13 @@ export const studioAuthService = {
 
   async login(email: string, password: string): Promise<{ success: boolean; error?: string; studio?: StudioProfile }> {
     try {
+      const cleanEmail = (email || '').trim().toLowerCase();
+      const cleanPass = (password || '').trim();
+
       const res = await fetch('/api/auth/studio/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email: cleanEmail, password: cleanPass }),
       });
 
       const text = await res.text();
@@ -120,6 +150,67 @@ export const studioAuthService = {
       return { success: true, studio: data.studio };
     } catch (err: any) {
       return { success: false, error: err.message || 'Error de conexión con el servidor.' };
+    }
+  },
+
+  async requestPasswordReset(email: string): Promise<{ success: boolean; message?: string; error?: string }> {
+    try {
+      const cleanEmail = (email || '').trim().toLowerCase();
+      const res = await fetch('/api/auth/studio/forgot-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: cleanEmail }),
+      });
+
+      const text = await res.text();
+      let data: any;
+      try {
+        data = JSON.parse(text);
+      } catch {
+        return { success: false, error: 'Respuesta no válida del servidor.' };
+      }
+
+      if (!res.ok || !data.success) {
+        return { success: false, error: data.error || 'No se pudo enviar el código de recuperación.' };
+      }
+
+      return { success: true, message: data.message };
+    } catch (err: any) {
+      return { success: false, error: err.message || 'Error de conexión.' };
+    }
+  },
+
+  async resetPassword(email: string, code: string, newPassword: string): Promise<{ success: boolean; studio?: StudioProfile; error?: string }> {
+    try {
+      const cleanEmail = (email || '').trim().toLowerCase();
+      const cleanCode = (code || '').trim();
+      const cleanPass = (newPassword || '').trim();
+
+      const res = await fetch('/api/auth/studio/reset-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: cleanEmail, code: cleanCode, newPassword: cleanPass }),
+      });
+
+      const text = await res.text();
+      let data: any;
+      try {
+        data = JSON.parse(text);
+      } catch {
+        return { success: false, error: 'Respuesta no válida del servidor.' };
+      }
+
+      if (!res.ok || !data.success) {
+        return { success: false, error: data.error || 'Código incorrecto o expirado.' };
+      }
+
+      if (data.token && data.studio) {
+        this.setSession(data.token, data.studio);
+      }
+
+      return { success: true, studio: data.studio };
+    } catch (err: any) {
+      return { success: false, error: err.message || 'Error de conexión.' };
     }
   },
 

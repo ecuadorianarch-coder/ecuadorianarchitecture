@@ -39,11 +39,25 @@ export const StudioProfileModal: React.FC<StudioProfileModalProps> = ({
   const [activeTab, setActiveTab] = useState<'enviados' | 'publicados'>('enviados');
   const [submissions, setSubmissions] = useState<StudioSubmission[]>([]);
   const [isLoadingSubmissions, setIsLoadingSubmissions] = useState(false);
+  const [catalogProjects, setCatalogProjects] = useState<any[]>(allProjects);
 
   useEffect(() => {
     const unsub = studioAuthService.subscribe((s) => setStudio(s));
     return unsub;
   }, []);
+
+  useEffect(() => {
+    if (allProjects && allProjects.length > 0) {
+      setCatalogProjects(allProjects);
+    } else {
+      fetch('/api/projects')
+        .then((r) => r.json())
+        .then((data) => {
+          if (Array.isArray(data)) setCatalogProjects(data);
+        })
+        .catch(() => {});
+    }
+  }, [allProjects]);
 
   const fetchMySubmissions = async () => {
     setIsLoadingSubmissions(true);
@@ -75,7 +89,7 @@ export const StudioProfileModal: React.FC<StudioProfileModalProps> = ({
 
   // Filter published projects from main catalog matching studio name
   const normalizedStudio = (studio.studioName || '').toUpperCase();
-  const publishedProjects = allProjects.filter((p) => {
+  const publishedProjects = catalogProjects.filter((p) => {
     const pStudio = (p.studio || p.institution || p.author || '').toUpperCase();
     return (
       pStudio.includes(normalizedStudio) ||

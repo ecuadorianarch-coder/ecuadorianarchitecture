@@ -124,37 +124,66 @@ export const Navbar: React.FC<NavbarProps> = ({
         className={`fixed top-[calc(0.75rem+env(safe-area-inset-top,0px))] sm:top-5 left-3 sm:left-6 md:left-8 z-40 select-none transition-all duration-500 ease-out ${
           isDestacadosInView
             ? 'max-md:opacity-0 max-md:pointer-events-none max-md:-translate-y-8 md:opacity-100 md:scale-100 md:pointer-events-auto'
+            : studio
+            ? 'opacity-100 scale-100 pointer-events-auto'
             : 'opacity-[0.4] sm:opacity-[0.25] hover:opacity-100 scale-95 hover:scale-105 pointer-events-auto'
         }`}
       >
-        <button
-          type="button"
-          onClick={handleLoginClick}
-          className="group relative min-h-[44px] min-w-[44px] flex items-center justify-center transition-transform duration-200 hover:scale-105 active:scale-90 cursor-pointer focus-visible:ring-2 focus-visible:ring-ea-black/70 focus-visible:outline-hidden"
-          title={
-            studio
-              ? `Perfil de ${studio.studioName} — Ver propuestas y catálogo`
-              : 'Iniciar sesión o crear cuenta — Ecuadorian Architecture'
-          }
-          data-cursor
-        >
-          <img
-            src={btnIniciarSesionUrl}
-            alt={studio ? studio.studioName : 'INICIAR SESIÓN'}
-            className={`h-7 sm:h-9 md:h-10 lg:h-11 w-auto object-contain transition-all duration-500 ${
-              isDestacadosInView
-                ? 'filter-none drop-shadow-2xs'
-                : 'filter grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 group-hover:drop-shadow-xs'
-            }`}
-            draggable={false}
-          />
-          {studio && (
-            <span
-              className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-500 border border-white shadow-xs"
-              title="Sesión de estudio activa"
+        {studio ? (
+          <button
+            type="button"
+            onClick={handleLoginClick}
+            className="group relative min-h-[40px] px-2.5 sm:px-3.5 py-1.5 bg-[#FAF8F5] border-2 border-ea-black rounded-full shadow-[2px_2px_0px_#000000] hover:shadow-[3px_3px_0px_#000000] hover:scale-105 active:scale-95 transition-all flex items-center gap-2 sm:gap-2.5 cursor-pointer focus-visible:ring-2 focus-visible:ring-ea-black/70 focus-visible:outline-hidden"
+            title={`Perfil de ${studio.studioName || 'Estudio'} — Clic para ver propuestas y catálogo`}
+            data-cursor
+          >
+            {/* Avatar o Inicial */}
+            <div className="relative w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-ea-black bg-neutral-200 overflow-hidden shrink-0 flex items-center justify-center">
+              {studio.studioAvatarUrl ? (
+                <img
+                  src={studio.studioAvatarUrl}
+                  alt={studio.studioName}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <span className="font-okcok text-xs sm:text-sm uppercase text-ea-black">
+                  {(studio.studioName || studio.email || 'A')[0]}
+                </span>
+              )}
+              {/* Online Green Indicator */}
+              <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-white shadow-xs" />
+            </div>
+
+            {/* Info Estudio */}
+            <div className="flex flex-col items-start text-left leading-none pr-1">
+              <span className="font-okcok text-[11px] sm:text-[13px] uppercase text-ea-black tracking-normal max-w-[120px] sm:max-w-[180px] md:max-w-[220px] truncate">
+                {studio.studioName || studio.studioPrincipals || 'MI PERFIL'}
+              </span>
+              <span className="font-mono text-[8px] sm:text-[9px] text-emerald-700 tracking-wider font-bold uppercase mt-0.5 flex items-center gap-1">
+                <span>●</span> MI ESTUDIO
+              </span>
+            </div>
+          </button>
+        ) : (
+          <button
+            type="button"
+            onClick={handleLoginClick}
+            className="group relative min-h-[44px] min-w-[44px] flex items-center justify-center transition-transform duration-200 hover:scale-105 active:scale-90 cursor-pointer focus-visible:ring-2 focus-visible:ring-ea-black/70 focus-visible:outline-hidden"
+            title="Iniciar sesión o crear cuenta — Ecuadorian Architecture"
+            data-cursor
+          >
+            <img
+              src={btnIniciarSesionUrl}
+              alt="INICIAR SESIÓN"
+              className={`h-7 sm:h-9 md:h-10 lg:h-11 w-auto object-contain transition-all duration-500 ${
+                isDestacadosInView
+                  ? 'filter-none drop-shadow-2xs'
+                  : 'filter grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 group-hover:drop-shadow-xs'
+              }`}
+              draggable={false}
             />
-          )}
-        </button>
+          </button>
+        )}
       </div>
 
       {/* ------------------------------------------------------------------- */}
