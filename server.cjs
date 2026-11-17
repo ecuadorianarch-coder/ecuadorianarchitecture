@@ -1082,10 +1082,165 @@ const server = http.createServer(async (req, res) => {
           studioWebsite: studio.studioWebsite,
           studioAvatarUrl: studio.studioAvatarUrl,
           studioCoverUrl: studio.studioCoverUrl,
+          philosophy: studio.philosophy || '',
+          headline: studio.headline || '',
+          description: studio.description || '',
+          instagram: studio.instagram || '',
+          phone: studio.phone || '',
+          country: studio.country || 'Ecuador',
+          typologies: studio.typologies || []
         };
 
         res.setHeader('Content-Type', 'application/json');
         res.end(JSON.stringify({ success: true, studio: safeStudio }));
+        return;
+      }
+
+      // Actualizar perfil del estudio autenticado y sincronizar con authors.json
+      if ((pathname === '/api/studio/profile' || pathname === '/api/auth/studio/profile') && (req.method === 'PUT' || req.method === 'POST')) {
+        const token = extractStudioTokenFromHeader(req);
+        const decoded = verifyStudioToken(token);
+        if (!decoded) {
+          res.statusCode = 401;
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ error: 'Sesión no válida o expirada.' }));
+          return;
+        }
+
+        let body = '';
+        req.on('data', chunk => body += chunk);
+        req.on('end', async () => {
+          try {
+            const updates = JSON.parse(body || '{}');
+            const studiosPath = path.join(dataDir, 'studios.json');
+            let studios = fs.existsSync(studiosPath) ? JSON.parse(fs.readFileSync(studiosPath, 'utf8') || '[]') : [];
+            let studio = studios.find(s => s.id === decoded.studioId || s.email.toLowerCase() === decoded.email.toLowerCase());
+
+            if (!studio) {
+              const cloud = await readFromSupabase('studios.json');
+              if (cloud) {
+                try {
+                  const cloudStudios = JSON.parse(cloud);
+                  studio = cloudStudios.find(s => s.id === decoded.studioId || s.email.toLowerCase() === decoded.email.toLowerCase());
+                  if (studio) studios = cloudStudios;
+                } catch {}
+              }
+            }
+
+            if (!studio) {
+              res.statusCode = 404;
+              res.setHeader('Content-Type', 'application/json');
+              res.end(JSON.stringify({ error: 'Estudio no encontrado.' }));
+              return;
+            }
+
+            // Aplicar campos modificables
+            if (updates.studioName !== undefined) studio.studioName = String(updates.studioName).trim();
+            if (updates.studioPrincipals !== undefined) studio.studioPrincipals = String(updates.studioPrincipals).trim();
+            if (updates.studioLocation !== undefined) studio.studioLocation = String(updates.studioLocation).trim();
+            if (updates.foundationYear !== undefined) studio.foundationYear = String(updates.foundationYear).trim();
+            if (updates.studioWebsite !== undefined) studio.studioWebsite = String(updates.studioWebsite).trim();
+            if (updates.studioAvatarUrl !== undefined) studio.studioAvatarUrl = String(updates.studioAvatarUrl).trim();
+            if (updates.studioCoverUrl !== undefined) studio.studioCoverUrl = String(updates.studioCoverUrl).trim();
+            if (updates.philosophy !== undefined) studio.philosophy = String(updates.philosophy).trim();
+            if (updates.headline !== undefined) studio.headline = String(updates.headline).trim();
+            if (updates.description !== undefined) studio.description = String(updates.description).trim();
+            if (updates.instagram !== undefined) studio.instagram = String(updates.instagram).trim();
+            if (updates.phone !== undefined) studio.phone = String(updates.phone).trim();
+            if (updates.country !== undefined) studio.country = String(updates.country).trim();
+            if (Array.isArray(updates.typologies)) studio.typologies = updates.typologies;
+
+            studio.updatedAt = new Date().toISOString();
+
+            try { fs.writeFileSync(studiosPath, JSON.stringify(studios, null, 2), 'utf8'); } catch {}
+            writeToSupabase('studios.json', JSON.stringify(studios, null, 2)).catch(() => {});
+
+            // Sincronizar con authors.json para que aparezca en el pop-up de proyectos
+            try {
+              const authorsPath = path.join(dataDir, 'authors.json');
+              let authors = fs.existsSync(authorsPath) ? JSON.parse(fs.readFileSync(authorsPath, 'utf8') || '[]') : [];
+              if (!authors.length) {
+                const cloudAuthors = await readFromSupabase('authors.json');
+                if (cloudAuthors) {
+                  try { authors = JSON.parse(cloudAuthors); } catch {}
+                }
+              }
+
+              const slug = (studio.studioName || 'estudio')
+                .toLowerCase()
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/(^-|-$)/g, '');
+
+              const authorIdx = authors.findIndex(a =>
+                a.id === slug ||
+                a.slug === slug ||
+                (a.name && a.name.toLowerCase() === (studio.studioName || '').toLowerCase())
+              );
+
+              const authorEntry = {
+                id: slug,
+                name: studio.studioName,
+                slug: slug,
+                founder: studio.studioPrincipals || studio.studioName,
+                location: studio.studioLocation || 'Ecuador',
+                country: studio.country || 'Ecuador',
+                foundedYear: studio.foundationYear || '2024',
+                avatarUrl: studio.studioAvatarUrl || '',
+                coverImage: studio.studioCoverUrl || '',
+                headline: studio.headline || `Práctica de arquitectura contemporánea, investigación y producción espacial en el Ecuador.`,
+                description: studio.description || `${studio.studioName} es una práctica arquitectónica activa en el Ecuador.`,
+                philosophy: studio.philosophy || '',
+                typologies: Array.isArray(studio.typologies) && studio.typologies.length ? studio.typologies : ['Arquitectura Contemporánea', 'Investigación Proyectual'],
+                team: (studio.studioPrincipals || studio.studioName).split(',').map(n => ({ name: n.trim(), role: 'Dirección de Taller' })),
+                awards: ['Publicado en Archivo EcuadorianArch'],
+                contact: {
+                  website: studio.studioWebsite || '',
+                  instagram: studio.instagram || '',
+                  email: studio.email || ''
+                }
+              };
+
+              if (authorIdx >= 0) {
+                authors[authorIdx] = { ...authors[authorIdx], ...authorEntry };
+              } else {
+                authors.push(authorEntry);
+              }
+
+              try { fs.writeFileSync(authorsPath, JSON.stringify(authors, null, 2), 'utf8'); } catch {}
+              writeToSupabase('authors.json', JSON.stringify(authors, null, 2)).catch(() => {});
+            } catch (errSync) {
+              console.warn('[Profile Author Sync Error]:', errSync);
+            }
+
+            const safeStudio = {
+              id: studio.id,
+              email: studio.email,
+              studioName: studio.studioName,
+              studioPrincipals: studio.studioPrincipals,
+              studioLocation: studio.studioLocation,
+              foundationYear: studio.foundationYear,
+              studioWebsite: studio.studioWebsite,
+              studioAvatarUrl: studio.studioAvatarUrl,
+              studioCoverUrl: studio.studioCoverUrl,
+              philosophy: studio.philosophy || '',
+              headline: studio.headline || '',
+              description: studio.description || '',
+              instagram: studio.instagram || '',
+              phone: studio.phone || '',
+              country: studio.country || 'Ecuador',
+              typologies: studio.typologies || []
+            };
+
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({ success: true, studio: safeStudio }));
+          } catch (e) {
+            res.statusCode = 500;
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({ error: e.message }));
+          }
+        });
         return;
       }
 

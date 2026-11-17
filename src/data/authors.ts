@@ -341,6 +341,42 @@ export const getAuthorProfile = (studioName: string): AuthorProfileData => {
     return AUTHORS_REGISTRY[slug];
   }
 
+  // 4.5. Check registered studio session in storage if matches studio name or slug
+  try {
+    if (typeof window !== 'undefined') {
+      const rawStudio = localStorage.getItem('ea_studio_data') || sessionStorage.getItem('ea_studio_data');
+      if (rawStudio) {
+        const s = JSON.parse(rawStudio);
+        const sName = (s.studioName || '').trim().toUpperCase();
+        const sSlug = normalizeStudioToSlug(s.studioName || '');
+        if (sName === cleanName || sSlug === slug || (cleanName.length > 3 && (sName.includes(cleanName) || cleanName.includes(sName)))) {
+          return {
+            id: sSlug || slug,
+            name: s.studioName || cleanName,
+            slug: sSlug || slug,
+            founder: s.studioPrincipals || s.studioName || cleanName,
+            location: s.studioLocation || 'Ecuador',
+            country: s.country || 'Ecuador',
+            foundedYear: s.foundationYear || '2024',
+            avatarUrl: s.studioAvatarUrl || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
+            coverImage: s.studioCoverUrl || 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80',
+            headline: s.headline || `Práctica de arquitectura contemporánea, investigación y producción espacial en el Ecuador.`,
+            description: s.description || `${s.studioName} es una práctica arquitectónica activa en el Ecuador.`,
+            philosophy: s.philosophy || 'Proyectar desde el lugar y con la materia local para responder con pertinencia tectónica a nuestro tiempo.',
+            typologies: Array.isArray(s.typologies) && s.typologies.length ? s.typologies : ['Arquitectura Contemporánea', 'Investigación Proyectual', 'Hábitat Sustentable'],
+            team: (s.studioPrincipals || s.studioName || cleanName).split(',').map((n: string) => ({ name: n.trim(), role: 'Dirección de Taller' })),
+            awards: s.awards || ['Publicado en Archivo EcuadorianArch'],
+            contact: {
+              website: s.studioWebsite || '',
+              instagram: s.instagram || '',
+              email: s.email || ''
+            }
+          };
+        }
+      }
+    }
+  } catch {}
+
   // 5. Dynamic fallback for any other studio (e.g., academia, territorios, or new studios)
   return {
     id: slug || 'estudio-arquitectura',

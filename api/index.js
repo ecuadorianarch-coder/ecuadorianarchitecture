@@ -426,6 +426,135 @@ export default async function handler(req, res) {
         studioWebsite: studio.studioWebsite,
         studioAvatarUrl: studio.studioAvatarUrl,
         studioCoverUrl: studio.studioCoverUrl,
+        philosophy: studio.philosophy || '',
+        headline: studio.headline || '',
+        description: studio.description || '',
+        instagram: studio.instagram || '',
+        phone: studio.phone || '',
+        country: studio.country || 'Ecuador',
+        typologies: studio.typologies || []
+      };
+
+      res.setHeader('Content-Type', 'application/json');
+      return res.end(JSON.stringify({ success: true, studio: safeStudio }));
+    } catch (e) {
+      res.statusCode = 500;
+      res.setHeader('Content-Type', 'application/json');
+      return res.end(JSON.stringify({ error: e.message }));
+    }
+  }
+
+  // Actualizar perfil del estudio autenticado y sincronizar con authors.json
+  if ((pathname === '/api/studio/profile' || pathname === '/api/auth/studio/profile') && (req.method === 'PUT' || req.method === 'POST')) {
+    try {
+      const token = extractStudioTokenFromHeader(req);
+      const decoded = verifyStudioToken(token);
+      if (!decoded) {
+        res.statusCode = 401;
+        res.setHeader('Content-Type', 'application/json');
+        return res.end(JSON.stringify({ error: 'Sesión no válida o expirada.' }));
+      }
+
+      const updates = await getRequestBody(req);
+      const studios = await loadJsonData(dataDir, 'studios.json');
+      const studio = Array.isArray(studios) ? studios.find(s => s.id === decoded.studioId || (s.email || '').toLowerCase() === decoded.email.toLowerCase()) : null;
+
+      if (!studio) {
+        res.statusCode = 404;
+        res.setHeader('Content-Type', 'application/json');
+        return res.end(JSON.stringify({ error: 'Estudio no encontrado.' }));
+      }
+
+      if (updates.studioName !== undefined) studio.studioName = String(updates.studioName).trim();
+      if (updates.studioPrincipals !== undefined) studio.studioPrincipals = String(updates.studioPrincipals).trim();
+      if (updates.studioLocation !== undefined) studio.studioLocation = String(updates.studioLocation).trim();
+      if (updates.foundationYear !== undefined) studio.foundationYear = String(updates.foundationYear).trim();
+      if (updates.studioWebsite !== undefined) studio.studioWebsite = String(updates.studioWebsite).trim();
+      if (updates.studioAvatarUrl !== undefined) studio.studioAvatarUrl = String(updates.studioAvatarUrl).trim();
+      if (updates.studioCoverUrl !== undefined) studio.studioCoverUrl = String(updates.studioCoverUrl).trim();
+      if (updates.philosophy !== undefined) studio.philosophy = String(updates.philosophy).trim();
+      if (updates.headline !== undefined) studio.headline = String(updates.headline).trim();
+      if (updates.description !== undefined) studio.description = String(updates.description).trim();
+      if (updates.instagram !== undefined) studio.instagram = String(updates.instagram).trim();
+      if (updates.phone !== undefined) studio.phone = String(updates.phone).trim();
+      if (updates.country !== undefined) studio.country = String(updates.country).trim();
+      if (Array.isArray(updates.typologies)) studio.typologies = updates.typologies;
+
+      studio.updatedAt = new Date().toISOString();
+
+      await saveJsonData(dataDir, 'studios.json', studios);
+
+      // Sincronizar con authors.json para que aparezca en el pop-up de proyectos
+      try {
+        const authors = await loadJsonData(dataDir, 'authors.json');
+        const slug = (studio.studioName || 'estudio')
+          .toLowerCase()
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/(^-|-$)/g, '');
+
+        let authorIdx = -1;
+        if (Array.isArray(authors)) {
+          authorIdx = authors.findIndex(a =>
+            a.id === slug ||
+            a.slug === slug ||
+            (a.name && a.name.toLowerCase() === (studio.studioName || '').toLowerCase())
+          );
+        }
+
+        const authorEntry = {
+          id: slug,
+          name: studio.studioName,
+          slug: slug,
+          founder: studio.studioPrincipals || studio.studioName,
+          location: studio.studioLocation || 'Ecuador',
+          country: studio.country || 'Ecuador',
+          foundedYear: studio.foundationYear || '2024',
+          avatarUrl: studio.studioAvatarUrl || '',
+          coverImage: studio.studioCoverUrl || '',
+          headline: studio.headline || `Práctica de arquitectura contemporánea, investigación y producción espacial en el Ecuador.`,
+          description: studio.description || `${studio.studioName} es una práctica arquitectónica activa en el Ecuador.`,
+          philosophy: studio.philosophy || '',
+          typologies: Array.isArray(studio.typologies) && studio.typologies.length ? studio.typologies : ['Arquitectura Contemporánea', 'Investigación Proyectual'],
+          team: (studio.studioPrincipals || studio.studioName).split(',').map(n => ({ name: n.trim(), role: 'Dirección de Taller' })),
+          awards: ['Publicado en Archivo EcuadorianArch'],
+          contact: {
+            website: studio.studioWebsite || '',
+            instagram: studio.instagram || '',
+            email: studio.email || ''
+          }
+        };
+
+        if (Array.isArray(authors)) {
+          if (authorIdx >= 0) {
+            authors[authorIdx] = { ...authors[authorIdx], ...authorEntry };
+          } else {
+            authors.push(authorEntry);
+          }
+          await saveJsonData(dataDir, 'authors.json', authors);
+        }
+      } catch (errSync) {
+        console.warn('[Serverless Profile Author Sync Error]:', errSync);
+      }
+
+      const safeStudio = {
+        id: studio.id,
+        email: studio.email,
+        studioName: studio.studioName,
+        studioPrincipals: studio.studioPrincipals,
+        studioLocation: studio.studioLocation,
+        foundationYear: studio.foundationYear,
+        studioWebsite: studio.studioWebsite,
+        studioAvatarUrl: studio.studioAvatarUrl,
+        studioCoverUrl: studio.studioCoverUrl,
+        philosophy: studio.philosophy || '',
+        headline: studio.headline || '',
+        description: studio.description || '',
+        instagram: studio.instagram || '',
+        phone: studio.phone || '',
+        country: studio.country || 'Ecuador',
+        typologies: studio.typologies || []
       };
 
       res.setHeader('Content-Type', 'application/json');

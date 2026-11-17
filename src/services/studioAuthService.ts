@@ -13,6 +13,13 @@ export interface StudioProfile {
   studioWebsite: string;
   studioAvatarUrl: string;
   studioCoverUrl: string;
+  philosophy?: string;
+  headline?: string;
+  description?: string;
+  instagram?: string;
+  phone?: string;
+  country?: string;
+  typologies?: string[];
 }
 
 export interface StudioSubmission {
@@ -294,6 +301,70 @@ export const studioAuthService = {
       return { success: true, studio: data.studio };
     } catch (err: any) {
       return { success: false, error: err.message || 'Error de conexión.' };
+    }
+  },
+
+  async uploadImage(file: File): Promise<{ success: boolean; url?: string; error?: string }> {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = async () => {
+        try {
+          const base64Data = reader.result as string;
+          const res = await fetch('/api/upload', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              filename: file.name,
+              data: base64Data,
+            }),
+          });
+          const json = await res.json();
+          if (res.ok && json.success && json.url) {
+            resolve({ success: true, url: json.url });
+          } else {
+            resolve({ success: false, error: json.error || 'Error al subir la imagen' });
+          }
+        } catch (e: any) {
+          resolve({ success: false, error: e.message || 'Error de conexión al subir imagen' });
+        }
+      };
+      reader.onerror = () => resolve({ success: false, error: 'Error al procesar el archivo' });
+      reader.readAsDataURL(file);
+    });
+  },
+
+  async updateProfile(updates: Partial<StudioProfile>): Promise<{ success: boolean; studio?: StudioProfile; error?: string }> {
+    const token = this.getToken();
+    if (!token) {
+      return { success: false, error: 'No has iniciado sesión.' };
+    }
+
+    try {
+      const res = await fetch('/api/studio/profile', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(updates),
+      });
+
+      const text = await res.text();
+      let data: any;
+      try {
+        data = JSON.parse(text);
+      } catch {
+        return { success: false, error: 'Respuesta inválida del servidor.' };
+      }
+
+      if (!res.ok || !data.success || !data.studio) {
+        return { success: false, error: data.error || 'Error al actualizar el perfil.' };
+      }
+
+      this.setSession(token, data.studio);
+      return { success: true, studio: data.studio };
+    } catch (e: any) {
+      return { success: false, error: e.message || 'Error de conexión.' };
     }
   },
 
