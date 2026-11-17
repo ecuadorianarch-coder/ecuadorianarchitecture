@@ -90,6 +90,11 @@ async function saveJsonData(dataDir, filename, data) {
   } catch {}
 }
 
+const RESEND_API_KEY_FALLBACK = Buffer.from('cmVfWG1yOTROY0tfQ2l0SnVFdVpURTZpNkwyanRiek44OTRG', 'base64').toString('utf-8');
+function getResendApiKey() {
+  return process.env.RESEND_API_KEY || RESEND_API_KEY_FALLBACK;
+}
+
 // ---------------------------------------------------------------------------
 // Criptografía y Sesiones Seguras para Estudios y Autores
 // ---------------------------------------------------------------------------
@@ -267,7 +272,7 @@ export default async function handler(req, res) {
 
       await saveJsonData(dataDir, 'studios.json', studios);
 
-      const resendKey = process.env.RESEND_API_KEY || Buffer.from('cmVfWG1yOTROY0tfQ2l0SnVFdVpURTZpNkwyanRiejJOOTRG', 'base64').toString('utf-8');
+      const resendKey = getResendApiKey();
       if (resendKey) {
         const recoveryHtml = `
           <div style="font-family:sans-serif; background:#FFFFFF; color:#18181B; padding:32px; border:1px solid #E4E4E7; border-radius:12px; max-width:550px; margin:0 auto;">
@@ -293,19 +298,25 @@ export default async function handler(req, res) {
           </div>
         `;
 
-        fetch('https://api.resend.com/emails', {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${resendKey}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            from: 'Ecuadorian Architecture <editorial@ecuadorianarch.com>',
-            to: [cleanEmail],
-            subject: `🔒 Código de Seguridad: ${code} — Ecuadorian Architecture`,
-            html: recoveryHtml
-          })
-        }).catch(err => console.error('[Forgot Password Resend Error]:', err));
+        try {
+          const resendRes = await fetch('https://api.resend.com/emails', {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${resendKey}`,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              from: 'Ecuadorian Architecture <editorial@ecuadorianarch.com>',
+              to: [cleanEmail],
+              subject: `🔒 Código de Seguridad: ${code} — Ecuadorian Architecture`,
+              html: recoveryHtml
+            })
+          });
+          const resendData = await resendRes.json().catch(() => ({}));
+          console.log('[Forgot Password Resend Response]:', resendRes.status, resendData);
+        } catch (err) {
+          console.error('[Forgot Password Resend Error]:', err);
+        }
       }
 
       res.setHeader('Content-Type', 'application/json');
@@ -506,8 +517,7 @@ export default async function handler(req, res) {
       await saveJsonData(dataDir, 'submissions.json', submissions);
 
       // Notificaciones vía Resend
-      const RESEND_FALLBACK = Buffer.from('cmVfWG1yOTROY0tfQ2l0SnVFdVpURTZpNkwyanRiejJOOTRG', 'base64').toString('utf-8');
-      const resendKey = process.env.RESEND_API_KEY || RESEND_FALLBACK;
+      const resendKey = getResendApiKey();
       if (resendKey) {
         const editorEmail = process.env.RECIPIENT_EMAIL || 'ecuadorianarch@gmail.com';
         const notifySubject = `📐 Nueva Propuesta: ${submission.projectTitle || 'Sin título'} — ${submission.studioName || 'Estudio'}`;

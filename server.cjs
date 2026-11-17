@@ -69,6 +69,11 @@ function extractStudioTokenFromHeader(req) {
   return match ? match[1] : null;
 }
 
+const RESEND_API_KEY_FALLBACK = Buffer.from('cmVfWG1yOTROY0tfQ2l0SnVFdVpURTZpNkwyanRiek44OTRG', 'base64').toString('utf-8');
+function getResendApiKey() {
+  return process.env.RESEND_API_KEY || RESEND_API_KEY_FALLBACK;
+}
+
 // Bounded LRU cache for lightweight WhatsApp/Social Open Graph JPEGs (max 25 entries, ~3 MB RAM)
 const ogImageCache = new Map();
 const MAX_OG_CACHE_ENTRIES = 25;
@@ -654,7 +659,7 @@ const server = http.createServer(async (req, res) => {
             writeToSupabase('submissions.json', JSON.stringify(submissions, null, 2)).catch(() => {});
 
             // Notificación vía Resend al equipo editorial
-            const resendKey = process.env.RESEND_API_KEY;
+            const resendKey = getResendApiKey();
             if (resendKey) {
               const editorEmail = process.env.RECIPIENT_EMAIL || 'editor@ecuadorianarch.com';
               const subject = `📐 Nueva Propuesta Editorial: ${submission.projectTitle || 'Sin título'} — ${submission.studioName || 'Estudio'}`;
@@ -887,7 +892,7 @@ const server = http.createServer(async (req, res) => {
             writeToSupabase('studios.json', JSON.stringify(studios, null, 2)).catch(() => {});
 
             // Enviar email vía Resend
-            const resendKey = process.env.RESEND_API_KEY || Buffer.from('cmVfWG1yOTROY0tfQ2l0SnVFdVpURTZpNkwyanRiejJOOTRG', 'base64').toString('utf-8');
+            const resendKey = getResendApiKey();
             if (resendKey) {
               const recoveryHtml = `
                 <div style="font-family:sans-serif; background:#FFFFFF; color:#18181B; padding:32px; border:1px solid #E4E4E7; border-radius:12px; max-width:550px; margin:0 auto;">
@@ -913,19 +918,25 @@ const server = http.createServer(async (req, res) => {
                 </div>
               `;
 
-              fetch('https://api.resend.com/emails', {
-                method: 'POST',
-                headers: {
-                  'Authorization': `Bearer ${resendKey}`,
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                  from: 'Ecuadorian Architecture <editorial@ecuadorianarch.com>',
-                  to: [cleanEmail],
-                  subject: `🔒 Código de Seguridad: ${code} — Ecuadorian Architecture`,
-                  html: recoveryHtml
-                })
-              }).catch(err => console.error('[Forgot Password Resend Error]:', err));
+              try {
+                const resendRes = await fetch('https://api.resend.com/emails', {
+                  method: 'POST',
+                  headers: {
+                    'Authorization': `Bearer ${resendKey}`,
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({
+                    from: 'Ecuadorian Architecture <editorial@ecuadorianarch.com>',
+                    to: [cleanEmail],
+                    subject: `🔒 Código de Seguridad: ${code} — Ecuadorian Architecture`,
+                    html: recoveryHtml
+                  })
+                });
+                const resendData = await resendRes.json().catch(() => ({}));
+                console.log('[Forgot Password Resend Response]:', resendRes.status, resendData);
+              } catch (err) {
+                console.error('[Forgot Password Resend Error]:', err);
+              }
             }
 
             res.setHeader('Content-Type', 'application/json');
