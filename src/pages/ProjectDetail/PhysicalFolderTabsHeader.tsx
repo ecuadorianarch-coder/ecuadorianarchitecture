@@ -23,7 +23,7 @@ export const PhysicalFolderTabsHeader: React.FC<PhysicalFolderTabsHeaderProps> =
           <style>{`
             @font-face {
               font-family: 'OKCOK';
-              src: url('/fonts/OKCOK.otf') format('opentype');
+              src: url('/fonts/OKCOK.ttf') format('truetype'), url('/fonts/OKCOK.otf') format('opentype');
             }
             .pft-tab-text {
               font-family: 'OKCOK', sans-serif;

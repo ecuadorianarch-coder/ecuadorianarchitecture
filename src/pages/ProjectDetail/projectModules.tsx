@@ -608,9 +608,9 @@ const CriticaModuleContent: React.FC<ProjectModuleContext> = ({
 export const PROJECT_MODULES_REGISTRY: ProjectModuleDefinition[] = [
   {
     id: 'resena',
-    title: 'RESENA',
-    navLabel: 'RESEÑAS',
-    shortTitle: 'RESEÑAS',
+    title: 'RESEÑA',
+    navLabel: 'RESEÑA',
+    shortTitle: 'RESEÑA',
     isMandatory: true,
     isAvailable: () => true,
     inactiveFillClass: 'af-fill-critica',
@@ -618,7 +618,7 @@ export const PROJECT_MODULES_REGISTRY: ProjectModuleDefinition[] = [
   },
   {
     id: 'critica',
-    title: 'CRITICA',
+    title: 'CRÍTICA',
     navLabel: 'CRÍTICA',
     shortTitle: 'CRÍTICA',
     isMandatory: false,

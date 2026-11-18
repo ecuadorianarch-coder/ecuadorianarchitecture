@@ -286,7 +286,7 @@ export const CommunityFolderExplorer: React.FC<CommunityFolderExplorerProps> = (
       <style>{`
         @font-face {
           font-family: 'OKCOK';
-          src: url('/fonts/OKCOK.otf') format('opentype');
+          src: url('/fonts/OKCOK.ttf') format('truetype'), url('/fonts/OKCOK.otf') format('opentype');
         }
         .ea-folder-svg text {
           font-family: 'OKCOK', sans-serif;
@@ -360,7 +360,7 @@ export const CommunityFolderExplorer: React.FC<CommunityFolderExplorerProps> = (
                 onClick={() => onNavigateTab?.('critica')}
               >
                 <path className="ea-cls-11" d="M263.98,127.57v-37.66c0-3.45,2.8-6.26,6.26-6.26h137.11c3.45,0,6.26,2.8,6.26,6.26v37.66"/>
-                <text className="ea-cls-3" transform="translate(292.08 113.6)"><tspan x="0" y="0">CRITICA</tspan></text>
+                <text className="ea-cls-3" transform="translate(292.08 113.6)"><tspan x="0" y="0">CRÍTICA</tspan></text>
               </g>
             </g>
 
@@ -372,7 +372,7 @@ export const CommunityFolderExplorer: React.FC<CommunityFolderExplorerProps> = (
               <path className="ea-cls-12" d="M105.81,151.46h137.11c3.45,0,6.26-2.8,6.26-6.26v-.04H99.55v.04c0,3.45,2.8,6.26,6.26,6.26Z"/>
               <path className="ea-cls-10" d="M249.17,145.2c0,3.45-2.8,6.26-6.26,6.26H105.81c-3.45,0-6.26-2.8-6.26-6.26"/>
               <path className="ea-cls-10" d="M249.17,145.16v-37.66c0-3.45-2.8-6.26-6.26-6.26H105.81c-3.45,0-6.26,2.8-6.26,6.26v37.66"/>
-              <text className="ea-cls-3" transform="translate(129.18 131.46)"><tspan x="0" y="0">RESENA</tspan></text>
+              <text className="ea-cls-3" transform="translate(129.18 131.46)"><tspan x="0" y="0">RESEÑA</tspan></text>
             </g>
 
             {/* Front folder body: NOTAS DE LA COMUNIDAD */}
@@ -493,7 +493,7 @@ export const CommunityFolderExplorer: React.FC<CommunityFolderExplorerProps> = (
                 onClick={() => onNavigateTab?.('critica')}
               >
                 <path className="ea-dt-15" d="M263.98,132.94v-37.66c0-3.45,2.8-6.26,6.26-6.26h137.11c3.45,0,6.26,2.8,6.26,6.26v37.66"/>
-                <text className="ea-dt-3" transform="translate(292.08 118.97)"><tspan x="0" y="0">CRITICA</tspan></text>
+                <text className="ea-dt-3" transform="translate(292.08 118.97)"><tspan x="0" y="0">CRÍTICA</tspan></text>
               </g>
             </g>
 
@@ -505,7 +505,7 @@ export const CommunityFolderExplorer: React.FC<CommunityFolderExplorerProps> = (
               <path className="ea-dt-16" d="M105.81,156.84h137.11c3.45,0,6.26-2.8,6.26-6.26v-.04H99.55v.04c0,3.45,2.8,6.26,6.26,6.26Z"/>
               <path className="ea-dt-14" d="M249.17,150.58c0,3.45-2.8,6.26-6.26,6.26H105.81c-3.45,0-6.26-2.8-6.26-6.26"/>
               <path className="ea-dt-14" d="M249.17,150.54v-37.66c0-3.45-2.8-6.26-6.26-6.26H105.81c-3.45,0-6.26,2.8-6.26,6.26v37.66"/>
-              <text className="ea-dt-3" transform="translate(129.18 136.83)"><tspan x="0" y="0">RESENA</tspan></text>
+              <text className="ea-dt-3" transform="translate(129.18 136.83)"><tspan x="0" y="0">RESEÑA</tspan></text>
             </g>
 
             {/* Front folder body: NOTAS DE LA COMUNIDAD */}

@@ -81,13 +81,13 @@ const computeTabGeometries = (
         xs: 105.81,
         xe: 249.17,
         center: 177.5,
-        title: 'RESENA',
+        title: 'RESEÑA',
       },
       critica: {
         xs: 263.98,
         xe: 407.35,
         center: 335.6,
-        title: 'CRITICA',
+        title: 'CRÍTICA',
       },
       podcast: {
         xs: 428.92,
@@ -680,7 +680,7 @@ export const AuthenticFolderContainer: React.FC<AuthenticFolderContainerProps> =
           <style>{`
             @font-face {
               font-family: 'OKCOK';
-              src: url('/fonts/OKCOK.otf') format('opentype');
+              src: url('/fonts/OKCOK.ttf') format('truetype'), url('/fonts/OKCOK.otf') format('opentype');
             }
             .af-cls-3 { font-size: 19.27px; fill: #1d1d1b; font-family: 'OKCOK', sans-serif; letter-spacing: 0.5px; }
             .af-cls-4 { font-size: 9.9px; fill: #1d1d1b; font-family: 'OKCOK', sans-serif; letter-spacing: 0.5px; }
