@@ -7,8 +7,7 @@ import crypto from 'crypto';
 // Supabase Cloud Storage Engine (Persistencia Permanente Blindada en Vercel)
 // ---------------------------------------------------------------------------
 const SUPABASE_URL = process.env.SUPABASE_URL || 'https://zinapitogdpdflkogutn.supabase.co';
-const DEFAULT_FALLBACK_KEY = Buffer.from('c2Jfc2VjcmV0X3BJYl81dEJuaUMzb2Z6Qlhhd0d5eGdfNEMyT3FmMXA=', 'base64').toString('utf-8');
-const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_KEY || DEFAULT_FALLBACK_KEY;
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_KEY || '';
 
 // Cache en memoria para respuestas de baja latencia
 const memoryContentCache = new Map();
@@ -90,9 +89,8 @@ async function saveJsonData(dataDir, filename, data) {
   } catch {}
 }
 
-const RESEND_API_KEY_FALLBACK = Buffer.from('cmVfWG1yOTROY0tfQ2l0SnVFdVpURTZpNkwyanRiek44OTRG', 'base64').toString('utf-8');
 function getResendApiKey() {
-  return process.env.RESEND_API_KEY || RESEND_API_KEY_FALLBACK;
+  return process.env.RESEND_API_KEY || process.env.VITE_RESEND_API_KEY || '';
 }
 
 // ---------------------------------------------------------------------------
