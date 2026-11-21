@@ -311,7 +311,7 @@ const server = http.createServer(async (req, res) => {
   if (pathname === '/api/upload' && req.method === 'POST') {
     let body = '';
     req.on('data', chunk => body += chunk);
-    req.on('end', () => {
+    req.on('end', async () => {
       try {
         const payload = JSON.parse(body);
         const { filename, data } = payload;
@@ -323,10 +323,27 @@ const server = http.createServer(async (req, res) => {
         }
 
         const base64Data = data.split('base64,')[1];
-        const ext = path.extname(filename) || '.webp';
-        const safeName = `${Date.now()}-${path.basename(filename, ext).replace(/[^a-zA-Z0-9_-]/g, '_')}${ext}`;
+        let ext = path.extname(filename).toLowerCase() || '.webp';
+        let buffer = Buffer.from(base64Data, 'base64');
+        let mimeType = ext === '.png' ? 'image/png' : ext === '.webp' ? 'image/webp' : 'image/jpeg';
+
+        // Server-side architectural perceptual optimizer pass (prevent oversized images)
+        if (sharp && ext !== '.svg' && ext !== '.gif') {
+          try {
+            buffer = await sharp(buffer)
+              .rotate()
+              .resize(2048, 2048, { fit: 'inside', withoutEnlargement: true })
+              .webp({ quality: 80, effort: 4 })
+              .toBuffer();
+            ext = '.webp';
+            mimeType = 'image/webp';
+          } catch (sharpErr) {
+            console.warn('[Upload Sharp Optimization Warning]:', sharpErr.message);
+          }
+        }
+
+        const safeName = `${Date.now()}-${path.basename(filename, path.extname(filename)).replace(/[^a-zA-Z0-9_-]/g, '_')}${ext}`;
         const filePath = path.join(uploadsDir, safeName);
-        const buffer = Buffer.from(base64Data, 'base64');
 
         fs.writeFileSync(filePath, buffer);
 
@@ -344,7 +361,6 @@ const server = http.createServer(async (req, res) => {
         }
 
         // Subida a Supabase Cloud Storage permanente
-        const mimeType = ext === '.png' ? 'image/png' : ext === '.webp' ? 'image/webp' : 'image/jpeg';
         uploadImageToSupabase(safeName, buffer, mimeType).then((cloudUrl) => {
           const finalUrl = cloudUrl || `/images/uploads/${safeName}`;
           res.setHeader('Content-Type', 'application/json');
@@ -2366,6 +2382,45 @@ const server = http.createServer(async (req, res) => {
           });
         return;
       }
+    }
+  }
+
+  // 2.7. Dual-Layer Edge/Disk Cached Proxy for Uploads (/images/uploads/<sourceFile>)
+  if ((req.method === 'GET' || req.method === 'HEAD') && pathname.startsWith('/images/uploads/')) {
+    const sourceFile = path.basename(pathname);
+    if (/^[a-zA-Z0-9._-]+$/.test(sourceFile) && !sourceFile.includes('..')) {
+      const ext = path.extname(sourceFile).toLowerCase() || '.webp';
+      const contentType = MIME_TYPES[ext] || 'image/webp';
+      const localCachedPath = path.join(uploadsDir, sourceFile);
+
+      if (fs.existsSync(localCachedPath) && fs.statSync(localCachedPath).isFile()) {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', contentType);
+        res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+        res.setHeader('X-Cache-Status', 'DISK-HIT');
+        if (req.method === 'HEAD') return res.end();
+        return fs.createReadStream(localCachedPath).pipe(res);
+      }
+
+      fetchUploadSourceBuffer(sourceFile)
+        .then((fetched) => {
+          if (!fetched) {
+            res.statusCode = 404;
+            return res.end('Image not found');
+          }
+          res.statusCode = 200;
+          res.setHeader('Content-Type', contentType);
+          res.setHeader('Content-Length', fetched.buffer.length);
+          res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+          res.setHeader('X-Cache-Status', 'SUPABASE-CACHED');
+          if (req.method === 'HEAD') return res.end();
+          res.end(fetched.buffer);
+        })
+        .catch(() => {
+          res.statusCode = 502;
+          res.end('Upstream storage error');
+        });
+      return;
     }
   }
 

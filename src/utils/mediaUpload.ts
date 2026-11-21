@@ -3,10 +3,10 @@
  *
  * Automatically prepares and optimizes photographs to high-end architectural publication standards
  * (ArchDaily / Dezeen / Divisare):
- * 1. Proportional resizing to max 2560px on long edge (Retina 4K/5K clarity).
- * 2. Visual lossless conversion to modern WebP (quality 0.88), retaining all material textures (concrete, timber, brick)
- *    while avoiding sky banding.
- * 3. Reduces 15MB-30MB camera RAW/JPEGs down to ~400KB - 750KB in milliseconds on the client.
+ * 1. Proportional resizing to max 2048px on long edge (Retina 4K clarity).
+ * 2. Visual lossless conversion to modern WebP (quality 0.80), retaining all material textures (concrete, timber, brick)
+ *    while avoiding sky banding and keeping file sizes under 250KB.
+ * 3. Reduces 15MB-30MB camera RAW/JPEGs down to ~150KB - 300KB in milliseconds on the client.
  * 4. Stores clean, permanent URLs into /public/images/uploads/.
  */
 
@@ -31,8 +31,8 @@ export const optimizeArchitecturalImage = async (
   options: OptimizationOptions = {}
 ): Promise<{ dataUrl: string; filename: string; originalSize: number; optimizedSize: number }> => {
   const {
-    maxDimension = 2560,
-    quality = 0.88,
+    maxDimension = 2048,
+    quality = 0.80,
     format = 'image/webp',
   } = options;
 
@@ -228,4 +228,19 @@ export const uploadMultipleImages = async (
   }
 
   return uploadedUrls;
+};
+
+/**
+ * Normalizes an image URL to route through the first-party cached Cloudflare proxy (/images/uploads/...)
+ * instead of hitting Supabase Storage directly, saving egress bandwidth while retaining 100% fidelity.
+ */
+export const getCachedMediaUrl = (url: string | null | undefined): string => {
+  if (!url || typeof url !== 'string') return '';
+  if (url.includes('supabase.co/storage/v1/object/public/uploads/')) {
+    const filename = url.split('/uploads/').pop();
+    if (filename) {
+      return `/images/uploads/${filename}`;
+    }
+  }
+  return url;
 };

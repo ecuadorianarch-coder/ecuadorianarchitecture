@@ -383,7 +383,7 @@
           {
             "id": "mod-single-image-1793892042969",
             "type": "single-image",
-            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892051586-R2_FINAL.webp",
+            "imageUrl": "/images/uploads/1793892051586-R2_FINAL.webp",
             "credits": "LAMS arquitectos",
             "category": "fotografia"
           },
@@ -395,7 +395,7 @@
           {
             "id": "mod-single-image-1793892358715",
             "type": "single-image",
-            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892408453-r4-01.webp",
+            "imageUrl": "/images/uploads/1793892408453-r4-01.webp",
             "credits": "LAMS arquitectos",
             "category": "planimetria"
           },
@@ -407,7 +407,7 @@
           {
             "id": "mod-single-image-1793892491974",
             "type": "single-image",
-            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892502029-R1__1_.webp",
+            "imageUrl": "/images/uploads/1793892502029-R1__1_.webp",
             "credits": "LAMS arquitectos",
             "category": "fotografia"
           },
@@ -419,7 +419,7 @@
           {
             "id": "mod-single-image-1793892537415",
             "type": "single-image",
-            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892545849-1__Foto_Maqueta.webp",
+            "imageUrl": "/images/uploads/1793892545849-1__Foto_Maqueta.webp",
             "credits": "LAMS arquitectos",
             "category": "fotografia"
           }
@@ -651,7 +651,7 @@
             "text": "¿Puede un templo sagrado nacer sin iglesia y desde el barro comunitario?",
             "wordCount": 12,
             "visualDirection": "Fondo negro editorial, render del templo en penumbra con tipografía Anton a gran escala.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892051586-R2_FINAL.webp",
+            "recommendedAssetUrl": "/images/uploads/1793892051586-R2_FINAL.webp",
             "recommendedAssetDescription": "Render exterior del templo con luz crepuscular en Rumipamba."
           },
           {
@@ -660,7 +660,7 @@
             "text": "Rumipamba, 2.850 metros de altitud: una comunidad históricamente privada de su propio refugio espiritual.",
             "wordCount": 14,
             "visualDirection": "Fotografía del territorio andino de Rumiñahui con encuadre horizontal amplio y textura de tierra.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892408453-r4-01.webp",
+            "recommendedAssetUrl": "/images/uploads/1793892408453-r4-01.webp",
             "recommendedAssetDescription": "Registro del paisaje y del taller participativo vecinal."
           },
           {
@@ -669,7 +669,7 @@
             "text": "La arquitectura renuncia al protagonismo individual para disolverse en asamblea comunitaria.",
             "wordCount": 11,
             "visualDirection": "Diagrama axonométrico minimalista en línea blanca sobre fondo oscuro.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892502029-R1__1_.webp",
+            "recommendedAssetUrl": "/images/uploads/1793892502029-R1__1_.webp",
             "recommendedAssetDescription": "Axonometría explotada de la nave y cerchas."
           },
           {
@@ -678,7 +678,7 @@
             "text": "Cinco asambleas deliberativas definieron cada rincón, dimensión y símbolo del espacio sagrado.",
             "wordCount": 12,
             "visualDirection": "Fotografía documental de los habitantes dibujando y debatiendo en la mesa comunal.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892408453-r4-01.webp",
+            "recommendedAssetUrl": "/images/uploads/1793892408453-r4-01.webp",
             "recommendedAssetDescription": "Taller participativo con los habitantes de Rumipamba."
           },
           {
@@ -687,7 +687,7 @@
             "text": "180 metros cuadrados donde el vacío no es ausencia, sino convocatoria al recogimiento.",
             "wordCount": 13,
             "visualDirection": "Planta arquitectónica limpia con cotas sobrias y módulo de proporciones visible.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892545849-1__Foto_Maqueta.webp",
+            "recommendedAssetUrl": "/images/uploads/1793892545849-1__Foto_Maqueta.webp",
             "recommendedAssetDescription": "Planta arquitectónica de distribución de la nave."
           },
           {
@@ -705,7 +705,7 @@
             "text": "Frente a templos dorados y corporativos, la pertinencia radica en la sobriedad del barro.",
             "wordCount": 14,
             "visualDirection": "Encuadre interior en sombra con haz de luz cenital tocando el suelo de tierra.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892051586-R2_FINAL.webp",
+            "recommendedAssetUrl": "/images/uploads/1793892051586-R2_FINAL.webp",
             "recommendedAssetDescription": "Atmósfera interior de luz cenital filtrada."
           },
           {
@@ -714,7 +714,7 @@
             "text": "¿Qué transforma más un territorio: un edificio terminado o una comunidad organizada?",
             "wordCount": 12,
             "visualDirection": "Composición tipográfica sobria con signo de interrogación protagonista.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892502029-R1__1_.webp",
+            "recommendedAssetUrl": "/images/uploads/1793892502029-R1__1_.webp",
             "recommendedAssetDescription": "Diagrama conceptual del proceso comunitario."
           },
           {
@@ -723,7 +723,7 @@
             "text": "Nómade Taller demuestra que la arquitectura más urgente se construye desde la escucha.",
             "wordCount": 13,
             "visualDirection": "Crédito tipográfico dual: Nómade Taller + Maestro Mayor Segundo Guanoluisa.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892051586-R2_FINAL.webp",
+            "recommendedAssetUrl": "/images/uploads/1793892051586-R2_FINAL.webp",
             "recommendedAssetDescription": "Perspectiva completa de la nave sagrada."
           },
           {
@@ -732,7 +732,7 @@
             "text": "Lo sagrado habita en el encuentro honesto entre tierra, memoria y comunidad.",
             "wordCount": 12,
             "visualDirection": "Logotipo de Ecuadorian Architecture, enlace de lectura profunda en bio y llamado a la conversación.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892051586-R2_FINAL.webp",
+            "recommendedAssetUrl": "/images/uploads/1793892051586-R2_FINAL.webp",
             "recommendedAssetDescription": "Cierre editorial institucional EA."
           }
         ],
@@ -747,10 +747,10 @@
           "#ArquitecturaAndina"
         ],
         "curatedAssetUrls": [
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892051586-R2_FINAL.webp",
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892408453-r4-01.webp",
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892502029-R1__1_.webp",
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892545849-1__Foto_Maqueta.webp"
+          "/images/uploads/1793892051586-R2_FINAL.webp",
+          "/images/uploads/1793892408453-r4-01.webp",
+          "/images/uploads/1793892502029-R1__1_.webp",
+          "/images/uploads/1793892545849-1__Foto_Maqueta.webp"
         ],
         "status": "ready_for_design",
         "createdAt": "2026-11-05T15:33:59.991Z"
@@ -806,7 +806,7 @@
           {
             "id": "mod-single-image-1793831391486",
             "type": "single-image",
-            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831399460-Por_Favor_Pisar_las_Jardineras_Collage_Lugar.webp",
+            "imageUrl": "/images/uploads/1793831399460-Por_Favor_Pisar_las_Jardineras_Collage_Lugar.webp",
             "credits": "Isaac Flores",
             "category": "fotografia"
           },
@@ -818,7 +818,7 @@
           {
             "id": "mod-single-image-1793831458949",
             "type": "single-image",
-            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831492239-2.webp",
+            "imageUrl": "/images/uploads/1793831492239-2.webp",
             "credits": "Isaac Flores",
             "category": "fotografia"
           },
@@ -830,7 +830,7 @@
           {
             "id": "mod-single-image-1793831598130",
             "type": "single-image",
-            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831607790-Por_Favor_Pisar_las_Jardineras_Implantacio__n.webp",
+            "imageUrl": "/images/uploads/1793831607790-Por_Favor_Pisar_las_Jardineras_Implantacio__n.webp",
             "credits": "Isaac Flores",
             "category": "fotografia"
           },
@@ -846,8 +846,8 @@
               "columns": 2
             },
             "imageUrls": [
-              "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831662232-Por_Favor_Pisar_las_Jardineras_Ima__gen_01.webp",
-              "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831670606-Por_Favor_Pisar_las_Jardineras_Maqueta_Conceptual.webp"
+              "/images/uploads/1793831662232-Por_Favor_Pisar_las_Jardineras_Ima__gen_01.webp",
+              "/images/uploads/1793831670606-Por_Favor_Pisar_las_Jardineras_Maqueta_Conceptual.webp"
             ]
           },
           {
@@ -858,7 +858,7 @@
           {
             "id": "mod-single-image-1793832862514",
             "type": "single-image",
-            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793832877836-Por_Favor_Pisar_las_Jardineras_Corte_Fachada_Norte.webp",
+            "imageUrl": "/images/uploads/1793832877836-Por_Favor_Pisar_las_Jardineras_Corte_Fachada_Norte.webp",
             "credits": "Isaac Flores",
             "category": "planimetria"
           }
@@ -1090,7 +1090,7 @@
             "text": "¿Puede un templo sagrado nacer sin iglesia y desde el barro comunitario?",
             "wordCount": 12,
             "visualDirection": "Fondo negro editorial, render del templo en penumbra con tipografía Anton a gran escala.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831399460-Por_Favor_Pisar_las_Jardineras_Collage_Lugar.webp",
+            "recommendedAssetUrl": "/images/uploads/1793831399460-Por_Favor_Pisar_las_Jardineras_Collage_Lugar.webp",
             "recommendedAssetDescription": "Render exterior del templo con luz crepuscular en Rumipamba."
           },
           {
@@ -1099,7 +1099,7 @@
             "text": "Rumipamba, 2.850 metros de altitud: una comunidad históricamente privada de su propio refugio espiritual.",
             "wordCount": 14,
             "visualDirection": "Fotografía del territorio andino de Rumiñahui con encuadre horizontal amplio y textura de tierra.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831492239-2.webp",
+            "recommendedAssetUrl": "/images/uploads/1793831492239-2.webp",
             "recommendedAssetDescription": "Registro del paisaje y del taller participativo vecinal."
           },
           {
@@ -1108,7 +1108,7 @@
             "text": "La arquitectura renuncia al protagonismo individual para disolverse en asamblea comunitaria.",
             "wordCount": 11,
             "visualDirection": "Diagrama axonométrico minimalista en línea blanca sobre fondo oscuro.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831607790-Por_Favor_Pisar_las_Jardineras_Implantacio__n.webp",
+            "recommendedAssetUrl": "/images/uploads/1793831607790-Por_Favor_Pisar_las_Jardineras_Implantacio__n.webp",
             "recommendedAssetDescription": "Axonometría explotada de la nave y cerchas."
           },
           {
@@ -1117,7 +1117,7 @@
             "text": "Cinco asambleas deliberativas definieron cada rincón, dimensión y símbolo del espacio sagrado.",
             "wordCount": 12,
             "visualDirection": "Fotografía documental de los habitantes dibujando y debatiendo en la mesa comunal.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831492239-2.webp",
+            "recommendedAssetUrl": "/images/uploads/1793831492239-2.webp",
             "recommendedAssetDescription": "Taller participativo con los habitantes de Rumipamba."
           },
           {
@@ -1126,7 +1126,7 @@
             "text": "180 metros cuadrados donde el vacío no es ausencia, sino convocatoria al recogimiento.",
             "wordCount": 13,
             "visualDirection": "Planta arquitectónica limpia con cotas sobrias y módulo de proporciones visible.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831662232-Por_Favor_Pisar_las_Jardineras_Ima__gen_01.webp",
+            "recommendedAssetUrl": "/images/uploads/1793831662232-Por_Favor_Pisar_las_Jardineras_Ima__gen_01.webp",
             "recommendedAssetDescription": "Planta arquitectónica de distribución de la nave."
           },
           {
@@ -1135,7 +1135,7 @@
             "text": "Adobe crudo andino y vigas de madera: la inercia térmica como ética constructiva.",
             "wordCount": 13,
             "visualDirection": "Detalle constructivo de muro de tierra trabada y apoyo de madera sin barniz.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831670606-Por_Favor_Pisar_las_Jardineras_Maqueta_Conceptual.webp",
+            "recommendedAssetUrl": "/images/uploads/1793831670606-Por_Favor_Pisar_las_Jardineras_Maqueta_Conceptual.webp",
             "recommendedAssetDescription": "Corte transversal con detalle de cimentación y cubierta ventilada."
           },
           {
@@ -1144,7 +1144,7 @@
             "text": "Frente a templos dorados y corporativos, la pertinencia radica en la sobriedad del barro.",
             "wordCount": 14,
             "visualDirection": "Encuadre interior en sombra con haz de luz cenital tocando el suelo de tierra.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831399460-Por_Favor_Pisar_las_Jardineras_Collage_Lugar.webp",
+            "recommendedAssetUrl": "/images/uploads/1793831399460-Por_Favor_Pisar_las_Jardineras_Collage_Lugar.webp",
             "recommendedAssetDescription": "Atmósfera interior de luz cenital filtrada."
           },
           {
@@ -1153,7 +1153,7 @@
             "text": "¿Qué transforma más un territorio: un edificio terminado o una comunidad organizada?",
             "wordCount": 12,
             "visualDirection": "Composición tipográfica sobria con signo de interrogación protagonista.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831607790-Por_Favor_Pisar_las_Jardineras_Implantacio__n.webp",
+            "recommendedAssetUrl": "/images/uploads/1793831607790-Por_Favor_Pisar_las_Jardineras_Implantacio__n.webp",
             "recommendedAssetDescription": "Diagrama conceptual del proceso comunitario."
           },
           {
@@ -1162,7 +1162,7 @@
             "text": "Nómade Taller demuestra que la arquitectura más urgente se construye desde la escucha.",
             "wordCount": 13,
             "visualDirection": "Crédito tipográfico dual: Nómade Taller + Maestro Mayor Segundo Guanoluisa.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831399460-Por_Favor_Pisar_las_Jardineras_Collage_Lugar.webp",
+            "recommendedAssetUrl": "/images/uploads/1793831399460-Por_Favor_Pisar_las_Jardineras_Collage_Lugar.webp",
             "recommendedAssetDescription": "Perspectiva completa de la nave sagrada."
           },
           {
@@ -1171,7 +1171,7 @@
             "text": "Lo sagrado habita en el encuentro honesto entre tierra, memoria y comunidad.",
             "wordCount": 12,
             "visualDirection": "Logotipo de Ecuadorian Architecture, enlace de lectura profunda en bio y llamado a la conversación.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831399460-Por_Favor_Pisar_las_Jardineras_Collage_Lugar.webp",
+            "recommendedAssetUrl": "/images/uploads/1793831399460-Por_Favor_Pisar_las_Jardineras_Collage_Lugar.webp",
             "recommendedAssetDescription": "Cierre editorial institucional EA."
           }
         ],
@@ -1186,11 +1186,11 @@
           "#ArquitecturaAndina"
         ],
         "curatedAssetUrls": [
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831399460-Por_Favor_Pisar_las_Jardineras_Collage_Lugar.webp",
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831492239-2.webp",
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831607790-Por_Favor_Pisar_las_Jardineras_Implantacio__n.webp",
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831662232-Por_Favor_Pisar_las_Jardineras_Ima__gen_01.webp",
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831670606-Por_Favor_Pisar_las_Jardineras_Maqueta_Conceptual.webp"
+          "/images/uploads/1793831399460-Por_Favor_Pisar_las_Jardineras_Collage_Lugar.webp",
+          "/images/uploads/1793831492239-2.webp",
+          "/images/uploads/1793831607790-Por_Favor_Pisar_las_Jardineras_Implantacio__n.webp",
+          "/images/uploads/1793831662232-Por_Favor_Pisar_las_Jardineras_Ima__gen_01.webp",
+          "/images/uploads/1793831670606-Por_Favor_Pisar_las_Jardineras_Maqueta_Conceptual.webp"
         ],
         "status": "ready_for_design",
         "createdAt": "2026-11-05T15:34:00.068Z"
@@ -1260,7 +1260,7 @@
           {
             "id": "mod-single-image-1793826919464",
             "type": "single-image",
-            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793826295352-Capa_31.webp",
+            "imageUrl": "/images/uploads/1793826295352-Capa_31.webp",
             "caption": "",
             "credits": "Natura Futura"
           },
@@ -1277,7 +1277,7 @@
           {
             "id": "mod-single-image-1793827473523",
             "type": "single-image",
-            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827530043-PLANTA_PABELLON_VEGETACION.webp",
+            "imageUrl": "/images/uploads/1793827530043-PLANTA_PABELLON_VEGETACION.webp",
             "credits": "Natura Futura",
             "category": "planimetria"
           },
@@ -1289,7 +1289,7 @@
           {
             "id": "mod-single-image-1793827362060",
             "type": "single-image",
-            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827417359-CORTE_FUGADO.webp",
+            "imageUrl": "/images/uploads/1793827417359-CORTE_FUGADO.webp",
             "credits": "Natura Futura",
             "category": "planimetria"
           },
@@ -1301,7 +1301,7 @@
           {
             "id": "mod-single-image-1793827661216",
             "type": "single-image",
-            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827672968-PROCESO.webp",
+            "imageUrl": "/images/uploads/1793827672968-PROCESO.webp",
             "credits": "Natura Futura",
             "category": "planimetria"
           },
@@ -1313,7 +1313,7 @@
           {
             "id": "mod-single-image-1793827769192",
             "type": "single-image",
-            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827779382-pabellon_jpg.webp",
+            "imageUrl": "/images/uploads/1793827779382-pabellon_jpg.webp",
             "credits": "Natura Futura",
             "category": "fotografia"
           },
@@ -1321,8 +1321,8 @@
             "id": "mod-image-gallery-1793827857165",
             "type": "image-gallery",
             "imageUrls": [
-              "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827866941-pabellon_2_jpg.webp",
-              "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827877399-WhatsApp_Image_2026-11-04_at_1_31_30_PM.webp"
+              "/images/uploads/1793827866941-pabellon_2_jpg.webp",
+              "/images/uploads/1793827877399-WhatsApp_Image_2026-11-04_at_1_31_30_PM.webp"
             ],
             "settings": {
               "columns": 2
@@ -1556,7 +1556,7 @@
             "text": "¿Puede un templo sagrado nacer sin iglesia y desde el barro comunitario?",
             "wordCount": 12,
             "visualDirection": "Fondo negro editorial, render del templo en penumbra con tipografía Anton a gran escala.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793826295352-Capa_31.webp",
+            "recommendedAssetUrl": "/images/uploads/1793826295352-Capa_31.webp",
             "recommendedAssetDescription": "Render exterior del templo con luz crepuscular en Rumipamba."
           },
           {
@@ -1565,7 +1565,7 @@
             "text": "Rumipamba, 2.850 metros de altitud: una comunidad históricamente privada de su propio refugio espiritual.",
             "wordCount": 14,
             "visualDirection": "Fotografía del territorio andino de Rumiñahui con encuadre horizontal amplio y textura de tierra.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827530043-PLANTA_PABELLON_VEGETACION.webp",
+            "recommendedAssetUrl": "/images/uploads/1793827530043-PLANTA_PABELLON_VEGETACION.webp",
             "recommendedAssetDescription": "Registro del paisaje y del taller participativo vecinal."
           },
           {
@@ -1574,7 +1574,7 @@
             "text": "La arquitectura renuncia al protagonismo individual para disolverse en asamblea comunitaria.",
             "wordCount": 11,
             "visualDirection": "Diagrama axonométrico minimalista en línea blanca sobre fondo oscuro.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827417359-CORTE_FUGADO.webp",
+            "recommendedAssetUrl": "/images/uploads/1793827417359-CORTE_FUGADO.webp",
             "recommendedAssetDescription": "Axonometría explotada de la nave y cerchas."
           },
           {
@@ -1583,7 +1583,7 @@
             "text": "Cinco asambleas deliberativas definieron cada rincón, dimensión y símbolo del espacio sagrado.",
             "wordCount": 12,
             "visualDirection": "Fotografía documental de los habitantes dibujando y debatiendo en la mesa comunal.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827530043-PLANTA_PABELLON_VEGETACION.webp",
+            "recommendedAssetUrl": "/images/uploads/1793827530043-PLANTA_PABELLON_VEGETACION.webp",
             "recommendedAssetDescription": "Taller participativo con los habitantes de Rumipamba."
           },
           {
@@ -1592,7 +1592,7 @@
             "text": "180 metros cuadrados donde el vacío no es ausencia, sino convocatoria al recogimiento.",
             "wordCount": 13,
             "visualDirection": "Planta arquitectónica limpia con cotas sobrias y módulo de proporciones visible.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827672968-PROCESO.webp",
+            "recommendedAssetUrl": "/images/uploads/1793827672968-PROCESO.webp",
             "recommendedAssetDescription": "Planta arquitectónica de distribución de la nave."
           },
           {
@@ -1601,7 +1601,7 @@
             "text": "Adobe crudo andino y vigas de madera: la inercia térmica como ética constructiva.",
             "wordCount": 13,
             "visualDirection": "Detalle constructivo de muro de tierra trabada y apoyo de madera sin barniz.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827779382-pabellon_jpg.webp",
+            "recommendedAssetUrl": "/images/uploads/1793827779382-pabellon_jpg.webp",
             "recommendedAssetDescription": "Corte transversal con detalle de cimentación y cubierta ventilada."
           },
           {
@@ -1610,7 +1610,7 @@
             "text": "Frente a templos dorados y corporativos, la pertinencia radica en la sobriedad del barro.",
             "wordCount": 14,
             "visualDirection": "Encuadre interior en sombra con haz de luz cenital tocando el suelo de tierra.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793826295352-Capa_31.webp",
+            "recommendedAssetUrl": "/images/uploads/1793826295352-Capa_31.webp",
             "recommendedAssetDescription": "Atmósfera interior de luz cenital filtrada."
           },
           {
@@ -1619,7 +1619,7 @@
             "text": "¿Qué transforma más un territorio: un edificio terminado o una comunidad organizada?",
             "wordCount": 12,
             "visualDirection": "Composición tipográfica sobria con signo de interrogación protagonista.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827417359-CORTE_FUGADO.webp",
+            "recommendedAssetUrl": "/images/uploads/1793827417359-CORTE_FUGADO.webp",
             "recommendedAssetDescription": "Diagrama conceptual del proceso comunitario."
           },
           {
@@ -1628,7 +1628,7 @@
             "text": "Nómade Taller demuestra que la arquitectura más urgente se construye desde la escucha.",
             "wordCount": 13,
             "visualDirection": "Crédito tipográfico dual: Nómade Taller + Maestro Mayor Segundo Guanoluisa.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793826295352-Capa_31.webp",
+            "recommendedAssetUrl": "/images/uploads/1793826295352-Capa_31.webp",
             "recommendedAssetDescription": "Perspectiva completa de la nave sagrada."
           },
           {
@@ -1637,7 +1637,7 @@
             "text": "Lo sagrado habita en el encuentro honesto entre tierra, memoria y comunidad.",
             "wordCount": 12,
             "visualDirection": "Logotipo de Ecuadorian Architecture, enlace de lectura profunda en bio y llamado a la conversación.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793826295352-Capa_31.webp",
+            "recommendedAssetUrl": "/images/uploads/1793826295352-Capa_31.webp",
             "recommendedAssetDescription": "Cierre editorial institucional EA."
           }
         ],
@@ -1652,11 +1652,11 @@
           "#ArquitecturaAndina"
         ],
         "curatedAssetUrls": [
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793826295352-Capa_31.webp",
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827530043-PLANTA_PABELLON_VEGETACION.webp",
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827417359-CORTE_FUGADO.webp",
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827672968-PROCESO.webp",
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827779382-pabellon_jpg.webp"
+          "/images/uploads/1793826295352-Capa_31.webp",
+          "/images/uploads/1793827530043-PLANTA_PABELLON_VEGETACION.webp",
+          "/images/uploads/1793827417359-CORTE_FUGADO.webp",
+          "/images/uploads/1793827672968-PROCESO.webp",
+          "/images/uploads/1793827779382-pabellon_jpg.webp"
         ],
         "status": "ready_for_design",
         "createdAt": "2026-11-05T15:34:00.162Z"
@@ -1711,7 +1711,7 @@
           {
             "id": "mod-single-image-1794410799476",
             "type": "single-image",
-            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410615803-20_20.webp",
+            "imageUrl": "/images/uploads/1794410615803-20_20.webp",
             "credits": "Cristina Correa",
             "category": "fotografia"
           },
@@ -1723,7 +1723,7 @@
           {
             "id": "mod-single-image-1794410863302",
             "type": "single-image",
-            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410875452-001_CONTEXTO.webp",
+            "imageUrl": "/images/uploads/1794410875452-001_CONTEXTO.webp",
             "credits": "Cristina Correa",
             "category": "planimetria"
           },
@@ -1735,7 +1735,7 @@
           {
             "id": "mod-single-image-1794410915289",
             "type": "single-image",
-            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410925189-004_ESQUEMA.webp",
+            "imageUrl": "/images/uploads/1794410925189-004_ESQUEMA.webp",
             "credits": "Cristina Correa",
             "category": "planimetria"
           },
@@ -1747,7 +1747,7 @@
           {
             "id": "mod-single-image-1794410967871",
             "type": "single-image",
-            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410978921-17_17.webp",
+            "imageUrl": "/images/uploads/1794410978921-17_17.webp",
             "credits": "Cristina Correa",
             "category": "fotografia"
           },
@@ -1759,7 +1759,7 @@
           {
             "id": "mod-single-image-1794411011040",
             "type": "single-image",
-            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794411025226-11_11.webp",
+            "imageUrl": "/images/uploads/1794411025226-11_11.webp",
             "credits": "Cristina Correa",
             "category": "fotografia"
           }
@@ -1991,7 +1991,7 @@
             "text": "¿Puede un templo sagrado nacer sin iglesia y desde el barro comunitario?",
             "wordCount": 12,
             "visualDirection": "Fondo negro editorial, render del templo en penumbra con tipografía Anton a gran escala.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410615803-20_20.webp",
+            "recommendedAssetUrl": "/images/uploads/1794410615803-20_20.webp",
             "recommendedAssetDescription": "Render exterior del templo con luz crepuscular en Rumipamba."
           },
           {
@@ -2000,7 +2000,7 @@
             "text": "Rumipamba, 2.850 metros de altitud: una comunidad históricamente privada de su propio refugio espiritual.",
             "wordCount": 14,
             "visualDirection": "Fotografía del territorio andino de Rumiñahui con encuadre horizontal amplio y textura de tierra.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410875452-001_CONTEXTO.webp",
+            "recommendedAssetUrl": "/images/uploads/1794410875452-001_CONTEXTO.webp",
             "recommendedAssetDescription": "Registro del paisaje y del taller participativo vecinal."
           },
           {
@@ -2009,7 +2009,7 @@
             "text": "La arquitectura renuncia al protagonismo individual para disolverse en asamblea comunitaria.",
             "wordCount": 11,
             "visualDirection": "Diagrama axonométrico minimalista en línea blanca sobre fondo oscuro.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410925189-004_ESQUEMA.webp",
+            "recommendedAssetUrl": "/images/uploads/1794410925189-004_ESQUEMA.webp",
             "recommendedAssetDescription": "Axonometría explotada de la nave y cerchas."
           },
           {
@@ -2018,7 +2018,7 @@
             "text": "Cinco asambleas deliberativas definieron cada rincón, dimensión y símbolo del espacio sagrado.",
             "wordCount": 12,
             "visualDirection": "Fotografía documental de los habitantes dibujando y debatiendo en la mesa comunal.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410875452-001_CONTEXTO.webp",
+            "recommendedAssetUrl": "/images/uploads/1794410875452-001_CONTEXTO.webp",
             "recommendedAssetDescription": "Taller participativo con los habitantes de Rumipamba."
           },
           {
@@ -2027,7 +2027,7 @@
             "text": "180 metros cuadrados donde el vacío no es ausencia, sino convocatoria al recogimiento.",
             "wordCount": 13,
             "visualDirection": "Planta arquitectónica limpia con cotas sobrias y módulo de proporciones visible.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410978921-17_17.webp",
+            "recommendedAssetUrl": "/images/uploads/1794410978921-17_17.webp",
             "recommendedAssetDescription": "Planta arquitectónica de distribución de la nave."
           },
           {
@@ -2036,7 +2036,7 @@
             "text": "Adobe crudo andino y vigas de madera: la inercia térmica como ética constructiva.",
             "wordCount": 13,
             "visualDirection": "Detalle constructivo de muro de tierra trabada y apoyo de madera sin barniz.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794411025226-11_11.webp",
+            "recommendedAssetUrl": "/images/uploads/1794411025226-11_11.webp",
             "recommendedAssetDescription": "Corte transversal con detalle de cimentación y cubierta ventilada."
           },
           {
@@ -2045,7 +2045,7 @@
             "text": "Frente a templos dorados y corporativos, la pertinencia radica en la sobriedad del barro.",
             "wordCount": 14,
             "visualDirection": "Encuadre interior en sombra con haz de luz cenital tocando el suelo de tierra.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410615803-20_20.webp",
+            "recommendedAssetUrl": "/images/uploads/1794410615803-20_20.webp",
             "recommendedAssetDescription": "Atmósfera interior de luz cenital filtrada."
           },
           {
@@ -2054,7 +2054,7 @@
             "text": "¿Qué transforma más un territorio: un edificio terminado o una comunidad organizada?",
             "wordCount": 12,
             "visualDirection": "Composición tipográfica sobria con signo de interrogación protagonista.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410925189-004_ESQUEMA.webp",
+            "recommendedAssetUrl": "/images/uploads/1794410925189-004_ESQUEMA.webp",
             "recommendedAssetDescription": "Diagrama conceptual del proceso comunitario."
           },
           {
@@ -2063,7 +2063,7 @@
             "text": "Nómade Taller demuestra que la arquitectura más urgente se construye desde la escucha.",
             "wordCount": 13,
             "visualDirection": "Crédito tipográfico dual: Nómade Taller + Maestro Mayor Segundo Guanoluisa.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410615803-20_20.webp",
+            "recommendedAssetUrl": "/images/uploads/1794410615803-20_20.webp",
             "recommendedAssetDescription": "Perspectiva completa de la nave sagrada."
           },
           {
@@ -2072,7 +2072,7 @@
             "text": "Lo sagrado habita en el encuentro honesto entre tierra, memoria y comunidad.",
             "wordCount": 12,
             "visualDirection": "Logotipo de Ecuadorian Architecture, enlace de lectura profunda en bio y llamado a la conversación.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410615803-20_20.webp",
+            "recommendedAssetUrl": "/images/uploads/1794410615803-20_20.webp",
             "recommendedAssetDescription": "Cierre editorial institucional EA."
           }
         ],
@@ -2087,11 +2087,11 @@
           "#ArquitecturaAndina"
         ],
         "curatedAssetUrls": [
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410615803-20_20.webp",
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410875452-001_CONTEXTO.webp",
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410925189-004_ESQUEMA.webp",
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410978921-17_17.webp",
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794411025226-11_11.webp"
+          "/images/uploads/1794410615803-20_20.webp",
+          "/images/uploads/1794410875452-001_CONTEXTO.webp",
+          "/images/uploads/1794410925189-004_ESQUEMA.webp",
+          "/images/uploads/1794410978921-17_17.webp",
+          "/images/uploads/1794411025226-11_11.webp"
         ],
         "status": "ready_for_design",
         "createdAt": "2026-11-11T20:52:30.006Z"
@@ -2146,7 +2146,7 @@
           {
             "id": "mod-single-image-1794408118012",
             "type": "single-image",
-            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794407839628-AXO.webp",
+            "imageUrl": "/images/uploads/1794407839628-AXO.webp",
             "caption": "Registro fotográfico de obra"
           },
           {
@@ -2157,7 +2157,7 @@
           {
             "id": "mod-single-image-1794408149280",
             "type": "single-image",
-            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408337720-kancha.webp",
+            "imageUrl": "/images/uploads/1794408337720-kancha.webp",
             "caption": "Vacío central bioclimático en Quito",
             "credits": "La kancha Inca",
             "category": "planimetria"
@@ -2176,8 +2176,8 @@
               "columns": 2
             },
             "imageUrls": [
-              "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408625945-k2.webp",
-              "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408582785-k1.webp"
+              "/images/uploads/1794408625945-k2.webp",
+              "/images/uploads/1794408582785-k1.webp"
             ],
             "credits": "",
             "category": "planimetria"
@@ -2190,7 +2190,7 @@
           {
             "id": "mod-single-image-1794408678925",
             "type": "single-image",
-            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408689851-INTERIOR.webp",
+            "imageUrl": "/images/uploads/1794408689851-INTERIOR.webp",
             "credits": "Pabellón",
             "category": "fotografia"
           },
@@ -2202,7 +2202,7 @@
           {
             "id": "mod-single-image-1794408738096",
             "type": "single-image",
-            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794409270186-k6.webp",
+            "imageUrl": "/images/uploads/1794409270186-k6.webp",
             "credits": "Pabellón",
             "category": "fotografia"
           },
@@ -2214,14 +2214,14 @@
           {
             "id": "mod-single-image-1794408870244",
             "type": "single-image",
-            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794409301297-k5.webp",
+            "imageUrl": "/images/uploads/1794409301297-k5.webp",
             "credits": "Pabellón",
             "category": "fotografia"
           },
           {
             "id": "mod-single-image-1794408907450",
             "type": "single-image",
-            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408916941-FRONTAL__1_.webp",
+            "imageUrl": "/images/uploads/1794408916941-FRONTAL__1_.webp",
             "credits": "Pabellón",
             "category": "fotografia"
           }
@@ -2453,7 +2453,7 @@
             "text": "¿Puede un templo sagrado nacer sin iglesia y desde el barro comunitario?",
             "wordCount": 12,
             "visualDirection": "Fondo negro editorial, render del templo en penumbra con tipografía Anton a gran escala.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794407839628-AXO.webp",
+            "recommendedAssetUrl": "/images/uploads/1794407839628-AXO.webp",
             "recommendedAssetDescription": "Render exterior del templo con luz crepuscular en Rumipamba."
           },
           {
@@ -2462,7 +2462,7 @@
             "text": "Rumipamba, 2.850 metros de altitud: una comunidad históricamente privada de su propio refugio espiritual.",
             "wordCount": 14,
             "visualDirection": "Fotografía del territorio andino de Rumiñahui con encuadre horizontal amplio y textura de tierra.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408337720-kancha.webp",
+            "recommendedAssetUrl": "/images/uploads/1794408337720-kancha.webp",
             "recommendedAssetDescription": "Registro del paisaje y del taller participativo vecinal."
           },
           {
@@ -2471,7 +2471,7 @@
             "text": "La arquitectura renuncia al protagonismo individual para disolverse en asamblea comunitaria.",
             "wordCount": 11,
             "visualDirection": "Diagrama axonométrico minimalista en línea blanca sobre fondo oscuro.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408625945-k2.webp",
+            "recommendedAssetUrl": "/images/uploads/1794408625945-k2.webp",
             "recommendedAssetDescription": "Axonometría explotada de la nave y cerchas."
           },
           {
@@ -2480,7 +2480,7 @@
             "text": "Cinco asambleas deliberativas definieron cada rincón, dimensión y símbolo del espacio sagrado.",
             "wordCount": 12,
             "visualDirection": "Fotografía documental de los habitantes dibujando y debatiendo en la mesa comunal.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408337720-kancha.webp",
+            "recommendedAssetUrl": "/images/uploads/1794408337720-kancha.webp",
             "recommendedAssetDescription": "Taller participativo con los habitantes de Rumipamba."
           },
           {
@@ -2489,7 +2489,7 @@
             "text": "180 metros cuadrados donde el vacío no es ausencia, sino convocatoria al recogimiento.",
             "wordCount": 13,
             "visualDirection": "Planta arquitectónica limpia con cotas sobrias y módulo de proporciones visible.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408582785-k1.webp",
+            "recommendedAssetUrl": "/images/uploads/1794408582785-k1.webp",
             "recommendedAssetDescription": "Planta arquitectónica de distribución de la nave."
           },
           {
@@ -2498,7 +2498,7 @@
             "text": "Adobe crudo andino y vigas de madera: la inercia térmica como ética constructiva.",
             "wordCount": 13,
             "visualDirection": "Detalle constructivo de muro de tierra trabada y apoyo de madera sin barniz.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408689851-INTERIOR.webp",
+            "recommendedAssetUrl": "/images/uploads/1794408689851-INTERIOR.webp",
             "recommendedAssetDescription": "Corte transversal con detalle de cimentación y cubierta ventilada."
           },
           {
@@ -2507,7 +2507,7 @@
             "text": "Frente a templos dorados y corporativos, la pertinencia radica en la sobriedad del barro.",
             "wordCount": 14,
             "visualDirection": "Encuadre interior en sombra con haz de luz cenital tocando el suelo de tierra.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794407839628-AXO.webp",
+            "recommendedAssetUrl": "/images/uploads/1794407839628-AXO.webp",
             "recommendedAssetDescription": "Atmósfera interior de luz cenital filtrada."
           },
           {
@@ -2516,7 +2516,7 @@
             "text": "¿Qué transforma más un territorio: un edificio terminado o una comunidad organizada?",
             "wordCount": 12,
             "visualDirection": "Composición tipográfica sobria con signo de interrogación protagonista.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408625945-k2.webp",
+            "recommendedAssetUrl": "/images/uploads/1794408625945-k2.webp",
             "recommendedAssetDescription": "Diagrama conceptual del proceso comunitario."
           },
           {
@@ -2525,7 +2525,7 @@
             "text": "Nómade Taller demuestra que la arquitectura más urgente se construye desde la escucha.",
             "wordCount": 13,
             "visualDirection": "Crédito tipográfico dual: Nómade Taller + Maestro Mayor Segundo Guanoluisa.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794407839628-AXO.webp",
+            "recommendedAssetUrl": "/images/uploads/1794407839628-AXO.webp",
             "recommendedAssetDescription": "Perspectiva completa de la nave sagrada."
           },
           {
@@ -2534,7 +2534,7 @@
             "text": "Lo sagrado habita en el encuentro honesto entre tierra, memoria y comunidad.",
             "wordCount": 12,
             "visualDirection": "Logotipo de Ecuadorian Architecture, enlace de lectura profunda en bio y llamado a la conversación.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794407839628-AXO.webp",
+            "recommendedAssetUrl": "/images/uploads/1794407839628-AXO.webp",
             "recommendedAssetDescription": "Cierre editorial institucional EA."
           }
         ],
@@ -2549,11 +2549,11 @@
           "#ArquitecturaAndina"
         ],
         "curatedAssetUrls": [
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794407839628-AXO.webp",
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408337720-kancha.webp",
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408625945-k2.webp",
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408582785-k1.webp",
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408689851-INTERIOR.webp"
+          "/images/uploads/1794407839628-AXO.webp",
+          "/images/uploads/1794408337720-kancha.webp",
+          "/images/uploads/1794408625945-k2.webp",
+          "/images/uploads/1794408582785-k1.webp",
+          "/images/uploads/1794408689851-INTERIOR.webp"
         ],
         "status": "ready_for_design",
         "createdAt": "2026-11-11T20:52:30.091Z"
@@ -2615,7 +2615,7 @@
           {
             "id": "mod-single-image-1794338437396",
             "type": "single-image",
-            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338454772-Croquis.webp",
+            "imageUrl": "/images/uploads/1794338454772-Croquis.webp",
             "caption": "Vacío central bioclimático en Quito",
             "credits": "González Serrano Studio+",
             "category": "planimetria"
@@ -2628,7 +2628,7 @@
           {
             "id": "mod-single-image-1794338555540",
             "type": "single-image",
-            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338570097-Diagrama_contexto.webp",
+            "imageUrl": "/images/uploads/1794338570097-Diagrama_contexto.webp",
             "caption": "Vacío central bioclimático en Quito",
             "credits": "González Serrano Studio+",
             "category": "planimetria"
@@ -2641,7 +2641,7 @@
           {
             "id": "mod-single-image-1794338631319",
             "type": "single-image",
-            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338647110-Frontal.webp",
+            "imageUrl": "/images/uploads/1794338647110-Frontal.webp",
             "caption": "Vacío central bioclimático en Quito",
             "credits": "González Serrano Studio+",
             "category": "fotografia"
@@ -2654,7 +2654,7 @@
           {
             "id": "mod-single-image-1794338687260",
             "type": "single-image",
-            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338703948-Perspectiva.webp",
+            "imageUrl": "/images/uploads/1794338703948-Perspectiva.webp",
             "caption": "Vacío central bioclimático en Quito",
             "credits": "González Serrano Studio+",
             "category": "fotografia"
@@ -2671,14 +2671,14 @@
               "columns": 2
             },
             "imageUrls": [
-              "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338747603-Seccion.webp",
-              "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338756047-Seccion_2.webp"
+              "/images/uploads/1794338747603-Seccion.webp",
+              "/images/uploads/1794338756047-Seccion_2.webp"
             ]
           },
           {
             "id": "mod-single-image-1794338764127",
             "type": "single-image",
-            "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338779484-Planta.webp",
+            "imageUrl": "/images/uploads/1794338779484-Planta.webp",
             "caption": "Vacío central bioclimático en Quito",
             "credits": "González Serrano Studio+",
             "category": "planimetria"
@@ -2911,7 +2911,7 @@
             "text": "¿Puede un templo sagrado nacer sin iglesia y desde el barro comunitario?",
             "wordCount": 12,
             "visualDirection": "Fondo negro editorial, render del templo en penumbra con tipografía Anton a gran escala.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338454772-Croquis.webp",
+            "recommendedAssetUrl": "/images/uploads/1794338454772-Croquis.webp",
             "recommendedAssetDescription": "Render exterior del templo con luz crepuscular en Rumipamba."
           },
           {
@@ -2920,7 +2920,7 @@
             "text": "Rumipamba, 2.850 metros de altitud: una comunidad históricamente privada de su propio refugio espiritual.",
             "wordCount": 14,
             "visualDirection": "Fotografía del territorio andino de Rumiñahui con encuadre horizontal amplio y textura de tierra.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338570097-Diagrama_contexto.webp",
+            "recommendedAssetUrl": "/images/uploads/1794338570097-Diagrama_contexto.webp",
             "recommendedAssetDescription": "Registro del paisaje y del taller participativo vecinal."
           },
           {
@@ -2929,7 +2929,7 @@
             "text": "La arquitectura renuncia al protagonismo individual para disolverse en asamblea comunitaria.",
             "wordCount": 11,
             "visualDirection": "Diagrama axonométrico minimalista en línea blanca sobre fondo oscuro.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338647110-Frontal.webp",
+            "recommendedAssetUrl": "/images/uploads/1794338647110-Frontal.webp",
             "recommendedAssetDescription": "Axonometría explotada de la nave y cerchas."
           },
           {
@@ -2938,7 +2938,7 @@
             "text": "Cinco asambleas deliberativas definieron cada rincón, dimensión y símbolo del espacio sagrado.",
             "wordCount": 12,
             "visualDirection": "Fotografía documental de los habitantes dibujando y debatiendo en la mesa comunal.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338570097-Diagrama_contexto.webp",
+            "recommendedAssetUrl": "/images/uploads/1794338570097-Diagrama_contexto.webp",
             "recommendedAssetDescription": "Taller participativo con los habitantes de Rumipamba."
           },
           {
@@ -2947,7 +2947,7 @@
             "text": "180 metros cuadrados donde el vacío no es ausencia, sino convocatoria al recogimiento.",
             "wordCount": 13,
             "visualDirection": "Planta arquitectónica limpia con cotas sobrias y módulo de proporciones visible.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338703948-Perspectiva.webp",
+            "recommendedAssetUrl": "/images/uploads/1794338703948-Perspectiva.webp",
             "recommendedAssetDescription": "Planta arquitectónica de distribución de la nave."
           },
           {
@@ -2956,7 +2956,7 @@
             "text": "Adobe crudo andino y vigas de madera: la inercia térmica como ética constructiva.",
             "wordCount": 13,
             "visualDirection": "Detalle constructivo de muro de tierra trabada y apoyo de madera sin barniz.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338747603-Seccion.webp",
+            "recommendedAssetUrl": "/images/uploads/1794338747603-Seccion.webp",
             "recommendedAssetDescription": "Corte transversal con detalle de cimentación y cubierta ventilada."
           },
           {
@@ -2965,7 +2965,7 @@
             "text": "Frente a templos dorados y corporativos, la pertinencia radica en la sobriedad del barro.",
             "wordCount": 14,
             "visualDirection": "Encuadre interior en sombra con haz de luz cenital tocando el suelo de tierra.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338454772-Croquis.webp",
+            "recommendedAssetUrl": "/images/uploads/1794338454772-Croquis.webp",
             "recommendedAssetDescription": "Atmósfera interior de luz cenital filtrada."
           },
           {
@@ -2974,7 +2974,7 @@
             "text": "¿Qué transforma más un territorio: un edificio terminado o una comunidad organizada?",
             "wordCount": 12,
             "visualDirection": "Composición tipográfica sobria con signo de interrogación protagonista.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338647110-Frontal.webp",
+            "recommendedAssetUrl": "/images/uploads/1794338647110-Frontal.webp",
             "recommendedAssetDescription": "Diagrama conceptual del proceso comunitario."
           },
           {
@@ -2983,7 +2983,7 @@
             "text": "Nómade Taller demuestra que la arquitectura más urgente se construye desde la escucha.",
             "wordCount": 13,
             "visualDirection": "Crédito tipográfico dual: Nómade Taller + Maestro Mayor Segundo Guanoluisa.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338454772-Croquis.webp",
+            "recommendedAssetUrl": "/images/uploads/1794338454772-Croquis.webp",
             "recommendedAssetDescription": "Perspectiva completa de la nave sagrada."
           },
           {
@@ -2992,7 +2992,7 @@
             "text": "Lo sagrado habita en el encuentro honesto entre tierra, memoria y comunidad.",
             "wordCount": 12,
             "visualDirection": "Logotipo de Ecuadorian Architecture, enlace de lectura profunda en bio y llamado a la conversación.",
-            "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338454772-Croquis.webp",
+            "recommendedAssetUrl": "/images/uploads/1794338454772-Croquis.webp",
             "recommendedAssetDescription": "Cierre editorial institucional EA."
           }
         ],
@@ -3007,11 +3007,11 @@
           "#ArquitecturaAndina"
         ],
         "curatedAssetUrls": [
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338454772-Croquis.webp",
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338570097-Diagrama_contexto.webp",
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338647110-Frontal.webp",
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338703948-Perspectiva.webp",
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338747603-Seccion.webp"
+          "/images/uploads/1794338454772-Croquis.webp",
+          "/images/uploads/1794338570097-Diagrama_contexto.webp",
+          "/images/uploads/1794338647110-Frontal.webp",
+          "/images/uploads/1794338703948-Perspectiva.webp",
+          "/images/uploads/1794338747603-Seccion.webp"
         ],
         "status": "ready_for_design",
         "createdAt": "2026-11-11T20:52:30.167Z"
@@ -3266,7 +3266,7 @@
           "text": "¿Puede un templo sagrado nacer sin iglesia y desde el barro comunitario?",
           "wordCount": 12,
           "visualDirection": "Fondo negro editorial, render del templo en penumbra con tipografía Anton a gran escala.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892051586-R2_FINAL.webp",
+          "recommendedAssetUrl": "/images/uploads/1793892051586-R2_FINAL.webp",
           "recommendedAssetDescription": "Render exterior del templo con luz crepuscular en Rumipamba."
         },
         {
@@ -3275,7 +3275,7 @@
           "text": "Rumipamba, 2.850 metros de altitud: una comunidad históricamente privada de su propio refugio espiritual.",
           "wordCount": 14,
           "visualDirection": "Fotografía del territorio andino de Rumiñahui con encuadre horizontal amplio y textura de tierra.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892408453-r4-01.webp",
+          "recommendedAssetUrl": "/images/uploads/1793892408453-r4-01.webp",
           "recommendedAssetDescription": "Registro del paisaje y del taller participativo vecinal."
         },
         {
@@ -3284,7 +3284,7 @@
           "text": "La arquitectura renuncia al protagonismo individual para disolverse en asamblea comunitaria.",
           "wordCount": 11,
           "visualDirection": "Diagrama axonométrico minimalista en línea blanca sobre fondo oscuro.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892502029-R1__1_.webp",
+          "recommendedAssetUrl": "/images/uploads/1793892502029-R1__1_.webp",
           "recommendedAssetDescription": "Axonometría explotada de la nave y cerchas."
         },
         {
@@ -3293,7 +3293,7 @@
           "text": "Cinco asambleas deliberativas definieron cada rincón, dimensión y símbolo del espacio sagrado.",
           "wordCount": 12,
           "visualDirection": "Fotografía documental de los habitantes dibujando y debatiendo en la mesa comunal.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892408453-r4-01.webp",
+          "recommendedAssetUrl": "/images/uploads/1793892408453-r4-01.webp",
           "recommendedAssetDescription": "Taller participativo con los habitantes de Rumipamba."
         },
         {
@@ -3302,7 +3302,7 @@
           "text": "180 metros cuadrados donde el vacío no es ausencia, sino convocatoria al recogimiento.",
           "wordCount": 13,
           "visualDirection": "Planta arquitectónica limpia con cotas sobrias y módulo de proporciones visible.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892545849-1__Foto_Maqueta.webp",
+          "recommendedAssetUrl": "/images/uploads/1793892545849-1__Foto_Maqueta.webp",
           "recommendedAssetDescription": "Planta arquitectónica de distribución de la nave."
         },
         {
@@ -3320,7 +3320,7 @@
           "text": "Frente a templos dorados y corporativos, la pertinencia radica en la sobriedad del barro.",
           "wordCount": 14,
           "visualDirection": "Encuadre interior en sombra con haz de luz cenital tocando el suelo de tierra.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892051586-R2_FINAL.webp",
+          "recommendedAssetUrl": "/images/uploads/1793892051586-R2_FINAL.webp",
           "recommendedAssetDescription": "Atmósfera interior de luz cenital filtrada."
         },
         {
@@ -3329,7 +3329,7 @@
           "text": "¿Qué transforma más un territorio: un edificio terminado o una comunidad organizada?",
           "wordCount": 12,
           "visualDirection": "Composición tipográfica sobria con signo de interrogación protagonista.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892502029-R1__1_.webp",
+          "recommendedAssetUrl": "/images/uploads/1793892502029-R1__1_.webp",
           "recommendedAssetDescription": "Diagrama conceptual del proceso comunitario."
         },
         {
@@ -3338,7 +3338,7 @@
           "text": "Nómade Taller demuestra que la arquitectura más urgente se construye desde la escucha.",
           "wordCount": 13,
           "visualDirection": "Crédito tipográfico dual: Nómade Taller + Maestro Mayor Segundo Guanoluisa.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892051586-R2_FINAL.webp",
+          "recommendedAssetUrl": "/images/uploads/1793892051586-R2_FINAL.webp",
           "recommendedAssetDescription": "Perspectiva completa de la nave sagrada."
         },
         {
@@ -3347,7 +3347,7 @@
           "text": "Lo sagrado habita en el encuentro honesto entre tierra, memoria y comunidad.",
           "wordCount": 12,
           "visualDirection": "Logotipo de Ecuadorian Architecture, enlace de lectura profunda en bio y llamado a la conversación.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892051586-R2_FINAL.webp",
+          "recommendedAssetUrl": "/images/uploads/1793892051586-R2_FINAL.webp",
           "recommendedAssetDescription": "Cierre editorial institucional EA."
         }
       ],
@@ -3362,10 +3362,10 @@
         "#ArquitecturaAndina"
       ],
       "curatedAssetUrls": [
-        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892051586-R2_FINAL.webp",
-        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892408453-r4-01.webp",
-        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892502029-R1__1_.webp",
-        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892545849-1__Foto_Maqueta.webp"
+        "/images/uploads/1793892051586-R2_FINAL.webp",
+        "/images/uploads/1793892408453-r4-01.webp",
+        "/images/uploads/1793892502029-R1__1_.webp",
+        "/images/uploads/1793892545849-1__Foto_Maqueta.webp"
       ],
       "status": "ready_for_design",
       "createdAt": "2026-11-05T15:33:59.991Z"
@@ -3382,7 +3382,7 @@
           "text": "¿Puede un templo sagrado nacer sin iglesia y desde el barro comunitario?",
           "wordCount": 12,
           "visualDirection": "Fondo negro editorial, render del templo en penumbra con tipografía Anton a gran escala.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831399460-Por_Favor_Pisar_las_Jardineras_Collage_Lugar.webp",
+          "recommendedAssetUrl": "/images/uploads/1793831399460-Por_Favor_Pisar_las_Jardineras_Collage_Lugar.webp",
           "recommendedAssetDescription": "Render exterior del templo con luz crepuscular en Rumipamba."
         },
         {
@@ -3391,7 +3391,7 @@
           "text": "Rumipamba, 2.850 metros de altitud: una comunidad históricamente privada de su propio refugio espiritual.",
           "wordCount": 14,
           "visualDirection": "Fotografía del territorio andino de Rumiñahui con encuadre horizontal amplio y textura de tierra.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831492239-2.webp",
+          "recommendedAssetUrl": "/images/uploads/1793831492239-2.webp",
           "recommendedAssetDescription": "Registro del paisaje y del taller participativo vecinal."
         },
         {
@@ -3400,7 +3400,7 @@
           "text": "La arquitectura renuncia al protagonismo individual para disolverse en asamblea comunitaria.",
           "wordCount": 11,
           "visualDirection": "Diagrama axonométrico minimalista en línea blanca sobre fondo oscuro.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831607790-Por_Favor_Pisar_las_Jardineras_Implantacio__n.webp",
+          "recommendedAssetUrl": "/images/uploads/1793831607790-Por_Favor_Pisar_las_Jardineras_Implantacio__n.webp",
           "recommendedAssetDescription": "Axonometría explotada de la nave y cerchas."
         },
         {
@@ -3409,7 +3409,7 @@
           "text": "Cinco asambleas deliberativas definieron cada rincón, dimensión y símbolo del espacio sagrado.",
           "wordCount": 12,
           "visualDirection": "Fotografía documental de los habitantes dibujando y debatiendo en la mesa comunal.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831492239-2.webp",
+          "recommendedAssetUrl": "/images/uploads/1793831492239-2.webp",
           "recommendedAssetDescription": "Taller participativo con los habitantes de Rumipamba."
         },
         {
@@ -3418,7 +3418,7 @@
           "text": "180 metros cuadrados donde el vacío no es ausencia, sino convocatoria al recogimiento.",
           "wordCount": 13,
           "visualDirection": "Planta arquitectónica limpia con cotas sobrias y módulo de proporciones visible.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831662232-Por_Favor_Pisar_las_Jardineras_Ima__gen_01.webp",
+          "recommendedAssetUrl": "/images/uploads/1793831662232-Por_Favor_Pisar_las_Jardineras_Ima__gen_01.webp",
           "recommendedAssetDescription": "Planta arquitectónica de distribución de la nave."
         },
         {
@@ -3427,7 +3427,7 @@
           "text": "Adobe crudo andino y vigas de madera: la inercia térmica como ética constructiva.",
           "wordCount": 13,
           "visualDirection": "Detalle constructivo de muro de tierra trabada y apoyo de madera sin barniz.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831670606-Por_Favor_Pisar_las_Jardineras_Maqueta_Conceptual.webp",
+          "recommendedAssetUrl": "/images/uploads/1793831670606-Por_Favor_Pisar_las_Jardineras_Maqueta_Conceptual.webp",
           "recommendedAssetDescription": "Corte transversal con detalle de cimentación y cubierta ventilada."
         },
         {
@@ -3436,7 +3436,7 @@
           "text": "Frente a templos dorados y corporativos, la pertinencia radica en la sobriedad del barro.",
           "wordCount": 14,
           "visualDirection": "Encuadre interior en sombra con haz de luz cenital tocando el suelo de tierra.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831399460-Por_Favor_Pisar_las_Jardineras_Collage_Lugar.webp",
+          "recommendedAssetUrl": "/images/uploads/1793831399460-Por_Favor_Pisar_las_Jardineras_Collage_Lugar.webp",
           "recommendedAssetDescription": "Atmósfera interior de luz cenital filtrada."
         },
         {
@@ -3445,7 +3445,7 @@
           "text": "¿Qué transforma más un territorio: un edificio terminado o una comunidad organizada?",
           "wordCount": 12,
           "visualDirection": "Composición tipográfica sobria con signo de interrogación protagonista.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831607790-Por_Favor_Pisar_las_Jardineras_Implantacio__n.webp",
+          "recommendedAssetUrl": "/images/uploads/1793831607790-Por_Favor_Pisar_las_Jardineras_Implantacio__n.webp",
           "recommendedAssetDescription": "Diagrama conceptual del proceso comunitario."
         },
         {
@@ -3454,7 +3454,7 @@
           "text": "Nómade Taller demuestra que la arquitectura más urgente se construye desde la escucha.",
           "wordCount": 13,
           "visualDirection": "Crédito tipográfico dual: Nómade Taller + Maestro Mayor Segundo Guanoluisa.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831399460-Por_Favor_Pisar_las_Jardineras_Collage_Lugar.webp",
+          "recommendedAssetUrl": "/images/uploads/1793831399460-Por_Favor_Pisar_las_Jardineras_Collage_Lugar.webp",
           "recommendedAssetDescription": "Perspectiva completa de la nave sagrada."
         },
         {
@@ -3463,7 +3463,7 @@
           "text": "Lo sagrado habita en el encuentro honesto entre tierra, memoria y comunidad.",
           "wordCount": 12,
           "visualDirection": "Logotipo de Ecuadorian Architecture, enlace de lectura profunda en bio y llamado a la conversación.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831399460-Por_Favor_Pisar_las_Jardineras_Collage_Lugar.webp",
+          "recommendedAssetUrl": "/images/uploads/1793831399460-Por_Favor_Pisar_las_Jardineras_Collage_Lugar.webp",
           "recommendedAssetDescription": "Cierre editorial institucional EA."
         }
       ],
@@ -3478,11 +3478,11 @@
         "#ArquitecturaAndina"
       ],
       "curatedAssetUrls": [
-        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831399460-Por_Favor_Pisar_las_Jardineras_Collage_Lugar.webp",
-        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831492239-2.webp",
-        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831607790-Por_Favor_Pisar_las_Jardineras_Implantacio__n.webp",
-        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831662232-Por_Favor_Pisar_las_Jardineras_Ima__gen_01.webp",
-        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831670606-Por_Favor_Pisar_las_Jardineras_Maqueta_Conceptual.webp"
+        "/images/uploads/1793831399460-Por_Favor_Pisar_las_Jardineras_Collage_Lugar.webp",
+        "/images/uploads/1793831492239-2.webp",
+        "/images/uploads/1793831607790-Por_Favor_Pisar_las_Jardineras_Implantacio__n.webp",
+        "/images/uploads/1793831662232-Por_Favor_Pisar_las_Jardineras_Ima__gen_01.webp",
+        "/images/uploads/1793831670606-Por_Favor_Pisar_las_Jardineras_Maqueta_Conceptual.webp"
       ],
       "status": "ready_for_design",
       "createdAt": "2026-11-05T15:34:00.068Z"
@@ -3499,7 +3499,7 @@
           "text": "¿Puede un templo sagrado nacer sin iglesia y desde el barro comunitario?",
           "wordCount": 12,
           "visualDirection": "Fondo negro editorial, render del templo en penumbra con tipografía Anton a gran escala.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793826295352-Capa_31.webp",
+          "recommendedAssetUrl": "/images/uploads/1793826295352-Capa_31.webp",
           "recommendedAssetDescription": "Render exterior del templo con luz crepuscular en Rumipamba."
         },
         {
@@ -3508,7 +3508,7 @@
           "text": "Rumipamba, 2.850 metros de altitud: una comunidad históricamente privada de su propio refugio espiritual.",
           "wordCount": 14,
           "visualDirection": "Fotografía del territorio andino de Rumiñahui con encuadre horizontal amplio y textura de tierra.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827530043-PLANTA_PABELLON_VEGETACION.webp",
+          "recommendedAssetUrl": "/images/uploads/1793827530043-PLANTA_PABELLON_VEGETACION.webp",
           "recommendedAssetDescription": "Registro del paisaje y del taller participativo vecinal."
         },
         {
@@ -3517,7 +3517,7 @@
           "text": "La arquitectura renuncia al protagonismo individual para disolverse en asamblea comunitaria.",
           "wordCount": 11,
           "visualDirection": "Diagrama axonométrico minimalista en línea blanca sobre fondo oscuro.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827417359-CORTE_FUGADO.webp",
+          "recommendedAssetUrl": "/images/uploads/1793827417359-CORTE_FUGADO.webp",
           "recommendedAssetDescription": "Axonometría explotada de la nave y cerchas."
         },
         {
@@ -3526,7 +3526,7 @@
           "text": "Cinco asambleas deliberativas definieron cada rincón, dimensión y símbolo del espacio sagrado.",
           "wordCount": 12,
           "visualDirection": "Fotografía documental de los habitantes dibujando y debatiendo en la mesa comunal.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827530043-PLANTA_PABELLON_VEGETACION.webp",
+          "recommendedAssetUrl": "/images/uploads/1793827530043-PLANTA_PABELLON_VEGETACION.webp",
           "recommendedAssetDescription": "Taller participativo con los habitantes de Rumipamba."
         },
         {
@@ -3535,7 +3535,7 @@
           "text": "180 metros cuadrados donde el vacío no es ausencia, sino convocatoria al recogimiento.",
           "wordCount": 13,
           "visualDirection": "Planta arquitectónica limpia con cotas sobrias y módulo de proporciones visible.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827672968-PROCESO.webp",
+          "recommendedAssetUrl": "/images/uploads/1793827672968-PROCESO.webp",
           "recommendedAssetDescription": "Planta arquitectónica de distribución de la nave."
         },
         {
@@ -3544,7 +3544,7 @@
           "text": "Adobe crudo andino y vigas de madera: la inercia térmica como ética constructiva.",
           "wordCount": 13,
           "visualDirection": "Detalle constructivo de muro de tierra trabada y apoyo de madera sin barniz.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827779382-pabellon_jpg.webp",
+          "recommendedAssetUrl": "/images/uploads/1793827779382-pabellon_jpg.webp",
           "recommendedAssetDescription": "Corte transversal con detalle de cimentación y cubierta ventilada."
         },
         {
@@ -3553,7 +3553,7 @@
           "text": "Frente a templos dorados y corporativos, la pertinencia radica en la sobriedad del barro.",
           "wordCount": 14,
           "visualDirection": "Encuadre interior en sombra con haz de luz cenital tocando el suelo de tierra.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793826295352-Capa_31.webp",
+          "recommendedAssetUrl": "/images/uploads/1793826295352-Capa_31.webp",
           "recommendedAssetDescription": "Atmósfera interior de luz cenital filtrada."
         },
         {
@@ -3562,7 +3562,7 @@
           "text": "¿Qué transforma más un territorio: un edificio terminado o una comunidad organizada?",
           "wordCount": 12,
           "visualDirection": "Composición tipográfica sobria con signo de interrogación protagonista.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827417359-CORTE_FUGADO.webp",
+          "recommendedAssetUrl": "/images/uploads/1793827417359-CORTE_FUGADO.webp",
           "recommendedAssetDescription": "Diagrama conceptual del proceso comunitario."
         },
         {
@@ -3571,7 +3571,7 @@
           "text": "Nómade Taller demuestra que la arquitectura más urgente se construye desde la escucha.",
           "wordCount": 13,
           "visualDirection": "Crédito tipográfico dual: Nómade Taller + Maestro Mayor Segundo Guanoluisa.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793826295352-Capa_31.webp",
+          "recommendedAssetUrl": "/images/uploads/1793826295352-Capa_31.webp",
           "recommendedAssetDescription": "Perspectiva completa de la nave sagrada."
         },
         {
@@ -3580,7 +3580,7 @@
           "text": "Lo sagrado habita en el encuentro honesto entre tierra, memoria y comunidad.",
           "wordCount": 12,
           "visualDirection": "Logotipo de Ecuadorian Architecture, enlace de lectura profunda en bio y llamado a la conversación.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793826295352-Capa_31.webp",
+          "recommendedAssetUrl": "/images/uploads/1793826295352-Capa_31.webp",
           "recommendedAssetDescription": "Cierre editorial institucional EA."
         }
       ],
@@ -3595,11 +3595,11 @@
         "#ArquitecturaAndina"
       ],
       "curatedAssetUrls": [
-        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793826295352-Capa_31.webp",
-        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827530043-PLANTA_PABELLON_VEGETACION.webp",
-        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827417359-CORTE_FUGADO.webp",
-        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827672968-PROCESO.webp",
-        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827779382-pabellon_jpg.webp"
+        "/images/uploads/1793826295352-Capa_31.webp",
+        "/images/uploads/1793827530043-PLANTA_PABELLON_VEGETACION.webp",
+        "/images/uploads/1793827417359-CORTE_FUGADO.webp",
+        "/images/uploads/1793827672968-PROCESO.webp",
+        "/images/uploads/1793827779382-pabellon_jpg.webp"
       ],
       "status": "ready_for_design",
       "createdAt": "2026-11-05T15:34:00.162Z"
@@ -3616,7 +3616,7 @@
           "text": "¿Puede un templo sagrado nacer sin iglesia y desde el barro comunitario?",
           "wordCount": 12,
           "visualDirection": "Fondo negro editorial, render del templo en penumbra con tipografía Anton a gran escala.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410615803-20_20.webp",
+          "recommendedAssetUrl": "/images/uploads/1794410615803-20_20.webp",
           "recommendedAssetDescription": "Render exterior del templo con luz crepuscular en Rumipamba."
         },
         {
@@ -3625,7 +3625,7 @@
           "text": "Rumipamba, 2.850 metros de altitud: una comunidad históricamente privada de su propio refugio espiritual.",
           "wordCount": 14,
           "visualDirection": "Fotografía del territorio andino de Rumiñahui con encuadre horizontal amplio y textura de tierra.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410875452-001_CONTEXTO.webp",
+          "recommendedAssetUrl": "/images/uploads/1794410875452-001_CONTEXTO.webp",
           "recommendedAssetDescription": "Registro del paisaje y del taller participativo vecinal."
         },
         {
@@ -3634,7 +3634,7 @@
           "text": "La arquitectura renuncia al protagonismo individual para disolverse en asamblea comunitaria.",
           "wordCount": 11,
           "visualDirection": "Diagrama axonométrico minimalista en línea blanca sobre fondo oscuro.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410925189-004_ESQUEMA.webp",
+          "recommendedAssetUrl": "/images/uploads/1794410925189-004_ESQUEMA.webp",
           "recommendedAssetDescription": "Axonometría explotada de la nave y cerchas."
         },
         {
@@ -3643,7 +3643,7 @@
           "text": "Cinco asambleas deliberativas definieron cada rincón, dimensión y símbolo del espacio sagrado.",
           "wordCount": 12,
           "visualDirection": "Fotografía documental de los habitantes dibujando y debatiendo en la mesa comunal.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410875452-001_CONTEXTO.webp",
+          "recommendedAssetUrl": "/images/uploads/1794410875452-001_CONTEXTO.webp",
           "recommendedAssetDescription": "Taller participativo con los habitantes de Rumipamba."
         },
         {
@@ -3652,7 +3652,7 @@
           "text": "180 metros cuadrados donde el vacío no es ausencia, sino convocatoria al recogimiento.",
           "wordCount": 13,
           "visualDirection": "Planta arquitectónica limpia con cotas sobrias y módulo de proporciones visible.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410978921-17_17.webp",
+          "recommendedAssetUrl": "/images/uploads/1794410978921-17_17.webp",
           "recommendedAssetDescription": "Planta arquitectónica de distribución de la nave."
         },
         {
@@ -3661,7 +3661,7 @@
           "text": "Adobe crudo andino y vigas de madera: la inercia térmica como ética constructiva.",
           "wordCount": 13,
           "visualDirection": "Detalle constructivo de muro de tierra trabada y apoyo de madera sin barniz.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794411025226-11_11.webp",
+          "recommendedAssetUrl": "/images/uploads/1794411025226-11_11.webp",
           "recommendedAssetDescription": "Corte transversal con detalle de cimentación y cubierta ventilada."
         },
         {
@@ -3670,7 +3670,7 @@
           "text": "Frente a templos dorados y corporativos, la pertinencia radica en la sobriedad del barro.",
           "wordCount": 14,
           "visualDirection": "Encuadre interior en sombra con haz de luz cenital tocando el suelo de tierra.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410615803-20_20.webp",
+          "recommendedAssetUrl": "/images/uploads/1794410615803-20_20.webp",
           "recommendedAssetDescription": "Atmósfera interior de luz cenital filtrada."
         },
         {
@@ -3679,7 +3679,7 @@
           "text": "¿Qué transforma más un territorio: un edificio terminado o una comunidad organizada?",
           "wordCount": 12,
           "visualDirection": "Composición tipográfica sobria con signo de interrogación protagonista.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410925189-004_ESQUEMA.webp",
+          "recommendedAssetUrl": "/images/uploads/1794410925189-004_ESQUEMA.webp",
           "recommendedAssetDescription": "Diagrama conceptual del proceso comunitario."
         },
         {
@@ -3688,7 +3688,7 @@
           "text": "Nómade Taller demuestra que la arquitectura más urgente se construye desde la escucha.",
           "wordCount": 13,
           "visualDirection": "Crédito tipográfico dual: Nómade Taller + Maestro Mayor Segundo Guanoluisa.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410615803-20_20.webp",
+          "recommendedAssetUrl": "/images/uploads/1794410615803-20_20.webp",
           "recommendedAssetDescription": "Perspectiva completa de la nave sagrada."
         },
         {
@@ -3697,7 +3697,7 @@
           "text": "Lo sagrado habita en el encuentro honesto entre tierra, memoria y comunidad.",
           "wordCount": 12,
           "visualDirection": "Logotipo de Ecuadorian Architecture, enlace de lectura profunda en bio y llamado a la conversación.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410615803-20_20.webp",
+          "recommendedAssetUrl": "/images/uploads/1794410615803-20_20.webp",
           "recommendedAssetDescription": "Cierre editorial institucional EA."
         }
       ],
@@ -3712,11 +3712,11 @@
         "#ArquitecturaAndina"
       ],
       "curatedAssetUrls": [
-        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410615803-20_20.webp",
-        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410875452-001_CONTEXTO.webp",
-        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410925189-004_ESQUEMA.webp",
-        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410978921-17_17.webp",
-        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794411025226-11_11.webp"
+        "/images/uploads/1794410615803-20_20.webp",
+        "/images/uploads/1794410875452-001_CONTEXTO.webp",
+        "/images/uploads/1794410925189-004_ESQUEMA.webp",
+        "/images/uploads/1794410978921-17_17.webp",
+        "/images/uploads/1794411025226-11_11.webp"
       ],
       "status": "ready_for_design",
       "createdAt": "2026-11-11T20:52:30.006Z"
@@ -3733,7 +3733,7 @@
           "text": "¿Puede un templo sagrado nacer sin iglesia y desde el barro comunitario?",
           "wordCount": 12,
           "visualDirection": "Fondo negro editorial, render del templo en penumbra con tipografía Anton a gran escala.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794407839628-AXO.webp",
+          "recommendedAssetUrl": "/images/uploads/1794407839628-AXO.webp",
           "recommendedAssetDescription": "Render exterior del templo con luz crepuscular en Rumipamba."
         },
         {
@@ -3742,7 +3742,7 @@
           "text": "Rumipamba, 2.850 metros de altitud: una comunidad históricamente privada de su propio refugio espiritual.",
           "wordCount": 14,
           "visualDirection": "Fotografía del territorio andino de Rumiñahui con encuadre horizontal amplio y textura de tierra.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408337720-kancha.webp",
+          "recommendedAssetUrl": "/images/uploads/1794408337720-kancha.webp",
           "recommendedAssetDescription": "Registro del paisaje y del taller participativo vecinal."
         },
         {
@@ -3751,7 +3751,7 @@
           "text": "La arquitectura renuncia al protagonismo individual para disolverse en asamblea comunitaria.",
           "wordCount": 11,
           "visualDirection": "Diagrama axonométrico minimalista en línea blanca sobre fondo oscuro.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408625945-k2.webp",
+          "recommendedAssetUrl": "/images/uploads/1794408625945-k2.webp",
           "recommendedAssetDescription": "Axonometría explotada de la nave y cerchas."
         },
         {
@@ -3760,7 +3760,7 @@
           "text": "Cinco asambleas deliberativas definieron cada rincón, dimensión y símbolo del espacio sagrado.",
           "wordCount": 12,
           "visualDirection": "Fotografía documental de los habitantes dibujando y debatiendo en la mesa comunal.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408337720-kancha.webp",
+          "recommendedAssetUrl": "/images/uploads/1794408337720-kancha.webp",
           "recommendedAssetDescription": "Taller participativo con los habitantes de Rumipamba."
         },
         {
@@ -3769,7 +3769,7 @@
           "text": "180 metros cuadrados donde el vacío no es ausencia, sino convocatoria al recogimiento.",
           "wordCount": 13,
           "visualDirection": "Planta arquitectónica limpia con cotas sobrias y módulo de proporciones visible.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408582785-k1.webp",
+          "recommendedAssetUrl": "/images/uploads/1794408582785-k1.webp",
           "recommendedAssetDescription": "Planta arquitectónica de distribución de la nave."
         },
         {
@@ -3778,7 +3778,7 @@
           "text": "Adobe crudo andino y vigas de madera: la inercia térmica como ética constructiva.",
           "wordCount": 13,
           "visualDirection": "Detalle constructivo de muro de tierra trabada y apoyo de madera sin barniz.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408689851-INTERIOR.webp",
+          "recommendedAssetUrl": "/images/uploads/1794408689851-INTERIOR.webp",
           "recommendedAssetDescription": "Corte transversal con detalle de cimentación y cubierta ventilada."
         },
         {
@@ -3787,7 +3787,7 @@
           "text": "Frente a templos dorados y corporativos, la pertinencia radica en la sobriedad del barro.",
           "wordCount": 14,
           "visualDirection": "Encuadre interior en sombra con haz de luz cenital tocando el suelo de tierra.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794407839628-AXO.webp",
+          "recommendedAssetUrl": "/images/uploads/1794407839628-AXO.webp",
           "recommendedAssetDescription": "Atmósfera interior de luz cenital filtrada."
         },
         {
@@ -3796,7 +3796,7 @@
           "text": "¿Qué transforma más un territorio: un edificio terminado o una comunidad organizada?",
           "wordCount": 12,
           "visualDirection": "Composición tipográfica sobria con signo de interrogación protagonista.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408625945-k2.webp",
+          "recommendedAssetUrl": "/images/uploads/1794408625945-k2.webp",
           "recommendedAssetDescription": "Diagrama conceptual del proceso comunitario."
         },
         {
@@ -3805,7 +3805,7 @@
           "text": "Nómade Taller demuestra que la arquitectura más urgente se construye desde la escucha.",
           "wordCount": 13,
           "visualDirection": "Crédito tipográfico dual: Nómade Taller + Maestro Mayor Segundo Guanoluisa.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794407839628-AXO.webp",
+          "recommendedAssetUrl": "/images/uploads/1794407839628-AXO.webp",
           "recommendedAssetDescription": "Perspectiva completa de la nave sagrada."
         },
         {
@@ -3814,7 +3814,7 @@
           "text": "Lo sagrado habita en el encuentro honesto entre tierra, memoria y comunidad.",
           "wordCount": 12,
           "visualDirection": "Logotipo de Ecuadorian Architecture, enlace de lectura profunda en bio y llamado a la conversación.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794407839628-AXO.webp",
+          "recommendedAssetUrl": "/images/uploads/1794407839628-AXO.webp",
           "recommendedAssetDescription": "Cierre editorial institucional EA."
         }
       ],
@@ -3829,11 +3829,11 @@
         "#ArquitecturaAndina"
       ],
       "curatedAssetUrls": [
-        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794407839628-AXO.webp",
-        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408337720-kancha.webp",
-        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408625945-k2.webp",
-        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408582785-k1.webp",
-        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408689851-INTERIOR.webp"
+        "/images/uploads/1794407839628-AXO.webp",
+        "/images/uploads/1794408337720-kancha.webp",
+        "/images/uploads/1794408625945-k2.webp",
+        "/images/uploads/1794408582785-k1.webp",
+        "/images/uploads/1794408689851-INTERIOR.webp"
       ],
       "status": "ready_for_design",
       "createdAt": "2026-11-11T20:52:30.091Z"
@@ -3850,7 +3850,7 @@
           "text": "¿Puede un templo sagrado nacer sin iglesia y desde el barro comunitario?",
           "wordCount": 12,
           "visualDirection": "Fondo negro editorial, render del templo en penumbra con tipografía Anton a gran escala.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338454772-Croquis.webp",
+          "recommendedAssetUrl": "/images/uploads/1794338454772-Croquis.webp",
           "recommendedAssetDescription": "Render exterior del templo con luz crepuscular en Rumipamba."
         },
         {
@@ -3859,7 +3859,7 @@
           "text": "Rumipamba, 2.850 metros de altitud: una comunidad históricamente privada de su propio refugio espiritual.",
           "wordCount": 14,
           "visualDirection": "Fotografía del territorio andino de Rumiñahui con encuadre horizontal amplio y textura de tierra.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338570097-Diagrama_contexto.webp",
+          "recommendedAssetUrl": "/images/uploads/1794338570097-Diagrama_contexto.webp",
           "recommendedAssetDescription": "Registro del paisaje y del taller participativo vecinal."
         },
         {
@@ -3868,7 +3868,7 @@
           "text": "La arquitectura renuncia al protagonismo individual para disolverse en asamblea comunitaria.",
           "wordCount": 11,
           "visualDirection": "Diagrama axonométrico minimalista en línea blanca sobre fondo oscuro.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338647110-Frontal.webp",
+          "recommendedAssetUrl": "/images/uploads/1794338647110-Frontal.webp",
           "recommendedAssetDescription": "Axonometría explotada de la nave y cerchas."
         },
         {
@@ -3877,7 +3877,7 @@
           "text": "Cinco asambleas deliberativas definieron cada rincón, dimensión y símbolo del espacio sagrado.",
           "wordCount": 12,
           "visualDirection": "Fotografía documental de los habitantes dibujando y debatiendo en la mesa comunal.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338570097-Diagrama_contexto.webp",
+          "recommendedAssetUrl": "/images/uploads/1794338570097-Diagrama_contexto.webp",
           "recommendedAssetDescription": "Taller participativo con los habitantes de Rumipamba."
         },
         {
@@ -3886,7 +3886,7 @@
           "text": "180 metros cuadrados donde el vacío no es ausencia, sino convocatoria al recogimiento.",
           "wordCount": 13,
           "visualDirection": "Planta arquitectónica limpia con cotas sobrias y módulo de proporciones visible.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338703948-Perspectiva.webp",
+          "recommendedAssetUrl": "/images/uploads/1794338703948-Perspectiva.webp",
           "recommendedAssetDescription": "Planta arquitectónica de distribución de la nave."
         },
         {
@@ -3895,7 +3895,7 @@
           "text": "Adobe crudo andino y vigas de madera: la inercia térmica como ética constructiva.",
           "wordCount": 13,
           "visualDirection": "Detalle constructivo de muro de tierra trabada y apoyo de madera sin barniz.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338747603-Seccion.webp",
+          "recommendedAssetUrl": "/images/uploads/1794338747603-Seccion.webp",
           "recommendedAssetDescription": "Corte transversal con detalle de cimentación y cubierta ventilada."
         },
         {
@@ -3904,7 +3904,7 @@
           "text": "Frente a templos dorados y corporativos, la pertinencia radica en la sobriedad del barro.",
           "wordCount": 14,
           "visualDirection": "Encuadre interior en sombra con haz de luz cenital tocando el suelo de tierra.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338454772-Croquis.webp",
+          "recommendedAssetUrl": "/images/uploads/1794338454772-Croquis.webp",
           "recommendedAssetDescription": "Atmósfera interior de luz cenital filtrada."
         },
         {
@@ -3913,7 +3913,7 @@
           "text": "¿Qué transforma más un territorio: un edificio terminado o una comunidad organizada?",
           "wordCount": 12,
           "visualDirection": "Composición tipográfica sobria con signo de interrogación protagonista.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338647110-Frontal.webp",
+          "recommendedAssetUrl": "/images/uploads/1794338647110-Frontal.webp",
           "recommendedAssetDescription": "Diagrama conceptual del proceso comunitario."
         },
         {
@@ -3922,7 +3922,7 @@
           "text": "Nómade Taller demuestra que la arquitectura más urgente se construye desde la escucha.",
           "wordCount": 13,
           "visualDirection": "Crédito tipográfico dual: Nómade Taller + Maestro Mayor Segundo Guanoluisa.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338454772-Croquis.webp",
+          "recommendedAssetUrl": "/images/uploads/1794338454772-Croquis.webp",
           "recommendedAssetDescription": "Perspectiva completa de la nave sagrada."
         },
         {
@@ -3931,7 +3931,7 @@
           "text": "Lo sagrado habita en el encuentro honesto entre tierra, memoria y comunidad.",
           "wordCount": 12,
           "visualDirection": "Logotipo de Ecuadorian Architecture, enlace de lectura profunda en bio y llamado a la conversación.",
-          "recommendedAssetUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338454772-Croquis.webp",
+          "recommendedAssetUrl": "/images/uploads/1794338454772-Croquis.webp",
           "recommendedAssetDescription": "Cierre editorial institucional EA."
         }
       ],
@@ -3946,11 +3946,11 @@
         "#ArquitecturaAndina"
       ],
       "curatedAssetUrls": [
-        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338454772-Croquis.webp",
-        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338570097-Diagrama_contexto.webp",
-        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338647110-Frontal.webp",
-        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338703948-Perspectiva.webp",
-        "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338747603-Seccion.webp"
+        "/images/uploads/1794338454772-Croquis.webp",
+        "/images/uploads/1794338570097-Diagrama_contexto.webp",
+        "/images/uploads/1794338647110-Frontal.webp",
+        "/images/uploads/1794338703948-Perspectiva.webp",
+        "/images/uploads/1794338747603-Seccion.webp"
       ],
       "status": "ready_for_design",
       "createdAt": "2026-11-11T20:52:30.167Z"

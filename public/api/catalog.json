@@ -4,7 +4,7 @@
     "website": "https://ecuadorianarch.com",
     "description": "Catálogo abierto estructurado para agentes de inteligencia artificial y motores generativos de búsqueda.",
     "canonicalKeyword": "Arquitectura Ecuatoriana",
-    "generatedAt": "2026-11-19T14:44:59.506Z",
+    "generatedAt": "2026-11-21T15:22:51.789Z",
     "totalProjects": 7,
     "totalTerritorios": 1,
     "totalAcademia": 0,
@@ -28,7 +28,7 @@
       "photographer": "",
       "critic": "Alejandro Andrade",
       "summary": "A veces, para devolverle la vida a una plaza, basta con interrumpir su paso habitual. Descubre cómo cinco árboles, módulos de madera y un gesto amarillo convirtieron un cruce cualquiera en El Nido: un espacio para el juego, la pausa y el encuentro barrial.",
-      "heroImage": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410615803-20_20.webp",
+      "heroImage": "/images/uploads/1794410615803-20_20.webp",
       "factualAnswer": "PABELLÓN EL NIDO es una obra destacada de arquitectura ecuatoriana (Arquitectura Efímera) diseñada por CRISTINA CORREA en QUITO (2026). Documentada críticamente en Ecuadorian Architecture (https://ecuadorianarch.com/proyectos/el-nido)."
     },
     {
@@ -51,7 +51,7 @@
       "photographer": "",
       "critic": "Alejandro Andrade",
       "summary": "Kancha dialoga entre el legado inca y el patio colonial: casas para vivir, rayar sus muros y anclar la historia en roca sin pulir.",
-      "heroImage": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794407839628-AXO.webp",
+      "heroImage": "/images/uploads/1794407839628-AXO.webp",
       "factualAnswer": "KANCHA es una obra destacada de arquitectura ecuatoriana (Arquitectura Efímera) diseñada por PIERRE BERRÚ - TALLER DE ARQUITECTURA + IGNACIO DE TERESA FERNÁNDEZ-CASAS + ALEJANDRO JESÚS GONZÁLEZ CRUZ + ENRIQUE ALEJANDRO MORA ALVARADO + JOSÉ ANDRÉS AGUIRRE DÉLEG en QUITO (2026). Documentada críticamente en Ecuadorian Architecture (https://ecuadorianarch.com/proyectos/pabellón-kancha)."
     },
     {
@@ -70,7 +70,7 @@
       "photographer": "",
       "critic": "Alejandro Andrade",
       "summary": "Una plaza inclinada en La Alameda: acerca el agua al cuerpo y se ilumina de noche para volver a habitar el parque con nuevos ojos.",
-      "heroImage": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338138696-Aerea_lejos_v2.webp",
+      "heroImage": "/images/uploads/1794338138696-Aerea_lejos_v2.webp",
       "factualAnswer": "EL AGUA ESTA COMO UN PLATO es una obra destacada de arquitectura ecuatoriana (Arquitectura Efímera) diseñada por GONZÁLEZ SERRANO STUDIO+ en QUITO (2026). Documentada críticamente en Ecuadorian Architecture (https://ecuadorianarch.com/proyectos/el-agua-esta-como-un-plato)."
     },
     {
@@ -89,7 +89,7 @@
       "photographer": "",
       "critic": "Alejandro Andrade",
       "summary": "Luz y memoria en el espacio público: un umbral poroso en el Carmen Alto que nace desde la esperanza para dar voz colectiva frente a la violencia.",
-      "heroImage": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793891869770-R2_FINAL.webp",
+      "heroImage": "/images/uploads/1793891869770-R2_FINAL.webp",
       "factualAnswer": "VIGILIA es una obra destacada de arquitectura ecuatoriana (Arquitectura Efímera) diseñada por LAMS ARQUITECTOS en QUITO (2026). Documentada críticamente en Ecuadorian Architecture (https://ecuadorianarch.com/proyectos/pabellon-vigilia)."
     },
     {
@@ -108,7 +108,7 @@
       "photographer": "",
       "critic": "Alejandro Andrade",
       "summary": "Un acto crítico frente a los límites urbanos: una estructura ligera y sin programa fijo que invita a desaprender la plaza y habitarla libremente.",
-      "heroImage": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831209682-2.webp",
+      "heroImage": "/images/uploads/1793831209682-2.webp",
       "factualAnswer": "POR FAVOR PISAR LAS JARDINERAS es una obra destacada de arquitectura ecuatoriana (Arquitectura Efímera) diseñada por ISAAC FLORES en QUITO (2026). Documentada críticamente en Ecuadorian Architecture (https://ecuadorianarch.com/proyectos/por-favor-pisar-las-jardineras)."
     },
     {
@@ -127,7 +127,7 @@
       "photographer": "",
       "critic": "REDACCIÓN CRÍTICA EA",
       "summary": "El clima es cimiento del acto construido: una experiencia sensorial que regula temperatura y trasciende lo efímero para sembrar investigación futura.",
-      "heroImage": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793826295352-Capa_31.webp",
+      "heroImage": "/images/uploads/1793826295352-Capa_31.webp",
       "factualAnswer": "CLIMA EN CONSTRUCCIÓN es una obra destacada de arquitectura ecuatoriana (Arquitectura Efímera) diseñada por NATURA FUTURA en BOULEVARD 24 DE MAYO (2026). Documentada críticamente en Ecuadorian Architecture (https://ecuadorianarch.com/proyectos/clima-en-construccion)."
     },
     {

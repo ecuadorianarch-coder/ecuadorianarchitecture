@@ -6,9 +6,9 @@
     "kicker": "ECUADORIAN ARCHITECTURE // COMUNIDAD",
     "title": "SUSCRÍBETE A NUESTRO NEWSLETTER",
     "subtitle": "Investigaciones, proyectos, procesos de obra y debates sobre la arquitectura ecuatoriana directamente en tu correo.",
-    "desktopAsset": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793818258059-PORTADA-02.webp",
-    "mobileAsset": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793818280761-Sin_t_tulo-1__Recuperado_-05.webp",
-    "horizontalBannerAsset": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793818271225-Sin_t_tulo-1__Recuperado_-04.webp",
+    "desktopAsset": "/images/uploads/1793818258059-PORTADA-02.webp",
+    "mobileAsset": "/images/uploads/1793818280761-Sin_t_tulo-1__Recuperado_-05.webp",
+    "horizontalBannerAsset": "/images/uploads/1793818271225-Sin_t_tulo-1__Recuperado_-04.webp",
     "destinationUrl": "#newsletter",
     "ctaText": "SUSCRÍBETE A NUESTRO NEWSLETTER",
     "startDate": "2026-01-01",
@@ -27,7 +27,7 @@
     "shareEnabled": true,
     "notes": "Campaña editorial oficial para suscripción al newsletter de Ecuadorian Architecture.",
     "createdAt": "2026-01-01",
-    "verticalBannerAsset": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793818264190-Sin_t_tulo-1__Recuperado_-03.webp"
+    "verticalBannerAsset": "/images/uploads/1793818264190-Sin_t_tulo-1__Recuperado_-03.webp"
   },
   {
     "id": "camp-flos-running-magnet",

@@ -28,7 +28,7 @@
       "Materia",
       "Ecuador"
     ],
-    "heroImage": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794241484389-562768852a2a011dab6eefc820c9f87d_jpg_71701403_2K.webp",
+    "heroImage": "/images/uploads/1794241484389-562768852a2a011dab6eefc820c9f87d_jpg_71701403_2K.webp",
     "heroImageFocalPoint": "center",
     "resena": "Acelerar en la ciudad no te hace llegar más rápido; es un sesgo mental que arriesga vidas por ganar solo segundos.",
     "hasCritica": false,
@@ -60,7 +60,7 @@
       {
         "id": "mod-single-image-1794241863589",
         "type": "single-image",
-        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794241871375-4962e3de6d6122ddf70f1aea996c7e7e.webp",
+        "imageUrl": "/images/uploads/1794241871375-4962e3de6d6122ddf70f1aea996c7e7e.webp",
         "category": "fotografia"
       },
       {
@@ -78,7 +78,7 @@
       {
         "id": "mod-single-image-1794242229252",
         "type": "single-image",
-        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794242262932-filters_format_webp__quality_75_.webp",
+        "imageUrl": "/images/uploads/1794242262932-filters_format_webp__quality_75_.webp",
         "category": "fotografia"
       },
       {
@@ -96,7 +96,7 @@
       {
         "id": "mod-single-image-1794242546332",
         "type": "single-image",
-        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794242587796-424e75c70fcc6f7de9a142d1a0da06b9.webp",
+        "imageUrl": "/images/uploads/1794242587796-424e75c70fcc6f7de9a142d1a0da06b9.webp",
         "category": "fotografia"
       },
       {
@@ -107,7 +107,7 @@
       {
         "id": "mod-single-image-1794242920011",
         "type": "single-image",
-        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794242968812-45fe0252b4fd983d4a6808b631186a04.webp",
+        "imageUrl": "/images/uploads/1794242968812-45fe0252b4fd983d4a6808b631186a04.webp",
         "category": "fotografia"
       },
       {
@@ -135,10 +135,10 @@
     "heroImagePosition": "50% 50%",
     "heroImageZoom": 100,
     "imageCategories": {
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794241871375-4962e3de6d6122ddf70f1aea996c7e7e.webp": "fotografia",
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794242262932-filters_format_webp__quality_75_.webp": "fotografia",
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794242587796-424e75c70fcc6f7de9a142d1a0da06b9.webp": "fotografia",
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794242968812-45fe0252b4fd983d4a6808b631186a04.webp": "fotografia"
+      "/images/uploads/1794241871375-4962e3de6d6122ddf70f1aea996c7e7e.webp": "fotografia",
+      "/images/uploads/1794242262932-filters_format_webp__quality_75_.webp": "fotografia",
+      "/images/uploads/1794242587796-424e75c70fcc6f7de9a142d1a0da06b9.webp": "fotografia",
+      "/images/uploads/1794242968812-45fe0252b4fd983d4a6808b631186a04.webp": "fotografia"
     },
     "secondaryExcerpt": ""
   }

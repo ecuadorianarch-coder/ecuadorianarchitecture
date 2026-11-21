@@ -8,8 +8,8 @@
     "studioLocation": "Quito",
     "foundationYear": "2024",
     "studioWebsite": "@nomade.taller.ec",
-    "studioAvatarUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/studio-avatar-studio-1794857919669.jpg",
-    "studioCoverUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/studio-cover-studio-1794857919669.jpg",
+    "studioAvatarUrl": "/images/uploads/studio-avatar-studio-1794857919669.jpg",
+    "studioCoverUrl": "/images/uploads/studio-cover-studio-1794857919669.jpg",
     "createdAt": "2026-11-16T19:38:39.698Z"
   }
 ]

@@ -3,6 +3,8 @@
  * Provides secure cryptographic session management for architectural studios and creators.
  */
 
+import { optimizeArchitecturalImage } from '../utils/mediaUpload';
+
 export interface StudioProfile {
   id: string;
   email: string;
@@ -302,32 +304,29 @@ export const studioAuthService = {
   },
 
   async uploadImage(file: File): Promise<{ success: boolean; url?: string; error?: string }> {
-    return new Promise((resolve) => {
-      const reader = new FileReader();
-      reader.onload = async () => {
-        try {
-          const base64Data = reader.result as string;
-          const res = await fetch('/api/upload', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              filename: file.name,
-              data: base64Data,
-            }),
-          });
-          const json = await res.json();
-          if (res.ok && json.success && json.url) {
-            resolve({ success: true, url: json.url });
-          } else {
-            resolve({ success: false, error: json.error || 'Error al subir la imagen' });
-          }
-        } catch (e: any) {
-          resolve({ success: false, error: e.message || 'Error de conexión al subir imagen' });
-        }
-      };
-      reader.onerror = () => resolve({ success: false, error: 'Error al procesar el archivo' });
-      reader.readAsDataURL(file);
-    });
+    try {
+      const { dataUrl, filename } = await optimizeArchitecturalImage(file, {
+        maxDimension: 1800,
+        quality: 0.80,
+      });
+
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          filename,
+          data: dataUrl,
+        }),
+      });
+      const json = await res.json();
+      if (res.ok && json.success && json.url) {
+        return { success: true, url: json.url };
+      } else {
+        return { success: false, error: json.error || 'Error al subir la imagen' };
+      }
+    } catch (e: any) {
+      return { success: false, error: e.message || 'Error de conexión al subir imagen' };
+    }
   },
 
   async updateProfile(updates: Partial<StudioProfile>): Promise<{ success: boolean; studio?: StudioProfile; error?: string }> {

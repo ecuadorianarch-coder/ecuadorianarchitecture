@@ -38,7 +38,7 @@
       "fotografia de arquitectura",
       "diseño arquitectonico contemporaneo"
     ],
-    "heroImage": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410615803-20_20.webp",
+    "heroImage": "/images/uploads/1794410615803-20_20.webp",
     "heroImageFocalPoint": "center",
     "resena": "A veces, para devolverle la vida a una plaza, basta con interrumpir su paso habitual. Descubre cómo cinco árboles, módulos de madera y un gesto amarillo convirtieron un cruce cualquiera en El Nido: un espacio para el juego, la pausa y el encuentro barrial.",
     "hasCritica": false,
@@ -65,7 +65,7 @@
       {
         "id": "mod-single-image-1794410799476",
         "type": "single-image",
-        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410615803-20_20.webp",
+        "imageUrl": "/images/uploads/1794410615803-20_20.webp",
         "credits": "Cristina Correa",
         "category": "fotografia"
       },
@@ -77,7 +77,7 @@
       {
         "id": "mod-single-image-1794410863302",
         "type": "single-image",
-        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410875452-001_CONTEXTO.webp",
+        "imageUrl": "/images/uploads/1794410875452-001_CONTEXTO.webp",
         "credits": "Cristina Correa",
         "category": "planimetria"
       },
@@ -89,7 +89,7 @@
       {
         "id": "mod-single-image-1794410915289",
         "type": "single-image",
-        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410925189-004_ESQUEMA.webp",
+        "imageUrl": "/images/uploads/1794410925189-004_ESQUEMA.webp",
         "credits": "Cristina Correa",
         "category": "planimetria"
       },
@@ -101,7 +101,7 @@
       {
         "id": "mod-single-image-1794410967871",
         "type": "single-image",
-        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410978921-17_17.webp",
+        "imageUrl": "/images/uploads/1794410978921-17_17.webp",
         "credits": "Cristina Correa",
         "category": "fotografia"
       },
@@ -113,7 +113,7 @@
       {
         "id": "mod-single-image-1794411011040",
         "type": "single-image",
-        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794411025226-11_11.webp",
+        "imageUrl": "/images/uploads/1794411025226-11_11.webp",
         "credits": "Cristina Correa",
         "category": "fotografia"
       }
@@ -135,11 +135,11 @@
     "createdAt": "2026-11-11T15:21:42.439Z",
     "updatedAt": "2026-11-11T17:08:47.740Z",
     "imageCategories": {
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410615803-20_20.webp": "fotografia",
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410875452-001_CONTEXTO.webp": "planimetria",
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410925189-004_ESQUEMA.webp": "planimetria",
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794410978921-17_17.webp": "fotografia",
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794411025226-11_11.webp": "fotografia"
+      "/images/uploads/1794410615803-20_20.webp": "fotografia",
+      "/images/uploads/1794410875452-001_CONTEXTO.webp": "planimetria",
+      "/images/uploads/1794410925189-004_ESQUEMA.webp": "planimetria",
+      "/images/uploads/1794410978921-17_17.webp": "fotografia",
+      "/images/uploads/1794411025226-11_11.webp": "fotografia"
     },
     "secondaryExcerpt": "",
     "seo": {
@@ -183,7 +183,7 @@
       "Materia",
       "Ecuador"
     ],
-    "heroImage": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794407839628-AXO.webp",
+    "heroImage": "/images/uploads/1794407839628-AXO.webp",
     "heroImageFocalPoint": "center",
     "resena": "Kancha dialoga entre el legado inca y el patio colonial: casas para vivir, rayar sus muros y anclar la historia en roca sin pulir.",
     "hasCritica": false,
@@ -210,7 +210,7 @@
       {
         "id": "mod-single-image-1794408118012",
         "type": "single-image",
-        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794407839628-AXO.webp",
+        "imageUrl": "/images/uploads/1794407839628-AXO.webp",
         "caption": "Registro fotográfico de obra"
       },
       {
@@ -221,7 +221,7 @@
       {
         "id": "mod-single-image-1794408149280",
         "type": "single-image",
-        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408337720-kancha.webp",
+        "imageUrl": "/images/uploads/1794408337720-kancha.webp",
         "caption": "Vacío central bioclimático en Quito",
         "credits": "La kancha Inca",
         "category": "planimetria"
@@ -240,8 +240,8 @@
           "columns": 2
         },
         "imageUrls": [
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408625945-k2.webp",
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408582785-k1.webp"
+          "/images/uploads/1794408625945-k2.webp",
+          "/images/uploads/1794408582785-k1.webp"
         ],
         "credits": "",
         "category": "planimetria"
@@ -254,7 +254,7 @@
       {
         "id": "mod-single-image-1794408678925",
         "type": "single-image",
-        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408689851-INTERIOR.webp",
+        "imageUrl": "/images/uploads/1794408689851-INTERIOR.webp",
         "credits": "Pabellón",
         "category": "fotografia"
       },
@@ -266,7 +266,7 @@
       {
         "id": "mod-single-image-1794408738096",
         "type": "single-image",
-        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794409270186-k6.webp",
+        "imageUrl": "/images/uploads/1794409270186-k6.webp",
         "credits": "Pabellón",
         "category": "fotografia"
       },
@@ -278,14 +278,14 @@
       {
         "id": "mod-single-image-1794408870244",
         "type": "single-image",
-        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794409301297-k5.webp",
+        "imageUrl": "/images/uploads/1794409301297-k5.webp",
         "credits": "Pabellón",
         "category": "fotografia"
       },
       {
         "id": "mod-single-image-1794408907450",
         "type": "single-image",
-        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408916941-FRONTAL__1_.webp",
+        "imageUrl": "/images/uploads/1794408916941-FRONTAL__1_.webp",
         "credits": "Pabellón",
         "category": "fotografia"
       }
@@ -308,16 +308,16 @@
     "updatedAt": "2026-11-11T19:39:41.205Z",
     "colaboradores": "Pierre Berrú - Taller de Arquitectura, Ignacio de Teresa Fernández-Casas, Alejandro Jesús González Cruz,  Enrique Alejandro Mora Alvarado, José Andrés Aguirre Déleg, Franklin Ariel Murillo Rojas, John Dylan Freire Murillo",
     "imageCategories": {
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408337720-kancha.webp": "planimetria",
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408504281-k1.webp": "planimetria",
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408689851-INTERIOR.webp": "fotografia",
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408796890-k3.webp": "planimetria",
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408879166-k4.webp": "planimetria",
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408916941-FRONTAL__1_.webp": "fotografia",
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408625945-k2.webp": "planimetria",
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794408582785-k1.webp": "planimetria",
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794409270186-k6.webp": "fotografia",
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794409301297-k5.webp": "fotografia"
+      "/images/uploads/1794408337720-kancha.webp": "planimetria",
+      "/images/uploads/1794408504281-k1.webp": "planimetria",
+      "/images/uploads/1794408689851-INTERIOR.webp": "fotografia",
+      "/images/uploads/1794408796890-k3.webp": "planimetria",
+      "/images/uploads/1794408879166-k4.webp": "planimetria",
+      "/images/uploads/1794408916941-FRONTAL__1_.webp": "fotografia",
+      "/images/uploads/1794408625945-k2.webp": "planimetria",
+      "/images/uploads/1794408582785-k1.webp": "planimetria",
+      "/images/uploads/1794409270186-k6.webp": "fotografia",
+      "/images/uploads/1794409301297-k5.webp": "fotografia"
     },
     "secondaryExcerpt": ""
   },
@@ -352,7 +352,7 @@
       "Materia",
       "Ecuador"
     ],
-    "heroImage": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338138696-Aerea_lejos_v2.webp",
+    "heroImage": "/images/uploads/1794338138696-Aerea_lejos_v2.webp",
     "heroImageFocalPoint": "center",
     "resena": "Una plaza inclinada en La Alameda: acerca el agua al cuerpo y se ilumina de noche para volver a habitar el parque con nuevos ojos.",
     "hasCritica": false,
@@ -386,7 +386,7 @@
       {
         "id": "mod-single-image-1794338437396",
         "type": "single-image",
-        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338454772-Croquis.webp",
+        "imageUrl": "/images/uploads/1794338454772-Croquis.webp",
         "caption": "Vacío central bioclimático en Quito",
         "credits": "González Serrano Studio+",
         "category": "planimetria"
@@ -399,7 +399,7 @@
       {
         "id": "mod-single-image-1794338555540",
         "type": "single-image",
-        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338570097-Diagrama_contexto.webp",
+        "imageUrl": "/images/uploads/1794338570097-Diagrama_contexto.webp",
         "caption": "Vacío central bioclimático en Quito",
         "credits": "González Serrano Studio+",
         "category": "planimetria"
@@ -412,7 +412,7 @@
       {
         "id": "mod-single-image-1794338631319",
         "type": "single-image",
-        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338647110-Frontal.webp",
+        "imageUrl": "/images/uploads/1794338647110-Frontal.webp",
         "caption": "Vacío central bioclimático en Quito",
         "credits": "González Serrano Studio+",
         "category": "fotografia"
@@ -425,7 +425,7 @@
       {
         "id": "mod-single-image-1794338687260",
         "type": "single-image",
-        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338703948-Perspectiva.webp",
+        "imageUrl": "/images/uploads/1794338703948-Perspectiva.webp",
         "caption": "Vacío central bioclimático en Quito",
         "credits": "González Serrano Studio+",
         "category": "fotografia"
@@ -442,14 +442,14 @@
           "columns": 2
         },
         "imageUrls": [
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338747603-Seccion.webp",
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338756047-Seccion_2.webp"
+          "/images/uploads/1794338747603-Seccion.webp",
+          "/images/uploads/1794338756047-Seccion_2.webp"
         ]
       },
       {
         "id": "mod-single-image-1794338764127",
         "type": "single-image",
-        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338779484-Planta.webp",
+        "imageUrl": "/images/uploads/1794338779484-Planta.webp",
         "caption": "Vacío central bioclimático en Quito",
         "credits": "González Serrano Studio+",
         "category": "planimetria"
@@ -472,11 +472,11 @@
     "createdAt": "2026-11-10T19:10:51.230Z",
     "updatedAt": "2026-11-10T19:29:16.619Z",
     "imageCategories": {
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338454772-Croquis.webp": "planimetria",
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338570097-Diagrama_contexto.webp": "planimetria",
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338647110-Frontal.webp": "fotografia",
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338703948-Perspectiva.webp": "fotografia",
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1794338779484-Planta.webp": "planimetria"
+      "/images/uploads/1794338454772-Croquis.webp": "planimetria",
+      "/images/uploads/1794338570097-Diagrama_contexto.webp": "planimetria",
+      "/images/uploads/1794338647110-Frontal.webp": "fotografia",
+      "/images/uploads/1794338703948-Perspectiva.webp": "fotografia",
+      "/images/uploads/1794338779484-Planta.webp": "planimetria"
     },
     "secondaryExcerpt": ""
   },
@@ -511,7 +511,7 @@
       "Materia",
       "Ecuador"
     ],
-    "heroImage": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793891869770-R2_FINAL.webp",
+    "heroImage": "/images/uploads/1793891869770-R2_FINAL.webp",
     "heroImageFocalPoint": "bottom",
     "resena": "",
     "hasCritica": false,
@@ -538,7 +538,7 @@
       {
         "id": "mod-single-image-1793892042969",
         "type": "single-image",
-        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892051586-R2_FINAL.webp",
+        "imageUrl": "/images/uploads/1793892051586-R2_FINAL.webp",
         "credits": "LAMS arquitectos",
         "category": "fotografia"
       },
@@ -550,7 +550,7 @@
       {
         "id": "mod-single-image-1793892358715",
         "type": "single-image",
-        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892408453-r4-01.webp",
+        "imageUrl": "/images/uploads/1793892408453-r4-01.webp",
         "credits": "LAMS arquitectos",
         "category": "planimetria"
       },
@@ -562,7 +562,7 @@
       {
         "id": "mod-single-image-1793892491974",
         "type": "single-image",
-        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892502029-R1__1_.webp",
+        "imageUrl": "/images/uploads/1793892502029-R1__1_.webp",
         "credits": "LAMS arquitectos",
         "category": "fotografia"
       },
@@ -574,7 +574,7 @@
       {
         "id": "mod-single-image-1793892537415",
         "type": "single-image",
-        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892545849-1__Foto_Maqueta.webp",
+        "imageUrl": "/images/uploads/1793892545849-1__Foto_Maqueta.webp",
         "credits": "LAMS arquitectos",
         "category": "fotografia"
       }
@@ -602,10 +602,10 @@
     "estadoObra": "En construcción",
     "colaboradores": "Luis Alberto Menéndez ",
     "imageCategories": {
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892051586-R2_FINAL.webp": "fotografia",
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892408453-r4-01.webp": "planimetria",
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892502029-R1__1_.webp": "fotografia",
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793892545849-1__Foto_Maqueta.webp": "fotografia"
+      "/images/uploads/1793892051586-R2_FINAL.webp": "fotografia",
+      "/images/uploads/1793892408453-r4-01.webp": "planimetria",
+      "/images/uploads/1793892502029-R1__1_.webp": "fotografia",
+      "/images/uploads/1793892545849-1__Foto_Maqueta.webp": "fotografia"
     },
     "motion": {
       "variant": "horizontal-blinds"
@@ -645,7 +645,7 @@
       "Materia",
       "Ecuador"
     ],
-    "heroImage": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831209682-2.webp",
+    "heroImage": "/images/uploads/1793831209682-2.webp",
     "heroImageFocalPoint": "center",
     "resena": "",
     "hasCritica": false,
@@ -672,7 +672,7 @@
       {
         "id": "mod-single-image-1793831391486",
         "type": "single-image",
-        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831399460-Por_Favor_Pisar_las_Jardineras_Collage_Lugar.webp",
+        "imageUrl": "/images/uploads/1793831399460-Por_Favor_Pisar_las_Jardineras_Collage_Lugar.webp",
         "credits": "Isaac Flores",
         "category": "fotografia"
       },
@@ -684,7 +684,7 @@
       {
         "id": "mod-single-image-1793831458949",
         "type": "single-image",
-        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831492239-2.webp",
+        "imageUrl": "/images/uploads/1793831492239-2.webp",
         "credits": "Isaac Flores",
         "category": "fotografia"
       },
@@ -696,7 +696,7 @@
       {
         "id": "mod-single-image-1793831598130",
         "type": "single-image",
-        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831607790-Por_Favor_Pisar_las_Jardineras_Implantacio__n.webp",
+        "imageUrl": "/images/uploads/1793831607790-Por_Favor_Pisar_las_Jardineras_Implantacio__n.webp",
         "credits": "Isaac Flores",
         "category": "fotografia"
       },
@@ -712,8 +712,8 @@
           "columns": 2
         },
         "imageUrls": [
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831662232-Por_Favor_Pisar_las_Jardineras_Ima__gen_01.webp",
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831670606-Por_Favor_Pisar_las_Jardineras_Maqueta_Conceptual.webp"
+          "/images/uploads/1793831662232-Por_Favor_Pisar_las_Jardineras_Ima__gen_01.webp",
+          "/images/uploads/1793831670606-Por_Favor_Pisar_las_Jardineras_Maqueta_Conceptual.webp"
         ]
       },
       {
@@ -724,7 +724,7 @@
       {
         "id": "mod-single-image-1793832862514",
         "type": "single-image",
-        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793832877836-Por_Favor_Pisar_las_Jardineras_Corte_Fachada_Norte.webp",
+        "imageUrl": "/images/uploads/1793832877836-Por_Favor_Pisar_las_Jardineras_Corte_Fachada_Norte.webp",
         "credits": "Isaac Flores",
         "category": "planimetria"
       }
@@ -749,10 +749,10 @@
     "secondaryExcerpt": "",
     "estadoObra": "EN CONSTRUCCIÓN",
     "imageCategories": {
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831399460-Por_Favor_Pisar_las_Jardineras_Collage_Lugar.webp": "fotografia",
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831492239-2.webp": "fotografia",
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793831607790-Por_Favor_Pisar_las_Jardineras_Implantacio__n.webp": "fotografia",
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793832877836-Por_Favor_Pisar_las_Jardineras_Corte_Fachada_Norte.webp": "planimetria"
+      "/images/uploads/1793831399460-Por_Favor_Pisar_las_Jardineras_Collage_Lugar.webp": "fotografia",
+      "/images/uploads/1793831492239-2.webp": "fotografia",
+      "/images/uploads/1793831607790-Por_Favor_Pisar_las_Jardineras_Implantacio__n.webp": "fotografia",
+      "/images/uploads/1793832877836-Por_Favor_Pisar_las_Jardineras_Corte_Fachada_Norte.webp": "planimetria"
     },
     "colaboradores": ""
   },
@@ -806,7 +806,7 @@
       "Materia",
       "Ecuador"
     ],
-    "heroImage": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793826295352-Capa_31.webp",
+    "heroImage": "/images/uploads/1793826295352-Capa_31.webp",
     "heroImageFocalPoint": "center",
     "resena": "",
     "hasCritica": false,
@@ -828,7 +828,7 @@
       {
         "id": "mod-single-image-1793826919464",
         "type": "single-image",
-        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793826295352-Capa_31.webp",
+        "imageUrl": "/images/uploads/1793826295352-Capa_31.webp",
         "caption": "",
         "credits": "Natura Futura"
       },
@@ -845,7 +845,7 @@
       {
         "id": "mod-single-image-1793827473523",
         "type": "single-image",
-        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827530043-PLANTA_PABELLON_VEGETACION.webp",
+        "imageUrl": "/images/uploads/1793827530043-PLANTA_PABELLON_VEGETACION.webp",
         "credits": "Natura Futura",
         "category": "planimetria"
       },
@@ -857,7 +857,7 @@
       {
         "id": "mod-single-image-1793827362060",
         "type": "single-image",
-        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827417359-CORTE_FUGADO.webp",
+        "imageUrl": "/images/uploads/1793827417359-CORTE_FUGADO.webp",
         "credits": "Natura Futura",
         "category": "planimetria"
       },
@@ -869,7 +869,7 @@
       {
         "id": "mod-single-image-1793827661216",
         "type": "single-image",
-        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827672968-PROCESO.webp",
+        "imageUrl": "/images/uploads/1793827672968-PROCESO.webp",
         "credits": "Natura Futura",
         "category": "planimetria"
       },
@@ -881,7 +881,7 @@
       {
         "id": "mod-single-image-1793827769192",
         "type": "single-image",
-        "imageUrl": "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827779382-pabellon_jpg.webp",
+        "imageUrl": "/images/uploads/1793827779382-pabellon_jpg.webp",
         "credits": "Natura Futura",
         "category": "fotografia"
       },
@@ -889,8 +889,8 @@
         "id": "mod-image-gallery-1793827857165",
         "type": "image-gallery",
         "imageUrls": [
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827866941-pabellon_2_jpg.webp",
-          "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827877399-WhatsApp_Image_2026-11-04_at_1_31_30_PM.webp"
+          "/images/uploads/1793827866941-pabellon_2_jpg.webp",
+          "/images/uploads/1793827877399-WhatsApp_Image_2026-11-04_at_1_31_30_PM.webp"
         ],
         "settings": {
           "columns": 2
@@ -970,11 +970,11 @@
     "updatedAt": "2026-11-05T15:37:19.563Z",
     "secondaryExcerpt": "",
     "imageCategories": {
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827417359-CORTE_FUGADO.webp": "planimetria",
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827530043-PLANTA_PABELLON_VEGETACION.webp": "planimetria",
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827672968-PROCESO.webp": "planimetria",
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827779382-pabellon_jpg.webp": "fotografia",
-      "https://zinapitogdpdflkogutn.supabase.co/storage/v1/object/public/uploads/1793827822305-WhatsApp_Image_2026-11-04_at_1_31_30_PM.webp": "planimetria"
+      "/images/uploads/1793827417359-CORTE_FUGADO.webp": "planimetria",
+      "/images/uploads/1793827530043-PLANTA_PABELLON_VEGETACION.webp": "planimetria",
+      "/images/uploads/1793827672968-PROCESO.webp": "planimetria",
+      "/images/uploads/1793827779382-pabellon_jpg.webp": "fotografia",
+      "/images/uploads/1793827822305-WhatsApp_Image_2026-11-04_at_1_31_30_PM.webp": "planimetria"
     },
     "motion": {
       "variant": "quadrant-aperture"
