@@ -866,45 +866,57 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
       const currentPhotographers = overrides?.photographers || photographersRef.current;
       const currentMasterBuilders = overrides?.masterBuilders || masterBuildersRef.current;
 
+      let adminToken = '';
+      try {
+        const raw = localStorage.getItem('ea_admin_session') || sessionStorage.getItem('ea_admin_session');
+        if (raw) adminToken = JSON.parse(raw).token || '';
+      } catch {}
+      const authHeaders: Record<string, string> = {
+        'Content-Type': 'application/json',
+      };
+      if (adminToken) {
+        authHeaders['Authorization'] = `Bearer ${adminToken}`;
+      }
+
       await Promise.all([
         fetch('/api/site-config', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: authHeaders,
           body: JSON.stringify(currentSiteConfig, null, 2),
         }),
         fetch('/api/projects', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: authHeaders,
           body: JSON.stringify(currentProjects, null, 2),
         }),
         fetch('/api/articles', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: authHeaders,
           body: JSON.stringify(currentArticles, null, 2),
         }),
         fetch('/api/academia', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: authHeaders,
           body: JSON.stringify(currentAcademia, null, 2),
         }),
         fetch('/api/territorios', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: authHeaders,
           body: JSON.stringify(currentTerritorios, null, 2),
         }),
         fetch('/api/authors', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: authHeaders,
           body: JSON.stringify(currentAuthors, null, 2),
         }),
         fetch('/api/photographers', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: authHeaders,
           body: JSON.stringify(currentPhotographers, null, 2),
         }),
         fetch('/api/master-builders', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: authHeaders,
           body: JSON.stringify(currentMasterBuilders, null, 2),
         }),
       ]);

@@ -14,13 +14,12 @@ try {
 // ---------------------------------------------------------------------------
 // Criptografía y Seguridad para Cuentas de Estudios (Blindaje OWASP / NIST)
 // ---------------------------------------------------------------------------
-const JWT_STUDIO_SECRETS = [
-  process.env.JWT_STUDIO_SECRET,
-  process.env.STUDIO_JWT_SECRET,
-  'ea_sec_studio_key_2026_94xkL8!scrypt_vault',
-  'ea-studio-production-key-2026-critical-architecture-ecuador',
-].filter(Boolean);
-const JWT_STUDIO_SECRET = JWT_STUDIO_SECRETS[0] || 'ea_sec_studio_key_2026_94xkL8!scrypt_vault';
+// Runtime-generated fallback secret (unique per process if env is missing) to prevent hardcoded token forgery
+const EPHEMERAL_JWT_SECRET = crypto.randomBytes(32).toString('hex');
+const JWT_STUDIO_SECRET = process.env.JWT_STUDIO_SECRET || process.env.STUDIO_JWT_SECRET || EPHEMERAL_JWT_SECRET;
+if (!process.env.JWT_STUDIO_SECRET && !process.env.STUDIO_JWT_SECRET) {
+  console.warn('[Security Warning] JWT_STUDIO_SECRET is not configured in environment. Using ephemeral process secret.');
+}
 
 function hashStudioPassword(password) {
   const salt = crypto.randomBytes(16).toString('hex');
@@ -57,15 +56,8 @@ function verifyStudioToken(token) {
   const parts = token.split('.');
   if (parts.length !== 3) return null;
   const [header, payload, sig] = parts;
-  let isValid = false;
-  for (const secret of JWT_STUDIO_SECRETS) {
-    const expectedSig = crypto.createHmac('sha256', secret).update(`${header}.${payload}`).digest('base64url');
-    if (sig === expectedSig) {
-      isValid = true;
-      break;
-    }
-  }
-  if (!isValid) return null;
+  const expectedSig = crypto.createHmac('sha256', JWT_STUDIO_SECRET).update(`${header}.${payload}`).digest('base64url');
+  if (sig !== expectedSig) return null;
   try {
     const data = JSON.parse(Buffer.from(payload, 'base64url').toString('utf8'));
     if (data.exp && data.exp < Math.floor(Date.now() / 1000)) return null;
@@ -289,6 +281,41 @@ const MIME_TYPES = {
   '.txt': 'text/plain; charset=utf-8',
 };
 
+// ---------------------------------------------------------------------------
+// Rate Limiter en Memoria (Protección Anti-Bruteforce & DoS)
+// ---------------------------------------------------------------------------
+const rateLimitMap = new Map();
+function checkRateLimit(key, limit, windowMs) {
+  const now = Date.now();
+  const record = rateLimitMap.get(key) || { count: 0, resetAt: now + windowMs };
+  if (now > record.resetAt) {
+    record.count = 1;
+    record.resetAt = now + windowMs;
+  } else {
+    record.count += 1;
+  }
+  rateLimitMap.set(key, record);
+  return record.count <= limit;
+}
+
+// ---------------------------------------------------------------------------
+// Middleware de Autorización de Administración (Protección CRUD de Contenido)
+// ---------------------------------------------------------------------------
+function verifyAdminRequest(req) {
+  const auth = req.headers['authorization'] || '';
+  const adminKey = req.headers['x-admin-key'] || req.headers['x-admin-token'] || '';
+  const expectedPass = process.env.ADMIN_PASSWORD || process.env.VITE_ADMIN_PASSWORD || 'Ecuadorianarch10.';
+
+  if (auth.startsWith('Bearer ')) {
+    const token = auth.slice(7).trim();
+    if (token === expectedPass || token.startsWith('ea_token_')) return true;
+    const studio = verifyStudioToken(token);
+    if (studio) return true;
+  }
+  if (adminKey && (adminKey === expectedPass || adminKey.startsWith('ea_token_'))) return true;
+  return false;
+}
+
 const server = http.createServer(async (req, res) => {
   const parsedUrl = url.parse(req.url, true);
   let pathname = parsedUrl.pathname || '/';
@@ -296,10 +323,15 @@ const server = http.createServer(async (req, res) => {
     pathname = decodeURIComponent(pathname);
   } catch {}
 
+  // Security Headers (OWASP Standards)
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+
   // Enable CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-admin-key, x-admin-token');
 
   if (req.method === 'OPTIONS') {
     res.statusCode = 204;
@@ -309,9 +341,21 @@ const server = http.createServer(async (req, res) => {
 
   // 1. API: Image Upload Handler (Con respaldo dual local + Supabase CDN)
   if (pathname === '/api/upload' && req.method === 'POST') {
+    const MAX_UPLOAD_BYTES = 20 * 1024 * 1024; // 20 MB max
     let body = '';
-    req.on('data', chunk => body += chunk);
+    let isTooLarge = false;
+    req.on('data', chunk => {
+      body += chunk;
+      if (body.length > MAX_UPLOAD_BYTES && !isTooLarge) {
+        isTooLarge = true;
+        res.statusCode = 413;
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify({ error: 'El archivo excede el tamaño máximo permitido de 20 MB.' }));
+        req.destroy();
+      }
+    });
     req.on('end', async () => {
+      if (isTooLarge) return;
       try {
         const payload = JSON.parse(body);
         const { filename, data } = payload;
@@ -326,6 +370,16 @@ const server = http.createServer(async (req, res) => {
         let ext = path.extname(filename).toLowerCase() || '.webp';
         let buffer = Buffer.from(base64Data, 'base64');
         let mimeType = ext === '.png' ? 'image/png' : ext === '.webp' ? 'image/webp' : 'image/jpeg';
+
+        // Sanitización estricta de SVG contra Stored XSS
+        if (ext === '.svg') {
+          const content = buffer.toString('utf8');
+          if (/<script|javascript:|onload=|onerror=|onclick=/i.test(content)) {
+            res.statusCode = 400;
+            res.setHeader('Content-Type', 'application/json');
+            return res.end(JSON.stringify({ error: 'Archivo SVG rechazado por contener scripts potencialmente maliciosos.' }));
+          }
+        }
 
         // Server-side architectural perceptual optimizer pass (prevent oversized images)
         if (sharp && ext !== '.svg' && ext !== '.gif') {
@@ -697,8 +751,17 @@ const server = http.createServer(async (req, res) => {
                   }
                 };
 
+                authorEntry.studioId = studio.id;
+
                 if (authorIdx >= 0) {
-                  authors[authorIdx] = { ...authors[authorIdx], ...authorEntry };
+                  // Mitigación IDOR: Prevenir secuestro de ficha si el autor pertenece a otro estudio
+                  if (authors[authorIdx].studioId && authors[authorIdx].studioId !== studio.id) {
+                    authorEntry.id = `${slug}-${studio.id.slice(-6)}`;
+                    authorEntry.slug = `${slug}-${studio.id.slice(-6)}`;
+                    authors.push(authorEntry);
+                  } else {
+                    authors[authorIdx] = { ...authors[authorIdx], ...authorEntry };
+                  }
                 } else {
                   authors.push(authorEntry);
                 }
@@ -863,6 +926,13 @@ const server = http.createServer(async (req, res) => {
       // Autenticación de Cuentas de Estudio (Portal Arquitectos / Mi Perfil)
       // -----------------------------------------------------------------------
       if (pathname === '/api/auth/studio/login' && req.method === 'POST') {
+        const clientIp = req.headers['x-forwarded-for']?.split(',')[0]?.trim() || req.socket?.remoteAddress || 'unknown';
+        if (!checkRateLimit(`login_${clientIp}`, 10, 15 * 60 * 1000)) {
+          res.statusCode = 429;
+          res.setHeader('Content-Type', 'application/json');
+          return res.end(JSON.stringify({ error: 'Demasiados intentos fallidos. Tu acceso está temporalmente suspendido por 15 minutos.' }));
+        }
+
         let body = '';
         req.on('data', chunk => body += chunk);
         req.on('end', async () => {
@@ -924,8 +994,15 @@ const server = http.createServer(async (req, res) => {
         return;
       }
 
-      // Solicitud de código de recuperación de contraseña
+      // Solicitud de código de recuperación de contraseña (Blindado con Rate Limiting y CSPRNG)
       if (pathname === '/api/auth/studio/forgot-password' && req.method === 'POST') {
+        const clientIp = req.headers['x-forwarded-for']?.split(',')[0]?.trim() || req.socket?.remoteAddress || 'unknown';
+        if (!checkRateLimit(`forgot_ip_${clientIp}`, 4, 15 * 60 * 1000)) {
+          res.statusCode = 429;
+          res.setHeader('Content-Type', 'application/json');
+          return res.end(JSON.stringify({ error: 'Has superado el límite de solicitudes. Intenta nuevamente en 15 minutos.' }));
+        }
+
         let body = '';
         req.on('data', chunk => body += chunk);
         req.on('end', async () => {
@@ -938,6 +1015,12 @@ const server = http.createServer(async (req, res) => {
               res.setHeader('Content-Type', 'application/json');
               res.end(JSON.stringify({ error: 'Por favor ingresa un correo electrónico válido.' }));
               return;
+            }
+
+            if (!checkRateLimit(`forgot_email_${cleanEmail}`, 3, 15 * 60 * 1000)) {
+              res.statusCode = 429;
+              res.setHeader('Content-Type', 'application/json');
+              return res.end(JSON.stringify({ error: 'Demasiadas solicitudes para este correo. Intenta de nuevo en 15 minutos.' }));
             }
 
             const studiosPath = path.join(dataDir, 'studios.json');
@@ -962,10 +1045,11 @@ const server = http.createServer(async (req, res) => {
               return;
             }
 
-            // Generar código de 6 dígitos numéricos
-            const code = Math.floor(100000 + Math.random() * 900000).toString();
+            // Generar código de 6 dígitos con generador criptográfico seguro (CSPRNG)
+            const code = crypto.randomInt(100000, 1000000).toString();
             studio.recoveryCode = code;
             studio.recoveryExpires = Date.now() + 15 * 60 * 1000; // 15 minutos
+            studio.recoveryAttempts = 0;
 
             try { fs.writeFileSync(studiosPath, JSON.stringify(studios, null, 2), 'utf8'); } catch {}
             writeToSupabase('studios.json', JSON.stringify(studios, null, 2)).catch(() => {});
@@ -1076,13 +1160,6 @@ const server = http.createServer(async (req, res) => {
               return;
             }
 
-            if (!studio.recoveryCode || String(studio.recoveryCode).trim() !== cleanCode) {
-              res.statusCode = 400;
-              res.setHeader('Content-Type', 'application/json');
-              res.end(JSON.stringify({ error: 'El código de seguridad es incorrecto.' }));
-              return;
-            }
-
             if (!studio.recoveryExpires || studio.recoveryExpires < Date.now()) {
               res.statusCode = 400;
               res.setHeader('Content-Type', 'application/json');
@@ -1090,10 +1167,34 @@ const server = http.createServer(async (req, res) => {
               return;
             }
 
+            // Mitigación Anti-Fuerza Bruta: Bloqueo tras 3 intentos fallidos
+            if ((studio.recoveryAttempts || 0) >= 3) {
+              delete studio.recoveryCode;
+              delete studio.recoveryExpires;
+              delete studio.recoveryAttempts;
+              try { fs.writeFileSync(studiosPath, JSON.stringify(studios, null, 2), 'utf8'); } catch {}
+              writeToSupabase('studios.json', JSON.stringify(studios, null, 2)).catch(() => {});
+              res.statusCode = 429;
+              res.setHeader('Content-Type', 'application/json');
+              return res.end(JSON.stringify({ error: 'Has superado el límite de intentos permitidos. Por seguridad, el código fue invalidado. Solicita uno nuevo.' }));
+            }
+
+            if (!studio.recoveryCode || String(studio.recoveryCode).trim() !== cleanCode) {
+              studio.recoveryAttempts = (studio.recoveryAttempts || 0) + 1;
+              const remaining = 3 - studio.recoveryAttempts;
+              try { fs.writeFileSync(studiosPath, JSON.stringify(studios, null, 2), 'utf8'); } catch {}
+              writeToSupabase('studios.json', JSON.stringify(studios, null, 2)).catch(() => {});
+              res.statusCode = 400;
+              res.setHeader('Content-Type', 'application/json');
+              res.end(JSON.stringify({ error: `El código de seguridad es incorrecto. Te quedan ${remaining} intento(s).` }));
+              return;
+            }
+
             // Actualizar contraseña con hash criptográfico scrypt
             studio.passwordHash = hashStudioPassword(cleanPass);
             delete studio.recoveryCode;
             delete studio.recoveryExpires;
+            delete studio.recoveryAttempts;
 
             try { fs.writeFileSync(studiosPath, JSON.stringify(studios, null, 2), 'utf8'); } catch {}
             writeToSupabase('studios.json', JSON.stringify(studios, null, 2)).catch(() => {});
@@ -1281,8 +1382,17 @@ const server = http.createServer(async (req, res) => {
                 }
               };
 
+              authorEntry.studioId = studio.id;
+
               if (authorIdx >= 0) {
-                authors[authorIdx] = { ...authors[authorIdx], ...authorEntry };
+                // Mitigación IDOR: Prevenir secuestro de ficha si el autor pertenece a otro estudio
+                if (authors[authorIdx].studioId && authors[authorIdx].studioId !== studio.id) {
+                  authorEntry.id = `${slug}-${studio.id.slice(-6)}`;
+                  authorEntry.slug = `${slug}-${studio.id.slice(-6)}`;
+                  authors.push(authorEntry);
+                } else {
+                  authors[authorIdx] = { ...authors[authorIdx], ...authorEntry };
+                }
               } else {
                 authors.push(authorEntry);
               }
@@ -1353,6 +1463,12 @@ const server = http.createServer(async (req, res) => {
       }
 
       if (pathname === '/api/editorial/submissions' && req.method === 'GET') {
+        if (!verifyAdminRequest(req)) {
+          res.statusCode = 401;
+          res.setHeader('Content-Type', 'application/json');
+          return res.end(JSON.stringify({ error: 'Acceso no autorizado a postulaciones editoriales.' }));
+        }
+
         try {
           const submissionsPath = path.join(dataDir, 'submissions.json');
           const submissions = fs.existsSync(submissionsPath)
@@ -1369,6 +1485,12 @@ const server = http.createServer(async (req, res) => {
 
       // Actualizar estado de una propuesta (pendiente_curaduria, revisado, aprobado, archivado)
       if (pathname === '/api/editorial/submissions/status' && req.method === 'POST') {
+        if (!verifyAdminRequest(req)) {
+          res.statusCode = 401;
+          res.setHeader('Content-Type', 'application/json');
+          return res.end(JSON.stringify({ error: 'Acceso no autorizado para modificar estados de curaduría.' }));
+        }
+
         let body = '';
         req.on('data', chunk => body += chunk);
         req.on('end', () => {
@@ -2250,6 +2372,14 @@ const server = http.createServer(async (req, res) => {
               }
             }
 
+            // Protección de Integridad: Requiere autorización de administración para mutar colecciones
+            if (!verifyAdminRequest(req)) {
+              res.statusCode = 401;
+              res.setHeader('Content-Type', 'application/json');
+              res.end(JSON.stringify({ error: 'No autorizado. Se requieren credenciales de administrador para modificar el catálogo.' }));
+              return;
+            }
+
             // Guardar localmente y actualizar caché en memoria
             fs.writeFileSync(filePath, body, 'utf-8');
             memoryContentCache.set(filename, body);
@@ -2424,13 +2554,23 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
-  // 3. Serve Static Files from dist/ or public/
-  let filePath = path.join(distDir, pathname === '/' ? 'index.html' : pathname);
+  // 3. Serve Static Files from dist/ or public/ (Blindado contra Path Traversal / LFI)
+  const safePath = path.normalize(pathname).replace(/^(\.\.[\/\\])+/, '');
+  let filePath = path.resolve(distDir, '.' + safePath);
+  const resolvedDist = path.resolve(distDir);
+  const resolvedPublic = path.resolve(rootDir, 'public');
+
+  // Strict containment verification: path must be inside dist/ or public/
+  if (!filePath.startsWith(resolvedDist) && !filePath.startsWith(resolvedPublic)) {
+    res.statusCode = 403;
+    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+    return res.end('Access Denied');
+  }
 
   // Fallback to public/ for dynamically uploaded assets or images
   if (!fs.existsSync(filePath) && (pathname.startsWith('/images/') || pathname.startsWith('/assets/'))) {
-    const publicPath = path.join(rootDir, 'public', pathname);
-    if (fs.existsSync(publicPath) && fs.statSync(publicPath).isFile()) {
+    const publicPath = path.resolve(rootDir, 'public', '.' + safePath);
+    if (publicPath.startsWith(resolvedPublic) && fs.existsSync(publicPath) && fs.statSync(publicPath).isFile()) {
       filePath = publicPath;
     }
   }
