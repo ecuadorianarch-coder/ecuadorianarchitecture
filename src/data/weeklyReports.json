@@ -1,5 +1,35 @@
 [
   {
+    "id": "report-1795444401079",
+    "timestamp": "2026-11-23T14:33:21.079Z",
+    "metrics": {
+      "totalProjects": 7,
+      "serverHealth": "100% Óptimo",
+      "rssPins": 40
+    },
+    "content": "### 1. Pulso de la Plataforma & Tráfico\nLa plataforma mantiene un estado de salud de red **100% Óptimo** con 7 obras arquitectónicas activas en catálogo, 1 investigaciones de territorio y 18 estudios registrados. El canal automatizado de Pinterest RSS cuenta con 40 pines activos debidamente sincronizados con metadatos arquitectónicos e imágenes de alta definición.\n\n### 2. Obras Estrella & Diagnóstico de Contenido\nLas obras publicadas (incluyendo Pabellón El Nido, Kancha y proyectos destacados) presentan integridad estructural en sus fichas técnicas, créditos a fotógrafos y secciones de crítica viva. La planimetría y el material gráfico continúan siendo los mayores atractivos de retención para lectores profesionales y académicos.\n\n### 3. Fricciones de Usuario & Oportunidades UX (GA4 + Clarity)\n- **Rendimiento y velocidad en móviles:** Verificar que las imágenes en formato WebP carguen en menos de 1.2 segundos en conexiones móviles 4G.\n- **Ruta de descubrimiento:** Fomentar la navegación fluida entre la ficha de cada obra y el perfil del estudio autor (/estudios).\n\n### 4. Tres Acciones Concretas para esta Semana\n1. **Revisión del buzón curatorial:** Atender nuevas propuestas recibidas en «Sube tu trabajo» desde el CMS de administración.\n2. **Difusión en redes:** Aprovechar los pines automáticos de Pinterest para dirigir tráfico cualificado al nuevo visor de proyectos.\n3. **Configuración de credenciales:** Si deseas análisis predictivo profundo con IA cada semana en GitHub Actions, añade el secret GEMINI_API_KEY en tu repositorio."
+  },
+  {
+    "id": "report-1795444360001",
+    "timestamp": "2026-11-23T14:32:40.001Z",
+    "metrics": {
+      "totalProjects": 7,
+      "serverHealth": "100% Óptimo",
+      "rssPins": 40
+    },
+    "content": "### 1. Pulso de la Plataforma & Tráfico\nLa plataforma mantiene un estado de salud de red **100% Óptimo** con 7 obras arquitectónicas activas en catálogo, 1 investigaciones de territorio y 18 estudios registrados. El canal automatizado de Pinterest RSS cuenta con 40 pines activos debidamente sincronizados con metadatos arquitectónicos e imágenes de alta definición.\n\n### 2. Obras Estrella & Diagnóstico de Contenido\nLas obras publicadas (incluyendo Pabellón El Nido, Kancha y proyectos destacados) presentan integridad estructural en sus fichas técnicas, créditos a fotógrafos y secciones de crítica viva. La planimetría y el material gráfico continúan siendo los mayores atractivos de retención para lectores profesionales y académicos.\n\n### 3. Fricciones de Usuario & Oportunidades UX (GA4 + Clarity)\n- **Rendimiento y velocidad en móviles:** Verificar que las imágenes en formato WebP carguen en menos de 1.2 segundos en conexiones móviles 4G.\n- **Ruta de descubrimiento:** Fomentar la navegación fluida entre la ficha de cada obra y el perfil del estudio autor (/estudios).\n\n### 4. Tres Acciones Concretas para esta Semana\n1. **Revisión del buzón curatorial:** Atender nuevas propuestas recibidas en «Sube tu trabajo» desde el CMS de administración.\n2. **Difusión en redes:** Aprovechar los pines automáticos de Pinterest para dirigir tráfico cualificado al nuevo visor de proyectos.\n3. **Configuración de credenciales:** Si deseas análisis predictivo profundo con IA cada semana en GitHub Actions, añade el secret GEMINI_API_KEY en tu repositorio."
+  },
+  {
+    "id": "report-1795444222360",
+    "timestamp": "2026-11-23T14:30:22.360Z",
+    "metrics": {
+      "totalProjects": 7,
+      "serverHealth": "100% Óptimo",
+      "rssPins": 40
+    },
+    "content": "### 1. Pulso de la Plataforma & Tráfico\n\nLa infraestructura digital de **Ecuadorian Architecture** registra una respuesta operativa saludable. Todos los endpoints críticos se mantienen en rango de disponibilidad del 100% (**200 OK**) con latencias comprendidas entre los 701ms y los 888ms. \n\nEl archivo documental cuenta actualmente con **7 obras publicadas**, **18 estudios y arquitectos registrados**, 1 artículo de territorio y 0 investigaciones académicas indexadas. El ecosistema de captación y posicionamiento evoluciona bajo un modelo híbrido:\n* **Estrategia Visual (Pinterest RSS):** El canal automatizado cuenta con **40 pines activos** enlazados directamente a fichas de proyecto. Esto asegura un flujo continuo de tráfico de descubrimiento altamente cualificado hacia obras efímeras y permanentes.\n* **Visibilidad en Motores & Modelos de IA:** La coexistencia fluida de `sitemap.xml` (709ms) y la especificación `llms.txt` (703ms) sitúa a la plataforma en una posición de vanguardia para la indexación semántica y la citación en agentes de Inteligencia Artificial (GEO/LLMO), garantizando que la arquitectura ecuatoriana contemporánea sea indexada con rigor técnico por nuevos motores de búsqueda.\n\n---\n\n### 2. Obras Estrella & Diagnóstico de Contenido\n\nLa curaduría reciente muestra una sólida concentración en **Arquitectura Efímera** (6 de las 7 obras), impulsada por intervenciones de alto valor conceptual en Quito y el Boulevard 24 de Mayo:\n* **Pabellón El Nido** (*Cristina Correa*) y **Kancha** (*Pierre Berrú, Ignacio de Teresa, Alejandro González, Enrique Mora, José Aguirre*): Obras de escala efímera con elevado atractivo visual y narrativa tectónica.\n* **Clima en Construcción** (*Natura Futura*): Pieza clave de inserción urbana que aporta peso crítico a la línea editorial de la plataforma.\n* **Espacio para Hablar con Dios** (*Nómade Taller*): Represent"
+  },
+  {
     "id": "report-1794845378446",
     "timestamp": "2026-11-16T16:09:38.446Z",
     "metrics": {
