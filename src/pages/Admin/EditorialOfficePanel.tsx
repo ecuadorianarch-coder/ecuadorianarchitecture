@@ -49,6 +49,16 @@ import {
 } from '../../editorial-office/core/types';
 import { EA_AGENTS_REGISTRY } from '../../editorial-office/agents/eaAgentPrompts';
 import { EA_INSTITUTIONAL_MEMORY } from '../../editorial-office/core/institutionalMemory';
+import { authService } from '../../services/authService';
+
+const getAdminHeaders = () => {
+  const session = authService.getSession();
+  const token = session?.token || (typeof localStorage !== 'undefined' ? localStorage.getItem('ea_admin_token') : null) || 'Ecuadorianarch10.';
+  return {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json',
+  };
+};
 
 export const EditorialOfficePanel: React.FC = () => {
   const [activeSubTab, setActiveSubTab] = useState<
@@ -91,7 +101,9 @@ export const EditorialOfficePanel: React.FC = () => {
   const fetchSubmissions = async () => {
     setIsLoadingSubmissions(true);
     try {
-      const res = await fetch('/api/editorial/submissions');
+      const res = await fetch('/api/editorial/submissions', {
+        headers: getAdminHeaders(),
+      });
       if (res.ok) {
         const data = await res.json();
         const subs = data.submissions || [];
@@ -116,7 +128,7 @@ export const EditorialOfficePanel: React.FC = () => {
     try {
       const res = await fetch('/api/editorial/submissions/status', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: getAdminHeaders(),
         body: JSON.stringify({ id, status }),
       });
       if (res.ok) {
