@@ -123,21 +123,44 @@ if (!fs.existsSync(uploadsDir)) {
 }
 
 // ---------------------------------------------------------------------------
-// Supabase Cloud Storage Engine (Persistencia Permanente Blindada)
+// Supabase Cloud Storage Engine & Smart Resilient Cache
 // ---------------------------------------------------------------------------
 const SUPABASE_URL = process.env.SUPABASE_URL || 'https://zinapitogdpdflkogutn.supabase.co';
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_KEY || '';
 
 // In-memory cache for zero-latency responses synchronized with Supabase
-const memoryContentCache = new Map();
+const memoryContentCache = new Map(); // filename -> { text, timestamp, etag }
+const CONTENT_CACHE_TTL_MS = 60 * 1000; // 60 segundos de frescura
 
 async function readFromSupabase(filename) {
   try {
-    const res = await fetch(`${SUPABASE_URL}/storage/v1/object/public/content/${filename}?t=${Date.now()}`);
+    const cached = memoryContentCache.get(filename);
+    const headers = {};
+    if (cached && cached.etag) {
+      headers['If-None-Match'] = cached.etag;
+    }
+
+    const res = await fetch(`${SUPABASE_URL}/storage/v1/object/public/content/${filename}`, {
+      headers,
+      signal: AbortSignal.timeout(4000),
+    });
+
+    if (res.status === 304 && cached) {
+      cached.timestamp = Date.now();
+      return cached.text;
+    }
+
     if (res.ok) {
+      const etag = res.headers.get('etag') || '';
       const text = await res.text();
-      memoryContentCache.set(filename, text);
+      memoryContentCache.set(filename, {
+        text,
+        timestamp: Date.now(),
+        etag,
+      });
       return text;
+    } else {
+      console.warn(`[Supabase Storage Read] Status ${res.status} for ${filename}. Active fallback will be used.`);
     }
   } catch (err) {
     console.warn(`[Supabase Storage Read Error for ${filename}]:`, err.message);
@@ -146,7 +169,11 @@ async function readFromSupabase(filename) {
 }
 
 async function writeToSupabase(filename, content) {
-  memoryContentCache.set(filename, content);
+  memoryContentCache.set(filename, {
+    text: content,
+    timestamp: Date.now(),
+    etag: `local-${Date.now()}`,
+  });
   try {
     const res = await fetch(`${SUPABASE_URL}/storage/v1/object/content/${filename}`, {
       method: 'POST',
@@ -157,6 +184,7 @@ async function writeToSupabase(filename, content) {
         'x-upsert': 'true',
       },
       body: content,
+      signal: AbortSignal.timeout(6000),
     });
     return res.ok;
   } catch (err) {
@@ -2261,17 +2289,19 @@ const server = http.createServer(async (req, res) => {
         return;
       }
 
-      // GET: Priorizar Supabase Cloud Cache, fallback a archivo local
+      // GET: Priorizar Memoria y Disco Local con Revalidación Controlada
       if (req.method === 'GET') {
+        res.setHeader('Cache-Control', 'public, max-age=60, s-maxage=120, stale-while-revalidate=300');
+        const now = Date.now();
         const cached = memoryContentCache.get(filename);
-        if (cached) {
+
+        // 1. Si está en memoria y fresco (< 60s), responder al instante sin tocar Supabase
+        if (cached && (now - cached.timestamp < CONTENT_CACHE_TTL_MS)) {
           res.setHeader('Content-Type', 'application/json');
-          res.end(cached);
-          // Actualización de fondo asíncrona
-          readFromSupabase(filename).catch(() => {});
-          return;
+          return res.end(cached.text);
         }
 
+        // 2. Si el TTL expiró o no está en memoria, consultar Supabase de forma controlada
         readFromSupabase(filename).then((cloudContent) => {
           if (cloudContent) {
             res.setHeader('Content-Type', 'application/json');
@@ -2280,8 +2310,14 @@ const server = http.createServer(async (req, res) => {
             return;
           }
 
+          if (cached && cached.text) {
+            res.setHeader('Content-Type', 'application/json');
+            return res.end(cached.text);
+          }
+
           if (fs.existsSync(filePath)) {
             const content = fs.readFileSync(filePath, 'utf-8');
+            memoryContentCache.set(filename, { text: content, timestamp: now, etag: '' });
             res.setHeader('Content-Type', 'application/json');
             res.end(content);
           } else {
@@ -2289,13 +2325,17 @@ const server = http.createServer(async (req, res) => {
             res.end(JSON.stringify({ error: 'Not found' }));
           }
         }).catch(() => {
+          if (cached && cached.text) {
+            res.setHeader('Content-Type', 'application/json');
+            return res.end(cached.text);
+          }
           if (fs.existsSync(filePath)) {
             const content = fs.readFileSync(filePath, 'utf-8');
             res.setHeader('Content-Type', 'application/json');
             res.end(content);
           } else {
-            res.statusCode = 404;
-            res.end(JSON.stringify({ error: 'Not found' }));
+            res.statusCode = 500;
+            res.end(JSON.stringify({ error: 'Error loading data' }));
           }
         });
         return;

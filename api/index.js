@@ -4,21 +4,50 @@ import url from 'url';
 import crypto from 'crypto';
 
 // ---------------------------------------------------------------------------
-// Supabase Cloud Storage Engine (Persistencia Permanente Blindada en Vercel)
+// Supabase Cloud Storage Engine & Smart Resilient Cache
 // ---------------------------------------------------------------------------
 const SUPABASE_URL = process.env.SUPABASE_URL || 'https://zinapitogdpdflkogutn.supabase.co';
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_KEY || '';
 
-// Cache en memoria para respuestas de baja latencia
-const memoryContentCache = new Map();
+// Cache en memoria con TTL para evitar el consumo de ancho de banda en Supabase
+const memoryContentCache = new Map(); // filename -> { data, text, timestamp, etag }
+const CONTENT_CACHE_TTL_MS = 60 * 1000; // 60 segundos de frescura en memoria
 
 async function readFromSupabase(filename) {
   try {
-    const res = await fetch(`${SUPABASE_URL}/storage/v1/object/public/content/${filename}?t=${Date.now()}`);
+    const cached = memoryContentCache.get(filename);
+    const headers = {};
+    if (cached && cached.etag) {
+      headers['If-None-Match'] = cached.etag;
+    }
+
+    // Sin ?t=timestamp para permitir caching a nivel de Edge CDN de Supabase y Cloudflare
+    const res = await fetch(`${SUPABASE_URL}/storage/v1/object/public/content/${filename}`, {
+      headers,
+      signal: AbortSignal.timeout(4000), // Timeout estricto de 4s para no ralentizar la web
+    });
+
+    if (res.status === 304 && cached) {
+      cached.timestamp = Date.now();
+      return cached.text;
+    }
+
     if (res.ok) {
+      const etag = res.headers.get('etag') || '';
       const text = await res.text();
-      memoryContentCache.set(filename, text);
+      try {
+        const parsed = JSON.parse(text);
+        memoryContentCache.set(filename, {
+          data: parsed,
+          text,
+          timestamp: Date.now(),
+          etag,
+        });
+      } catch {}
       return text;
+    } else {
+      // Si Supabase devuelve 402 (límite alcanzado) o error, advertir y usar respaldo
+      console.warn(`[Supabase Storage Read] Status ${res.status} for ${filename}. Active fallback will be used.`);
     }
   } catch (err) {
     console.warn(`[Supabase Storage Read Error for ${filename}]:`, err.message);
@@ -27,7 +56,6 @@ async function readFromSupabase(filename) {
 }
 
 async function writeToSupabase(filename, content) {
-  memoryContentCache.set(filename, content);
   try {
     const res = await fetch(`${SUPABASE_URL}/storage/v1/object/content/${filename}`, {
       method: 'POST',
@@ -38,6 +66,7 @@ async function writeToSupabase(filename, content) {
         'x-upsert': 'true',
       },
       body: content,
+      signal: AbortSignal.timeout(6000),
     });
     return res.ok;
   } catch (err) {
@@ -46,15 +75,17 @@ async function writeToSupabase(filename, content) {
   }
 }
 
-// Helper para leer datos con fallback Supabase -> Local
+// Helper para leer datos con triple capa: Memoria -> Supabase -> Disco Local
 async function loadJsonData(dataDir, filename) {
-  if (memoryContentCache.has(filename)) {
-    try {
-      return JSON.parse(memoryContentCache.get(filename));
-    } catch {}
+  const now = Date.now();
+  const cached = memoryContentCache.get(filename);
+
+  // 1. Si está en memoria y fresco (< 60s), responder al instante (0 ms, 0 bytes Supabase)
+  if (cached && (now - cached.timestamp < CONTENT_CACHE_TTL_MS)) {
+    return cached.data;
   }
 
-  // 1. Intentar desde Supabase
+  // 2. Intentar refrescar desde Supabase sin forzar bypass de caché
   const cloudText = await readFromSupabase(filename);
   if (cloudText) {
     try {
@@ -62,27 +93,52 @@ async function loadJsonData(dataDir, filename) {
     } catch {}
   }
 
-  // 2. Intentar desde disco local
+  // 3. Si Supabase devuelve 402, falla o la red está lenta, usar el caché previo en memoria
+  if (cached && cached.data) {
+    return cached.data;
+  }
+
+  // 4. Respaldo definitivo: Leer los datos compilados en disco local de Vercel
   const localPath = path.join(dataDir, filename);
   if (fs.existsSync(localPath)) {
     try {
       const localText = fs.readFileSync(localPath, 'utf8');
-      return JSON.parse(localText || '[]');
+      const parsed = JSON.parse(localText || '[]');
+      memoryContentCache.set(filename, {
+        data: parsed,
+        text: localText,
+        timestamp: now,
+        etag: '',
+      });
+      return parsed;
     } catch {}
   }
 
   return [];
 }
 
-// Helper para guardar datos con persistencia Supabase + Local
+// Helper para guardar datos: Invalida el caché en 0ms y persiste en Supabase + Local
 async function saveJsonData(dataDir, filename, data) {
   const jsonString = typeof data === 'string' ? data : JSON.stringify(data, null, 2);
-  memoryContentCache.set(filename, jsonString);
+  let parsed = null;
+  try {
+    parsed = typeof data === 'string' ? JSON.parse(data) : data;
+  } catch {
+    parsed = data;
+  }
 
-  // Guardar en Supabase (crítico para Vercel Serverless)
+  // 1. Actualizar memoria INMEDIATAMENTE para que el cambio se vea al instante
+  memoryContentCache.set(filename, {
+    data: parsed,
+    text: jsonString,
+    timestamp: Date.now(),
+    etag: `local-${Date.now()}`,
+  });
+
+  // 2. Persistir en Supabase en segundo plano o await
   await writeToSupabase(filename, jsonString);
 
-  // Intentar guardar localmente sin bloquear si el FS es de solo lectura
+  // 3. Intentar guardar localmente si el sistema de archivos lo permite
   try {
     const localPath = path.join(dataDir, filename);
     fs.writeFileSync(localPath, jsonString, 'utf8');
@@ -1211,6 +1267,7 @@ export default async function handler(req, res) {
   if (req.method === 'GET') {
     const data = await loadJsonData(dataDir, filename);
     res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Cache-Control', 'public, max-age=60, s-maxage=120, stale-while-revalidate=300');
     return res.end(JSON.stringify(data));
   }
 
